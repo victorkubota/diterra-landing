@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Di Terrá — Espaço para Eventos em Piracicaba</title>
+<meta name="description" content="Di Terrá Eventos — espaço premium para casamentos, formaturas e eventos corporativos em Piracicaba, SP.">
+
+<!-- FONTS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+
+<!-- LIBRARIES -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+
+<style>
+/* ══════════════════════════════════════════════════════════════
+   CUSTOM PROPERTIES
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --color-cream:     #f5f3ef;
+  --color-cream-alt: #eae7e0;
+  --color-offwhite:  #faf9f7;
+  --color-white:     #ffffff;
+  --color-dark:      #1a1a1a;
+  --color-text:      #3a3a3a;
+  --color-text-light:#7a7a7a;
+  --color-border:    rgba(0,0,0,.08);
+
+  --color-teal:      #2c5c54;
+  --color-teal-soft: rgba(44,92,84,.06);
+  --color-gold:      #b8a070;
+
+  --font-serif:  'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans:   'Jost', 'Helvetica Neue', Arial, sans-serif;
+
+  --section-pad:    clamp(80px, 10vw, 140px);
+  --container-max:  1200px;
+  --gutter:         clamp(20px, 4vw, 64px);
+
+  --ease:           cubic-bezier(.15,.75,.5,1);
+  --ease-out:       cubic-bezier(.25,1,.33,1);
+
+  /* Apple-style radius */
+  --radius-xl:      28px;
+  --radius-lg:      22px;
+  --radius-md:      16px;
+  --radius-sm:      12px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BASE RESET
+   ══════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto;
+}
+body {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-text);
+  background: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; }
+h1,h2,h3,h4,h5,h6,p { margin: 0; }
+::selection { background: var(--color-teal); color: var(--color-white); }
+
+
+/* ══════════════════════════════════════════════════════════════
+   PRELOADER
+   ══════════════════════════════════════════════════════════════ */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: var(--color-dark);
+  z-index: 100000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 24px;
+}
+.loader-text {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 48px);
+  font-weight: 300;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--color-cream);
+}
+.loader-bar {
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-cream));
+  width: 0%;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   NOISE OVERLAY
+   ══════════════════════════════════════════════════════════════ */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LAYOUT
+   ══════════════════════════════════════════════════════════════ */
+.wrapper {
+  position: relative;
+  z-index: 10;
+  background-color: var(--color-cream);
+  margin-bottom: 100vh;
+  box-shadow: 0 50px 100px rgba(0,0,0,0.3);
+}
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TYPOGRAPHY UTILITY
+   ══════════════════════════════════════════════════════════════ */
+.heading-lg {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: var(--color-dark);
+}
+.heading-md {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: .02em;
+  color: var(--color-dark);
+}
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.eyebrow::before {
+  content: '';
+  width: 32px; height: 1px;
+  background: var(--color-text-light);
+}
+.body-text {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--color-text-light);
+  max-width: 520px;
+}
+.deco-line {
+  width: 48px; height: 1px;
+  background: var(--color-dark);
+  display: block;
+  opacity: .2;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.deco-line.revealed { transform: scaleX(1); transition: transform .8s var(--ease); }
+
+/* Split text containers */
+.word-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.1em;
+}
+.word-inner {
+  display: inline-block;
+  transform: translateY(110%);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BUTTONS
+   ══════════════════════════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 36px;
+  border: 1px solid rgba(255,255,255,.6);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  transition: all .5s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-white);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .5s var(--ease);
+  z-index: 0;
+  border-radius: var(--radius-sm);
+}
+.btn:hover::before { transform: scaleX(1); transform-origin: left; }
+.btn:hover { color: var(--color-dark); border-color: var(--color-white); }
+.btn span, .btn svg { position: relative; z-index: 1; }
+.btn svg { transition: transform .4s var(--ease-out); }
+.btn:hover svg { transform: translateX(4px); }
+.btn--dark {
+  border-color: rgba(0,0,0,.2);
+  color: var(--color-dark);
+}
+.btn--dark::before { background: var(--color-dark); }
+.btn--dark:hover { color: var(--color-white); border-color: var(--color-dark); }
+
+/* ══════════════════════════════════════════════════════════════
+   NAVIGATION — mix-blend-difference (from parallax-clean)
+   ══════════════════════════════════════════════════════════════ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 9000;
+  padding: 0 var(--gutter);
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  mix-blend-mode: difference;
+  color: var(--color-white);
+}
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+.nav-logo img {
+  height: 36px;
+  filter: brightness(0) invert(1);
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+  transition: color .3s var(--ease);
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -4px;
+  width: 100%; height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .4s var(--ease);
+}
+.nav-links a:hover { color: var(--color-white); }
+.nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+.nav-toggle {
+  display: none;
+  width: 32px; height: 24px;
+  flex-direction: column;
+  justify-content: space-between;
+  background: none; border: none; padding: 0;
+}
+.nav-toggle span {
+  display: block; width: 100%; height: 1px;
+  background: var(--color-white);
+  transition: all .4s var(--ease);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   § 1 — HERO
+   ══════════════════════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-bg {
+  position: absolute;
+  inset: -80px;
+  background-image: url('./assets/solucao-completa-decoracao-casamento.png');
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,.45) 0%,
+    rgba(0,0,0,.35) 40%,
+    rgba(0,0,0,.65) 100%
+  );
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 var(--gutter);
+  max-width: 1000px;
+  color: var(--color-white);
+}
+.hero-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.95);
+  margin-bottom: 32px;
+  text-shadow: 0 1px 12px rgba(0,0,0,.5);
+}
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(44px, 7.5vw, 96px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  margin-bottom: 24px;
+  overflow: hidden;
+  mix-blend-mode: difference;
+}
+.hero-sub {
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(255,255,255,.95);
+  margin-bottom: 44px;
+  letter-spacing: .04em;
+  text-shadow: 0 1px 12px rgba(0,0,0,.4);
+  opacity: 0;
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.hero-scroll span {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+}
+.hero-scroll-line {
+  width: 1px; height: 48px;
+  background: rgba(255,255,255,.15);
+  position: relative;
+  overflow: hidden;
+}
+.hero-scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -48px; left: 0;
+  width: 1px; height: 48px;
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,.7));
+  animation: scrollPulse 2.5s var(--ease) infinite;
+}
+@keyframes scrollPulse {
+  0% { top: -48px; }
+  100% { top: 48px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   § 2 — INTRO (split text reveal, like parallax-clean)
+   ══════════════════════════════════════════════════════════════ */
+.intro {
+  padding: var(--section-pad) 0;
+  background: var(--color-cream);
+}
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(40px, 6vw, 100px);
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: center;
+}
+.intro-text .heading-lg { margin-bottom: 28px; }
+.intro-text .body-text { margin-bottom: 16px; }
+.intro-meta {
+  display: flex;
+  gap: 36px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+}
+.intro-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  aspect-ratio: 3/4;
+}
+.intro-image img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .8s var(--ease);
+}
+.intro-image:hover img { transform: scale(1.04); }
+
+/* ══════════════════════════════════════════════════════════════
+   § 3 — CARD STACK (from parallax-clean — Espaços)
+   ══════════════════════════════════════════════════════════════ */
+.stack-section {
+  padding: 10vh 0;
+  background: var(--color-dark);
+  color: var(--color-cream);
+  position: relative;
+}
+.stack-header {
+  text-align: center;
+  margin-bottom: clamp(40px, 6vw, 80px);
+  padding: 0 var(--gutter);
+}
+.stack-header .eyebrow {
+  justify-content: center;
+  color: rgba(255,255,255,.4);
+  margin-bottom: 16px;
+}
+.stack-header .eyebrow::before { background: rgba(255,255,255,.3); }
+.stack-header .heading-lg {
+  color: var(--color-cream);
+}
+.stack-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  padding-bottom: 10vh;
+}
+.card-item {
+  position: sticky;
+  top: 10vh;
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5vh;
+}
+.card-inner {
+  width: 90%;
+  height: 100%;
+  background: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-xl);
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7);
+}
+.card-content {
+  padding: clamp(2rem, 4vw, 4rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #1a1a1a;
+  z-index: 2;
+  border-radius: var(--radius-xl) 0 0 var(--radius-xl);
+}
+.card-number {
+  font-family: var(--font-serif);
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 300;
+  color: var(--color-cream);
+  opacity: .2;
+  margin-bottom: 8px;
+}
+.card-title {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 400;
+  letter-spacing: .02em;
+  color: var(--color-cream);
+  margin-bottom: 8px;
+}
+.card-location {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.4);
+  margin-top: 12px;
+}
+.card-desc {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(255,255,255,.55);
+}
+.card-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+}
+.card-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 1.5s ease;
+}
+.card-inner:hover .card-img { transform: scale(1.08); }
+
+/* ══════════════════════════════════════════════════════════════
+   § 4 — EVENTOS
+   ══════════════════════════════════════════════════════════════ */
+.eventos {
+  padding: var(--section-pad) 0;
+  background: var(--color-offwhite);
+}
+.eventos-header {
+  text-align: center;
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+.eventos-header .eyebrow {
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.eventos-header .eyebrow::before { display: none; }
+.eventos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.evento-card {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+.evento-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .8s var(--ease);
+  border-radius: var(--radius-lg);
+}
+.evento-card:hover img { transform: scale(1.06); }
+.evento-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,.6) 100%);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px;
+  opacity: 0;
+  transition: opacity .5s var(--ease);
+}
+.evento-card:hover .evento-card-overlay { opacity: 1; }
+.evento-card-overlay h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 300;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  transform: translateY(12px);
+  transition: transform .5s var(--ease);
+}
+.evento-card:hover .evento-card-overlay h3 { transform: translateY(0); }
+.evento-card-overlay .evento-tag {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-top: 8px;
+  transform: translateY(12px);
+  transition: transform .5s var(--ease) .05s;
+}
+.evento-card:hover .evento-card-overlay .evento-tag { transform: translateY(0); }
+
+/* ══════════════════════════════════════════════════════════════
+   § 5 — BANNER FULLWIDTH
+   ══════════════════════════════════════════════════════════════ */
+.banner {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.banner-bg {
+  position: absolute;
+  inset: -40px;
+  background-image: url('./assets/3.png');
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+}
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  z-index: 1;
+}
+.banner-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: 80px var(--gutter);
+}
+.banner-content blockquote {
+  font-family: var(--font-serif);
+  font-size: clamp(26px, 3.5vw, 48px);
+  font-weight: 300;
+  line-height: 1.25;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  margin-bottom: 24px;
+}
+.banner-content .deco-line {
+  background: rgba(255,255,255,.3);
+  margin: 0 auto;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   § 6 — GALERIA
+   ══════════════════════════════════════════════════════════════ */
+.galeria {
+  padding: var(--section-pad) 0;
+  background: var(--color-cream);
+}
+.galeria-header {
+  text-align: center;
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+.galeria-header .eyebrow {
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.galeria-header .eyebrow::before { display: none; }
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.galeria-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+.galeria-item:nth-child(1) { grid-row: span 2; }
+.galeria-item:nth-child(4) { grid-column: span 2; }
+.galeria-item a {
+  display: block;
+  width: 100%; height: 100%;
+}
+.galeria-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .8s var(--ease);
+  aspect-ratio: 1/1;
+  border-radius: var(--radius-lg);
+}
+.galeria-item:nth-child(1) img { aspect-ratio: auto; height: 100%; }
+.galeria-item:nth-child(4) img { aspect-ratio: 16/9; }
+.galeria-item:hover img { transform: scale(1.05); }
+
+/* ══════════════════════════════════════════════════════════════
+   § 7 — CONTATO
+   ══════════════════════════════════════════════════════════════ */
+.contato {
+  padding: var(--section-pad) 0;
+  background: var(--color-offwhite);
+}
+.contato-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 100px);
+  align-items: start;
+}
+.contato-text .eyebrow { margin-bottom: 20px; }
+.contato-text .heading-lg { margin-bottom: 20px; }
+.contato-text .body-text { margin-bottom: 32px; }
+.contato-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+.contato-info a {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-text-light);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: color .3s var(--ease);
+}
+.contato-info a:hover { color: var(--color-teal); }
+.contato-info svg {
+  width: 16px; height: 16px;
+  flex-shrink: 0;
+  fill: var(--color-teal);
+  opacity: .6;
+}
+
+/* Form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--color-white);
+  padding: clamp(24px, 3vw, 40px);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-label {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+}
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: var(--color-offwhite);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-dark);
+  outline: none;
+  transition: border-color .4s var(--ease);
+  border-radius: var(--radius-sm);
+  appearance: none;
+}
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--color-teal);
+}
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--color-text-light);
+  opacity: .5;
+}
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237a7a7a' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+.form-submit { align-self: flex-start; margin-top: 8px; }
+
+/* ══════════════════════════════════════════════════════════════
+   § 8 — ETERNITY SECTION (before footer, like parallax-clean)
+   ══════════════════════════════════════════════════════════════ */
+.eternity {
+  padding: clamp(80px, 12vw, 160px) 0;
+  background: var(--color-cream);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+.eternity .heading-lg {
+  margin-bottom: 24px;
+}
+.eternity .body-text {
+  max-width: 560px;
+  text-align: center;
+  margin-bottom: 32px;
+}
+.eternity .vert-line {
+  width: 1px;
+  height: 64px;
+  background: rgba(0,0,0,.15);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FOOTER (FIXED BEHIND)
+   ══════════════════════════════════════════════════════════════ */
+.footer-sticky {
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  background: var(--color-dark);
+  color: rgba(255,255,255,.45);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.footer-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 var(--gutter);
+  max-width: 800px;
+}
+.footer-logo {
+  height: 48px;
+  opacity: .7;
+  margin: 0 auto 40px;
+}
+.footer-cta-label {
+  font-size: 11px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+  margin-bottom: 16px;
+}
+.footer-cta {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 300;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--color-cream);
+  transition: color .4s var(--ease);
+  display: block;
+  line-height: 1.1;
+}
+.footer-cta:hover { color: rgba(255,255,255,.5); }
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 48px;
+  flex-wrap: wrap;
+}
+.footer-nav a {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  transition: color .3s var(--ease);
+}
+.footer-nav a:hover { color: rgba(255,255,255,.85); }
+.footer-social {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  justify-content: center;
+}
+.footer-social a {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .3s var(--ease);
+}
+.footer-social a:hover {
+  border-color: rgba(255,255,255,.3);
+  background: rgba(255,255,255,.05);
+}
+.footer-social a svg {
+  width: 14px; height: 14px;
+  fill: rgba(255,255,255,.5);
+}
+.footer-bottom {
+  margin-top: 48px;
+  font-size: 10px;
+  font-weight: 200;
+  letter-spacing: .06em;
+  color: rgba(255,255,255,.2);
+}
+.footer-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: .06;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .eventos-grid { grid-template-columns: repeat(2, 1fr); }
+  .galeria-grid { grid-template-columns: repeat(2, 1fr); }
+  .galeria-item:nth-child(1) { grid-row: span 1; }
+  .galeria-item:nth-child(4) { grid-column: span 1; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+
+  .intro-grid,
+  .contato-grid {
+    grid-template-columns: 1fr;
+  }
+  .intro-image { margin-right: 0; }
+
+  .card-inner { grid-template-columns: 1fr; }
+  .card-item { top: 5vh; height: 85vh; }
+  .card-img-wrap { height: 50%; order: -1; border-radius: var(--radius-xl) var(--radius-xl) 0 0; }
+  .card-content { border-radius: 0 0 var(--radius-xl) var(--radius-xl); }
+
+  .eventos-grid { grid-template-columns: 1fr 1fr; }
+  .galeria-grid { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+
+  .evento-card-overlay { opacity: 1; }
+}
+@media (max-width: 480px) {
+  .eventos-grid { grid-template-columns: 1fr; }
+  .galeria-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NOISE -->
+<div class="noise-overlay"></div>
+
+<!-- PRELOADER -->
+<div class="loader" id="loader">
+  <div class="loader-text">Di Terrá</div>
+  <div class="loader-bar" id="loaderBar"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     NAVIGATION — mix-blend-difference
+     ═══════════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <a href="#hero" class="nav-logo">
+    <img src="./assets/Logo-Di-Terra-Lettering-PNG-1.png" alt="Di Terrá Eventos">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#intro">O Espaço</a></li>
+    <li><a href="#espacos">Ambientes</a></li>
+    <li><a href="#eventos">Eventos</a></li>
+    <li><a href="#galeria">Galeria</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <button class="nav-toggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════
+     WRAPPER (z-index 10, reveals footer underneath)
+     ═══════════════════════════════════════════════════ -->
+<div class="wrapper">
+
+<!-- ═══════════════════════════════════════════════════
+     § 1 — HERO
+     ═══════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow hero-fade">Piracicaba · Interior de São Paulo</p>
+    <h1 class="hero-title" id="heroTitle">
+      <span class="word-wrap"><span class="word-inner">Um&nbsp;</span></span>
+      <span class="word-wrap"><span class="word-inner">Lugar&nbsp;</span></span>
+      <span class="word-wrap"><span class="word-inner">Para</span></span><br>
+      <span class="word-wrap"><span class="word-inner">Momentos&nbsp;</span></span>
+      <span class="word-wrap"><span class="word-inner">Excepcionais</span></span>
+    </h1>
+    <p class="hero-sub hero-fade">Onde cada detalhe compõe uma experiência inesquecível</p>
+    <a href="#intro" class="btn hero-fade" style="opacity:0">
+      <span>Conheça o Espaço</span>
+      <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M9 1l4 4-4 4" stroke="currentColor" stroke-width="1"/></svg>
+    </a>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     § 2 — INTRO (split text reveal)
+     ═══════════════════════════════════════════════════ -->
+<section class="intro" id="intro">
+  <div class="container">
+    <div class="intro-grid">
+      <div class="intro-text">
+        <h2 class="heading-lg split-animate">
+          Onde a natureza <br><span style="color:var(--color-teal)">encontra a arte.</span>
+        </h2>
+        <p class="body-text split-animate">O Di Terrá nasceu da convicção de que cada celebração merece um cenário à altura de sua importância. Mais do que um espaço, oferecemos uma arquitetura de experiências — onde a natureza do interior paulista encontra uma infraestrutura pensada em cada detalhe.</p>
+        <div class="deco-line" style="margin:24px 0"></div>
+        <div class="intro-meta split-animate">
+          <div>Est. Piracicaba</div>
+          <div>Interior de São Paulo</div>
+        </div>
+      </div>
+      <div class="intro-image">
+        <img src="./assets/DECORACAO.png" alt="Decoração Di Terrá — ambientação premium para eventos">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     § 3 — CARD STACK (Espaços / Ambientes)
+     ═══════════════════════════════════════════════════ -->
+<section class="stack-section" id="espacos">
+  <div class="stack-header">
+    <div class="eyebrow">Nossos Ambientes</div>
+    <h2 class="heading-lg">Espaços que Inspiram</h2>
+  </div>
+  <div class="stack-container">
+
+    <!-- Card 1 — Jardim -->
+    <div class="card-item">
+      <div class="card-inner">
+        <div class="card-content">
+          <div>
+            <div class="card-number">01</div>
+            <h3 class="card-title">Jardim & Área Externa</h3>
+            <p class="card-location">Cerimônias · Coquetéis · Pôr do Sol</p>
+          </div>
+          <div class="card-desc">
+            Amplos jardins cercados pela paisagem natural de Piracicaba. Um cenário a céu aberto que se transforma ao entardecer — ideal para cerimônias, coquetéis e momentos que pedem horizonte.
+          </div>
+          <a href="#contato" class="btn" style="width:max-content">
+            <span>Agendar Visita</span>
+            <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M9 1l4 4-4 4" stroke="currentColor" stroke-width="1"/></svg>
+          </a>
+        </div>
+        <div class="card-img-wrap">
+          <img class="card-img" src="./assets/3.png" alt="Jardim e área externa do Di Terrá">
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 — Salão -->
+    <div class="card-item">
+      <div class="card-inner">
+        <div class="card-content">
+          <div>
+            <div class="card-number">02</div>
+            <h3 class="card-title">Salão Principal</h3>
+            <p class="card-location">Recepções · Jantares · Festas</p>
+          </div>
+          <div class="card-desc">
+            Linhas contemporâneas, pé-direito generoso e iluminação que acompanha o tom de cada celebração. O salão principal acomoda eventos de grande porte com o conforto e a elegância que definem o Di Terrá.
+          </div>
+          <a href="#contato" class="btn" style="width:max-content">
+            <span>Agendar Visita</span>
+            <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M9 1l4 4-4 4" stroke="currentColor" stroke-width="1"/></svg>
+          </a>
+        </div>
+        <div class="card-img-wrap">
+          <img class="card-img" src="./assets/PRODUCAO-6.png" alt="Salão principal — produção executiva Di Terrá">
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 — Lounge -->
+    <div class="card-item">
+      <div class="card-inner">
+        <div class="card-content">
+          <div>
+            <div class="card-number">03</div>
+            <h3 class="card-title">Lounge & Bar</h3>
+            <p class="card-location">Coquetelaria · Design · Convivência</p>
+          </div>
+          <div class="card-desc">
+            Um espaço pensado para a convivência descontraída. Bar completo com coquetelaria autoral, mobiliário de design e uma atmosfera que convida à conversa e à celebração entre amigos.
+          </div>
+          <a href="#contato" class="btn" style="width:max-content">
+            <span>Agendar Visita</span>
+            <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M9 1l4 4-4 4" stroke="currentColor" stroke-width="1"/></svg>
+          </a>
+        </div>
+        <div class="card-img-wrap">
+          <img class="card-img" src="./assets/1.png" alt="Bar e coquetelaria para eventos">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     § 4 — EVENTOS
+     ═══════════════════════════════════════════════════ -->
+<section class="eventos" id="eventos">
+  <div class="container">
+    <div class="eventos-header">
+      <div class="eyebrow" data-aos="fade-up">Celebrações</div>
+      <h2 class="heading-lg" data-aos="fade-up" data-aos-delay="100">Cada Evento,<br>Uma Narrativa Única</h2>
+    </div>
+  </div>
+  <div class="eventos-grid" data-aos="fade-up" data-aos-delay="200">
+    <article class="evento-card">
+      <img src="./assets/CASAMENTO-v2.png" alt="Casamento no Di Terrá">
+      <div class="evento-card-overlay">
+        <h3>Casamentos</h3>
+        <div class="evento-tag">Cerimônia & Recepção</div>
+      </div>
+    </article>
+    <article class="evento-card">
+      <img src="./assets/DECORACAO.png" alt="Formatura no Di Terrá">
+      <div class="evento-card-overlay">
+        <h3>Formaturas</h3>
+        <div class="evento-tag">Celebrações Acadêmicas</div>
+      </div>
+    </article>
+    <article class="evento-card">
+      <img src="./assets/TECNOLOGIA-2.png" alt="Evento corporativo Di Terrá">
+      <div class="evento-card-overlay">
+        <h3>Corporativos</h3>
+        <div class="evento-tag">Conferências & Gala</div>
+      </div>
+    </article>
+    <article class="evento-card">
+      <img src="./assets/ANIVERSARIO-v2.png" alt="Aniversário no Di Terrá">
+      <div class="evento-card-overlay">
+        <h3>Aniversários</h3>
+        <div class="evento-tag">Festas & Debutantes</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     § 5 — BANNER FULLWIDTH
+     ═══════════════════════════════════════════════════ -->
+<section class="banner">
+  <div class="banner-bg" id="bannerBg"></div>
+  <div class="banner-overlay"></div>
+  <div class="banner-content">
+    <blockquote data-aos="fade-up">
+      O lugar mais desejado de<br>Piracicaba para eventos<br>inesquecíveis
+    </blockquote>
+    <span class="deco-line" style="background:rgba(255,255,255,.3);margin:0 auto;transform:scaleX(1)" data-aos="fade-up" data-aos-delay="200"></span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     § 6 — GALERIA
+     ═══════════════════════════════════════════════════ -->
+<section class="galeria" id="galeria">
+  <div class="container">
+    <div class="galeria-header">
+      <div class="eyebrow" data-aos="fade-up">Portfólio</div>
+      <h2 class="heading-lg" data-aos="fade-up" data-aos-delay="100">Registros de<br>Momentos Reais</h2>
+    </div>
+  </div>
+  <div class="galeria-grid" data-aos="fade-up" data-aos-delay="200">
+    <div class="galeria-item">
+      <a href="./assets/DECORACAO.png" class="glightbox" data-gallery="gallery1">
+        <img src="./assets/DECORACAO.png" alt="Decoração Di Terrá">
+      </a>
+    </div>
+    <div class="galeria-item">
+      <a href="./assets/4.png" class="glightbox" data-gallery="gallery1">
+        <img src="./assets/4.png" alt="Gastronomia Di Terrá">
+      </a>
+    </div>
+    <div class="galeria-item">
+      <a href="./assets/PRODUCAO-6.png" class="glightbox" data-gallery="gallery1">
+        <img src="./assets/PRODUCAO-6.png" alt="Produção Di Terrá">
+      </a>
+    </div>
+    <div class="galeria-item">
+      <a href="./assets/3.png" class="glightbox" data-gallery="gallery1">
+        <img src="./assets/3.png" alt="Espaço ao ar livre">
+      </a>
+    </div>
+    <div class="galeria-item">
+      <a href="./assets/TECNOLOGIA-2.png" class="glightbox" data-gallery="gallery1">
+        <img src="./assets/TECNOLOGIA-2.png" alt="Tecnologia Di Terrá">
+      </a>
+    </div>
+    <div class="galeria-item">
+      <a href="./assets/1.png" class="glightbox" data-gallery="gallery1">
+        <img src="./assets/1.png" alt="Bar Di Terrá">
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     § 7 — CONTATO
+     ═══════════════════════════════════════════════════ -->
+<section class="contato" id="contato">
+  <div class="container">
+    <div class="contato-grid">
+      <div class="contato-text">
+        <div class="eyebrow" data-aos="fade-right">Contato</div>
+        <h2 class="heading-lg" data-aos="fade-up">Vamos<br>Conversar</h2>
+        <span class="deco-line" data-aos="fade-right" data-aos-delay="100"></span>
+        <p class="body-text" data-aos="fade-up" data-aos-delay="200">
+          Cada evento começa por uma conversa. Conte-nos sobre a celebração que imagina e descobriremos juntos como transformá-la em algo extraordinário.
+        </p>
+        <div class="contato-info" data-aos="fade-up" data-aos-delay="300">
+          <a href="tel:+5519999999999">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/></svg>
+            (19) 99999-9999
+          </a>
+          <a href="mailto:contato@diterra.com.br">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.708 2.825L15 11.105V5.383zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741zM1 11.105l4.708-2.897L1 5.383v5.722z"/></svg>
+            contato@diterra.com.br
+          </a>
+          <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+            Piracicaba, SP — Interior de São Paulo
+          </a>
+        </div>
+      </div>
+      <div data-aos="fade-up" data-aos-delay="200">
+        <form class="form" onsubmit="return false">
+          <div class="form-row">
+            <div class="form-field">
+              <label class="form-label" for="nome3">Nome *</label>
+              <input class="form-input" type="text" id="nome3" placeholder="Seu nome completo" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="email3">E-mail *</label>
+              <input class="form-input" type="email" id="email3" placeholder="email@exemplo.com" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label class="form-label" for="evento3">Tipo de Evento</label>
+              <select class="form-select" id="evento3">
+                <option value="">Selecione...</option>
+                <option>Casamento</option>
+                <option>Debutante</option>
+                <option>Corporativo</option>
+                <option>Aniversário</option>
+                <option>Formatura</option>
+                <option>Outro</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="data3">Data prevista</label>
+              <input class="form-input" type="text" id="data3" placeholder="Ex: Março 2026">
+            </div>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="mensagem3">Mensagem</label>
+            <textarea class="form-textarea" id="mensagem3" placeholder="Conte-nos sobre o evento que imagina..."></textarea>
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn btn--dark">
+              <span>Enviar Mensagem</span>
+              <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M9 1l4 4-4 4" stroke="currentColor" stroke-width="1"/></svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     § 8 — ETERNITY (closing section before footer)
+     ═══════════════════════════════════════════════════ -->
+<section class="eternity">
+  <h2 class="heading-lg" data-aos="fade-up">Memórias que ficam</h2>
+  <p class="body-text" data-aos="fade-up" data-aos-delay="100">
+    Nossa missão é criar cenários onde cada detalhe contribui para memórias que transcendem o momento. Gastronomia, ambientação e natureza em perfeita harmonia.
+  </p>
+  <div class="vert-line" data-aos="fade-up" data-aos-delay="200"></div>
+</section>
+
+</div>
+<!-- END WRAPPER -->
+
+<!-- ═══════════════════════════════════════════════════
+     FOOTER (FIXED BEHIND WRAPPER)
+     ═══════════════════════════════════════════════════ -->
+<footer class="footer-sticky">
+  <img class="footer-bg-img" src="./assets/3.png" alt="">
+  <div class="footer-inner">
+    <img class="footer-logo" src="./assets/DiTerra-logo-150x150.png" alt="Di Terrá">
+    <div class="footer-cta-label">Pronto para começar?</div>
+    <a class="footer-cta" href="#contato">Vamos<br>Conversar</a>
+    <nav class="footer-nav">
+      <a href="#intro">O Espaço</a>
+      <a href="#espacos">Ambientes</a>
+      <a href="#eventos">Eventos</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <div class="footer-social">
+      <a href="#" aria-label="Instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+      <a href="#" aria-label="Facebook">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="#" aria-label="WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+    </div>
+    <div class="footer-bottom">© 2025 Di Terrá Eventos — Piracicaba, SP</div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   SETUP
+   ══════════════════════════════════════════════════════════════ */
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── Lenis Smooth Scroll ── */
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  direction: 'vertical',
+  smooth: true,
+});
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+/* ── Text Splitter Utility (from parallax-clean) ── */
+function splitTextToWords(element) {
+  const text = element.innerText;
+  const words = text.split(' ');
+  element.innerHTML = '';
+  words.forEach(word => {
+    const wordWrap = document.createElement('span');
+    wordWrap.classList.add('word-wrap');
+    wordWrap.innerHTML = `<span class="word-inner">${word}&nbsp;</span>`;
+    element.appendChild(wordWrap);
+  });
+}
+document.querySelectorAll('.split-animate').forEach(el => {
+  splitTextToWords(el);
+});
+
+/* ── Preloader ── */
+const loadTl = gsap.timeline({
+  onComplete: () => {
+    initSite();
+  }
+});
+
+loadTl
+  .to('#loaderBar', { width: '100%', duration: 1.5, ease: 'power2.inOut' })
+  .to('.loader-text', { y: -40, opacity: 0, duration: 0.5 })
+  .to('#loader', { yPercent: -100, duration: 1, ease: 'power4.inOut' });
+
+/* ══════════════════════════════════════════════════════════════
+   INIT SITE — called after preloader
+   ══════════════════════════════════════════════════════════════ */
+function initSite() {
+
+  /* ── AOS ── */
+  AOS.init({
+    duration: 800,
+    easing: 'ease-out-cubic',
+    once: true,
+    offset: 60
+  });
+
+  /* ── GLightbox ── */
+  GLightbox({
+    touchNavigation: true,
+    loop: true,
+    autoplayVideos: true,
+    skin: 'clean'
+  });
+
+  /* ── Hero Animations ── */
+  gsap.to('.word-inner', {
+    y: '0%',
+    stagger: 0.1,
+    duration: 1.5,
+    ease: 'power4.out'
+  });
+  gsap.to('.hero-fade', { opacity: 1, duration: 1, delay: 0.5 });
+
+  /* ── Hero Parallax ── */
+  gsap.to('#heroBg', {
+    yPercent: 15,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true
+    }
+  });
+
+  /* ── Split Text Scroll Reveal (intro .split-animate) ── */
+  document.querySelectorAll('.split-animate').forEach(el => {
+    const words = el.querySelectorAll('.word-inner');
+    gsap.to(words, {
+      y: '0%',
+      duration: 1,
+      ease: 'power3.out',
+      stagger: 0.02,
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 85%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+  });
+
+  /* ── Card Stack Animation (from parallax-clean) ── */
+  const cards = gsap.utils.toArray('.card-item');
+  cards.forEach((card, i) => {
+    const nextCard = cards[i + 1];
+    if (nextCard) {
+      gsap.to(card.querySelector('.card-inner'), {
+        scale: 0.9,
+        opacity: 0.4,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: nextCard,
+          start: 'top bottom',
+          end: 'top 10vh',
+          scrub: true
+        }
+      });
+    }
+  });
+
+  /* ── Banner Parallax ── */
+  gsap.to('#bannerBg', {
+    yPercent: 10,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.banner',
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: true
+    }
+  });
+
+  /* ── Decorative Line Reveal ── */
+  document.querySelectorAll('.deco-line').forEach(line => {
+    ScrollTrigger.create({
+      trigger: line,
+      start: 'top 85%',
+      onEnter: () => line.classList.add('revealed'),
+      once: true
+    });
+  });
+
+  /* ── Footer Parallax ── */
+  gsap.from('.footer-inner', {
+    y: 80,
+    opacity: 0.5,
+    scale: 0.95,
+    scrollTrigger: {
+      trigger: '.footer-sticky',
+      start: 'top bottom',
+      end: 'bottom bottom',
+      scrub: true
+    }
+  });
+}
+</script>
+</body>
+</html>
