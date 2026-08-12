@@ -293,7 +293,9 @@ h1,h2,h3,h4,h5,h6,p { margin: 0; }
   color: var(--color-white);
 }
 .nav-logo img {
-  height: 36px;
+  height: 30px;
+  /* sem width:auto o browser usa o atributo width do HTML e estica o logo */
+  width: auto;
   filter: brightness(0) invert(1);
 }
 .nav-links {
@@ -917,7 +919,8 @@ h1,h2,h3,h4,h5,h6,p { margin: 0; }
   max-width: 800px;
 }
 .footer-logo {
-  height: 48px;
+  height: 68px;
+  width: auto;
   opacity: .7;
   margin: 0 auto 40px;
 }

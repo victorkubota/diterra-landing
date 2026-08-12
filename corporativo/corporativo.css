@@ -115,7 +115,7 @@ a { color: inherit; }
    TIPOGRAFIA
    ══════════════════════════════════════════════════════════════════════ */
 .eyebrow {
-  display: flex; align-items: center; gap: 14px;
+  display: block;
   font-size: var(--text-xs);
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
@@ -123,11 +123,7 @@ a { color: inherit; }
   color: var(--ui-text-muted);
   margin-bottom: clamp(18px, 2vw, 30px);
 }
-.eyebrow::before {
-  content: ''; width: 34px; height: 1px; background: var(--blue-500); flex: none;
-}
 .on-dark .eyebrow { color: var(--blue-300); }
-.on-dark .eyebrow::before { background: var(--blue-300); }
 
 .h-display {
   font-family: var(--font-display);
