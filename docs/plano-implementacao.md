@@ -246,7 +246,26 @@ ensaio fotográfico próprio.
 
 ---
 
-## 6. Como rodar
+## 6. Ambiente de protótipo e indexação
+
+O deploy de avaliação fica bloqueado para buscadores por duas travas
+independentes, para que não concorra com `diterra.com.br` nem gere conteúdo
+duplicado antes da troca:
+
+| Trava | Onde |
+|---|---|
+| `Disallow: /` | `robots.txt` |
+| `X-Robots-Tag: noindex, nofollow` | header global em `vercel.json` |
+
+As metas `robots` das páginas seguem `index,follow`, que é o valor correto para
+produção. O bloqueio vive só na camada de infraestrutura.
+
+**Ao promover para produção, remover as duas travas** e publicar um
+`sitemap.xml`. Remover apenas uma delas mantém o site fora do índice.
+
+---
+
+## 7. Como rodar
 
 ```bash
 npx serve diterra-deploy -l 8081
