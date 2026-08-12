@@ -1,0 +1,43 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/fazendaquerencia", "destination": "/social#espacos", "permanent": true },
+    { "source": "/palacetemontealegre", "destination": "/social#espacos", "permanent": true },
+    { "source": "/casa-lucca", "destination": "/social#espacos", "permanent": true },
+    { "source": "/espaco-terra", "destination": "/social#espacos", "permanent": true },
+    { "source": "/meia_lua", "destination": "/social#espacos", "permanent": true },
+
+    { "source": "/gastronomia", "destination": "/social#eventos", "permanent": true },
+    { "source": "/alta-confeitaria", "destination": "/social#eventos", "permanent": true },
+    { "source": "/banquete-3", "destination": "/social#eventos", "permanent": true },
+    { "source": "/coquetel", "destination": "/social#eventos", "permanent": true },
+    { "source": "/bar", "destination": "/social#eventos", "permanent": true },
+    { "source": "/decoracao", "destination": "/social#eventos", "permanent": true },
+
+    { "source": "/espaco-para-evento-corporativo", "destination": "/corporativo", "permanent": true },
+    { "source": "/auditorio", "destination": "/corporativo#espacos", "permanent": true },
+
+    { "source": "/escolar", "destination": "/social", "permanent": true },
+    { "source": "/blog", "destination": "/social", "permanent": true },
+    { "source": "/contato", "destination": "/social#contato", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+      ]
+    }
+  ]
+}
