@@ -1,0 +1,10 @@
+# Ambiente de protótipo para avaliação do cliente.
+# Bloqueia indexação para não competir com diterra.com.br nem gerar
+# conteúdo duplicado enquanto o site oficial não é substituído.
+#
+# AO PROMOVER PARA PRODUÇÃO, remover as duas travas:
+#   1. este arquivo (ou trocar por Allow + Sitemap)
+#   2. o header X-Robots-Tag em vercel.json
+
+User-agent: *
+Disallow: /
