@@ -32,7 +32,7 @@ ESPACOS = [
         "lead": "Área ampla, salão coberto e jardim aberto. A casa que recebe as "
                 "celebrações de maior porte, com espaço para cerimônia ao ar livre "
                 "e festa sob cobertura.",
-        "imagem": "../../assets/brand/foto-casal-noite.jpg",
+        "imagem": "/assets/brand/foto-casal-noite.jpg",
         "alt": "Casal de noivos sob luzes no jardim da Querência",
         "prosa": [
             "A Querência nasceu para receber festas que pedem espaço. O jardim abre "
@@ -65,7 +65,7 @@ ESPACOS = [
         "resumo": "Arquitetura histórica para celebrações de assinatura.",
         "lead": "Casarão histórico, pé-direito alto e janelas em arco. O endereço para "
                 "quem quer uma festa com a formalidade de outro tempo.",
-        "imagem": "../../assets/brand/foto-noiva-janela.jpg",
+        "imagem": "/assets/brand/foto-noiva-janela.jpg",
         "alt": "Noiva junto à janela em arco do Palacete Monte Alegre",
         "prosa": [
             "O Palacete carrega a arquitetura que deu origem ao símbolo da marca: as "
@@ -97,7 +97,7 @@ ESPACOS = [
         "resumo": "Escala menor e ambiente reservado para celebrações intimistas.",
         "lead": "Para festas de convidados contados. Mesa longa na área externa, "
                 "ambiente reservado e serviço próximo.",
-        "imagem": "../../assets/espaco-casa-lucca.png",
+        "imagem": "/assets/espaco-casa-lucca.png",
         "alt": "Mesa longa montada na área externa da Casa Lucca",
         "prosa": [
             "A Casa Lucca é a resposta para quem não quer uma festa grande. O formato "
@@ -129,7 +129,7 @@ ESPACOS = [
         "resumo": "Estrutura versátil com horizonte aberto do interior paulista.",
         "lead": "Terreno aberto e vista limpa. O espaço mais versátil do grupo, "
                 "preparado para montagens cenográficas de grande formato.",
-        "imagem": "../../assets/capa-video.png",
+        "imagem": "/assets/capa-video.png",
         "alt": "Vista do horizonte no Espaço Terrá, interior paulista",
         "prosa": [
             "O Espaço Terrá é o mais maleável dos quatro. A área aberta aceita "
@@ -164,7 +164,7 @@ SOLUCOES = [
         "resumo": "Menu autoral, do welcome ao doce da madrugada.",
         "lead": "Cozinha própria, menu construído com os noivos e serviço que acompanha "
                 "o ritmo da festa do começo ao fim.",
-        "imagem": "../../assets/4.png",
+        "imagem": "/assets/4.png",
         "alt": "Mesa de doces e sobremesas montada em evento da Di Terrá",
         "prosa": [
             "O menu não sai de um catálogo. É construído em degustação, ajustado ao "
@@ -190,7 +190,7 @@ SOLUCOES = [
         "resumo": "Cenografia, flores e ambientação sob medida.",
         "lead": "Projeto de ambientação desenhado para o espaço escolhido, do arranjo "
                 "de mesa à cenografia da cerimônia.",
-        "imagem": "../../assets/solucao-completa-decoracao-casamento.png",
+        "imagem": "/assets/solucao-completa-decoracao-casamento.png",
         "alt": "Cenografia floral montada para cerimônia de casamento",
         "prosa": [
             "A decoração parte do espaço, não de um moodboard genérico. Cada casa tem "
@@ -215,7 +215,7 @@ SOLUCOES = [
         "resumo": "Bar assinado, drinks autorais e serviço dedicado.",
         "lead": "Carta de drinks criada para a festa, com bar montado e equipe própria "
                 "de bartenders.",
-        "imagem": "../../assets/1.png",
+        "imagem": "/assets/1.png",
         "alt": "Drink autoral sendo finalizado no bar da Di Terrá",
         "prosa": [
             "A carta é montada junto com os noivos e costuma incluir dois drinks "
@@ -240,7 +240,7 @@ SOLUCOES = [
         "resumo": "Planejamento, cronograma e operação no dia.",
         "lead": "A equipe que costura fornecedores, cronograma e imprevistos para que "
                 "a festa aconteça sem que ninguém perceba a operação.",
-        "imagem": "../../assets/PRODUCAO-6.png",
+        "imagem": "/assets/PRODUCAO-6.png",
         "alt": "Equipe de produção da Di Terrá em operação durante evento",
         "prosa": [
             "A produção começa muito antes do dia: definição de cronograma, "
@@ -266,7 +266,7 @@ SOLUCOES = [
         "resumo": "Som, luz, projeção e transmissão.",
         "lead": "Estrutura técnica dimensionada para o espaço, da cerimônia ao último "
                 "bloco da pista.",
-        "imagem": "../../assets/TECNOLOGIA-2.png",
+        "imagem": "/assets/TECNOLOGIA-2.png",
         "alt": "Estrutura de som e luz durante show em evento da Di Terrá",
         "prosa": [
             "Som e luz são dimensionados por espaço. O que funciona no salão coberto "
@@ -322,45 +322,45 @@ def cabeca(titulo, descricao, canonical, css, favicon):
 """
 
 
-def nav(base):
-    return f"""
+def nav():
+    return """
 <nav class="nav" id="nav" aria-label="Navegação principal">
-  <a class="nav__logo" href="{base}" aria-label="Di Terrá Eventos, início">
-    <img src="{base}../assets/brand/social-wordmark-white.png" alt="Di Terrá Eventos" width="500" height="500">
+  <a class="nav__logo" href="/social" aria-label="Di Terrá Eventos, início">
+    <img src="/assets/brand/social-wordmark-white.png" alt="Di Terrá Eventos" width="472" height="94">
   </a>
   <ul class="nav__links">
-    <li><a href="{base}#intro">O grupo</a></li>
-    <li><a href="{base}espacos/">Espaços</a></li>
-    <li><a href="{base}solucoes/">Soluções</a></li>
-    <li><a href="{base}#galeria">Galeria</a></li>
-    <li><a href="{base}#contato">Contato</a></li>
+    <li><a href="/social#intro">O grupo</a></li>
+    <li><a href="/social/espacos">Espaços</a></li>
+    <li><a href="/social/solucoes">Soluções</a></li>
+    <li><a href="/social#galeria">Galeria</a></li>
+    <li><a href="/social#contato">Contato</a></li>
   </ul>
   <div class="nav__side">
-    <a class="nav__switch" href="{base}../corporativo/">Corporativo &rarr;</a>
-    <a class="btn btn--primary" href="{base}#contato">Fale conosco</a>
+    <a class="nav__switch" href="/corporativo">Corporativo &rarr;</a>
+    <a class="btn btn--primary" href="/social#contato">Fale conosco</a>
     <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Abrir menu">
       <span></span><span></span>
     </button>
   </div>
 </nav>
 <div class="nav__drawer" id="navDrawer">
-  <a href="{base}#intro">O grupo</a>
-  <a href="{base}espacos/">Espaços</a>
-  <a href="{base}solucoes/">Soluções</a>
-  <a href="{base}#galeria">Galeria</a>
-  <a href="{base}#contato">Contato</a>
-  <a class="nav__switch" href="{base}../corporativo/">Ir para Corporativo &rarr;</a>
+  <a href="/social#intro">O grupo</a>
+  <a href="/social/espacos">Espaços</a>
+  <a href="/social/solucoes">Soluções</a>
+  <a href="/social#galeria">Galeria</a>
+  <a href="/social#contato">Contato</a>
+  <a class="nav__switch" href="/corporativo">Ir para Corporativo &rarr;</a>
 </div>
 """
 
 
-def rodape(base):
-    return f"""
+def rodape():
+    return """
 <footer class="foot">
   <div class="wrap">
     <div class="foot__grid">
       <div class="foot__logo">
-        <img src="{base}../assets/brand/social-lockup-white.png" alt="Di Terrá Eventos" width="500" height="500">
+        <img src="/assets/brand/social-lockup-white.png" alt="Di Terrá Eventos" width="454" height="288">
         <p style="font-size:var(--text-sm); color:rgba(254,250,224,.78); max-width:30ch">
           Quatro espaços no interior paulista para casamentos, debutantes, aniversários e bodas.
         </p>
@@ -368,29 +368,29 @@ def rodape(base):
       <div>
         <h2>Espaços</h2>
         <ul>
-          <li><a href="{base}espacos/a-querencia.html">A Querência</a></li>
-          <li><a href="{base}espacos/palacete-monte-alegre.html">Palacete Monte Alegre</a></li>
-          <li><a href="{base}espacos/casa-lucca.html">Casa Lucca</a></li>
-          <li><a href="{base}espacos/espaco-terra.html">Espaço Terrá</a></li>
+          <li><a href="/social/espacos/a-querencia">A Querência</a></li>
+          <li><a href="/social/espacos/palacete-monte-alegre">Palacete Monte Alegre</a></li>
+          <li><a href="/social/espacos/casa-lucca">Casa Lucca</a></li>
+          <li><a href="/social/espacos/espaco-terra">Espaço Terrá</a></li>
         </ul>
       </div>
       <div>
         <h2>Soluções</h2>
         <ul>
-          <li><a href="{base}solucoes/gastronomia.html">Gastronomia</a></li>
-          <li><a href="{base}solucoes/decoracao.html">Decoração</a></li>
-          <li><a href="{base}solucoes/coquetelaria.html">Coquetelaria</a></li>
-          <li><a href="{base}solucoes/producao.html">Produção</a></li>
-          <li><a href="{base}solucoes/tecnologia-audiovisual.html">Tecnologia Audiovisual</a></li>
+          <li><a href="/social/solucoes/gastronomia">Gastronomia</a></li>
+          <li><a href="/social/solucoes/decoracao">Decoração</a></li>
+          <li><a href="/social/solucoes/coquetelaria">Coquetelaria</a></li>
+          <li><a href="/social/solucoes/producao">Produção</a></li>
+          <li><a href="/social/solucoes/tecnologia-audiovisual">Tecnologia Audiovisual</a></li>
         </ul>
       </div>
       <div>
         <h2>Di Terrá</h2>
         <ul>
-          <li><a href="{base}">Home social</a></li>
-          <li><a href="{base}../corporativo/">Corporativo</a></li>
-          <li><a href="{base}#contato">Contato</a></li>
-          <li><a href="{base}../">Página de entrada</a></li>
+          <li><a href="/social">Home social</a></li>
+          <li><a href="/corporativo">Corporativo</a></li>
+          <li><a href="/social#contato">Contato</a></li>
+          <li><a href="/">Página de entrada</a></li>
         </ul>
       </div>
     </div>
@@ -407,25 +407,25 @@ def rodape(base):
   </svg>
 </a>
 
-<script src="{base}../assets/site.js" defer></script>
+<script src="/assets/site.js" defer></script>
 </body>
 </html>
 """
 
 
-def cta(base):
-    return f"""
+def cta():
+    return """
 <section class="section section--rose">
-  <span class="ornament ornament--tr"><img src="{base}../assets/brand/ornamento-ramo-navy.png" alt="" width="287" height="513"></span>
+  <span class="ornament ornament--tr"><img src="/assets/brand/ornamento-ramo-navy.png" alt="" width="287" height="513"></span>
   <div class="wrap cta rise">
     <p class="script">Sua história começa aqui</p>
     <h2 class="h-section">Vamos conversar sobre a sua data?</h2>
     <div class="cta__actions">
-      <a class="btn btn--primary" href="{base}#contato">
+      <a class="btn btn--primary" href="/social#contato">
         Falar com a equipe
         <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
       </a>
-      <a class="btn btn--ghost" href="{base}espacos/">Conhecer os espaços</a>
+      <a class="btn btn--ghost" href="/social/espacos">Conhecer os espaços</a>
     </div>
   </div>
 </section>
@@ -441,13 +441,13 @@ def ficha_html(itens):
     return NL.join(linhas)
 
 
-def cards_html(itens, pasta, base, atual=None):
+def cards_html(itens, pasta, atual=None):
     saida = []
     for it in itens:
         if it["slug"] == atual:
             continue
-        img = it["imagem"].replace("../../", f"{base}../")
-        saida.append(f"""      <a class="card rise" href="{base}{pasta}/{it['slug']}.html">
+        img = it["imagem"]
+        saida.append(f"""      <a class="card rise" href="/social/{pasta}/{it['slug']}">
         <div class="card__media">
           <img src="{img}" alt="{it['alt']}" loading="lazy" style="object-position:center 35%">
           <span class="card__arch" aria-hidden="true"></span>
@@ -463,15 +463,14 @@ def cards_html(itens, pasta, base, atual=None):
     return NL.join(saida)
 
 
-def galeria_html(base):
+def galeria_html():
     return NL.join(
-        f'      <figure><img src="{base}../assets/{arq}" alt="{alt}" loading="lazy" style="object-position:center 35%"></figure>'
+        f'      <figure><img src="/assets/{arq}" alt="{alt}" loading="lazy" style="object-position:center 35%"></figure>'
         for arq, alt in GALERIA
     )
 
 
 def pagina_interna(item, tipo):
-    base = "../"
     e_espaco = tipo == "espacos"
     rotulo = "Espaços" if e_espaco else "Soluções"
     irmaos = ESPACOS if e_espaco else SOLUCOES
@@ -527,8 +526,8 @@ def pagina_interna(item, tipo):
 
     return (
         cabeca(titulo, desc, f"https://www.diterra.com.br/social/{tipo}/{item['slug']}",
-               f"{base}social.css", f"{base}../assets/brand/favicon-social.png")
-        + nav(base)
+               "/social/social.css", "/assets/brand/favicon-social.png")
+        + nav()
         + f"""
 <main id="conteudo">
 
@@ -538,9 +537,9 @@ def pagina_interna(item, tipo):
   </div>
   <div class="wrap on-dark">
     <ol class="crumbs">
-      <li><a href="{base}../">Di Terrá</a></li>
-      <li><a href="{base}">Social</a></li>
-      <li><a href="{base}{tipo}/">{rotulo}</a></li>
+      <li><a href="/">Di Terrá</a></li>
+      <li><a href="/social">Social</a></li>
+      <li><a href="/social/{tipo}">{rotulo}</a></li>
       <li aria-current="page">{item['nome']}</li>
     </ol>
     <h1 class="h-display">{item['nome']}</h1>
@@ -549,7 +548,7 @@ def pagina_interna(item, tipo):
 </header>
 
 <section class="section">
-  <span class="ornament ornament--tr"><img src="{base}../assets/brand/ornamento-ramo-rose.png" alt="" width="305" height="621"></span>
+  <span class="ornament ornament--tr"><img src="/assets/brand/ornamento-ramo-rose.png" alt="" width="305" height="621"></span>
   <div class="wrap split">
     <div class="prose rise">
       <p class="eyebrow">{rotulo}</p>
@@ -568,7 +567,7 @@ def pagina_interna(item, tipo):
       <h2 class="h-section">Momentos na Di Terrá</h2>
     </div>
     <div class="gallery rise">
-{galeria_html(base)}
+{galeria_html()}
     </div>
   </div>
 </section>
@@ -580,18 +579,17 @@ def pagina_interna(item, tipo):
       <h2 class="h-section">{titulo_irmaos}</h2>
     </div>
     <div class="grid grid--3">
-{cards_html(irmaos, tipo, base, atual=item['slug'])}
+{cards_html(irmaos, tipo, atual=item['slug'])}
     </div>
   </div>
 </section>
-{cta(base)}
+{cta()}
 </main>
-""" + rodape(base)
+""" + rodape()
     )
 
 
 def hub(tipo):
-    base = "../"
     e_espaco = tipo == "espacos"
     itens = ESPACOS if e_espaco else SOLUCOES
 
@@ -602,7 +600,7 @@ def hub(tipo):
         h1, chamada = "Espaços", "Escolha a casa"
         lead = ("Quatro casas, cada uma com uma escala e um caráter. A escolha do "
                 "espaço é a primeira decisão da festa.")
-        img, alt = "../../assets/3.png", "Fachada e jardim de um dos espaços da Di Terrá"
+        img, alt = "/assets/3.png", "Fachada e jardim de um dos espaços da Di Terrá"
         sub = "Cada casa recebe um tipo de festa"
         subtexto = ("Da celebração intimista de mesa longa à festa de grande porte "
                     "com cerimônia ao ar livre.")
@@ -613,15 +611,15 @@ def hub(tipo):
         h1, chamada = "Soluções", "O que fazemos"
         lead = ("Tudo o que a festa precisa sob um contrato só, sem coordenar "
                 "fornecedor por fornecedor.")
-        img, alt = "../../assets/DECORACAO.png", "Cenografia floral montada em evento da Di Terrá"
+        img, alt = "/assets/DECORACAO.png", "Cenografia floral montada em evento da Di Terrá"
         sub = "Cinco frentes, uma operação"
         subtexto = ("A mesma equipe cuida do menu, da ambientação, do bar, do "
                     "cronograma e da estrutura técnica.")
 
     return (
         cabeca(titulo, desc, f"https://www.diterra.com.br/social/{tipo}/",
-               f"{base}social.css", f"{base}../assets/brand/favicon-social.png")
-        + nav(base)
+               "/social/social.css", "/assets/brand/favicon-social.png")
+        + nav()
         + f"""
 <main id="conteudo">
 
@@ -631,8 +629,8 @@ def hub(tipo):
   </div>
   <div class="wrap on-dark">
     <ol class="crumbs">
-      <li><a href="{base}../">Di Terrá</a></li>
-      <li><a href="{base}">Social</a></li>
+      <li><a href="/">Di Terrá</a></li>
+      <li><a href="/social">Social</a></li>
       <li aria-current="page">{h1}</li>
     </ol>
     <h1 class="h-display">{h1}</h1>
@@ -641,7 +639,7 @@ def hub(tipo):
 </header>
 
 <section class="section">
-  <span class="ornament ornament--bl"><img src="{base}../assets/brand/ornamento-ramo-rose.png" alt="" width="305" height="621"></span>
+  <span class="ornament ornament--bl"><img src="/assets/brand/ornamento-ramo-rose.png" alt="" width="305" height="621"></span>
   <div class="wrap">
     <div class="section__head rise">
       <p class="eyebrow">{chamada}</p>
@@ -649,13 +647,13 @@ def hub(tipo):
       <p class="body-muted">{subtexto}</p>
     </div>
     <div class="grid grid--3">
-{cards_html(itens, tipo, base)}
+{cards_html(itens, tipo)}
     </div>
   </div>
 </section>
-{cta(base)}
+{cta()}
 </main>
-""" + rodape(base)
+""" + rodape()
     )
 
 
