@@ -14,87 +14,15 @@
 /* ══════════════════════════════════════════════════════════════
    CUSTOM PROPERTIES
    ══════════════════════════════════════════════════════════════ */
-:root {
-  /* ── PALETA OFICIAL (BRANDBOOK v2, p.6) ──────────────────────
-     azul royal #111542 · rosa baby #f4bfb3
-     bege marfim #fefae0 · marrom tijolo #c67139
-     Os nomes de token abaixo foram mantidos para não quebrar as
-     regras existentes; os valores agora seguem o brandbook.     */
-  --ivory:     #fefae0;   /* bege marfim */
-  --ivory-warm: #f7f1d8;
-  --ivory-light:  #fffdf2;
-  --white:     #ffffff;
-  --royal:      #111542;   /* azul royal */
-  --ui-text:      #2a2f5c;
-  --ui-text-muted:#5b608a;
-  --ui-border:    rgba(17,21,66,.12);
-
-  --royal-soft: rgba(17,21,66,.06);
-  --brick:      #c67139;   /* marrom tijolo */
-  --rose:      #f4bfb3;   /* rosa baby */
-
-  /* ── TIPOGRAFIA (BRANDBOOK v2, p.8) ─────────────────────────── */
-  --font-display:  'Channe', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --font-script: 'Oooh Baby', 'Cormorant Garamond', cursive;
-  --font-sans:   'Albert Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
-
-  --section-y:    clamp(80px, 10vw, 140px);
-  --max:  1200px;
-  --gutter:         clamp(20px, 4vw, 64px);
-
-  --ease:           cubic-bezier(.15,.75,.5,1);
-  --ease-out:       cubic-bezier(.25,1,.33,1);
-
-  /* Apple-style radius */
-  --radius-xl:      28px;
-  --radius-lg:      22px;
-  --radius-md:      16px;
-  --radius-sm:      12px;
-}
 
 /* ══════════════════════════════════════════════════════════════
    BASE RESET
    ══════════════════════════════════════════════════════════════ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html {
-  -webkit-text-size-adjust: 100%;
-  scroll-behavior: auto;
-}
-body {
-  font-family: var(--font-sans);
-  font-size: 15px;
-  font-weight: 300;
-  line-height: 1.7;
-  color: var(--ui-text);
-  background: var(--ivory);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-}
-img { max-width: 100%; display: block; }
-a { text-decoration: none; color: inherit; }
-button { font-family: inherit; }
-h1,h2,h3,h4,h5,h6,p { margin: 0; }
-::selection { background: var(--royal); color: var(--white); }
-
 
 /* ══════════════════════════════════════════════════════════════
    PRELOADER
    ══════════════════════════════════════════════════════════════ */
 /* ── voltar ao topo ── */
-.to-top {
-  position: fixed; right: clamp(16px, 2.4vw, 30px); bottom: clamp(16px, 2.4vw, 30px);
-  z-index: 9000; width: 46px; height: 46px;
-  display: grid; place-items: center;
-  background: var(--royal); color: var(--ivory);
-  border: 1px solid rgba(254,250,224,.24); border-radius: 999px;
-  text-decoration: none;
-  opacity: 0; visibility: hidden; transform: translateY(10px);
-  transition: opacity .5s var(--ease-out), transform .5s var(--ease-out),
-              visibility .5s, background .25s var(--ease-out);
-}
-.to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
-.to-top:hover { background: var(--brick); }
 
 .loader {
   position: fixed;
@@ -145,11 +73,6 @@ h1,h2,h3,h4,h5,h6,p { margin: 0; }
   margin-bottom: 100vh;
   box-shadow: 0 50px 100px rgba(0,0,0,0.3);
 }
-.container {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-}
 
 /* ══════════════════════════════════════════════════════════════
    TYPOGRAPHY UTILITY
@@ -171,22 +94,7 @@ h1,h2,h3,h4,h5,h6,p { margin: 0; }
   letter-spacing: .02em;
   color: var(--royal);
 }
-.eyebrow {
-  font-family: var(--font-sans);
-  font-size: 11px;
-  font-weight: 300;
-  letter-spacing: .25em;
-  text-transform: uppercase;
-  color: var(--ui-text-muted);
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.eyebrow::before {
-  content: '';
-  width: 32px; height: 1px;
-  background: var(--ui-text-muted);
-}
+
 .body-text {
   font-size: 15px;
   font-weight: 300;
@@ -219,46 +127,8 @@ h1,h2,h3,h4,h5,h6,p { margin: 0; }
 /* ══════════════════════════════════════════════════════════════
    BUTTONS
    ══════════════════════════════════════════════════════════════ */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 36px;
-  border: 1px solid rgba(255,255,255,.6);
-  border-radius: var(--radius-sm);
-  background: transparent;
-  font-family: var(--font-sans);
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--white);
-  transition: all .5s var(--ease);
-  position: relative;
-  overflow: hidden;
-}
-.btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--white);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform .5s var(--ease);
-  z-index: 0;
-  border-radius: var(--radius-sm);
-}
-.btn:hover::before { transform: scaleX(1); transform-origin: left; }
+
 .btn:hover { color: var(--royal); border-color: var(--white); }
-.btn span, .btn svg { position: relative; z-index: 1; }
-.btn svg { transition: transform .4s var(--ease-out); }
-.btn:hover svg { transform: translateX(4px); }
-.btn--dark {
-  border-color: rgba(0,0,0,.2);
-  color: var(--royal);
-}
-.btn--dark::before { background: var(--royal); }
-.btn--dark:hover { color: var(--white); border-color: var(--royal); }
 
 /* ══════════════════════════════════════════════════════════════
    NAVIGATION — mix-blend-difference (from parallax-clean)
