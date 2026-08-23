@@ -45,7 +45,7 @@
   --ui-text:          var(--navy-900);
   --ui-text-muted:    #4a5b7d;
   --ui-text-invert:   var(--white);
-  --ui-text-invert-m: rgba(255,255,255,.76);
+  --ui-text-invert-muted: rgba(255,255,255,.76);
   --ui-accent:        var(--blue-500);   /* display / gráficos apenas */
   --ui-accent-on-dark:var(--blue-300);
   --ui-border:        rgba(30,50,92,.14);
@@ -154,7 +154,7 @@ a { color: inherit; }
 .lead { font-size: var(--text-lg); font-weight: 300; line-height: 1.6; max-width: 46ch; }
 .body-muted { color: var(--ui-text-muted); }
 .on-dark { color: var(--ui-text-invert); }
-.on-dark .body-muted { color: var(--ui-text-invert-m); }
+.on-dark .body-muted { color: var(--ui-text-invert-muted); }
 
 /* ══════════════════════════════════════════════════════════════════════
    BOTÕES E LINKS DE AÇÃO
@@ -764,7 +764,7 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
 @media (min-width: 620px) { .form-grid { grid-template-columns: 1fr 1fr; } }
 .field { display: flex; flex-direction: column; gap: 8px; }
 .field--full { grid-column: 1 / -1; }
-.field label { font-size: var(--text-xs); letter-spacing: .14em; text-transform: uppercase; color: var(--ui-text-invert-m); }
+.field label { font-size: var(--text-xs); letter-spacing: .14em; text-transform: uppercase; color: var(--ui-text-invert-muted); }
 .field input, .field select, .field textarea {
   font-family: inherit; font-size: var(--text-base); font-weight: 300;
   color: #fff; background: rgba(255,255,255,.06);
