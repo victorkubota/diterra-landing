@@ -63,215 +63,373 @@
 
 <!-- ══════════════════════════════════════════════════════════════
      HERO
+     Feedback de 18/08: "tela inicial precisa ser mais viva — sem
+     filtro escuro, menos texto, animação de entrada".
+     Saiu o duotone (grayscale + luminosity + opacity .55) e o bloco
+     de manifesto. Entrou vídeo, uma linha de apoio e a ficha rápida
+     que o comprador corporativo procura na primeira dobra.
      ══════════════════════════════════════════════════════════════ -->
 <header class="hero" id="topo">
   <div class="hero__media">
-    <img src="/assets/corporativo-auditorio.png" width="1024" height="1024"
+    <img id="heroPoster" src="/assets/demo/hero/hero-corporativo.webp"
+         width="2400" height="1340"
          alt="Auditório montado para convenção corporativa em espaço da Di Terrá"
-         fetchpriority="high">
+         fetchpriority="high" decoding="async">
+    <video id="heroVideo" muted loop playsinline preload="none"
+           poster="/assets/demo/hero/hero-corporativo.webp"
+           aria-hidden="true" hidden></video>
   </div>
+
   <div class="wrap hero__inner on-dark">
-    <p class="eyebrow">Di Terrá Corporativo</p>
-    <h1 class="h-display">Onde marcas se expressam.<br><em>Onde pessoas se conectam.</em></h1>
-    <p class="lead hero__lead">
-      Há encontros que acontecem. E há encontros que transformam.
-      Um evento corporativo não é uma pauta da agenda: é um momento vivo,
-      capaz de inspirar, emocionar e conectar as pessoas à sua marca.
+    <p class="eyebrow rise" style="--i:0">Di Terrá Corporativo</p>
+    <h1 class="h-display rise" style="--i:1">Onde marcas se expressam.<br><em>Onde pessoas se conectam.</em></h1>
+    <p class="lead hero__lead rise" style="--i:2">
+      Quatro casas no interior paulista, com estrutura completa em um único contrato.
     </p>
-    <div class="hero__actions">
+
+    <div class="hero__actions rise" style="--i:3">
       <a class="btn btn--primary" href="#proposta">
         Solicitar proposta
         <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
       </a>
       <a class="btn btn--ghost" href="#espacos">Conhecer os espaços</a>
     </div>
+
+    <!-- ficha rápida: resolve "não informa capacidade nem localização" -->
+    <ul class="hero__facts rise" style="--i:4">
+      <li><span class="hero__facts-v">04</span><span class="hero__facts-k">Espaços próprios</span></li>
+      <li><span class="hero__facts-v tbd">a confirmar</span><span class="hero__facts-k">Capacidade máxima</span></li>
+      <li><span class="hero__facts-v tbd">a confirmar</span><span class="hero__facts-k">Distância de São Paulo</span></li>
+      <li><span class="hero__facts-v">06</span><span class="hero__facts-k">Formatos atendidos</span></li>
+    </ul>
   </div>
+
   <p class="hero__scroll">Role para descobrir</p>
 </header>
 
 <!-- ══════════════════════════════════════════════════════════════
      MANIFESTO
+     Feedback: "sinto falta de animação ao scrollar e abrir esse
+     bloco — também acho que podemos explorar uma foto".
      ══════════════════════════════════════════════════════════════ -->
 <section class="section section--paper" id="manifesto">
   <div class="wrap manifesto">
-    <div class="manifesto__aside rise">
-      <p class="eyebrow">A proposta</p>
-      <h2 class="h-section">O enredo de um evento que acontece por inteiro</h2>
+    <div class="manifesto__aside">
+      <p class="eyebrow rise" style="--i:0">A proposta</p>
+      <h2 class="h-section rise" style="--i:1">O enredo de um evento que acontece por inteiro</h2>
+      <figure class="manifesto__media rise" style="--i:2">
+        <img src="/assets/demo/apoio/manifesto.webp" width="1856" height="2304"
+             alt="Portal em arco de uma das casas da Di Terrá ao amanhecer" loading="lazy">
+      </figure>
     </div>
-    <div class="manifesto__body rise">
-      <p>Cada empresa tem uma história para contar, e nós transformamos essa história em experiência.</p>
-      <p>Na <strong>Di Terrá</strong>, a exclusividade encontra o corporativo e esse momento ganha significado estratégico. Criamos encontros que inspiram times, aproximam pessoas e fortalecem marcas.</p>
-      <p>Cuidamos de tudo e de todos os detalhes para que as conexões sejam reais e para que cada encontro atue como um momento de fortalecimento da cultura organizacional, vivo e presente.</p>
-      <p class="body-muted">Criamos experiências que vão além da lógica. Espaços que acolhem. Alta gastronomia que conquista. Tecnologia, som e luz que encantam. Atmosferas que inspiram.</p>
+    <div class="manifesto__body">
+      <p class="rise" style="--i:1">Cada empresa tem uma história para contar, e nós transformamos essa história em experiência.</p>
+      <p class="rise" style="--i:2">Na <strong>Di Terrá</strong>, a exclusividade encontra o corporativo e esse momento ganha significado estratégico. Criamos encontros que inspiram times, aproximam pessoas e fortalecem marcas.</p>
+      <p class="rise" style="--i:3">Cuidamos de tudo e de todos os detalhes para que as conexões sejam reais e para que cada encontro atue como um momento de fortalecimento da cultura organizacional, vivo e presente.</p>
+      <p class="body-muted rise" style="--i:4">Criamos experiências que vão além da lógica. Espaços que acolhem. Alta gastronomia que conquista. Tecnologia, som e luz que encantam. Atmosferas que inspiram.</p>
+      <p class="rise" style="--i:5">
+        <a class="btn btn--ghost" href="#proposta">Falar com o comercial</a>
+      </p>
     </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════
-     PROVA — números
-     Placeholders: os valores devem ser fornecidos pela Di Terrá.
+     PROVA — números sobre fotografia
+     Feedback: "bloco ficou um pouco sem graça, podemos explorar
+     mais imagens aqui?". Os valores continuam pendentes: nenhum
+     número foi estimado.
      ══════════════════════════════════════════════════════════════ -->
-<section class="section section--invert">
+<section class="section section--photo" id="numeros">
+  <div class="photo-bg" aria-hidden="true">
+    <img src="/assets/demo/apoio/numeros-fundo.webp" width="2400" height="1018"
+         alt="" loading="lazy">
+  </div>
   <div class="wrap">
-    <div class="section__head on-dark rise">
+    <div class="section__head on-dark rise" style="--i:0">
       <p class="eyebrow">Em números</p>
       <h2 class="h-section">A operação por trás de cada encontro</h2>
     </div>
-    <div class="stats rise">
-      <div class="stat"><span class="stat__n">04</span><span class="stat__l">Espaços próprios</span></div>
-      <div class="stat"><span class="stat__n stat__n--tbd tbd">a confirmar</span><span class="stat__l">Eventos corporativos por ano</span></div>
-      <div class="stat"><span class="stat__n stat__n--tbd tbd">a confirmar</span><span class="stat__l">Convidados por evento (máx.)</span></div>
-      <div class="stat"><span class="stat__n stat__n--tbd tbd">a confirmar</span><span class="stat__l">Anos de operação</span></div>
+    <div class="stats">
+      <div class="stat rise" style="--i:1"><span class="stat__n" data-count="4">04</span><span class="stat__l">Espaços próprios</span></div>
+      <div class="stat rise" style="--i:2"><span class="stat__n stat__n--tbd tbd">a confirmar</span><span class="stat__l">Eventos corporativos por ano</span></div>
+      <div class="stat rise" style="--i:3"><span class="stat__n stat__n--tbd tbd">a confirmar</span><span class="stat__l">Convidados por evento (máx.)</span></div>
+      <div class="stat rise" style="--i:4"><span class="stat__n stat__n--tbd tbd">a confirmar</span><span class="stat__l">Anos de operação</span></div>
     </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════
      FORMATOS
+     Feedback: "esses são os formatos de eventos que atendemos,
+     precisamos que essa parte seja muito visual!".
+     Os seis blocos de prosa viraram grade bento com fotografia.
      ══════════════════════════════════════════════════════════════ -->
 <section class="section" id="formatos">
-  <div class="wrap section__head rise">
-    <p class="eyebrow">Formatos</p>
-    <h2 class="h-section">O poder dos nossos eventos como ferramenta estratégica</h2>
-    <p class="body-muted">Nossos espaços não são apenas locais. São palcos prontos para dar forma e voz ao que sua empresa deseja promover.</p>
+  <div class="wrap section__head">
+    <p class="eyebrow rise" style="--i:0">Formatos</p>
+    <h2 class="h-section rise" style="--i:1">O poder dos nossos eventos como ferramenta estratégica</h2>
+    <p class="body-muted rise" style="--i:2">Nossos espaços não são apenas locais. São palcos prontos para dar forma e voz ao que sua empresa deseja promover.</p>
   </div>
-  <div class="formats rise">
-    <article class="format">
-      <span class="format__n">01</span>
-      <h3 class="h-card">Convenções e congressos</h3>
-      <p>Plenária em auditório, salas de apoio, credenciamento e coffee simultâneo para grupos grandes.</p>
-    </article>
-    <article class="format">
-      <span class="format__n">02</span>
-      <h3 class="h-card">Off-sites e retreats</h3>
-      <p>Alinhamentos estratégicos de liderança longe do escritório, com ritmo, silêncio e natureza a favor.</p>
-    </article>
-    <article class="format">
-      <span class="format__n">03</span>
-      <h3 class="h-card">Lançamentos de produto</h3>
-      <p>Cenografia, projeção e som desenhados para o momento em que a marca aparece.</p>
-    </article>
-    <article class="format">
-      <span class="format__n">04</span>
-      <h3 class="h-card">Integrações de equipe</h3>
-      <p>Encontros que aproximam times distribuídos e transformam cultura em experiência compartilhada.</p>
-    </article>
-    <article class="format">
-      <span class="format__n">05</span>
-      <h3 class="h-card">Celebrações corporativas</h3>
-      <p>Premiações, festas de fim de ano e comemorações de conquistas do time.</p>
-    </article>
-    <article class="format">
-      <span class="format__n">06</span>
-      <h3 class="h-card">Alinhamentos comerciais</h3>
-      <p>Kickoffs de vendas e convenções de força comercial com estrutura de palco e breakout.</p>
-    </article>
+
+  <div class="wrap">
+    <div class="bento">
+      <article class="fmt fmt--wide rise" style="--i:0">
+        <img src="/assets/demo/formatos/convencoes-congressos.webp" width="2400" height="1792"
+             alt="Plenária de convenção montada em auditório na Di Terrá" loading="lazy">
+        <div class="fmt__text">
+          <span class="fmt__n">01</span>
+          <h3 class="h-card">Convenções e congressos</h3>
+          <p>Plenária em auditório, salas de apoio, credenciamento e coffee simultâneo para grupos grandes.</p>
+        </div>
+      </article>
+
+      <article class="fmt fmt--wide rise" style="--i:1">
+        <img src="/assets/demo/formatos/offsites-retreats.webp" width="2400" height="1792"
+             alt="Reunião de liderança em terraço ao ar livre" loading="lazy">
+        <div class="fmt__text">
+          <span class="fmt__n">02</span>
+          <h3 class="h-card">Off-sites e retreats</h3>
+          <p>Alinhamentos estratégicos de liderança longe do escritório, com ritmo, silêncio e natureza a favor.</p>
+        </div>
+      </article>
+
+      <article class="fmt rise" style="--i:2">
+        <img src="/assets/demo/formatos/lancamentos-produto.webp" width="2400" height="1792"
+             alt="Palco de lançamento de produto com projeção de grande formato" loading="lazy">
+        <div class="fmt__text">
+          <span class="fmt__n">03</span>
+          <h3 class="h-card">Lançamentos de produto</h3>
+          <p>Cenografia, projeção e som desenhados para o momento em que a marca aparece.</p>
+        </div>
+      </article>
+
+      <article class="fmt rise" style="--i:3">
+        <img src="/assets/demo/formatos/integracoes-equipe.webp" width="2400" height="1792"
+             alt="Confraternização de equipe no gramado ao entardecer" loading="lazy">
+        <div class="fmt__text">
+          <span class="fmt__n">04</span>
+          <h3 class="h-card">Integrações de equipe</h3>
+          <p>Encontros que aproximam times distribuídos e transformam cultura em experiência compartilhada.</p>
+        </div>
+      </article>
+
+      <article class="fmt rise" style="--i:4">
+        <img src="/assets/demo/formatos/celebracoes-corporativas.webp" width="2400" height="1792"
+             alt="Jantar de gala corporativo sob pavilhão iluminado" loading="lazy">
+        <div class="fmt__text">
+          <span class="fmt__n">05</span>
+          <h3 class="h-card">Celebrações corporativas</h3>
+          <p>Premiações, festas de fim de ano e comemorações de conquistas do time.</p>
+        </div>
+      </article>
+
+      <article class="fmt fmt--full rise" style="--i:5">
+        <img src="/assets/demo/formatos/alinhamentos-comerciais.webp" width="2400" height="1792"
+             alt="Sala de breakout montada em U para kickoff comercial" loading="lazy">
+        <div class="fmt__text">
+          <span class="fmt__n">06</span>
+          <h3 class="h-card">Alinhamentos comerciais</h3>
+          <p>Kickoffs de vendas e convenções de força comercial com estrutura de palco e breakout.</p>
+        </div>
+      </article>
+    </div>
+
+    <p class="cta-inline rise" style="--i:6">
+      <span>Não encontrou o seu formato? A estrutura se adapta.</span>
+      <a class="btn btn--primary" href="#proposta">
+        Solicitar proposta
+        <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+      </a>
+    </p>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════
-     ESPAÇOS — versão corporativa, com ficha técnica
+     ESPAÇOS
+     Feedback: "adoro a sugestão de fazer o comparativo das casas,
+     mas sinto que as imagens são pequenas. Podemos investir em um
+     espaço que mostre mais amplitude?" + a referência da Sarah
+     Haywood, com animação entre os slides.
+     Formato: lista que troca a foto. A foto ocupa metade da tela e
+     cada casa aponta para a página que já existe no social.
      ══════════════════════════════════════════════════════════════ -->
 <section class="section section--paper" id="espacos">
   <div class="wrap">
-    <div class="section__head rise">
-      <p class="eyebrow">Espaços</p>
-      <h2 class="h-section">Quatro casas, uma operação</h2>
-      <p class="body-muted">Os mesmos espaços que recebem casamentos foram desenhados para o ritmo corporativo: layout de auditório, infraestrutura audiovisual, salas de apoio e acesso.</p>
+    <div class="section__head">
+      <p class="eyebrow rise" style="--i:0">Espaços</p>
+      <h2 class="h-section rise" style="--i:1">Quatro casas, uma operação</h2>
+      <p class="body-muted rise" style="--i:2">Os mesmos espaços que recebem casamentos foram desenhados para o ritmo corporativo: layout de auditório, infraestrutura audiovisual, salas de apoio e acesso.</p>
     </div>
 
-    <p class="notice rise">
+    <p class="notice rise" style="--i:3">
       <span aria-hidden="true">▲</span>
-      <span><strong>Campos técnicos a preencher.</strong> Capacidades, metragens e infraestrutura estão marcados como pendentes até que a Di Terrá confirme os números reais de cada casa. Nenhum dado foi estimado. As imagens são ilustrativas e devem ser substituídas por fotografia corporativa dedicada.</span>
+      <span><strong>Campos técnicos a preencher.</strong> Capacidades, metragens e infraestrutura estão marcados como pendentes até que a Di Terrá confirme os números reais de cada casa. Nenhum dado foi estimado. As imagens desta demonstração são ilustrativas e devem ser substituídas por fotografia corporativa dedicada.</span>
     </p>
+  </div>
 
-    <div class="venues">
+  <div class="wrap">
+    <div class="switch rise" style="--i:4" id="venueSwitch">
 
-      <article class="venue rise">
-        <div class="venue__media">
-          <img src="/assets/corporativo-auditorio.png" width="1024" height="1024" alt="Salão em formato auditório na Querência" loading="lazy">
-          <span class="venue__arch" aria-hidden="true"></span>
-        </div>
-        <div class="venue__body">
-          <h3 class="h-card">A Querência</h3>
-          <p>Área ampla com salão coberto e jardim, indicada para convenções com plenária e áreas de convivência ao ar livre.</p>
-          <ul class="spec">
-            <li><span class="k">Auditório</span><span class="v tbd">a confirmar</span></li>
-            <li><span class="k">Banquete</span><span class="v tbd">a confirmar</span></li>
-            <li><span class="k">Área coberta</span><span class="v tbd">a confirmar</span></li>
-            <li><span class="k">Salas de apoio</span><span class="v tbd">a confirmar</span></li>
-            <li><span class="k">Estacionamento</span><span class="v tbd">a confirmar</span></li>
-          </ul>
-        </div>
-      </article>
+      <!-- palco: as quatro fotos empilhadas, uma visível por vez -->
+      <div class="switch__stage">
+        <figure class="switch__shot is-on" data-shot="a-querencia">
+          <img src="/assets/demo/espacos/a-querencia-amplitude.webp" width="2400" height="1610"
+               alt="Vista do pavilhão coberto da Querência aberto para o jardim" loading="lazy">
+        </figure>
+        <figure class="switch__shot" data-shot="palacete-monte-alegre">
+          <img src="/assets/demo/espacos/palacete-monte-alegre-amplitude.webp" width="2400" height="1610"
+               alt="Salão principal do Palacete Monte Alegre montado para jantar" loading="lazy">
+        </figure>
+        <figure class="switch__shot" data-shot="casa-lucca">
+          <img src="/assets/demo/espacos/casa-lucca-amplitude.webp" width="2400" height="1610"
+               alt="Casa Lucca vista do jardim, com varanda ao longo da fachada" loading="lazy">
+        </figure>
+        <figure class="switch__shot" data-shot="espaco-terra">
+          <img src="/assets/demo/espacos/espaco-terra-amplitude.webp" width="2400" height="1610"
+               alt="Espaço Terrá montado em plenária, com palco e painel de LED" loading="lazy">
+        </figure>
+      </div>
 
-      <article class="venue rise">
-        <div class="venue__media">
-          <img src="/assets/espaco-casa-lucca.png" width="620" height="480" alt="Mesa longa montada na área externa da Casa Lucca" loading="lazy">
-          <span class="venue__arch" aria-hidden="true"></span>
-        </div>
-        <div class="venue__body">
-          <h3 class="h-card">Casa Lucca</h3>
-          <p>Escala menor e ambiente reservado. Formato natural para off-sites de liderança, comitês e reuniões de conselho.</p>
-          <ul class="spec">
-            <li><span class="k">Auditório</span><span class="v tbd">a confirmar</span></li>
-            <li><span class="k">Banquete</span><span class="v tbd">a confirmar</span></li>
-            <li><span class="k">Área coberta</span><span class="v tbd">a confirmar</span></li>
-            <li><span class="k">Salas de apoio</span><span class="v tbd">a confirmar</span></li>
-            <li><span class="k">Estacionamento</span><span class="v tbd">a confirmar</span></li>
-          </ul>
-        </div>
-      </article>
+      <!-- lista -->
+      <div class="switch__list" role="tablist" aria-label="Escolha um espaço">
 
-      <article class="venue rise">
-        <div class="venue__media">
-          <img src="/assets/espaco-lounge.png" width="848" height="982" alt="Lounge externo com mesas altas e iluminação cênica no Palacete Monte Alegre" loading="lazy">
-          <span class="venue__arch" aria-hidden="true"></span>
-        </div>
-        <div class="venue__body">
-          <h3 class="h-card">Palacete Monte Alegre</h3>
-          <p>Arquitetura histórica para eventos de posicionamento e recepções institucionais de alto padrão.</p>
-          <ul class="spec">
-            <li><span class="k">Auditório</span><span class="v tbd">a confirmar</span></li>
-            <li><span class="k">Banquete</span><span class="v tbd">a confirmar</span></li>
-            <li><span class="k">Área coberta</span><span class="v tbd">a confirmar</span></li>
-            <li><span class="k">Salas de apoio</span><span class="v tbd">a confirmar</span></li>
-            <li><span class="k">Estacionamento</span><span class="v tbd">a confirmar</span></li>
-          </ul>
-        </div>
-      </article>
+        <article class="vcard is-on" data-venue="a-querencia">
+          <button class="vcard__head" role="tab" aria-selected="true" aria-controls="p-a-querencia" id="t-a-querencia">
+            <span class="vcard__n">01</span>
+            <span class="vcard__name">A Querência</span>
+            <svg class="vcard__chev" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M1 1l6 6 6-6" stroke="currentColor" stroke-width="1.3"/></svg>
+          </button>
+          <div class="vcard__panel" id="p-a-querencia" role="tabpanel" aria-labelledby="t-a-querencia">
+            <div class="vcard__inner">
+              <figure class="vcard__shot-m">
+                <img src="/assets/demo/espacos/a-querencia-amplitude.webp" width="2400" height="1610"
+                     alt="Vista do pavilhão coberto da Querência aberto para o jardim" loading="lazy">
+              </figure>
+              <p>Área ampla com salão coberto e jardim, indicada para convenções com plenária e áreas de convivência ao ar livre.</p>
+              <ul class="spec">
+                <li><span class="k">Auditório</span><span class="v tbd">a confirmar</span></li>
+                <li><span class="k">Banquete</span><span class="v tbd">a confirmar</span></li>
+                <li><span class="k">Área coberta</span><span class="v tbd">a confirmar</span></li>
+                <li><span class="k">Salas de apoio</span><span class="v tbd">a confirmar</span></li>
+                <li><span class="k">Estacionamento</span><span class="v tbd">a confirmar</span></li>
+              </ul>
+              <div class="vcard__acts">
+                <a class="link-arrow" href="/social/espacos/a-querencia.html">Ver a casa por inteiro
+                  <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+                </a>
+                <a class="link-arrow link-arrow--alt" href="#proposta">Solicitar proposta para esta casa</a>
+              </div>
+            </div>
+          </div>
+        </article>
 
-      <article class="venue rise">
-        <div class="venue__media">
-          <img src="/assets/capa-video.png" width="1024" height="576" alt="Vista geral do Espaço Terrá" loading="lazy">
-          <span class="venue__arch" aria-hidden="true"></span>
-        </div>
-        <div class="venue__body">
-          <h3 class="h-card">Espaço Terrá</h3>
-          <p>Estrutura versátil para lançamentos e convenções com montagem cenográfica e projeção de grande formato.</p>
-          <ul class="spec">
-            <li><span class="k">Auditório</span><span class="v tbd">a confirmar</span></li>
-            <li><span class="k">Banquete</span><span class="v tbd">a confirmar</span></li>
-            <li><span class="k">Área coberta</span><span class="v tbd">a confirmar</span></li>
-            <li><span class="k">Salas de apoio</span><span class="v tbd">a confirmar</span></li>
-            <li><span class="k">Estacionamento</span><span class="v tbd">a confirmar</span></li>
-          </ul>
-        </div>
-      </article>
+        <article class="vcard" data-venue="palacete-monte-alegre">
+          <button class="vcard__head" role="tab" aria-selected="false" aria-controls="p-palacete" id="t-palacete">
+            <span class="vcard__n">02</span>
+            <span class="vcard__name">Palacete Monte Alegre</span>
+            <svg class="vcard__chev" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M1 1l6 6 6-6" stroke="currentColor" stroke-width="1.3"/></svg>
+          </button>
+          <div class="vcard__panel" id="p-palacete" role="tabpanel" aria-labelledby="t-palacete">
+            <div class="vcard__inner">
+              <figure class="vcard__shot-m">
+                <img src="/assets/demo/espacos/palacete-monte-alegre-amplitude.webp" width="2400" height="1610"
+                     alt="Salão principal do Palacete Monte Alegre montado para jantar" loading="lazy">
+              </figure>
+              <p>Arquitetura histórica para eventos de posicionamento e recepções institucionais de alto padrão.</p>
+              <ul class="spec">
+                <li><span class="k">Auditório</span><span class="v tbd">a confirmar</span></li>
+                <li><span class="k">Banquete</span><span class="v tbd">a confirmar</span></li>
+                <li><span class="k">Área coberta</span><span class="v tbd">a confirmar</span></li>
+                <li><span class="k">Salas de apoio</span><span class="v tbd">a confirmar</span></li>
+                <li><span class="k">Estacionamento</span><span class="v tbd">a confirmar</span></li>
+              </ul>
+              <div class="vcard__acts">
+                <a class="link-arrow" href="/social/espacos/palacete-monte-alegre.html">Ver a casa por inteiro
+                  <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+                </a>
+                <a class="link-arrow link-arrow--alt" href="#proposta">Solicitar proposta para esta casa</a>
+              </div>
+            </div>
+          </div>
+        </article>
 
+        <article class="vcard" data-venue="casa-lucca">
+          <button class="vcard__head" role="tab" aria-selected="false" aria-controls="p-lucca" id="t-lucca">
+            <span class="vcard__n">03</span>
+            <span class="vcard__name">Casa Lucca</span>
+            <svg class="vcard__chev" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M1 1l6 6 6-6" stroke="currentColor" stroke-width="1.3"/></svg>
+          </button>
+          <div class="vcard__panel" id="p-lucca" role="tabpanel" aria-labelledby="t-lucca">
+            <div class="vcard__inner">
+              <figure class="vcard__shot-m">
+                <img src="/assets/demo/espacos/casa-lucca-amplitude.webp" width="2400" height="1610"
+                     alt="Casa Lucca vista do jardim, com varanda ao longo da fachada" loading="lazy">
+              </figure>
+              <p>Escala menor e ambiente reservado. Formato natural para off-sites de liderança, comitês e reuniões de conselho.</p>
+              <ul class="spec">
+                <li><span class="k">Auditório</span><span class="v tbd">a confirmar</span></li>
+                <li><span class="k">Banquete</span><span class="v tbd">a confirmar</span></li>
+                <li><span class="k">Área coberta</span><span class="v tbd">a confirmar</span></li>
+                <li><span class="k">Salas de apoio</span><span class="v tbd">a confirmar</span></li>
+                <li><span class="k">Estacionamento</span><span class="v tbd">a confirmar</span></li>
+              </ul>
+              <div class="vcard__acts">
+                <a class="link-arrow" href="/social/espacos/casa-lucca.html">Ver a casa por inteiro
+                  <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+                </a>
+                <a class="link-arrow link-arrow--alt" href="#proposta">Solicitar proposta para esta casa</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="vcard" data-venue="espaco-terra">
+          <button class="vcard__head" role="tab" aria-selected="false" aria-controls="p-terra" id="t-terra">
+            <span class="vcard__n">04</span>
+            <span class="vcard__name">Espaço Terrá</span>
+            <svg class="vcard__chev" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M1 1l6 6 6-6" stroke="currentColor" stroke-width="1.3"/></svg>
+          </button>
+          <div class="vcard__panel" id="p-terra" role="tabpanel" aria-labelledby="t-terra">
+            <div class="vcard__inner">
+              <figure class="vcard__shot-m">
+                <img src="/assets/demo/espacos/espaco-terra-amplitude.webp" width="2400" height="1610"
+                     alt="Espaço Terrá montado em plenária, com palco e painel de LED" loading="lazy">
+              </figure>
+              <p>Estrutura versátil para lançamentos e convenções com montagem cenográfica e projeção de grande formato.</p>
+              <ul class="spec">
+                <li><span class="k">Auditório</span><span class="v tbd">a confirmar</span></li>
+                <li><span class="k">Banquete</span><span class="v tbd">a confirmar</span></li>
+                <li><span class="k">Área coberta</span><span class="v tbd">a confirmar</span></li>
+                <li><span class="k">Salas de apoio</span><span class="v tbd">a confirmar</span></li>
+                <li><span class="k">Estacionamento</span><span class="v tbd">a confirmar</span></li>
+              </ul>
+              <div class="vcard__acts">
+                <a class="link-arrow" href="/social/espacos/espaco-terra.html">Ver a casa por inteiro
+                  <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+                </a>
+                <a class="link-arrow link-arrow--alt" href="#proposta">Solicitar proposta para esta casa</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════
      ESTRUTURA
+     Feedback: "aqui tb precisamos usar imagens pra ilustrar os
+     serviços". Os cinco blocos de ícone ganharam fotografia.
      ══════════════════════════════════════════════════════════════ -->
 <section class="section section--petrol" id="estrutura">
   <div class="wrap">
-    <div class="section__head on-dark rise">
-      <p class="eyebrow">Tudo em um só lugar</p>
-      <h2 class="h-section">Hospitalidade que se transforma em experiência</h2>
-      <p class="body-muted">
+    <div class="section__head on-dark">
+      <p class="eyebrow rise" style="--i:0">Tudo em um só lugar</p>
+      <h2 class="h-section rise" style="--i:1">Hospitalidade que se transforma em experiência</h2>
+      <p class="body-muted rise" style="--i:2">
         No ritmo intenso das empresas, tempo é o bem mais precioso. Em um único contrato, sua marca tem
         alta gastronomia, ambientação, som, luz, vídeo, mobiliário, operação, segurança e serviço.
         O que isso entrega é mais do que praticidade: entrega confiança, para que sua equipe esteja
@@ -279,29 +437,44 @@
       </p>
     </div>
 
-    <div class="solutions rise">
-      <article class="solution">
-        <svg class="solution__ico" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 3v8a4 4 0 0 0 8 0V3M8 11v10M18 3c-1.5 3-2 5-2 8h4c0-3-.5-5-2-8ZM18 11v10" stroke="currentColor" stroke-width="1.2"/></svg>
+    <div class="solutions">
+      <article class="solution rise" style="--i:0">
+        <figure class="solution__media">
+          <img src="/assets/demo/solucoes/gastronomia.webp" width="2400" height="1792"
+               alt="Prato autoral servido em jantar da Di Terrá" loading="lazy">
+        </figure>
         <h3>Gastronomia</h3>
         <p>Menu autoral, coffee, welcome e jantares de gala.</p>
       </article>
-      <article class="solution">
-        <svg class="solution__ico" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21V11M12 11c0-4 3-7 8-7 0 5-3 8-8 7ZM12 13c0-3-2.5-6-7-6 0 4 2.5 6.5 7 6Z" stroke="currentColor" stroke-width="1.2"/></svg>
+      <article class="solution rise" style="--i:1">
+        <figure class="solution__media">
+          <img src="/assets/demo/solucoes/decoracao.webp" width="2400" height="1792"
+               alt="Arranjo floral e ambientação de mesa" loading="lazy">
+        </figure>
         <h3>Decoração</h3>
         <p>Cenografia e ambientação alinhadas à marca do cliente.</p>
       </article>
-      <article class="solution">
-        <svg class="solution__ico" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3h12l-5 7v8h3M6 3l5 7M9 18h4" stroke="currentColor" stroke-width="1.2"/></svg>
+      <article class="solution rise" style="--i:2">
+        <figure class="solution__media">
+          <img src="/assets/demo/solucoes/coquetelaria.webp" width="2400" height="1792"
+               alt="Drinks autorais no bar da casa" loading="lazy">
+        </figure>
         <h3>Coquetelaria</h3>
         <p>Bar assinado, drinks de marca e serviço dedicado.</p>
       </article>
-      <article class="solution">
-        <svg class="solution__ico" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18M8 3v3M16 9v3M11 15v3" stroke="currentColor" stroke-width="1.2"/></svg>
+      <article class="solution rise" style="--i:3">
+        <figure class="solution__media">
+          <img src="/assets/demo/solucoes/producao.webp" width="2400" height="1792"
+               alt="Equipe de produção montando a estrutura do evento" loading="lazy">
+        </figure>
         <h3>Produção</h3>
         <p>Planejamento, cronograma, equipe e operação no dia.</p>
       </article>
-      <article class="solution">
-        <svg class="solution__ico" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 5h18v11H3zM8 20h8M12 16v4" stroke="currentColor" stroke-width="1.2"/></svg>
+      <article class="solution rise" style="--i:4">
+        <figure class="solution__media">
+          <img src="/assets/demo/solucoes/tecnologia-audiovisual.webp" width="2400" height="1792"
+               alt="Mesa de luz e vídeo em operação durante o evento" loading="lazy">
+        </figure>
         <h3>Tecnologia audiovisual</h3>
         <p>Som, luz, projeção, telão e transmissão.</p>
       </article>
@@ -311,118 +484,225 @@
 
 <!-- ══════════════════════════════════════════════════════════════
      TERRITÓRIO
+     Feedback: "aqui precisa de um carrossel pra mostrarmos as
+     possibilidades de hospedagem".
      ══════════════════════════════════════════════════════════════ -->
 <section class="section" id="territorio">
   <div class="wrap territory">
-    <div class="rise">
-      <p class="eyebrow">O interior paulista</p>
-      <h2 class="h-section">Quando o interior vira destino corporativo</h2>
-      <p class="body-muted" style="margin-top:22px">
+    <div>
+      <p class="eyebrow rise" style="--i:0">O interior paulista</p>
+      <h2 class="h-section rise" style="--i:1">Quando o interior vira destino corporativo</h2>
+      <p class="body-muted rise" style="--i:2">
         No coração do interior paulista, onde a natureza molda o horizonte, criamos espaços que unem
         sofisticação a uma estética natural única.
       </p>
-      <p class="body-muted" style="margin-top:1.1em">
+      <p class="body-muted rise" style="--i:3">
         Aqui, longe do trânsito e perto do essencial, eventos se tornam experiências mais leves,
         mais humanas e mais profundas. Momentos que reforçam identidade, propósito e cultura.
       </p>
-      <ul class="spec" style="margin-top:32px; max-width:420px">
+      <ul class="spec rise" style="--i:4">
         <li><span class="k">Distância de São Paulo</span><span class="v tbd">a confirmar</span></li>
         <li><span class="k">Aeroporto mais próximo</span><span class="v tbd">a confirmar</span></li>
         <li><span class="k">Hospedagem na região</span><span class="v tbd">a confirmar</span></li>
       </ul>
     </div>
-    <div class="territory__media rise">
-      <img src="/assets/espaco-lounge.png" width="848" height="982" alt="Ambiente externo de um dos espaços da Di Terrá no interior paulista" loading="lazy">
+    <div class="territory__media rise" style="--i:2">
+      <img src="/assets/demo/territorio/estrada-interior.webp" width="2400" height="1610"
+           alt="Estrada arborizada no interior paulista, a caminho da Di Terrá" loading="lazy">
     </div>
+  </div>
+
+  <!-- carrossel de hospedagem -->
+  <div class="wrap">
+    <div class="rail-head rise" style="--i:0">
+      <div>
+        <p class="eyebrow">Hospedagem na região</p>
+        <h3 class="h-card">Onde a sua equipe fica</h3>
+      </div>
+      <div class="rail-nav">
+        <button class="rail-btn" data-rail="prev" aria-label="Ver opções anteriores">
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M16 6H1M5 1L.6 6 5 11" stroke="currentColor" stroke-width="1.2"/></svg>
+        </button>
+        <button class="rail-btn" data-rail="next" aria-label="Ver mais opções">
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M0 6h15M11 1l4.4 5L11 11" stroke="currentColor" stroke-width="1.2"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="rail rise" style="--i:1" id="stayRail" tabindex="0" aria-label="Carrossel de hospedagem, use as setas do teclado">
+    <article class="stay">
+      <figure><img src="/assets/demo/territorio/pousada.webp" width="2400" height="1610" alt="Pousada de fazenda restaurada na região de Piracicaba" loading="lazy"></figure>
+      <h4>Pousadas de fazenda</h4>
+      <p class="tbd">a confirmar &middot; parceiros e distância</p>
+    </article>
+    <article class="stay">
+      <figure><img src="/assets/demo/territorio/hotel-fazenda.webp" width="2400" height="1610" alt="Hotel fazenda com piscina e arcadas no interior paulista" loading="lazy"></figure>
+      <h4>Hotéis fazenda</h4>
+      <p class="tbd">a confirmar &middot; parceiros e distância</p>
+    </article>
+    <article class="stay">
+      <figure><img src="/assets/demo/territorio/suite.webp" width="2400" height="1610" alt="Suíte de hotel com vista para o jardim" loading="lazy"></figure>
+      <h4>Suítes e apartamentos</h4>
+      <p class="tbd">a confirmar &middot; parceiros e distância</p>
+    </article>
+    <article class="stay">
+      <figure><img src="/assets/demo/territorio/estrada-interior.webp" width="2400" height="1610" alt="Acesso rodoviário à região" loading="lazy"></figure>
+      <h4>Acesso e transfer</h4>
+      <p class="tbd">a confirmar &middot; rota e tempo de viagem</p>
+    </article>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════
      PROPOSTA — formulário B2B
+     Feedback: "gosto da opção de contato ao lado do forms + redes
+     sociais abaixo".
      ══════════════════════════════════════════════════════════════ -->
 <section class="section section--invert" id="proposta">
-  <div class="wrap proposal">
-    <div class="on-dark rise">
-      <p class="eyebrow">Proposta</p>
-      <h2 class="h-section">Experiências que atraem, emocionam e deixam marca</h2>
-      <p class="body-muted" style="margin-top:22px">
+  <div class="wrap">
+    <div class="on-dark section__head">
+      <p class="eyebrow rise" style="--i:0">Proposta</p>
+      <h2 class="h-section rise" style="--i:1">Experiências que atraem, emocionam e deixam marca</h2>
+      <p class="body-muted rise" style="--i:2">
         Seja uma convenção inspiradora, um lançamento de impacto, um retreat que transforma equipes
         ou uma celebração das conquistas: a Di Terrá cria eventos que marcam. Na memória. No negócio.
       </p>
     </div>
 
-    <form class="on-dark rise" action="#" method="post" novalidate>
-      <div class="form-grid">
-        <div class="field">
-          <label for="nome">Nome</label>
-          <input id="nome" name="nome" type="text" autocomplete="name" required>
+    <div class="proposal">
+      <!-- coluna de contato -->
+      <aside class="contact on-dark rise" style="--i:0">
+        <a class="contact__card" href="tel:+551996777288">
+          <span class="contact__ico" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M6 1.5 7.6 5 6 6.6c.9 1.9 2.5 3.5 4.4 4.4L12 9.4l3.5 1.6v3.5c0 .8-.7 1.5-1.5 1.5A12.5 12.5 0 0 1 1.5 3.5C1.5 2.7 2.2 2 3 2h3Z" stroke="currentColor" stroke-width="1.2"/></svg>
+          </span>
+          <span class="contact__body">
+            <span class="contact__k">Telefone</span>
+            <span class="contact__v">(19) 99677-7288</span>
+          </span>
+        </a>
+
+        <a class="contact__card" href="mailto:corporativo@diterra.com.br">
+          <span class="contact__ico" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M1.5 4h15v10h-15zM1.5 4.5 9 10l7.5-5.5" stroke="currentColor" stroke-width="1.2"/></svg>
+          </span>
+          <span class="contact__body">
+            <span class="contact__k">E-mail comercial</span>
+            <span class="contact__v">corporativo@diterra.com.br</span>
+          </span>
+        </a>
+
+        <a class="contact__card" href="https://wa.me/5519996777288" target="_blank" rel="noopener">
+          <span class="contact__ico" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1.6a7.4 7.4 0 0 0-6.3 11.3L1.6 16.4l3.6-1a7.4 7.4 0 1 0 3.8-13.8Z" stroke="currentColor" stroke-width="1.2"/><path d="M6.4 6c.3-.6.6-.6.9-.6h.5l.8 1.8-.7.8c.5 1 1.1 1.6 2.1 2.1l.8-.7 1.8.8v.5c0 .3 0 .6-.6.9-.9.4-2.3 0-3.6-1.2S6 7 6.4 6Z" fill="currentColor"/></svg>
+          </span>
+          <span class="contact__body">
+            <span class="contact__k">WhatsApp comercial</span>
+            <span class="contact__v">Falar agora</span>
+          </span>
+        </a>
+
+        <div class="contact__card contact__card--static">
+          <span class="contact__ico" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 16.5S15 11 15 7A6 6 0 0 0 3 7c0 4 6 9.5 6 9.5Z" stroke="currentColor" stroke-width="1.2"/><circle cx="9" cy="7" r="2.2" stroke="currentColor" stroke-width="1.2"/></svg>
+          </span>
+          <span class="contact__body">
+            <span class="contact__k">Onde estamos</span>
+            <span class="contact__v">Piracicaba e região<br>Interior de São Paulo</span>
+          </span>
         </div>
-        <div class="field">
-          <label for="empresa">Empresa</label>
-          <input id="empresa" name="empresa" type="text" autocomplete="organization" required>
+
+        <div class="socials">
+          <span class="contact__k">Acompanhe</span>
+          <div class="socials__row">
+            <a href="https://instagram.com/diterraeventos" target="_blank" rel="noopener" aria-label="Instagram da Di Terrá">
+              <svg width="19" height="19" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="16" height="16" rx="4.6" stroke="currentColor" stroke-width="1.3"/><circle cx="10" cy="10" r="3.8" stroke="currentColor" stroke-width="1.3"/><circle cx="14.8" cy="5.2" r="1" fill="currentColor"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/company/diterraeventos" target="_blank" rel="noopener" aria-label="LinkedIn da Di Terrá">
+              <svg width="19" height="19" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="16" height="16" rx="2.4" stroke="currentColor" stroke-width="1.3"/><path d="M6 8.4V14M6 5.9v.1M9.6 14V8.4M9.6 10.6c0-1.2 1-2.2 2.2-2.2s2.2 1 2.2 2.2V14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            </a>
+            <a href="https://www.facebook.com/diterraeventos" target="_blank" rel="noopener" aria-label="Facebook da Di Terrá">
+              <svg width="19" height="19" viewBox="0 0 20 20" fill="none"><path d="M12.4 6.6h1.9V3.9c-.3 0-1.4-.1-2.7-.1-2.6 0-4.4 1.6-4.4 4.6v2.1H5.3v3h1.9V21h3.4v-7.5h2.6l.4-3h-3V8.7c0-1.4.4-2.1 2.2-2.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
         </div>
-        <div class="field">
-          <label for="email">E-mail corporativo</label>
-          <input id="email" name="email" type="email" autocomplete="email" required>
+      </aside>
+
+      <!-- formulário -->
+      <form class="on-dark rise" style="--i:1" action="#" method="post" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label for="nome">Nome</label>
+            <input id="nome" name="nome" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="empresa">Empresa</label>
+            <input id="empresa" name="empresa" type="text" autocomplete="organization" required>
+          </div>
+          <div class="field">
+            <label for="email">E-mail corporativo</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="telefone">Telefone</label>
+            <input id="telefone" name="telefone" type="tel" autocomplete="tel" placeholder="(00) 00000-0000">
+          </div>
+          <div class="field">
+            <label for="formato">Formato do evento</label>
+            <select id="formato" name="formato">
+              <option value="">Selecione</option>
+              <option>Convenção / congresso</option>
+              <option>Off-site / retreat</option>
+              <option>Lançamento de produto</option>
+              <option>Integração de equipe</option>
+              <option>Celebração corporativa</option>
+              <option>Alinhamento comercial</option>
+              <option>Outro</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="participantes">Participantes (estimativa)</label>
+            <select id="participantes" name="participantes">
+              <option value="">Selecione</option>
+              <option>Até 50</option>
+              <option>51 a 150</option>
+              <option>151 a 300</option>
+              <option>301 a 600</option>
+              <option>Acima de 600</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="data">Janela de data</label>
+            <input id="data" name="data" type="text" placeholder="Ex.: 2º semestre de 2026">
+          </div>
+          <div class="field">
+            <label for="espaco">Espaço de interesse</label>
+            <select id="espaco" name="espaco">
+              <option value="">Sem preferência</option>
+              <option>A Querência</option>
+              <option>Casa Lucca</option>
+              <option>Palacete Monte Alegre</option>
+              <option>Espaço Terrá</option>
+            </select>
+          </div>
+          <div class="field field--full">
+            <label for="mensagem">Sobre o evento</label>
+            <textarea id="mensagem" name="mensagem" placeholder="Objetivo, formato desejado, necessidades de estrutura."></textarea>
+          </div>
+          <div class="field field--full">
+            <button class="btn btn--primary" type="submit">
+              Enviar solicitação
+              <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+            </button>
+            <p class="form-note">
+              Formulário de demonstração: o envio ainda não está conectado a um destino.
+              O lead corporativo deve ser roteado para o comercial B2B, separado do social.
+            </p>
+          </div>
         </div>
-        <div class="field">
-          <label for="telefone">Telefone</label>
-          <input id="telefone" name="telefone" type="tel" autocomplete="tel" placeholder="(00) 00000-0000">
-        </div>
-        <div class="field">
-          <label for="formato">Formato do evento</label>
-          <select id="formato" name="formato">
-            <option value="">Selecione</option>
-            <option>Convenção / congresso</option>
-            <option>Off-site / retreat</option>
-            <option>Lançamento de produto</option>
-            <option>Integração de equipe</option>
-            <option>Celebração corporativa</option>
-            <option>Alinhamento comercial</option>
-            <option>Outro</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="participantes">Participantes (estimativa)</label>
-          <select id="participantes" name="participantes">
-            <option value="">Selecione</option>
-            <option>Até 50</option>
-            <option>51 a 150</option>
-            <option>151 a 300</option>
-            <option>301 a 600</option>
-            <option>Acima de 600</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="data">Janela de data</label>
-          <input id="data" name="data" type="text" placeholder="Ex.: 2º semestre de 2026">
-        </div>
-        <div class="field">
-          <label for="espaco">Espaço de interesse</label>
-          <select id="espaco" name="espaco">
-            <option value="">Sem preferência</option>
-            <option>A Querência</option>
-            <option>Casa Lucca</option>
-            <option>Palacete Monte Alegre</option>
-            <option>Espaço Terrá</option>
-          </select>
-        </div>
-        <div class="field field--full">
-          <label for="mensagem">Sobre o evento</label>
-          <textarea id="mensagem" name="mensagem" placeholder="Objetivo, formato desejado, necessidades de estrutura."></textarea>
-        </div>
-        <div class="field field--full">
-          <button class="btn btn--primary" type="submit">
-            Enviar solicitação
-            <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
-          </button>
-          <p class="form-note">
-            Formulário de demonstração: o envio ainda não está conectado a um destino.
-            O lead corporativo deve ser roteado para o comercial B2B, separado do social.
-          </p>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </section>
 
@@ -453,21 +733,33 @@
         </ul>
       </div>
       <div>
-        <h2>Di Terrá Eventos</h2>
+        <h2>As quatro casas</h2>
         <ul>
+          <li><a href="/social/espacos/a-querencia.html">A Querência</a></li>
+          <li><a href="/social/espacos/palacete-monte-alegre.html">Palacete Monte Alegre</a></li>
+          <li><a href="/social/espacos/casa-lucca.html">Casa Lucca</a></li>
+          <li><a href="/social/espacos/espaco-terra.html">Espaço Terrá</a></li>
           <li><a href="/social">Eventos sociais</a></li>
-          <li><a href="/social#espacos">Espaços</a></li>
-          <li><a href="/social#contato">Contato</a></li>
           <li><a href="/">Página de entrada</a></li>
         </ul>
       </div>
     </div>
     <div class="foot__bar">
       <span>&copy; 2026 Di Terrá Eventos. Piracicaba e região, São Paulo.</span>
-      <span>Protótipo de avaliação. Conteúdo e dados técnicos sujeitos a validação.</span>
+      <span>Protótipo de avaliação. Fotografia ilustrativa e dados técnicos sujeitos a validação.</span>
     </div>
   </div>
 </footer>
+
+<!-- contato flutuante: hoje a página inteira tinha um único ponto de conversão -->
+<a class="wa" id="wa" href="https://wa.me/5519996777288" target="_blank" rel="noopener"
+   aria-label="Falar com o comercial pelo WhatsApp">
+  <svg width="22" height="22" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+    <path d="M9 1.6a7.4 7.4 0 0 0-6.3 11.3L1.6 16.4l3.6-1a7.4 7.4 0 1 0 3.8-13.8Z" stroke="currentColor" stroke-width="1.2"/>
+    <path d="M6.4 6c.3-.6.6-.6.9-.6h.5l.8 1.8-.7.8c.5 1 1.1 1.6 2.1 2.1l.8-.7 1.8.8v.5c0 .3 0 .6-.6.9-.9.4-2.3 0-3.6-1.2S6 7 6.4 6Z" fill="currentColor"/>
+  </svg>
+  <span>Falar com o comercial</span>
+</a>
 
 <a class="to-top" id="toTop" href="#topo" aria-label="Voltar ao topo da página">
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -477,10 +769,29 @@
 
 <script>
 (function () {
+  var reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var nav = document.getElementById('nav');
   var toggle = document.getElementById('navToggle');
   var drawer = document.getElementById('navDrawer');
   var links = Array.prototype.slice.call(document.querySelectorAll('.nav__links a'));
+
+  /* ── vídeo do hero ─────────────────────────────────────────────
+     Desktop e movimento permitido. No celular o poster assume. */
+  var video = document.getElementById('heroVideo');
+  var poster = document.getElementById('heroPoster');
+  if (video && !reduz && window.matchMedia('(min-width: 768px)').matches) {
+    video.src = '/assets/demo/hero/hero-corporativo.mp4';
+    video.hidden = false;
+    video.addEventListener('playing', function () {
+      poster.style.transition = 'opacity .8s cubic-bezier(.16,1,.3,1)';
+      poster.style.opacity = '0';
+    }, { once: true });
+    var tocar = video.play();
+    if (tocar && tocar.catch) { tocar.catch(function () { video.hidden = true; }); }
+  }
+
+  /* ── entrada do hero em cascata ────────────────────────────── */
+  requestAnimationFrame(function () { document.body.classList.add('is-ready'); });
 
   /* nav sólida ao sair do hero */
   var sentinel = document.getElementById('topo');
@@ -524,42 +835,141 @@
     sections.forEach(function (s) { spy.observe(s); });
   }
 
-  /* entrada dos blocos.
-     Quem chega por deep link com âncora (ex.: /corporativo#espacos, linkado
-     na página de entrada) inicia a página no meio do documento. Tudo que
-     ficou acima nunca cruzaria o observer, então é revelado de imediato. */
-  var rises = document.querySelectorAll('.rise');
+  /* ── entrada dos blocos, em cascata ────────────────────────────
+     Cada bloco tem --i: os irmãos entram escalonados, não juntos.
+
+     Duas redes de segurança, porque um bloco que nunca revela fica
+     invisível para sempre:
+       · quem chega por deep link com âncora começa no meio do
+         documento, e tudo que ficou acima entra de imediato;
+       · numa rolagem muito rápida o observer pode não entregar a
+         interseção, então a varredura por scroll revela o que já
+         passou da linha de leitura. */
+  var rises = Array.prototype.slice.call(document.querySelectorAll('.rise'));
+  var pendentes = rises.slice();
+
+  var revelar = function (el) {
+    el.classList.add('is-in');
+    var i = pendentes.indexOf(el);
+    if (i > -1) pendentes.splice(i, 1);
+  };
+
+  var varrer = function () {
+    if (!pendentes.length) return;
+    var linha = window.innerHeight * 0.9;
+    pendentes.slice().forEach(function (el) {
+      if (el.getBoundingClientRect().top < linha) revelar(el);
+    });
+  };
+
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
-          entry.target.classList.add('is-in');
+          revelar(entry.target);
           io.unobserve(entry.target);
         }
       });
-    }, { rootMargin: '0px 0px -12% 0px' });
+    }, { rootMargin: '0px 0px -10% 0px' });
     rises.forEach(function (el) { io.observe(el); });
   } else {
-    rises.forEach(function (el) { el.classList.add('is-in'); });
+    rises.forEach(revelar);
   }
 
-  /* voltar ao topo */
-  var toTop = document.getElementById('toTop');
-  if (toTop) {
-    var pendente = false;
-    var atualizar = function () {
-      toTop.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.8);
-      pendente = false;
+  /* ── contador dos números ──────────────────────────────────────
+     Só anima o que é dado real. Campos "a confirmar" ficam parados. */
+  var contadores = document.querySelectorAll('[data-count]');
+  if ('IntersectionObserver' in window && !reduz) {
+    var ioc = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var alvo = parseInt(el.getAttribute('data-count'), 10);
+        var t0 = null;
+        var passo = function (t) {
+          if (!t0) t0 = t;
+          var p = Math.min((t - t0) / 900, 1);
+          var v = Math.round(alvo * (1 - Math.pow(1 - p, 3)));
+          el.textContent = v < 10 ? '0' + v : String(v);
+          if (p < 1) requestAnimationFrame(passo);
+        };
+        requestAnimationFrame(passo);
+        ioc.unobserve(el);
+      });
+    }, { rootMargin: '0px 0px -20% 0px' });
+    contadores.forEach(function (el) { ioc.observe(el); });
+  }
+
+  /* ── espaços: lista que troca a foto ───────────────────────────
+     Referência Sarah Haywood. No desktop a foto grande troca com
+     transição; no celular cada card abre a própria foto. */
+  var sw = document.getElementById('venueSwitch');
+  if (sw) {
+    var cards = Array.prototype.slice.call(sw.querySelectorAll('.vcard'));
+    var shots = Array.prototype.slice.call(sw.querySelectorAll('.switch__shot'));
+
+    var ativar = function (slug) {
+      cards.forEach(function (c) {
+        var on = c.getAttribute('data-venue') === slug;
+        c.classList.toggle('is-on', on);
+        c.querySelector('.vcard__head').setAttribute('aria-selected', String(on));
+      });
+      shots.forEach(function (s) {
+        s.classList.toggle('is-on', s.getAttribute('data-shot') === slug);
+      });
     };
-    window.addEventListener('scroll', function () {
-      if (pendente) return;
-      pendente = true;
-      window.requestAnimationFrame(atualizar);
-    }, { passive: true });
-    atualizar();
+
+    cards.forEach(function (c, i) {
+      var head = c.querySelector('.vcard__head');
+      head.addEventListener('click', function () { ativar(c.getAttribute('data-venue')); });
+      head.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowDown' ? 1 : e.key === 'ArrowUp' ? -1 : 0;
+        if (!d) return;
+        e.preventDefault();
+        var alvo = cards[(i + d + cards.length) % cards.length];
+        alvo.querySelector('.vcard__head').focus();
+        ativar(alvo.getAttribute('data-venue'));
+      });
+    });
+  }
+
+  /* ── carrossel de hospedagem ───────────────────────────────── */
+  var rail = document.getElementById('stayRail');
+  if (rail) {
+    document.querySelectorAll('[data-rail]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var card = rail.querySelector('.stay');
+        var passo = card ? card.getBoundingClientRect().width + 24 : rail.clientWidth * 0.7;
+        rail.scrollBy({
+          left: b.getAttribute('data-rail') === 'next' ? passo : -passo,
+          behavior: reduz ? 'auto' : 'smooth'
+        });
+      });
+    });
+  }
+
+  /* ── contato flutuante e voltar ao topo ────────────────────── */
+  var toTop = document.getElementById('toTop');
+  var wa = document.getElementById('wa');
+  var pendente = false;
+  var atualizar = function () {
+    var passou = window.scrollY > window.innerHeight * 0.8;
+    if (toTop) toTop.classList.toggle('is-visible', passou);
+    if (wa) wa.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.5);
+    varrer();
+    pendente = false;
+  };
+  window.addEventListener('scroll', function () {
+    if (pendente) return;
+    pendente = true;
+    window.requestAnimationFrame(atualizar);
+  }, { passive: true });
+  window.addEventListener('resize', varrer, { passive: true });
+  atualizar();
+
+  if (toTop) {
     toTop.addEventListener('click', function (e) {
       e.preventDefault();
-      var reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       window.scrollTo({ top: 0, behavior: reduz ? 'auto' : 'smooth' });
     });
   }
