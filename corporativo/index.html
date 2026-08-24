@@ -37,8 +37,8 @@
   <ul class="nav__links">
     <li><a href="#manifesto">A proposta</a></li>
     <li><a href="#formatos">Formatos</a></li>
-    <li><a href="#espacos">Espaços</a></li>
     <li><a href="#estrutura">Estrutura</a></li>
+    <li><a href="#espacos">Espaços</a></li>
     <li><a href="#territorio">Território</a></li>
   </ul>
 
@@ -54,8 +54,8 @@
 <div class="nav__drawer" id="navDrawer">
   <a href="#manifesto">A proposta</a>
   <a href="#formatos">Formatos</a>
-  <a href="#espacos">Espaços</a>
   <a href="#estrutura">Estrutura</a>
+  <a href="#espacos">Espaços</a>
   <a href="#territorio">Território</a>
   <a href="#proposta">Solicitar proposta</a>
   <a class="nav__switch" href="/social">Ir para eventos sociais &rarr;</a>
@@ -65,49 +65,89 @@
 
 <!-- ══════════════════════════════════════════════════════════════
      HERO
-     Feedback de 18/08: "tela inicial precisa ser mais viva — sem
-     filtro escuro, menos texto, animação de entrada".
-     Saiu o duotone (grayscale + luminosity + opacity .55) e o bloco
-     de manifesto. Entrou vídeo, uma linha de apoio e a ficha rápida
-     que o comprador corporativo procura na primeira dobra.
+     Mesma composição da home social e da referência Sarah Haywood:
+     vídeo em tela cheia, marca centrada, título serifado em caixa alta
+     com tracking largo, subtítulo em itálico e uma única ação.
+     Sem filtro sobre o vídeo — o contraste vem de sombra no texto.
      ══════════════════════════════════════════════════════════════ -->
 <header class="hero" id="topo">
   <div class="hero__media">
-    <img id="heroPoster" src="/assets/demo/hero/hero-corporativo.webp"
+    <img id="heroPoster" src="/assets/demo/hero/hero-corporativo-noite.webp"
          width="2400" height="1340"
          alt="Auditório montado para convenção corporativa em espaço da Di Terrá"
          fetchpriority="high" decoding="async">
     <video id="heroVideo" muted loop playsinline preload="none"
-           poster="/assets/demo/hero/hero-corporativo.webp"
+           poster="/assets/demo/hero/hero-corporativo-noite.webp"
            aria-hidden="true" hidden></video>
   </div>
 
-  <div class="wrap hero__inner on-dark">
-    <p class="eyebrow rise" style="--i:0">Di Terrá Corporativo</p>
-    <h1 class="h-display rise" style="--i:1">Onde marcas se expressam.<br><em>Onde pessoas se conectam.</em></h1>
-    <p class="lead hero__lead rise" style="--i:2">
-      Quatro casas no interior paulista, com estrutura completa em um único contrato.
-    </p>
-
-    <div class="hero__actions rise" style="--i:3">
-      <a class="btn btn--primary" href="#proposta">
-        Solicitar proposta
-        <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+  <div class="hero__conteudo on-dark">
+    <p class="hero__eyebrow rise" style="--i:0">Di Terrá Corporativo</p>
+    <h1 class="hero__titulo rise" style="--i:1">Onde marcas se expressam</h1>
+    <p class="hero__sub rise" style="--i:2">Onde pessoas se conectam</p>
+    <div class="hero__acao rise" style="--i:3">
+      <a class="btn btn--ghost on-dark" href="#proposta">
+        <span>Solicitar proposta</span>
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h11M9 1l4 4-4 4" stroke="currentColor" stroke-width="1"/></svg>
       </a>
-      <a class="btn btn--ghost" href="#espacos">Conhecer os espaços</a>
     </div>
-
-    <!-- ficha rápida: resolve "não informa capacidade nem localização" -->
-    <ul class="hero__facts rise" style="--i:4">
-      <li><span class="hero__facts-v">04</span><span class="hero__facts-k">Espaços próprios</span></li>
-      <li><span class="hero__facts-v tbd">a confirmar</span><span class="hero__facts-k">Capacidade máxima</span></li>
-      <li><span class="hero__facts-v tbd">a confirmar</span><span class="hero__facts-k">Distância de São Paulo</span></li>
-      <li><span class="hero__facts-v">06</span><span class="hero__facts-k">Formatos atendidos</span></li>
-    </ul>
   </div>
 
-  <p class="hero__scroll">Role para descobrir</p>
+  <div class="hero__scroll" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="hero__scroll-linha"></div>
+  </div>
 </header>
+
+<!-- ══════════════════════════════════════════════════════════════
+     CLIENTES — faixa de logos
+     Ordem definida pelo cliente: a prova social vem logo depois do
+     hero, antes de qualquer discurso.
+     ══════════════════════════════════════════════════════════════ -->
+<section class="section section--paper" id="clientes">
+  <div class="wrap">
+    <p class="eyebrow rise" style="--i:0">Quem já esteve aqui</p>
+    <h2 class="h-section clientes__titulo rise" style="--i:1">Marcas que escolheram a Di&nbsp;Terrá</h2>
+  </div>
+  <div class="faixa rise" style="--i:2" aria-label="Empresas que já realizaram eventos na Di Terrá">
+    <div class="faixa__pista">
+      <img src="/assets/demo/logos/alice.webp" alt="alice" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/b3.webp" alt="b3" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/btg.webp" alt="btg" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/cocacola.webp" alt="cocacola" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/dasa.webp" alt="dasa" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/exame.webp" alt="exame" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/foxbit.webp" alt="foxbit" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/genera.webp" alt="genera" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/getninjas.webp" alt="getninjas" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/heineken.webp" alt="heineken" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/itau.webp" alt="itau" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/livup.webp" alt="livup" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/olist.webp" alt="olist" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/quintoandar.webp" alt="quintoandar" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/smiles.webp" alt="smiles" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/sodexo.webp" alt="sodexo" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/swift.webp" alt="swift" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/alice.webp" alt="alice" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/b3.webp" alt="b3" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/btg.webp" alt="btg" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/cocacola.webp" alt="cocacola" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/dasa.webp" alt="dasa" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/exame.webp" alt="exame" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/foxbit.webp" alt="foxbit" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/genera.webp" alt="genera" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/getninjas.webp" alt="getninjas" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/heineken.webp" alt="heineken" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/itau.webp" alt="itau" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/livup.webp" alt="livup" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/olist.webp" alt="olist" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/quintoandar.webp" alt="quintoandar" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/smiles.webp" alt="smiles" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/sodexo.webp" alt="sodexo" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/swift.webp" alt="swift" loading="lazy" width="300" height="120">
+    </div>
+  </div>
+</section>
 
 <!-- ══════════════════════════════════════════════════════════════
      MANIFESTO
@@ -132,31 +172,6 @@
       <p class="rise" style="--i:5">
         <a class="btn btn--ghost" href="#proposta">Falar com o comercial</a>
       </p>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════
-     PROVA — números sobre fotografia
-     Feedback: "bloco ficou um pouco sem graça, podemos explorar
-     mais imagens aqui?". Os valores continuam pendentes: nenhum
-     número foi estimado.
-     ══════════════════════════════════════════════════════════════ -->
-<section class="section section--photo" id="numeros">
-  <div class="photo-bg" aria-hidden="true">
-    <img src="/assets/demo/apoio/numeros-fundo.webp" width="2400" height="1018"
-         alt="" loading="lazy">
-  </div>
-  <div class="wrap">
-    <div class="section__head on-dark rise" style="--i:0">
-      <p class="eyebrow">Em números</p>
-      <h2 class="h-section">A operação por trás de cada encontro</h2>
-    </div>
-    <div class="stats">
-      <div class="stat rise" style="--i:1"><span class="stat__n" data-count="4">04</span><span class="stat__l">Espaços próprios</span></div>
-      <div class="stat rise" style="--i:2"><span class="stat__n stat__n--tbd tbd">a confirmar</span><span class="stat__l">Eventos corporativos por ano</span></div>
-      <div class="stat rise" style="--i:3"><span class="stat__n stat__n--tbd tbd">a confirmar</span><span class="stat__l">Convidados por evento (máx.)</span></div>
-      <div class="stat rise" style="--i:4"><span class="stat__n stat__n--tbd tbd">a confirmar</span><span class="stat__l">Anos de operação</span></div>
     </div>
   </div>
 </section>
@@ -245,6 +260,84 @@
       </a>
     </p>
   </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     ESTRUTURA
+     Feedback: "aqui tb precisamos usar imagens pra ilustrar os
+     serviços". Os cinco blocos de ícone ganharam fotografia.
+     ══════════════════════════════════════════════════════════════ -->
+<section class="section section--petrol" id="estrutura">
+  <div class="wrap">
+    <div class="section__head on-dark">
+      <p class="eyebrow rise" style="--i:0">Tudo em um só lugar</p>
+      <h2 class="h-section rise" style="--i:1">Hospitalidade que se transforma em experiência</h2>
+      <p class="body-muted rise" style="--i:2">
+        No ritmo intenso das empresas, tempo é o bem mais precioso. Em um único contrato, sua marca tem
+        alta gastronomia, ambientação, som, luz, vídeo, mobiliário, operação, segurança e serviço.
+        O que isso entrega é mais do que praticidade: entrega confiança, para que sua equipe esteja
+        100% presente no que importa.
+      </p>
+    </div>
+
+    <div class="reel" id="reel">
+      <div class="reel__head on-dark">
+        <p class="reel__conta"><span id="reelAtual">01</span> <i>/</i> 05</p>
+        <div class="reel__nav">
+          <button class="reel__btn" data-reel="prev" aria-label="Recurso anterior" aria-controls="reelTrack">
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M16 6H1M5 1L.6 6 5 11" stroke="currentColor" stroke-width="1.2"/></svg>
+          </button>
+          <button class="reel__btn" data-reel="next" aria-label="Próximo recurso" aria-controls="reelTrack">
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M0 6h15M11 1l4.4 5L11 11" stroke="currentColor" stroke-width="1.2"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="reel__track" id="reelTrack" tabindex="0" aria-label="Recursos inclusos, use as setas do teclado">
+        <article class="reel__item">
+          <figure><img src="/assets/demo/solucoes/gastronomia.webp" width="2400" height="1792" alt="Prato autoral servido em jantar da Di Terrá" loading="lazy"></figure>
+          <div class="reel__texto">
+            <span class="reel__n">01</span>
+            <h3>Gastronomia</h3>
+            <p>Menu autoral, coffee, welcome e jantares de gala.</p>
+          </div>
+        </article>
+        <article class="reel__item">
+          <figure><img src="/assets/demo/solucoes/decoracao.webp" width="2400" height="1792" alt="Arranjo floral e ambientação de mesa" loading="lazy"></figure>
+          <div class="reel__texto">
+            <span class="reel__n">02</span>
+            <h3>Decoração</h3>
+            <p>Cenografia e ambientação alinhadas à marca do cliente.</p>
+          </div>
+        </article>
+        <article class="reel__item">
+          <figure><img src="/assets/demo/solucoes/coquetelaria.webp" width="2400" height="1792" alt="Drinks autorais no bar da casa" loading="lazy"></figure>
+          <div class="reel__texto">
+            <span class="reel__n">03</span>
+            <h3>Coquetelaria</h3>
+            <p>Bar assinado, drinks de marca e serviço dedicado.</p>
+          </div>
+        </article>
+        <article class="reel__item">
+          <figure><img src="/assets/demo/solucoes/producao.webp" width="2400" height="1792" alt="Equipe de produção montando a estrutura do evento" loading="lazy"></figure>
+          <div class="reel__texto">
+            <span class="reel__n">04</span>
+            <h3>Produção</h3>
+            <p>Planejamento, cronograma, equipe e operação no dia.</p>
+          </div>
+        </article>
+        <article class="reel__item">
+          <figure><img src="/assets/demo/solucoes/tecnologia-audiovisual.webp" width="2400" height="1792" alt="Mesa de luz e vídeo em operação durante o evento" loading="lazy"></figure>
+          <div class="reel__texto">
+            <span class="reel__n">05</span>
+            <h3>Tecnologia audiovisual</h3>
+            <p>Som, luz, projeção, telão e transmissão.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="reel__barra" aria-hidden="true"><span id="reelProgresso"></span></div>
+    </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════
@@ -418,84 +511,6 @@
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════
-     ESTRUTURA
-     Feedback: "aqui tb precisamos usar imagens pra ilustrar os
-     serviços". Os cinco blocos de ícone ganharam fotografia.
-     ══════════════════════════════════════════════════════════════ -->
-<section class="section section--petrol" id="estrutura">
-  <div class="wrap">
-    <div class="section__head on-dark">
-      <p class="eyebrow rise" style="--i:0">Tudo em um só lugar</p>
-      <h2 class="h-section rise" style="--i:1">Hospitalidade que se transforma em experiência</h2>
-      <p class="body-muted rise" style="--i:2">
-        No ritmo intenso das empresas, tempo é o bem mais precioso. Em um único contrato, sua marca tem
-        alta gastronomia, ambientação, som, luz, vídeo, mobiliário, operação, segurança e serviço.
-        O que isso entrega é mais do que praticidade: entrega confiança, para que sua equipe esteja
-        100% presente no que importa.
-      </p>
-    </div>
-
-    <div class="reel" id="reel">
-      <div class="reel__head on-dark">
-        <p class="reel__conta"><span id="reelAtual">01</span> <i>/</i> 05</p>
-        <div class="reel__nav">
-          <button class="reel__btn" data-reel="prev" aria-label="Recurso anterior" aria-controls="reelTrack">
-            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M16 6H1M5 1L.6 6 5 11" stroke="currentColor" stroke-width="1.2"/></svg>
-          </button>
-          <button class="reel__btn" data-reel="next" aria-label="Próximo recurso" aria-controls="reelTrack">
-            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M0 6h15M11 1l4.4 5L11 11" stroke="currentColor" stroke-width="1.2"/></svg>
-          </button>
-        </div>
-      </div>
-
-      <div class="reel__track" id="reelTrack" tabindex="0" aria-label="Recursos inclusos, use as setas do teclado">
-        <article class="reel__item">
-          <figure><img src="/assets/demo/solucoes/gastronomia.webp" width="2400" height="1792" alt="Prato autoral servido em jantar da Di Terrá" loading="lazy"></figure>
-          <div class="reel__texto">
-            <span class="reel__n">01</span>
-            <h3>Gastronomia</h3>
-            <p>Menu autoral, coffee, welcome e jantares de gala.</p>
-          </div>
-        </article>
-        <article class="reel__item">
-          <figure><img src="/assets/demo/solucoes/decoracao.webp" width="2400" height="1792" alt="Arranjo floral e ambientação de mesa" loading="lazy"></figure>
-          <div class="reel__texto">
-            <span class="reel__n">02</span>
-            <h3>Decoração</h3>
-            <p>Cenografia e ambientação alinhadas à marca do cliente.</p>
-          </div>
-        </article>
-        <article class="reel__item">
-          <figure><img src="/assets/demo/solucoes/coquetelaria.webp" width="2400" height="1792" alt="Drinks autorais no bar da casa" loading="lazy"></figure>
-          <div class="reel__texto">
-            <span class="reel__n">03</span>
-            <h3>Coquetelaria</h3>
-            <p>Bar assinado, drinks de marca e serviço dedicado.</p>
-          </div>
-        </article>
-        <article class="reel__item">
-          <figure><img src="/assets/demo/solucoes/producao.webp" width="2400" height="1792" alt="Equipe de produção montando a estrutura do evento" loading="lazy"></figure>
-          <div class="reel__texto">
-            <span class="reel__n">04</span>
-            <h3>Produção</h3>
-            <p>Planejamento, cronograma, equipe e operação no dia.</p>
-          </div>
-        </article>
-        <article class="reel__item">
-          <figure><img src="/assets/demo/solucoes/tecnologia-audiovisual.webp" width="2400" height="1792" alt="Mesa de luz e vídeo em operação durante o evento" loading="lazy"></figure>
-          <div class="reel__texto">
-            <span class="reel__n">05</span>
-            <h3>Tecnologia audiovisual</h3>
-            <p>Som, luz, projeção, telão e transmissão.</p>
-          </div>
-        </article>
-      </div>
-
-      <div class="reel__barra" aria-hidden="true"><span id="reelProgresso"></span></div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════
      TERRITÓRIO
      Feedback: "aqui precisa de um carrossel pra mostrarmos as
      possibilidades de hospedagem".
@@ -564,6 +579,61 @@
       <h4>Acesso e transfer</h4>
       <p class="tbd">a confirmar &middot; rota e tempo de viagem</p>
     </article>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     DEPOIMENTOS
+
+     CONTEÚDO DE DEMONSTRAÇÃO. Nomes, cargos, empresas, citações e
+     retratos são fictícios; os retratos foram gerados por IA. As
+     empresas são inventadas de propósito: assinar um depoimento com o
+     nome de uma marca real seria pôr palavras na boca dela.
+     Substituir por depoimento real com autorização de uso de imagem
+     antes de qualquer publicação.
+     ══════════════════════════════════════════════════════════════ -->
+<section class="section" id="depoimentos">
+  <div class="wrap">
+    <div class="section__head section__head--centro">
+      <p class="eyebrow rise" style="--i:0">Depoimentos</p>
+      <h2 class="h-section rise" style="--i:1">O que dizem quem já realizou</h2>
+    </div>
+    <div class="depo">
+
+      <figure class="depo__item rise" style="--i:0">
+        <blockquote>Levamos 180 pessoas para a convenção anual e a operação inteira ficou com uma equipe só. Não precisei coordenar fornecedor nenhum: cheguei e estava montado.</blockquote>
+        <figcaption>
+          <img class="depo__foto" src="/assets/demo/depoimentos/retrato-1.webp" width="480" height="480" alt="" loading="lazy">
+          <span class="depo__quem">
+            <span class="depo__nome">Marina Salgado</span>
+            <span class="depo__cargo">Diretora de Marketing &middot; Grupo Meridiano</span>
+          </span>
+        </figcaption>
+      </figure>
+
+      <figure class="depo__item rise" style="--i:1">
+        <blockquote>Escolhemos pela distância de São Paulo e ficamos pela comida. O time voltou falando do jantar de encerramento até semanas depois.</blockquote>
+        <figcaption>
+          <img class="depo__foto" src="/assets/demo/depoimentos/retrato-2.webp" width="480" height="480" alt="" loading="lazy">
+          <span class="depo__quem">
+            <span class="depo__nome">Rafael Ostrowski</span>
+            <span class="depo__cargo">Head de Vendas &middot; Vantiva Brasil</span>
+          </span>
+        </figcaption>
+      </figure>
+
+      <figure class="depo__item rise" style="--i:2">
+        <blockquote>Fizemos o off-site de liderança na Casa Lucca. O silêncio do lugar faz diferença real numa agenda de dois dias de decisão.</blockquote>
+        <figcaption>
+          <img class="depo__foto" src="/assets/demo/depoimentos/retrato-3.webp" width="480" height="480" alt="" loading="lazy">
+          <span class="depo__quem">
+            <span class="depo__nome">Beatriz Furtado</span>
+            <span class="depo__cargo">Diretora de Pessoas &middot; Arcadia Tecnologia</span>
+          </span>
+        </figcaption>
+      </figure>
+
+    </div>
   </div>
 </section>
 
@@ -793,7 +863,7 @@
   var video = document.getElementById('heroVideo');
   var poster = document.getElementById('heroPoster');
   if (video && !reduz && window.matchMedia('(min-width: 768px)').matches) {
-    video.src = '/assets/demo/hero/hero-corporativo.mp4';
+    video.src = '/assets/demo/hero/hero-corporativo-noite.mp4';
     video.hidden = false;
     video.addEventListener('playing', function () {
       poster.style.transition = 'opacity .8s cubic-bezier(.16,1,.3,1)';

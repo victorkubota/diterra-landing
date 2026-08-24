@@ -128,21 +128,24 @@
 /* ══════════════════════════════════════════════════════════════════════
    HERO
 
-   O tratamento anterior aplicava grayscale(1) + mix-blend-mode:
-   luminosity + opacity .55 sobre um gradiente pesado. Era literalmente
-   o "filtro escuro" apontado no feedback. A foto agora aparece como é;
-   só um véu inferior garante o contraste do texto branco.
+   Mesma composição da home social: tela cheia, conteúdo centrado, título
+   serifado em caixa alta com tracking largo, subtítulo em itálico.
+
+   Sem filtro sobre o vídeo, conforme pedido. O contraste vem de sombra
+   no texto e de um véu muito leve nas bordas — o suficiente para o
+   branco se sustentar sem apagar a imagem.
    ══════════════════════════════════════════════════════════════════════ */
 .hero {
   position: relative;
-  min-height: 100svh;
-  display: flex; align-items: flex-end;
-  padding: 140px 0 clamp(56px, 7vw, 96px);
-  background: var(--navy-900);
+  width: 100%;
+  height: 100svh;
+  min-height: 600px;
   overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--navy-900);
   isolation: isolate;
 }
-.hero__media { position: absolute; inset: 0; z-index: -2; background: var(--navy-900); }
+.hero__media { position: absolute; inset: 0; z-index: -2; }
 .hero__media img,
 .hero__media video {
   width: 100%; height: 100%;
@@ -150,85 +153,85 @@
 }
 .hero__media video { position: absolute; inset: 0; }
 
-/* Véu direcional, não filtro chapado.
-   O escuro fica onde o texto vive — coluna esquerda, topo da nav e
-   rodapé da ficha. O canto superior direito da foto continua limpo,
-   que é o que sustenta a sensação de "tela viva" pedida no feedback. */
+/* Sem filtro sobre a imagem. A foto do hero é escura por composição —
+   evento montado à noite, luminância média de 36/255 na faixa onde o
+   título fica — então o branco se sustenta sozinho. O que resta aqui é
+   só um esmaecido nas bordas, para a nav e o "scroll" não flutuarem
+   sobre áreas claras. */
 .hero::before {
   content: ''; position: absolute; inset: 0; z-index: -1;
   background:
-    linear-gradient(96deg, rgba(11,19,38,.9) 0%, rgba(11,19,38,.8) 34%, rgba(11,19,38,.56) 58%, rgba(11,19,38,.2) 80%, rgba(11,19,38,0) 100%),
-    linear-gradient(to top, rgba(11,19,38,.62) 0%, rgba(11,19,38,0) 38%),
-    linear-gradient(to bottom, rgba(11,19,38,.6) 0%, rgba(11,19,38,.14) 16%, rgba(11,19,38,0) 26%);
-}
-/* no celular o texto ocupa a largura toda: o véu vira vertical */
-@media (max-width: 900px) {
-  .hero::before {
-    background:
-      linear-gradient(to top, rgba(11,19,38,.92) 0%, rgba(11,19,38,.78) 46%, rgba(11,19,38,.56) 78%, rgba(11,19,38,.42) 100%);
-  }
+    linear-gradient(to bottom, rgba(10,18,36,.34) 0%, rgba(10,18,36,0) 22%),
+    linear-gradient(to top,    rgba(10,18,36,.34) 0%, rgba(10,18,36,0) 24%);
 }
 
-.hero__inner { max-width: 940px; position: relative; }
-.hero .h-display {
-  color: #fff; margin-bottom: clamp(20px, 2.4vw, 30px);
-  text-shadow: 0 2px 30px rgba(8,14,30,.5);
+.hero__conteudo {
+  position: relative; z-index: 1;
+  text-align: center;
+  padding-inline: var(--gutter);
+  max-width: 1000px;
 }
-.hero .h-display em { font-style: normal; color: var(--blue-300); }
-.hero__lead {
-  color: rgba(255,255,255,.92); max-width: 40ch;
-  margin-bottom: clamp(26px, 3vw, 38px);
-  text-shadow: 0 1px 18px rgba(8,14,30,.6);
-}
-.hero .eyebrow { text-shadow: 0 1px 16px rgba(8,14,30,.6); }
-.hero__actions { display: flex; flex-wrap: wrap; gap: 14px; }
-/* sobre foto, a borda de 18% de opacidade desaparece */
-.hero .btn--ghost { border-color: rgba(255,255,255,.5); background: rgba(11,19,38,.24); }
-.hero .btn--ghost:hover { background: rgba(11,19,38,.42); border-color: #fff; }
 
-/* ficha rápida na primeira dobra */
-.hero__facts {
-  list-style: none;
-  display: grid; gap: 1px;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  margin-top: clamp(34px, 4vw, 54px);
-  background: rgba(255,255,255,.2);
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
+.hero__eyebrow {
+  font-family: var(--font-sans);
+  font-size: 13px; font-weight: 400;
+  letter-spacing: .3em; text-transform: uppercase;
+  color: rgba(255,255,255,.95);
+  margin-bottom: clamp(24px, 3vw, 32px);
+  text-shadow: 0 1px 14px rgba(8,14,30,.75);
 }
-.hero__facts li {
-  background: rgba(14,22,42,.42);
-  padding: 16px clamp(14px, 1.6vw, 22px);
-  display: flex; flex-direction: column; gap: 5px;
+.hero__titulo {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 7.5vw, 96px);
+  font-weight: 600; line-height: 1.05;
+  letter-spacing: .06em; text-transform: uppercase;
+  color: #fff;
+  margin-bottom: clamp(18px, 2vw, 24px);
+  text-shadow: 0 2px 40px rgba(8,14,30,.6);
 }
-@supports (backdrop-filter: blur(6px)) {
-  .hero__facts li { background: rgba(14,22,42,.3); backdrop-filter: blur(10px); }
+.hero__sub {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 400; font-style: italic;
+  letter-spacing: .04em;
+  color: #fff;
+  margin-bottom: clamp(34px, 4vw, 44px);
+  /* a projeção acesa é a área mais clara da foto e cai bem atrás desta
+     linha no celular: duas sombras seguram o branco sem véu na imagem */
+  text-shadow: 0 1px 3px rgba(8,14,30,.85), 0 2px 24px rgba(8,14,30,.75);
 }
-.hero__facts-v {
-  font-family: var(--font-display); font-size: clamp(1.5rem, 2.4vw, 2.1rem);
-  line-height: 1; color: #fff; font-weight: 400;
-}
-.hero__facts-k {
-  font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
-  color: rgba(255,255,255,.74);
-}
-.hero__facts .tbd {
-  font-family: var(--font-sans); font-size: var(--text-sm);
-  font-weight: 300; color: rgba(255,255,255,.8);
-  border-bottom-color: rgba(255,255,255,.4);
-  align-self: flex-start;
+.hero__acao { display: flex; justify-content: center; }
+.hero .btn--ghost {
+  border-color: rgba(255,255,255,.62);
+  text-shadow: 0 1px 3px rgba(8,14,30,.7);
 }
 
 .hero__scroll {
-  position: absolute; right: var(--gutter); bottom: clamp(56px, 7vw, 96px);
-  writing-mode: vertical-rl;
-  font-size: var(--text-xs); letter-spacing: .26em; text-transform: uppercase;
-  color: rgba(255,255,255,.78); display: flex; align-items: center; gap: 14px;
-  text-shadow: 0 1px 14px rgba(10,18,36,.6);
+  position: absolute; bottom: 40px; left: 50%;
+  transform: translateX(-50%); z-index: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
 }
-.hero__scroll::after { content: ''; width: 1px; height: 56px; background: rgba(255,255,255,.4); }
-@media (max-width: 1180px) { .hero__scroll { display: none; } }
+.hero__scroll span {
+  font-family: var(--font-sans); font-size: 9px;
+  letter-spacing: .25em; text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+}
+.hero__scroll-linha {
+  width: 1px; height: 48px;
+  background: rgba(255,255,255,.2);
+  position: relative; overflow: hidden;
+}
+.hero__scroll-linha::after {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(255,255,255,.9);
+  animation: heroScroll 2.4s var(--ease) infinite;
+}
+@keyframes heroScroll {
+  0%   { transform: translateY(-100%); }
+  60%,
+  100% { transform: translateY(100%); }
+}
+@media (max-width: 640px) { .hero__scroll { display: none; } }
 
 /* ══════════════════════════════════════════════════════════════════════
    SEÇÕES
@@ -715,4 +718,85 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
   .hero__media img, .hero__media video { transform: none; }
   .switch__shot { transition: none; }
   .vcard__panel { transition: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   CLIENTES — faixa de logos em laço
+
+   A pista tem a lista duplicada e desliza metade da própria largura, o
+   que faz a emenda cair exatamente onde a sequência recomeça. Pausa no
+   hover e para de vez com "reduzir movimento".
+   ══════════════════════════════════════════════════════════════════════ */
+.clientes__titulo { text-align: center; max-width: 22ch; margin-inline: auto; }
+#clientes .eyebrow { text-align: center; }
+
+.faixa {
+  margin-top: clamp(34px, 4vw, 54px);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.faixa__pista {
+  display: flex; align-items: center;
+  gap: clamp(44px, 6vw, 88px);
+  width: max-content;
+  animation: faixaCorre 64s linear infinite;
+}
+.faixa__pista img {
+  height: clamp(22px, 2.4vw, 32px);
+  width: auto;
+  flex: none;
+  /* cinza com pouca opacidade: uniformiza marcas de cores muito
+     diferentes sem achatar a forma de cada uma */
+  opacity: .45;
+  mix-blend-mode: multiply;
+  transition: opacity var(--dur) var(--ease);
+}
+.faixa:hover .faixa__pista { animation-play-state: paused; }
+.faixa__pista img:hover { opacity: .8; }
+@keyframes faixaCorre {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faixa { overflow-x: auto; }
+  .faixa__pista { animation: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   DEPOIMENTOS
+   Marcação pronta, conteúdo pendente de autorização.
+   ══════════════════════════════════════════════════════════════════════ */
+.depo {
+  display: grid; gap: clamp(20px, 2.6vw, 34px);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+.depo__item {
+  display: flex; flex-direction: column; gap: 20px;
+  padding: clamp(26px, 3vw, 38px);
+  background: var(--ui-bg-alt);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--radius-lg);
+}
+.depo__item blockquote {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 300; line-height: 1.45;
+  font-style: italic;
+  flex: 1;
+}
+.depo__item blockquote::before { content: '\201C'; margin-right: .1em; }
+.depo__item figcaption {
+  display: flex; align-items: center; gap: 14px;
+  padding-top: 18px; border-top: 1px solid var(--ui-border);
+}
+.depo__foto {
+  width: 48px; height: 48px; flex: none;
+  border-radius: 999px; object-fit: cover;
+}
+.depo__quem { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.depo__nome { font-size: var(--text-base); font-weight: 500; }
+.depo__cargo {
+  font-size: var(--text-xs); color: var(--ui-text-muted);
+  letter-spacing: .08em; line-height: 1.4;
 }
