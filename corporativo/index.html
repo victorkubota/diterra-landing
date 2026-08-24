@@ -44,7 +44,7 @@
 
   <div class="nav__side">
     <a class="nav__switch" href="/social">Eventos sociais &rarr;</a>
-    <a class="btn btn--primary" href="#proposta">Solicitar proposta</a>
+    <a class="btn btn--primary on-dark" href="#proposta">Solicitar proposta</a>
     <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Abrir menu">
       <span></span><span></span>
     </button>
@@ -117,14 +117,14 @@
 <section class="section section--paper" id="manifesto">
   <div class="wrap manifesto">
     <div class="manifesto__aside">
-      <p class="eyebrow rise" style="--i:0">A proposta</p>
-      <h2 class="h-section rise" style="--i:1">O enredo de um evento que acontece por inteiro</h2>
-      <figure class="manifesto__media rise" style="--i:2">
+      <figure class="manifesto__media rise" style="--i:0">
         <img src="/assets/demo/apoio/manifesto.webp" width="1856" height="2304"
              alt="Portal em arco de uma das casas da Di Terrá ao amanhecer" loading="lazy">
       </figure>
     </div>
     <div class="manifesto__body">
+      <p class="eyebrow rise" style="--i:0">A proposta</p>
+      <h2 class="h-section rise" style="--i:1">O enredo de um evento que acontece por inteiro</h2>
       <p class="rise" style="--i:1">Cada empresa tem uma história para contar, e nós transformamos essa história em experiência.</p>
       <p class="rise" style="--i:2">Na <strong>Di Terrá</strong>, a exclusividade encontra o corporativo e esse momento ganha significado estratégico. Criamos encontros que inspiram times, aproximam pessoas e fortalecem marcas.</p>
       <p class="rise" style="--i:3">Cuidamos de tudo e de todos os detalhes para que as conexões sejam reais e para que cada encontro atue como um momento de fortalecimento da cultura organizacional, vivo e presente.</p>
@@ -258,16 +258,12 @@
      ══════════════════════════════════════════════════════════════ -->
 <section class="section section--paper" id="espacos">
   <div class="wrap">
-    <div class="section__head">
+    <div class="section__head section__head--centro">
       <p class="eyebrow rise" style="--i:0">Espaços</p>
       <h2 class="h-section rise" style="--i:1">Quatro casas, uma operação</h2>
       <p class="body-muted rise" style="--i:2">Os mesmos espaços que recebem casamentos foram desenhados para o ritmo corporativo: layout de auditório, infraestrutura audiovisual, salas de apoio e acesso.</p>
     </div>
 
-    <p class="notice rise" style="--i:3">
-      <span aria-hidden="true">▲</span>
-      <span><strong>Campos técnicos a preencher.</strong> Capacidades, metragens e infraestrutura estão marcados como pendentes até que a Di Terrá confirme os números reais de cada casa. Nenhum dado foi estimado. As imagens desta demonstração são ilustrativas e devem ser substituídas por fotografia corporativa dedicada.</span>
-    </p>
   </div>
 
   <div class="wrap">
@@ -439,49 +435,64 @@
       </p>
     </div>
 
-    <div class="solutions">
-      <article class="solution rise" style="--i:0">
-        <figure class="solution__media">
-          <img src="/assets/demo/solucoes/gastronomia.webp" width="2400" height="1792"
-               alt="Prato autoral servido em jantar da Di Terrá" loading="lazy">
-        </figure>
-        <h3>Gastronomia</h3>
-        <p>Menu autoral, coffee, welcome e jantares de gala.</p>
-      </article>
-      <article class="solution rise" style="--i:1">
-        <figure class="solution__media">
-          <img src="/assets/demo/solucoes/decoracao.webp" width="2400" height="1792"
-               alt="Arranjo floral e ambientação de mesa" loading="lazy">
-        </figure>
-        <h3>Decoração</h3>
-        <p>Cenografia e ambientação alinhadas à marca do cliente.</p>
-      </article>
-      <article class="solution rise" style="--i:2">
-        <figure class="solution__media">
-          <img src="/assets/demo/solucoes/coquetelaria.webp" width="2400" height="1792"
-               alt="Drinks autorais no bar da casa" loading="lazy">
-        </figure>
-        <h3>Coquetelaria</h3>
-        <p>Bar assinado, drinks de marca e serviço dedicado.</p>
-      </article>
-      <article class="solution rise" style="--i:3">
-        <figure class="solution__media">
-          <img src="/assets/demo/solucoes/producao.webp" width="2400" height="1792"
-               alt="Equipe de produção montando a estrutura do evento" loading="lazy">
-        </figure>
-        <h3>Produção</h3>
-        <p>Planejamento, cronograma, equipe e operação no dia.</p>
-      </article>
-      <article class="solution rise" style="--i:4">
-        <figure class="solution__media">
-          <img src="/assets/demo/solucoes/tecnologia-audiovisual.webp" width="2400" height="1792"
-               alt="Mesa de luz e vídeo em operação durante o evento" loading="lazy">
-        </figure>
-        <h3>Tecnologia audiovisual</h3>
-        <p>Som, luz, projeção, telão e transmissão.</p>
-      </article>
+    <div class="reel" id="reel">
+      <div class="reel__head on-dark">
+        <p class="reel__conta"><span id="reelAtual">01</span> <i>/</i> 05</p>
+        <div class="reel__nav">
+          <button class="reel__btn" data-reel="prev" aria-label="Recurso anterior" aria-controls="reelTrack">
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M16 6H1M5 1L.6 6 5 11" stroke="currentColor" stroke-width="1.2"/></svg>
+          </button>
+          <button class="reel__btn" data-reel="next" aria-label="Próximo recurso" aria-controls="reelTrack">
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M0 6h15M11 1l4.4 5L11 11" stroke="currentColor" stroke-width="1.2"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="reel__track" id="reelTrack" tabindex="0" aria-label="Recursos inclusos, use as setas do teclado">
+        <article class="reel__item">
+          <figure><img src="/assets/demo/solucoes/gastronomia.webp" width="2400" height="1792" alt="Prato autoral servido em jantar da Di Terrá" loading="lazy"></figure>
+          <div class="reel__texto">
+            <span class="reel__n">01</span>
+            <h3>Gastronomia</h3>
+            <p>Menu autoral, coffee, welcome e jantares de gala.</p>
+          </div>
+        </article>
+        <article class="reel__item">
+          <figure><img src="/assets/demo/solucoes/decoracao.webp" width="2400" height="1792" alt="Arranjo floral e ambientação de mesa" loading="lazy"></figure>
+          <div class="reel__texto">
+            <span class="reel__n">02</span>
+            <h3>Decoração</h3>
+            <p>Cenografia e ambientação alinhadas à marca do cliente.</p>
+          </div>
+        </article>
+        <article class="reel__item">
+          <figure><img src="/assets/demo/solucoes/coquetelaria.webp" width="2400" height="1792" alt="Drinks autorais no bar da casa" loading="lazy"></figure>
+          <div class="reel__texto">
+            <span class="reel__n">03</span>
+            <h3>Coquetelaria</h3>
+            <p>Bar assinado, drinks de marca e serviço dedicado.</p>
+          </div>
+        </article>
+        <article class="reel__item">
+          <figure><img src="/assets/demo/solucoes/producao.webp" width="2400" height="1792" alt="Equipe de produção montando a estrutura do evento" loading="lazy"></figure>
+          <div class="reel__texto">
+            <span class="reel__n">04</span>
+            <h3>Produção</h3>
+            <p>Planejamento, cronograma, equipe e operação no dia.</p>
+          </div>
+        </article>
+        <article class="reel__item">
+          <figure><img src="/assets/demo/solucoes/tecnologia-audiovisual.webp" width="2400" height="1792" alt="Mesa de luz e vídeo em operação durante o evento" loading="lazy"></figure>
+          <div class="reel__texto">
+            <span class="reel__n">05</span>
+            <h3>Tecnologia audiovisual</h3>
+            <p>Som, luz, projeção, telão e transmissão.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="reel__barra" aria-hidden="true"><span id="reelProgresso"></span></div>
     </div>
-  </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════
@@ -933,6 +944,50 @@
         ativar(alvo.getAttribute('data-venue'));
       });
     });
+  }
+
+  /* ── carrossel de recursos ─────────────────────────────────────
+     Contador, barra de progresso e setas que desabilitam nas pontas.
+     A posição vem do scroll real, então arrastar no trackpad ou no
+     dedo atualiza o indicador igual ao clique nas setas. */
+  var reel = document.getElementById('reelTrack');
+  if (reel) {
+    var itens = reel.querySelectorAll('.reel__item');
+    var atual = document.getElementById('reelAtual');
+    var progresso = document.getElementById('reelProgresso');
+    var botoes = document.querySelectorAll('[data-reel]');
+    var passoReel = function () {
+      var it = reel.querySelector('.reel__item');
+      return it ? it.getBoundingClientRect().width + 18 : reel.clientWidth * 0.8;
+    };
+    var sincronizar = function () {
+      var noFim = reel.scrollLeft >= reel.scrollWidth - reel.clientWidth - 2;
+      /* no fim do curso o índice arredondado ainda aponta para o primeiro
+         item visível, e o contador travava em 04 de 05 */
+      var i = noFim ? itens.length - 1 : Math.round(reel.scrollLeft / passoReel());
+      i = Math.max(0, Math.min(i, itens.length - 1));
+      if (atual) atual.textContent = (i + 1 < 10 ? '0' : '') + (i + 1);
+      var visiveis = Math.max(1, Math.round(reel.clientWidth / passoReel()));
+      var fracao = Math.min(1, visiveis / itens.length);
+      if (progresso) {
+        progresso.style.width = (fracao * 100) + '%';
+        var curso = Math.max(1, reel.scrollWidth - reel.clientWidth);
+        progresso.style.transform = 'translateX(' + (reel.scrollLeft / curso) * ((1 / fracao) - 1) * 100 + '%)';
+      }
+      botoes.forEach(function (b) {
+        var fim = reel.scrollLeft >= reel.scrollWidth - reel.clientWidth - 2;
+        b.disabled = b.getAttribute('data-reel') === 'prev' ? reel.scrollLeft <= 2 : fim;
+      });
+    };
+    botoes.forEach(function (b) {
+      b.addEventListener('click', function () {
+        reel.scrollBy({ left: b.getAttribute('data-reel') === 'next' ? passoReel() : -passoReel(),
+                        behavior: reduz ? 'auto' : 'smooth' });
+      });
+    });
+    reel.addEventListener('scroll', function () { window.requestAnimationFrame(sincronizar); }, { passive: true });
+    window.addEventListener('resize', sincronizar, { passive: true });
+    sincronizar();
   }
 
   /* ── carrossel de hospedagem ───────────────────────────────── */
