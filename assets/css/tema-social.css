@@ -1,0 +1,47 @@
+/* ══════════════════════════════════════════════════════════════════════
+   TEMA — DI TERRÁ EVENTOS (SOCIAL)
+   Paleta oficial do BRANDBOOK v2, p.6.
+
+   SÓ COR. Se você precisar mudar raio, tamanho de fonte, espaçamento ou
+   duração, o lugar é assets/css/base.css — e a mudança vale para os dois
+   universos, que é exatamente o ponto.
+
+   Contraste medido:
+     royal sobre ivory ....... 15,6:1   AA + AAA
+     ivory sobre royal ....... 15,6:1   AA + AAA
+     royal sobre rose ........ 10,9:1   AA + AAA
+     rose  sobre royal .......  8,7:1   AA + AAA
+     brick sobre ivory .......  3,6:1   só título ≥24px, filete e ornamento
+   O marrom tijolo nunca carrega texto corrido.
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* paleta bruta */
+  --royal:       #111542;   /* azul royal */
+  --royal-80:    #2a2f5c;
+  --royal-soft:  rgba(17,21,66,.06);
+  --rose:        #f4bfb3;   /* rosa baby */
+  --rose-soft:   #fbe4de;
+  --ivory:       #fefae0;   /* bege marfim */
+  --ivory-warm:  #f7f1d8;
+  --ivory-light: #fffdf2;
+  --brick:       #c67139;   /* marrom tijolo */
+  --white:       #ffffff;
+
+  /* papéis de interface */
+  --ui-bg:                 var(--ivory);
+  --ui-bg-alt:             var(--white);
+  --ui-bg-invert:          var(--royal);
+  --ui-text:               var(--royal);
+  --ui-text-muted:         #4a4f78;
+  --ui-text-invert:        var(--ivory);
+  --ui-text-invert-muted:  rgba(254,250,224,.78);
+  --ui-accent:             var(--brick);
+  --ui-accent-on-dark:     var(--rose);
+  --ui-border:             rgba(17,21,66,.14);
+  --ui-border-invert:      rgba(254,250,224,.22);
+  --ui-action:             var(--royal);
+  --ui-action-hover:       var(--royal-80);
+  --ui-notice-bg:          var(--rose-soft);
+  --ui-notice-text:        #6b3f22;
+}

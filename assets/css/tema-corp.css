@@ -1,0 +1,49 @@
+/* ══════════════════════════════════════════════════════════════════════
+   TEMA — DI TERRÁ CORPORATIVO
+   Paleta do Brand Guideline V0 (dez/2025), p.10.
+
+   SÓ COR. Se você precisar mudar raio, tamanho de fonte, espaçamento ou
+   duração, o lugar é assets/css/base.css — e a mudança vale para os dois
+   universos, que é exatamente o ponto.
+
+   Contraste medido:
+     navy-900 sobre branco ... 12,6:1   AA + AAA
+     branco sobre navy-900 ... 12,6:1   AA + AAA
+     blue-300 sobre navy-900 ..  7,4:1   AA + AAA
+     blue-500 sobre branco ....  3,3:1   só título ≥24px e gráfico
+   Por isso a ação primária é navy, não azul: azul com rótulo pequeno em
+   branco reprova WCAG AA. O azul fica em títulos, filetes e ícones.
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* paleta bruta */
+  --navy-900:    #1e325c;   /* principal */
+  --navy-700:    #1c4c7e;
+  --blue-700:    #0058a4;
+  --blue-500:    #0094dc;   /* acento */
+  --blue-300:    #7fc4ec;   /* acento clareado, legível sobre navy */
+  --petrol-900:  #123b44;
+  --petrol-700:  #346372;
+  --taupe-700:   #8c7364;
+  --taupe-400:   #c2ad9f;
+  --sand-200:    #e9dacd;
+  --sand-100:    #f5f1e8;
+  --white:       #ffffff;
+
+  /* papéis de interface */
+  --ui-bg:                 var(--sand-100);
+  --ui-bg-alt:             var(--white);
+  --ui-bg-invert:          var(--navy-900);
+  --ui-text:               var(--navy-900);
+  --ui-text-muted:         #4a5b7d;
+  --ui-text-invert:        var(--white);
+  --ui-text-invert-muted:  rgba(255,255,255,.76);
+  --ui-accent:             var(--blue-700);
+  --ui-accent-on-dark:     var(--blue-300);
+  --ui-border:             rgba(30,50,92,.14);
+  --ui-border-invert:      rgba(255,255,255,.18);
+  --ui-action:             var(--navy-900);
+  --ui-action-hover:       var(--navy-700);
+  --ui-notice-bg:          var(--sand-200);
+  --ui-notice-text:        #58453a;
+}
