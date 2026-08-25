@@ -1,0 +1,356 @@
+/* ══════════════════════════════════════════════════════════════════════
+   DI TERRÁ — BASE
+
+   Forma, tipografia, ritmo, movimento e componentes. Vale igual para as
+   treze rotas, social e corporativo.
+
+   REGRA DESTE ARQUIVO: nenhuma cor literal. Tudo que é cor vem de um
+   token --ui-* definido nos arquivos de tema. Se você precisou escrever
+   um #hex ou um rgb() aqui, o lugar certo é o tema.
+
+   REGRA DOS TEMAS: só cor. Se um tema-*.css declarar raio, tamanho de
+   fonte, espaçamento ou duração, ele está errado.
+
+   Os valores de forma e tipografia seguem a home social, que é a página
+   que define a linguagem do site (decisão de 23/08/2026).
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── TIPOGRAFIA ───────────────────────────────────────────────────
+     Channe é licenciada e não veio nos arquivos de marca. Cormorant
+     Garamond entra como substituta: mesma classe de serifada de alto
+     contraste do logotipo. Trocar por Channe em woff2 quando a licença
+     for adquirida. Oooh Baby é acento manuscrito do universo social e
+     não tem equivalente no corporativo.                             */
+  --font-display: 'Channe', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-script:  'Oooh Baby', 'Cormorant Garamond', cursive;
+  --font-sans:    'Albert Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+
+  --text-xs:   .6875rem;                                  /* 11px — eyebrow  */
+  --text-sm:   .75rem;                                    /* 12px — botão    */
+  --text-base: .9375rem;                                  /* 15px — corpo    */
+  --text-lg:   clamp(1.0625rem, 1rem + .3vw, 1.25rem);
+  --text-xl:   clamp(1.4rem, 1.2rem + .85vw, 2rem);
+  --text-2xl:  clamp(2rem, 1.5rem + 2.1vw, 3.5rem);
+  --text-3xl:  clamp(2.6rem, 1.6rem + 4.2vw, 5.25rem);
+
+  --leading-body:    1.7;
+  --leading-display: 1.02;
+  --tracking-eyebrow: .25em;
+  --tracking-btn:     .2em;
+
+  /* ── ESPAÇO E FORMA ─────────────────────────────────────────────── */
+  --section-y: clamp(80px, 10vw, 140px);
+  --gutter:    clamp(20px, 4vw, 64px);
+  --max:       1200px;
+  --max-text:  70ch;
+
+  --radius:    3px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+  --arch:      999px 999px 3px 3px;   /* arco da janela do símbolo */
+
+  /* ── MOVIMENTO ──────────────────────────────────────────────────── */
+  --ease:      cubic-bezier(.15,.75,.5,1);
+  --ease-out:  cubic-bezier(.25,1,.33,1);
+  --dur-fast:  .25s;
+  --dur:       .5s;
+  --dur-slow:  .8s;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   RESET
+   ══════════════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Sem overflow-x aqui: qualquer valor diferente de visible no html ou
+   no body contém o position:sticky de toda a página. Quando algum bloco
+   estourar a largura, o certo é corrigir o bloco, não abafar aqui. */
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 300;
+  line-height: var(--leading-body);
+  color: var(--ui-text);
+  background: var(--ui-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img, video { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; }
+h1, h2, h3, h4, h5, h6, p { margin: 0; }
+::selection { background: var(--ui-bg-invert); color: var(--ui-text-invert); }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 200;
+  background: var(--ui-bg-invert); color: var(--ui-text-invert);
+  padding: 14px 22px; font-size: var(--text-sm);
+}
+.skip:focus { left: 12px; top: 12px; }
+
+:focus-visible { outline: 2px solid var(--ui-accent); outline-offset: 3px; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   GRADE
+   ══════════════════════════════════════════════════════════════════════ */
+.wrap,
+.container { max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+
+/* Sem overflow aqui de propósito: qualquer valor diferente de visible
+   contém o position: sticky dos descendentes. Quem tem elemento que
+   sangra para fora da caixa — os ornamentos do social — corta no
+   próprio arquivo. */
+.section {
+  padding-block: var(--section-y);
+  position: relative;
+  scroll-margin-top: 76px;
+}
+.section--invert { background: var(--ui-bg-invert); color: var(--ui-text-invert); }
+.section--paper  { background: var(--ui-bg-alt); }
+
+.section__head { max-width: var(--max-text); margin-bottom: clamp(34px, 4.4vw, 62px); }
+.section__head .h-section { margin-bottom: 18px; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   TIPOGRAFIA
+   ══════════════════════════════════════════════════════════════════════ */
+/* Sem filete antes do rótulo: o traço curto grudado no texto ficou
+   parecendo travessão e dava ar de texto gerado. O eyebrow se sustenta
+   pelo tracking e pelo tamanho. */
+.eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 300;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--ui-text-muted);
+  margin-bottom: clamp(16px, 2vw, 26px);
+}
+.on-dark .eyebrow { color: var(--ui-accent-on-dark); }
+
+.h-display {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--text-3xl);
+  line-height: var(--leading-display);
+  letter-spacing: -.01em;
+}
+.h-section {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--text-2xl);
+  line-height: 1.08;
+  letter-spacing: -.008em;
+}
+.h-card {
+  font-size: var(--text-lg);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.lead { font-size: var(--text-lg); font-weight: 300; line-height: 1.6; max-width: 46ch; }
+.body-muted { color: var(--ui-text-muted); }
+.on-dark { color: var(--ui-text-invert); }
+.on-dark .body-muted { color: var(--ui-text-invert-muted); }
+
+/* ══════════════════════════════════════════════════════════════════════
+   BOTÃO
+
+   Forma da home social: canto de 12px, rótulo pequeno em caixa alta com
+   tracking largo, e preenchimento que escala da esquerda no hover.
+   As variantes preservam a hierarquia de conversão: --primary chega
+   preenchido, --ghost chega contornado.
+   ══════════════════════════════════════════════════════════════════════ */
+.btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  position: relative; overflow: hidden;
+  /* isolation + ::before em z-index -1, e não .btn > * em z-index 1:
+     o rótulo nem sempre vem embrulhado em <span>, e um nó de texto solto
+     não recebe z-index. Sem isso o preenchimento cobria o texto. */
+  isolation: isolate;
+  padding: 16px 36px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  letter-spacing: var(--tracking-btn);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.btn::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  border-radius: inherit;
+  transform: scaleX(0); transform-origin: right;
+  transition: transform var(--dur) var(--ease);
+}
+.btn:hover::before { transform: scaleX(1); transform-origin: left; }
+.btn svg { transition: transform .4s var(--ease-out); }
+.btn:hover svg { transform: translateX(4px); }
+
+/* Ambas as variantes chegam contornadas e preenchem no hover: é o
+   comportamento da home social, onde não existia botão sólido de saída.
+   A hierarquia entre elas está na força da borda e do rótulo, não no
+   preenchimento.
+   Nota para revisão: um CTA sólido converte melhor que um contornado.
+   Se a conversão pesar mais que a paridade, é aqui que se muda — e a
+   mudança vale para os dois universos de uma vez. */
+.btn--primary {
+  background: transparent;
+  color: var(--ui-action);
+  border-color: var(--ui-action);
+}
+.btn--primary::before { background: var(--ui-action); }
+.btn--primary:hover { color: var(--ui-text-invert); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ui-text);
+  border-color: var(--ui-border);
+}
+.btn--ghost::before { background: var(--ui-action); }
+.btn--ghost:hover { color: var(--ui-text-invert); border-color: var(--ui-action); }
+
+.on-dark .btn--primary,
+.btn--primary.on-dark {
+  background: transparent;
+  color: var(--ui-text-invert);
+  border-color: var(--ui-text-invert);
+}
+.on-dark .btn--primary::before,
+.btn--primary.on-dark::before { background: var(--ui-text-invert); }
+.on-dark .btn--primary:hover,
+.btn--primary.on-dark:hover { color: var(--ui-bg-invert); }
+
+.on-dark .btn--ghost,
+.btn--ghost.on-dark { color: var(--ui-text-invert); border-color: var(--ui-border-invert); }
+.on-dark .btn--ghost::before,
+.btn--ghost.on-dark::before { background: var(--ui-text-invert); }
+.on-dark .btn--ghost:hover,
+.btn--ghost.on-dark:hover { color: var(--ui-bg-invert); border-color: var(--ui-text-invert); }
+
+/* link com seta, para navegação secundária */
+.link-arrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: var(--text-base); font-weight: 400;
+  letter-spacing: .04em;
+  color: var(--ui-accent);
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--ui-border);
+  transition: border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.link-arrow svg { transition: transform var(--dur) var(--ease); }
+.link-arrow:hover { border-color: currentColor; }
+.link-arrow:hover svg { transform: translateX(5px); }
+.link-arrow--alt { color: var(--ui-text-muted); }
+.link-arrow--alt:hover { color: var(--ui-text); }
+
+/* ══════════════════════════════════════════════════════════════════════
+   FICHA TÉCNICA E AVISOS
+   ══════════════════════════════════════════════════════════════════════ */
+.spec { list-style: none; display: grid; }
+.spec li {
+  display: flex; justify-content: space-between; gap: 18px;
+  padding: 12px 0; border-top: 1px solid var(--ui-border);
+  font-size: var(--text-base);
+}
+.spec .k { color: var(--ui-text-muted); font-weight: 300; }
+.spec .v { font-weight: 500; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* campo pendente de confirmação da Di Terrá — nunca inventar dado */
+.tbd {
+  font-weight: 400;
+  color: var(--ui-accent);
+  border-bottom: 1px dashed var(--ui-accent);
+}
+
+.notice {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 16px 20px; margin-bottom: clamp(28px, 3.2vw, 40px);
+  background: var(--ui-notice-bg);
+  border-left: 2px solid var(--ui-accent);
+  color: var(--ui-notice-text);
+  font-size: var(--text-base);
+  max-width: var(--max-text);
+}
+.notice strong { font-weight: 600; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   RODAPÉ
+   ══════════════════════════════════════════════════════════════════════ */
+.foot {
+  background: var(--ui-bg-invert);
+  color: var(--ui-text-invert);
+  padding-block: clamp(48px, 6vw, 80px) 30px;
+}
+.foot__grid { display: grid; gap: clamp(28px, 4vw, 56px); }
+@media (min-width: 760px) { .foot__grid { grid-template-columns: 1.4fr 1fr 1fr; } }
+.foot h2 {
+  font-size: var(--text-xs); letter-spacing: .22em; text-transform: uppercase;
+  color: var(--ui-text-invert-muted); margin-bottom: 14px; font-weight: 500;
+}
+.foot ul { list-style: none; display: grid; gap: 9px; }
+.foot a { color: var(--ui-text-invert); opacity: .9; font-size: var(--text-base); transition: opacity var(--dur-fast) var(--ease); }
+.foot a:hover { opacity: 1; }
+.foot__bar {
+  margin-top: clamp(34px, 4.4vw, 58px); padding-top: 22px;
+  border-top: 1px solid var(--ui-border-invert);
+  display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between;
+  font-size: var(--text-xs); color: var(--ui-text-invert-muted);
+  letter-spacing: .02em;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   VOLTAR AO TOPO
+   ══════════════════════════════════════════════════════════════════════ */
+.to-top {
+  position: fixed; right: clamp(16px, 2.4vw, 30px); bottom: clamp(16px, 2.4vw, 30px);
+  z-index: 9000; width: 46px; height: 46px;
+  display: grid; place-items: center;
+  background: var(--ui-bg-invert); color: var(--ui-text-invert);
+  border: 1px solid var(--ui-border-invert); border-radius: 999px;
+  cursor: pointer;
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity var(--dur) var(--ease-out), transform var(--dur) var(--ease-out),
+              visibility var(--dur), background var(--dur-fast) var(--ease-out);
+}
+.to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
+.to-top:hover { background: var(--ui-accent); }
+.to-top svg { transition: transform var(--dur-fast) var(--ease-out); }
+.to-top:hover svg { transform: translateY(-2px); }
+
+/* ══════════════════════════════════════════════════════════════════════
+   MOVIMENTO
+
+   Revelação em cascata: --i escalona os irmãos, de modo que o bloco se
+   monta em sequência em vez de aparecer inteiro.
+   ══════════════════════════════════════════════════════════════════════ */
+.rise { opacity: 0; transform: translateY(26px); }
+.rise.is-in {
+  opacity: 1; transform: none;
+  transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
+  transition-delay: calc(var(--i, 0) * .11s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  .rise { opacity: 1; transform: none; }
+}
