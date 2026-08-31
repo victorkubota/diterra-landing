@@ -616,7 +616,7 @@
     </div>
     <div class="depo">
 
-      <figure class="depo__item rise" style="--i:0">
+      <figure class="depo__item pilha__item" style="--i:0"><div class="depo__cartao recua">
         <blockquote>Levamos 180 pessoas para a convenção anual e a operação inteira ficou com uma equipe só. Não precisei coordenar fornecedor nenhum: cheguei e estava montado.</blockquote>
         <figcaption>
           <img class="depo__foto" src="/assets/demo/depoimentos/retrato-1.webp" width="480" height="480" alt="" loading="lazy">
@@ -625,9 +625,10 @@
             <span class="depo__cargo">Diretora de Marketing &middot; Grupo Meridiano</span>
           </span>
         </figcaption>
+        </div>
       </figure>
 
-      <figure class="depo__item rise" style="--i:1">
+      <figure class="depo__item pilha__item" style="--i:1"><div class="depo__cartao recua">
         <blockquote>Escolhemos pela distância de São Paulo e ficamos pela comida. O time voltou falando do jantar de encerramento até semanas depois.</blockquote>
         <figcaption>
           <img class="depo__foto" src="/assets/demo/depoimentos/retrato-2.webp" width="480" height="480" alt="" loading="lazy">
@@ -636,9 +637,10 @@
             <span class="depo__cargo">Head de Vendas &middot; Vantiva Brasil</span>
           </span>
         </figcaption>
+        </div>
       </figure>
 
-      <figure class="depo__item rise" style="--i:2">
+      <figure class="depo__item pilha__item" style="--i:2"><div class="depo__cartao recua">
         <blockquote>Fizemos o off-site de liderança na Casa Lucca. O silêncio do lugar faz diferença real numa agenda de dois dias de decisão.</blockquote>
         <figcaption>
           <img class="depo__foto" src="/assets/demo/depoimentos/retrato-3.webp" width="480" height="480" alt="" loading="lazy">
@@ -647,6 +649,7 @@
             <span class="depo__cargo">Diretora de Pessoas &middot; Arcadia Tecnologia</span>
           </span>
         </figcaption>
+        </div>
       </figure>
 
     </div>
@@ -1067,6 +1070,28 @@
 
      Desligado no celular: lá o custo por quadro não se paga, e o
      endereço da barra do navegador já move a página sozinho. */
+  /* ── pilha de depoimentos ──────────────────────────────────────
+     --cp é quanto o PRÓXIMO cartão já cobriu este: 0 enquanto ele ainda
+     está abaixo da dobra, 1 quando alcança a posição de fixação. A
+     forma (desfoque, escala, luz) mora no base.css.
+
+     A home social faz o mesmo, mas lá o recuo já existia num tween do
+     GSAP, então bastou somar o desfoque a ele. Aqui não há GSAP. */
+  var cartoes = reduz ? [] : Array.prototype.slice.call(document.querySelectorAll('.depo__item'));
+
+  var medirPilha = function () {
+    if (cartoes.length < 2) return;
+    var alto = window.innerHeight;
+    cartoes.forEach(function (c, i) {
+      var prox = cartoes[i + 1];
+      if (!prox) { c.style.setProperty('--cp', '0'); return; }
+      var curso = alto - c.getBoundingClientRect().top;
+      var avanco = alto - prox.getBoundingClientRect().top;
+      var p = curso > 0 ? avanco / curso : 0;
+      c.style.setProperty('--cp', Math.max(0, Math.min(1, p)).toFixed(4));
+    });
+  };
+
   var camadas = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
   var podeParallax = !reduz && window.matchMedia('(min-width: 768px)').matches;
 
@@ -1201,6 +1226,7 @@
     }
 
     moverCamadas();
+    medirPilha();
     varrer();
     pendente = false;
   };
