@@ -134,7 +134,16 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
 .section--invert { background: var(--ui-bg-invert); color: var(--ui-text-invert); }
 .section--paper  { background: var(--ui-bg-alt); }
 
-.section__head { max-width: var(--max-text); margin-bottom: clamp(34px, 4.4vw, 62px); }
+/* margin-inline: 0 é o que faltava. Quando o mesmo elemento carrega
+   .wrap e .section__head, o auto do .wrap centraliza uma caixa de 70ch
+   no meio da tela: em 1920 o cabeçalho ficava 575px à direita do bloco
+   que ele apresenta. Passava despercebido enquanto o container tinha
+   teto de 1200px, e ficou gritante quando ele passou a ser fluido. */
+.section__head {
+  max-width: var(--max-text);
+  margin-inline: 0;
+  margin-bottom: clamp(34px, 4.4vw, 62px);
+}
 .section__head .h-section { margin-bottom: 18px; }
 
 /* ══════════════════════════════════════════════════════════════════════

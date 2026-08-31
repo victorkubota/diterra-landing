@@ -360,36 +360,49 @@
 
    Antes: seis blocos de prosa, 2.816px de altura e nenhuma imagem.
    ══════════════════════════════════════════════════════════════════════ */
-.bento { display: grid; gap: clamp(12px, 1.4vw, 20px); }
-@media (min-width: 760px)  { .bento { grid-template-columns: repeat(6, 1fr); } }
+/* Era grade bento. Virou pilha a pedido do cliente: cada formato ocupa
+   a tela por vez e o anterior recua desfocado, o mesmo mecanismo que a
+   referência usa nas citações de imprensa. Um formato de cada vez lê
+   melhor que seis miniaturas competindo. */
+.pilha { display: grid; gap: clamp(12px, 1.4vw, 20px); }
 
-.fmt {
+/* sem position aqui: .pilha__item já dá o sticky no base.css, e como
+   corporativo.css carrega depois, um "relative" nesta regra o anulava */
+/* no celular não há pilha: um sticky sem top é inerte, mas deixar
+   explícito evita surpresa se alguém mexer no utilitário depois */
+@media (max-width: 859px) { .fmt { position: static; } }
+@media (min-width: 860px) {
+  .pilha { display: block; padding-bottom: 12vh; }
+  .fmt { top: 12vh; margin-bottom: 7vh; height: 76vh; }
+}
+
+.fmt__cartao {
   position: relative;
+  width: 100%; height: 100%;
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--navy-900);
   min-height: clamp(240px, 34vw, 320px);
   display: flex; align-items: flex-end;
   isolation: isolate;
+  box-shadow: 0 30px 60px -30px rgba(14,22,42,.5);
 }
-@media (min-width: 760px) {
-  .fmt            { grid-column: span 2; }
-  .fmt--wide      { grid-column: span 3; min-height: clamp(300px, 30vw, 400px); }
-  .fmt--full      { grid-column: span 6; min-height: clamp(260px, 26vw, 340px); }
+@media (min-width: 860px) {
+  .fmt__cartao { min-height: 0; }
 }
-.fmt img {
+.fmt__cartao img {
   position: absolute; inset: 0; z-index: -2;
   width: 100%; height: 100%; object-fit: cover;
   transition: transform 1.4s var(--ease);
 }
-.fmt::after {
+.fmt__cartao::after {
   content: ''; position: absolute; inset: 0; z-index: -1;
   background: linear-gradient(to top, rgba(12,20,38,.9) 0%, rgba(12,20,38,.46) 46%, rgba(12,20,38,.06) 100%);
   transition: background var(--dur) var(--ease);
 }
 @media (hover: hover) {
-  .fmt:hover img { transform: scale(1.05); }
-  .fmt:hover::after { background: linear-gradient(to top, rgba(12,20,38,.92) 0%, rgba(12,20,38,.56) 52%, rgba(12,20,38,.14) 100%); }
+  .fmt__cartao:hover img { transform: scale(1.05); }
+  .fmt__cartao:hover::after { background: linear-gradient(to top, rgba(12,20,38,.92) 0%, rgba(12,20,38,.56) 52%, rgba(12,20,38,.14) 100%); }
 }
 .fmt__text {
   position: relative;
@@ -401,8 +414,8 @@
   font-size: var(--text-xs); font-variant-numeric: tabular-nums;
   letter-spacing: .2em; color: var(--blue-300);
 }
-.fmt .h-card { color: #fff; }
-.fmt p { font-size: var(--text-sm); color: rgba(255,255,255,.84); max-width: 44ch; }
+.fmt__cartao .h-card { color: #fff; }
+.fmt__cartao p { font-size: var(--text-sm); color: rgba(255,255,255,.84); max-width: 44ch; }
 
 /* ══════════════════════════════════════════════════════════════════════
    ESPAÇOS — lista que troca a foto (referência Sarah Haywood)
@@ -904,33 +917,26 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
    DEPOIMENTOS
    Marcação pronta, conteúdo pendente de autorização.
    ══════════════════════════════════════════════════════════════════════ */
-.depo { display: grid; gap: clamp(20px, 2.6vw, 34px); }
-/* três cartões lado a lado não tinham peso nenhum. Empilhados, cada
-   depoimento ganha a tela e o anterior recua desfocado, como a
-   referência faz com as citações de imprensa. */
-@media (min-width: 860px) {
-  .depo { display: block; padding-bottom: 10vh; }
-  .depo__item { top: 14vh; margin-bottom: 6vh; }
+.depo {
+  display: grid; gap: clamp(20px, 2.6vw, 34px);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
-.depo__cartao {
+.depo__item {
   display: flex; flex-direction: column; gap: 20px;
   padding: clamp(26px, 3vw, 38px);
   background: var(--ui-bg-alt);
   border: 1px solid var(--ui-border);
   border-radius: var(--radius-lg);
 }
-@media (max-width: 859px) {
-  .depo { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-}
-.depo__cartao blockquote {
+.depo__item blockquote {
   font-family: var(--font-display);
   font-size: var(--text-lg);
   font-weight: 300; line-height: 1.45;
   font-style: italic;
   flex: 1;
 }
-.depo__cartao blockquote::before { content: '\201C'; margin-right: .1em; }
-.depo__cartao figcaption {
+.depo__item blockquote::before { content: '\201C'; margin-right: .1em; }
+.depo__item figcaption {
   display: flex; align-items: center; gap: 14px;
   padding-top: 18px; border-top: 1px solid var(--ui-border);
 }
@@ -943,4 +949,39 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
 .depo__cargo {
   font-size: var(--text-xs); color: var(--ui-text-muted);
   letter-spacing: .08em; line-height: 1.4;
+}
+
+/* ── CABEÇALHO DE FORMATOS ────────────────────────────────────────────
+   Feedback do cliente: "está centralizado em uma faixa pequena que
+   poderia ser maior". O alinhamento foi resolvido no base.css; aqui
+   fica a escala. A caixa deixa de valer 70ch (medida de leitura) e
+   passa a valer 12em do PRÓPRIO título, que é o que dá a faixa larga.
+   O parágrafo de apoio continua com medida de leitura. */
+#formatos .section__head { max-width: none; }
+#formatos .section__head .h-section { max-width: 12em; }
+#formatos .section__head .body-muted { max-width: var(--max-text); }
+
+/* ── RÉGUA DO RODÍZIO DE CASAS ────────────────────────────────────────
+   Sem um indicador, a foto trocando sozinha lê como falha. A régua
+   corre no card ativo e mostra quanto falta para a próxima casa.
+
+   Ela só existe enquanto o rodízio está rodando: parou no hover, no
+   foco ou por escolha da pessoa, a régua some junto, e o que sobra é o
+   comportamento de clique de sempre.
+
+   O tempo aqui e o ESPERA do JS precisam bater. */
+.vcard.is-on { position: relative; }
+.vcard.is-on::after {
+  content: '';
+  position: absolute; left: 0; bottom: -1px; height: 2px;
+  background: var(--ui-accent);
+  width: 0;
+}
+.is-rodando .vcard.is-on::after {
+  animation: correRelogio 6s linear forwards;
+}
+@keyframes correRelogio { from { width: 0 } to { width: 100% } }
+
+@media (prefers-reduced-motion: reduce) {
+  .is-rodando .vcard.is-on::after { animation: none; width: 0; }
 }
