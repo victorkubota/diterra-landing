@@ -541,7 +541,9 @@ function initSite() {
       scrollTrigger: {
         trigger: palco,
         start: 'top top',
-        end: 'bottom bottom',
+        /* o palco não é mais alto que a tela, então 'bottom bottom' dava
+           curso zero: agora são 70% de uma tela de rolagem */
+        end: function () { return '+=' + (window.innerHeight * 0.7); },
         scrub: true
       }
     });
