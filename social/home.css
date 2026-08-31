@@ -86,6 +86,10 @@
   text-transform: uppercase;
   color: var(--royal);
 }
+/* home.css carrega depois do base.css, então .heading-lg vencia o
+   empate de especificidade com .manchete e a frase ficava em 56px */
+.heading-lg.manchete { font-size: var(--text-manchete); }
+
 .heading-md {
   font-family: var(--font-display);
   font-size: clamp(24px, 3vw, 40px);
@@ -325,11 +329,17 @@
 }
 .intro-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: clamp(40px, 6vw, 100px);
+  grid-template-columns: 1fr;
+  gap: clamp(40px, 6vw, 80px);
   max-width: var(--max);   /* era 1400px: o layout acompanha a tela */
   margin: 0 auto;
   align-items: center;
+}
+/* metade e metade a partir de 940px, como a referência: era 1fr/1.2fr
+   com a foto centrada, agora as duas colunas partem do topo e a foto
+   fica presa enquanto o texto passa */
+@media (min-width: 940px) {
+  .intro-grid { grid-template-columns: 1fr 1fr; align-items: start; }
 }
 .intro-text .heading-lg { margin-bottom: 28px; }
 .intro-text .body-text { margin-bottom: 16px; }
@@ -354,6 +364,14 @@
   overflow: hidden;
   border-radius: var(--radius-xl);
   aspect-ratio: 3/4;
+}
+/* a proporção 3/4 já batia com a referência; o que faltava era altura
+   de viewport e a fixação: 620x810 numa tela de 1440x900 são 90vh */
+@media (min-width: 940px) {
+  .intro-image {
+    position: sticky; top: 100px;
+    aspect-ratio: auto; height: min(90svh, 900px);
+  }
 }
 .intro-image img {
   width: 100%; height: 100%;

@@ -94,14 +94,18 @@
   <div class="container">
     <div class="intro-grid">
       <div class="intro-text">
-        <h2 class="heading-lg split-animate">
+        <h2 class="heading-lg manchete split-animate">
           Onde a natureza <br><span style="color:var(--royal)">encontra a arte.</span>
         </h2>
         <p class="body-text split-animate">O Di Terrá nasceu da convicção de que cada celebração merece um cenário à altura de sua importância. Mais do que um espaço, oferecemos uma arquitetura de experiências, onde a natureza do interior paulista encontra uma infraestrutura pensada em cada detalhe.</p>
         <div class="deco-line" style="margin:24px 0"></div>
-        <div class="intro-meta split-animate">
-          <div>Est. Piracicaba</div>
-          <div>Interior de São Paulo</div>
+        <!-- o split-animate vai em cada rótulo, não no contêiner:
+             splitTextToWords reescreve o innerHTML inteiro, e no contêiner
+             ele apagava estes dois divs, deixando cada PALAVRA como item
+             de flex separado por 36px -->
+        <div class="intro-meta">
+          <div class="split-animate">Est. Piracicaba</div>
+          <div class="split-animate">Interior de São Paulo</div>
         </div>
       </div>
       <div class="intro-image">

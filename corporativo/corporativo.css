@@ -412,8 +412,9 @@
    ══════════════════════════════════════════════════════════════════════ */
 .switch { display: grid; gap: clamp(26px, 3vw, 52px); }
 @media (min-width: 940px) {
-  /* a foto passa de ~48% para ~62% da linha: é o palco, não uma ilustração */
-  .switch { grid-template-columns: 1.25fr .75fr; align-items: start; }
+  /* metade e metade, como a referência. Era 1.25/.75: mais largo, porém
+     mais baixo, e no fim com MENOS área que este retrato de 90svh. */
+  .switch { grid-template-columns: 1fr 1fr; align-items: start; }
 }
 
 .switch__stage { display: none;
@@ -424,9 +425,9 @@
     display: block;
     position: sticky; top: 100px;
     /* altura de verdade, não proporção: é o que responde ao pedido de
-       "um espaço que mostre mais amplitude". Sem teto fixo em 680px,
-       que fazia a foto encolher justamente nas telas grandes. */
-    height: clamp(520px, 82vh, 900px);
+       "um espaço que mostre mais amplitude". Agora nos 90svh medidos na
+       referência, que é o que vira o corte em retrato. */
+    height: min(90svh, 900px);
     border-radius: var(--radius-lg);
     overflow: hidden;
     background: var(--navy-900);

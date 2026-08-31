@@ -33,6 +33,11 @@
   --text-xl:   clamp(1.4rem, 1.2rem + .85vw, 2rem);
   --text-2xl:  clamp(2rem, 1.5rem + 2.1vw, 3.5rem);
   --text-3xl:  clamp(2.6rem, 1.6rem + 4.2vw, 5.25rem);
+  /* manchete: o degrau que faltava entre o título de seção e o display
+     do hero. A referência declara a frase de abertura em 94px enquanto
+     nosso maior título de seção parava em 56px, e é essa diferença que
+     faz a frase valer por um parágrafo inteiro. */
+  --text-manchete: clamp(2.75rem, 1.4rem + 5.6vw, 6.5rem);
 
   --leading-body:    1.7;
   --leading-display: 1.02;
@@ -353,6 +358,36 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   opacity: 1; transform: none;
   transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
   transition-delay: calc(var(--i, 0) * .11s);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   MANCHETE
+
+   A frase de abertura da primeira seção de texto. Só escala e ritmo: a
+   revelação fica com o mecanismo que cada página já tem, .linhas no
+   corporativo e .split-animate na home social.
+   ══════════════════════════════════════════════════════════════════════ */
+.manchete {
+  font-size: var(--text-manchete);
+  line-height: 1.02;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   PALCO DE MÍDIA
+
+   Proporção medida na referência: cartão de 620x810 numa tela de
+   1440x900, ou seja metade da coluna e 90vh de altura, retrato 3:4. Era
+   mais estreito que o nosso e ainda assim MAIOR em área, porque a altura
+   compensa com folga o que perde de largura.
+   ══════════════════════════════════════════════════════════════════════ */
+@media (min-width: 940px) {
+  .palco-duplo { grid-template-columns: 1fr 1fr; align-items: start; }
+  .palco-fixo {
+    position: sticky; top: 100px;
+    height: min(90svh, 900px);
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════════════
