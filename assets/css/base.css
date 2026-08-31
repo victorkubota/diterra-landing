@@ -41,8 +41,17 @@
 
   /* ── ESPAÇO E FORMA ─────────────────────────────────────────────── */
   --section-y: clamp(80px, 10vw, 140px);
-  --gutter:    clamp(20px, 4vw, 64px);
-  --max:       1200px;
+
+  /* ── LARGURA ──────────────────────────────────────────────────────
+     O teto de 1200px deixava 360px de margem morta de cada lado em
+     1920: a página usava 62% da tela. A referência (sarahhaywood.com)
+     não tem teto, só um respiro fixo de 60px, e chega a 94% em 1920.
+
+     Sem teto no container de LAYOUT. A prosa segue protegida por
+     --max-text: o que não pode crescer é a linha de texto, não a grade.
+     ─────────────────────────────────────────────────────────────── */
+  --gutter:    clamp(20px, 4vw, 60px);
+  --max:       none;
   --max-text:  70ch;
 
   --radius:    3px;

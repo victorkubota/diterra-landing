@@ -706,7 +706,12 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
   border-color: var(--blue-300); background: rgba(255,255,255,.1); outline: none;
 }
 .field select option { color: var(--navy-900); }
-.form-note { font-size: var(--text-xs); color: rgba(255,255,255,.66); margin-top: 4px; }
+/* o campo é full-width na grade do formulário, então sem medida
+   própria esta nota chegava a 201ch em 1920 */
+.form-note {
+  font-size: var(--text-xs); color: rgba(255,255,255,.66);
+  margin-top: 4px; max-width: var(--max-text);
+}
 
 /* ══════════════════════════════════════════════════════════════════════
    RODAPÉ

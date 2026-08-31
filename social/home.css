@@ -322,7 +322,7 @@
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   gap: clamp(40px, 6vw, 100px);
-  max-width: 1400px;
+  max-width: var(--max);   /* era 1400px: o layout acompanha a tela */
   margin: 0 auto;
   align-items: center;
 }
@@ -330,7 +330,11 @@
 .intro-text .body-text { margin-bottom: 16px; }
 .intro-meta {
   display: flex;
-  gap: 36px;
+  /* os dois rótulos lado a lado davam 379px de min-content e esticavam
+     a coluna da grade além da tela: 24px de rolagem horizontal em 375px.
+     Bug anterior a esta mudança, corrigido aqui por estar no caminho. */
+  flex-wrap: wrap;
+  gap: 12px 36px;
   margin-top: 32px;
   padding-top: 24px;
   border-top: 1px solid var(--ui-border);
@@ -378,7 +382,7 @@
 }
 .stack-container {
   width: 100%;
-  max-width: 1400px;
+  max-width: var(--max);   /* era 1400px: o layout acompanha a tela */
   margin: 0 auto;
   position: relative;
   padding-bottom: 10vh;
@@ -478,7 +482,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  max-width: 1400px;
+  max-width: var(--max);   /* era 1400px: o layout acompanha a tela */
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
@@ -599,7 +603,7 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
   gap: 16px;
-  max-width: 1400px;
+  max-width: var(--max);   /* era 1400px: o layout acompanha a tela */
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
