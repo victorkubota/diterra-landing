@@ -245,14 +245,20 @@
    ─────────────────────────────────────────────────────────────────── */
 .manifesto { display: grid; grid-template-columns: 1fr; gap: clamp(30px, 4vw, 64px); }
 @media (min-width: 900px) {
-  .manifesto { grid-template-columns: 5fr 6fr; align-items: start; }
-  .manifesto__aside { position: sticky; top: 108px; }
+  /* palco fixo: a foto domina a linha e fica presa enquanto o texto rola */
+  .manifesto { grid-template-columns: 1.25fr .75fr; align-items: start; }
+  .manifesto__aside { position: sticky; top: 100px; }
 }
 .manifesto__media {
-  border-radius: var(--arch);
+  /* era var(--arch): o arco da janela do símbolo saiu do tratamento de
+     foto a pedido do cliente. A janela segue sendo o logotipo. */
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 2;
   background: var(--sand-200);
+}
+@media (min-width: 900px) {
+  .manifesto__media { aspect-ratio: auto; height: clamp(420px, 68vh, 720px); }
 }
 .manifesto__media img { width: 100%; height: 100%; object-fit: cover; }
 .manifesto__body .h-section { margin-bottom: clamp(20px, 2.4vw, 32px); }
@@ -283,6 +289,34 @@
   content: ''; position: absolute; inset: 0; z-index: -1;
   background: linear-gradient(to bottom, rgba(14,22,42,.8) 0%, rgba(14,22,42,.5) 38%, rgba(14,22,42,.42) 70%, rgba(14,22,42,.62) 100%);
 }
+
+/* ── RESPIRO FOTOGRÁFICO ──────────────────────────────────────────────
+   A pausa entre dois blocos densos. Uma frase, tela cheia de foto, e
+   segue. Altura por viewport, não por conteúdo: o assunto é a imagem.
+   ─────────────────────────────────────────────────────────────────── */
+.section--respiro {
+  min-height: clamp(420px, 68vh, 720px);
+  display: grid; align-items: center;
+  padding-block: clamp(64px, 8vw, 110px);
+}
+/* O véu vertical de .section--photo cai para 0,42 justamente onde o
+   título fica, e a aérea é clara ali. Aqui ele é horizontal: pesa do
+   lado do texto e abre do lado da paisagem.
+
+   Calibrado por medição de pixel sobre a foto real: 5,6:1 no pior
+   ponto do título, contra os 4,5:1 que o texto grande pede. Escurecer
+   mais só apagaria a fotografia, que é o argumento da seção. */
+.section--respiro::before {
+  background: linear-gradient(to right, rgba(14,22,42,.68) 0%, rgba(14,22,42,.46) 46%, rgba(14,22,42,.16) 100%);
+}
+/* a medida vai no título, não no .wrap: .respiro É o wrap, e um
+   max-width aqui sobrescrevia o --max e centralizava o bloco inteiro,
+   desalinhando do resto da página. O em é relativo ao próprio título. */
+.respiro .h-section { max-width: 14em; }
+/* branco, não o azul de acento: medido sobre a foto, o blue-300 em 11px
+   dá 2,97:1 e reprova o mínimo de 4,5:1. O branco chega a 5,66:1 sem
+   precisar escurecer mais a imagem. */
+.section--respiro .eyebrow { color: #fff; }
 
 .stats {
   display: grid; gap: 1px;
@@ -372,7 +406,8 @@
    ══════════════════════════════════════════════════════════════════════ */
 .switch { display: grid; gap: clamp(26px, 3vw, 52px); }
 @media (min-width: 940px) {
-  .switch { grid-template-columns: 1.05fr .95fr; align-items: start; }
+  /* a foto passa de ~48% para ~62% da linha: é o palco, não uma ilustração */
+  .switch { grid-template-columns: 1.25fr .75fr; align-items: start; }
 }
 
 .switch__stage { display: none;
@@ -383,8 +418,9 @@
     display: block;
     position: sticky; top: 100px;
     /* altura de verdade, não proporção: é o que responde ao pedido de
-       "um espaço que mostre mais amplitude" */
-    height: clamp(460px, 68vh, 680px);
+       "um espaço que mostre mais amplitude". Sem teto fixo em 680px,
+       que fazia a foto encolher justamente nas telas grandes. */
+    height: clamp(520px, 82vh, 900px);
     border-radius: var(--radius-lg);
     overflow: hidden;
     background: var(--navy-900);
@@ -393,9 +429,13 @@
 .switch__shot {
   position: absolute; inset: 0;
   opacity: 0; transform: scale(1.04);
-  transition: opacity .9s var(--ease), transform 1.4s var(--ease);
+  /* o wipe entra pela direita junto do cross-fade: a troca passa a ter
+     direção, em vez de só surgir */
+  clip-path: inset(0 0 0 100%);
+  transition: opacity .9s var(--ease), transform 1.4s var(--ease),
+              clip-path 1s var(--ease);
 }
-.switch__shot.is-on { opacity: 1; transform: none; }
+.switch__shot.is-on { opacity: 1; transform: none; clip-path: inset(0 0 0 0); }
 .switch__shot img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg); }
 
 .switch__list { display: grid; gap: 0; border-top: 1px solid var(--ui-border); }
@@ -553,13 +593,19 @@
   display: grid; gap: clamp(32px, 4vw, 70px); align-items: center;
   margin-bottom: clamp(52px, 6vw, 92px);
 }
-@media (min-width: 900px) { .territory { grid-template-columns: 1fr 1fr; } }
+/* texto na coluna estreita, foto na larga: o mesmo palco do resto da página */
+@media (min-width: 900px) { .territory { grid-template-columns: .75fr 1.25fr; } }
 .territory .body-muted { margin-top: 22px; }
 .territory .spec { margin-top: 32px; max-width: 420px; }
 .territory__media {
-  position: relative; aspect-ratio: 4/5; overflow: hidden;
-  border-radius: var(--arch);
+  /* era var(--arch), e a proporção 4/5 ainda recortava uma foto
+     panorâmica em retrato, jogando fora metade do enquadramento */
+  position: relative; aspect-ratio: 3/2; overflow: hidden;
+  border-radius: var(--radius-lg);
   background: var(--navy-900);
+}
+@media (min-width: 900px) {
+  .territory__media { aspect-ratio: auto; height: clamp(420px, 68vh, 720px); }
 }
 .territory__media img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -709,6 +755,80 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
   transition: transform 3.2s var(--ease);
 }
 
+/* ── REVELAÇÃO DE FOTO POR CLIP-PATH ──────────────────────────────────
+   O .rise resolve texto, mas em fotografia um fade puro não se lê como
+   revelação: a imagem só clareia. Aqui a foto é descoberta de baixo
+   para cima enquanto assenta a escala — é o gesto que responde ao
+   "sinto falta de animação ao scrollar".
+
+   O clip fica na figura e a escala na imagem: sobrepor os dois no mesmo
+   elemento faz a borda arredondada tremer durante a transição.
+   ─────────────────────────────────────────────────────────────────── */
+.reveal-shot { clip-path: inset(0 0 100% 0); }
+.reveal-shot img,
+.reveal-shot video { transform: scale(1.07); }
+.reveal-shot.is-in {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 1.15s var(--ease);
+  transition-delay: calc(var(--i, 0) * .11s);
+}
+.reveal-shot.is-in img,
+.reveal-shot.is-in video {
+  transform: scale(1);
+  transition: transform 1.6s var(--ease);
+  transition-delay: calc(var(--i, 0) * .11s);
+}
+
+/* ── TÍTULO QUE SOBE POR TRÁS DE UMA MÁSCARA ──────────────────────────
+   O JS quebra o título em linhas e embrulha cada uma; quando não
+   consegue (título com marcação interna), a seção inteira vira uma
+   máscara só e o gesto continua o mesmo, em bloco.
+   ─────────────────────────────────────────────────────────────────── */
+/* o respiro embaixo devolve o espaço dos descendentes: sem ele a
+   máscara corta o "ç" e o "p" da Cormorant */
+.linhas__l {
+  display: block; overflow: hidden;
+  padding-bottom: .14em; margin-bottom: -.14em;
+}
+.linhas__l > span {
+  display: block;
+  transform: translateY(105%);
+}
+.linhas.is-in .linhas__l > span {
+  transform: translateY(0);
+  transition: transform 1s var(--ease-out);
+  transition-delay: calc(var(--l, 0) * .07s + var(--i, 0) * .11s);
+}
+
+/* ── PARALLAX ─────────────────────────────────────────────────────────
+   O deslocamento vem do JS em --py; aqui só declaramos onde ele entra.
+   Sem transição: o valor já acompanha o scroll quadro a quadro.
+
+   A folga vem da altura da imagem, não de um scale: assim o transform
+   fica livre para o translate e não disputa com .reveal-shot, que
+   também anima escala. Por isso um bloco nunca leva as duas classes.
+   ─────────────────────────────────────────────────────────────────── */
+[data-parallax] { overflow: hidden; }
+[data-parallax] > img {
+  /* 18% de folga em cima e embaixo: o JS nunca desloca mais que 16% */
+  height: 136%;
+  position: relative; top: -18%;
+  transform: translate3d(0, var(--py, 0px), 0);
+  will-change: transform;
+}
+
+/* ── BARRA DE PROGRESSO DE LEITURA ────────────────────────────────── */
+.nav__progresso {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: var(--ui-accent-on-dark);
+  transform: scaleX(var(--lido, 0));
+  transform-origin: left;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+  pointer-events: none;
+}
+.nav.is-stuck .nav__progresso { opacity: .9; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
@@ -718,6 +838,11 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
   .hero__media img, .hero__media video { transform: none; }
   .switch__shot { transition: none; }
   .vcard__panel { transition: none; }
+  .reveal-shot { clip-path: none; }
+  .reveal-shot img, .reveal-shot video { transform: none; }
+  .linhas__l > span { transform: none; }
+  [data-parallax] > img { height: 100%; top: 0; transform: none; will-change: auto; }
+  .nav__progresso { display: none; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════
