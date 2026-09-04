@@ -18,6 +18,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="/assets/css/tema-entrada.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+
 <style>
 /* ══════════════════════════════════════════════════════════════
    PÁGINA DE ENTRADA — Di Terrá Eventos
@@ -30,39 +33,10 @@
    Nenhum deep link passa por aqui — não há redirect, gate ou
    interstitial em /social/* e /corporativo/*.
    ══════════════════════════════════════════════════════════════ */
-:root {
-  --ink:          #0c0e10;
-  --paper:        #f5f3ef;
-  --accent:       #b8a070;
-
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-sans:    'Albert Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
-
-  --ease-out:     cubic-bezier(.16,1,.3,1);
-  --gutter:       clamp(20px, 4vw, 56px);
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { -webkit-text-size-adjust: 100%; }
-
-body {
-  font-family: var(--font-sans);
-  background: var(--ink);
-  color: var(--paper);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-img, video { display: block; max-width: 100%; }
-
-.skip {
-  position: absolute; left: -9999px; top: 0; z-index: 200;
-  background: var(--paper); color: var(--ink); padding: 14px 22px; font-size: .875rem;
-}
-.skip:focus { left: 12px; top: 12px; }
-
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+/* Paleta, reset, tipografia, foco e revelação vêm de
+   assets/css/tema-entrada.css + assets/css/base.css. O que sobra neste
+   <style> é só o layout que é desta página: o palco, as portas, a
+   gaveta e a cortina de abertura. */
 
 /* ══════════════════════════════════════════════════════════════
    PALCO — mídia única em tela cheia
@@ -291,10 +265,12 @@ img, video { display: block; max-width: 100%; }
 /* ══════════════════════════════════════════════════════════════
    CONTEÚDO INDEXÁVEL — a raiz precisa continuar rankeando
    ══════════════════════════════════════════════════════════════ */
+/* mesma regra das outras treze rotas: o rodapé é sempre um degrau mais
+   fundo que a superfície acima, e não só um filete */
 .entry-foot {
   position: relative; z-index: 4;
-  background: var(--ink);
-  border-top: 1px solid rgba(245,243,239,.09);
+  background: var(--ui-bg-rodape);
+  border-top: 1px solid var(--ui-border-invert);
   padding: clamp(30px, 4vw, 46px) var(--gutter);
   display: flex; flex-wrap: wrap;
   gap: clamp(24px, 4vw, 60px);

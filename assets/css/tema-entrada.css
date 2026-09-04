@@ -1,0 +1,41 @@
+/* ══════════════════════════════════════════════════════════════════════
+   TEMA — PÁGINA DE ENTRADA
+
+   A entrada vem ANTES da bifurcação, então não pode ser nem o navy do
+   social nem o do corporativo: ela é a terceira superfície, quase-preta
+   com acento dourado, e isso é deliberado, não divergência.
+
+   O que muda aqui é só onde a paleta mora. Era um :root privado com
+   nomes próprios (--ink, --paper, --accent) dentro do <style> da página,
+   o que deixava os componentes do base.css sem saber lê-la. Agora os
+   mesmos valores usam os nomes compartilhados, e a entrada passa a
+   receber reset, botões, rodapé e revelação como as outras treze rotas.
+
+   SÓ COR, como os outros temas. Raio, tamanho de fonte, espaçamento e
+   duração vêm do base.css.
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* paleta bruta da entrada */
+  --ink:       #0c0e10;   /* quase-preto, o fundo da porta */
+  --paper:     #f5f3ef;   /* off-white levemente quente */
+  --accent:    #b8a070;   /* dourado sóbrio, o acento da entrada */
+
+  /* papéis de interface */
+  --ui-bg:                 var(--ink);
+  --ui-bg-alt:             #14171a;
+  --ui-bg-invert:          var(--ink);
+  --ui-bg-rodape:          #08090b;
+  --ui-text:               var(--paper);
+  --ui-text-muted:         rgba(245,243,239,.66);
+  --ui-text-invert:        var(--paper);
+  --ui-text-invert-muted:  rgba(245,243,239,.66);
+  --ui-accent:             var(--accent);
+  --ui-accent-on-dark:     var(--accent);
+  --ui-border:             rgba(245,243,239,.14);
+  --ui-border-invert:      rgba(245,243,239,.14);
+  --ui-action:             var(--paper);
+  --ui-action-hover:       var(--accent);
+  --ui-notice-bg:          #1a1d20;
+  --ui-notice-text:        rgba(245,243,239,.78);
+}
