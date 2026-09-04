@@ -49,6 +49,7 @@
       <span></span><span></span>
     </button>
   </div>
+  <span class="nav__progresso" id="navProgresso" aria-hidden="true"></span>
 </nav>
 
 <div class="nav__drawer" id="navDrawer">
@@ -157,19 +158,17 @@
 <section class="section section--paper" id="manifesto">
   <div class="wrap manifesto">
     <div class="manifesto__aside">
-      <figure class="manifesto__media rise" style="--i:0">
-        <img src="/assets/demo/apoio/manifesto.webp" width="1856" height="2304"
-             alt="Portal em arco de uma das casas da Di Terrá ao amanhecer" loading="lazy">
+      <figure class="manifesto__media reveal-shot" style="--i:0">
+        <img src="/assets/demo/apoio/offsite-corporativo.webp" width="2400" height="1340"
+             alt="Mesa de reunião montada sob a árvore, com a sede ao fundo" loading="lazy">
       </figure>
     </div>
     <div class="manifesto__body">
       <p class="eyebrow rise" style="--i:0">A proposta</p>
-      <h2 class="h-section rise" style="--i:1">O enredo de um evento que acontece por inteiro</h2>
-      <p class="rise" style="--i:1">Cada empresa tem uma história para contar, e nós transformamos essa história em experiência.</p>
-      <p class="rise" style="--i:2">Na <strong>Di Terrá</strong>, a exclusividade encontra o corporativo e esse momento ganha significado estratégico. Criamos encontros que inspiram times, aproximam pessoas e fortalecem marcas.</p>
-      <p class="rise" style="--i:3">Cuidamos de tudo e de todos os detalhes para que as conexões sejam reais e para que cada encontro atue como um momento de fortalecimento da cultura organizacional, vivo e presente.</p>
-      <p class="body-muted rise" style="--i:4">Criamos experiências que vão além da lógica. Espaços que acolhem. Alta gastronomia que conquista. Tecnologia, som e luz que encantam. Atmosferas que inspiram.</p>
-      <p class="rise" style="--i:5">
+      <h2 class="h-section linhas" style="--i:1">O enredo de um evento que acontece por inteiro</h2>
+      <p class="rise" style="--i:2">Cada empresa tem uma história para contar, e nós transformamos essa história em experiência.</p>
+      <p class="rise" style="--i:3">Cuidamos de tudo e de todos os detalhes para que as conexões sejam reais e para que cada encontro fortaleça a cultura da empresa.</p>
+      <p class="rise" style="--i:4">
         <a class="btn btn--ghost" href="#proposta">Falar com o comercial</a>
       </p>
     </div>
@@ -263,6 +262,24 @@
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════
+     RESPIRO FOTOGRÁFICO
+     A página encadeava três blocos de conteúdo sem pausa. Aqui a
+     fotografia assume a tela inteira por um momento, com parallax,
+     e o texto se reduz a uma frase. Sem id: não é destino de âncora,
+     é a respiração entre dois blocos densos.
+     ══════════════════════════════════════════════════════════════ -->
+<section class="section section--photo section--respiro">
+  <div class="photo-bg" data-parallax data-parallax-fator="0.18">
+    <img src="/assets/demo/apoio/numeros-fundo.webp" width="2400" height="1018"
+         alt="Vista aérea da sede da Di Terrá e do entorno no fim da tarde" loading="lazy">
+  </div>
+  <div class="wrap respiro on-dark">
+    <p class="eyebrow rise" style="--i:0">Quatro casas, um só interlocutor</p>
+    <h2 class="h-section linhas" style="--i:1">Você contrata um lugar e recebe uma operação inteira</h2>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
      ESTRUTURA
      Feedback: "aqui tb precisamos usar imagens pra ilustrar os
      serviços". Os cinco blocos de ícone ganharam fotografia.
@@ -338,6 +355,7 @@
 
       <div class="reel__barra" aria-hidden="true"><span id="reelProgresso"></span></div>
     </div>
+  </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════
@@ -519,22 +537,18 @@
   <div class="wrap territory">
     <div>
       <p class="eyebrow rise" style="--i:0">O interior paulista</p>
-      <h2 class="h-section rise" style="--i:1">Quando o interior vira destino corporativo</h2>
+      <h2 class="h-section linhas" style="--i:1">Quando o interior vira destino corporativo</h2>
       <p class="body-muted rise" style="--i:2">
-        No coração do interior paulista, onde a natureza molda o horizonte, criamos espaços que unem
-        sofisticação a uma estética natural única.
-      </p>
-      <p class="body-muted rise" style="--i:3">
-        Aqui, longe do trânsito e perto do essencial, eventos se tornam experiências mais leves,
+        Longe do trânsito e perto do essencial, eventos se tornam experiências mais leves,
         mais humanas e mais profundas. Momentos que reforçam identidade, propósito e cultura.
       </p>
-      <ul class="spec rise" style="--i:4">
+      <ul class="spec rise" style="--i:3">
         <li><span class="k">Distância de São Paulo</span><span class="v tbd">a confirmar</span></li>
         <li><span class="k">Aeroporto mais próximo</span><span class="v tbd">a confirmar</span></li>
         <li><span class="k">Hospedagem na região</span><span class="v tbd">a confirmar</span></li>
       </ul>
     </div>
-    <div class="territory__media rise" style="--i:2">
+    <div class="territory__media reveal-shot" style="--i:1">
       <img src="/assets/demo/territorio/estrada-interior.webp" width="2400" height="1610"
            alt="Estrada arborizada no interior paulista, a caminho da Di Terrá" loading="lazy">
     </div>
@@ -928,7 +942,92 @@
        · numa rolagem muito rápida o observer pode não entregar a
          interseção, então a varredura por scroll revela o que já
          passou da linha de leitura. */
-  var rises = Array.prototype.slice.call(document.querySelectorAll('.rise'));
+  /* ── títulos quebrados em linhas ────────────────────────────────
+     Cada linha ganha a própria máscara e sobe escalonada. A quebra é
+     medida no navegador, não presumida: é a única forma de acertar
+     onde o texto realmente vira de linha em um título fluido.
+
+     Título com marcação interna (<strong>, <br>) não é dividido — a
+     reconstrução perderia as tags. Nesse caso o bloco inteiro vira uma
+     máscara só e o gesto continua o mesmo. */
+  var montarLinhas = function (el) {
+    var bruto = el.getAttribute('data-linhas');
+    if (bruto === null) {
+      bruto = el.children.length ? '' : el.textContent.replace(/\s+/g, ' ').trim();
+      el.setAttribute('data-linhas', bruto);
+    }
+
+    if (!bruto) {
+      if (el.querySelector('.linhas__l')) return;
+      var caixa = document.createElement('span');
+      caixa.className = 'linhas__l';
+      caixa.style.setProperty('--l', '0');
+      var dentro = document.createElement('span');
+      while (el.firstChild) { dentro.appendChild(el.firstChild); }
+      caixa.appendChild(dentro);
+      el.appendChild(caixa);
+      return;
+    }
+
+    /* mede: cada palavra vira inline-block e o offsetTop diz a linha */
+    var palavras = bruto.split(' ');
+    el.textContent = '';
+    var marcas = palavras.map(function (p) {
+      var s = document.createElement('span');
+      s.textContent = p;
+      s.style.display = 'inline-block';
+      el.appendChild(s);
+      el.appendChild(document.createTextNode(' '));
+      return s;
+    });
+
+    var linhas = [], atual = null, topo = null;
+    marcas.forEach(function (s, i) {
+      var t = s.offsetTop;
+      if (topo === null || Math.abs(t - topo) > 2) { topo = t; atual = []; linhas.push(atual); }
+      atual.push(palavras[i]);
+    });
+
+    el.textContent = '';
+    linhas.forEach(function (palavrasDaLinha, i) {
+      var caixa = document.createElement('span');
+      caixa.className = 'linhas__l';
+      caixa.style.setProperty('--l', String(i));
+      var dentro = document.createElement('span');
+      dentro.textContent = palavrasDaLinha.join(' ');
+      caixa.appendChild(dentro);
+      el.appendChild(caixa);
+    });
+  };
+
+  var titulos = Array.prototype.slice.call(document.querySelectorAll('.linhas'));
+  titulos.forEach(montarLinhas);
+
+  /* a primeira medição acontece com a fonte de sistema no lugar da
+     Cormorant, e a serifada quebra em outro ponto. Remede quando a
+     fonte real chega, pulando o que já entrou em tela. */
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () {
+      titulos.forEach(function (el) {
+        if (!el.classList.contains('is-in')) montarLinhas(el);
+      });
+    });
+  }
+
+  /* na virada de largura o texto quebra em outro ponto. Só refaz o que
+     ainda não entrou: remontar um título já revelado o faria animar de
+     novo, do nada, no meio da leitura. */
+  var larguraAnterior = window.innerWidth;
+  window.addEventListener('resize', function () {
+    if (window.innerWidth === larguraAnterior) return;
+    larguraAnterior = window.innerWidth;
+    titulos.forEach(function (el) {
+      if (!el.classList.contains('is-in')) montarLinhas(el);
+    });
+  }, { passive: true });
+
+  var rises = Array.prototype.slice.call(
+    document.querySelectorAll('.rise, .reveal-shot, .linhas'));
   var pendentes = rises.slice();
 
   var revelar = function (el) {
@@ -959,29 +1058,29 @@
     rises.forEach(revelar);
   }
 
-  /* ── contador dos números ──────────────────────────────────────
-     Só anima o que é dado real. Campos "a confirmar" ficam parados. */
-  var contadores = document.querySelectorAll('[data-count]');
-  if ('IntersectionObserver' in window && !reduz) {
-    var ioc = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        var el = entry.target;
-        var alvo = parseInt(el.getAttribute('data-count'), 10);
-        var t0 = null;
-        var passo = function (t) {
-          if (!t0) t0 = t;
-          var p = Math.min((t - t0) / 900, 1);
-          var v = Math.round(alvo * (1 - Math.pow(1 - p, 3)));
-          el.textContent = v < 10 ? '0' + v : String(v);
-          if (p < 1) requestAnimationFrame(passo);
-        };
-        requestAnimationFrame(passo);
-        ioc.unobserve(el);
-      });
-    }, { rootMargin: '0px 0px -20% 0px' });
-    contadores.forEach(function (el) { ioc.observe(el); });
-  }
+  /* ── parallax das fotos sangradas ──────────────────────────────
+     A imagem é mais alta que a moldura e desliza contra o scroll. Só
+     desloca o que está em tela, e o fator fica sempre abaixo da folga
+     que a CSS reservou (18%), senão a borda da foto aparece.
+
+     Desligado no celular: lá o custo por quadro não se paga, e o
+     endereço da barra do navegador já move a página sozinho. */
+  var camadas = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
+  var podeParallax = !reduz && window.matchMedia('(min-width: 768px)').matches;
+
+  var moverCamadas = function () {
+    if (!podeParallax) return;
+    var vh = window.innerHeight;
+    camadas.forEach(function (c) {
+      var r = c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh) return;
+      var fator = parseFloat(c.getAttribute('data-parallax-fator'));
+      if (!(fator > 0) || fator > 0.16) fator = 0.12;
+      /* -1 entrando por baixo, +1 saindo por cima */
+      var centro = (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2);
+      c.style.setProperty('--py', (centro * r.height * fator).toFixed(1) + 'px');
+    });
+  };
 
   /* ── espaços: lista que troca a foto ───────────────────────────
      Referência Sarah Haywood. No desktop a foto grande troca com
@@ -1083,6 +1182,13 @@
     var passou = window.scrollY > window.innerHeight * 0.8;
     if (toTop) toTop.classList.toggle('is-visible', passou);
     if (wa) wa.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.5);
+
+    /* quanto da página já foi lida, para a régua da nav */
+    var curso = document.documentElement.scrollHeight - window.innerHeight;
+    nav.style.setProperty('--lido',
+      curso > 0 ? Math.min(1, window.scrollY / curso).toFixed(4) : '0');
+
+    moverCamadas();
     varrer();
     pendente = false;
   };
@@ -1091,7 +1197,12 @@
     pendente = true;
     window.requestAnimationFrame(atualizar);
   }, { passive: true });
-  window.addEventListener('resize', varrer, { passive: true });
+  window.addEventListener('resize', function () {
+    podeParallax = !reduz && window.matchMedia('(min-width: 768px)').matches;
+    if (!podeParallax) camadas.forEach(function (c) { c.style.removeProperty('--py'); });
+    varrer();
+    moverCamadas();
+  }, { passive: true });
   atualizar();
 
   if (toTop) {
