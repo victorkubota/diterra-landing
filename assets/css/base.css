@@ -441,28 +441,24 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
 /* no :root, não em .hero-palco: a seção seguinte é IRMÃ do palco, não
    descendente, e não herdaria a variável. O calc ficava inválido e a
    margem negativa caía para zero, sem a sobreposição. */
-:root { --hero-curso: 60svh; }
-/* --hp declarado com valor de partida: sem isso o GSAP não tem de onde
+/* O hero não fica mais preso: some pelo topo como qualquer bloco.
+   O que permanece é a foto se recolhendo num cartão enquanto sai, com
+   recuo nas laterais e arredondamento embaixo. Sem recuo no topo, que é
+   justamente por onde ela desaparece.
+
+   --hp declarado com valor de partida: sem isso o GSAP não tem de onde
    interpolar a variável na home social, e a animação não roda. */
 .hero-palco { --hp: 0; position: relative; }
 
 @media (min-width: 768px) {
-  .hero-palco { height: calc(100svh + var(--hero-curso)); }
   .hero-palco > .hero {
-    position: sticky; top: 0;
-    /* o arredondamento e o recuo crescem juntos com o progresso */
     clip-path: inset(
-      calc(var(--hp, 0) * 2.5svh)
+      0
       calc(var(--hp, 0) * var(--gutter))
-      calc(var(--hp, 0) * 5svh)
+      calc(var(--hp, 0) * 4svh)
       calc(var(--hp, 0) * var(--gutter))
-      round calc(var(--hp, 0) * var(--radius-xl))
+      round 0 0 calc(var(--hp, 0) * var(--radius-xl)) calc(var(--hp, 0) * var(--radius-xl))
     );
-  }
-  /* a seção seguinte sobe por cima do hero preso */
-  .hero-palco + * {
-    position: relative; z-index: 1;
-    margin-top: calc(var(--hero-curso) * -1);
   }
 }
 
@@ -473,8 +469,6 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
     transition-duration: .01ms !important;
   }
   .rise { opacity: 1; transform: none; }
-  /* sem curso, sem recolhimento: o hero volta a ser um bloco comum */
-  .hero-palco { height: auto; }
-  .hero-palco > .hero { position: relative; clip-path: none; }
-  .hero-palco + * { margin-top: 0; }
+  /* sem recolhimento: o hero volta a ser um bloco comum */
+  .hero-palco > .hero { clip-path: none; }
 }
