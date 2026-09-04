@@ -315,10 +315,18 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
 /* ══════════════════════════════════════════════════════════════════════
    RODAPÉ
    ══════════════════════════════════════════════════════════════════════ */
+/* O rodapé usava o mesmo token de fundo que .section--invert, então no
+   corporativo ele encostava na seção de proposta sem transição nenhuma:
+   mesma cor, sem borda, um bloco só.
+
+   A separação vem do componente, não da página. Assim ela não some
+   quando alguém trocar a cor de uma seção: o rodapé tem tom próprio,
+   sempre mais fundo que a seção acima dele, com filete de topo. */
 .foot {
-  background: var(--ui-bg-invert);
+  background: var(--ui-bg-rodape);
   color: var(--ui-text-invert);
   padding-block: clamp(48px, 6vw, 80px) 30px;
+  border-top: 1px solid var(--ui-border-invert);
 }
 .foot__grid { display: grid; gap: clamp(28px, 4vw, 56px); }
 @media (min-width: 760px) { .foot__grid { grid-template-columns: 1.4fr 1fr 1fr; } }

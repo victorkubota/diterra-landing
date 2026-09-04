@@ -32,6 +32,9 @@
   --ui-bg:                 var(--ivory);
   --ui-bg-alt:             var(--white);
   --ui-bg-invert:          var(--royal);
+  /* mesmo papel do corporativo: o rodapé sempre um degrau mais fundo
+     que a seção invertida, para nunca encostar sem transição */
+  --ui-bg-rodape:          #0d1038;
   --ui-text:               var(--royal);
   --ui-text-muted:         #4a4f78;
   --ui-text-invert:        var(--ivory);

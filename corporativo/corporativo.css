@@ -685,8 +685,17 @@
 /* ══════════════════════════════════════════════════════════════════════
    PROPOSTA — contato ao lado do formulário, redes abaixo
    ══════════════════════════════════════════════════════════════════════ */
+/* Sem o teto de 1200px, o "1fr" da coluna do formulário passou a
+   acompanhar a tela: em 1920 a grade virava 380px + 1368px e cada campo
+   de linha única chegava a 675px de largura.
+
+   O PR das laterais deu medida à prosa e ao aviso do formulário, mas
+   não aos campos. Aqui a coluna ganha teto próprio, e o formulário
+   volta a ter margem em vez de encostar na borda da tela. */
 .proposal { display: grid; gap: clamp(28px, 3.4vw, 52px); }
-@media (min-width: 940px) { .proposal { grid-template-columns: 380px 1fr; align-items: start; } }
+@media (min-width: 940px) {
+  .proposal { grid-template-columns: 380px minmax(0, 720px); align-items: start; justify-content: space-between; }
+}
 
 .contact { display: flex; flex-direction: column; gap: 12px; }
 .contact__card {
@@ -723,6 +732,10 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
 .field { display: flex; flex-direction: column; gap: 8px; }
 .field--full { grid-column: 1 / -1; }
 .field label { font-size: var(--text-xs); letter-spacing: .14em; text-transform: uppercase; color: var(--ui-text-invert-muted); }
+/* teto de leitura no campo: um input de linha única com 675px é largo
+   demais para ler o que foi digitado */
+.field input, .field select { max-width: 34ch; }
+.field--full input, .field--full select, .field textarea { max-width: none; }
 .field input, .field select, .field textarea {
   font-family: inherit; font-size: var(--text-base); font-weight: 300;
   color: #fff; background: rgba(255,255,255,.06);
@@ -972,29 +985,30 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
 #formatos .section__head .body-muted { max-width: var(--max-text); }
 
 /* ── RÉGUA DO RODÍZIO DE CASAS ────────────────────────────────────────
-   Sem um indicador, a foto trocando sozinha lê como falha. A régua
-   corre no card ativo e mostra quanto falta para a próxima casa.
+   A largura vem de --rp, o progresso que o próprio timer escreve, e não
+   de uma animação presa à classe .is-on.
 
-   Ela só existe enquanto o rodízio está rodando: parou no hover, no
-   foco ou por escolha da pessoa, a régua some junto, e o que sobra é o
-   comportamento de clique de sempre.
-
-   O tempo aqui e o ESPERA do JS precisam bater. */
+   A versão anterior dependia de o navegador reiniciar a animação toda
+   vez que .is-on mudava de cartão, e era isso que dava a impressão de
+   que a régua só rodava na primeira volta. Agora ela é um número: anda
+   com o relógio, para junto com ele, e a pausa fica visível em vez de
+   parecer que a contagem sumiu. */
 .vcard.is-on { position: relative; }
 .vcard.is-on::after {
   content: '';
   position: absolute; left: 0; bottom: -1px; height: 2px;
   background: var(--ui-accent);
-  width: 0;
+  width: calc(var(--rp, 0) * 100%);
+  /* só aparece enquanto o rodízio anda: parado, some e o que resta é o
+     comportamento de clique de sempre */
+  opacity: var(--ro, 0);
+  transition: opacity var(--dur-fast) var(--ease);
 }
-.is-rodando .vcard.is-on::after {
-  animation: correRelogio 6s linear forwards;
-}
-@keyframes correRelogio { from { width: 0 } to { width: 100% } }
 
 @media (prefers-reduced-motion: reduce) {
-  .is-rodando .vcard.is-on::after { animation: none; width: 0; }
+  .vcard.is-on::after { display: none; }
 }
+
 
 /* ── FRASE DE ABERTURA REVELADA POR CARACTERE ─────────────────────────
    Medido na referência: 94px, serifada, caixa alta, centralizado,
