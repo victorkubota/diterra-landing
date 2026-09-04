@@ -103,6 +103,14 @@
   padding: 150px 0 clamp(44px, 6vw, 76px);
   background: var(--royal); overflow: hidden; isolation: isolate;
 }
+/* O .wrap é item de flex aqui, e o margin-inline: auto que ele traz do
+   base.css absorve todo o espaço livre: em vez de ocupar a linha, ele
+   encolhia até a largura do texto e ficava centrado. Em 1920 o título
+   da página começava a 675px da borda, contra os 60px do gutter.
+
+   Mesma família do desalinhamento de .section__head, e igualmente
+   anterior ao layout fluido: com ele mudaram 4px de gutter, nada mais. */
+.page-hero > .wrap { width: 100%; margin-inline: 0; }
 .page-hero__media { position: absolute; inset: 0; z-index: -2; }
 .page-hero__media img {
   width: 100%; height: 112%; object-fit: cover; object-position: center 40%;
@@ -191,7 +199,15 @@
 @media (min-width: 1040px) { .grid--3 { grid-template-columns: repeat(3, 1fr); } }
 
 .card {
-  display: flex; flex-direction: column; text-decoration: none; color: inherit;
+  display: flex; flex-direction: column; text-decoration: none;
+  /* era color: inherit, e dentro de .section--invert o cartão pintava
+     fundo branco mas herdava o ivory da seção escura: o nome da casa
+     ficava em 1,05:1 contra o branco, ou seja, invisível. A descrição
+     escapava só porque declara cor própria.
+
+     O cartão traz o próprio fundo, então tem de trazer a própria cor de
+     texto: assim ele não depende de onde foi colocado. */
+  color: var(--ui-text);
   background: var(--ui-bg-alt); border: 1px solid var(--ui-border);
   border-radius: var(--radius); overflow: hidden;
   transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease);
@@ -215,7 +231,7 @@
 .card__more {
   margin-top: auto; padding-top: 14px;
   font-size: var(--text-xs); letter-spacing: .18em; text-transform: uppercase;
-  color: var(--brick); display: inline-flex; align-items: center; gap: 10px;
+  color: var(--ui-link-brick); display: inline-flex; align-items: center; gap: 10px;
 }
 .card__more svg { transition: transform var(--dur) var(--ease); }
 .card:hover .card__more svg { transform: translateX(5px); }

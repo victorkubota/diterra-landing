@@ -35,6 +35,10 @@
   /* mesmo papel do corporativo: o rodapé sempre um degrau mais fundo
      que a seção invertida, para nunca encostar sem transição */
   --ui-bg-rodape:          #0d1038;
+  /* o --brick puro dá 3,61:1 sobre branco, e o "ver" do cartão é texto
+     de 11px, que pede 4,5:1. Este é o mesmo tom a 85%: 4,79:1. O brick
+     original segue valendo para ornamento, onde contraste não se aplica. */
+  --ui-link-brick:         #a86030;
   --ui-text:               var(--royal);
   --ui-text-muted:         #4a4f78;
   --ui-text-invert:        var(--ivory);
