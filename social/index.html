@@ -61,6 +61,7 @@
 <!-- ═══════════════════════════════════════════════════
      § 1 — HERO
      ═══════════════════════════════════════════════════ -->
+<div class="hero-palco" id="heroPalco">
 <section class="hero" id="hero">
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-overlay"></div>
@@ -84,6 +85,7 @@
     <div class="hero-scroll-line"></div>
   </div>
 </section>
+</div>
 
 <!-- ═══════════════════════════════════════════════════
      § 2 — INTRO (split text reveal)
@@ -517,6 +519,29 @@ function initSite() {
       scrub: true
     }
   });
+
+  /* ── Hero vira cartão ──────────────────────────────────────────
+     A forma mora no base.css; aqui só escrevemos o progresso. O
+     corporativo faz o mesmo pelo próprio laço de scroll, porque não
+     carrega GSAP. Desligado no celular e com movimento reduzido, onde
+     o CSS já devolve o hero ao fluxo normal. */
+  const palco = document.getElementById('heroPalco');
+  const podeCartao = palco
+    && window.matchMedia('(min-width: 768px)').matches
+    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (podeCartao) {
+    gsap.to(palco, {
+      '--hp': 1,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: palco,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: true
+      }
+    });
+  }
 
   /* ── Split Text Scroll Reveal (intro .split-animate) ── */
   document.querySelectorAll('.split-animate').forEach(el => {

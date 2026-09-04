@@ -71,6 +71,7 @@
      com tracking largo, subtítulo em itálico e uma única ação.
      Sem filtro sobre o vídeo — o contraste vem de sombra no texto.
      ══════════════════════════════════════════════════════════════ -->
+<div class="hero-palco" id="heroPalco">
 <header class="hero" id="topo">
   <div class="hero__media">
     <img id="heroPoster" src="/assets/demo/hero/hero-corporativo-noite.webp"
@@ -99,6 +100,7 @@
     <div class="hero__scroll-linha"></div>
   </div>
 </header>
+</div>
 
 <!-- ══════════════════════════════════════════════════════════════
      CLIENTES — faixa de logos
@@ -1177,6 +1179,7 @@
   /* ── contato flutuante e voltar ao topo ────────────────────── */
   var toTop = document.getElementById('toTop');
   var wa = document.getElementById('wa');
+  var palco = reduz ? null : document.getElementById('heroPalco');
   var pendente = false;
   var atualizar = function () {
     var passou = window.scrollY > window.innerHeight * 0.8;
@@ -1187,6 +1190,15 @@
     var curso = document.documentElement.scrollHeight - window.innerHeight;
     nav.style.setProperty('--lido',
       curso > 0 ? Math.min(1, window.scrollY / curso).toFixed(4) : '0');
+
+    /* progresso do hero virando cartão: 0 na tela cheia, 1 no cartão.
+       O curso é a folga do palco além da altura da tela. */
+    if (palco) {
+      var cursoHero = palco.offsetHeight - window.innerHeight;
+      palco.style.setProperty('--hp', cursoHero > 0
+        ? Math.max(0, Math.min(1, window.scrollY / cursoHero)).toFixed(4)
+        : '0');
+    }
 
     moverCamadas();
     varrer();
