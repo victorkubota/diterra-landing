@@ -9,6 +9,18 @@ nada do que viu no site é problema comercial, e anunciar um espaço com imagem 
 outro lugar é propaganda enganosa. São substituídas na íntegra pela sessão
 fotográfica da Di Terrá.
 
+## Estas imagens agora estão no ar nas catorze rotas
+
+Até 04/09/2026 elas viviam só nesta pasta e as páginas usavam nove arquivos
+legados de marketing — peças com texto queimado no pixel ("COQUETELARIA",
+"PRODUÇÃO"), um frame de player de vídeo com botão de play falso servindo de
+hero do Espaço Terrá, e um PNG com ilustração floral laranja e moldura
+embutidas. Foram trocadas por estas, que ao menos são fotográficas e têm
+2400px.
+
+Isso não afrouxa nada do aviso acima: aumenta a urgência. O que antes era um
+problema de layout agora é o que o visitante vê.
+
 ## Pendências antes de qualquer publicação
 
 - Substituir todos os arquivos desta pasta por fotografia real.
