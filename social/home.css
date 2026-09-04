@@ -429,8 +429,13 @@
   position: relative;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  /* a imagem passa de 55% para 65% do cartão: item 5 do brief pede a
+     foto na proporção grande da referência */
+  grid-template-columns: 1fr 1.85fr;
   box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7);
+}
+@media (max-width: 860px) {
+  .card-inner { grid-template-columns: 1fr; }
 }
 .card-content {
   padding: clamp(2rem, 4vw, 4rem);

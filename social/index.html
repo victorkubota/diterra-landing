@@ -571,6 +571,10 @@ function initSite() {
       gsap.to(card.querySelector('.card-inner'), {
         scale: 0.9,
         opacity: 0.4,
+        /* item 5 do brief: o cartão coberto também desfoca, e é o
+           desfoque que faz ele ler como "foi para o fundo" em vez de
+           apenas "ficou menor" */
+        filter: 'blur(6px)',
         ease: 'none',
         scrollTrigger: {
           trigger: nextCard,

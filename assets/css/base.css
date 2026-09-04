@@ -391,6 +391,30 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════
+   PILHA DE CARTÕES
+
+   Cada cartão prende no topo e o seguinte sobe por cima. O que está
+   sendo coberto desfoca, encolhe e perde luz, então a profundidade fica
+   legível: um está na frente, o outro foi para o fundo.
+
+   --cp (0 a 1) é quanto o próximo já cobriu este, escrito pelo JS.
+
+   O desfoque vai no filho, nunca no elemento sticky: filter cria bloco
+   de contenção e quebraria a própria fixação.
+   ══════════════════════════════════════════════════════════════════════ */
+.pilha__item { position: sticky; }
+.recua {
+  filter: blur(calc(var(--cp, 0) * 6px));
+  transform: scale(calc(1 - var(--cp, 0) * .07));
+  opacity: calc(1 - var(--cp, 0) * .4);
+  will-change: transform, filter;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recua { filter: none; transform: none; opacity: 1; will-change: auto; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
    HERO QUE VIRA CARTÃO
 
    O hero fica preso no topo enquanto a seção seguinte sobe por cima

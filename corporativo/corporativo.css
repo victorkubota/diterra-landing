@@ -904,26 +904,33 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
    DEPOIMENTOS
    Marcação pronta, conteúdo pendente de autorização.
    ══════════════════════════════════════════════════════════════════════ */
-.depo {
-  display: grid; gap: clamp(20px, 2.6vw, 34px);
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+.depo { display: grid; gap: clamp(20px, 2.6vw, 34px); }
+/* três cartões lado a lado não tinham peso nenhum. Empilhados, cada
+   depoimento ganha a tela e o anterior recua desfocado, como a
+   referência faz com as citações de imprensa. */
+@media (min-width: 860px) {
+  .depo { display: block; padding-bottom: 10vh; }
+  .depo__item { top: 14vh; margin-bottom: 6vh; }
 }
-.depo__item {
+.depo__cartao {
   display: flex; flex-direction: column; gap: 20px;
   padding: clamp(26px, 3vw, 38px);
   background: var(--ui-bg-alt);
   border: 1px solid var(--ui-border);
   border-radius: var(--radius-lg);
 }
-.depo__item blockquote {
+@media (max-width: 859px) {
+  .depo { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+}
+.depo__cartao blockquote {
   font-family: var(--font-display);
   font-size: var(--text-lg);
   font-weight: 300; line-height: 1.45;
   font-style: italic;
   flex: 1;
 }
-.depo__item blockquote::before { content: '\201C'; margin-right: .1em; }
-.depo__item figcaption {
+.depo__cartao blockquote::before { content: '\201C'; margin-right: .1em; }
+.depo__cartao figcaption {
   display: flex; align-items: center; gap: 14px;
   padding-top: 18px; border-top: 1px solid var(--ui-border);
 }
