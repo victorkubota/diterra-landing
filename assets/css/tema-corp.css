@@ -34,6 +34,9 @@
   --ui-bg:                 var(--sand-100);
   --ui-bg-alt:             var(--white);
   --ui-bg-invert:          var(--navy-900);
+  /* o rodapé é o único bloco mais fundo que a seção invertida: sem tom
+     próprio ele encostava em #proposta e os dois viravam um bloco só */
+  --ui-bg-rodape:          #16233f;
   --ui-text:               var(--navy-900);
   --ui-text-muted:         #4a5b7d;
   --ui-text-invert:        var(--white);

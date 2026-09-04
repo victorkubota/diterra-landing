@@ -1166,7 +1166,10 @@
 
     cards.forEach(function (c, i) {
       var head = c.querySelector('.vcard__head');
-      head.addEventListener('click', function () { ativar(c.getAttribute('data-venue')); parar(); });
+      head.addEventListener('click', function () {
+        ativar(c.getAttribute('data-venue'));
+        escolher();
+      });
       head.addEventListener('keydown', function (e) {
         var d = e.key === 'ArrowDown' ? 1 : e.key === 'ArrowUp' ? -1 : 0;
         if (!d) return;
@@ -1174,7 +1177,7 @@
         var alvo = cards[(i + d + cards.length) % cards.length];
         alvo.querySelector('.vcard__head').focus();
         ativar(alvo.getAttribute('data-venue'));
-        parar();
+        escolher();
       });
     });
 
@@ -1182,37 +1185,75 @@
        Quem só rola a página via uma casa das quatro. O rodízio mostra
        as outras três sozinho.
 
-       Três formas de parar, porque conteúdo que se move sozinho sem
-       como interromper é barreira de acessibilidade (WCAG 2.2.2):
-         · passar o mouse ou dar foco pausa
-         · clicar ou usar o teclado encerra de vez, porque aí a escolha
-           é da pessoa e o rodízio não deve roubá-la de volta
-         · quem pediu menos movimento no sistema nunca vê o rodízio
+       A régua vem do MESMO relógio que faz a troca, não de uma animação
+       CSS presa a uma classe. A versão anterior dependia de o navegador
+       reiniciar a animação a cada vez que a classe .is-on mudava de
+       cartão, e era isso que dava a impressão de que ela só rodava na
+       primeira volta. Aqui o progresso é um número que o próprio timer
+       escreve: enquanto ele anda, a régua anda; quando ele para, ela
+       para no lugar, e a pausa fica visível.
 
-       Também para quando a seção sai da tela, e quando a aba fica em
-       segundo plano: não adianta rodar para ninguém. */
+       Conteúdo que se move sozinho precisa de como parar (WCAG 2.2.2):
+         · mouse ou foco na seção pausa enquanto durar
+         · escolher uma casa pausa e NÃO retoma sozinho, para o rodízio
+           não roubar de volta a casa que a pessoa quis ler
+         · quem pediu menos movimento no sistema nunca vê o rodízio
+         · fora da tela ou em aba oculta não roda para ninguém */
     var ESPERA = 6000;
-    var relogio = null, pausado = false, encerrado = false, naTela = false;
+    var PASSO = 100;
+    var relogio = null, pausado = false, escolhido = false, naTela = false;
+    var decorrido = 0;
+
+    /* largura E visibilidade saem da mesma variável. A visibilidade
+       chegou a depender de uma classe no contêiner, mas aí eram dois
+       mecanismos para um efeito só; com uma variável, o que o relógio
+       escreve é exatamente o que a régua mostra. */
+    var pintarRegua = function (visivel) {
+      sw.style.setProperty('--rp', (decorrido / ESPERA).toFixed(4));
+      sw.style.setProperty('--ro', visivel ? '1' : '0');
+    };
 
     var proxima = function () {
       var atual = cards.findIndex(function (c) { return c.classList.contains('is-on'); });
       ativar(cards[(Math.max(0, atual) + 1) % cards.length].getAttribute('data-venue'));
+      decorrido = 0;
+      pintarRegua(true);
+    };
+
+    var passo = function () {
+      decorrido += PASSO;
+      if (decorrido >= ESPERA) proxima(); else pintarRegua(true);
     };
 
     var tocar = function () {
-      if (relogio || encerrado || pausado || !naTela || document.hidden) return;
-      sw.classList.add('is-rodando');
-      relogio = setInterval(proxima, ESPERA);
+      if (relogio || escolhido || pausado || !naTela || document.hidden) return;
+      relogio = setInterval(passo, PASSO);
+      pintarRegua(true);
     };
+
+    /* pausa guarda o tempo decorrido: ao voltar, a casa atual termina o
+       que faltava em vez de recomeçar do zero */
     var pausar = function () {
       if (relogio) { clearInterval(relogio); relogio = null; }
-      sw.classList.remove('is-rodando');
+      pintarRegua(false);
     };
-    var parar = function () { encerrado = true; pausar(); };
+
+    /* a pessoa escolheu uma casa: para e fica parado, mas a régua zera
+       para não deixar uma barra pela metade sugerindo contagem */
+    var escolher = function () {
+      escolhido = true;
+      pausar();
+      decorrido = 0;
+      pintarRegua(false);
+    };
 
     if (!reduz) {
+      pintarRegua(false);
       sw.addEventListener('mouseenter', function () { pausado = true; pausar(); });
       sw.addEventListener('mouseleave', function () { pausado = false; tocar(); });
+      /* focusin/focusout só entre pausa e retomada: quem clicou já caiu
+         em escolher(), e o foco que fica no botão não deve represar o
+         estado depois disso */
       sw.addEventListener('focusin', function () { pausado = true; pausar(); });
       sw.addEventListener('focusout', function () { pausado = false; tocar(); });
       document.addEventListener('visibilitychange', function () {
