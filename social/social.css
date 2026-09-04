@@ -76,10 +76,14 @@
 
 .nav__toggle {
   display: none; background: none; border: 0; cursor: pointer;
-  width: 40px; height: 40px; padding: 10px; color: var(--ivory);
+  width: 44px; height: 44px; padding: 12px;   /* 44px: mínimo de alvo de toque */ color: var(--ivory);
 }
 .nav__toggle span { display: block; height: 1px; background: currentColor; margin: 5px 0; }
 @media (max-width: 1000px) { .nav__links, .nav__side .nav__switch { display: none; } .nav__toggle { display: block; } }
+/* Abaixo de 480px a logo (171px) e o botão (120px) não cabem juntos e o
+   hambúrguer era espremido a 38px. A ação já está dentro da gaveta.
+   O corporativo faz o mesmo desde sempre, a ≤1080px. */
+@media (max-width: 480px) { .nav__side .btn { display: none; } }
 
 /* .nav__drawer mora no base.css: mesmo componente em treze rotas. */
 

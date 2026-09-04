@@ -91,7 +91,7 @@
 
 .nav__toggle {
   display: none; background: none; border: 0; cursor: pointer;
-  width: 40px; height: 40px; padding: 10px; color: #fff;
+  width: 44px; height: 44px; padding: 12px;   /* 44px: mínimo de alvo de toque */ color: #fff;
 }
 .nav__toggle span { display: block; height: 1px; background: currentColor; margin: 5px 0; }
 
@@ -724,7 +724,9 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
 .field input, .field select { max-width: 34ch; }
 .field--full input, .field--full select, .field textarea { max-width: none; }
 .field input, .field select, .field textarea {
-  font-family: inherit; font-size: var(--text-base); font-weight: 300;
+  /* 16px é o piso: abaixo disso o Safari do iPhone dá zoom ao focar o
+     campo e o visitante precisa pinçar de volta para continuar. */
+  font-family: inherit; font-size: 16px; font-weight: 300;
   color: #fff; background: rgba(255,255,255,.06);
   border: 1px solid var(--ui-border-invert); border-radius: var(--radius-sm);
   padding: 14px 16px;
