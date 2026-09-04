@@ -65,12 +65,30 @@
     Array.prototype.forEach.call(blocos, function (el) { el.classList.add('is-in'); });
   }
 
-  /* ── voltar ao topo ──────────────────────────────────────────────── */
-  if (toTop) {
+  /* ── hero vira cartão ao sair ─────────────────────────────────────
+     Mesmo gesto do corporativo e da home social: a foto se recolhe num
+     cartão arredondado enquanto some pelo topo. A forma mora no
+     base.css; aqui só escrevemos o progresso.
+
+     O curso são 70% de uma tela de rolagem, tempo suficiente para o
+     recolhimento acontecer enquanto a foto ainda está saindo. */
+  var palco = document.getElementById('heroPalco');
+  var semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var pintarHero = function () {
+    if (!palco || semMovimento) return;
+    var curso = window.innerHeight * 0.7;
+    palco.style.setProperty('--hp',
+      Math.max(0, Math.min(1, window.scrollY / curso)).toFixed(4));
+  };
+
+  /* ── laço de scroll, compartilhado pelo hero e pelo voltar ao topo ── */
+  if (toTop || palco) {
     var pendente = false;
 
     var atualizar = function () {
-      toTop.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.8);
+      if (toTop) toTop.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.8);
+      pintarHero();
       pendente = false;
     };
 
@@ -81,6 +99,10 @@
     }, { passive: true });
 
     atualizar();
+  }
+
+  /* ── voltar ao topo ──────────────────────────────────────────────── */
+  if (toTop) {
 
     toTop.addEventListener('click', function (e) {
       e.preventDefault();

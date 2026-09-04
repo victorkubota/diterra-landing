@@ -459,7 +459,10 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
 .hero-palco { --hp: 0; position: relative; }
 
 @media (min-width: 768px) {
-  .hero-palco > .hero {
+  /* .page-hero entra junto: é o hero das onze internas e recebe o mesmo
+     recolhimento, com o mesmo progresso, escrito pelo site.js */
+  .hero-palco > .hero,
+  .hero-palco > .page-hero {
     clip-path: inset(
       0
       calc(var(--hp, 0) * var(--gutter))
@@ -478,5 +481,6 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   }
   .rise { opacity: 1; transform: none; }
   /* sem recolhimento: o hero volta a ser um bloco comum */
-  .hero-palco > .hero { clip-path: none; }
+  .hero-palco > .hero,
+  .hero-palco > .page-hero { clip-path: none; }
 }
