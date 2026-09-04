@@ -86,6 +86,10 @@
   text-transform: uppercase;
   color: var(--royal);
 }
+/* home.css carrega depois do base.css, então .heading-lg vencia o
+   empate de especificidade com .manchete e a frase ficava em 56px */
+.heading-lg.manchete { font-size: var(--text-manchete); }
+
 .heading-md {
   font-family: var(--font-display);
   font-size: clamp(24px, 3vw, 40px);
@@ -240,6 +244,9 @@
   padding: 0 var(--gutter);
   max-width: 1000px;
   color: var(--white);
+  /* sai de cena antes de o hero terminar de virar cartão: no cartão a
+     foto fala sozinha, como na referência */
+  opacity: calc(1 - var(--hp, 0) * 1.9);
 }
 .hero-eyebrow {
   font-family: var(--font-sans);
@@ -284,6 +291,8 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  /* já cumpriu o papel assim que a pessoa rolou */
+  opacity: calc(1 - var(--hp, 0) * 3);
 }
 .hero-scroll span {
   font-family: var(--font-sans);
@@ -320,17 +329,27 @@
 }
 .intro-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: clamp(40px, 6vw, 100px);
-  max-width: 1400px;
+  grid-template-columns: 1fr;
+  gap: clamp(40px, 6vw, 80px);
+  max-width: var(--max);   /* era 1400px: o layout acompanha a tela */
   margin: 0 auto;
   align-items: center;
+}
+/* metade e metade a partir de 940px, como a referência: era 1fr/1.2fr
+   com a foto centrada, agora as duas colunas partem do topo e a foto
+   fica presa enquanto o texto passa */
+@media (min-width: 940px) {
+  .intro-grid { grid-template-columns: 1fr 1fr; align-items: start; }
 }
 .intro-text .heading-lg { margin-bottom: 28px; }
 .intro-text .body-text { margin-bottom: 16px; }
 .intro-meta {
   display: flex;
-  gap: 36px;
+  /* os dois rótulos lado a lado davam 379px de min-content e esticavam
+     a coluna da grade além da tela: 24px de rolagem horizontal em 375px.
+     Bug anterior a esta mudança, corrigido aqui por estar no caminho. */
+  flex-wrap: wrap;
+  gap: 12px 36px;
   margin-top: 32px;
   padding-top: 24px;
   border-top: 1px solid var(--ui-border);
@@ -345,6 +364,14 @@
   overflow: hidden;
   border-radius: var(--radius-xl);
   aspect-ratio: 3/4;
+}
+/* a proporção 3/4 já batia com a referência; o que faltava era altura
+   de viewport e a fixação: 620x810 numa tela de 1440x900 são 90vh */
+@media (min-width: 940px) {
+  .intro-image {
+    position: sticky; top: 100px;
+    aspect-ratio: auto; height: min(90svh, 900px);
+  }
 }
 .intro-image img {
   width: 100%; height: 100%;
@@ -378,7 +405,7 @@
 }
 .stack-container {
   width: 100%;
-  max-width: 1400px;
+  max-width: var(--max);   /* era 1400px: o layout acompanha a tela */
   margin: 0 auto;
   position: relative;
   padding-bottom: 10vh;
@@ -402,8 +429,13 @@
   position: relative;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  /* a imagem passa de 55% para 65% do cartão: item 5 do brief pede a
+     foto na proporção grande da referência */
+  grid-template-columns: 1fr 1.85fr;
   box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7);
+}
+@media (max-width: 860px) {
+  .card-inner { grid-template-columns: 1fr; }
 }
 .card-content {
   padding: clamp(2rem, 4vw, 4rem);
@@ -478,7 +510,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  max-width: 1400px;
+  max-width: var(--max);   /* era 1400px: o layout acompanha a tela */
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
@@ -599,7 +631,7 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
   gap: 16px;
-  max-width: 1400px;
+  max-width: var(--max);   /* era 1400px: o layout acompanha a tela */
   margin: 0 auto;
   padding: 0 var(--gutter);
 }

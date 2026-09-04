@@ -170,6 +170,9 @@
   text-align: center;
   padding-inline: var(--gutter);
   max-width: 1000px;
+  /* sai de cena antes de o hero terminar de virar cartão: no cartão a
+     foto fala sozinha, como na referência */
+  opacity: calc(1 - var(--hp, 0) * 1.9);
 }
 
 .hero__eyebrow {
@@ -210,6 +213,9 @@
   position: absolute; bottom: 40px; left: 50%;
   transform: translateX(-50%); z-index: 1;
   display: flex; flex-direction: column; align-items: center; gap: 10px;
+  /* já cumpriu o papel assim que a pessoa rolou; some junto do título,
+     senão fica pendurado na borda do cartão */
+  opacity: calc(1 - var(--hp, 0) * 3);
 }
 .hero__scroll span {
   font-family: var(--font-sans); font-size: 9px;
@@ -354,49 +360,72 @@
 
    Antes: seis blocos de prosa, 2.816px de altura e nenhuma imagem.
    ══════════════════════════════════════════════════════════════════════ */
-.bento { display: grid; gap: clamp(12px, 1.4vw, 20px); }
-@media (min-width: 760px)  { .bento { grid-template-columns: repeat(6, 1fr); } }
+/* Era grade bento. Virou pilha a pedido do cliente: cada formato ocupa
+   a tela por vez e o anterior recua desfocado, o mesmo mecanismo que a
+   referência usa nas citações de imprensa. Um formato de cada vez lê
+   melhor que seis miniaturas competindo. */
+.pilha { display: grid; gap: clamp(12px, 1.4vw, 20px); }
 
-.fmt {
+/* sem position aqui: .pilha__item já dá o sticky no base.css, e como
+   corporativo.css carrega depois, um "relative" nesta regra o anulava */
+/* no celular não há pilha: um sticky sem top é inerte, mas deixar
+   explícito evita surpresa se alguém mexer no utilitário depois */
+@media (max-width: 859px) { .fmt { position: static; } }
+@media (min-width: 860px) {
+  .pilha { display: block; padding-bottom: 12vh; }
+  .fmt { top: 12vh; margin-bottom: 7vh; height: 76vh; }
+}
+
+.fmt__cartao {
   position: relative;
+  width: 100%; height: 100%;
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--navy-900);
   min-height: clamp(240px, 34vw, 320px);
-  display: flex; align-items: flex-end;
+  display: flex; align-items: flex-start; justify-content: center;
   isolation: isolate;
+  box-shadow: 0 30px 60px -30px rgba(14,22,42,.5);
 }
-@media (min-width: 760px) {
-  .fmt            { grid-column: span 2; }
-  .fmt--wide      { grid-column: span 3; min-height: clamp(300px, 30vw, 400px); }
-  .fmt--full      { grid-column: span 6; min-height: clamp(260px, 26vw, 340px); }
+@media (min-width: 860px) {
+  .fmt__cartao { min-height: 0; }
 }
-.fmt img {
+.fmt__cartao img {
   position: absolute; inset: 0; z-index: -2;
   width: 100%; height: 100%; object-fit: cover;
   transition: transform 1.4s var(--ease);
 }
-.fmt::after {
+.fmt__cartao::after {
   content: ''; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(to top, rgba(12,20,38,.9) 0%, rgba(12,20,38,.46) 46%, rgba(12,20,38,.06) 100%);
+  /* o véu inverteu junto com o texto: pesa em cima, onde agora se lê */
+  background: linear-gradient(to bottom, rgba(12,20,38,.88) 0%, rgba(12,20,38,.44) 42%, rgba(12,20,38,.06) 100%);
   transition: background var(--dur) var(--ease);
 }
 @media (hover: hover) {
-  .fmt:hover img { transform: scale(1.05); }
-  .fmt:hover::after { background: linear-gradient(to top, rgba(12,20,38,.92) 0%, rgba(12,20,38,.56) 52%, rgba(12,20,38,.14) 100%); }
+  .fmt__cartao:hover img { transform: scale(1.05); }
+  .fmt__cartao:hover::after { background: linear-gradient(to bottom, rgba(12,20,38,.9) 0%, rgba(12,20,38,.52) 48%, rgba(12,20,38,.14) 100%); }
 }
+/* texto no topo, centralizado e maior: item 5 do brief. Antes ficava no
+   pé, alinhado à esquerda, no corpo de 15px. */
 .fmt__text {
   position: relative;
-  padding: clamp(22px, 2.6vw, 34px);
+  padding: clamp(30px, 4vw, 64px) clamp(22px, 3vw, 40px);
   color: #fff;
-  display: flex; flex-direction: column; gap: 10px;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  text-align: center;
+  max-width: 46em;
+}
+.fmt__text .h-card {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 1rem + 2.4vw, 3.25rem);
+  font-weight: 400; line-height: 1.08; letter-spacing: -.012em;
 }
 .fmt__n {
   font-size: var(--text-xs); font-variant-numeric: tabular-nums;
   letter-spacing: .2em; color: var(--blue-300);
 }
-.fmt .h-card { color: #fff; }
-.fmt p { font-size: var(--text-sm); color: rgba(255,255,255,.84); max-width: 44ch; }
+.fmt__cartao .h-card { color: #fff; }
+.fmt__cartao p { font-size: var(--text-lg); color: rgba(255,255,255,.86); max-width: 48ch; }
 
 /* ══════════════════════════════════════════════════════════════════════
    ESPAÇOS — lista que troca a foto (referência Sarah Haywood)
@@ -406,8 +435,9 @@
    ══════════════════════════════════════════════════════════════════════ */
 .switch { display: grid; gap: clamp(26px, 3vw, 52px); }
 @media (min-width: 940px) {
-  /* a foto passa de ~48% para ~62% da linha: é o palco, não uma ilustração */
-  .switch { grid-template-columns: 1.25fr .75fr; align-items: start; }
+  /* metade e metade, como a referência. Era 1.25/.75: mais largo, porém
+     mais baixo, e no fim com MENOS área que este retrato de 90svh. */
+  .switch { grid-template-columns: 1fr 1fr; align-items: start; }
 }
 
 .switch__stage { display: none;
@@ -418,9 +448,9 @@
     display: block;
     position: sticky; top: 100px;
     /* altura de verdade, não proporção: é o que responde ao pedido de
-       "um espaço que mostre mais amplitude". Sem teto fixo em 680px,
-       que fazia a foto encolher justamente nas telas grandes. */
-    height: clamp(520px, 82vh, 900px);
+       "um espaço que mostre mais amplitude". Agora nos 90svh medidos na
+       referência, que é o que vira o corte em retrato. */
+    height: min(90svh, 900px);
     border-radius: var(--radius-lg);
     overflow: hidden;
     background: var(--navy-900);
@@ -706,7 +736,12 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
   border-color: var(--blue-300); background: rgba(255,255,255,.1); outline: none;
 }
 .field select option { color: var(--navy-900); }
-.form-note { font-size: var(--text-xs); color: rgba(255,255,255,.66); margin-top: 4px; }
+/* o campo é full-width na grade do formulário, então sem medida
+   própria esta nota chegava a 201ch em 1920 */
+.form-note {
+  font-size: var(--text-xs); color: rgba(255,255,255,.66);
+  margin-top: 4px; max-width: var(--max-text);
+}
 
 /* ══════════════════════════════════════════════════════════════════════
    RODAPÉ
@@ -852,7 +887,7 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
    que faz a emenda cair exatamente onde a sequência recomeça. Pausa no
    hover e para de vez com "reduzir movimento".
    ══════════════════════════════════════════════════════════════════════ */
-.clientes__titulo { text-align: center; max-width: 22ch; margin-inline: auto; }
+
 #clientes .eyebrow { text-align: center; }
 
 .faixa {
@@ -925,3 +960,62 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
   font-size: var(--text-xs); color: var(--ui-text-muted);
   letter-spacing: .08em; line-height: 1.4;
 }
+
+/* ── CABEÇALHO DE FORMATOS ────────────────────────────────────────────
+   Feedback do cliente: "está centralizado em uma faixa pequena que
+   poderia ser maior". O alinhamento foi resolvido no base.css; aqui
+   fica a escala. A caixa deixa de valer 70ch (medida de leitura) e
+   passa a valer 12em do PRÓPRIO título, que é o que dá a faixa larga.
+   O parágrafo de apoio continua com medida de leitura. */
+#formatos .section__head { max-width: none; }
+#formatos .section__head .h-section { max-width: 12em; }
+#formatos .section__head .body-muted { max-width: var(--max-text); }
+
+/* ── RÉGUA DO RODÍZIO DE CASAS ────────────────────────────────────────
+   Sem um indicador, a foto trocando sozinha lê como falha. A régua
+   corre no card ativo e mostra quanto falta para a próxima casa.
+
+   Ela só existe enquanto o rodízio está rodando: parou no hover, no
+   foco ou por escolha da pessoa, a régua some junto, e o que sobra é o
+   comportamento de clique de sempre.
+
+   O tempo aqui e o ESPERA do JS precisam bater. */
+.vcard.is-on { position: relative; }
+.vcard.is-on::after {
+  content: '';
+  position: absolute; left: 0; bottom: -1px; height: 2px;
+  background: var(--ui-accent);
+  width: 0;
+}
+.is-rodando .vcard.is-on::after {
+  animation: correRelogio 6s linear forwards;
+}
+@keyframes correRelogio { from { width: 0 } to { width: 100% } }
+
+@media (prefers-reduced-motion: reduce) {
+  .is-rodando .vcard.is-on::after { animation: none; width: 0; }
+}
+
+/* ── FRASE DE ABERTURA REVELADA POR CARACTERE ─────────────────────────
+   Medido na referência: 94px, serifada, caixa alta, centralizado,
+   line-height 1.0, ocupando 83% da tela, e dividido em caracteres que
+   aparecem em onda conforme a seção sobe.
+
+   A opacidade sai de calc, não de um timer por letra: --tp é o
+   progresso do scroll e --ci o índice do caractere, então a onda tem
+   seis caracteres de largura e corre sozinha com a rolagem. */
+.clientes__titulo {
+  font-size: var(--text-manchete);
+  line-height: 1;
+  letter-spacing: -.005em;
+  text-transform: uppercase;
+  text-align: center;
+  max-width: 83vw;
+  margin-inline: auto;
+}
+.letras__p { display: inline-block; }
+.letras__c {
+  display: inline-block;
+  opacity: clamp(0, calc((var(--tp, 0) * (var(--total) + 6) - var(--ci)) / 6), 1);
+}
+@media (prefers-reduced-motion: reduce) { .letras__c { opacity: 1; } }

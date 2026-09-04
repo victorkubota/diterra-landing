@@ -24,6 +24,9 @@
 }
 .on-dark .script { color: var(--rose); }
 
+/* Sem o teto de 1200px no container, este bloco ia a 93ch em 1920.
+   A grade acompanha a tela; a linha de leitura, não. */
+.prose { max-width: var(--max-text); }
 .prose p + p { margin-top: 1.15em; }
 .prose strong { font-weight: 500; }
 

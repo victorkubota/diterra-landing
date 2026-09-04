@@ -33,6 +33,11 @@
   --text-xl:   clamp(1.4rem, 1.2rem + .85vw, 2rem);
   --text-2xl:  clamp(2rem, 1.5rem + 2.1vw, 3.5rem);
   --text-3xl:  clamp(2.6rem, 1.6rem + 4.2vw, 5.25rem);
+  /* manchete: o degrau que faltava entre o título de seção e o display
+     do hero. A referência declara a frase de abertura em 94px enquanto
+     nosso maior título de seção parava em 56px, e é essa diferença que
+     faz a frase valer por um parágrafo inteiro. */
+  --text-manchete: clamp(2.75rem, 1.4rem + 5.6vw, 6.5rem);
 
   --leading-body:    1.7;
   --leading-display: 1.02;
@@ -41,8 +46,17 @@
 
   /* ── ESPAÇO E FORMA ─────────────────────────────────────────────── */
   --section-y: clamp(80px, 10vw, 140px);
-  --gutter:    clamp(20px, 4vw, 64px);
-  --max:       1200px;
+
+  /* ── LARGURA ──────────────────────────────────────────────────────
+     O teto de 1200px deixava 360px de margem morta de cada lado em
+     1920: a página usava 62% da tela. A referência (sarahhaywood.com)
+     não tem teto, só um respiro fixo de 60px, e chega a 94% em 1920.
+
+     Sem teto no container de LAYOUT. A prosa segue protegida por
+     --max-text: o que não pode crescer é a linha de texto, não a grade.
+     ─────────────────────────────────────────────────────────────── */
+  --gutter:    clamp(20px, 4vw, 60px);
+  --max:       none;
   --max-text:  70ch;
 
   --radius:    3px;
@@ -120,7 +134,16 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
 .section--invert { background: var(--ui-bg-invert); color: var(--ui-text-invert); }
 .section--paper  { background: var(--ui-bg-alt); }
 
-.section__head { max-width: var(--max-text); margin-bottom: clamp(34px, 4.4vw, 62px); }
+/* margin-inline: 0 é o que faltava. Quando o mesmo elemento carrega
+   .wrap e .section__head, o auto do .wrap centraliza uma caixa de 70ch
+   no meio da tela: em 1920 o cabeçalho ficava 575px à direita do bloco
+   que ele apresenta. Passava despercebido enquanto o container tinha
+   teto de 1200px, e ficou gritante quando ele passou a ser fluido. */
+.section__head {
+  max-width: var(--max-text);
+  margin-inline: 0;
+  margin-bottom: clamp(34px, 4.4vw, 62px);
+}
 .section__head .h-section { margin-bottom: 18px; }
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -346,6 +369,99 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   transition-delay: calc(var(--i, 0) * .11s);
 }
 
+/* ══════════════════════════════════════════════════════════════════════
+   MANCHETE
+
+   A frase de abertura da primeira seção de texto. Só escala e ritmo: a
+   revelação fica com o mecanismo que cada página já tem, .linhas no
+   corporativo e .split-animate na home social.
+   ══════════════════════════════════════════════════════════════════════ */
+.manchete {
+  font-size: var(--text-manchete);
+  line-height: 1.02;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   PALCO DE MÍDIA
+
+   Proporção medida na referência: cartão de 620x810 numa tela de
+   1440x900, ou seja metade da coluna e 90vh de altura, retrato 3:4. Era
+   mais estreito que o nosso e ainda assim MAIOR em área, porque a altura
+   compensa com folga o que perde de largura.
+   ══════════════════════════════════════════════════════════════════════ */
+@media (min-width: 940px) {
+  .palco-duplo { grid-template-columns: 1fr 1fr; align-items: start; }
+  .palco-fixo {
+    position: sticky; top: 100px;
+    height: min(90svh, 900px);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   PILHA DE CARTÕES
+
+   Cada cartão prende no topo e o seguinte sobe por cima. O que está
+   sendo coberto desfoca, encolhe e perde luz, então a profundidade fica
+   legível: um está na frente, o outro foi para o fundo.
+
+   --cp (0 a 1) é quanto o próximo já cobriu este, escrito pelo JS.
+
+   O desfoque vai no filho, nunca no elemento sticky: filter cria bloco
+   de contenção e quebraria a própria fixação.
+   ══════════════════════════════════════════════════════════════════════ */
+.pilha__item { position: sticky; }
+.recua {
+  filter: blur(calc(var(--cp, 0) * 6px));
+  transform: scale(calc(1 - var(--cp, 0) * .07));
+  opacity: calc(1 - var(--cp, 0) * .4);
+  will-change: transform, filter;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recua { filter: none; transform: none; opacity: 1; will-change: auto; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   HERO QUE VIRA CARTÃO
+
+   O hero fica preso no topo enquanto a seção seguinte sobe por cima
+   dele, e a foto se recolhe num cartão de bordas arredondadas.
+
+   O curso é o palco: .hero-palco é mais alto que a tela, e a diferença
+   é quanto o hero fica preso. A seção seguinte sobe com margin-top
+   negativa da mesma medida, então o efeito NÃO alonga a página: o
+   documento continua com os mesmos 100svh de hero.
+
+   O progresso vem de --hp (0 a 1), escrito pelo JS de cada página. A
+   corporativa alimenta pelo próprio laço de scroll; a home social, pelo
+   ScrollTrigger que ela já carrega. A forma mora aqui, uma vez só.
+   ══════════════════════════════════════════════════════════════════════ */
+/* no :root, não em .hero-palco: a seção seguinte é IRMÃ do palco, não
+   descendente, e não herdaria a variável. O calc ficava inválido e a
+   margem negativa caía para zero, sem a sobreposição. */
+/* O hero não fica mais preso: some pelo topo como qualquer bloco.
+   O que permanece é a foto se recolhendo num cartão enquanto sai, com
+   recuo nas laterais e arredondamento embaixo. Sem recuo no topo, que é
+   justamente por onde ela desaparece.
+
+   --hp declarado com valor de partida: sem isso o GSAP não tem de onde
+   interpolar a variável na home social, e a animação não roda. */
+.hero-palco { --hp: 0; position: relative; }
+
+@media (min-width: 768px) {
+  .hero-palco > .hero {
+    clip-path: inset(
+      0
+      calc(var(--hp, 0) * var(--gutter))
+      calc(var(--hp, 0) * 4svh)
+      calc(var(--hp, 0) * var(--gutter))
+      round 0 0 calc(var(--hp, 0) * var(--radius-xl)) calc(var(--hp, 0) * var(--radius-xl))
+    );
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
@@ -353,4 +469,6 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
     transition-duration: .01ms !important;
   }
   .rise { opacity: 1; transform: none; }
+  /* sem recolhimento: o hero volta a ser um bloco comum */
+  .hero-palco > .hero { clip-path: none; }
 }
