@@ -76,23 +76,16 @@
 
 .nav__toggle {
   display: none; background: none; border: 0; cursor: pointer;
-  width: 40px; height: 40px; padding: 10px; color: var(--ivory);
+  width: 44px; height: 44px; padding: 12px;   /* 44px: mínimo de alvo de toque */ color: var(--ivory);
 }
 .nav__toggle span { display: block; height: 1px; background: currentColor; margin: 5px 0; }
 @media (max-width: 1000px) { .nav__links, .nav__side .nav__switch { display: none; } .nav__toggle { display: block; } }
+/* Abaixo de 480px a logo (171px) e o botão (120px) não cabem juntos e o
+   hambúrguer era espremido a 38px. A ação já está dentro da gaveta.
+   O corporativo faz o mesmo desde sempre, a ≤1080px. */
+@media (max-width: 480px) { .nav__side .btn { display: none; } }
 
-.nav__drawer {
-  position: fixed; inset: 0; z-index: 99; background: var(--royal);
-  display: flex; flex-direction: column; justify-content: center; gap: 4px;
-  padding: var(--gutter); opacity: 0; visibility: hidden;
-  transition: opacity var(--dur) var(--ease), visibility var(--dur);
-}
-.nav__drawer.is-open { opacity: 1; visibility: visible; }
-.nav__drawer a {
-  font-family: var(--font-display); font-size: clamp(1.6rem, 5.6vw, 2.4rem);
-  color: var(--ivory); text-decoration: none; padding: 8px 0; font-weight: 300;
-}
-.nav__drawer .nav__switch { margin-top: 24px; font-size: var(--text-sm); }
+/* .nav__drawer mora no base.css: mesmo componente em treze rotas. */
 
 /* ══════════════════════════════════════════════════════════════════════
    HERO DE PÁGINA INTERNA

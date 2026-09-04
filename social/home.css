@@ -194,13 +194,19 @@
 
 .nav-toggle {
   display: none;
-  width: 32px; height: 24px;
+  /* O traço continua com 32x24; a caixa é que vai a 44x44, o mínimo de
+     alvo de toque. Um botão pequeno demais é indistinguível de um botão
+     que não funciona. */
+  width: 44px; height: 44px;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center; gap: 10px;
+  align-items: center;
   background: none; border: none; padding: 0;
+  margin-right: -6px;   /* devolve o alinhamento óptico à direita da nav */
 }
+.nav-toggle span:nth-child(2) { width: 22px; align-self: flex-end; }
 .nav-toggle span {
-  display: block; width: 100%; height: 1px;
+  display: block; width: 32px; height: 1px;
   background: var(--white);
   transition: all .4s var(--ease);
 }
@@ -212,6 +218,7 @@
   position: relative;
   width: 100%;
   height: 100vh;
+  height: 100svh;   /* no celular o 100vh conta a barra do navegador e corta o hero */
   min-height: 600px;
   overflow: hidden;
   display: flex;
@@ -731,7 +738,9 @@
   border: 1px solid rgba(0,0,0,.08);
   background: var(--ivory-light);
   font-family: var(--font-sans);
-  font-size: 14px;
+  /* 16px é o piso: abaixo disso o Safari do iPhone dá zoom ao focar o
+     campo e o visitante precisa pinçar de volta para continuar. */
+  font-size: 16px;
   font-weight: 300;
   color: var(--royal);
   outline: none;

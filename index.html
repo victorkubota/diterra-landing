@@ -111,7 +111,7 @@ img, video { display: block; max-width: 100%; }
 .menu-btn {
   justify-self: start;
   background: none; border: 0; cursor: pointer;
-  width: 52px; height: 34px; padding: 0;
+  width: 52px; min-height: 44px; padding: 0;   /* 44px: mínimo de alvo de toque */
   display: grid; align-content: center; gap: 7px;
   color: var(--paper);
 }
@@ -237,6 +237,9 @@ img, video { display: block; max-width: 100%; }
 
 .chev {
   justify-self: center;
+  /* a seta desenhada tem 20x14; a área clicável vai a 44x44 */
+  display: grid; place-items: center;
+  width: 44px; height: 44px;
   color: rgba(245,243,239,.8);
   animation: chev 2.6s var(--ease-out) infinite;
 }
@@ -348,7 +351,9 @@ img, video { display: block; max-width: 100%; }
   .topbar { grid-template-columns: auto 1fr auto; padding-inline: 16px; }
   .topbar__cta .pill { padding: 10px 13px; letter-spacing: .12em; font-size: 9.5px; }
   .topbar__cta .pill svg { display: none; }
-  .menu-btn, .menu-btn span { width: 30px; }
+  /* o traço encolhe para caber na barra; a caixa fica em 44px */
+  .menu-btn { width: 44px; }
+  .menu-btn span { width: 30px; }
   .menu-btn span:last-child { width: 20px; }
   .brand img { height: 30px; }
   .core__title { font-size: clamp(1.7rem, 8.4vw, 2.6rem); letter-spacing: .08em; text-indent: .08em; }

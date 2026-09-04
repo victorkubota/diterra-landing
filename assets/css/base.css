@@ -283,6 +283,29 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
 .link-arrow--alt:hover { color: var(--ui-text); }
 
 /* ══════════════════════════════════════════════════════════════════════
+   MENU MOBILE
+   Estava duplicado, literal por literal, em social.css e corporativo.css,
+   e por isso faltava na home social: o botão existia, a gaveta não.
+   Aqui em cima os dois temas o pintam sozinhos.
+   ══════════════════════════════════════════════════════════════════════ */
+.nav__drawer {
+  position: fixed; inset: 0; z-index: 99;
+  background: var(--ui-bg-invert);
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 5px; padding: var(--gutter);
+  opacity: 0; visibility: hidden;
+  transition: opacity var(--dur) var(--ease), visibility var(--dur);
+}
+.nav__drawer.is-open { opacity: 1; visibility: visible; }
+.nav__drawer a {
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 5.8vw, 2.5rem);
+  color: var(--ui-text-invert);
+  text-decoration: none; padding: 9px 0; font-weight: 300;
+}
+.nav__drawer .nav__switch { display: inline-block; margin-top: 25px; font-size: var(--text-sm); }
+
+/* ══════════════════════════════════════════════════════════════════════
    FICHA TÉCNICA E AVISOS
    ══════════════════════════════════════════════════════════════════════ */
 .spec { list-style: none; display: grid; }

@@ -48,10 +48,23 @@
     <li><a href="#contato">Contato</a></li>
     <li><a href="/corporativo">Corporativo &rarr;</a></li>
   </ul>
-  <button class="nav-toggle" aria-label="Menu">
+  <button class="nav-toggle" id="navToggle" aria-expanded="false"
+          aria-controls="navDrawer" aria-label="Abrir menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
+
+<!-- O hambúrguer existia sem gaveta nenhuma e sem handler: era o único
+     dos catorze menus que não abria no celular. Mesma marcação das
+     outras doze rotas do social. -->
+<div class="nav__drawer" id="navDrawer">
+  <a href="#intro">O grupo</a>
+  <a href="/social/espacos">Espaços</a>
+  <a href="/social/solucoes">Soluções</a>
+  <a href="#galeria">Galeria</a>
+  <a href="#contato">Contato</a>
+  <a class="nav__switch" href="/corporativo">Ir para Corporativo &rarr;</a>
+</div>
 
 <!-- ═══════════════════════════════════════════════════
      WRAPPER (z-index 10, reveals footer underneath)
@@ -465,6 +478,39 @@ function splitTextToWords(element) {
 document.querySelectorAll('.split-animate').forEach(el => {
   splitTextToWords(el);
 });
+
+/* ══════════════════════════════════════════════════════════════
+   MENU MOBILE
+   Fora do initSite() de propósito: aquele só roda quando o preloader
+   do GSAP termina, o que deixava a navegação refém de uma animação de
+   três segundos e de três CDNs. Menu é navegação, não decoração —
+   liga assim que o script é lido.
+   ══════════════════════════════════════════════════════════════ */
+(function () {
+  const btnMenu = document.getElementById('navToggle');
+  const gaveta  = document.getElementById('navDrawer');
+  if (!btnMenu || !gaveta) return;
+
+  const alternar = (aberto) => {
+    gaveta.classList.toggle('is-open', aberto);
+    btnMenu.setAttribute('aria-expanded', String(aberto));
+    btnMenu.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+    document.body.style.overflow = aberto ? 'hidden' : '';
+  };
+
+  btnMenu.addEventListener('click', function () {
+    alternar(!gaveta.classList.contains('is-open'));
+  });
+  gaveta.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') alternar(false);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && gaveta.classList.contains('is-open')) {
+      alternar(false);
+      btnMenu.focus();
+    }
+  });
+})();
 
 /* ── Preloader ── */
 const loadTl = gsap.timeline({
