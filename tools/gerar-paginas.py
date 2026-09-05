@@ -344,6 +344,7 @@ def nav():
       <span></span><span></span>
     </button>
   </div>
+  <span class="nav__progresso" aria-hidden="true"></span>
 </nav>
 <div class="nav__drawer" id="navDrawer">
   <a href="/social#intro">O grupo</a>
@@ -487,9 +488,9 @@ def pagina_interna(item, tipo):
         bloco_dados = f"""
 <section class="section section--paper">
   <div class="wrap">
-    <div class="section__head rise">
-      <p class="eyebrow">Ficha do espaço</p>
-      <h2 class="h-section">Números e estrutura</h2>
+    <div class="section__head">
+      <p class="eyebrow rise">Ficha do espaço</p>
+      <h2 class="h-section linhas">Números e estrutura</h2>
     </div>
     <p class="notice rise">
       <span aria-hidden="true">&#9650;</span>
@@ -515,9 +516,9 @@ def pagina_interna(item, tipo):
         bloco_dados = f"""
 <section class="section section--paper">
   <div class="wrap">
-    <div class="section__head rise">
-      <p class="eyebrow">O que está incluído</p>
-      <h2 class="h-section">Do planejamento à desmontagem</h2>
+    <div class="section__head">
+      <p class="eyebrow rise">O que está incluído</p>
+      <h2 class="h-section linhas">Do planejamento à desmontagem</h2>
     </div>
     <ul class="checks cascata">
 {inclui}
@@ -567,9 +568,9 @@ def pagina_interna(item, tipo):
 {bloco_dados}
 <section class="section">
   <div class="wrap">
-    <div class="section__head rise">
-      <p class="eyebrow">Registros</p>
-      <h2 class="h-section">Momentos na Di Terrá</h2>
+    <div class="section__head">
+      <p class="eyebrow rise">Registros</p>
+      <h2 class="h-section linhas">Momentos na Di Terrá</h2>
     </div>
     <div class="gallery">
 {galeria_html()}
@@ -579,9 +580,9 @@ def pagina_interna(item, tipo):
 
 <section class="section section--invert">
   <div class="wrap">
-    <div class="section__head on-dark rise">
-      <p class="eyebrow">Continue explorando</p>
-      <h2 class="h-section">{titulo_irmaos}</h2>
+    <div class="section__head on-dark">
+      <p class="eyebrow rise">Continue explorando</p>
+      <h2 class="h-section linhas">{titulo_irmaos}</h2>
     </div>
     <div class="grid grid--3">
 {cards_html(irmaos, tipo, atual=item['slug'])}
@@ -646,10 +647,10 @@ def hub(tipo):
 <section class="section">
   <span class="ornament ornament--bl"><img src="/assets/brand/ornamento-ramo-rose.png" alt="" width="305" height="621"></span>
   <div class="wrap">
-    <div class="section__head rise">
-      <p class="eyebrow">{chamada}</p>
-      <h2 class="h-section">{sub}</h2>
-      <p class="body-muted">{subtexto}</p>
+    <div class="section__head">
+      <p class="eyebrow rise">{chamada}</p>
+      <h2 class="h-section linhas">{sub}</h2>
+      <p class="body-muted rise">{subtexto}</p>
     </div>
     <div class="grid grid--3">
 {cards_html(itens, tipo)}
@@ -704,9 +705,11 @@ def main():
 #   · trouxe de volta /assets/DECORACAO.png, a peça de marketing com texto
 #     queimado no pixel, substituída no PR victorkubota/diterra-landing#21
 #
-# As classes de motion (.reveal-shot, .cascata, --i na galeria) já foram
-# alinhadas aqui, mas os três pontos acima não. Enquanto não forem, gerar
-# é destrutivo.
+# As classes de motion já foram todas alinhadas aqui: .reveal-shot na
+# fotografia, .cascata nas listas, --i na galeria, .linhas nos títulos de
+# seção e a barra .nav__progresso na nav. O que continua desalinhado é o
+# hero-palco, que sumiria, e os eyebrows, que voltariam. Enquanto esses
+# dois não forem resolvidos, gerar é destrutivo.
 #
 # Para rodar mesmo assim, depois de alinhar o template:
 #   python3 tools/gerar-paginas.py --eu-sei-o-que-estou-fazendo

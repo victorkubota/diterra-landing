@@ -453,6 +453,50 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
 .cascata.is-in > li:nth-child(8) { transition-delay: .51s; }
 .cascata.is-in > li:nth-child(n+9) { transition-delay: .58s; }
 
+/* ── TÍTULO QUE SOBE POR TRÁS DE UMA MÁSCARA ──────────────────────────
+   O bloco inteiro subindo lê como "a página carregou". As linhas subindo
+   em cascata leem como alguém escrevendo — e numa página de casamento a
+   segunda leitura vale mais.
+
+   O JS quebra o título em linhas e embrulha cada uma; quando não
+   consegue, porque o título tem marcação interna, o elemento vira uma
+   máscara só e o gesto continua o mesmo, em bloco.
+
+   O respiro embaixo devolve o espaço dos descendentes: sem ele a máscara
+   corta o "ç" e o "p" da Cormorant.
+   ─────────────────────────────────────────────────────────────────── */
+.linhas__l {
+  display: block; overflow: hidden;
+  padding-bottom: .14em; margin-bottom: -.14em;
+}
+.linhas__l > span {
+  display: block;
+  transform: translateY(105%);
+}
+.linhas.is-in .linhas__l > span {
+  transform: translateY(0);
+  transition: transform 1s var(--ease-out);
+  transition-delay: calc(var(--l, 0) * .07s + var(--i, 0) * .11s);
+}
+
+/* ── BARRA DE PROGRESSO DE LEITURA ────────────────────────────────────
+   As internas de casa têm cinco seções e ficha técnica; a barra diz
+   quanto falta. É orientação, não enfeite, e por isso só aparece depois
+   que a nav gruda — antes disso a página inteira ainda está à vista.
+
+   A nav é fixed, então ancora a barra absoluta sem precisar de relative.
+   ─────────────────────────────────────────────────────────────────── */
+.nav__progresso {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: var(--ui-accent-on-dark);
+  transform: scaleX(var(--lido, 0));
+  transform-origin: left;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+  pointer-events: none;
+}
+.nav.is-stuck .nav__progresso { opacity: .9; }
+
 /* ══════════════════════════════════════════════════════════════════════
    MANCHETE
 
@@ -564,4 +608,9 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   .reveal-shot img, .reveal-shot video { transform: none; }
   /* a lista aparece inteira, sem escalonar */
   .cascata > li { opacity: 1; transform: none; }
+  /* o título já está no lugar, sem subir por trás da máscara */
+  .linhas__l > span { transform: none; }
+  /* a régua de leitura sai de cena: é movimento contínuo na borda do
+     campo de visão, exatamente o que incomoda quem pediu menos */
+  .nav__progresso { display: none; }
 }
