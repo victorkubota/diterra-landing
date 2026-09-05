@@ -235,10 +235,28 @@
       curso > 0 ? Math.min(1, window.scrollY / curso).toFixed(4) : '0');
   };
 
-  /* ── laço de scroll, compartilhado pelo hero, a régua, a barra de ação
-     e o voltar ao topo ── */
+  /* ── pilha de cartões: --cp é quanto o PRÓXIMO cartão já cobriu este ──
+     Só onde há pilha (≥ 860px) e com movimento permitido. A forma
+     (desfoque, escala, luz) mora no base.css. */
+  var podePilha = !semMovimento && window.matchMedia('(min-width: 860px)').matches;
+  var cartoes = podePilha ? Array.prototype.slice.call(document.querySelectorAll('.pilha .fmt')) : [];
+  var medirPilha = function () {
+    if (cartoes.length < 2) return;
+    var alto = window.innerHeight;
+    cartoes.forEach(function (c, i) {
+      var prox = cartoes[i + 1];
+      if (!prox) { c.style.setProperty('--cp', '0'); return; }
+      var curso = alto - c.getBoundingClientRect().top;
+      var avanco = alto - prox.getBoundingClientRect().top;
+      var p = curso > 0 ? avanco / curso : 0;
+      c.style.setProperty('--cp', Math.max(0, Math.min(1, p)).toFixed(4));
+    });
+  };
+
+  /* ── laço de scroll, compartilhado pelo hero, a régua, a barra de ação,
+     a pilha e o voltar ao topo ── */
   var barra = document.getElementById('barraAcao');
-  if (toTop || palco || regua || barra) {
+  if (toTop || palco || regua || barra || cartoes.length) {
     var pendente = false;
 
     var atualizar = function () {
@@ -246,6 +264,7 @@
       if (barra) barra.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.5);
       pintarHero();
       pintarRegua();
+      medirPilha();
       pendente = false;
     };
 
@@ -256,6 +275,19 @@
     }, { passive: true });
 
     atualizar();
+  }
+
+  /* ── hub de soluções chegando de uma ocasião ─────────────────────
+     /social/solucoes?ocasiao=casamento: o hero diz para que ocasião a
+     pessoa está olhando. Só texto; a lista continua a mesma. */
+  var ocasiao = new URLSearchParams(window.location.search).get('ocasiao');
+  var leadHub = document.querySelector('.page-hero__lead');
+  var nomesOcasiao = { casamento: 'casamentos', debutante: 'debutantes', aniversario: 'aniversários e bodas', formatura: 'formaturas' };
+  if (ocasiao && leadHub && nomesOcasiao[ocasiao] && window.location.pathname.indexOf('/social/solucoes') === 0) {
+    var marca = document.createElement('span');
+    marca.className = 'eyebrow';
+    marca.textContent = 'Para ' + nomesOcasiao[ocasiao];
+    leadHub.parentNode.insertBefore(marca, leadHub);
   }
 
   /* ── índice com foto (soluções na home) ─────────────────────────

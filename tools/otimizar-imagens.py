@@ -35,7 +35,7 @@ QUALIDADE_WEBP = 80
 # Pastas de demonstração que recebem srcset. Logos e retratos ficam de fora:
 # já são pequenos e servidos no tamanho em que aparecem.
 PASTAS_DEMO = ("hero", "espacos", "solucoes", "eventos", "formatos", "galeria",
-               "apoio", "territorio")
+               "apoio", "territorio", "ocasioes", "percurso", "passos")
 
 # Peças legadas ainda em uso na home social. Ficam no tamanho nativo porque
 # não há pixel para ampliar (o hero tem 1220 px, o banner 500 px).
@@ -108,7 +108,7 @@ def limpar(fontes: list[Path]) -> int:
 # Só fotos que ocupam a tela inteira (hero, pilha de formatos, respiro
 # fotográfico) precisam da variante de 2400 px. As demais aparecem em
 # metade ou um quarto da largura e param em 1400.
-PASTAS_CHEIAS = ("hero", "formatos", "apoio")
+PASTAS_CHEIAS = ("hero", "formatos", "apoio", "ocasioes", "passos")
 
 
 def larguras_para(largura_origem: int, origem: Path) -> list[int]:
