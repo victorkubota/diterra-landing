@@ -139,6 +139,9 @@
   object-fit: cover; object-position: center 58%;
 }
 .hero__media video { position: absolute; inset: 0; }
+/* transição entre páginas (base.css): a foto do hero e o logo viajam */
+.hero__media img { view-transition-name: hero-foto; }
+.nav__brand-img { view-transition-name: marca; }
 
 /* Sem filtro sobre a imagem. A foto do hero é escura por composição —
    evento montado à noite, luminância média de 36/255 na faixa onde o

@@ -91,6 +91,18 @@ img, video { display: block; max-width: 100%; }
   object-fit: cover; object-position: center 46%;
   /* sem duotone e sem dessaturação: o feedback pediu imagem viva */
 }
+
+/* Transição entre páginas: a raiz não carrega base.css, então declara a
+   própria adesão. A foto do hero e o logo viajam para a página seguinte
+   (mesmos nomes em base.css). */
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .45s; }
+::view-transition-group(hero-foto) { animation-duration: .7s; animation-timing-function: var(--ease-out); }
+::view-transition-old(hero-foto), ::view-transition-new(hero-foto) { animation: none; mix-blend-mode: normal; }
+::view-transition-group(marca) { animation-duration: .5s; animation-timing-function: var(--ease-out); }
+.stage__media img { view-transition-name: hero-foto; }
+.brand img { view-transition-name: marca; }
+@media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
 .stage__media video { position: absolute; inset: 0; }
 
 /* véu discreto, só o suficiente para o texto branco ficar legível.
