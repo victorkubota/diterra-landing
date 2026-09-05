@@ -182,6 +182,8 @@
   color: #fff;
   margin-bottom: clamp(18px, 2vw, 24px);
   text-shadow: 0 2px 40px rgba(8,14,30,.6);
+  /* sem isto a quebra automática deixa "SE" no fim da primeira linha */
+  text-wrap: balance;
 }
 .hero__sub {
   font-family: var(--font-display);

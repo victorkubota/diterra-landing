@@ -130,6 +130,8 @@
   text-align: center;
   padding: 0 var(--gutter);
   max-width: 1000px;
+  /* acima de 1200px a caixa abre para 1360px: é a largura que a
+     composição autoral de duas linhas do <h1> precisa (ver .hero-title) */
   color: var(--white);
   /* sai de cena antes de o hero terminar de virar cartão: no cartão a
      foto fala sozinha, como na referência */
@@ -156,6 +158,35 @@
   margin-bottom: 24px;
   overflow: hidden;
   mix-blend-mode: difference;
+  /* a manchete foi composta em duas linhas (o <br> no HTML). Sem isto
+     ela reflui em quatro, com "PARA" sozinha na segunda. Abaixo de
+     1200px as duas linhas não cabem em nenhum tamanho legível, então
+     o <br> sai e o balanceamento distribui as linhas por igual. */
+  text-wrap: balance;
+  /* Abaixo de 1200px a composição de duas linhas não cabe em tamanho
+     nenhum. O teto aqui é a primeira linha ("Um Lugar Para", 9,85em
+     medidos): acima dele "Para" cai sozinha numa linha só dela. Em
+     375px isso dá 34px, contra os 44,6px do clamp. */
+  font-size: min(
+    var(--text-hero),
+    calc((100vw - 2 * var(--gutter)) / 9.85)
+  );
+}
+.hero-title br { display: none; }
+
+@media (min-width: 1200px) {
+  .hero-content { max-width: 1360px; }
+  .hero-title br { display: inline; }
+  /* Medido no navegador: a segunda linha ("Momentos Excepcionais",
+     duas caixas inline-block com o espaço entre elas) precisa de
+     15,56em. O divisor 15,9 guarda a folga. Sem este teto o clamp de
+     --text-hero pede 96px onde só cabem 80px, e a linha quebra em duas. */
+  .hero-title {
+    font-size: min(
+      var(--text-hero),
+      calc((min(1360px, 100vw) - 2 * var(--gutter)) / 15.9)
+    );
+  }
 }
 .hero-sub {
   font-family: var(--font-display);
@@ -416,7 +447,9 @@
   position: relative;
   z-index: 2;
   text-align: center;
-  max-width: 800px;
+  /* 800px era estreito demais para a citação de três linhas, que
+     refluía em cinco e deixava "de" pendurada na primeira */
+  max-width: 1000px;
   padding: 80px var(--gutter);
 }
 .banner-content blockquote {
@@ -428,6 +461,13 @@
   text-transform: uppercase;
   color: var(--white);
   margin-bottom: 24px;
+  text-wrap: balance;
+}
+/* abaixo de 600px a linha mais longa (13,67em) não cabe: o <br> sai e o
+   balanceamento assume */
+.banner-content blockquote br { display: none; }
+@media (min-width: 600px) {
+  .banner-content blockquote br { display: inline; }
 }
 .banner-content .deco-line {
   background: rgba(255,255,255,.3);
