@@ -74,6 +74,33 @@
         ],
         "createdAt": "2026-09-05T10:10:16.361Z",
         "reason": "sanctioned: drawer thumbnails stay at opacity 0 until the drawer opens and their src is set (PR-08); they are not decorative texture"
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-05T10:12:31.702Z",
+        "reason": "false positive: the flagged strings are short uppercase labels (hero subtitle, stage foot, nav pill), 12px with wide tracking, not body copy"
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "social/index.html"
+        ],
+        "createdAt": "2026-09-05T10:12:31.719Z",
+        "reason": "false positive: hero eyebrow and card location labels are short uppercase labels, not body copy"
+      },
+      {
+        "rule": "hero-eyebrow-chip",
+        "value": "*",
+        "files": [
+          "social/index.html"
+        ],
+        "createdAt": "2026-09-05T10:12:31.735Z",
+        "reason": "sanctioned: hero composition (location eyebrow above the display title) comes from the client feedback documented in the page and CSS comments (referência Sarah Haywood / Cipriani); not user-confirmed in this session"
       }
     ]
   }
