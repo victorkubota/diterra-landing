@@ -264,7 +264,7 @@
 .percurso__passo { display: grid; gap: 10px; max-width: 40ch; transition: opacity var(--dur) var(--ease); }
 @media (min-width: 940px) { .percurso__passo { opacity: .35; } .percurso__passo.is-on { opacity: 1; } }
 .percurso__n { font-family: var(--font-display); font-weight: 300; font-size: var(--text-2xl); line-height: 1; color: var(--brick); }
-.percurso__titulo { font-family: var(--font-display); font-weight: 400; font-size: var(--text-xl); line-height: 1.1; }
+.percurso__titulo { font-family: var(--font-display); font-weight: 400; font-size: var(--text-xl); line-height: 1.3; }
 .percurso__passo p { color: var(--ui-text-muted); }
 .percurso__foto-m { margin: 0 0 10px; aspect-ratio: 3 / 4; overflow: hidden; border-radius: var(--radius-lg); background: var(--royal); }
 .percurso__foto-m img { width: 100%; height: 100%; object-fit: cover; }
@@ -335,8 +335,25 @@
 @media (hover: hover) { .trilho__item:hover img { transform: scale(1.05); } }
 .trilho__item::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(17,21,66,.85) 0%, rgba(17,21,66,.2) 50%, transparent 100%); }
 .trilho__texto { position: absolute; inset: auto 0 0 0; z-index: 1; padding: clamp(18px, 2.4vw, 28px); display: grid; gap: 6px; }
-.trilho__nome { font-family: var(--font-display); font-weight: 300; font-size: var(--text-xl); line-height: 1.1; }
-.trilho__meta { font-size: var(--text-sm); color: var(--ui-text-invert-muted); }
+.trilho__nome { font-family: var(--font-display); font-weight: 300; font-size: var(--text-xl); line-height: 1.3; }
+/* marfim cheio: o tom atenuado dava 4,4:1 sobre o degradê */
+.trilho__meta { font-size: var(--text-sm); color: var(--ivory); }
+
+/* ── vídeo dentro de cartão (soluções) ── */
+.section--rose-soft { background: var(--rose-soft); }
+.video-cartao { margin: clamp(28px, 4vw, 56px) 0 0; display: grid; gap: 10px; position: relative; }
+.video-cartao__video {
+  width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block;
+  border-radius: var(--radius-xl); background: var(--royal);
+}
+.video-cartao__pausa {
+  position: absolute; right: 18px; top: 18px;
+  background: rgba(17,21,66,.6); color: var(--ivory); border: 1px solid rgba(254,250,224,.4);
+  border-radius: 999px; padding: 8px 14px; min-height: 32px; cursor: pointer;
+  font: 500 var(--text-xs)/1 var(--font-sans); letter-spacing: .14em; text-transform: uppercase;
+}
+.video-cartao__pausa:hover, .video-cartao__pausa[aria-pressed="true"] { background: var(--royal); }
+#como-acontece .fmt__n { color: var(--rose); }
 
 /* ══════════════════════════════════════════════════════════════════════
    ÍNDICE FOTOGRÁFICO (hubs de espaços e soluções)
