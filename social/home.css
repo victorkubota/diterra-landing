@@ -226,7 +226,7 @@
 /* metade e metade a partir de 940px, como a referência: era 1fr/1.2fr
    com a foto centrada, agora as duas colunas partem do topo e a foto
    fica presa enquanto o texto passa */
-@media (min-width: 940px) {
+@media (min-width: 860px) {
   .intro-grid { grid-template-columns: 1fr 1fr; align-items: start; }
 }
 .intro-text .heading-lg { margin-bottom: 28px; }
@@ -626,7 +626,11 @@
   .galeria-grid { grid-template-columns: 1fr 1fr; }
   .form-row { grid-template-columns: 1fr; }
 
+}
+/* sem hover (dedo, inclusive tablet) o nome do evento fica sempre visível */
+@media (hover: none), (max-width: 768px) {
   .evento-card-overlay { opacity: 1; }
+  .evento-card-overlay h3, .evento-card-overlay .evento-tag { transform: none; }
 }
 @media (max-width: 480px) {
   .eventos-grid { grid-template-columns: 1fr; }

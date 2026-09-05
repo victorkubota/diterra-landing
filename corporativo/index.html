@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Di Terrá Corporativo | Espaços para Convenções, Off-sites e Eventos de Empresa</title>
 <meta name="description" content="Convenções, off-sites, lançamentos e integrações no interior paulista. Quatro espaços com gastronomia, cenografia, som, luz e operação em um único contrato.">
 <link rel="canonical" href="https://www.diterra.com.br/corporativo/">
@@ -861,6 +861,13 @@
   <span>Falar com o comercial</span>
 </a>
 
+<!-- barra de ação do celular (base.css): a proposta e o WhatsApp no polegar -->
+<div class="barra-acao on-dark" id="barraAcao">
+  <a class="btn btn--primary on-dark" href="#proposta">Solicitar proposta</a>
+  <a class="barra-acao__wa" href="https://wa.me/5519996777288" target="_blank" rel="noopener" aria-label="Falar com o comercial pelo WhatsApp">
+    <svg width="22" height="22" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 1.6a7.4 7.4 0 0 0-6.3 11.3L1.6 16.4l3.6-1a7.4 7.4 0 1 0 3.8-13.8Z" stroke="currentColor" stroke-width="1.2"/><path d="M6.4 6c.3-.6.6-.6.9-.6h.5l.8 1.8-.7.8c.5 1 1.1 1.6 2.1 2.1l.8-.7 1.8.8v.5c0 .3 0 .6-.6.9-.9.4-2.3 0-3.6-1.2S6 7 6.4 6Z" fill="currentColor"/></svg>
+  </a>
+</div>
 <a class="to-top" id="toTop" href="#topo" aria-label="Voltar ao topo da página">
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
     <path d="M8 13V3M3.5 7.5L8 3l4.5 4.5" stroke="currentColor" stroke-width="1.3"/>
@@ -1205,12 +1212,14 @@
   /* ── contato flutuante e voltar ao topo ────────────────────── */
   var toTop = document.getElementById('toTop');
   var wa = document.getElementById('wa');
+  var barra = document.getElementById('barraAcao');
   var palco = reduz ? null : document.getElementById('heroPalco');
   var pendente = false;
   var atualizar = function () {
     var passou = window.scrollY > window.innerHeight * 0.8;
     if (toTop) toTop.classList.toggle('is-visible', passou);
     if (wa) wa.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.5);
+    if (barra) barra.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.5);
 
     /* quanto da página já foi lida, para a régua da nav */
     var curso = document.documentElement.scrollHeight - window.innerHeight;

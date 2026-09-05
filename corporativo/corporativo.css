@@ -95,7 +95,8 @@
 }
 .nav__toggle span { display: block; height: 1px; background: currentColor; margin: 5px 0; }
 
-@media (max-width: 1080px) {
+/* 1024: o mesmo ponto de colapso do social */
+@media (max-width: 1024px) {
   .nav__links, .nav__side .nav__switch { display: none; }
   .nav__toggle { display: block; }
 }
@@ -592,8 +593,8 @@
    não aos campos. Aqui a coluna ganha teto próprio, e o formulário
    volta a ter margem em vez de encostar na borda da tela. */
 .proposal { display: grid; gap: clamp(28px, 3.4vw, 52px); }
-@media (min-width: 940px) {
-  .proposal { grid-template-columns: 380px minmax(0, 720px); align-items: start; justify-content: space-between; }
+@media (min-width: 860px) {
+  .proposal { grid-template-columns: minmax(300px, 380px) minmax(0, 720px); align-items: start; justify-content: space-between; }
 }
 
 .contact { display: flex; flex-direction: column; gap: 12px; }
@@ -683,10 +684,8 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
 .wa.is-visible { opacity: 1; visibility: visible; transform: none; }
 .wa:hover { background: var(--navy-700); }
 .wa svg { flex: none; color: var(--blue-300); }
-@media (max-width: 620px) {
-  .wa { padding: 15px; }
-  .wa span { display: none; }
-}
+/* no celular o WhatsApp mora na barra de ação; o balão fica para o desktop */
+@media (max-width: 768px) { .wa { display: none; } }
 
 /* ══════════════════════════════════════════════════════════════════════
    MOTION

@@ -611,6 +611,49 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════
+   BARRA DE AÇÃO NO CELULAR
+
+   No celular a ação principal fica no polegar, não no topo: uma barra
+   fixa no rodapé com a conversão da rota (falar com a equipe, pedir
+   proposta) e, onde há número real, o WhatsApp. Aparece depois que a
+   pessoa rolou meia tela, some no desktop. Respeita a área segura do
+   iPhone (env) e empurra o voltar-ao-topo para cima dela.
+   ══════════════════════════════════════════════════════════════════════ */
+.barra-acao {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 95;
+  display: none; gap: 10px;
+  padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom, 0px));
+  background: var(--ui-bg-invert); color: var(--ui-text-invert);
+  border-top: 1px solid var(--ui-border-invert);
+  box-shadow: 0 -8px 30px rgba(0,0,0,.18);
+  transform: translateY(110%);
+  transition: transform var(--dur) var(--ease-out);
+}
+.barra-acao.is-visible { transform: none; }
+.barra-acao .btn { flex: 1; justify-content: center; padding: 14px 16px; }
+.barra-acao .btn--primary.on-dark { background: var(--ui-text-invert); color: var(--ui-bg-invert); }
+.barra-acao .btn--primary.on-dark:hover { color: var(--ui-bg-invert); }
+.barra-acao__wa {
+  flex: none; display: grid; place-items: center;
+  width: 50px; border: 1px solid var(--ui-border-invert); border-radius: var(--radius-sm);
+  color: var(--ui-text-invert);
+}
+@media (max-width: 768px) {
+  .barra-acao { display: flex; }
+  /* o conteúdo não termina escondido atrás da barra */
+  body { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* ── TOQUE ──────────────────────────────────────────────────────────────
+   Tamanho de tela não diz o que aponta na tela. Com dedo, os alvos
+   crescem e o que dependia de hover fica sempre visível. */
+@media (pointer: coarse) {
+  .btn { padding: 16px 30px; }
+  .nav__links a { padding: 10px 0; }
+  .link-arrow { padding-block: 6px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
    VOLTAR AO TOPO
    ══════════════════════════════════════════════════════════════════════ */
 .to-top {
@@ -626,6 +669,9 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
 }
 .to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
 .to-top:hover { background: var(--ui-accent); }
+/* no celular sobe para cima da barra de ação (vem depois do bloco .to-top
+   de propósito: o bottom de cima venceria) */
+@media (max-width: 768px) { .to-top { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); } }
 .to-top svg { transition: transform var(--dur-fast) var(--ease-out); }
 .to-top:hover svg { transform: translateY(-2px); }
 

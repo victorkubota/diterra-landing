@@ -304,7 +304,7 @@ def cabeca(titulo, descricao, canonical, css, favicon):
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>{titulo}</title>
 <meta name="description" content="{descricao}">
 <link rel="canonical" href="{canonical}">
@@ -406,6 +406,10 @@ def rodape():
   </div>
 </footer>
 
+<!-- barra de ação do celular (base.css / site.js) -->
+<div class="barra-acao on-dark" id="barraAcao">
+  <a class="btn btn--primary on-dark" href="/social#contato">Fale conosco</a>
+</div>
 <a class="to-top" id="toTop" href="#topo" aria-label="Voltar ao topo da página">
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
     <path d="M8 13V3M3.5 7.5L8 3l4.5 4.5" stroke="currentColor" stroke-width="1.3"/>
