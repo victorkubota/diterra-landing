@@ -51,7 +51,9 @@
   /* ── entrada dos blocos ──────────────────────────────────────────────
      Quem chega por link com âncora começa no meio do documento; o que
      ficou acima nunca cruzaria o observer, então é revelado de imediato. */
-  var blocos = document.querySelectorAll('.rise');
+  /* .rise para texto, .reveal-shot para fotografia, .cascata para listas:
+     os três dependem do mesmo is-in, então um observer só dá conta. */
+  var blocos = document.querySelectorAll('.rise, .reveal-shot, .cascata');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
