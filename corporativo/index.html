@@ -425,7 +425,7 @@
                 <li><span class="k">Estacionamento</span><span class="v tbd">a confirmar</span></li>
               </ul>
               <div class="vcard__acts">
-                <a class="link-arrow" href="/social/espacos/a-querencia.html">Ver a casa por inteiro
+                <a class="link-arrow" href="/social/espacos/a-querencia">Ver a casa por inteiro
                   <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
                 </a>
                 <a class="link-arrow link-arrow--alt" href="#proposta">Solicitar proposta para esta casa</a>
@@ -455,7 +455,7 @@
                 <li><span class="k">Estacionamento</span><span class="v tbd">a confirmar</span></li>
               </ul>
               <div class="vcard__acts">
-                <a class="link-arrow" href="/social/espacos/palacete-monte-alegre.html">Ver a casa por inteiro
+                <a class="link-arrow" href="/social/espacos/palacete-monte-alegre">Ver a casa por inteiro
                   <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
                 </a>
                 <a class="link-arrow link-arrow--alt" href="#proposta">Solicitar proposta para esta casa</a>
@@ -485,7 +485,7 @@
                 <li><span class="k">Estacionamento</span><span class="v tbd">a confirmar</span></li>
               </ul>
               <div class="vcard__acts">
-                <a class="link-arrow" href="/social/espacos/casa-lucca.html">Ver a casa por inteiro
+                <a class="link-arrow" href="/social/espacos/casa-lucca">Ver a casa por inteiro
                   <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
                 </a>
                 <a class="link-arrow link-arrow--alt" href="#proposta">Solicitar proposta para esta casa</a>
@@ -515,7 +515,7 @@
                 <li><span class="k">Estacionamento</span><span class="v tbd">a confirmar</span></li>
               </ul>
               <div class="vcard__acts">
-                <a class="link-arrow" href="/social/espacos/espaco-terra.html">Ver a casa por inteiro
+                <a class="link-arrow" href="/social/espacos/espaco-terra">Ver a casa por inteiro
                   <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
                 </a>
                 <a class="link-arrow link-arrow--alt" href="#proposta">Solicitar proposta para esta casa</a>
@@ -724,7 +724,7 @@
       </aside>
 
       <!-- formulário -->
-      <form class="on-dark rise" style="--i:1" action="#" method="post" novalidate>
+      <form class="on-dark rise" style="--i:1" method="post" data-destino="corporativo@diterra.com.br" data-assunto="Solicitação de proposta corporativa">
         <div class="form-grid">
           <div class="field">
             <label for="nome">Nome</label>
@@ -789,9 +789,10 @@
               Enviar solicitação
               <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
             </button>
+            <p class="form-status" aria-live="polite" tabindex="-1" hidden></p>
             <p class="form-note">
-              Formulário de demonstração: o envio ainda não está conectado a um destino.
-              O lead corporativo deve ser roteado para o comercial B2B, separado do social.
+              Enquanto o envio direto não está conectado, o botão abre o seu e-mail com a
+              solicitação pronta para o comercial.
             </p>
           </div>
         </div>
@@ -801,6 +802,8 @@
 </section>
 
 </main>
+
+<script src="/assets/formulario.js" defer></script>
 
 <!-- ══════════════════════════════════════════════════════════════
      RODAPÉ
@@ -829,10 +832,10 @@
       <div>
         <h2>As quatro casas</h2>
         <ul>
-          <li><a href="/social/espacos/a-querencia.html">A Querência</a></li>
-          <li><a href="/social/espacos/palacete-monte-alegre.html">Palacete Monte Alegre</a></li>
-          <li><a href="/social/espacos/casa-lucca.html">Casa Lucca</a></li>
-          <li><a href="/social/espacos/espaco-terra.html">Espaço Terrá</a></li>
+          <li><a href="/social/espacos/a-querencia">A Querência</a></li>
+          <li><a href="/social/espacos/palacete-monte-alegre">Palacete Monte Alegre</a></li>
+          <li><a href="/social/espacos/casa-lucca">Casa Lucca</a></li>
+          <li><a href="/social/espacos/espaco-terra">Espaço Terrá</a></li>
           <li><a href="/social">Eventos sociais</a></li>
           <li><a href="/">Página de entrada</a></li>
         </ul>

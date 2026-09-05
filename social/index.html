@@ -16,50 +16,40 @@
      e itálico 400. Oooh Baby não aparece nesta rota. -->
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 
-<!-- LIBRARIES — o CSS do GLightbox entra junto com o script, no primeiro
-     clique da galeria (ver carregarLightbox) -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
 <script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="/assets/css/tema-social.css">
 <link rel="stylesheet" href="/assets/css/base.css">
+<!-- social.css: nav, botão, gaveta e rodapé são os mesmos das outras
+     treze rotas. home.css fica só com o layout desta página. -->
+<link rel="stylesheet" href="/social/social.css">
 <link rel="stylesheet" href="/social/home.css">
 </head>
 <body>
 
-<!-- NOISE -->
-<div class="noise-overlay"></div>
-
-<!-- PRELOADER -->
-<div class="loader" id="loader">
-  <div class="loader-text">Di Terrá</div>
-  <div class="loader-bar" id="loaderBar"></div>
-</div>
-
 <!-- ═══════════════════════════════════════════════════
-     NAVIGATION — mix-blend-difference
+     NAV — o mesmo componente das outras treze rotas (social.css +
+     site.js): fundo ao sair do hero, gaveta no celular, régua de leitura
      ═══════════════════════════════════════════════════ -->
-<nav class="nav" id="nav">
-  <a href="#hero" class="nav-logo">
+<nav class="nav" id="nav" aria-label="Navegação principal">
+  <a class="nav__logo" href="/social" aria-label="Di Terrá Eventos, início">
     <img src="/assets/brand/social-wordmark-white.png" alt="Di Terrá Eventos" width="472" height="94">
   </a>
-  <ul class="nav-links">
-    <li><a href="#intro">O Grupo</a></li>
+  <ul class="nav__links">
+    <li><a href="#intro">O grupo</a></li>
     <li><a href="/social/espacos">Espaços</a></li>
     <li><a href="/social/solucoes">Soluções</a></li>
     <li><a href="#galeria">Galeria</a></li>
     <li><a href="#contato">Contato</a></li>
-    <li><a href="/corporativo">Corporativo &rarr;</a></li>
   </ul>
-  <button class="nav-toggle" id="navToggle" aria-expanded="false"
-          aria-controls="navDrawer" aria-label="Abrir menu">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav__side">
+    <a class="nav__switch" href="/corporativo">Corporativo &rarr;</a>
+    <a class="btn btn--primary" href="#contato">Fale conosco</a>
+    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Abrir menu">
+      <span></span><span></span>
+    </button>
+  </div>
+  <span class="nav__progresso" aria-hidden="true"></span>
 </nav>
-
-<!-- O hambúrguer existia sem gaveta nenhuma e sem handler: era o único
-     dos catorze menus que não abria no celular. Mesma marcação das
-     outras doze rotas do social. -->
 <div class="nav__drawer" id="navDrawer">
   <a href="#intro">O grupo</a>
   <a href="/social/espacos">Espaços</a>
@@ -69,16 +59,13 @@
   <a class="nav__switch" href="/corporativo">Ir para Corporativo &rarr;</a>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     WRAPPER (z-index 10, reveals footer underneath)
-     ═══════════════════════════════════════════════════ -->
-<div class="wrapper">
+<main id="conteudo">
 
 <!-- ═══════════════════════════════════════════════════
      § 1 — HERO
      ═══════════════════════════════════════════════════ -->
 <div class="hero-palco" id="heroPalco">
-<section class="hero" id="hero">
+<section class="hero" id="topo">
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -136,7 +123,7 @@
      ═══════════════════════════════════════════════════ -->
 <section class="stack-section" id="espacos">
   <div class="stack-header">
-    <h2 class="heading-lg">Espaços que Inspiram</h2>
+    <h2 class="heading-lg linhas">Espaços que Inspiram</h2>
   </div>
   <div class="stack-container">
 
@@ -218,10 +205,10 @@
 <section class="eventos" id="eventos">
   <div class="container">
     <div class="eventos-header">
-      <h2 class="heading-lg" data-aos="fade-up" data-aos-delay="100">Cada Evento,<br>Uma Narrativa Única</h2>
+      <h2 class="heading-lg linhas">Cada Evento,<br>Uma Narrativa Única</h2>
     </div>
   </div>
-  <div class="eventos-grid" data-aos="fade-up" data-aos-delay="200">
+  <div class="eventos-grid rise" style="--i:2">
     <article class="evento-card">
       <picture><source type="image/avif" srcset="/assets/opt/CASAMENTO-v2-800.avif 800w, /assets/opt/CASAMENTO-v2-1024.avif 1024w" sizes="(min-width: 1025px) 25vw, (min-width: 481px) 50vw, 100vw"><img src="/assets/opt/CASAMENTO-v2-1024.webp" alt="Casamento no Di Terrá" width="1024" height="1024" loading="lazy" decoding="async" srcset="/assets/opt/CASAMENTO-v2-800.webp 800w, /assets/opt/CASAMENTO-v2-1024.webp 1024w" sizes="(min-width: 1025px) 25vw, (min-width: 481px) 50vw, 100vw"></picture>
       <div class="evento-card-overlay">
@@ -260,10 +247,10 @@
   <div class="banner-bg" id="bannerBg"></div>
   <div class="banner-overlay"></div>
   <div class="banner-content">
-    <blockquote data-aos="fade-up">
+    <blockquote class="rise" style="--i:0">
       O lugar mais desejado de<br>Piracicaba para eventos<br>inesquecíveis
     </blockquote>
-    <span class="deco-line" style="background:rgba(255,255,255,.3);margin:0 auto;transform:scaleX(1)" data-aos="fade-up" data-aos-delay="200"></span>
+    <span class="deco-line rise" style="--i:2;background:rgba(255,255,255,.3);margin:0 auto;transform:scaleX(1)"></span>
   </div>
 </section>
 
@@ -273,10 +260,10 @@
 <section class="galeria" id="galeria">
   <div class="container">
     <div class="galeria-header">
-      <h2 class="heading-lg" data-aos="fade-up" data-aos-delay="100">Registros de<br>Momentos Reais</h2>
+      <h2 class="heading-lg linhas">Registros de<br>Momentos Reais</h2>
     </div>
   </div>
-  <div class="galeria-grid" data-aos="fade-up" data-aos-delay="200">
+  <div class="galeria-grid rise" style="--i:2">
     <div class="galeria-item">
       <a href="/assets/demo/galeria/cerimonia-vertical.webp" class="glightbox" data-gallery="gallery1">
         <picture><source type="image/avif" srcset="/assets/opt/cerimonia-vertical-800.avif 800w, /assets/opt/cerimonia-vertical-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/cerimonia-vertical-1400.webp" alt="Cadeiras e arco de flores montados para a cerimônia, no fim da tarde" width="1792" height="2400" loading="lazy" decoding="async" srcset="/assets/opt/cerimonia-vertical-800.webp 800w, /assets/opt/cerimonia-vertical-1400.webp 1400w" sizes="100vw"></picture>
@@ -317,12 +304,12 @@
   <div class="container">
     <div class="contato-grid">
       <div class="contato-text">
-        <h2 class="heading-lg" data-aos="fade-up">Vamos<br>Conversar</h2>
-        <span class="deco-line" data-aos="fade-right" data-aos-delay="100"></span>
-        <p class="body-text" data-aos="fade-up" data-aos-delay="200">
+        <h2 class="heading-lg linhas">Vamos<br>Conversar</h2>
+        <span class="deco-line rise" style="--i:1"></span>
+        <p class="body-text rise" style="--i:2">
           Cada evento começa por uma conversa. Conte-nos sobre a celebração que imagina e descobriremos juntos como transformá-la em algo extraordinário.
         </p>
-        <div class="contato-info" data-aos="fade-up" data-aos-delay="300">
+        <div class="contato-info rise" style="--i:3">
           <a href="tel:+5519999999999">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/></svg>
             (19) 99999-9999
@@ -337,8 +324,8 @@
           </a>
         </div>
       </div>
-      <div data-aos="fade-up" data-aos-delay="200">
-        <form class="form" onsubmit="return false">
+      <div class="rise" style="--i:2">
+        <form class="form" data-destino="contato@diterra.com.br" data-assunto="Contato pelo site Di Terrá">
           <div class="form-row">
             <div class="form-field">
               <label class="form-label" for="nome3">Nome *</label>
@@ -352,7 +339,7 @@
           <div class="form-row">
             <div class="form-field">
               <label class="form-label" for="evento3">Tipo de Evento</label>
-              <select class="form-select" id="evento3">
+              <select class="form-select" id="evento3" name="evento">
                 <option value="">Selecione...</option>
                 <option>Casamento</option>
                 <option>Debutante</option>
@@ -364,19 +351,20 @@
             </div>
             <div class="form-field">
               <label class="form-label" for="data3">Data prevista</label>
-              <input class="form-input" type="text" id="data3" placeholder="Ex: Março 2026">
+              <input class="form-input" type="text" id="data3" name="data" placeholder="Ex: Março 2026">
             </div>
           </div>
           <div class="form-field">
             <label class="form-label" for="mensagem3">Mensagem</label>
-            <textarea class="form-textarea" id="mensagem3" placeholder="Conte-nos sobre o evento que imagina..."></textarea>
+            <textarea class="form-textarea" id="mensagem3" name="mensagem" placeholder="Conte-nos sobre o evento que imagina..."></textarea>
           </div>
           <div class="form-submit">
             <button type="submit" class="btn btn--primary">
-              <span>Enviar Mensagem</span>
-              <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M9 1l4 4-4 4" stroke="currentColor" stroke-width="1"/></svg>
+              <span>Enviar mensagem</span>
+              <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h11M9 1l4 4-4 4" stroke="currentColor" stroke-width="1"/></svg>
             </button>
           </div>
+          <p class="form-status" aria-live="polite" tabindex="-1" hidden></p>
         </form>
       </div>
     </div>
@@ -384,58 +372,72 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════
-     § 8 — ETERNITY (closing section before footer)
+     § 8 — CHAMADA FINAL
+     O "Vamos conversar" em corpo de display era o pico emocional da
+     página e continua sendo; só deixou de viver atrás de um rodapé
+     fixo com truque de z-index.
      ═══════════════════════════════════════════════════ -->
-<section class="eternity">
-  <h2 class="heading-lg" data-aos="fade-up">Memórias que ficam</h2>
-  <p class="body-text" data-aos="fade-up" data-aos-delay="100">
-    Nossa missão é criar cenários onde cada detalhe contribui para memórias que transcendem o momento. Gastronomia, ambientação e natureza em perfeita harmonia.
-  </p>
-  <div class="vert-line" data-aos="fade-up" data-aos-delay="200"></div>
+<section class="section section--invert chamada">
+  <div class="wrap on-dark">
+    <p class="chamada__rotulo rise" style="--i:0">Pronto para começar?</p>
+    <a class="chamada__cta rise" style="--i:1" href="#contato">Vamos<br>conversar</a>
+    <p class="body-text chamada__texto rise" style="--i:2">
+      Nossa missão é criar cenários onde cada detalhe contribui para memórias que transcendem o momento. Gastronomia, ambientação e natureza em perfeita harmonia.
+    </p>
+  </div>
 </section>
 
-</div>
-<!-- END WRAPPER -->
+</main>
 
-<!-- ═══════════════════════════════════════════════════
-     FOOTER (FIXED BEHIND WRAPPER)
-     ═══════════════════════════════════════════════════ -->
-<footer class="footer-sticky">
-  <picture><source type="image/avif" srcset="/assets/opt/numeros-fundo-800.avif 800w, /assets/opt/numeros-fundo-1400.avif 1400w, /assets/opt/numeros-fundo-2400.avif 2400w" sizes="100vw"><img class="footer-bg-img" src="/assets/opt/numeros-fundo-1400.webp" alt="" width="2400" height="1018" loading="lazy" decoding="async" srcset="/assets/opt/numeros-fundo-800.webp 800w, /assets/opt/numeros-fundo-1400.webp 1400w, /assets/opt/numeros-fundo-2400.webp 2400w" sizes="100vw"></picture>
-  <div class="footer-inner">
-    <img class="footer-logo" src="/assets/brand/social-lockup-white.png" alt="Di Terrá Eventos" width="454" height="288">
-    <div class="footer-cta-label">Pronto para começar?</div>
-    <a class="footer-cta" href="#contato">Vamos<br>Conversar</a>
-    <nav class="footer-nav">
-      <a href="#intro">O Espaço</a>
-      <a href="#espacos">Ambientes</a>
-      <a href="#eventos">Eventos</a>
-      <a href="/social/espacos">Espaços</a>
-      <a href="/social/solucoes">Soluções</a>
-      <a href="#galeria">Galeria</a>
-      <a href="#contato">Contato</a>
-      <a href="/corporativo">Corporativo</a>
-      <a href="/">Página de entrada</a>
-    </nav>
-    <div class="footer-social">
-      <a href="#" aria-label="Instagram">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-      </a>
-      <a href="#" aria-label="Facebook">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-      </a>
-      <a href="#" aria-label="WhatsApp">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      </a>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__logo">
+        <img src="/assets/brand/social-lockup-white.png" alt="Di Terrá Eventos" width="454" height="288">
+        <p style="font-size:var(--text-sm); color:rgba(254,250,224,.78); max-width:30ch">
+          Quatro espaços no interior paulista para casamentos, debutantes, aniversários e bodas.
+        </p>
+      </div>
+      <div>
+        <h2>Espaços</h2>
+        <ul>
+          <li><a href="/social/espacos/a-querencia">A Querência</a></li>
+          <li><a href="/social/espacos/palacete-monte-alegre">Palacete Monte Alegre</a></li>
+          <li><a href="/social/espacos/casa-lucca">Casa Lucca</a></li>
+          <li><a href="/social/espacos/espaco-terra">Espaço Terrá</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Soluções</h2>
+        <ul>
+          <li><a href="/social/solucoes/gastronomia">Gastronomia</a></li>
+          <li><a href="/social/solucoes/decoracao">Decoração</a></li>
+          <li><a href="/social/solucoes/coquetelaria">Coquetelaria</a></li>
+          <li><a href="/social/solucoes/producao">Produção</a></li>
+          <li><a href="/social/solucoes/tecnologia-audiovisual">Tecnologia Audiovisual</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Di Terrá</h2>
+        <ul>
+          <li><a href="#galeria">Galeria</a></li>
+          <li><a href="#contato">Contato</a></li>
+          <li><a href="/corporativo">Corporativo</a></li>
+          <li><a href="/">Página de entrada</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="footer-bottom">© 2026 Di Terrá Eventos. Piracicaba, SP</div>
+    <div class="foot__bar">
+      <span>&copy; 2026 Di Terrá Eventos. Piracicaba e região, São Paulo.</span>
+      <span>Protótipo de avaliação. Conteúdo sujeito a validação.</span>
+    </div>
   </div>
 </footer>
 
 <!-- ═══════════════════════════════════════════════════
      SCRIPTS
      ═══════════════════════════════════════════════════ -->
-<a class="to-top" id="toTop" href="#hero" aria-label="Voltar ao topo da página">
+<a class="to-top" id="toTop" href="#topo" aria-label="Voltar ao topo da página">
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
     <path d="M8 13V3M3.5 7.5L8 3l4.5 4.5" stroke="currentColor" stroke-width="1.3"/>
   </svg>
@@ -443,46 +445,22 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="/assets/site.js" defer></script>
+<script src="/assets/formulario.js" defer></script>
 
 <script>
 /* ══════════════════════════════════════════════════════════════
-   SETUP
+   MOTION DA HOME — o que ainda é do GSAP: palavras do hero, parallax
+   do hero e do banner, pilha de cartões, filete decorativo. Nav,
+   gaveta, voltar ao topo, hero-cartão (--hp), régua e revelações
+   (.rise/.linhas) são do site.js, iguais às outras treze rotas.
+   Sem preloader: o conteúdo aparece assim que o CSS chega.
    ══════════════════════════════════════════════════════════════ */
 gsap.registerPlugin(ScrollTrigger);
 
-/* ── Movimento reduzido ─────────────────────────────────────────
-   Quase todo o movimento desta página é escrito por JavaScript, e o
-   bloco de prefers-reduced-motion do base.css não alcança valor que o
-   JS grava direto no elemento. Então a preferência é lida uma vez aqui
-   e consultada nos pontos que o CSS não cobre: Lenis, AOS e preloader.
-   Leitura única, na carga: quem muda a preferência no sistema recarrega
-   a página, que é o comportamento esperado. */
 const movimentoReduzido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ── Lenis Smooth Scroll ──────────────────────────────────────────
-   O Lenis sequestra a rolagem da página inteira — é o item mais
-   desorientador para quem tem sensibilidade vestibular. Com a
-   preferência ligada não instanciamos nada e não abrimos o laço de
-   requestAnimationFrame; a rolagem volta a ser a nativa do navegador.
-   A variável continua DECLARADA e valendo null, porque o voltar-ao-topo
-   consulta 'lenis' e já sabe cair no window.scrollTo quando não há. */
-const lenis = movimentoReduzido ? null : new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  direction: 'vertical',
-  smooth: true,
-});
-if (lenis) {
-  const raf = (time) => {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  };
-  requestAnimationFrame(raf);
-}
-
-/* ── Text Splitter Utility (from parallax-clean) ── */
+/* ── Text splitter (split-animate) ── */
 function splitTextToWords(element) {
   const text = element.innerText;
   const words = text.split(' ');
@@ -494,271 +472,83 @@ function splitTextToWords(element) {
     element.appendChild(wordWrap);
   });
 }
-document.querySelectorAll('.split-animate').forEach(el => {
-  splitTextToWords(el);
+document.querySelectorAll('.split-animate').forEach(el => { splitTextToWords(el); });
+
+/* ── GLightbox sob demanda ─────────────────────────────────────
+   A galeria é a sexta seção; no primeiro clique baixa, inicia e abre
+   a foto clicada. Sem script o link continua levando à imagem. */
+let lightbox = null;
+let carregandoLightbox = null;
+const carregarLightbox = function () {
+  if (carregandoLightbox) return carregandoLightbox;
+  carregandoLightbox = new Promise(function (ok, falha) {
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = 'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css';
+    document.head.appendChild(css);
+    const js = document.createElement('script');
+    js.src = 'https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js';
+    js.onload = function () {
+      lightbox = GLightbox({ touchNavigation: true, loop: true, skin: 'clean' });
+      ok(lightbox);
+    };
+    js.onerror = falha;
+    document.head.appendChild(js);
+  });
+  return carregandoLightbox;
+};
+document.querySelectorAll('.glightbox').forEach(function (link, i) {
+  link.addEventListener('click', function (e) {
+    if (lightbox) return;
+    e.preventDefault();
+    carregarLightbox().then(function (lb) { lb.openAt(i); })
+      .catch(function () { window.location.href = link.href; });
+  });
 });
 
-/* ══════════════════════════════════════════════════════════════
-   MENU MOBILE
-   Fora do initSite() de propósito: aquele só roda quando o preloader
-   do GSAP termina, o que deixava a navegação refém de uma animação de
-   três segundos e de três CDNs. Menu é navegação, não decoração —
-   liga assim que o script é lido.
-   ══════════════════════════════════════════════════════════════ */
-(function () {
-  const btnMenu = document.getElementById('navToggle');
-  const gaveta  = document.getElementById('navDrawer');
-  if (!btnMenu || !gaveta) return;
-
-  const alternar = (aberto) => {
-    gaveta.classList.toggle('is-open', aberto);
-    btnMenu.setAttribute('aria-expanded', String(aberto));
-    btnMenu.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
-    document.body.style.overflow = aberto ? 'hidden' : '';
-  };
-
-  btnMenu.addEventListener('click', function () {
-    alternar(!gaveta.classList.contains('is-open'));
-  });
-  gaveta.addEventListener('click', function (e) {
-    if (e.target.tagName === 'A') alternar(false);
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && gaveta.classList.contains('is-open')) {
-      alternar(false);
-      btnMenu.focus();
-    }
-  });
-})();
-
-/* ── Preloader ─────────────────────────────────────────────────
-   São ~3s de barra e cortina antes de qualquer conteúdo aparecer. Com
-   movimento reduzido pulamos a encenação: escondemos o #loader de uma
-   vez, sem tween, e chamamos initSite() na hora. O initSite() PRECISA
-   rodar nos dois caminhos — é ele que liga AOS, GLightbox e o resto do
-   comportamento; sem ele a página fica sem site, não sem animação. */
 if (movimentoReduzido) {
-  gsap.set('#loader', { yPercent: -100 });
-  initSite();
+  /* com movimento reduzido as palavras já estão no lugar (base.css) e o
+     GSAP não precisa mover nada */
 } else {
-  const loadTl = gsap.timeline({
-    onComplete: () => {
-      initSite();
-    }
-  });
-
-  loadTl
-    .to('#loaderBar', { width: '100%', duration: 1.5, ease: 'power2.inOut' })
-    .to('.loader-text', { y: -40, opacity: 0, duration: 0.5 })
-    .to('#loader', { yPercent: -100, duration: 1, ease: 'power4.inOut' });
-}
-
-/* ══════════════════════════════════════════════════════════════
-   INIT SITE — called after preloader
-   ══════════════════════════════════════════════════════════════ */
-function initSite() {
-
-  /* ── AOS ──────────────────────────────────────────────────────
-     São 14 revelações declarativas espalhadas pelo HTML. O próprio AOS
-     aceita 'disable' como função: devolvendo true ele não anima nada e
-     deixa os elementos no estado final, então os data-aos do HTML podem
-     ficar onde estão. */
-  AOS.init({
-    duration: 800,
-    easing: 'ease-out-cubic',
-    once: true,
-    offset: 60,
-    disable: function () { return movimentoReduzido; }
-  });
-
-  /* ── GLightbox sob demanda ─────────────────────────────────────
-     A galeria é a sexta seção; carregar CSS e JS do lightbox na
-     abertura da página cobrava 19 KB de quem nunca chega lá. No
-     primeiro clique: baixa, inicia e abre a foto clicada. Sem script
-     o link continua levando à imagem inteira. */
-  var lightbox = null;
-  var carregandoLightbox = null;
-  var carregarLightbox = function () {
-    if (carregandoLightbox) return carregandoLightbox;
-    carregandoLightbox = new Promise(function (ok, falha) {
-      var css = document.createElement('link');
-      css.rel = 'stylesheet';
-      css.href = 'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css';
-      document.head.appendChild(css);
-      var js = document.createElement('script');
-      js.src = 'https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js';
-      js.onload = function () {
-        lightbox = GLightbox({ touchNavigation: true, loop: true, skin: 'clean' });
-        ok(lightbox);
-      };
-      js.onerror = falha;
-      document.head.appendChild(js);
-    });
-    return carregandoLightbox;
-  };
-  document.querySelectorAll('.glightbox').forEach(function (link, i) {
-    link.addEventListener('click', function (e) {
-      if (lightbox) return;           /* já iniciado: o GLightbox trata o clique */
-      e.preventDefault();
-      carregarLightbox().then(function (lb) { lb.openAt(i); })
-        .catch(function () { window.location.href = link.href; });
-    });
-  });
-
-  /* ── Hero Animations ── */
-  gsap.to('.word-inner', {
-    y: '0%',
-    stagger: 0.1,
-    duration: 1.5,
-    ease: 'power4.out'
-  });
+  /* ── Hero ── */
+  gsap.to('.word-inner', { y: '0%', stagger: 0.1, duration: 1.5, ease: 'power4.out' });
   gsap.to('.hero-fade', { opacity: 1, duration: 1, delay: 0.5 });
-
-  /* ── Hero Parallax ── */
   gsap.to('#heroBg', {
-    yPercent: 15,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.hero',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: true
-    }
+    yPercent: 15, ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
   });
 
-  /* ── Hero vira cartão ──────────────────────────────────────────
-     A forma mora no base.css; aqui só escrevemos o progresso. O
-     corporativo faz o mesmo pelo próprio laço de scroll, porque não
-     carrega GSAP. Desligado no celular e com movimento reduzido, onde
-     o CSS já devolve o hero ao fluxo normal. */
-  const palco = document.getElementById('heroPalco');
-  const podeCartao = palco
-    && window.matchMedia('(min-width: 768px)').matches
-    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (podeCartao) {
-    gsap.to(palco, {
-      '--hp': 1,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: palco,
-        start: 'top top',
-        /* o palco não é mais alto que a tela, então 'bottom bottom' dava
-           curso zero: agora são 70% de uma tela de rolagem */
-        end: function () { return '+=' + (window.innerHeight * 0.7); },
-        scrub: true
-      }
-    });
-  }
-
-  /* ── Split Text Scroll Reveal (intro .split-animate) ── */
+  /* ── Split text da intro ── */
   document.querySelectorAll('.split-animate').forEach(el => {
-    const words = el.querySelectorAll('.word-inner');
-    gsap.to(words, {
-      y: '0%',
-      duration: 1,
-      ease: 'power3.out',
-      stagger: 0.02,
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 85%',
-        toggleActions: 'play none none reverse'
-      }
+    gsap.to(el.querySelectorAll('.word-inner'), {
+      y: '0%', duration: 1, ease: 'power3.out', stagger: 0.02,
+      scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none reverse' }
     });
   });
 
-  /* ── Card Stack Animation (from parallax-clean) ── */
+  /* ── Pilha de cartões: o coberto encolhe, apaga e desfoca ── */
   const cards = gsap.utils.toArray('.card-item');
   cards.forEach((card, i) => {
     const nextCard = cards[i + 1];
     if (nextCard) {
       gsap.to(card.querySelector('.card-inner'), {
-        scale: 0.9,
-        opacity: 0.4,
-        /* item 5 do brief: o cartão coberto também desfoca, e é o
-           desfoque que faz ele ler como "foi para o fundo" em vez de
-           apenas "ficou menor" */
-        filter: 'blur(6px)',
-        ease: 'none',
-        scrollTrigger: {
-          trigger: nextCard,
-          start: 'top bottom',
-          end: 'top 10vh',
-          scrub: true
-        }
+        scale: 0.9, opacity: 0.4, filter: 'blur(6px)', ease: 'none',
+        scrollTrigger: { trigger: nextCard, start: 'top bottom', end: 'top 10vh', scrub: true }
       });
     }
   });
 
-  /* ── Banner Parallax ── */
+  /* ── Banner ── */
   gsap.to('#bannerBg', {
-    yPercent: 10,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.banner',
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: true
-    }
+    yPercent: 10, ease: 'none',
+    scrollTrigger: { trigger: '.banner', start: 'top bottom', end: 'bottom top', scrub: true }
   });
 
-  /* ── Decorative Line Reveal ── */
+  /* ── Filete decorativo ── */
   document.querySelectorAll('.deco-line').forEach(line => {
-    ScrollTrigger.create({
-      trigger: line,
-      start: 'top 85%',
-      onEnter: () => line.classList.add('revealed'),
-      once: true
-    });
-  });
-
-  /* ── Footer Parallax ── */
-  gsap.from('.footer-inner', {
-    y: 80,
-    opacity: 0.5,
-    scale: 0.95,
-    scrollTrigger: {
-      trigger: '.footer-sticky',
-      start: 'top bottom',
-      end: 'bottom bottom',
-      scrub: true
-    }
+    ScrollTrigger.create({ trigger: line, start: 'top 85%', onEnter: () => line.classList.add('revealed'), once: true });
   });
 }
-
-/* ══════════════════════════════════════════════════════════════
-   VOLTAR AO TOPO
-   Usa o Lenis quando disponível, porque a rolagem da página é
-   controlada por ele; window.scrollTo brigaria com o loop do rAF.
-   ══════════════════════════════════════════════════════════════ */
-(function () {
-  const toTop = document.getElementById('toTop');
-  if (!toTop) return;
-
-  let pendente = false;
-  const atualizar = () => {
-    toTop.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.8);
-    pendente = false;
-  };
-
-  window.addEventListener('scroll', () => {
-    if (pendente) return;
-    pendente = true;
-    requestAnimationFrame(atualizar);
-  }, { passive: true });
-
-  atualizar();
-
-  toTop.addEventListener('click', (e) => {
-    e.preventDefault();
-    const reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (typeof lenis !== 'undefined' && lenis) {
-      lenis.scrollTo(0, { immediate: reduz });
-    } else {
-      window.scrollTo({ top: 0, behavior: reduz ? 'auto' : 'smooth' });
-    }
-  });
-})();
 </script>
 </body>
 </html>
