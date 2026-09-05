@@ -21,24 +21,6 @@ embutidas. Foram trocadas por estas, que ao menos são fotográficas e têm
 Isso não afrouxa nada do aviso acima: aumenta a urgência. O que antes era um
 problema de layout agora é o que o visitante vê.
 
-## Rodada de 05/09/2026 (benchmarks)
-
-Mais 39 imagens e um vídeo gerados no Higgsfield (Nano Banana Pro 2k e
-Seedance 2.5), para o cliente ver o comportamento das seções antes de
-fornecer a fotografia real:
-
-- `ocasioes/ocasiao-*.webp`: 4 horizontais (casamento, debutante,
-  aniversário, formatura) para a pilha da home social.
-- `percurso/<casa>-0N-*.webp`: 5 retratos por casa (chegada, cerimônia,
-  coquetel, festa, saída) para o percurso das páginas de casa.
-- `passos/<solucao>-N.webp`: 3 horizontais por solução para "Como
-  acontece"; `passos/coquetelaria-video-poster.webp` e
-  `assets/opt/video/coquetelaria-1280.mp4` (5 s) para o vídeo em cartão.
-  O clipe de gastronomia não foi gerado por falta de créditos.
-
-Vale o mesmo aviso: nada disto é a Di Terrá. Ao trocar, manter os
-nomes de arquivo e rodar os dois scripts de `tools/`.
-
 ## Pendências antes de qualquer publicação
 
 - Substituir todos os arquivos desta pasta por fotografia real. Depois,

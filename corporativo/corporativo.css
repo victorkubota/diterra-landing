@@ -348,34 +348,75 @@
 
 /* ══════════════════════════════════════════════════════════════════════
    FORMATOS — grade bento com fotografia
-   Seis cartões de altura contida: dois largos, três médios, um cheio.
+
+   Antes: seis blocos de prosa, 2.816px de altura e nenhuma imagem.
    ══════════════════════════════════════════════════════════════════════ */
-.bento { display: grid; gap: clamp(12px, 1.4vw, 20px); }
-@media (min-width: 760px) { .bento { grid-template-columns: repeat(6, 1fr); } }
-.bento__item {
-  position: relative; border-radius: var(--radius-lg); overflow: hidden;
-  background: var(--navy-900); min-height: clamp(240px, 34vw, 320px);
-  display: flex; align-items: flex-end; isolation: isolate;
+/* Era grade bento. Virou pilha a pedido do cliente: cada formato ocupa
+   a tela por vez e o anterior recua desfocado, o mesmo mecanismo que a
+   referência usa nas citações de imprensa. Um formato de cada vez lê
+   melhor que seis miniaturas competindo. */
+.pilha { display: grid; gap: clamp(12px, 1.4vw, 20px); }
+
+/* sem position aqui: .pilha__item já dá o sticky no base.css, e como
+   corporativo.css carrega depois, um "relative" nesta regra o anulava */
+/* no celular não há pilha: um sticky sem top é inerte, mas deixar
+   explícito evita surpresa se alguém mexer no utilitário depois */
+@media (max-width: 859px) { .fmt { position: static; } }
+@media (min-width: 860px) {
+  .pilha { display: block; padding-bottom: 12vh; }
+  .fmt { top: 12vh; margin-bottom: 7vh; height: 76vh; }
 }
-@media (min-width: 760px) {
-  .bento__item        { grid-column: span 2; }
-  .bento__item--wide  { grid-column: span 3; min-height: clamp(300px, 30vw, 400px); }
-  .bento__item--full  { grid-column: span 6; min-height: clamp(260px, 26vw, 340px); }
+
+.fmt__cartao {
+  position: relative;
+  width: 100%; height: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--navy-900);
+  min-height: clamp(240px, 34vw, 320px);
+  display: flex; align-items: flex-start; justify-content: center;
+  isolation: isolate;
+  box-shadow: 0 30px 60px -30px rgba(14,22,42,.5);
 }
-.bento__item img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s var(--ease); }
-.bento__item::after {
+@media (min-width: 860px) {
+  .fmt__cartao { min-height: 0; }
+}
+.fmt__cartao img {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 1.4s var(--ease);
+}
+.fmt__cartao::after {
   content: ''; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(to top, rgba(12,20,38,.9) 0%, rgba(12,20,38,.46) 46%, rgba(12,20,38,.06) 100%);
+  /* o véu inverteu junto com o texto: pesa em cima, onde agora se lê */
+  background: linear-gradient(to bottom, rgba(12,20,38,.88) 0%, rgba(12,20,38,.44) 42%, rgba(12,20,38,.06) 100%);
   transition: background var(--dur) var(--ease);
 }
 @media (hover: hover) {
-  .bento__item:hover img { transform: scale(1.05); }
-  .bento__item:hover::after { background: linear-gradient(to top, rgba(12,20,38,.92) 0%, rgba(12,20,38,.56) 52%, rgba(12,20,38,.14) 100%); }
+  .fmt__cartao:hover img { transform: scale(1.05); }
+  .fmt__cartao:hover::after { background: linear-gradient(to bottom, rgba(12,20,38,.9) 0%, rgba(12,20,38,.52) 48%, rgba(12,20,38,.14) 100%); }
 }
-.bento__text { position: relative; padding: clamp(22px, 2.6vw, 34px); color: #fff; display: flex; flex-direction: column; gap: 10px; }
-.bento__text .h-card { color: #fff; }
-.bento__text p { font-size: var(--text-sm); color: rgba(255,255,255,.84); max-width: 44ch; }
-#formatos .fmt__n { color: var(--blue-300); }
+/* texto no topo, centralizado e maior: item 5 do brief. Antes ficava no
+   pé, alinhado à esquerda, no corpo de 15px. */
+.fmt__text {
+  position: relative;
+  padding: clamp(30px, 4vw, 64px) clamp(22px, 3vw, 40px);
+  color: #fff;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  text-align: center;
+  max-width: 46em;
+}
+.fmt__text .h-card {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 1rem + 2.4vw, 3.25rem);
+  font-weight: 400; line-height: 1.08; letter-spacing: -.012em;
+}
+.fmt__n {
+  font-size: var(--text-xs); font-variant-numeric: tabular-nums;
+  letter-spacing: .2em; color: var(--blue-300);
+}
+.fmt__cartao .h-card { color: #fff; }
+.fmt__cartao p { font-size: var(--text-lg); color: rgba(255,255,255,.86); max-width: 48ch; }
 
 /* .switch / .vcard (lista que troca a foto) moram no base.css desde
    05/09/2026: a home social passou a usar o mesmo componente para as

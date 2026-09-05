@@ -92,15 +92,15 @@
 .hero-bg {
   position: absolute;
   inset: -80px;
-  background: var(--royal);
+  /* A peça tem 1220 px de largura: não há pixel para ampliar, então a
+     variante nativa é a única. AVIF pesa 1/20 do PNG de 3,7 MB. */
+  background-image: url('/assets/opt/solucao-completa-decoracao-casamento-1220.webp');
+  background-image: image-set(
+    url('/assets/opt/solucao-completa-decoracao-casamento-1220.avif') type('image/avif'),
+    url('/assets/opt/solucao-completa-decoracao-casamento-1220.webp') type('image/webp'));
+  background-size: cover;
+  background-position: center;
 }
-/* foto de reserva e vídeo ocupam o palco inteiro; o vídeo fica por cima
-   quando o script o liga (mesma lógica da raiz e do corporativo) */
-.hero-bg img, .hero-bg video {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%; object-fit: cover; object-position: center 46%;
-}
-.hero-bg video { z-index: 1; }
 /* parallax preso à rolagem, sem JS: a foto desce 15% enquanto o hero
    sai pelo topo. Onde não há animation-timeline, fica parada. */
 @supports (animation-timeline: scroll()) {
@@ -304,47 +304,77 @@
 @media (max-width: 939px) { .switch__arco { display: none; } }
 
 /* ══════════════════════════════════════════════════════════════
-   § 4 — OCASIÕES (pilares editoriais)
-   Foto 4:5 de um lado, texto do outro, lados alternando. Altura da foto
-   limitada a 72svh para a seção ler como um todo.
+   § 4 — EVENTOS
    ══════════════════════════════════════════════════════════════ */
-.ocasioes { background: var(--ivory-light); }
-.ocasioes .section__head--centro { margin-inline: auto; text-align: center; margin-bottom: clamp(40px, 6vw, 96px); }
-.pilar { display: grid; gap: clamp(22px, 3vw, 56px); align-items: center; }
-.pilar + .pilar { margin-top: clamp(56px, 9vw, 140px); }
-@media (min-width: 900px) {
-  .pilar { grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 110px); }
-  .pilar:nth-of-type(even) .pilar__media { order: 2; }
+.eventos {
+  padding: var(--section-y) 0;
+  background: var(--ivory-light);
 }
-.pilar__media { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4 / 5; max-height: 72svh; background: var(--royal); }
-.pilar__media picture, .pilar__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.pilar__texto { display: flex; flex-direction: column; gap: 16px; max-width: 42ch; }
-@media (min-width: 900px) { .pilar:nth-of-type(odd) .pilar__texto { padding-left: clamp(0px, 4vw, 64px); } }
-.pilar__rotulo { font-size: var(--text-xs); letter-spacing: .22em; text-transform: uppercase; color: var(--ui-text-muted); }
-.pilar__titulo { font-family: var(--font-display); font-weight: 300; font-size: var(--text-2xl); line-height: 1.05; letter-spacing: -.01em; color: var(--royal); }
-.pilar__texto > p:not(.pilar__rotulo) { color: var(--ui-text-muted); line-height: 1.75; }
-
-/* ══════════════════════════════════════════════════════════════
-   § 4b — SOLUÇÕES (índice com foto)
-   ══════════════════════════════════════════════════════════════ */
-.solucoes-faixa { background: var(--rose); color: var(--royal); }
-.solucoes-faixa .heading-lg { color: var(--royal); }
-.solucoes-faixa .body-text { color: var(--royal); opacity: .8; }
-/* as cinco soluções visíveis ao mesmo tempo: retratos 3:4 lado a lado,
-   nome em serifa e rótulo em caixa alta; trilho no celular */
-.solucoes-grade { display: grid; gap: clamp(14px, 1.6vw, 24px); grid-template-columns: repeat(5, 1fr); }
-@media (max-width: 1099px) { .solucoes-grade { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 699px) {
-  .solucoes-grade { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); padding-bottom: 6px; }
-  .solucoes-grade::-webkit-scrollbar { display: none; }
-  .solucao-card { flex: 0 0 68vw; scroll-snap-align: start; }
+.eventos-header {
+  text-align: center;
+  margin-bottom: clamp(40px, 6vw, 72px);
 }
-.solucao-card { display: grid; gap: 10px; color: var(--royal); }
-.solucao-card__media { display: block; aspect-ratio: 3 / 4; border-radius: var(--radius-md); overflow: hidden; background: var(--royal); }
-.solucao-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
-@media (hover: hover) { .solucao-card:hover .solucao-card__media img { transform: scale(1.05); } }
-.solucao-card__nome { font-family: var(--font-display); font-weight: 300; font-size: var(--text-xl); line-height: 1.1; margin-top: 6px; }
-.solucao-card__meta { font-size: var(--text-xs); letter-spacing: .16em; text-transform: uppercase; opacity: .7; }
+.eventos-header .eyebrow {
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.eventos-header .eyebrow::before { display: none; }
+.eventos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: var(--max);   /* era 1400px: o layout acompanha a tela */
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.evento-card {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+.evento-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .8s var(--ease);
+  border-radius: var(--radius-lg);
+}
+.evento-card:hover img { transform: scale(1.06); }
+.evento-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,.6) 100%);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px;
+  opacity: 0;
+  transition: opacity .5s var(--ease);
+}
+.evento-card:hover .evento-card-overlay { opacity: 1; }
+.evento-card-overlay h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-lg-display);
+  font-weight: 300;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--white);
+  transform: translateY(12px);
+  transition: transform .5s var(--ease);
+}
+.evento-card:hover .evento-card-overlay h3 { transform: translateY(0); }
+.evento-card-overlay .evento-tag {
+  font-size: var(--text-xs);
+  font-weight: 300;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-top: 8px;
+  transform: translateY(12px);
+  transition: transform .5s var(--ease) .05s;
+}
+.evento-card:hover .evento-card-overlay .evento-tag { transform: translateY(0); }
 
 /* ══════════════════════════════════════════════════════════════
    § 5 — BANNER FULLWIDTH
@@ -579,6 +609,7 @@
    RESPONSIVE
    ══════════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
+  .eventos-grid { grid-template-columns: repeat(2, 1fr); }
   /* a galeria mantém o desenho bento em duas colunas: item 1 alto à
      esquerda, 2 e 3 à direita, 4 largo embaixo, 5 e 6 fechando */
   .galeria-grid { grid-template-columns: repeat(2, 1fr); }
@@ -591,11 +622,18 @@
   .intro-image { margin-right: 0; }
 
 
+  .eventos-grid { grid-template-columns: 1fr 1fr; }
   .galeria-grid { grid-template-columns: 1fr 1fr; }
   .form-row { grid-template-columns: 1fr; }
 
 }
+/* sem hover (dedo, inclusive tablet) o nome do evento fica sempre visível */
+@media (hover: none), (max-width: 768px) {
+  .evento-card-overlay { opacity: 1; }
+  .evento-card-overlay h3, .evento-card-overlay .evento-tag { transform: none; }
+}
 @media (max-width: 480px) {
+  .eventos-grid { grid-template-columns: 1fr; }
   .galeria-grid { grid-template-columns: 1fr; }
   .galeria-item:nth-child(1) { grid-row: span 1; }
   .galeria-item:nth-child(4) { grid-column: span 1; }

@@ -129,19 +129,3 @@ Mesmo esqueleto, com dois blocos próprios:
 | 9 | Ficha como número, citação em tela cheia, vídeo em cartão | P cada | Sim (dados, depoimento, vídeo) |
 
 Os itens 2, 3, 5, 6, 7 e 8 podem entrar já, com o material atual. Os itens 1, 4 e 9 valem a espera pela fotografia, porque são justamente os que vendem o lugar.
-
----
-
-## 10. Execução (2026-09-05, PRs #37 a #41)
-
-Por decisão do Victor, todos os nove itens foram implementados, com fotos e um vídeo de placeholder gerados no Higgsfield para o cliente ver o comportamento antes de fornecer o material real.
-
-| PR | Itens | Placeholder gerado |
-|---|---|---|
-| #37 | 3 hero com vídeo, 2 soluções na home, 8 cursor "Ver" e título por máscara | nenhum |
-| #38 | 1 ocasiões como pilha em tela cheia (+ `?ocasiao=` no hub) | 4 fotos 16:9 |
-| #39 | 6 hubs como índice fotográfico | nenhum |
-| #40 | 4 percurso do evento, 9 ficha como número e citação, 5 galeria dupla e trilho | 20 retratos 3:4 |
-| #41 | 7 "Como acontece" e "Em qual casa", 9 vídeo em cartão (só coquetelaria) | 15 fotos 16:9 + 1 vídeo de 5 s |
-
-Ficou de fora: o vídeo de gastronomia (saldo de créditos acabou; a estrutura do cartão está pronta em `social/solucoes/coquetelaria.html` para replicar), e os dados reais da ficha (o componente numérico mostra "a confirmar" até chegarem). As citações são frases ilustrativas marcadas na página.

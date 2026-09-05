@@ -554,7 +554,7 @@ def pagina_interna(item, tipo):
       <li><a href="/social/{tipo}">{rotulo}</a></li>
       <li aria-current="page">{item['nome']}</li>
     </ol>
-    <h1 class="h-display linhas">{item['nome']}</h1>
+    <h1 class="h-display">{item['nome']}</h1>
     <p class="lead page-hero__lead">{item['lead']}</p>
   </div>
 </header>
@@ -645,7 +645,7 @@ def hub(tipo):
       <li><a href="/social">Social</a></li>
       <li aria-current="page">{h1}</li>
     </ol>
-    <h1 class="h-display linhas">{h1}</h1>
+    <h1 class="h-display">{h1}</h1>
     <p class="lead page-hero__lead">{lead}</p>
   </div>
 </header>
