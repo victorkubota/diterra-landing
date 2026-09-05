@@ -235,12 +235,15 @@
       curso > 0 ? Math.min(1, window.scrollY / curso).toFixed(4) : '0');
   };
 
-  /* ── laço de scroll, compartilhado pelo hero, a régua e o voltar ao topo ── */
-  if (toTop || palco || regua) {
+  /* ── laço de scroll, compartilhado pelo hero, a régua, a barra de ação
+     e o voltar ao topo ── */
+  var barra = document.getElementById('barraAcao');
+  if (toTop || palco || regua || barra) {
     var pendente = false;
 
     var atualizar = function () {
       if (toTop) toTop.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.8);
+      if (barra) barra.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.5);
       pintarHero();
       pintarRegua();
       pendente = false;

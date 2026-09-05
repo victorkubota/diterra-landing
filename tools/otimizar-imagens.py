@@ -49,7 +49,7 @@ LEGADAS = (
 
 # Uma foto conta como usada se algum HTML, CSS ou o gerador cita a origem em
 # assets/demo/ OU uma variante já reescrita em assets/opt/<nome>-<largura>.
-REF_DEMO_RE = re.compile(r"assets/demo/(?:%s)/([A-Za-z0-9_-]+)\.webp" % "|".join(PASTAS_DEMO))
+REF_DEMO_RE = re.compile(r"assets/(?:demo/(?:%s)|brand)/([A-Za-z0-9_-]+)\.(?:webp|jpg)" % "|".join(PASTAS_DEMO))
 REF_OPT_RE = re.compile(r"assets/opt/([A-Za-z0-9_-]+?)-\d+\.(?:avif|webp)")
 
 
@@ -59,6 +59,9 @@ def candidatas() -> dict[str, Path]:
     for pasta in PASTAS_DEMO:
         for arq in sorted((ASSETS / "demo" / pasta).glob("*.webp")):
             mapa[arq.stem] = arq
+    # fotografia dos arquivos de marca (1800 px), usada nas internas
+    for arq in sorted((ASSETS / "brand").glob("foto-*.jpg")):
+        mapa[arq.stem] = arq
     for nome in LEGADAS:
         arq = ASSETS / nome
         if arq.exists():

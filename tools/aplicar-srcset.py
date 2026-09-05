@@ -29,7 +29,8 @@ from PIL import Image
 RAIZ = Path(__file__).resolve().parent.parent
 OPT = RAIZ / "assets" / "opt"
 
-PAGINAS = ("index.html", "social/index.html", "corporativo/index.html")
+PAGINAS = ("index.html", "social/index.html", "corporativo/index.html") + tuple(
+    str(p.relative_to(RAIZ)) for p in sorted((RAIZ / "social").rglob("*.html")) if p != RAIZ / "social" / "index.html")
 
 CHEIA = "100vw"
 METADE = "(min-width: 940px) 50vw, 100vw"
@@ -53,6 +54,11 @@ SIZES: list[tuple[str, str, str]] = [
     ("corporativo/index.html", "espacos/", METADE),
     ("corporativo/index.html", "territorio/estrada", "(min-width: 900px) 62vw, 100vw"),
     ("corporativo/index.html", "territorio/", "(min-width: 1000px) 25vw, 30vw"),
+    # internas (social/espacos/*, social/solucoes/*): hero, bloco editorial,
+    # galeria e cards das outras casas
+    ("social/", "brand/foto-", "(min-width: 900px) 50vw, 100vw"),
+    ("social/", "espacos/", "(min-width: 1040px) 33vw, (min-width: 680px) 50vw, 100vw"),
+    ("social/", "solucoes/", "(min-width: 860px) 25vw, 50vw"),
 ]
 
 IMG_RE = re.compile(r"<img\b([^>]*?)>", re.S)
@@ -75,9 +81,12 @@ def srcset(vs: list[tuple[int, Path]]) -> str:
     return ", ".join(f"/assets/opt/{p.name} {w}w" for w, p in vs)
 
 
-def medida(pagina: str, src: str) -> str:
+def medida(pagina: str, src: str, atributos: str = "") -> str:
+    # o hero de página interna é sempre tela cheia
+    if 'fetchpriority="high"' in atributos:
+        return CHEIA
     for pag, trecho, sizes in SIZES:
-        if pag == pagina and trecho in src:
+        if pagina.startswith(pag) and trecho in src:
             return sizes
     return CHEIA
 
@@ -107,7 +116,7 @@ def reescrever(pagina: str) -> int:
         if not avif or not webp:
             return m.group(0)
 
-        sizes = medida(pagina, src)
+        sizes = medida(pagina, src, atributos)
         # fallback: a maior variante até 1400, ou a única existente
         candidatos = [p for w, p in webp if w <= 1400] or [webp[0][1]]
         fallback = f"/assets/opt/{candidatos[-1].name}"
