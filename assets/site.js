@@ -293,6 +293,25 @@
     Array.prototype.forEach.call(passosP, function (el) { ioPasso.observe(el); });
   }
 
+  /* ── vídeo em cartão: toca em laço só enquanto está na tela e com
+     movimento permitido; quem pediu para parar, para (WCAG 2.2.2) ── */
+  Array.prototype.forEach.call(document.querySelectorAll('.video-cartao'), function (cartao) {
+    var v = cartao.querySelector('video');
+    var b = cartao.querySelector('.video-cartao__pausa');
+    var parado = semMovimento;
+    if (parado && b) { b.textContent = 'Reproduzir'; b.setAttribute('aria-pressed', 'true'); }
+    var tocar = function () { if (!parado) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } };
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (e) { if (e[0].isIntersecting) tocar(); else v.pause(); }, { threshold: .35 }).observe(v);
+    } else { tocar(); }
+    if (b) b.addEventListener('click', function () {
+      parado = !parado;
+      b.setAttribute('aria-pressed', String(parado));
+      b.textContent = parado ? 'Reproduzir' : 'Pausar';
+      if (parado) v.pause(); else tocar();
+    });
+  });
+
   /* ── hub de soluções chegando de uma ocasião ─────────────────────
      /social/solucoes?ocasiao=casamento: o hero diz para que ocasião a
      pessoa está olhando. Só texto; a lista continua a mesma. */
