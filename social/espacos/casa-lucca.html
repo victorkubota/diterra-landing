@@ -54,7 +54,7 @@
 <main id="conteudo">
 
 <div class="hero-palco" id="heroPalco">
-<header class="page-hero page-hero--cheio" id="topo">
+<header class="page-hero" id="topo">
   <div class="page-hero__media">
     <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-amplitude-800.avif 800w, /assets/opt/casa-lucca-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/casa-lucca-amplitude-1400.webp" alt="Mesa longa montada na área externa da Casa Lucca" fetchpriority="high" width="2400" height="1610" srcset="/assets/opt/casa-lucca-amplitude-800.webp 800w, /assets/opt/casa-lucca-amplitude-1400.webp 1400w" sizes="100vw"></picture>
   </div>
@@ -65,7 +65,7 @@
       <li><a href="/social/espacos">Espaços</a></li>
       <li aria-current="page">Casa Lucca</li>
     </ol>
-    <h1 class="h-display linhas">Casa Lucca</h1>
+    <h1 class="h-display">Casa Lucca</h1>
     <p class="lead page-hero__lead">Para festas de convidados contados. Mesa longa na área externa, ambiente reservado e serviço próximo.</p>
   </div>
 </header>
@@ -73,66 +73,18 @@
 
 <section class="section">
   <span class="ornament ornament--tr"><img src="/assets/brand/ornamento-ramo-rose.png" alt="" width="305" height="621"></span>
-  <div class="wrap">
-    <div class="prose prose--abertura rise">
+  <div class="wrap split">
+    <div class="prose rise">
       <p>A Casa Lucca é a resposta para quem não quer uma festa grande. O formato favorece mesas longas, jantares servidos e conversas que atravessam a noite inteira sem competir com o som.</p>
       <p>A escala menor muda a operação: a equipe fica mais próxima dos convidados e o ritmo do serviço acompanha a mesa, não o cronograma.</p>
     </div>
-  </div>
-</section>
-
-<!-- PERCURSO DO EVENTO: a foto presa à direita troca conforme cada passo
-     entra na tela (site.js). No celular, cada passo traz a própria foto. -->
-<section class="section section--paper percurso" id="percurso">
-  <div class="wrap">
-    <div class="section__head">
-      <h2 class="h-section linhas">Um dia inteiro, do portão à saída</h2>
-    </div>
-    <div class="percurso__grade">
-      <ol class="percurso__passos">
-        <li class="percurso__passo is-on" data-passo="0">
-          <figure class="percurso__foto-m"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-01-chegada-800.avif 800w, /assets/opt/casa-lucca-01-chegada-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-01-chegada-1400.webp" width="1792" height="2400" alt="Chegada: O caminho de pedra entre buganvílias leva à varanda; a casa é pequena de propósito." loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-01-chegada-800.webp 800w, /assets/opt/casa-lucca-01-chegada-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture></figure>
-          <span class="percurso__n">01</span>
-          <h3 class="percurso__titulo">Chegada</h3>
-          <p>O caminho de pedra entre buganvílias leva à varanda; a casa é pequena de propósito.</p>
-        </li>
-        <li class="percurso__passo" data-passo="1">
-          <figure class="percurso__foto-m"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-02-cerimonia-800.avif 800w, /assets/opt/casa-lucca-02-cerimonia-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-02-cerimonia-1400.webp" width="1792" height="2400" alt="Cerimônia: Sob a árvore grande, para poucas cadeiras e quem importa." loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-02-cerimonia-800.webp 800w, /assets/opt/casa-lucca-02-cerimonia-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture></figure>
-          <span class="percurso__n">02</span>
-          <h3 class="percurso__titulo">Cerimônia</h3>
-          <p>Sob a árvore grande, para poucas cadeiras e quem importa.</p>
-        </li>
-        <li class="percurso__passo" data-passo="2">
-          <figure class="percurso__foto-m"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-03-coquetel-800.avif 800w, /assets/opt/casa-lucca-03-coquetel-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-03-coquetel-1400.webp" width="1792" height="2400" alt="Coquetel: Na varanda de arcos, com o bar montado e as lanternas acesas." loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-03-coquetel-800.webp 800w, /assets/opt/casa-lucca-03-coquetel-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture></figure>
-          <span class="percurso__n">03</span>
-          <h3 class="percurso__titulo">Coquetel</h3>
-          <p>Na varanda de arcos, com o bar montado e as lanternas acesas.</p>
-        </li>
-        <li class="percurso__passo" data-passo="3">
-          <figure class="percurso__foto-m"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-04-festa-800.avif 800w, /assets/opt/casa-lucca-04-festa-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-04-festa-1400.webp" width="1792" height="2400" alt="Festa: Mesa longa ao longo da varanda; a festa é o jantar." loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-04-festa-800.webp 800w, /assets/opt/casa-lucca-04-festa-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture></figure>
-          <span class="percurso__n">04</span>
-          <h3 class="percurso__titulo">Festa</h3>
-          <p>Mesa longa ao longo da varanda; a festa é o jantar.</p>
-        </li>
-        <li class="percurso__passo" data-passo="4">
-          <figure class="percurso__foto-m"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-05-saida-800.avif 800w, /assets/opt/casa-lucca-05-saida-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-05-saida-1400.webp" width="1792" height="2400" alt="Saída: O caminho de lanternas até o portão." loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-05-saida-800.webp 800w, /assets/opt/casa-lucca-05-saida-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture></figure>
-          <span class="percurso__n">05</span>
-          <h3 class="percurso__titulo">Saída</h3>
-          <p>O caminho de lanternas até o portão.</p>
-        </li>
-      </ol>
-      <div class="percurso__palco" aria-hidden="true">
-        <figure class="percurso__foto is-on" data-passo="0"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-01-chegada-800.avif 800w, /assets/opt/casa-lucca-01-chegada-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-01-chegada-1400.webp" width="1792" height="2400" alt="" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-01-chegada-800.webp 800w, /assets/opt/casa-lucca-01-chegada-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture></figure>
-        <figure class="percurso__foto" data-passo="1"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-02-cerimonia-800.avif 800w, /assets/opt/casa-lucca-02-cerimonia-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-02-cerimonia-1400.webp" width="1792" height="2400" alt="" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-02-cerimonia-800.webp 800w, /assets/opt/casa-lucca-02-cerimonia-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture></figure>
-        <figure class="percurso__foto" data-passo="2"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-03-coquetel-800.avif 800w, /assets/opt/casa-lucca-03-coquetel-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-03-coquetel-1400.webp" width="1792" height="2400" alt="" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-03-coquetel-800.webp 800w, /assets/opt/casa-lucca-03-coquetel-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture></figure>
-        <figure class="percurso__foto" data-passo="3"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-04-festa-800.avif 800w, /assets/opt/casa-lucca-04-festa-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-04-festa-1400.webp" width="1792" height="2400" alt="" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-04-festa-800.webp 800w, /assets/opt/casa-lucca-04-festa-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture></figure>
-        <figure class="percurso__foto" data-passo="4"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-05-saida-800.avif 800w, /assets/opt/casa-lucca-05-saida-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-05-saida-1400.webp" width="1792" height="2400" alt="" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-05-saida-800.webp 800w, /assets/opt/casa-lucca-05-saida-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture></figure>
-      </div>
+    <div class="split__media reveal-shot">
+      <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-amplitude-800.avif 800w, /assets/opt/casa-lucca-amplitude-1400.avif 1400w" sizes="(min-width: 1040px) 33vw, (min-width: 680px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-amplitude-1400.webp" alt="Mesa longa montada na área externa da Casa Lucca" loading="lazy" width="2400" height="1610" decoding="async" srcset="/assets/opt/casa-lucca-amplitude-800.webp 800w, /assets/opt/casa-lucca-amplitude-1400.webp 1400w" sizes="(min-width: 1040px) 33vw, (min-width: 680px) 50vw, 100vw"></picture>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section section--paper">
   <div class="wrap">
     <div class="section__head">
       <h2 class="h-section linhas">Números e estrutura</h2>
@@ -142,30 +94,25 @@
       <span><strong>Campos a preencher.</strong> Capacidades e metragens aguardam
       confirmação da Di Terrá. Nenhum valor foi estimado.</span>
     </p>
-    <div class="ficha-num">
-      <div class="ficha-num__item rise" style="--i:0">
-        <span class="ficha-num__v tbd">a confirmar</span>
-        <span class="ficha-num__k">Capacidade sentado</span>
-      </div>
-      <div class="ficha-num__item rise" style="--i:1">
-        <span class="ficha-num__v tbd">a confirmar</span>
-        <span class="ficha-num__k">Capacidade em pé</span>
-      </div>
-      <div class="ficha-num__item rise" style="--i:2">
-        <span class="ficha-num__v tbd">a confirmar</span>
-        <span class="ficha-num__k">Área coberta</span>
-      </div>
-      <div class="ficha-num__item rise" style="--i:3">
-        <span class="ficha-num__v tbd">a confirmar</span>
-        <span class="ficha-num__k">Área de jardim</span>
-      </div>
-      <div class="ficha-num__item rise" style="--i:4">
-        <span class="ficha-num__v tbd">a confirmar</span>
-        <span class="ficha-num__k">Estacionamento</span>
-      </div>
-      <div class="ficha-num__item rise" style="--i:5">
-        <span class="ficha-num__v tbd">a confirmar</span>
-        <span class="ficha-num__k">Suíte dos noivos</span>
+    <div class="split">
+      <ul class="spec cascata">
+        <li><span class="k">Capacidade sentado</span><span class="v tbd">a confirmar</span></li>
+        <li><span class="k">Capacidade em pé</span><span class="v tbd">a confirmar</span></li>
+        <li><span class="k">Área coberta</span><span class="v tbd">a confirmar</span></li>
+        <li><span class="k">Área externa</span><span class="v tbd">a confirmar</span></li>
+        <li><span class="k">Estacionamento</span><span class="v tbd">a confirmar</span></li>
+        <li><span class="k">Suíte dos noivos</span><span class="v tbd">a confirmar</span></li>
+      </ul>
+      <div class="rise">
+        <h3 class="h-card" style="margin-bottom:20px">O que este espaço oferece</h3>
+        <ul class="checks cascata">
+          <li>Formato de mesa longa</li>
+          <li>Ambiente reservado</li>
+          <li>Jantar servido à mesa</li>
+          <li>Jardim de apoio</li>
+          <li>Indicado para bodas e jantares</li>
+          <li>Equipe dedicada</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -176,45 +123,62 @@
     <div class="section__head">
       <h2 class="h-section linhas">Momentos na Di Terrá</h2>
     </div>
-    <div class="dupla">
-      <figure class="dupla__item dupla__cheia reveal-shot" style="--i:0"><picture><source type="image/avif" srcset="/assets/opt/foto-saida-noivos-800.avif 800w, /assets/opt/foto-saida-noivos-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/foto-saida-noivos-1400.webp" alt="Saída dos noivos entre os convidados" loading="lazy" style="object-position:center 35%" width="1400" height="788" decoding="async" srcset="/assets/opt/foto-saida-noivos-800.webp 800w, /assets/opt/foto-saida-noivos-1400.webp 1400w" sizes="100vw"></picture><figcaption class="dupla__legenda">Saída dos noivos entre os convidados</figcaption></figure>
-      <figure class="dupla__item dupla__retrato reveal-shot" style="--i:1"><picture><source type="image/avif" srcset="/assets/opt/foto-mesa-posta-800.avif 800w, /assets/opt/foto-mesa-posta-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/foto-mesa-posta-1400.webp" alt="Mesa posta com arranjo central" loading="lazy" style="object-position:center 35%" width="1400" height="788" decoding="async" srcset="/assets/opt/foto-mesa-posta-800.webp 800w, /assets/opt/foto-mesa-posta-1400.webp 1400w" sizes="100vw"></picture><figcaption class="dupla__legenda">Mesa posta com arranjo central</figcaption></figure>
-      <figure class="dupla__item dupla__retrato reveal-shot" style="--i:0"><picture><source type="image/avif" srcset="/assets/opt/foto-noiva-robe-800.avif 800w, /assets/opt/foto-noiva-robe-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/foto-noiva-robe-1400.webp" alt="Noiva na preparação" loading="lazy" style="object-position:center 35%" width="1400" height="788" decoding="async" srcset="/assets/opt/foto-noiva-robe-800.webp 800w, /assets/opt/foto-noiva-robe-1400.webp 1400w" sizes="100vw"></picture><figcaption class="dupla__legenda">Noiva na preparação</figcaption></figure>
-      <figure class="dupla__item dupla__cheia reveal-shot" style="--i:1"><picture><source type="image/avif" srcset="/assets/opt/decoracao-800.avif 800w, /assets/opt/decoracao-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/decoracao-1400.webp" alt="Cenografia floral da cerimônia" loading="lazy" style="object-position:center 35%" width="1400" height="1045" decoding="async" srcset="/assets/opt/decoracao-800.webp 800w, /assets/opt/decoracao-1400.webp 1400w" sizes="100vw"></picture><figcaption class="dupla__legenda">Cenografia floral da cerimônia</figcaption></figure>
-      <figure class="dupla__item dupla__retrato reveal-shot" style="--i:0"><picture><source type="image/avif" srcset="/assets/opt/foto-casal-noite-800.avif 800w, /assets/opt/foto-casal-noite-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/foto-casal-noite-1400.webp" alt="Casal sob luzes no jardim" loading="lazy" style="object-position:center 35%" width="1400" height="788" decoding="async" srcset="/assets/opt/foto-casal-noite-800.webp 800w, /assets/opt/foto-casal-noite-1400.webp 1400w" sizes="100vw"></picture><figcaption class="dupla__legenda">Casal sob luzes no jardim</figcaption></figure>
+    <div class="gallery">
+      <figure class="reveal-shot" style="--i:0"><picture><source type="image/avif" srcset="/assets/opt/foto-saida-noivos-800.avif 800w, /assets/opt/foto-saida-noivos-1400.avif 1400w" sizes="(min-width: 900px) 50vw, 100vw"><img src="/assets/opt/foto-saida-noivos-1400.webp" alt="Saída dos noivos entre os convidados" loading="lazy" style="object-position:center 35%" width="1400" height="788" decoding="async" srcset="/assets/opt/foto-saida-noivos-800.webp 800w, /assets/opt/foto-saida-noivos-1400.webp 1400w" sizes="(min-width: 900px) 50vw, 100vw"></picture></figure>
+      <figure class="reveal-shot" style="--i:1"><picture><source type="image/avif" srcset="/assets/opt/foto-mesa-posta-800.avif 800w, /assets/opt/foto-mesa-posta-1400.avif 1400w" sizes="(min-width: 900px) 50vw, 100vw"><img src="/assets/opt/foto-mesa-posta-1400.webp" alt="Mesa posta com arranjo central" loading="lazy" style="object-position:center 35%" width="1400" height="788" decoding="async" srcset="/assets/opt/foto-mesa-posta-800.webp 800w, /assets/opt/foto-mesa-posta-1400.webp 1400w" sizes="(min-width: 900px) 50vw, 100vw"></picture></figure>
+      <figure class="reveal-shot" style="--i:2"><picture><source type="image/avif" srcset="/assets/opt/foto-noiva-robe-800.avif 800w, /assets/opt/foto-noiva-robe-1400.avif 1400w" sizes="(min-width: 900px) 50vw, 100vw"><img src="/assets/opt/foto-noiva-robe-1400.webp" alt="Noiva na preparação" loading="lazy" style="object-position:center 35%" width="1400" height="788" decoding="async" srcset="/assets/opt/foto-noiva-robe-800.webp 800w, /assets/opt/foto-noiva-robe-1400.webp 1400w" sizes="(min-width: 900px) 50vw, 100vw"></picture></figure>
+      <figure class="reveal-shot" style="--i:3"><picture><source type="image/avif" srcset="/assets/opt/decoracao-800.avif 800w, /assets/opt/decoracao-1400.avif 1400w" sizes="(min-width: 860px) 25vw, 50vw"><img src="/assets/opt/decoracao-1400.webp" alt="Cenografia floral da cerimônia" loading="lazy" style="object-position:center 35%" width="1400" height="1045" decoding="async" srcset="/assets/opt/decoracao-800.webp 800w, /assets/opt/decoracao-1400.webp 1400w" sizes="(min-width: 860px) 25vw, 50vw"></picture></figure>
+      <figure class="reveal-shot" style="--i:4"><picture><source type="image/avif" srcset="/assets/opt/foto-casal-noite-800.avif 800w, /assets/opt/foto-casal-noite-1400.avif 1400w" sizes="(min-width: 900px) 50vw, 100vw"><img src="/assets/opt/foto-casal-noite-1400.webp" alt="Casal sob luzes no jardim" loading="lazy" style="object-position:center 35%" width="1400" height="788" decoding="async" srcset="/assets/opt/foto-casal-noite-800.webp 800w, /assets/opt/foto-casal-noite-1400.webp 1400w" sizes="(min-width: 900px) 50vw, 100vw"></picture></figure>
     </div>
-  </div>
-</section>
-
-<!-- CITAÇÃO EM TELA CHEIA. CONTEÚDO ILUSTRATIVO: frase inventada para mostrar
-     o formato. Substituir por depoimento real com autorização antes de publicar. -->
-<section class="section section--invert citacao">
-  <div class="citacao__fundo" aria-hidden="true"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-05-saida-800.avif 800w, /assets/opt/casa-lucca-05-saida-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-05-saida-1400.webp" width="1792" height="2400" alt="" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-05-saida-800.webp 800w, /assets/opt/casa-lucca-05-saida-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture></div>
-  <div class="wrap on-dark citacao__corpo">
-    <blockquote class="citacao__texto linhas">Eram quarenta pessoas e parecia que a casa tinha sido feita para elas.</blockquote>
-    <p class="citacao__quem rise">Um casal que casou aqui <span class="citacao__aviso">· depoimento ilustrativo, a substituir</span></p>
   </div>
 </section>
 
 <section class="section section--invert">
   <div class="wrap">
     <div class="section__head on-dark">
-      <h2 class="h-section linhas">As outras casas</h2>
+      <h2 class="h-section linhas">Os outros espaços</h2>
     </div>
-  </div>
-  <div class="trilho rise" style="--i:1">
-      <a class="trilho__item" href="/social/espacos/a-querencia">
-        <picture><source type="image/avif" srcset="/assets/opt/a-querencia-amplitude-800.avif 800w, /assets/opt/a-querencia-amplitude-1400.avif 1400w" sizes="(min-width: 1040px) 33vw, (min-width: 680px) 50vw, 100vw"><img src="/assets/opt/a-querencia-amplitude-1400.webp" width="2400" height="1610" alt="" loading="lazy" decoding="async" srcset="/assets/opt/a-querencia-amplitude-800.webp 800w, /assets/opt/a-querencia-amplitude-1400.webp 1400w" sizes="(min-width: 1040px) 33vw, (min-width: 680px) 50vw, 100vw"></picture>
-        <span class="trilho__texto"><span class="trilho__nome">A Querência</span><span class="trilho__meta">Salão coberto e jardim para celebrações de grande porte.</span></span>
+    <div class="grid grid--3">
+      <a class="card rise" href="/social/espacos/a-querencia">
+        <div class="card__media reveal-shot">
+          <picture><source type="image/avif" srcset="/assets/opt/foto-casal-noite-800.avif 800w, /assets/opt/foto-casal-noite-1400.avif 1400w" sizes="(min-width: 900px) 50vw, 100vw"><img src="/assets/opt/foto-casal-noite-1400.webp" alt="Casal de noivos sob luzes no jardim da Querência" loading="lazy" style="object-position:center 35%" width="1400" height="788" decoding="async" srcset="/assets/opt/foto-casal-noite-800.webp 800w, /assets/opt/foto-casal-noite-1400.webp 1400w" sizes="(min-width: 900px) 50vw, 100vw"></picture>
+          <span class="card__arch" aria-hidden="true"></span>
+        </div>
+        <div class="card__body">
+          <h3 class="h-card">A Querência</h3>
+          <p>Salão coberto e jardim para celebrações de grande porte.</p>
+          <span class="card__more">Ver
+            <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+          </span>
+        </div>
       </a>
-      <a class="trilho__item" href="/social/espacos/palacete-monte-alegre">
-        <picture><source type="image/avif" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.avif 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.avif 1400w" sizes="(min-width: 1040px) 33vw, (min-width: 680px) 50vw, 100vw"><img src="/assets/opt/palacete-monte-alegre-amplitude-1400.webp" width="2400" height="1610" alt="" loading="lazy" decoding="async" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.webp 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.webp 1400w" sizes="(min-width: 1040px) 33vw, (min-width: 680px) 50vw, 100vw"></picture>
-        <span class="trilho__texto"><span class="trilho__nome">Palacete Monte Alegre</span><span class="trilho__meta">Arquitetura histórica para celebrações de assinatura.</span></span>
+      <a class="card rise" href="/social/espacos/palacete-monte-alegre">
+        <div class="card__media reveal-shot">
+          <picture><source type="image/avif" srcset="/assets/opt/foto-noiva-janela-800.avif 800w, /assets/opt/foto-noiva-janela-1400.avif 1400w" sizes="(min-width: 900px) 50vw, 100vw"><img src="/assets/opt/foto-noiva-janela-1400.webp" alt="Noiva junto à janela em arco do Palacete Monte Alegre" loading="lazy" style="object-position:center 35%" width="1400" height="788" decoding="async" srcset="/assets/opt/foto-noiva-janela-800.webp 800w, /assets/opt/foto-noiva-janela-1400.webp 1400w" sizes="(min-width: 900px) 50vw, 100vw"></picture>
+          <span class="card__arch" aria-hidden="true"></span>
+        </div>
+        <div class="card__body">
+          <h3 class="h-card">Palacete Monte Alegre</h3>
+          <p>Arquitetura histórica para celebrações de assinatura.</p>
+          <span class="card__more">Ver
+            <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+          </span>
+        </div>
       </a>
-      <a class="trilho__item" href="/social/espacos/espaco-terra">
-        <picture><source type="image/avif" srcset="/assets/opt/espaco-terra-amplitude-800.avif 800w, /assets/opt/espaco-terra-amplitude-1400.avif 1400w" sizes="(min-width: 1040px) 33vw, (min-width: 680px) 50vw, 100vw"><img src="/assets/opt/espaco-terra-amplitude-1400.webp" width="2400" height="1610" alt="" loading="lazy" decoding="async" srcset="/assets/opt/espaco-terra-amplitude-800.webp 800w, /assets/opt/espaco-terra-amplitude-1400.webp 1400w" sizes="(min-width: 1040px) 33vw, (min-width: 680px) 50vw, 100vw"></picture>
-        <span class="trilho__texto"><span class="trilho__nome">Espaço Terrá</span><span class="trilho__meta">Estrutura versátil com horizonte aberto do interior paulista.</span></span>
+      <a class="card rise" href="/social/espacos/espaco-terra">
+        <div class="card__media reveal-shot">
+          <picture><source type="image/avif" srcset="/assets/opt/espaco-terra-amplitude-800.avif 800w, /assets/opt/espaco-terra-amplitude-1400.avif 1400w" sizes="(min-width: 1040px) 33vw, (min-width: 680px) 50vw, 100vw"><img src="/assets/opt/espaco-terra-amplitude-1400.webp" alt="Vista do horizonte no Espaço Terrá, interior paulista" loading="lazy" style="object-position:center 35%" width="1400" height="939" decoding="async" srcset="/assets/opt/espaco-terra-amplitude-800.webp 800w, /assets/opt/espaco-terra-amplitude-1400.webp 1400w" sizes="(min-width: 1040px) 33vw, (min-width: 680px) 50vw, 100vw"></picture>
+          <span class="card__arch" aria-hidden="true"></span>
+        </div>
+        <div class="card__body">
+          <h3 class="h-card">Espaço Terrá</h3>
+          <p>Estrutura versátil com horizonte aberto do interior paulista.</p>
+          <span class="card__more">Ver
+            <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+          </span>
+        </div>
       </a>
+    </div>
   </div>
 </section>
 

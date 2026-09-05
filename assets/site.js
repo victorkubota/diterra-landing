@@ -235,28 +235,10 @@
       curso > 0 ? Math.min(1, window.scrollY / curso).toFixed(4) : '0');
   };
 
-  /* ── pilha de cartões: --cp é quanto o PRÓXIMO cartão já cobriu este ──
-     Só onde há pilha (≥ 860px) e com movimento permitido. A forma
-     (desfoque, escala, luz) mora no base.css. */
-  var podePilha = !semMovimento && window.matchMedia('(min-width: 860px)').matches;
-  var cartoes = podePilha ? Array.prototype.slice.call(document.querySelectorAll('.pilha .fmt')) : [];
-  var medirPilha = function () {
-    if (cartoes.length < 2) return;
-    var alto = window.innerHeight;
-    cartoes.forEach(function (c, i) {
-      var prox = cartoes[i + 1];
-      if (!prox) { c.style.setProperty('--cp', '0'); return; }
-      var curso = alto - c.getBoundingClientRect().top;
-      var avanco = alto - prox.getBoundingClientRect().top;
-      var p = curso > 0 ? avanco / curso : 0;
-      c.style.setProperty('--cp', Math.max(0, Math.min(1, p)).toFixed(4));
-    });
-  };
-
-  /* ── laço de scroll, compartilhado pelo hero, a régua, a barra de ação,
-     a pilha e o voltar ao topo ── */
+  /* ── laço de scroll, compartilhado pelo hero, a régua, a barra de ação
+     e o voltar ao topo ── */
   var barra = document.getElementById('barraAcao');
-  if (toTop || palco || regua || barra || cartoes.length) {
+  if (toTop || palco || regua || barra) {
     var pendente = false;
 
     var atualizar = function () {
@@ -264,7 +246,6 @@
       if (barra) barra.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.5);
       pintarHero();
       pintarRegua();
-      medirPilha();
       pendente = false;
     };
 
@@ -275,83 +256,6 @@
     }, { passive: true });
 
     atualizar();
-  }
-
-  /* ── percurso do evento: o passo no meio da tela acende a própria foto ──
-     Observer com a faixa central (40% de cima e de baixo excluídos). */
-  var percurso = document.querySelector('.percurso');
-  if (percurso && 'IntersectionObserver' in window) {
-    var passosP = percurso.querySelectorAll('.percurso__passo');
-    var fotosP = percurso.querySelectorAll('.percurso__foto');
-    var ativarPasso = function (n) {
-      Array.prototype.forEach.call(passosP, function (el) { el.classList.toggle('is-on', el.getAttribute('data-passo') === n); });
-      Array.prototype.forEach.call(fotosP, function (el) { el.classList.toggle('is-on', el.getAttribute('data-passo') === n); });
-    };
-    var ioPasso = new IntersectionObserver(function (entradas) {
-      entradas.forEach(function (e) { if (e.isIntersecting) ativarPasso(e.target.getAttribute('data-passo')); });
-    }, { rootMargin: '-40% 0px -40% 0px' });
-    Array.prototype.forEach.call(passosP, function (el) { ioPasso.observe(el); });
-  }
-
-  /* ── vídeo em cartão: toca em laço só enquanto está na tela e com
-     movimento permitido; quem pediu para parar, para (WCAG 2.2.2) ── */
-  Array.prototype.forEach.call(document.querySelectorAll('.video-cartao'), function (cartao) {
-    var v = cartao.querySelector('video');
-    var b = cartao.querySelector('.video-cartao__pausa');
-    var parado = semMovimento;
-    if (parado && b) { b.textContent = 'Reproduzir'; b.setAttribute('aria-pressed', 'true'); }
-    var tocar = function () { if (!parado) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } };
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (e) { if (e[0].isIntersecting) tocar(); else v.pause(); }, { threshold: .35 }).observe(v);
-    } else { tocar(); }
-    if (b) b.addEventListener('click', function () {
-      parado = !parado;
-      b.setAttribute('aria-pressed', String(parado));
-      b.textContent = parado ? 'Reproduzir' : 'Pausar';
-      if (parado) v.pause(); else tocar();
-    });
-  });
-
-  /* ── hub de soluções chegando de uma ocasião ─────────────────────
-     /social/solucoes?ocasiao=casamento: o hero diz para que ocasião a
-     pessoa está olhando. Só texto; a lista continua a mesma. */
-  var ocasiao = new URLSearchParams(window.location.search).get('ocasiao');
-  var leadHub = document.querySelector('.page-hero__lead');
-  var nomesOcasiao = { casamento: 'casamentos', debutante: 'debutantes', aniversario: 'aniversários e bodas', formatura: 'formaturas' };
-  if (ocasiao && leadHub && nomesOcasiao[ocasiao] && window.location.pathname.indexOf('/social/solucoes') === 0) {
-    var marca = document.createElement('span');
-    marca.className = 'eyebrow';
-    marca.textContent = 'Para ' + nomesOcasiao[ocasiao];
-    leadHub.parentNode.insertBefore(marca, leadHub);
-  }
-
-  /* ── cursor "Ver" ──────────────────────────────────────────────────
-     Só com ponteiro fino e sem movimento reduzido. Um círculo pequeno
-     com a palavra segue o mouse sobre fotos clicáveis; diz o que o
-     clique faz antes do clique. */
-  if (window.matchMedia('(pointer: fine)').matches && !semMovimento) {
-    var cursor = document.createElement('div');
-    cursor.className = 'cursor-ver';
-    cursor.setAttribute('aria-hidden', 'true');
-    cursor.textContent = 'Ver';
-    document.body.appendChild(cursor);
-    var alvosCursor = 'a:has(img), .glightbox, .vcard__head, .switch__stage';
-    var moverCursor = function (e) {
-      cursor.style.transform = 'translate3d(' + (e.clientX - 28) + 'px,' + (e.clientY - 28) + 'px,0)';
-    };
-    document.addEventListener('pointerover', function (e) {
-      var alvo = e.target.closest && e.target.closest(alvosCursor);
-      if (!alvo) return;
-      cursor.classList.add('is-on');
-      moverCursor(e);
-    });
-    document.addEventListener('pointerout', function (e) {
-      var alvo = e.target.closest && e.target.closest(alvosCursor);
-      if (alvo && !(e.relatedTarget && alvo.contains(e.relatedTarget))) cursor.classList.remove('is-on');
-    });
-    document.addEventListener('pointermove', function (e) {
-      if (cursor.classList.contains('is-on')) moverCursor(e);
-    }, { passive: true });
   }
 
   /* ── voltar ao topo ──────────────────────────────────────────────── */
