@@ -53,7 +53,87 @@
      ficou acima nunca cruzaria o observer, então é revelado de imediato. */
   /* .rise para texto, .reveal-shot para fotografia, .cascata para listas:
      os três dependem do mesmo is-in, então um observer só dá conta. */
-  var blocos = document.querySelectorAll('.rise, .reveal-shot, .cascata');
+  /* ── título que sobe por trás de uma máscara ────────────────────────
+     Cada linha do título vira um recorte com o próprio índice --l, e
+     sobe de dentro dele. O gesto vinha do corporativo; a função abaixo
+     é a mesma, palavra por palavra. */
+  var montarLinhas = function (el) {
+    var bruto = el.getAttribute('data-linhas');
+    if (bruto === null) {
+      bruto = el.children.length ? '' : el.textContent.replace(/\s+/g, ' ').trim();
+      el.setAttribute('data-linhas', bruto);
+    }
+
+    if (!bruto) {
+      if (el.querySelector('.linhas__l')) return;
+      var caixa = document.createElement('span');
+      caixa.className = 'linhas__l';
+      caixa.style.setProperty('--l', '0');
+      var dentro = document.createElement('span');
+      while (el.firstChild) { dentro.appendChild(el.firstChild); }
+      caixa.appendChild(dentro);
+      el.appendChild(caixa);
+      return;
+    }
+
+    /* mede: cada palavra vira inline-block e o offsetTop diz a linha */
+    var palavras = bruto.split(' ');
+    el.textContent = '';
+    var marcas = palavras.map(function (p) {
+      var s = document.createElement('span');
+      s.textContent = p;
+      s.style.display = 'inline-block';
+      el.appendChild(s);
+      el.appendChild(document.createTextNode(' '));
+      return s;
+    });
+
+    var linhas = [], atual = null, topo = null;
+    marcas.forEach(function (s, i) {
+      var t = s.offsetTop;
+      if (topo === null || Math.abs(t - topo) > 2) { topo = t; atual = []; linhas.push(atual); }
+      atual.push(palavras[i]);
+    });
+
+    el.textContent = '';
+    linhas.forEach(function (palavrasDaLinha, i) {
+      var caixa = document.createElement('span');
+      caixa.className = 'linhas__l';
+      caixa.style.setProperty('--l', String(i));
+      var dentro = document.createElement('span');
+      dentro.textContent = palavrasDaLinha.join(' ');
+      caixa.appendChild(dentro);
+      el.appendChild(caixa);
+    });
+  };
+
+  var titulos = Array.prototype.slice.call(document.querySelectorAll('.linhas'));
+  titulos.forEach(montarLinhas);
+
+  /* a primeira medição acontece com a fonte de sistema no lugar da
+     Cormorant, e a serifada quebra em outro ponto. Remede quando a fonte
+     real chega, pulando o que já entrou em tela. */
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () {
+      titulos.forEach(function (el) {
+        if (!el.classList.contains('is-in')) montarLinhas(el);
+      });
+    });
+  }
+
+  /* na virada de largura o texto quebra em outro ponto. Só refaz o que
+     ainda não entrou: remontar um título já revelado o faria animar de
+     novo, do nada, no meio da leitura. */
+  var larguraAnterior = window.innerWidth;
+  window.addEventListener('resize', function () {
+    if (window.innerWidth === larguraAnterior) return;
+    larguraAnterior = window.innerWidth;
+    titulos.forEach(function (el) {
+      if (!el.classList.contains('is-in')) montarLinhas(el);
+    });
+  }, { passive: true });
+
+  var blocos = document.querySelectorAll('.rise, .reveal-shot, .cascata, .linhas');
 
   /* A revelação é um gesto de uma vez só, e a classe precisa sair quando
      ele termina.
@@ -121,13 +201,27 @@
       Math.max(0, Math.min(1, window.scrollY / curso)).toFixed(4));
   };
 
-  /* ── laço de scroll, compartilhado pelo hero e pelo voltar ao topo ── */
-  if (toTop || palco) {
+  /* ── régua de leitura ──────────────────────────────────────────────
+     Quanto da página já passou, escrito em --lido para a barra da nav
+     ler por scaleX. Sem transição: o valor acompanha a rolagem quadro a
+     quadro, e uma transição aqui atrasaria a barra em relação ao dedo. */
+  var regua = document.querySelector('.nav__progresso');
+
+  var pintarRegua = function () {
+    if (!regua || !nav) return;
+    var curso = document.documentElement.scrollHeight - window.innerHeight;
+    nav.style.setProperty('--lido',
+      curso > 0 ? Math.min(1, window.scrollY / curso).toFixed(4) : '0');
+  };
+
+  /* ── laço de scroll, compartilhado pelo hero, a régua e o voltar ao topo ── */
+  if (toTop || palco || regua) {
     var pendente = false;
 
     var atualizar = function () {
       if (toTop) toTop.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.8);
       pintarHero();
+      pintarRegua();
       pendente = false;
     };
 
