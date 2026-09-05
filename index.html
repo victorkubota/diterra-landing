@@ -18,6 +18,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
 
+<!-- o poster do hero é o LCP da página: pede-se antes do CSS terminar.
+     Quem não decodifica AVIF ignora o preload e segue pelo <picture>. -->
+<link rel="preload" as="image" type="image/avif" imagesizes="100vw"
+      imagesrcset="/assets/opt/hero-social-800.avif 800w, /assets/opt/hero-social-1400.avif 1400w, /assets/opt/hero-social-2400.avif 2400w">
+
 <style>
 /* ══════════════════════════════════════════════════════════════
    PÁGINA DE ENTRADA — Di Terrá Eventos
@@ -394,12 +399,13 @@ img, video { display: block; max-width: 100%; }
   <!-- MÍDIA ÚNICA — vídeo com foto de reserva.
        O vídeo é desligado no celular pelo script; o poster assume. -->
   <div class="stage__media">
-    <img id="stagePoster" src="/assets/demo/hero/hero-social.webp"
+    <picture><source type="image/avif" srcset="/assets/opt/hero-social-800.avif 800w, /assets/opt/hero-social-1400.avif 1400w, /assets/opt/hero-social-2400.avif 2400w" sizes="100vw"><img id="stagePoster" src="/assets/opt/hero-social-1400.webp"
          width="2400" height="1340"
          alt="Cerimônia ao entardecer no jardim de um dos espaços da Di Terrá"
-         fetchpriority="high" decoding="async">
+         fetchpriority="high" decoding="async" srcset="/assets/opt/hero-social-800.webp 800w, /assets/opt/hero-social-1400.webp 1400w, /assets/opt/hero-social-2400.webp 2400w" sizes="100vw"></picture>
+    <!-- sem poster: o atributo baixa a imagem mesmo com o vídeo oculto, e a
+         foto acima já cumpre esse papel -->
     <video id="stageVideo" muted loop playsinline preload="none"
-           poster="/assets/demo/hero/hero-social.webp"
            aria-hidden="true" hidden></video>
   </div>
   <div class="stage__veil"></div>
@@ -564,7 +570,12 @@ img, video { display: block; max-width: 100%; }
   var poster = document.getElementById('stagePoster');
 
   if (video && !reduz && window.matchMedia('(min-width: 768px)').matches) {
-    video.src = '/assets/demo/hero/hero-social.mp4';
+    /* H.264 em vez do HEVC original: o HEVC não toca no Chrome do Windows
+       e do Android nem no Firefox, e nesses o poster ficava para sempre.
+       1280 px até o tablet, 1920 px daí para cima. */
+    video.src = window.matchMedia('(min-width: 1440px)').matches
+      ? '/assets/opt/video/hero-social-1920.mp4'
+      : '/assets/opt/video/hero-social-1280.mp4';
     video.hidden = false;
     video.addEventListener('playing', function () {
       poster.style.opacity = '0';

@@ -12,11 +12,13 @@
      entra como substituta temporária da mesma classe de serifada. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@200;300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Oooh+Baby&display=swap" rel="stylesheet">
+<!-- Só os pesos que a home usa: Albert 300/400/500/600, Cormorant 300/400/600
+     e itálico 400. Oooh Baby não aparece nesta rota. -->
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 
-<!-- LIBRARIES -->
+<!-- LIBRARIES — o CSS do GLightbox entra junto com o script, no primeiro
+     clique da galeria (ver carregarLightbox) -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
 
 <link rel="stylesheet" href="/assets/css/tema-social.css">
 <link rel="stylesheet" href="/assets/css/base.css">
@@ -122,7 +124,7 @@
         </div>
       </div>
       <div class="intro-image">
-        <img src="/assets/demo/solucoes/decoracao.webp" alt="Decoração Di Terrá, ambientação premium para eventos">
+        <picture><source type="image/avif" srcset="/assets/opt/decoracao-800.avif 800w, /assets/opt/decoracao-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/decoracao-1400.webp" alt="Decoração Di Terrá, ambientação premium para eventos" width="2400" height="1792" loading="lazy" decoding="async" srcset="/assets/opt/decoracao-800.webp 800w, /assets/opt/decoracao-1400.webp 1400w" sizes="100vw"></picture>
       </div>
     </div>
   </div>
@@ -155,7 +157,7 @@
           </a>
         </div>
         <div class="card-img-wrap">
-          <img class="card-img" src="/assets/demo/espacos/casa-lucca-amplitude.webp" alt="Mesa longa montada no jardim, sob as árvores">
+          <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-amplitude-800.avif 800w, /assets/opt/casa-lucca-amplitude-1400.avif 1400w" sizes="100vw"><img class="card-img" src="/assets/opt/casa-lucca-amplitude-1400.webp" alt="Mesa longa montada no jardim, sob as árvores" width="2400" height="1610" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-amplitude-800.webp 800w, /assets/opt/casa-lucca-amplitude-1400.webp 1400w" sizes="100vw"></picture>
         </div>
       </div>
     </div>
@@ -178,7 +180,7 @@
           </a>
         </div>
         <div class="card-img-wrap">
-          <img class="card-img" src="/assets/demo/espacos/a-querencia-amplitude.webp" alt="Salão principal, produção executiva Di Terrá">
+          <picture><source type="image/avif" srcset="/assets/opt/a-querencia-amplitude-800.avif 800w, /assets/opt/a-querencia-amplitude-1400.avif 1400w" sizes="100vw"><img class="card-img" src="/assets/opt/a-querencia-amplitude-1400.webp" alt="Salão principal, produção executiva Di Terrá" width="2400" height="1610" loading="lazy" decoding="async" srcset="/assets/opt/a-querencia-amplitude-800.webp 800w, /assets/opt/a-querencia-amplitude-1400.webp 1400w" sizes="100vw"></picture>
         </div>
       </div>
     </div>
@@ -201,7 +203,7 @@
           </a>
         </div>
         <div class="card-img-wrap">
-          <img class="card-img" src="/assets/demo/solucoes/coquetelaria.webp" alt="Bar e coquetelaria para eventos">
+          <picture><source type="image/avif" srcset="/assets/opt/coquetelaria-800.avif 800w, /assets/opt/coquetelaria-1400.avif 1400w" sizes="100vw"><img class="card-img" src="/assets/opt/coquetelaria-1400.webp" alt="Bar e coquetelaria para eventos" width="2400" height="1792" loading="lazy" decoding="async" srcset="/assets/opt/coquetelaria-800.webp 800w, /assets/opt/coquetelaria-1400.webp 1400w" sizes="100vw"></picture>
         </div>
       </div>
     </div>
@@ -220,28 +222,28 @@
   </div>
   <div class="eventos-grid" data-aos="fade-up" data-aos-delay="200">
     <article class="evento-card">
-      <img src="/assets/CASAMENTO-v2.png" alt="Casamento no Di Terrá">
+      <picture><source type="image/avif" srcset="/assets/opt/CASAMENTO-v2-800.avif 800w, /assets/opt/CASAMENTO-v2-1024.avif 1024w" sizes="(min-width: 1025px) 25vw, (min-width: 481px) 50vw, 100vw"><img src="/assets/opt/CASAMENTO-v2-1024.webp" alt="Casamento no Di Terrá" width="1024" height="1024" loading="lazy" decoding="async" srcset="/assets/opt/CASAMENTO-v2-800.webp 800w, /assets/opt/CASAMENTO-v2-1024.webp 1024w" sizes="(min-width: 1025px) 25vw, (min-width: 481px) 50vw, 100vw"></picture>
       <div class="evento-card-overlay">
         <h3>Casamentos</h3>
         <div class="evento-tag">Cerimônia & Recepção</div>
       </div>
     </article>
     <article class="evento-card">
-      <img src="/assets/demo/eventos/formatura.webp" alt="Formatura no Di Terrá">
+      <picture><source type="image/avif" srcset="/assets/opt/formatura-800.avif 800w, /assets/opt/formatura-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/formatura-1400.webp" alt="Formatura no Di Terrá" width="1856" height="2304" loading="lazy" decoding="async" srcset="/assets/opt/formatura-800.webp 800w, /assets/opt/formatura-1400.webp 1400w" sizes="100vw"></picture>
       <div class="evento-card-overlay">
         <h3>Formaturas</h3>
         <div class="evento-tag">Celebrações Acadêmicas</div>
       </div>
     </article>
     <article class="evento-card">
-      <img src="/assets/demo/apoio/offsite-corporativo.webp" alt="Evento corporativo Di Terrá">
+      <picture><source type="image/avif" srcset="/assets/opt/offsite-corporativo-800.avif 800w, /assets/opt/offsite-corporativo-1400.avif 1400w, /assets/opt/offsite-corporativo-2400.avif 2400w" sizes="100vw"><img src="/assets/opt/offsite-corporativo-1400.webp" alt="Evento corporativo Di Terrá" width="2400" height="1340" loading="lazy" decoding="async" srcset="/assets/opt/offsite-corporativo-800.webp 800w, /assets/opt/offsite-corporativo-1400.webp 1400w, /assets/opt/offsite-corporativo-2400.webp 2400w" sizes="100vw"></picture>
       <div class="evento-card-overlay">
         <h3>Corporativos</h3>
         <div class="evento-tag">Conferências & Gala</div>
       </div>
     </article>
     <article class="evento-card">
-      <img src="/assets/ANIVERSARIO-v2.png" alt="Aniversário no Di Terrá">
+      <picture><source type="image/avif" srcset="/assets/opt/ANIVERSARIO-v2-800.avif 800w, /assets/opt/ANIVERSARIO-v2-1024.avif 1024w" sizes="(min-width: 1025px) 25vw, (min-width: 481px) 50vw, 100vw"><img src="/assets/opt/ANIVERSARIO-v2-1024.webp" alt="Aniversário no Di Terrá" width="1024" height="1024" loading="lazy" decoding="async" srcset="/assets/opt/ANIVERSARIO-v2-800.webp 800w, /assets/opt/ANIVERSARIO-v2-1024.webp 1024w" sizes="(min-width: 1025px) 25vw, (min-width: 481px) 50vw, 100vw"></picture>
       <div class="evento-card-overlay">
         <h3>Aniversários</h3>
         <div class="evento-tag">Festas & Debutantes</div>
@@ -276,32 +278,32 @@
   <div class="galeria-grid" data-aos="fade-up" data-aos-delay="200">
     <div class="galeria-item">
       <a href="/assets/demo/galeria/cerimonia-vertical.webp" class="glightbox" data-gallery="gallery1">
-        <img src="/assets/demo/galeria/cerimonia-vertical.webp" alt="Cadeiras e arco de flores montados para a cerimônia, no fim da tarde" width="1792" height="2400" loading="lazy" decoding="async">
+        <picture><source type="image/avif" srcset="/assets/opt/cerimonia-vertical-800.avif 800w, /assets/opt/cerimonia-vertical-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/cerimonia-vertical-1400.webp" alt="Cadeiras e arco de flores montados para a cerimônia, no fim da tarde" width="1792" height="2400" loading="lazy" decoding="async" srcset="/assets/opt/cerimonia-vertical-800.webp 800w, /assets/opt/cerimonia-vertical-1400.webp 1400w" sizes="100vw"></picture>
       </a>
     </div>
     <div class="galeria-item">
       <a href="/assets/demo/galeria/mesa-posta.webp" class="glightbox" data-gallery="gallery1">
-        <img src="/assets/demo/galeria/mesa-posta.webp" alt="Detalhe de mesa posta: louça, cristal e arranjo baixo de rosas brancas" width="2048" height="2048" loading="lazy" decoding="async">
+        <picture><source type="image/avif" srcset="/assets/opt/mesa-posta-800.avif 800w, /assets/opt/mesa-posta-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/mesa-posta-1400.webp" alt="Detalhe de mesa posta: louça, cristal e arranjo baixo de rosas brancas" width="2048" height="2048" loading="lazy" decoding="async" srcset="/assets/opt/mesa-posta-800.webp 800w, /assets/opt/mesa-posta-1400.webp 1400w" sizes="100vw"></picture>
       </a>
     </div>
     <div class="galeria-item">
       <a href="/assets/demo/galeria/brinde-por-do-sol.webp" class="glightbox" data-gallery="gallery1">
-        <img src="/assets/demo/galeria/brinde-por-do-sol.webp" alt="Taças erguidas em brinde contra o céu do fim de tarde" width="2048" height="2048" loading="lazy" decoding="async">
+        <picture><source type="image/avif" srcset="/assets/opt/brinde-por-do-sol-800.avif 800w, /assets/opt/brinde-por-do-sol-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/brinde-por-do-sol-1400.webp" alt="Taças erguidas em brinde contra o céu do fim de tarde" width="2048" height="2048" loading="lazy" decoding="async" srcset="/assets/opt/brinde-por-do-sol-800.webp 800w, /assets/opt/brinde-por-do-sol-1400.webp 1400w" sizes="100vw"></picture>
       </a>
     </div>
     <div class="galeria-item">
       <a href="/assets/demo/galeria/propriedade-anoitecer.webp" class="glightbox" data-gallery="gallery1">
-        <img src="/assets/demo/galeria/propriedade-anoitecer.webp" alt="O galpão iluminado ao anoitecer, visto de fora, com as colinas ao fundo" width="2400" height="1340" loading="lazy" decoding="async">
+        <picture><source type="image/avif" srcset="/assets/opt/propriedade-anoitecer-800.avif 800w, /assets/opt/propriedade-anoitecer-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/propriedade-anoitecer-1400.webp" alt="O galpão iluminado ao anoitecer, visto de fora, com as colinas ao fundo" width="2400" height="1340" loading="lazy" decoding="async" srcset="/assets/opt/propriedade-anoitecer-800.webp 800w, /assets/opt/propriedade-anoitecer-1400.webp 1400w" sizes="100vw"></picture>
       </a>
     </div>
     <div class="galeria-item">
       <a href="/assets/demo/galeria/pista-noite.webp" class="glightbox" data-gallery="gallery1">
-        <img src="/assets/demo/galeria/pista-noite.webp" alt="Pista de dança cheia sob o telhado de madeira, à noite" width="2048" height="2048" loading="lazy" decoding="async">
+        <picture><source type="image/avif" srcset="/assets/opt/pista-noite-800.avif 800w, /assets/opt/pista-noite-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/pista-noite-1400.webp" alt="Pista de dança cheia sob o telhado de madeira, à noite" width="2048" height="2048" loading="lazy" decoding="async" srcset="/assets/opt/pista-noite-800.webp 800w, /assets/opt/pista-noite-1400.webp 1400w" sizes="100vw"></picture>
       </a>
     </div>
     <div class="galeria-item">
       <a href="/assets/demo/galeria/cozinha-servico.webp" class="glightbox" data-gallery="gallery1">
-        <img src="/assets/demo/galeria/cozinha-servico.webp" alt="Cozinha em serviço: finalização dos pratos na passagem" width="2048" height="2048" loading="lazy" decoding="async">
+        <picture><source type="image/avif" srcset="/assets/opt/cozinha-servico-800.avif 800w, /assets/opt/cozinha-servico-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/cozinha-servico-1400.webp" alt="Cozinha em serviço: finalização dos pratos na passagem" width="2048" height="2048" loading="lazy" decoding="async" srcset="/assets/opt/cozinha-servico-800.webp 800w, /assets/opt/cozinha-servico-1400.webp 1400w" sizes="100vw"></picture>
       </a>
     </div>
   </div>
@@ -398,7 +400,7 @@
      FOOTER (FIXED BEHIND WRAPPER)
      ═══════════════════════════════════════════════════ -->
 <footer class="footer-sticky">
-  <img class="footer-bg-img" src="/assets/demo/apoio/numeros-fundo.webp" alt="">
+  <picture><source type="image/avif" srcset="/assets/opt/numeros-fundo-800.avif 800w, /assets/opt/numeros-fundo-1400.avif 1400w, /assets/opt/numeros-fundo-2400.avif 2400w" sizes="100vw"><img class="footer-bg-img" src="/assets/opt/numeros-fundo-1400.webp" alt="" width="2400" height="1018" loading="lazy" decoding="async" srcset="/assets/opt/numeros-fundo-800.webp 800w, /assets/opt/numeros-fundo-1400.webp 1400w, /assets/opt/numeros-fundo-2400.webp 2400w" sizes="100vw"></picture>
   <div class="footer-inner">
     <img class="footer-logo" src="/assets/brand/social-lockup-white.png" alt="Di Terrá Eventos" width="454" height="288">
     <div class="footer-cta-label">Pronto para começar?</div>
@@ -442,7 +444,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
 
 <script>
 /* ══════════════════════════════════════════════════════════════
@@ -569,12 +570,38 @@ function initSite() {
     disable: function () { return movimentoReduzido; }
   });
 
-  /* ── GLightbox ── */
-  GLightbox({
-    touchNavigation: true,
-    loop: true,
-    autoplayVideos: true,
-    skin: 'clean'
+  /* ── GLightbox sob demanda ─────────────────────────────────────
+     A galeria é a sexta seção; carregar CSS e JS do lightbox na
+     abertura da página cobrava 19 KB de quem nunca chega lá. No
+     primeiro clique: baixa, inicia e abre a foto clicada. Sem script
+     o link continua levando à imagem inteira. */
+  var lightbox = null;
+  var carregandoLightbox = null;
+  var carregarLightbox = function () {
+    if (carregandoLightbox) return carregandoLightbox;
+    carregandoLightbox = new Promise(function (ok, falha) {
+      var css = document.createElement('link');
+      css.rel = 'stylesheet';
+      css.href = 'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css';
+      document.head.appendChild(css);
+      var js = document.createElement('script');
+      js.src = 'https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js';
+      js.onload = function () {
+        lightbox = GLightbox({ touchNavigation: true, loop: true, skin: 'clean' });
+        ok(lightbox);
+      };
+      js.onerror = falha;
+      document.head.appendChild(js);
+    });
+    return carregandoLightbox;
+  };
+  document.querySelectorAll('.glightbox').forEach(function (link, i) {
+    link.addEventListener('click', function (e) {
+      if (lightbox) return;           /* já iniciado: o GLightbox trata o clique */
+      e.preventDefault();
+      carregarLightbox().then(function (lb) { lb.openAt(i); })
+        .catch(function () { window.location.href = link.href; });
+    });
   });
 
   /* ── Hero Animations ── */
