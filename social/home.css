@@ -228,7 +228,12 @@
 .hero-bg {
   position: absolute;
   inset: -80px;
-  background-image: url('../assets/solucao-completa-decoracao-casamento.png');
+  /* A peça tem 1220 px de largura: não há pixel para ampliar, então a
+     variante nativa é a única. AVIF pesa 1/20 do PNG de 3,7 MB. */
+  background-image: url('/assets/opt/solucao-completa-decoracao-casamento-1220.webp');
+  background-image: image-set(
+    url('/assets/opt/solucao-completa-decoracao-casamento-1220.avif') type('image/avif'),
+    url('/assets/opt/solucao-completa-decoracao-casamento-1220.webp') type('image/webp'));
   background-size: cover;
   background-position: center;
   will-change: transform;
@@ -584,7 +589,11 @@
 .banner-bg {
   position: absolute;
   inset: -40px;
-  background-image: url('../assets/3.png');
+  /* 500 px de origem esticados a tela cheia: fica até a foto real chegar */
+  background-image: url('/assets/opt/3-500.webp');
+  background-image: image-set(
+    url('/assets/opt/3-500.avif') type('image/avif'),
+    url('/assets/opt/3-500.webp') type('image/webp'));
   background-size: cover;
   background-position: center;
   will-change: transform;

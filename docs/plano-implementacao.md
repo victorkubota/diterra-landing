@@ -268,7 +268,28 @@ produção. O bloqueio vive só na camada de infraestrutura.
 ## 7. Como rodar
 
 ```bash
-npx serve diterra-deploy -l 8081
+npx serve . -l 8081
 ```
 
-Ou via preview configurado em `.claude/launch.json` (entrada `diterra-deploy`).
+Ou via preview configurado em `.claude/launch.json` (entrada `diterra-static`).
+
+### Imagens e vídeo
+
+As fotos das rotas principais são servidas de `assets/opt/`, em AVIF e WebP
+nas larguras 800, 1400 e 2400. Ao trocar ou adicionar uma foto em
+`assets/demo/`:
+
+```bash
+python3 tools/otimizar-imagens.py --limpar   # gera as variantes e apaga órfãs
+python3 tools/aplicar-srcset.py              # reescreve <img> com picture/srcset
+```
+
+Os vídeos de hero vivem em `assets/opt/video/` em H.264 (1920 e 1280 px),
+gerados com:
+
+```bash
+ffmpeg -i origem.mp4 -an -vf "scale=1920:-2" -c:v libx264 -preset slow -crf 30 \
+  -pix_fmt yuv420p -movflags +faststart assets/opt/video/nome-1920.mp4
+```
+
+O HEVC original não toca no Chrome do Windows e do Android nem no Firefox.

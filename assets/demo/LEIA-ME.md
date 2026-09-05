@@ -23,9 +23,13 @@ problema de layout agora é o que o visitante vê.
 
 ## Pendências antes de qualquer publicação
 
-- Substituir todos os arquivos desta pasta por fotografia real.
-- Recomprimir `hero/*.mp4`: saíram com 7,1 MB e 2,8 MB, alvo ~1,5 MB, mais uma
-  versão reduzida para o celular.
+- Substituir todos os arquivos desta pasta por fotografia real. Depois,
+  rodar `tools/otimizar-imagens.py --limpar` e `tools/aplicar-srcset.py`
+  para regenerar as variantes em `assets/opt/`.
+- ~~Recomprimir `hero/*.mp4`~~ feito em 05/09/2026: os HEVC originais
+  saíram do repositório; os H.264 de 1920 e 1280 px vivem em
+  `assets/opt/video/` (1,3 MB e 1,0 MB no social, 0,75 MB e 0,4 MB no
+  corporativo). O celular segue com o poster.
 - Preencher os 26 campos marcados "a confirmar" na página corporativa.
 
 Gerado em 23/08/2026. Inventário completo do que ainda falta: ver o documento

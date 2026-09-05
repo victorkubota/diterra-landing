@@ -17,6 +17,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<!-- o poster do hero é o LCP da página: pede-se antes do CSS terminar -->
+<link rel="preload" as="image" type="image/avif" imagesizes="100vw"
+      imagesrcset="/assets/opt/hero-corporativo-noite-800.avif 800w, /assets/opt/hero-corporativo-noite-1400.avif 1400w, /assets/opt/hero-corporativo-noite-2400.avif 2400w">
 <link rel="stylesheet" href="/assets/css/tema-corp.css">
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/corporativo/corporativo.css">
@@ -74,12 +77,13 @@
 <div class="hero-palco" id="heroPalco">
 <header class="hero" id="topo">
   <div class="hero__media">
-    <img id="heroPoster" src="/assets/demo/hero/hero-corporativo-noite.webp"
+    <picture><source type="image/avif" srcset="/assets/opt/hero-corporativo-noite-800.avif 800w, /assets/opt/hero-corporativo-noite-1400.avif 1400w, /assets/opt/hero-corporativo-noite-2400.avif 2400w" sizes="100vw"><img id="heroPoster" src="/assets/opt/hero-corporativo-noite-1400.webp"
          width="2400" height="1340"
          alt="Auditório montado para convenção corporativa em espaço da Di Terrá"
-         fetchpriority="high" decoding="async">
+         fetchpriority="high" decoding="async" srcset="/assets/opt/hero-corporativo-noite-800.webp 800w, /assets/opt/hero-corporativo-noite-1400.webp 1400w, /assets/opt/hero-corporativo-noite-2400.webp 2400w" sizes="100vw"></picture>
+    <!-- sem poster: o atributo baixa a imagem mesmo com o vídeo oculto, e a
+         foto acima já cumpre esse papel -->
     <video id="heroVideo" muted loop playsinline preload="none"
-           poster="/assets/demo/hero/hero-corporativo-noite.webp"
            aria-hidden="true" hidden></video>
   </div>
 
@@ -160,8 +164,8 @@
   <div class="wrap manifesto">
     <div class="manifesto__aside">
       <figure class="manifesto__media reveal-shot" style="--i:0">
-        <img src="/assets/demo/apoio/offsite-corporativo.webp" width="2400" height="1340"
-             alt="Mesa de reunião montada sob a árvore, com a sede ao fundo" loading="lazy">
+        <picture><source type="image/avif" srcset="/assets/opt/offsite-corporativo-800.avif 800w, /assets/opt/offsite-corporativo-1400.avif 1400w, /assets/opt/offsite-corporativo-2400.avif 2400w" sizes="100vw"><img src="/assets/opt/offsite-corporativo-1400.webp" width="2400" height="1340"
+             alt="Mesa de reunião montada sob a árvore, com a sede ao fundo" loading="lazy" decoding="async" srcset="/assets/opt/offsite-corporativo-800.webp 800w, /assets/opt/offsite-corporativo-1400.webp 1400w, /assets/opt/offsite-corporativo-2400.webp 2400w" sizes="100vw"></picture>
       </figure>
     </div>
     <div class="manifesto__body">
@@ -190,8 +194,8 @@
   <div class="wrap">
     <div class="pilha">
       <article class="fmt pilha__item" style="--i:0"><div class="fmt__cartao recua">
-        <img src="/assets/demo/formatos/convencoes-congressos.webp" width="2400" height="1792"
-             alt="Plenária de convenção montada em auditório na Di Terrá" loading="lazy">
+        <picture><source type="image/avif" srcset="/assets/opt/convencoes-congressos-800.avif 800w, /assets/opt/convencoes-congressos-1400.avif 1400w, /assets/opt/convencoes-congressos-2400.avif 2400w" sizes="100vw"><img src="/assets/opt/convencoes-congressos-1400.webp" width="2400" height="1792"
+             alt="Plenária de convenção montada em auditório na Di Terrá" loading="lazy" decoding="async" srcset="/assets/opt/convencoes-congressos-800.webp 800w, /assets/opt/convencoes-congressos-1400.webp 1400w, /assets/opt/convencoes-congressos-2400.webp 2400w" sizes="100vw"></picture>
         <div class="fmt__text">
           <h3 class="h-card">Convenções e congressos</h3>
           <p>Plenária em auditório, salas de apoio, credenciamento e coffee simultâneo para grupos grandes.</p>
@@ -200,8 +204,8 @@
       </article>
 
       <article class="fmt pilha__item" style="--i:1"><div class="fmt__cartao recua">
-        <img src="/assets/demo/formatos/offsites-retreats.webp" width="2400" height="1792"
-             alt="Reunião de liderança em terraço ao ar livre" loading="lazy">
+        <picture><source type="image/avif" srcset="/assets/opt/offsites-retreats-800.avif 800w, /assets/opt/offsites-retreats-1400.avif 1400w, /assets/opt/offsites-retreats-2400.avif 2400w" sizes="100vw"><img src="/assets/opt/offsites-retreats-1400.webp" width="2400" height="1792"
+             alt="Reunião de liderança em terraço ao ar livre" loading="lazy" decoding="async" srcset="/assets/opt/offsites-retreats-800.webp 800w, /assets/opt/offsites-retreats-1400.webp 1400w, /assets/opt/offsites-retreats-2400.webp 2400w" sizes="100vw"></picture>
         <div class="fmt__text">
           <h3 class="h-card">Off-sites e retreats</h3>
           <p>Alinhamentos estratégicos de liderança longe do escritório, com ritmo, silêncio e natureza a favor.</p>
@@ -210,8 +214,8 @@
       </article>
 
       <article class="fmt pilha__item" style="--i:2"><div class="fmt__cartao recua">
-        <img src="/assets/demo/formatos/lancamentos-produto.webp" width="2400" height="1792"
-             alt="Palco de lançamento de produto com projeção de grande formato" loading="lazy">
+        <picture><source type="image/avif" srcset="/assets/opt/lancamentos-produto-800.avif 800w, /assets/opt/lancamentos-produto-1400.avif 1400w, /assets/opt/lancamentos-produto-2400.avif 2400w" sizes="100vw"><img src="/assets/opt/lancamentos-produto-1400.webp" width="2400" height="1792"
+             alt="Palco de lançamento de produto com projeção de grande formato" loading="lazy" decoding="async" srcset="/assets/opt/lancamentos-produto-800.webp 800w, /assets/opt/lancamentos-produto-1400.webp 1400w, /assets/opt/lancamentos-produto-2400.webp 2400w" sizes="100vw"></picture>
         <div class="fmt__text">
           <h3 class="h-card">Lançamentos de produto</h3>
           <p>Cenografia, projeção e som desenhados para o momento em que a marca aparece.</p>
@@ -220,8 +224,8 @@
       </article>
 
       <article class="fmt pilha__item" style="--i:3"><div class="fmt__cartao recua">
-        <img src="/assets/demo/formatos/integracoes-equipe.webp" width="2400" height="1792"
-             alt="Confraternização de equipe no gramado ao entardecer" loading="lazy">
+        <picture><source type="image/avif" srcset="/assets/opt/integracoes-equipe-800.avif 800w, /assets/opt/integracoes-equipe-1400.avif 1400w, /assets/opt/integracoes-equipe-2400.avif 2400w" sizes="100vw"><img src="/assets/opt/integracoes-equipe-1400.webp" width="2400" height="1792"
+             alt="Confraternização de equipe no gramado ao entardecer" loading="lazy" decoding="async" srcset="/assets/opt/integracoes-equipe-800.webp 800w, /assets/opt/integracoes-equipe-1400.webp 1400w, /assets/opt/integracoes-equipe-2400.webp 2400w" sizes="100vw"></picture>
         <div class="fmt__text">
           <h3 class="h-card">Integrações de equipe</h3>
           <p>Encontros que aproximam times distribuídos e transformam cultura em experiência compartilhada.</p>
@@ -230,8 +234,8 @@
       </article>
 
       <article class="fmt pilha__item" style="--i:4"><div class="fmt__cartao recua">
-        <img src="/assets/demo/formatos/celebracoes-corporativas.webp" width="2400" height="1792"
-             alt="Jantar de gala corporativo sob pavilhão iluminado" loading="lazy">
+        <picture><source type="image/avif" srcset="/assets/opt/celebracoes-corporativas-800.avif 800w, /assets/opt/celebracoes-corporativas-1400.avif 1400w, /assets/opt/celebracoes-corporativas-2400.avif 2400w" sizes="100vw"><img src="/assets/opt/celebracoes-corporativas-1400.webp" width="2400" height="1792"
+             alt="Jantar de gala corporativo sob pavilhão iluminado" loading="lazy" decoding="async" srcset="/assets/opt/celebracoes-corporativas-800.webp 800w, /assets/opt/celebracoes-corporativas-1400.webp 1400w, /assets/opt/celebracoes-corporativas-2400.webp 2400w" sizes="100vw"></picture>
         <div class="fmt__text">
           <h3 class="h-card">Celebrações corporativas</h3>
           <p>Premiações, festas de fim de ano e comemorações de conquistas do time.</p>
@@ -240,8 +244,8 @@
       </article>
 
       <article class="fmt pilha__item" style="--i:5"><div class="fmt__cartao recua">
-        <img src="/assets/demo/formatos/alinhamentos-comerciais.webp" width="2400" height="1792"
-             alt="Sala de breakout montada em U para kickoff comercial" loading="lazy">
+        <picture><source type="image/avif" srcset="/assets/opt/alinhamentos-comerciais-800.avif 800w, /assets/opt/alinhamentos-comerciais-1400.avif 1400w, /assets/opt/alinhamentos-comerciais-2400.avif 2400w" sizes="100vw"><img src="/assets/opt/alinhamentos-comerciais-1400.webp" width="2400" height="1792"
+             alt="Sala de breakout montada em U para kickoff comercial" loading="lazy" decoding="async" srcset="/assets/opt/alinhamentos-comerciais-800.webp 800w, /assets/opt/alinhamentos-comerciais-1400.webp 1400w, /assets/opt/alinhamentos-comerciais-2400.webp 2400w" sizes="100vw"></picture>
         <div class="fmt__text">
           <h3 class="h-card">Alinhamentos comerciais</h3>
           <p>Kickoffs de vendas e convenções de força comercial com estrutura de palco e breakout.</p>
@@ -269,8 +273,8 @@
      ══════════════════════════════════════════════════════════════ -->
 <section class="section section--photo section--respiro">
   <div class="photo-bg" data-parallax data-parallax-fator="0.18">
-    <img src="/assets/demo/apoio/numeros-fundo.webp" width="2400" height="1018"
-         alt="Vista aérea da sede da Di Terrá e do entorno no fim da tarde" loading="lazy">
+    <picture><source type="image/avif" srcset="/assets/opt/numeros-fundo-800.avif 800w, /assets/opt/numeros-fundo-1400.avif 1400w, /assets/opt/numeros-fundo-2400.avif 2400w" sizes="100vw"><img src="/assets/opt/numeros-fundo-1400.webp" width="2400" height="1018"
+         alt="Vista aérea da sede da Di Terrá e do entorno no fim da tarde" loading="lazy" decoding="async" srcset="/assets/opt/numeros-fundo-800.webp 800w, /assets/opt/numeros-fundo-1400.webp 1400w, /assets/opt/numeros-fundo-2400.webp 2400w" sizes="100vw"></picture>
   </div>
   <div class="wrap respiro on-dark">
     <h2 class="h-section linhas" style="--i:1">Você contrata um lugar e recebe uma operação inteira</h2>
@@ -309,7 +313,7 @@
 
       <div class="reel__track" id="reelTrack" tabindex="0" aria-label="Recursos inclusos, use as setas do teclado">
         <article class="reel__item">
-          <figure><img src="/assets/demo/solucoes/gastronomia.webp" width="2400" height="1792" alt="Prato autoral servido em jantar da Di Terrá" loading="lazy"></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/opt/gastronomia-800.avif 800w, /assets/opt/gastronomia-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/gastronomia-1400.webp" width="2400" height="1792" alt="Prato autoral servido em jantar da Di Terrá" loading="lazy" decoding="async" srcset="/assets/opt/gastronomia-800.webp 800w, /assets/opt/gastronomia-1400.webp 1400w" sizes="100vw"></picture></figure>
           <div class="reel__texto">
             <span class="reel__n">01</span>
             <h3>Gastronomia</h3>
@@ -317,7 +321,7 @@
           </div>
         </article>
         <article class="reel__item">
-          <figure><img src="/assets/demo/solucoes/decoracao.webp" width="2400" height="1792" alt="Arranjo floral e ambientação de mesa" loading="lazy"></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/opt/decoracao-800.avif 800w, /assets/opt/decoracao-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/decoracao-1400.webp" width="2400" height="1792" alt="Arranjo floral e ambientação de mesa" loading="lazy" decoding="async" srcset="/assets/opt/decoracao-800.webp 800w, /assets/opt/decoracao-1400.webp 1400w" sizes="100vw"></picture></figure>
           <div class="reel__texto">
             <span class="reel__n">02</span>
             <h3>Decoração</h3>
@@ -325,7 +329,7 @@
           </div>
         </article>
         <article class="reel__item">
-          <figure><img src="/assets/demo/solucoes/coquetelaria.webp" width="2400" height="1792" alt="Drinks autorais no bar da casa" loading="lazy"></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/opt/coquetelaria-800.avif 800w, /assets/opt/coquetelaria-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/coquetelaria-1400.webp" width="2400" height="1792" alt="Drinks autorais no bar da casa" loading="lazy" decoding="async" srcset="/assets/opt/coquetelaria-800.webp 800w, /assets/opt/coquetelaria-1400.webp 1400w" sizes="100vw"></picture></figure>
           <div class="reel__texto">
             <span class="reel__n">03</span>
             <h3>Coquetelaria</h3>
@@ -333,7 +337,7 @@
           </div>
         </article>
         <article class="reel__item">
-          <figure><img src="/assets/demo/solucoes/producao.webp" width="2400" height="1792" alt="Equipe de produção montando a estrutura do evento" loading="lazy"></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/opt/producao-800.avif 800w, /assets/opt/producao-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/producao-1400.webp" width="2400" height="1792" alt="Equipe de produção montando a estrutura do evento" loading="lazy" decoding="async" srcset="/assets/opt/producao-800.webp 800w, /assets/opt/producao-1400.webp 1400w" sizes="100vw"></picture></figure>
           <div class="reel__texto">
             <span class="reel__n">04</span>
             <h3>Produção</h3>
@@ -341,7 +345,7 @@
           </div>
         </article>
         <article class="reel__item">
-          <figure><img src="/assets/demo/solucoes/tecnologia-audiovisual.webp" width="2400" height="1792" alt="Mesa de luz e vídeo em operação durante o evento" loading="lazy"></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/opt/tecnologia-audiovisual-800.avif 800w, /assets/opt/tecnologia-audiovisual-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/tecnologia-audiovisual-1400.webp" width="2400" height="1792" alt="Mesa de luz e vídeo em operação durante o evento" loading="lazy" decoding="async" srcset="/assets/opt/tecnologia-audiovisual-800.webp 800w, /assets/opt/tecnologia-audiovisual-1400.webp 1400w" sizes="100vw"></picture></figure>
           <div class="reel__texto">
             <span class="reel__n">05</span>
             <h3>Tecnologia audiovisual</h3>
@@ -379,20 +383,20 @@
       <!-- palco: as quatro fotos empilhadas, uma visível por vez -->
       <div class="switch__stage">
         <figure class="switch__shot is-on" data-shot="a-querencia">
-          <img src="/assets/demo/espacos/a-querencia-amplitude.webp" width="2400" height="1610"
-               alt="Vista do pavilhão coberto da Querência aberto para o jardim" loading="lazy">
+          <picture><source type="image/avif" srcset="/assets/opt/a-querencia-amplitude-800.avif 800w, /assets/opt/a-querencia-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/a-querencia-amplitude-1400.webp" width="2400" height="1610"
+               alt="Vista do pavilhão coberto da Querência aberto para o jardim" loading="lazy" decoding="async" srcset="/assets/opt/a-querencia-amplitude-800.webp 800w, /assets/opt/a-querencia-amplitude-1400.webp 1400w" sizes="100vw"></picture>
         </figure>
         <figure class="switch__shot" data-shot="palacete-monte-alegre">
-          <img src="/assets/demo/espacos/palacete-monte-alegre-amplitude.webp" width="2400" height="1610"
-               alt="Salão principal do Palacete Monte Alegre montado para jantar" loading="lazy">
+          <picture><source type="image/avif" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.avif 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/palacete-monte-alegre-amplitude-1400.webp" width="2400" height="1610"
+               alt="Salão principal do Palacete Monte Alegre montado para jantar" loading="lazy" decoding="async" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.webp 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.webp 1400w" sizes="100vw"></picture>
         </figure>
         <figure class="switch__shot" data-shot="casa-lucca">
-          <img src="/assets/demo/espacos/casa-lucca-amplitude.webp" width="2400" height="1610"
-               alt="Casa Lucca vista do jardim, com varanda ao longo da fachada" loading="lazy">
+          <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-amplitude-800.avif 800w, /assets/opt/casa-lucca-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/casa-lucca-amplitude-1400.webp" width="2400" height="1610"
+               alt="Casa Lucca vista do jardim, com varanda ao longo da fachada" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-amplitude-800.webp 800w, /assets/opt/casa-lucca-amplitude-1400.webp 1400w" sizes="100vw"></picture>
         </figure>
         <figure class="switch__shot" data-shot="espaco-terra">
-          <img src="/assets/demo/espacos/espaco-terra-amplitude.webp" width="2400" height="1610"
-               alt="Espaço Terrá montado em plenária, com palco e painel de LED" loading="lazy">
+          <picture><source type="image/avif" srcset="/assets/opt/espaco-terra-amplitude-800.avif 800w, /assets/opt/espaco-terra-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/espaco-terra-amplitude-1400.webp" width="2400" height="1610"
+               alt="Espaço Terrá montado em plenária, com palco e painel de LED" loading="lazy" decoding="async" srcset="/assets/opt/espaco-terra-amplitude-800.webp 800w, /assets/opt/espaco-terra-amplitude-1400.webp 1400w" sizes="100vw"></picture>
         </figure>
       </div>
 
@@ -408,8 +412,8 @@
           <div class="vcard__panel" id="p-a-querencia" role="tabpanel" aria-labelledby="t-a-querencia">
             <div class="vcard__inner">
               <figure class="vcard__shot-m">
-                <img src="/assets/demo/espacos/a-querencia-amplitude.webp" width="2400" height="1610"
-                     alt="Vista do pavilhão coberto da Querência aberto para o jardim" loading="lazy">
+                <picture><source type="image/avif" srcset="/assets/opt/a-querencia-amplitude-800.avif 800w, /assets/opt/a-querencia-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/a-querencia-amplitude-1400.webp" width="2400" height="1610"
+                     alt="Vista do pavilhão coberto da Querência aberto para o jardim" loading="lazy" decoding="async" srcset="/assets/opt/a-querencia-amplitude-800.webp 800w, /assets/opt/a-querencia-amplitude-1400.webp 1400w" sizes="100vw"></picture>
               </figure>
               <p>Área ampla com salão coberto e jardim, indicada para convenções com plenária e áreas de convivência ao ar livre.</p>
               <ul class="spec">
@@ -438,8 +442,8 @@
           <div class="vcard__panel" id="p-palacete" role="tabpanel" aria-labelledby="t-palacete">
             <div class="vcard__inner">
               <figure class="vcard__shot-m">
-                <img src="/assets/demo/espacos/palacete-monte-alegre-amplitude.webp" width="2400" height="1610"
-                     alt="Salão principal do Palacete Monte Alegre montado para jantar" loading="lazy">
+                <picture><source type="image/avif" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.avif 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/palacete-monte-alegre-amplitude-1400.webp" width="2400" height="1610"
+                     alt="Salão principal do Palacete Monte Alegre montado para jantar" loading="lazy" decoding="async" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.webp 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.webp 1400w" sizes="100vw"></picture>
               </figure>
               <p>Arquitetura histórica para eventos de posicionamento e recepções institucionais de alto padrão.</p>
               <ul class="spec">
@@ -468,8 +472,8 @@
           <div class="vcard__panel" id="p-lucca" role="tabpanel" aria-labelledby="t-lucca">
             <div class="vcard__inner">
               <figure class="vcard__shot-m">
-                <img src="/assets/demo/espacos/casa-lucca-amplitude.webp" width="2400" height="1610"
-                     alt="Casa Lucca vista do jardim, com varanda ao longo da fachada" loading="lazy">
+                <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-amplitude-800.avif 800w, /assets/opt/casa-lucca-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/casa-lucca-amplitude-1400.webp" width="2400" height="1610"
+                     alt="Casa Lucca vista do jardim, com varanda ao longo da fachada" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-amplitude-800.webp 800w, /assets/opt/casa-lucca-amplitude-1400.webp 1400w" sizes="100vw"></picture>
               </figure>
               <p>Escala menor e ambiente reservado. Formato natural para off-sites de liderança, comitês e reuniões de conselho.</p>
               <ul class="spec">
@@ -498,8 +502,8 @@
           <div class="vcard__panel" id="p-terra" role="tabpanel" aria-labelledby="t-terra">
             <div class="vcard__inner">
               <figure class="vcard__shot-m">
-                <img src="/assets/demo/espacos/espaco-terra-amplitude.webp" width="2400" height="1610"
-                     alt="Espaço Terrá montado em plenária, com palco e painel de LED" loading="lazy">
+                <picture><source type="image/avif" srcset="/assets/opt/espaco-terra-amplitude-800.avif 800w, /assets/opt/espaco-terra-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/espaco-terra-amplitude-1400.webp" width="2400" height="1610"
+                     alt="Espaço Terrá montado em plenária, com palco e painel de LED" loading="lazy" decoding="async" srcset="/assets/opt/espaco-terra-amplitude-800.webp 800w, /assets/opt/espaco-terra-amplitude-1400.webp 1400w" sizes="100vw"></picture>
               </figure>
               <p>Estrutura versátil para lançamentos e convenções com montagem cenográfica e projeção de grande formato.</p>
               <ul class="spec">
@@ -544,8 +548,8 @@
       </ul>
     </div>
     <div class="territory__media reveal-shot" style="--i:1">
-      <img src="/assets/demo/territorio/estrada-interior.webp" width="2400" height="1610"
-           alt="Estrada arborizada no interior paulista, a caminho da Di Terrá" loading="lazy">
+      <picture><source type="image/avif" srcset="/assets/opt/estrada-interior-800.avif 800w, /assets/opt/estrada-interior-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/estrada-interior-1400.webp" width="2400" height="1610"
+           alt="Estrada arborizada no interior paulista, a caminho da Di Terrá" loading="lazy" decoding="async" srcset="/assets/opt/estrada-interior-800.webp 800w, /assets/opt/estrada-interior-1400.webp 1400w" sizes="100vw"></picture>
     </div>
   </div>
 
@@ -568,22 +572,22 @@
 
   <div class="rail rise" style="--i:1" id="stayRail" tabindex="0" aria-label="Carrossel de hospedagem, use as setas do teclado">
     <article class="stay">
-      <figure><img src="/assets/demo/territorio/pousada.webp" width="2400" height="1610" alt="Pousada de fazenda restaurada na região de Piracicaba" loading="lazy"></figure>
+      <figure><picture><source type="image/avif" srcset="/assets/opt/pousada-800.avif 800w, /assets/opt/pousada-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/pousada-1400.webp" width="2400" height="1610" alt="Pousada de fazenda restaurada na região de Piracicaba" loading="lazy" decoding="async" srcset="/assets/opt/pousada-800.webp 800w, /assets/opt/pousada-1400.webp 1400w" sizes="100vw"></picture></figure>
       <h4>Pousadas de fazenda</h4>
       <p class="tbd">a confirmar &middot; parceiros e distância</p>
     </article>
     <article class="stay">
-      <figure><img src="/assets/demo/territorio/hotel-fazenda.webp" width="2400" height="1610" alt="Hotel fazenda com piscina e arcadas no interior paulista" loading="lazy"></figure>
+      <figure><picture><source type="image/avif" srcset="/assets/opt/hotel-fazenda-800.avif 800w, /assets/opt/hotel-fazenda-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/hotel-fazenda-1400.webp" width="2400" height="1610" alt="Hotel fazenda com piscina e arcadas no interior paulista" loading="lazy" decoding="async" srcset="/assets/opt/hotel-fazenda-800.webp 800w, /assets/opt/hotel-fazenda-1400.webp 1400w" sizes="100vw"></picture></figure>
       <h4>Hotéis fazenda</h4>
       <p class="tbd">a confirmar &middot; parceiros e distância</p>
     </article>
     <article class="stay">
-      <figure><img src="/assets/demo/territorio/suite.webp" width="2400" height="1610" alt="Suíte de hotel com vista para o jardim" loading="lazy"></figure>
+      <figure><picture><source type="image/avif" srcset="/assets/opt/suite-800.avif 800w, /assets/opt/suite-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/suite-1400.webp" width="2400" height="1610" alt="Suíte de hotel com vista para o jardim" loading="lazy" decoding="async" srcset="/assets/opt/suite-800.webp 800w, /assets/opt/suite-1400.webp 1400w" sizes="100vw"></picture></figure>
       <h4>Suítes e apartamentos</h4>
       <p class="tbd">a confirmar &middot; parceiros e distância</p>
     </article>
     <article class="stay">
-      <figure><img src="/assets/demo/territorio/estrada-interior.webp" width="2400" height="1610" alt="Acesso rodoviário à região" loading="lazy"></figure>
+      <figure><picture><source type="image/avif" srcset="/assets/opt/estrada-interior-800.avif 800w, /assets/opt/estrada-interior-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/estrada-interior-1400.webp" width="2400" height="1610" alt="Acesso rodoviário à região" loading="lazy" decoding="async" srcset="/assets/opt/estrada-interior-800.webp 800w, /assets/opt/estrada-interior-1400.webp 1400w" sizes="100vw"></picture></figure>
       <h4>Acesso e transfer</h4>
       <p class="tbd">a confirmar &middot; rota e tempo de viagem</p>
     </article>
@@ -869,7 +873,11 @@
   var video = document.getElementById('heroVideo');
   var poster = document.getElementById('heroPoster');
   if (video && !reduz && window.matchMedia('(min-width: 768px)').matches) {
-    video.src = '/assets/demo/hero/hero-corporativo-noite.mp4';
+    /* H.264 em vez do HEVC original: o HEVC não toca no Chrome do Windows
+       e do Android nem no Firefox. 1280 px até o tablet, 1920 px acima. */
+    video.src = window.matchMedia('(min-width: 1440px)').matches
+      ? '/assets/opt/video/hero-corporativo-noite-1920.mp4'
+      : '/assets/opt/video/hero-corporativo-noite-1280.mp4';
     video.hidden = false;
     video.addEventListener('playing', function () {
       poster.style.transition = 'opacity .8s cubic-bezier(.16,1,.3,1)';
