@@ -115,11 +115,13 @@
     if (tipo) resumo.push(tipo);
     if (espaco) resumo.push(espaco);
     if (data) resumo.push(data);
+    /* a partir daqui é com a gente: a confirmação repete o que a pessoa
+       pediu e diz quem responde, na voz da casa */
+    var fecho = ' A partir daqui é com a gente: a equipe comercial responde por e-mail ou WhatsApp.';
     var texto = viaEmail
       ? 'Seu e-mail abriu com a solicitação pronta para ' + destino + '. Se não abriu, escreva para esse endereço' +
-        (resumo.length ? ' mencionando ' + resumo.join(', ') : '') + '. A equipe comercial responde por e-mail ou WhatsApp.'
-      : 'Recebemos sua solicitação' + (resumo.length ? ' para ' + resumo.join(', ') : '') +
-        '. A equipe comercial responde por e-mail ou WhatsApp.';
+        (resumo.length ? ' mencionando ' + resumo.join(', ') : '') + '.' + fecho
+      : 'Recebemos sua solicitação' + (resumo.length ? ' para ' + resumo.join(', ') : '') + '.' + fecho;
     pintarStatus(status, texto, 'ok');
     form.reset();
     if (status) status.focus();

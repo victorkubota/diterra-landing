@@ -8,6 +8,7 @@
 <link rel="canonical" href="https://www.diterra.com.br/corporativo/">
 <meta name="robots" content="index,follow">
 <link rel="icon" type="image/png" href="/assets/brand/favicon-corp.png">
+<meta name="theme-color" content="#1e325c">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Di Terrá Corporativo">
@@ -907,6 +908,12 @@
       nav.classList.toggle('is-stuck', !entries[0].isIntersecting);
     }, { rootMargin: '-88% 0px 0px 0px' }).observe(sentinel);
   }
+
+  /* "a confirmar" explicado no hover e no leitor de tela */
+  Array.prototype.forEach.call(document.querySelectorAll('.tbd'), function (el) {
+    el.setAttribute('title', 'Estamos confirmando este dado com a casa. Pergunte na proposta e a equipe responde com o número certo.');
+    el.setAttribute('aria-description', 'Estamos confirmando este dado com a casa. Pergunte na proposta e a equipe responde com o número certo.');
+  });
 
   /* faixa de logos: quem pediu para parar, para (WCAG 2.2.2) */
   var faixa = document.getElementById('faixaLogos');
