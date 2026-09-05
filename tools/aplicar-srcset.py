@@ -38,8 +38,7 @@ METADE = "(min-width: 940px) 50vw, 100vw"
 # sem regra, a imagem é tratada como tela cheia.
 SIZES: list[tuple[str, str, str]] = [
     ("social/index.html", "solucoes/decoracao", METADE),                              # intro
-    ("social/index.html", "espacos/", "(min-width: 861px) 60vw, 90vw"),               # card stack
-    ("social/index.html", "solucoes/coquetelaria", "(min-width: 861px) 60vw, 90vw"),
+    ("social/index.html", "espacos/", METADE),                                          # as quatro casas
     ("social/index.html", "eventos/", "(min-width: 1025px) 25vw, (min-width: 481px) 50vw, 100vw"),
     ("social/index.html", "apoio/offsite", "(min-width: 1025px) 25vw, (min-width: 481px) 50vw, 100vw"),
     ("social/index.html", "CASAMENTO", "(min-width: 1025px) 25vw, (min-width: 481px) 50vw, 100vw"),
