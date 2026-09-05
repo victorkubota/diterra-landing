@@ -250,114 +250,39 @@
 .intro-image:hover img { transform: scale(1.04); }
 
 /* ══════════════════════════════════════════════════════════════
-   § 3 — CARD STACK (from parallax-clean — Espaços)
+   § 3 — AS QUATRO CASAS
+   O .switch mora no base.css. Aqui: o fundo royal desta seção, a
+   lista sobre escuro e a moldura em arco sobre a foto.
    ══════════════════════════════════════════════════════════════ */
-.stack-section {
-  padding: 10vh 0;
-  background: var(--royal);
-  color: var(--ivory);
-  position: relative;
+.casas { background: var(--royal); color: var(--ivory); }
+.casas .heading-lg { color: var(--ivory); }
+.casas .section__head--centro .body-text { margin-inline: auto; text-align: center; }
+.casas__lead { color: var(--ui-text-invert-muted); max-width: 46ch; margin-top: 14px; }
+.casas .switch__list { border-top-color: var(--ui-border-invert); }
+.casas .vcard { border-bottom-color: var(--ui-border-invert); }
+.casas .vcard__head { color: var(--ivory); }
+.casas .vcard__n, .casas .vcard__chev { color: var(--ui-text-invert-muted); }
+.casas .vcard.is-on .vcard__n, .casas .vcard.is-on .vcard__chev { color: var(--rose); }
+@media (hover: hover) { .casas .vcard__head:hover .vcard__name { color: var(--rose); } }
+.casas .vcard__inner > p { color: var(--ui-text-invert-muted); }
+.casas .link-arrow { color: var(--rose); border-bottom-color: var(--ui-border-invert); }
+.casas .link-arrow--alt { color: var(--ui-text-invert-muted); }
+.casas .link-arrow--alt:hover { color: var(--ivory); }
+.casas .vcard.is-on::after { background: var(--rose); }
+
+/* a janela em arco do símbolo, em linha, sobre a foto: moldura, não
+   máscara (o cliente tirou a máscara; a moldura mantém o motivo sem
+   recortar a imagem). Só no palco grande. */
+.switch__arco {
+  position: absolute; inset: 28px 28px 0;
+  border: 1px solid rgba(254,250,224,.55); border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+  pointer-events: none;
+  opacity: 0; transform: scaleY(.96); transform-origin: bottom;
+  transition: opacity 1.2s var(--ease) .4s, transform 1.2s var(--ease) .4s;
 }
-.stack-header {
-  text-align: center;
-  margin-bottom: clamp(40px, 6vw, 80px);
-  padding: 0 var(--gutter);
-}
-.stack-header .eyebrow {
-  justify-content: center;
-  color: rgba(255,255,255,.4);
-  margin-bottom: 16px;
-}
-.stack-header .eyebrow::before { background: rgba(255,255,255,.3); }
-.stack-header .heading-lg {
-  color: var(--ivory);
-}
-.stack-container {
-  width: 100%;
-  max-width: var(--max);   /* era 1400px: o layout acompanha a tela */
-  margin: 0 auto;
-  position: relative;
-  padding-bottom: 10vh;
-}
-.card-item {
-  position: sticky;
-  top: 10vh;
-  height: 80vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 5vh;
-}
-.card-inner {
-  width: 90%;
-  height: 100%;
-  background: #1a1a1a;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius-xl);
-  position: relative;
-  overflow: hidden;
-  display: grid;
-  /* a imagem passa de 55% para 65% do cartão: item 5 do brief pede a
-     foto na proporção grande da referência */
-  grid-template-columns: 1fr 1.85fr;
-  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7);
-}
-@media (max-width: 860px) {
-  .card-inner { grid-template-columns: 1fr; }
-}
-.card-content {
-  padding: clamp(2rem, 4vw, 4rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: #1a1a1a;
-  z-index: 2;
-  border-radius: var(--radius-xl) 0 0 var(--radius-xl);
-}
-.card-number {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 1.5rem + 3vw, 4rem);
-  font-weight: 300;
-  color: var(--ivory);
-  opacity: .2;
-  margin-bottom: 8px;
-}
-.card-title {
-  font-family: var(--font-display);
-  font-size: var(--text-xl);
-  font-weight: 400;
-  letter-spacing: .02em;
-  color: var(--ivory);
-  margin-bottom: 8px;
-}
-.card-location {
-  font-size: var(--text-xs);
-  font-weight: 300;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.4);
-  margin-top: 12px;
-}
-.card-desc {
-  font-size: var(--text-base);
-  font-weight: 300;
-  line-height: 1.8;
-  color: rgba(255,255,255,.55);
-}
-.card-img-wrap {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
-}
-.card-img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform 1.5s ease;
-}
-.card-inner:hover .card-img { transform: scale(1.08); }
+.switch.is-in .switch__arco { opacity: 1; transform: none; }
+@media (max-width: 939px) { .switch__arco { display: none; } }
 
 /* ══════════════════════════════════════════════════════════════
    § 4 — EVENTOS
@@ -670,14 +595,6 @@
   }
   .intro-image { margin-right: 0; }
 
-  /* sem pilha no celular: três cartões empilhados na altura do próprio
-     conteúdo, com a foto em 3:2 em cima. Um cartão sticky de 85vh por
-     item exigia três telas de rolagem para ler três parágrafos. */
-  .card-inner { grid-template-columns: 1fr; width: 100%; height: auto; }
-  .card-item { position: static; height: auto; margin-bottom: 20px; padding-inline: var(--gutter); }
-  .card-img-wrap { aspect-ratio: 3 / 2; height: auto; order: -1; border-radius: var(--radius-xl) var(--radius-xl) 0 0; }
-  .card-content { border-radius: 0 0 var(--radius-xl) var(--radius-xl); gap: 20px; }
-  .stack-container { padding-bottom: 0; }
 
   .eventos-grid { grid-template-columns: 1fr 1fr; }
   .galeria-grid { grid-template-columns: 1fr 1fr; }

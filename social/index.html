@@ -119,83 +119,123 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════
-     § 3 — CARD STACK (Espaços / Ambientes)
+     § 3 — AS QUATRO CASAS
+     Antes: três cartões genéricos (Jardim, Salão, Lounge) que não eram
+     nenhum lugar. Agora as quatro casas, com o mesmo componente que o
+     corporativo usa: foto de 90svh presa à esquerda, lista à direita que
+     troca a foto, rodízio que para quando a pessoa escolhe. A moldura em
+     arco sobre a foto é o símbolo da marca, em linha, sem recortar a
+     imagem.
      ═══════════════════════════════════════════════════ -->
-<section class="stack-section" id="espacos">
-  <div class="stack-header">
-    <h2 class="heading-lg linhas">Espaços que Inspiram</h2>
-  </div>
-  <div class="stack-container">
-
-    <!-- Card 1 — Jardim -->
-    <div class="card-item">
-      <div class="card-inner">
-        <div class="card-content">
-          <div>
-            <div class="card-number">01</div>
-            <h3 class="card-title">Jardim & Área Externa</h3>
-            <p class="card-location">Cerimônias · Coquetéis · Pôr do Sol</p>
+<section class="section casas on-dark" id="espacos">
+  <div class="wrap">
+    <div class="section__head section__head--centro">
+      <h2 class="heading-lg linhas">Espaços que Inspiram</h2>
+      <p class="body-text casas__lead rise">Quatro casas no interior paulista, cada uma com um jeito de receber. Escolha a sua.</p>
+    </div>
+    <div class="switch rise" style="--i:1" id="venueSwitch">
+      <div class="switch__stage">
+        <figure class="switch__shot is-on" data-shot="a-querencia">
+          <picture><source type="image/avif" srcset="/assets/opt/a-querencia-amplitude-800.avif 800w, /assets/opt/a-querencia-amplitude-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/a-querencia-amplitude-1400.webp" width="2400" height="1610" alt="Vista do pavilhão coberto da Querência aberto para o jardim" loading="lazy" decoding="async" srcset="/assets/opt/a-querencia-amplitude-800.webp 800w, /assets/opt/a-querencia-amplitude-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture>
+        </figure>
+        <figure class="switch__shot" data-shot="palacete-monte-alegre">
+          <picture><source type="image/avif" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.avif 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/palacete-monte-alegre-amplitude-1400.webp" width="2400" height="1610" alt="Salão principal do Palacete Monte Alegre montado para jantar" loading="lazy" decoding="async" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.webp 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture>
+        </figure>
+        <figure class="switch__shot" data-shot="casa-lucca">
+          <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-amplitude-800.avif 800w, /assets/opt/casa-lucca-amplitude-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-amplitude-1400.webp" width="2400" height="1610" alt="Casa Lucca vista do jardim, com varanda ao longo da fachada" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-amplitude-800.webp 800w, /assets/opt/casa-lucca-amplitude-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture>
+        </figure>
+        <figure class="switch__shot" data-shot="espaco-terra">
+          <picture><source type="image/avif" srcset="/assets/opt/espaco-terra-amplitude-800.avif 800w, /assets/opt/espaco-terra-amplitude-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/espaco-terra-amplitude-1400.webp" width="2400" height="1610" alt="Espaço Terrá montado em plenária, com palco e painel de LED" loading="lazy" decoding="async" srcset="/assets/opt/espaco-terra-amplitude-800.webp 800w, /assets/opt/espaco-terra-amplitude-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture>
+        </figure>
+        <span class="switch__arco" aria-hidden="true"></span>
+      </div>
+      <div class="switch__list" role="tablist" aria-label="Escolha uma casa">
+        <article class="vcard is-on" data-venue="a-querencia">
+          <button class="vcard__head" role="tab" aria-selected="true" aria-controls="p-a-querencia" id="t-a-querencia">
+            <span class="vcard__n">01</span>
+            <span class="vcard__name">A Querência</span>
+            <svg class="vcard__chev" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M1 1l6 6 6-6" stroke="currentColor" stroke-width="1.3"/></svg>
+          </button>
+          <div class="vcard__panel" id="p-a-querencia" role="tabpanel" aria-labelledby="t-a-querencia">
+            <div class="vcard__inner">
+              <figure class="vcard__shot-m">
+                <picture><source type="image/avif" srcset="/assets/opt/a-querencia-amplitude-800.avif 800w, /assets/opt/a-querencia-amplitude-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/a-querencia-amplitude-1400.webp" width="2400" height="1610" alt="Vista do pavilhão coberto da Querência aberto para o jardim" loading="lazy" decoding="async" srcset="/assets/opt/a-querencia-amplitude-800.webp 800w, /assets/opt/a-querencia-amplitude-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture>
+              </figure>
+              <p>Área ampla, salão coberto e jardim aberto. A casa que recebe as celebrações de maior porte, com espaço para cerimônia ao ar livre e festa sob cobertura.</p>
+              <div class="vcard__acts">
+                <a class="link-arrow" href="/social/espacos/a-querencia">Ver a casa por inteiro
+                  <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+                </a>
+                <a class="link-arrow link-arrow--alt" href="#contato">Agendar visita</a>
+              </div>
+            </div>
           </div>
-          <div class="card-desc">
-            Amplos jardins cercados pela paisagem natural de Piracicaba. Um cenário a céu aberto que se transforma ao entardecer, ideal para cerimônias, coquetéis e momentos que pedem horizonte.
+        </article>
+        <article class="vcard" data-venue="palacete-monte-alegre">
+          <button class="vcard__head" role="tab" aria-selected="false" aria-controls="p-palacete-monte-alegre" id="t-palacete-monte-alegre">
+            <span class="vcard__n">02</span>
+            <span class="vcard__name">Palacete Monte Alegre</span>
+            <svg class="vcard__chev" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M1 1l6 6 6-6" stroke="currentColor" stroke-width="1.3"/></svg>
+          </button>
+          <div class="vcard__panel" id="p-palacete-monte-alegre" role="tabpanel" aria-labelledby="t-palacete-monte-alegre">
+            <div class="vcard__inner">
+              <figure class="vcard__shot-m">
+                <picture><source type="image/avif" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.avif 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/palacete-monte-alegre-amplitude-1400.webp" width="2400" height="1610" alt="Salão principal do Palacete Monte Alegre montado para jantar" loading="lazy" decoding="async" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.webp 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture>
+              </figure>
+              <p>Casarão histórico, pé-direito alto e janelas em arco. O endereço para quem quer uma festa com a formalidade de outro tempo.</p>
+              <div class="vcard__acts">
+                <a class="link-arrow" href="/social/espacos/palacete-monte-alegre">Ver a casa por inteiro
+                  <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+                </a>
+                <a class="link-arrow link-arrow--alt" href="#contato">Agendar visita</a>
+              </div>
+            </div>
           </div>
-          <a href="#contato" class="btn btn--ghost on-dark" style="width:max-content">
-            <span>Agendar Visita</span>
-            <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M9 1l4 4-4 4" stroke="currentColor" stroke-width="1"/></svg>
-          </a>
-        </div>
-        <div class="card-img-wrap">
-          <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-amplitude-800.avif 800w, /assets/opt/casa-lucca-amplitude-1400.avif 1400w" sizes="100vw"><img class="card-img" src="/assets/opt/casa-lucca-amplitude-1400.webp" alt="Mesa longa montada no jardim, sob as árvores" width="2400" height="1610" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-amplitude-800.webp 800w, /assets/opt/casa-lucca-amplitude-1400.webp 1400w" sizes="100vw"></picture>
-        </div>
+        </article>
+        <article class="vcard" data-venue="casa-lucca">
+          <button class="vcard__head" role="tab" aria-selected="false" aria-controls="p-casa-lucca" id="t-casa-lucca">
+            <span class="vcard__n">03</span>
+            <span class="vcard__name">Casa Lucca</span>
+            <svg class="vcard__chev" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M1 1l6 6 6-6" stroke="currentColor" stroke-width="1.3"/></svg>
+          </button>
+          <div class="vcard__panel" id="p-casa-lucca" role="tabpanel" aria-labelledby="t-casa-lucca">
+            <div class="vcard__inner">
+              <figure class="vcard__shot-m">
+                <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-amplitude-800.avif 800w, /assets/opt/casa-lucca-amplitude-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-amplitude-1400.webp" width="2400" height="1610" alt="Casa Lucca vista do jardim, com varanda ao longo da fachada" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-amplitude-800.webp 800w, /assets/opt/casa-lucca-amplitude-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture>
+              </figure>
+              <p>Para festas de convidados contados. Mesa longa na área externa, ambiente reservado e serviço próximo.</p>
+              <div class="vcard__acts">
+                <a class="link-arrow" href="/social/espacos/casa-lucca">Ver a casa por inteiro
+                  <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+                </a>
+                <a class="link-arrow link-arrow--alt" href="#contato">Agendar visita</a>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="vcard" data-venue="espaco-terra">
+          <button class="vcard__head" role="tab" aria-selected="false" aria-controls="p-espaco-terra" id="t-espaco-terra">
+            <span class="vcard__n">04</span>
+            <span class="vcard__name">Espaço Terrá</span>
+            <svg class="vcard__chev" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M1 1l6 6 6-6" stroke="currentColor" stroke-width="1.3"/></svg>
+          </button>
+          <div class="vcard__panel" id="p-espaco-terra" role="tabpanel" aria-labelledby="t-espaco-terra">
+            <div class="vcard__inner">
+              <figure class="vcard__shot-m">
+                <picture><source type="image/avif" srcset="/assets/opt/espaco-terra-amplitude-800.avif 800w, /assets/opt/espaco-terra-amplitude-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/espaco-terra-amplitude-1400.webp" width="2400" height="1610" alt="Espaço Terrá montado em plenária, com palco e painel de LED" loading="lazy" decoding="async" srcset="/assets/opt/espaco-terra-amplitude-800.webp 800w, /assets/opt/espaco-terra-amplitude-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture>
+              </figure>
+              <p>Terreno aberto e vista limpa. O espaço mais versátil do grupo, preparado para montagens cenográficas de grande formato.</p>
+              <div class="vcard__acts">
+                <a class="link-arrow" href="/social/espacos/espaco-terra">Ver a casa por inteiro
+                  <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+                </a>
+                <a class="link-arrow link-arrow--alt" href="#contato">Agendar visita</a>
+              </div>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
-
-    <!-- Card 2 — Salão -->
-    <div class="card-item">
-      <div class="card-inner">
-        <div class="card-content">
-          <div>
-            <div class="card-number">02</div>
-            <h3 class="card-title">Salão Principal</h3>
-            <p class="card-location">Recepções · Jantares · Festas</p>
-          </div>
-          <div class="card-desc">
-            Linhas contemporâneas, pé-direito generoso e iluminação que acompanha o tom de cada celebração. O salão principal acomoda eventos de grande porte com o conforto e a elegância que definem o Di Terrá.
-          </div>
-          <a href="#contato" class="btn btn--ghost on-dark" style="width:max-content">
-            <span>Agendar Visita</span>
-            <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M9 1l4 4-4 4" stroke="currentColor" stroke-width="1"/></svg>
-          </a>
-        </div>
-        <div class="card-img-wrap">
-          <picture><source type="image/avif" srcset="/assets/opt/a-querencia-amplitude-800.avif 800w, /assets/opt/a-querencia-amplitude-1400.avif 1400w" sizes="100vw"><img class="card-img" src="/assets/opt/a-querencia-amplitude-1400.webp" alt="Salão principal, produção executiva Di Terrá" width="2400" height="1610" loading="lazy" decoding="async" srcset="/assets/opt/a-querencia-amplitude-800.webp 800w, /assets/opt/a-querencia-amplitude-1400.webp 1400w" sizes="100vw"></picture>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card 3 — Lounge -->
-    <div class="card-item">
-      <div class="card-inner">
-        <div class="card-content">
-          <div>
-            <div class="card-number">03</div>
-            <h3 class="card-title">Lounge & Bar</h3>
-            <p class="card-location">Coquetelaria · Design · Convivência</p>
-          </div>
-          <div class="card-desc">
-            Um espaço pensado para a convivência descontraída. Bar completo com coquetelaria autoral, mobiliário de design e uma atmosfera que convida à conversa e à celebração entre amigos.
-          </div>
-          <a href="#contato" class="btn btn--ghost on-dark" style="width:max-content">
-            <span>Agendar Visita</span>
-            <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M9 1l4 4-4 4" stroke="currentColor" stroke-width="1"/></svg>
-          </a>
-        </div>
-        <div class="card-img-wrap">
-          <picture><source type="image/avif" srcset="/assets/opt/coquetelaria-800.avif 800w, /assets/opt/coquetelaria-1400.avif 1400w" sizes="100vw"><img class="card-img" src="/assets/opt/coquetelaria-1400.webp" alt="Bar e coquetelaria para eventos" width="2400" height="1792" loading="lazy" decoding="async" srcset="/assets/opt/coquetelaria-800.webp 800w, /assets/opt/coquetelaria-1400.webp 1400w" sizes="100vw"></picture>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -446,6 +486,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="/assets/site.js" defer></script>
+<script src="/assets/switch.js" defer></script>
 <script src="/assets/formulario.js" defer></script>
 
 <script>
@@ -524,20 +565,6 @@ if (movimentoReduzido) {
       y: '0%', duration: 1, ease: 'power3.out', stagger: 0.02,
       scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none reverse' }
     });
-  });
-
-  /* ── Pilha de cartões: o coberto encolhe, apaga e desfoca ──
-     Só onde há pilha (≥ 861px); no celular os cartões são uma grade
-     simples e nenhum deve encolher ou desfocar. */
-  const cards = window.matchMedia('(min-width: 861px)').matches ? gsap.utils.toArray('.card-item') : [];
-  cards.forEach((card, i) => {
-    const nextCard = cards[i + 1];
-    if (nextCard) {
-      gsap.to(card.querySelector('.card-inner'), {
-        scale: 0.9, opacity: 0.4, filter: 'blur(6px)', ease: 'none',
-        scrollTrigger: { trigger: nextCard, start: 'top bottom', end: 'top 10vh', scrub: true }
-      });
-    }
   });
 
   /* ── Banner ── */

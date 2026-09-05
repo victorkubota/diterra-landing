@@ -414,103 +414,9 @@
 .fmt__cartao .h-card { color: #fff; }
 .fmt__cartao p { font-size: var(--text-lg); color: rgba(255,255,255,.86); max-width: 48ch; }
 
-/* ══════════════════════════════════════════════════════════════════════
-   ESPAÇOS — lista que troca a foto (referência Sarah Haywood)
-
-   A foto ocupa metade da tela e é sticky enquanto a lista rola.
-   No celular vira acordeão, com a foto dentro de cada card.
-   ══════════════════════════════════════════════════════════════════════ */
-.switch { display: grid; gap: clamp(26px, 3vw, 52px); }
-@media (min-width: 940px) {
-  /* metade e metade, como a referência. Era 1.25/.75: mais largo, porém
-     mais baixo, e no fim com MENOS área que este retrato de 90svh. */
-  .switch { grid-template-columns: 1fr 1fr; align-items: start; }
-}
-
-.switch__stage { display: none;
-  border-radius: var(--radius-lg);
-}
-@media (min-width: 940px) {
-  .switch__stage {
-    display: block;
-    position: sticky; top: 100px;
-    /* altura de verdade, não proporção: é o que responde ao pedido de
-       "um espaço que mostre mais amplitude". Agora nos 90svh medidos na
-       referência, que é o que vira o corte em retrato. */
-    height: min(90svh, 900px);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background: var(--navy-900);
-  }
-}
-.switch__shot {
-  position: absolute; inset: 0;
-  opacity: 0; transform: scale(1.04);
-  /* o wipe entra pela direita junto do cross-fade: a troca passa a ter
-     direção, em vez de só surgir */
-  clip-path: inset(0 0 0 100%);
-  transition: opacity .9s var(--ease), transform 1.4s var(--ease),
-              clip-path 1s var(--ease);
-}
-.switch__shot.is-on { opacity: 1; transform: none; clip-path: inset(0 0 0 0); }
-.switch__shot img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg); }
-
-.switch__list { display: grid; gap: 0; border-top: 1px solid var(--ui-border); }
-
-.vcard { border-bottom: 1px solid var(--ui-border); }
-
-.vcard__head {
-  width: 100%;
-  display: flex; align-items: center; gap: clamp(14px, 2vw, 24px);
-  background: none; border: 0; cursor: pointer;
-  font-family: inherit; text-align: left;
-  padding: clamp(20px, 2.4vw, 30px) 0;
-  color: var(--ui-text);
-  transition: color var(--dur-fast) var(--ease);
-}
-.vcard__n {
-  font-size: var(--text-xs); font-variant-numeric: tabular-nums;
-  letter-spacing: .2em; color: var(--ui-text-muted); flex: none;
-  transition: color var(--dur-fast) var(--ease);
-}
-.vcard__name {
-  flex: 1;
-  font-family: var(--font-display); font-weight: 300;
-  font-size: clamp(1.45rem, 2.6vw, 2.1rem);
-  line-height: 1.1; letter-spacing: -.01em;
-}
-.vcard__chev {
-  flex: none; color: var(--ui-text-muted);
-  transition: transform var(--dur) var(--ease), color var(--dur-fast) var(--ease);
-}
-.vcard.is-on .vcard__n,
-.vcard.is-on .vcard__chev { color: var(--blue-700); }
-.vcard.is-on .vcard__chev { transform: rotate(180deg); }
-@media (hover: hover) { .vcard__head:hover .vcard__name { color: var(--blue-700); } }
-
-/* painel: altura animada por grid-template-rows, sem medir em JS */
-.vcard__panel {
-  display: grid; grid-template-rows: 0fr;
-  transition: grid-template-rows .7s var(--ease);
-}
-.vcard.is-on .vcard__panel { grid-template-rows: 1fr; }
-.vcard__inner {
-  overflow: hidden;
-  display: flex; flex-direction: column; gap: 20px;
-  opacity: 0;
-  transition: opacity .5s var(--ease);
-}
-.vcard.is-on .vcard__inner { opacity: 1; transition-delay: .16s; padding-bottom: clamp(24px, 2.6vw, 34px); }
-.vcard__inner > p { font-size: var(--text-sm); color: var(--ui-text-muted); max-width: 52ch; }
-
-/* a foto dentro do card só existe abaixo de 940px */
-.vcard__shot-m { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 3/2; background: var(--navy-900); }
-.vcard__shot-m img { width: 100%; height: 100%; object-fit: cover; }
-@media (min-width: 940px) { .vcard__shot-m { display: none; } }
-
-.vcard__acts { display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: center; }
-
-/* campo a preencher pela Di Terrá — nunca inventar capacidade */
+/* .switch / .vcard (lista que troca a foto) moram no base.css desde
+   05/09/2026: a home social passou a usar o mesmo componente para as
+   quatro casas. */
 
 /* ══════════════════════════════════════════════════════════════════════
    ESTRUTURA — carrossel de recursos
@@ -918,31 +824,7 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
 #formatos .section__head .h-section { max-width: 12em; }
 #formatos .section__head .body-muted { max-width: var(--max-text); }
 
-/* ── RÉGUA DO RODÍZIO DE CASAS ────────────────────────────────────────
-   A largura vem de --rp, o progresso que o próprio timer escreve, e não
-   de uma animação presa à classe .is-on.
-
-   A versão anterior dependia de o navegador reiniciar a animação toda
-   vez que .is-on mudava de cartão, e era isso que dava a impressão de
-   que a régua só rodava na primeira volta. Agora ela é um número: anda
-   com o relógio, para junto com ele, e a pausa fica visível em vez de
-   parecer que a contagem sumiu. */
-.vcard.is-on { position: relative; }
-.vcard.is-on::after {
-  content: '';
-  position: absolute; left: 0; bottom: -1px; height: 2px;
-  background: var(--ui-accent);
-  width: calc(var(--rp, 0) * 100%);
-  /* só aparece enquanto o rodízio anda: parado, some e o que resta é o
-     comportamento de clique de sempre */
-  opacity: var(--ro, 0);
-  transition: opacity var(--dur-fast) var(--ease);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .vcard.is-on::after { display: none; }
-}
-
+/* a régua do rodízio de casas mora no base.css, junto do .switch */
 
 /* ── FRASE DE ABERTURA REVELADA POR CARACTERE ─────────────────────────
    Medido na referência: 94px, serifada, caixa alta, centralizado,
