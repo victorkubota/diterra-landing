@@ -51,4 +51,8 @@
   --ui-action-hover:       var(--royal-80);
   --ui-notice-bg:          var(--rose-soft);
   --ui-notice-text:        #6b3f22;
+  /* erro de formulário: o tijolo escurecido a 5,3:1 sobre marfim, e o
+     rosa da marca sobre royal (8,7:1) quando o formulário está no escuro */
+  --ui-erro:               #9a4a1f;
+  --ui-erro-on-dark:       var(--rose);
 }

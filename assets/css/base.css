@@ -339,6 +339,32 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
 .notice strong { font-weight: 600; }
 
 /* ══════════════════════════════════════════════════════════════════════
+   ESTADOS DO FORMULÁRIO
+   Erro junto do campo, enviando no botão, resultado num bloco que o
+   leitor de tela anuncia (aria-live no HTML). A cor de erro é um papel
+   do tema, não um vermelho genérico.
+   ══════════════════════════════════════════════════════════════════════ */
+.campo-erro {
+  font-size: var(--text-sm); font-weight: 400;
+  color: var(--ui-erro); margin-top: 6px;
+}
+[aria-invalid="true"] { border-color: var(--ui-erro) !important; }
+.form-status {
+  margin-top: 18px; padding: 16px 20px;
+  font-size: var(--text-base); line-height: 1.55;
+  border: 1px solid var(--ui-border); border-radius: var(--radius-sm);
+  max-width: var(--max-text);
+}
+.form-status:focus { outline: 2px solid var(--ui-accent); outline-offset: 3px; }
+.form-status--ok { background: var(--ui-notice-bg); color: var(--ui-notice-text); border-color: transparent; }
+.form-status--erro { color: var(--ui-erro); border-color: var(--ui-erro); }
+.on-dark .form-status--ok { background: rgba(255,255,255,.1); color: var(--ui-text-invert); }
+.on-dark .form-status--erro { color: var(--ui-erro-on-dark); border-color: var(--ui-erro-on-dark); }
+.on-dark .campo-erro { color: var(--ui-erro-on-dark); }
+.on-dark [aria-invalid="true"] { border-color: var(--ui-erro-on-dark) !important; }
+button[aria-busy="true"] { cursor: progress; opacity: .7; }
+
+/* ══════════════════════════════════════════════════════════════════════
    RODAPÉ
    ══════════════════════════════════════════════════════════════════════ */
 /* O rodapé usava o mesmo token de fundo que .section--invert, então no

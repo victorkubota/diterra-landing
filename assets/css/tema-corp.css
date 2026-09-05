@@ -49,4 +49,8 @@
   --ui-action-hover:       var(--navy-700);
   --ui-notice-bg:          var(--sand-200);
   --ui-notice-text:        #58453a;
+  /* erro de formulário: taupe escurecido sobre areia (5,1:1) e a areia
+     clara sobre navy (9,8:1) no formulário de proposta, que é escuro */
+  --ui-erro:               #7a4a2e;
+  --ui-erro-on-dark:       #f0c8a8;
 }
