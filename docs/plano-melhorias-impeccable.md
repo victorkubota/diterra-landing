@@ -205,3 +205,30 @@ P = até meio dia, M = 1 a 2 dias, G = 3 dias ou mais.
 4. **Escopo: os 10 PRs**, um por vez, cada um com branch própria e revisão antes do próximo.
 
 Ordem de execução resultante: 01 → 02 → 03 → 04 → 05 → 06 → 07 → 08 → 09 (A) → 10 → polish final e re-critique.
+
+---
+
+## 6. Resultado (2026-09-05, os 10 PRs mergeados: #26 a #35)
+
+| Medida | Antes | Depois |
+|---|---|---|
+| Critique (Nielsen, /32) | 18 (56 %) | 26 (81 %) |
+| Audit técnico (/20) | 11 | 17 |
+| Detector Impeccable, todas as rotas | 428 (144 sem `design-system.html`) | 18 (rótulos em caixa alta, eyebrows dos heros, breadcrumbs) |
+| Home social, transferência inicial | 10,9 MB | 1,1 MB |
+| Scripts de terceiros na home social | 5 (3 CDNs) | 0 |
+| Rotas sem JS legíveis | não (`opacity: 0` sem gate) | sim (`html.js`) |
+| Vídeo de hero | HEVC 7,4 MB (não toca em Chrome Windows/Android nem Firefox) | H.264 1,3 MB / 1,0 MB |
+
+O que cada PR entregou está no histórico (`git log --merges`). O que continua fora do design e trava a publicação:
+
+1. Fotografia real das quatro casas (`assets/demo` é IA).
+2. Depoimentos reais com autorização.
+3. Ficha técnica: 26 + 3 campos "a confirmar".
+4. Endpoint do formulário (`data-endpoint` já é suportado por `assets/formulario.js`; até lá o botão abre o e-mail do visitante).
+5. Telefone e WhatsApp do social: o número da home é placeholder, por isso a barra de ação social leva só ao contato.
+6. Channe: licenciar ou retirar do stack.
+7. Remover `X-Robots-Tag` e `Disallow` ao promover.
+8. `tools/gerar-paginas.py` segue travado (TRAVA): as 11 internas são a fonte de verdade; regenerar exige alinhar o template antes.
+
+Risco de ambiente: `~/Desktop` está no iCloud Drive (CloudDesktop). Durante a execução surgiram 158 cópias "nome 2.ext" não rastreadas dentro do repositório, apagadas antes dos commits. Repositórios git em pasta sincronizada pelo iCloud repetem isso; vale mover `projects/` para fora do Desktop ou desligar a sincronização.
