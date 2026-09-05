@@ -22,9 +22,9 @@
      contraste do logotipo. Trocar por Channe em woff2 quando a licença
      for adquirida. Oooh Baby é acento manuscrito do universo social e
      não tem equivalente no corporativo.                             */
-  --font-display: 'Channe', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-display: 'Channe', 'Cormorant Garamond', 'Cormorant Fallback', Georgia, 'Times New Roman', serif;
   --font-script:  'Oooh Baby', 'Cormorant Garamond', cursive;
-  --font-sans:    'Albert Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-sans:    'Albert Sans', 'Albert Fallback', -apple-system, 'Helvetica Neue', Arial, sans-serif;
 
   /* 12px é o piso de texto funcional (rótulo, link, botão): abaixo disso
      falha em tela pequena e de alta densidade. Os dois degraus subiram
@@ -41,6 +41,13 @@
      nosso maior título de seção parava em 56px, e é essa diferença que
      faz a frase valer por um parágrafo inteiro. */
   --text-manchete: clamp(2.75rem, 1.4rem + 5.6vw, 6.5rem);
+  /* papéis do hero, iguais na home social e no corporativo: título em
+     caixa alta e subtítulo em itálico. Viviam como px soltos nas duas
+     folhas; agora são um degrau só. */
+  --text-hero:     clamp(2.75rem, 1.5rem + 5.5vw, 6rem);
+  --text-hero-sub: clamp(1.125rem, 1rem + .7vw, 1.625rem);
+  /* título de cartão em display (overlay de evento, card de casa) */
+  --text-lg-display: clamp(1.25rem, 1rem + 1vw, 1.75rem);
 
   --leading-body:    1.7;
   --leading-display: 1.02;
@@ -75,6 +82,36 @@
   --dur-fast:  .25s;
   --dur:       .5s;
   --dur-slow:  .8s;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   FALLBACKS MÉTRICOS
+
+   Enquanto a webfont não chega, o texto usa Georgia e Arial ajustadas
+   para ocupar a mesma largura e altura de linha da Cormorant e da Albert.
+   Duas consequências: o título não pula quando a fonte real entra, e o
+   montarLinhas() do site.js, que mede onde cada linha quebra, mede
+   certo desde a primeira passada.
+
+   Valores aproximados da relação de largura média entre as famílias
+   (Cormorant é estreita; Georgia, larga). Afinar contra o rendering real
+   se algum título mudar de quebra na troca.
+   ══════════════════════════════════════════════════════════════════════ */
+@font-face {
+  font-family: 'Cormorant Fallback';
+  src: local('Georgia'), local('Times New Roman');
+  size-adjust: 88%;
+  ascent-override: 92%;
+  descent-override: 26%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Albert Fallback';
+  src: local('Arial'), local('Helvetica Neue');
+  size-adjust: 101%;
+  ascent-override: 95%;
+  descent-override: 24%;
+  line-gap-override: 0%;
 }
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -191,6 +228,12 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
 .body-muted { color: var(--ui-text-muted); }
 .on-dark { color: var(--ui-text-invert); }
 .on-dark .body-muted { color: var(--ui-text-invert-muted); }
+/* Texto claro sobre navy ou royal perde massa: a Albert 300 fica fina e
+   as letras se colam. Sobre fundo escuro o corpo sobe um peso, ganha um
+   fio de tracking e um pouco mais de entrelinha. */
+.on-dark p, .on-dark li, .section--invert p, .section--invert li {
+  font-weight: 400; letter-spacing: .012em; line-height: 1.75;
+}
 
 /* ══════════════════════════════════════════════════════════════════════
    BOTÃO
