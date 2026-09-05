@@ -55,7 +55,7 @@
   transform-origin: left;
 }
 .js .deco-line { transform: scaleX(0); }
-.deco-line.revealed { transform: scaleX(1); transition: transform .8s var(--ease); }
+.deco-line.is-in { transform: scaleX(1); transition: transform .8s var(--ease) .2s; }
 
 /* Split text containers */
 .word-wrap {
@@ -64,8 +64,16 @@
   vertical-align: top;
   padding-bottom: 0.1em;
 }
+/* palavras do hero sobem de trás da máscara em cascata quando o
+   documento fica pronto (is-ready vem do site.js, com timer de reserva) */
 .word-inner { display: inline-block; }
 .js .word-inner { transform: translateY(110%); }
+.is-ready .word-inner {
+  transform: none;
+  transition: transform 1.3s var(--ease-out);
+  transition-delay: calc(.1s + var(--w, 0) * .1s);
+}
+.is-ready .hero-fade { opacity: 1; transition: opacity 1s var(--ease) .6s; }
 
 /* ══════════════════════════════════════════════════════════════
    § 1 — HERO
@@ -92,8 +100,17 @@
     url('/assets/opt/solucao-completa-decoracao-casamento-1220.webp') type('image/webp'));
   background-size: cover;
   background-position: center;
-  will-change: transform;
 }
+/* parallax preso à rolagem, sem JS: a foto desce 15% enquanto o hero
+   sai pelo topo. Onde não há animation-timeline, fica parada. */
+@supports (animation-timeline: scroll()) {
+  .js .hero-bg {
+    animation: heroParallax linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 100vh;
+  }
+}
+@keyframes heroParallax { to { transform: translateY(15%); } }
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -378,8 +395,15 @@
     url('/assets/opt/3-500.webp') type('image/webp'));
   background-size: cover;
   background-position: center;
-  will-change: transform;
 }
+@supports (animation-timeline: view()) {
+  .js .banner-bg {
+    animation: bannerParallax linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+}
+@keyframes bannerParallax { from { transform: translateY(-6%); } to { transform: translateY(6%); } }
 .banner-overlay {
   position: absolute;
   inset: 0;
@@ -608,4 +632,10 @@
   .galeria-item:nth-child(1) { grid-row: span 1; }
   .galeria-item:nth-child(4) { grid-column: span 1; }
   .galeria-item:nth-child(1) img { aspect-ratio: 3 / 4; height: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg, .banner-bg { animation: none; }
+  .js .word-inner { transform: none; }
+  .js .hero-fade { opacity: 1; }
 }

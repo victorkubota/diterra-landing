@@ -71,11 +71,11 @@
   <div class="hero-content">
     <p class="hero-eyebrow hero-fade">Piracicaba · Interior de São Paulo</p>
     <h1 class="hero-title" id="heroTitle">
-      <span class="word-wrap"><span class="word-inner">Um&nbsp;</span></span>
-      <span class="word-wrap"><span class="word-inner">Lugar&nbsp;</span></span>
-      <span class="word-wrap"><span class="word-inner">Para</span></span><br>
-      <span class="word-wrap"><span class="word-inner">Momentos&nbsp;</span></span>
-      <span class="word-wrap"><span class="word-inner">Excepcionais</span></span>
+      <span class="word-wrap"><span class="word-inner" style="--w:0">Um&nbsp;</span></span>
+      <span class="word-wrap"><span class="word-inner" style="--w:1">Lugar&nbsp;</span></span>
+      <span class="word-wrap"><span class="word-inner" style="--w:2">Para</span></span><br>
+      <span class="word-wrap"><span class="word-inner" style="--w:3">Momentos&nbsp;</span></span>
+      <span class="word-wrap"><span class="word-inner" style="--w:4">Excepcionais</span></span>
     </h1>
     <p class="hero-sub hero-fade">Onde cada detalhe compõe uma experiência inesquecível</p>
     <a href="#intro" class="btn btn--ghost on-dark hero-fade">
@@ -97,18 +97,14 @@
   <div class="container">
     <div class="intro-grid">
       <div class="intro-text">
-        <h2 class="heading-lg manchete split-animate">
+        <h2 class="heading-lg manchete linhas">
           Onde a natureza <br><span style="color:var(--royal)">encontra a arte.</span>
         </h2>
-        <p class="body-text split-animate">O Di Terrá nasceu da convicção de que cada celebração merece um cenário à altura de sua importância. Mais do que um espaço, oferecemos uma arquitetura de experiências, onde a natureza do interior paulista encontra uma infraestrutura pensada em cada detalhe.</p>
-        <div class="deco-line" style="margin:24px 0"></div>
-        <!-- o split-animate vai em cada rótulo, não no contêiner:
-             splitTextToWords reescreve o innerHTML inteiro, e no contêiner
-             ele apagava estes dois divs, deixando cada PALAVRA como item
-             de flex separado por 36px -->
+        <p class="body-text rise" style="--i:1">O Di Terrá nasceu da convicção de que cada celebração merece um cenário à altura de sua importância. Mais do que um espaço, oferecemos uma arquitetura de experiências, onde a natureza do interior paulista encontra uma infraestrutura pensada em cada detalhe.</p>
+        <div class="deco-line rise" style="--i:2;margin:24px 0"></div>
         <div class="intro-meta">
-          <div class="split-animate">Est. Piracicaba</div>
-          <div class="split-animate">Interior de São Paulo</div>
+          <div class="rise" style="--i:3">Est. Piracicaba</div>
+          <div class="rise" style="--i:4">Interior de São Paulo</div>
         </div>
       </div>
       <div class="intro-image">
@@ -483,101 +479,50 @@
   </svg>
 </a>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="/assets/site.js" defer></script>
 <script src="/assets/switch.js" defer></script>
 <script src="/assets/formulario.js" defer></script>
 
 <script>
 /* ══════════════════════════════════════════════════════════════
-   MOTION DA HOME — o que ainda é do GSAP: palavras do hero, parallax
-   do hero e do banner, pilha de cartões, filete decorativo. Nav,
-   gaveta, voltar ao topo, hero-cartão (--hp), régua e revelações
-   (.rise/.linhas) são do site.js, iguais às outras treze rotas.
-   Sem preloader: o conteúdo aparece assim que o CSS chega.
+   MOTION DA HOME — sem biblioteca.
+   Tese: um momento autoral (o hero: palavras que sobem, foto que
+   recolhe em cartão ao rolar), continuidade (parallax do hero e do
+   banner por animation-timeline, quando o navegador tem) e feedback
+   (botões, formulário). Revelações de seção, gaveta, régua e
+   voltar-ao-topo são do site.js, iguais às outras treze rotas.
    ══════════════════════════════════════════════════════════════ */
-gsap.registerPlugin(ScrollTrigger);
-
-const movimentoReduzido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* ── Text splitter (split-animate) ── */
-function splitTextToWords(element) {
-  const text = element.innerText;
-  const words = text.split(' ');
-  element.innerHTML = '';
-  words.forEach(word => {
-    const wordWrap = document.createElement('span');
-    wordWrap.classList.add('word-wrap');
-    wordWrap.innerHTML = `<span class="word-inner">${word}&nbsp;</span>`;
-    element.appendChild(wordWrap);
-  });
-}
-document.querySelectorAll('.split-animate').forEach(el => { splitTextToWords(el); });
-
-/* ── GLightbox sob demanda ─────────────────────────────────────
-   A galeria é a sexta seção; no primeiro clique baixa, inicia e abre
-   a foto clicada. Sem script o link continua levando à imagem. */
-let lightbox = null;
-let carregandoLightbox = null;
-const carregarLightbox = function () {
-  if (carregandoLightbox) return carregandoLightbox;
-  carregandoLightbox = new Promise(function (ok, falha) {
-    const css = document.createElement('link');
-    css.rel = 'stylesheet';
-    css.href = 'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css';
-    document.head.appendChild(css);
-    const js = document.createElement('script');
-    js.src = 'https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js';
-    js.onload = function () {
-      lightbox = GLightbox({ touchNavigation: true, loop: true, skin: 'clean' });
-      ok(lightbox);
-    };
-    js.onerror = falha;
-    document.head.appendChild(js);
-  });
-  return carregandoLightbox;
-};
-document.querySelectorAll('.glightbox').forEach(function (link, i) {
-  link.addEventListener('click', function (e) {
-    if (lightbox) return;
-    e.preventDefault();
-    carregarLightbox().then(function (lb) { lb.openAt(i); })
-      .catch(function () { window.location.href = link.href; });
-  });
-});
-
-if (movimentoReduzido) {
-  /* com movimento reduzido as palavras já estão no lugar (base.css) e o
-     GSAP não precisa mover nada */
-} else {
-  /* ── Hero ── */
-  gsap.to('.word-inner', { y: '0%', stagger: 0.1, duration: 1.5, ease: 'power4.out' });
-  gsap.to('.hero-fade', { opacity: 1, duration: 1, delay: 0.5 });
-  gsap.to('#heroBg', {
-    yPercent: 15, ease: 'none',
-    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
-  });
-
-  /* ── Split text da intro ── */
-  document.querySelectorAll('.split-animate').forEach(el => {
-    gsap.to(el.querySelectorAll('.word-inner'), {
-      y: '0%', duration: 1, ease: 'power3.out', stagger: 0.02,
-      scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none reverse' }
+(function () {
+  /* ── GLightbox sob demanda: baixa no primeiro clique da galeria ── */
+  var lightbox = null;
+  var carregando = null;
+  var carregar = function () {
+    if (carregando) return carregando;
+    carregando = new Promise(function (ok, falha) {
+      var css = document.createElement('link');
+      css.rel = 'stylesheet';
+      css.href = 'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css';
+      document.head.appendChild(css);
+      var js = document.createElement('script');
+      js.src = 'https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js';
+      js.onload = function () {
+        lightbox = GLightbox({ touchNavigation: true, loop: true, skin: 'clean' });
+        ok(lightbox);
+      };
+      js.onerror = falha;
+      document.head.appendChild(js);
+    });
+    return carregando;
+  };
+  document.querySelectorAll('.glightbox').forEach(function (link, i) {
+    link.addEventListener('click', function (e) {
+      if (lightbox) return;
+      e.preventDefault();
+      carregar().then(function (lb) { lb.openAt(i); })
+        .catch(function () { window.location.href = link.href; });
     });
   });
-
-  /* ── Banner ── */
-  gsap.to('#bannerBg', {
-    yPercent: 10, ease: 'none',
-    scrollTrigger: { trigger: '.banner', start: 'top bottom', end: 'bottom top', scrub: true }
-  });
-
-  /* ── Filete decorativo ── */
-  document.querySelectorAll('.deco-line').forEach(line => {
-    ScrollTrigger.create({ trigger: line, start: 'top 85%', onEnter: () => line.classList.add('revealed'), once: true });
-  });
-}
+})();
 </script>
 </body>
 </html>

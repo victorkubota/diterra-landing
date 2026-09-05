@@ -5,6 +5,12 @@
 (function () {
   'use strict';
 
+  /* is-ready: o hero de cada rota entra em cascata a partir daqui.
+     rAF não roda em aba de fundo, então o timer garante a entrada. */
+  var pronto = function () { document.body.classList.add('is-ready'); };
+  window.requestAnimationFrame(pronto);
+  window.setTimeout(pronto, 400);
+
   var nav    = document.getElementById('nav');
   var toggle = document.getElementById('navToggle');
   var drawer = document.getElementById('navDrawer');
@@ -133,7 +139,7 @@
     });
   }, { passive: true });
 
-  var blocos = document.querySelectorAll('.rise, .reveal-shot, .cascata, .linhas');
+  var blocos = document.querySelectorAll('.rise, .reveal-shot, .cascata, .linhas, .deco-line');
 
   /* A revelação é um gesto de uma vez só, e a classe precisa sair quando
      ele termina.

@@ -715,13 +715,22 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
    também anima escala. Por isso um bloco nunca leva as duas classes.
    ─────────────────────────────────────────────────────────────────── */
 [data-parallax] { overflow: hidden; }
-[data-parallax] > img {
-  /* 18% de folga em cima e embaixo: o JS nunca desloca mais que 16% */
+[data-parallax] img {
+  /* 18% de folga em cima e embaixo: o deslocamento nunca passa de 16% */
   height: 136%;
   position: relative; top: -18%;
   transform: translate3d(0, var(--py, 0px), 0);
-  will-change: transform;
 }
+/* preso à rolagem, sem JS, onde o navegador tem animation-timeline: a
+   foto desliza de -12% a +12% enquanto o bloco atravessa a tela */
+@supports (animation-timeline: view()) {
+  .js [data-parallax] img {
+    animation: fotoParallax linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+}
+@keyframes fotoParallax { from { transform: translateY(-12%); } to { transform: translateY(12%); } }
 
 /* .nav__progresso mora no base.css: toda página longa merece a régua. */
 
@@ -730,7 +739,7 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
   .hero__media img, .hero__media video { transform: none; }
   .switch__shot { transition: none; }
   .vcard__panel { transition: none; }
-  [data-parallax] > img { height: 100%; top: 0; transform: none; will-change: auto; }
+  [data-parallax] img { height: 100%; top: 0; transform: none; animation: none; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -765,7 +774,18 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
   mix-blend-mode: multiply;
   transition: opacity var(--dur) var(--ease);
 }
-.faixa:hover .faixa__pista { animation-play-state: paused; }
+.faixa:hover .faixa__pista,
+.faixa--parada .faixa__pista { animation-play-state: paused; }
+.faixa { position: relative; }
+.faixa__pausa {
+  position: absolute; right: var(--gutter); top: -44px; z-index: 1;
+  background: none; border: 1px solid var(--ui-border); border-radius: 999px;
+  padding: 8px 14px; font: 500 var(--text-xs)/1 var(--font-sans);
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ui-text-muted);
+  cursor: pointer; min-height: 32px;
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.faixa__pausa:hover, .faixa__pausa[aria-pressed="true"] { color: var(--ui-text); border-color: var(--ui-text); }
 .faixa__pista img:hover { opacity: .8; }
 @keyframes faixaCorre {
   from { transform: translateX(0); }
@@ -826,14 +846,11 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
 
 /* a régua do rodízio de casas mora no base.css, junto do .switch */
 
-/* ── FRASE DE ABERTURA REVELADA POR CARACTERE ─────────────────────────
-   Medido na referência: 94px, serifada, caixa alta, centralizado,
-   line-height 1.0, ocupando 83% da tela, e dividido em caracteres que
-   aparecem em onda conforme a seção sobe.
-
-   A opacidade sai de calc, não de um timer por letra: --tp é o
-   progresso do scroll e --ci o índice do caractere, então a onda tem
-   seis caracteres de largura e corre sozinha com a rolagem. */
+/* ── FRASE DE ABERTURA ────────────────────────────────────────────────
+   Medida na referência: 94px, serifada, caixa alta, centralizada,
+   ocupando 83% da tela. Sobe por máscara como todo título de seção
+   (.linhas); a revelação caractere a caractere saiu em 05/09/2026,
+   era uma segunda voz de motion na mesma página. */
 .clientes__titulo {
   font-size: var(--text-manchete);
   line-height: 1;
@@ -843,9 +860,3 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
   max-width: 83vw;
   margin-inline: auto;
 }
-.letras__p { display: inline-block; }
-.letras__c {
-  display: inline-block;
-  opacity: clamp(0, calc((var(--tp, 0) * (var(--total) + 6) - var(--ci)) / 6), 1);
-}
-@media (prefers-reduced-motion: reduce) { .letras__c { opacity: 1; } }
