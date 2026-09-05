@@ -452,9 +452,12 @@
   background: none; cursor: pointer; color: #fff;
   border: 1px solid var(--ui-border-invert); border-radius: 999px;
   transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease),
-              opacity var(--dur-fast) var(--ease);
+              opacity var(--dur-fast) var(--ease), transform var(--dur-press) var(--ease);
 }
-.reel__btn:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.45); }
+@media (hover: hover) {
+  .reel__btn:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.45); }
+}
+.reel__btn:active:not([disabled]) { transform: var(--press-borda); }
 .reel__btn[disabled] { opacity: .3; cursor: default; }
 .reel__btn[disabled]:hover { background: none; border-color: var(--ui-border-invert); }
 
@@ -554,9 +557,13 @@
   background: none; cursor: pointer;
   border: 1px solid var(--ui-border); border-radius: 999px;
   color: var(--ui-text);
-  transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+  transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease),
+              transform var(--dur-press) var(--ease);
 }
-.rail-btn:hover { border-color: var(--navy-900); background: var(--ui-bg-alt); }
+@media (hover: hover) {
+  .rail-btn:hover { border-color: var(--navy-900); background: var(--ui-bg-alt); }
+}
+.rail-btn:active:not([disabled]) { transform: var(--press-borda); }
 
 .rail {
   display: grid; grid-auto-flow: column;
@@ -564,6 +571,7 @@
   gap: clamp(14px, 1.6vw, 24px);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
   scrollbar-width: none;
   padding-inline: var(--gutter);
   padding-bottom: 8px;
