@@ -111,6 +111,8 @@
   }
 }
 @keyframes heroParallax { to { transform: translateY(15%); } }
+/* a foto do hero viaja de e para a raiz e o corporativo (base.css) */
+.hero-bg { view-transition-name: hero-foto; }
 .hero-overlay {
   position: absolute;
   inset: 0;

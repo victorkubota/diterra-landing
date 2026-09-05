@@ -121,6 +121,42 @@
 }
 
 /* ══════════════════════════════════════════════════════════════════════
+   TRANSIÇÃO ENTRE PÁGINAS (View Transitions entre documentos)
+
+   Raiz, home social, corporativo e as casas são um site só, e a troca
+   de página deveria parecer isso, não um recarregamento. Com a regra
+   abaixo o navegador tira um retrato da página que sai e anima para a
+   que entra. Três elementos têm nome e viajam de uma página à outra:
+
+     hero-foto   a foto do hero de cada rota (raiz, social, corporativo)
+     casa-foto   a foto da casa escolhida na lista, que vira o hero da
+                 página daquela casa
+     marca       o logo na nav, que troca de universo sem sumir
+
+   Chrome, Edge e Safari 18.2+ animam; Firefox navega como sempre. Nada
+   de JS, nada a carregar. Com movimento reduzido, não há transição.
+   ══════════════════════════════════════════════════════════════════════ */
+@view-transition { navigation: auto; }
+
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: .45s; animation-timing-function: var(--ease); }
+::view-transition-group(hero-foto),
+::view-transition-group(casa-foto) { animation-duration: .7s; animation-timing-function: var(--ease-out); }
+::view-transition-group(marca) { animation-duration: .5s; animation-timing-function: var(--ease-out); }
+/* a foto antiga não esmaece por baixo da nova: a nova cobre, a antiga some no fim */
+::view-transition-old(hero-foto),
+::view-transition-old(casa-foto) { animation: none; mix-blend-mode: normal; }
+::view-transition-new(hero-foto),
+::view-transition-new(casa-foto) { animation: none; mix-blend-mode: normal; }
+
+/* a foto da casa ativa na lista é a que vira hero da página da casa */
+.switch__shot.is-on img { view-transition-name: casa-foto; }
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
    RESET
    ══════════════════════════════════════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

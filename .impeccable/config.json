@@ -56,6 +56,15 @@
         ],
         "createdAt": "2026-09-05T06:53:19.168Z",
         "reason": "false positive: full-bleed sections pad vertically and delegate the gutter to .wrap; fmt__cartao and switch__list children carry their own padding"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-05T10:04:17.939Z",
+        "reason": "sanctioned: drawer thumbnails carry data-src and receive src when the drawer opens, so the four photos are not downloaded by visitors who never open the menu; they are invisible (opacity 0) until then"
       }
     ]
   }
