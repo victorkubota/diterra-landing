@@ -526,8 +526,10 @@ if (movimentoReduzido) {
     });
   });
 
-  /* ── Pilha de cartões: o coberto encolhe, apaga e desfoca ── */
-  const cards = gsap.utils.toArray('.card-item');
+  /* ── Pilha de cartões: o coberto encolhe, apaga e desfoca ──
+     Só onde há pilha (≥ 861px); no celular os cartões são uma grade
+     simples e nenhum deve encolher ou desfocar. */
+  const cards = window.matchMedia('(min-width: 861px)').matches ? gsap.utils.toArray('.card-item') : [];
   cards.forEach((card, i) => {
     const nextCard = cards[i + 1];
     if (nextCard) {

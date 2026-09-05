@@ -638,7 +638,7 @@
 /* ══════════════════════════════════════════════════════════════
    § 8 — CHAMADA FINAL
    ══════════════════════════════════════════════════════════════ */
-.chamada { text-align: center; }
+.chamada { text-align: center; padding-block: var(--section-y-loose); }
 .chamada .wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; }
 .chamada__rotulo {
   font-size: var(--text-xs); letter-spacing: .25em; text-transform: uppercase;
@@ -659,9 +659,9 @@
    ══════════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
   .eventos-grid { grid-template-columns: repeat(2, 1fr); }
+  /* a galeria mantém o desenho bento em duas colunas: item 1 alto à
+     esquerda, 2 e 3 à direita, 4 largo embaixo, 5 e 6 fechando */
   .galeria-grid { grid-template-columns: repeat(2, 1fr); }
-  .galeria-item:nth-child(1) { grid-row: span 1; }
-  .galeria-item:nth-child(4) { grid-column: span 1; }
 }
 @media (max-width: 768px) {
   .intro-grid,
@@ -670,10 +670,14 @@
   }
   .intro-image { margin-right: 0; }
 
-  .card-inner { grid-template-columns: 1fr; }
-  .card-item { top: 5vh; height: 85vh; }
-  .card-img-wrap { height: 50%; order: -1; border-radius: var(--radius-xl) var(--radius-xl) 0 0; }
-  .card-content { border-radius: 0 0 var(--radius-xl) var(--radius-xl); }
+  /* sem pilha no celular: três cartões empilhados na altura do próprio
+     conteúdo, com a foto em 3:2 em cima. Um cartão sticky de 85vh por
+     item exigia três telas de rolagem para ler três parágrafos. */
+  .card-inner { grid-template-columns: 1fr; width: 100%; height: auto; }
+  .card-item { position: static; height: auto; margin-bottom: 20px; padding-inline: var(--gutter); }
+  .card-img-wrap { aspect-ratio: 3 / 2; height: auto; order: -1; border-radius: var(--radius-xl) var(--radius-xl) 0 0; }
+  .card-content { border-radius: 0 0 var(--radius-xl) var(--radius-xl); gap: 20px; }
+  .stack-container { padding-bottom: 0; }
 
   .eventos-grid { grid-template-columns: 1fr 1fr; }
   .galeria-grid { grid-template-columns: 1fr 1fr; }
@@ -684,4 +688,7 @@
 @media (max-width: 480px) {
   .eventos-grid { grid-template-columns: 1fr; }
   .galeria-grid { grid-template-columns: 1fr; }
+  .galeria-item:nth-child(1) { grid-row: span 1; }
+  .galeria-item:nth-child(4) { grid-column: span 1; }
+  .galeria-item:nth-child(1) img { aspect-ratio: 3 / 4; height: auto; }
 }
