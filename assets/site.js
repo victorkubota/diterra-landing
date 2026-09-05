@@ -51,18 +51,57 @@
   /* ── entrada dos blocos ──────────────────────────────────────────────
      Quem chega por link com âncora começa no meio do documento; o que
      ficou acima nunca cruzaria o observer, então é revelado de imediato. */
-  var blocos = document.querySelectorAll('.rise');
+  /* .rise para texto, .reveal-shot para fotografia, .cascata para listas:
+     os três dependem do mesmo is-in, então um observer só dá conta. */
+  var blocos = document.querySelectorAll('.rise, .reveal-shot, .cascata');
+
+  /* A revelação é um gesto de uma vez só, e a classe precisa sair quando
+     ele termina.
+
+     .reveal-shot.is-in img pesa (0,2,1) e vence .card__media img e
+     .gallery img, que pesam (0,1,1). Enquanto a classe fica, ela governa
+     também o hover: medido em 05/09/2026, o zoom passava de 1,1s para
+     1,6s e herdava o atraso do --i — 0,44s na quinta foto da galeria, o
+     que lê como travado. No corporativo isso nunca apareceu porque lá
+     nenhum .reveal-shot tem zoom de hover.
+
+     Tirada a classe, resta o is-in e o componente volta a mandar no
+     próprio hover. Sem clip-path a foto já está inteira, então nada
+     pisca. */
+  var encerrarRevelacao = function (el) {
+    var alvo = el.querySelector('img, video');
+    var pronto = false;
+    var limpar = function () {
+      if (pronto) return;
+      pronto = true;
+      el.classList.remove('reveal-shot');
+    };
+    if (alvo) {
+      alvo.addEventListener('transitionend', function (e) {
+        if (e.propertyName === 'transform') limpar();
+      });
+    }
+    /* rede: transitionend não dispara se a transição for suprimida —
+       movimento reduzido, aba em segundo plano, imagem que não carregou */
+    window.setTimeout(limpar, 2600);
+  };
+
+  var revelar = function (el) {
+    el.classList.add('is-in');
+    if (el.classList.contains('reveal-shot')) encerrarRevelacao(el);
+  };
+
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting && entry.boundingClientRect.top >= 0) return;
-        entry.target.classList.add('is-in');
+        revelar(entry.target);
         io.unobserve(entry.target);
       });
     }, { rootMargin: '0px 0px -10% 0px' });
     Array.prototype.forEach.call(blocos, function (el) { io.observe(el); });
   } else {
-    Array.prototype.forEach.call(blocos, function (el) { el.classList.add('is-in'); });
+    Array.prototype.forEach.call(blocos, function (el) { revelar(el); });
   }
 
   /* ── hero vira cartão ao sair ─────────────────────────────────────

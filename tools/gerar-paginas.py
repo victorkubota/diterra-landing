@@ -450,7 +450,7 @@ def cards_html(itens, pasta, atual=None):
             continue
         img = it["imagem"]
         saida.append(f"""      <a class="card rise" href="/social/{pasta}/{it['slug']}">
-        <div class="card__media">
+        <div class="card__media reveal-shot">
           <img src="{img}" alt="{it['alt']}" loading="lazy" style="object-position:center 35%">
           <span class="card__arch" aria-hidden="true"></span>
         </div>
@@ -466,9 +466,12 @@ def cards_html(itens, pasta, atual=None):
 
 
 def galeria_html():
+    # cada figura se descobre por conta, escalonada pelo --i; o .gallery
+    # não leva mais .rise, senão o bloco piscaria inteiro por cima
     return NL.join(
-        f'      <figure><img src="/assets/{arq}" alt="{alt}" loading="lazy" style="object-position:center 35%"></figure>'
-        for arq, alt in GALERIA
+        f'      <figure class="reveal-shot" style="--i:{i}"><img src="/assets/{arq}" '
+        f'alt="{alt}" loading="lazy" style="object-position:center 35%"></figure>'
+        for i, (arq, alt) in enumerate(GALERIA)
     )
 
 
@@ -494,12 +497,12 @@ def pagina_interna(item, tipo):
       confirmação da Di Terrá. Nenhum valor foi estimado.</span>
     </p>
     <div class="split">
-      <ul class="spec rise">
+      <ul class="spec cascata">
 {ficha_html(item['ficha'])}
       </ul>
       <div class="rise">
         <h3 class="h-card" style="margin-bottom:20px">O que este espaço oferece</h3>
-        <ul class="checks">
+        <ul class="checks cascata">
 {destaques}
         </ul>
       </div>
@@ -516,7 +519,7 @@ def pagina_interna(item, tipo):
       <p class="eyebrow">O que está incluído</p>
       <h2 class="h-section">Do planejamento à desmontagem</h2>
     </div>
-    <ul class="checks rise">
+    <ul class="checks cascata">
 {inclui}
     </ul>
   </div>
@@ -556,7 +559,7 @@ def pagina_interna(item, tipo):
       <p class="eyebrow">{rotulo}</p>
 {prosa}
     </div>
-    <div class="split__media rise">
+    <div class="split__media reveal-shot">
       <img src="{item['imagem']}" alt="{item['alt']}" loading="lazy" width="1800" height="1013">
     </div>
   </div>
@@ -568,7 +571,7 @@ def pagina_interna(item, tipo):
       <p class="eyebrow">Registros</p>
       <h2 class="h-section">Momentos na Di Terrá</h2>
     </div>
-    <div class="gallery rise">
+    <div class="gallery">
 {galeria_html()}
     </div>
   </div>
@@ -661,6 +664,11 @@ def hub(tipo):
 
 # ══════════════════════════════════════════════════════════════════════════
 # EXECUÇÃO
+#
+# Este script SOBRESCREVE as onze internas por inteiro. Toda classe de
+# motion aplicada à mão nelas precisa existir aqui em cima também, senão
+# uma execução apaga o trabalho. Em 05/09/2026 foi o que quase aconteceu
+# com .reveal-shot e .cascata.
 # ══════════════════════════════════════════════════════════════════════════
 
 def escrever(caminho, conteudo):
@@ -683,5 +691,34 @@ def main():
     print(f"\n{2 + len(ESPACOS) + len(SOLUCOES)} páginas geradas.")
 
 
+# ══════════════════════════════════════════════════════════════════════════
+# TRAVA
+#
+# Este template ficou para trás do que as onze páginas realmente contêm.
+# Rodado em 05/09/2026, ele desfez trabalho de três PRs em uma execução:
+#
+#   · removeu o <div class="hero-palco"> das onze — o hero deixou de se
+#     recolher em cartão ao rolar (fase 4)
+#   · reinseriu 44 <p class="eyebrow">, que o cliente pediu para tirar
+#     ("Em todas as seções remova os headlines")
+#   · trouxe de volta /assets/DECORACAO.png, a peça de marketing com texto
+#     queimado no pixel, substituída no PR victorkubota/diterra-landing#21
+#
+# As classes de motion (.reveal-shot, .cascata, --i na galeria) já foram
+# alinhadas aqui, mas os três pontos acima não. Enquanto não forem, gerar
+# é destrutivo.
+#
+# Para rodar mesmo assim, depois de alinhar o template:
+#   python3 tools/gerar-paginas.py --eu-sei-o-que-estou-fazendo
+# ══════════════════════════════════════════════════════════════════════════
+
 if __name__ == "__main__":
+    import sys
+    if "--eu-sei-o-que-estou-fazendo" not in sys.argv:
+        print(__doc__ or "")
+        print("RECUSADO: este gerador sobrescreve as onze internas por inteiro e")
+        print("o template está desatualizado. Rodá-lo agora apaga o hero-palco,")
+        print("devolve os eyebrows removidos a pedido do cliente e restaura uma")
+        print("imagem legada. Leia o bloco TRAVA no fim deste arquivo.")
+        sys.exit(1)
     main()

@@ -450,18 +450,35 @@
    ══════════════════════════════════════════════════════════════ */
 gsap.registerPlugin(ScrollTrigger);
 
-/* ── Lenis Smooth Scroll ── */
-const lenis = new Lenis({
+/* ── Movimento reduzido ─────────────────────────────────────────
+   Quase todo o movimento desta página é escrito por JavaScript, e o
+   bloco de prefers-reduced-motion do base.css não alcança valor que o
+   JS grava direto no elemento. Então a preferência é lida uma vez aqui
+   e consultada nos pontos que o CSS não cobre: Lenis, AOS e preloader.
+   Leitura única, na carga: quem muda a preferência no sistema recarrega
+   a página, que é o comportamento esperado. */
+const movimentoReduzido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ── Lenis Smooth Scroll ──────────────────────────────────────────
+   O Lenis sequestra a rolagem da página inteira — é o item mais
+   desorientador para quem tem sensibilidade vestibular. Com a
+   preferência ligada não instanciamos nada e não abrimos o laço de
+   requestAnimationFrame; a rolagem volta a ser a nativa do navegador.
+   A variável continua DECLARADA e valendo null, porque o voltar-ao-topo
+   consulta 'lenis' e já sabe cair no window.scrollTo quando não há. */
+const lenis = movimentoReduzido ? null : new Lenis({
   duration: 1.2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   direction: 'vertical',
   smooth: true,
 });
-function raf(time) {
-  lenis.raf(time);
+if (lenis) {
+  const raf = (time) => {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  };
   requestAnimationFrame(raf);
 }
-requestAnimationFrame(raf);
 
 /* ── Text Splitter Utility (from parallax-clean) ── */
 function splitTextToWords(element) {
@@ -512,29 +529,44 @@ document.querySelectorAll('.split-animate').forEach(el => {
   });
 })();
 
-/* ── Preloader ── */
-const loadTl = gsap.timeline({
-  onComplete: () => {
-    initSite();
-  }
-});
+/* ── Preloader ─────────────────────────────────────────────────
+   São ~3s de barra e cortina antes de qualquer conteúdo aparecer. Com
+   movimento reduzido pulamos a encenação: escondemos o #loader de uma
+   vez, sem tween, e chamamos initSite() na hora. O initSite() PRECISA
+   rodar nos dois caminhos — é ele que liga AOS, GLightbox e o resto do
+   comportamento; sem ele a página fica sem site, não sem animação. */
+if (movimentoReduzido) {
+  gsap.set('#loader', { yPercent: -100 });
+  initSite();
+} else {
+  const loadTl = gsap.timeline({
+    onComplete: () => {
+      initSite();
+    }
+  });
 
-loadTl
-  .to('#loaderBar', { width: '100%', duration: 1.5, ease: 'power2.inOut' })
-  .to('.loader-text', { y: -40, opacity: 0, duration: 0.5 })
-  .to('#loader', { yPercent: -100, duration: 1, ease: 'power4.inOut' });
+  loadTl
+    .to('#loaderBar', { width: '100%', duration: 1.5, ease: 'power2.inOut' })
+    .to('.loader-text', { y: -40, opacity: 0, duration: 0.5 })
+    .to('#loader', { yPercent: -100, duration: 1, ease: 'power4.inOut' });
+}
 
 /* ══════════════════════════════════════════════════════════════
    INIT SITE — called after preloader
    ══════════════════════════════════════════════════════════════ */
 function initSite() {
 
-  /* ── AOS ── */
+  /* ── AOS ──────────────────────────────────────────────────────
+     São 14 revelações declarativas espalhadas pelo HTML. O próprio AOS
+     aceita 'disable' como função: devolvendo true ele não anima nada e
+     deixa os elementos no estado final, então os data-aos do HTML podem
+     ficar onde estão. */
   AOS.init({
     duration: 800,
     easing: 'ease-out-cubic',
     once: true,
-    offset: 60
+    offset: 60,
+    disable: function () { return movimentoReduzido; }
   });
 
   /* ── GLightbox ── */
