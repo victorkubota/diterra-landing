@@ -114,9 +114,10 @@
      ══════════════════════════════════════════════════════════════ -->
 <section class="section section--paper section--tight" id="clientes">
   <div class="wrap">
-    <h2 class="h-section clientes__titulo letras">Marcas que escolheram a Di Terrá</h2>
+    <h2 class="h-section clientes__titulo linhas">Marcas que escolheram a Di Terrá</h2>
   </div>
-  <div class="faixa rise" style="--i:2" aria-label="Empresas que já realizaram eventos na Di Terrá">
+  <div class="faixa rise" style="--i:2" id="faixaLogos" aria-label="Empresas que já realizaram eventos na Di Terrá">
+    <button class="faixa__pausa" type="button" aria-pressed="false" aria-controls="faixaLogos">Pausar</button>
     <div class="faixa__pista">
       <img src="/assets/demo/logos/alice.webp" alt="Alice" loading="lazy" width="289" height="160">
       <img src="/assets/demo/logos/b3.webp" alt="B3" loading="lazy" width="357" height="160">
@@ -907,6 +908,17 @@
     }, { rootMargin: '-88% 0px 0px 0px' }).observe(sentinel);
   }
 
+  /* faixa de logos: quem pediu para parar, para (WCAG 2.2.2) */
+  var faixa = document.getElementById('faixaLogos');
+  var pausa = faixa && faixa.querySelector('.faixa__pausa');
+  if (pausa) {
+    pausa.addEventListener('click', function () {
+      var parada = faixa.classList.toggle('faixa--parada');
+      pausa.setAttribute('aria-pressed', String(parada));
+      pausa.textContent = parada ? 'Retomar' : 'Pausar';
+    });
+  }
+
   /* menu mobile */
   if (toggle && drawer) {
     toggle.addEventListener('click', function () {
@@ -1009,54 +1021,6 @@
     });
   };
 
-  /* ── frase revelada caractere a caractere ──────────────────────
-     Referência: a abertura da sarahhaywood aparece letra por letra
-     conforme a seção sobe, não de uma vez. Cada caractere carrega o
-     próprio índice, e a opacidade sai de --tp por calc: uma onda de
-     seis caracteres correndo pela frase, sem um timer por letra. */
-  var montarLetras = function (el) {
-    var bruto = el.getAttribute('data-letras');
-    if (bruto === null) {
-      bruto = el.textContent.replace(/\s+/g, ' ').trim();
-      el.setAttribute('data-letras', bruto);
-    }
-    el.textContent = '';
-    el.style.setProperty('--total', String(bruto.length));
-
-    var n = 0;
-    var caractere = function (ch) {
-      var c = document.createElement('span');
-      c.className = 'letras__c';
-      c.style.setProperty('--ci', String(n++));
-      if (ch === ' ') { c.innerHTML = '&nbsp;'; } else { c.textContent = ch; }
-      return c;
-    };
-
-    /* as letras entram dentro de uma palavra para a quebra de linha
-       acontecer entre palavras, não no meio de uma */
-    bruto.split(' ').forEach(function (palavra, w, todas) {
-      var p = document.createElement('span');
-      p.className = 'letras__p';
-      palavra.split('').forEach(function (ch) { p.appendChild(caractere(ch)); });
-      el.appendChild(p);
-      if (w < todas.length - 1) el.appendChild(caractere(' '));
-    });
-  };
-
-  var frases = Array.prototype.slice.call(document.querySelectorAll('.letras'));
-  frases.forEach(montarLetras);
-
-  var medirFrases = function () {
-    if (!frases.length) return;
-    var alto = window.innerHeight;
-    frases.forEach(function (el) {
-      var r = el.getBoundingClientRect();
-      /* 0 quando a frase entra por baixo, 1 quando alcança o meio da tela */
-      var p = (alto - r.top) / (alto * 0.62);
-      el.style.setProperty('--tp', Math.max(0, Math.min(1, p)).toFixed(4));
-    });
-  };
-
   var titulos = Array.prototype.slice.call(document.querySelectorAll('.linhas'));
   titulos.forEach(montarLinhas);
 
@@ -1148,8 +1112,11 @@
     });
   };
 
-  var camadas = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
-  var podeParallax = !reduz && window.matchMedia('(min-width: 768px)').matches;
+  /* onde o navegador tem animation-timeline o parallax é do CSS
+     (corporativo.css); o laço abaixo só entra como reserva */
+  var parallaxCss = window.CSS && CSS.supports && CSS.supports('animation-timeline: view()');
+  var camadas = parallaxCss ? [] : Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
+  var podeParallax = !reduz && !parallaxCss && window.matchMedia('(min-width: 768px)').matches;
 
   var moverCamadas = function () {
     if (!podeParallax) return;
@@ -1256,7 +1223,6 @@
 
     moverCamadas();
     medirPilha();
-    medirFrases();
     varrer();
     pendente = false;
   };
@@ -1266,7 +1232,7 @@
     window.requestAnimationFrame(atualizar);
   }, { passive: true });
   window.addEventListener('resize', function () {
-    podeParallax = !reduz && window.matchMedia('(min-width: 768px)').matches;
+    podeParallax = !reduz && !parallaxCss && window.matchMedia('(min-width: 768px)').matches;
     /* sem a pilha, --cp precisa voltar a zero: senão um cartão fica
        desfocado no fluxo normal depois de encolher a janela */
     if (!window.matchMedia('(min-width: 860px)').matches) {
