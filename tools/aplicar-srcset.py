@@ -47,6 +47,9 @@ SIZES: list[tuple[str, str, str]] = [
     ("social/index.html", "galeria/propriedade", "(min-width: 1025px) 66vw, (min-width: 481px) 50vw, 100vw"),
     ("social/index.html", "galeria/", "(min-width: 1025px) 34vw, (min-width: 481px) 50vw, 100vw"),
     ("social/index.html", "apoio/numeros", CHEIA),
+    ("social/index.html", "ocasioes/", CHEIA),
+    ("social/", "percurso/", METADE),
+    ("social/", "passos/", CHEIA),
     ("corporativo/index.html", "apoio/offsite", "(min-width: 900px) 62vw, 100vw"),   # manifesto
     ("corporativo/index.html", "formatos/", CHEIA),
     ("corporativo/index.html", "apoio/numeros", CHEIA),
