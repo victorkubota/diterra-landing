@@ -48,7 +48,7 @@ Superfície: Persuade. Heurísticas 7 e 10 não se aplicam. Máximo aplicável: 
 |---|---|---|---|
 | 1 | Acessibilidade | 3 | `.evento-tag` mede **3,08:1** sobre o card corporativo (reprova AA, que exige 4,5:1 abaixo de 18,66 px); alvos entre 26 e 40 px, que passam no WCAG 2.2 AA (mínimo 24 px) e ficam abaixo da diretriz de plataforma de 44 px |
 | 2 | Performance | 3 | Sem erro de console, `loading="lazy"` e AVIF/WebP com `srcset` em toda parte; 34 das 38 declarações de `sizes` na home social são `100vw`, o que é impreciso mas custa pouco na prática (só 1 das 17 imagens baixa mais que 2,2× do necessário); 9,9 MB de PNG legado sem referência em HTML |
-| 3 | Responsivo | 4 | Nenhum estouro horizontal em 375; barra de ação no polegar; o botão "ao topo" colide com essa barra |
+| 3 | Responsivo | 4 | Nenhum estouro horizontal de 320 a 1440; barra de ação no polegar; o botão "ao topo" encosta na barra, com 1 px de folga medido |
 | 4 | Theming | 4 | Escala de tokens em `base.css` usada com disciplina nas 14 rotas |
 | 5 | Integridade de implementação | 2 | Texto de marketing dentro de duas fotos; peça composta no lugar de foto; telefone placeholder em produção; 26 campos "a confirmar" |
 | **Total** | | **16/20** | **Bom** |
@@ -97,9 +97,8 @@ Três intervalos verticais medidos que sobraram:
 - O contato deixa um bloco grande à direita de "VAMOS CONVERSAR" e outro abaixo do formulário.
 Nada disso é erro; é ritmo repetido. A correção é diferenciar os intervalos, não encolher todos.
 
-### adapt — P1 (um item) e P2 (o resto)
-P1: o botão "ao topo" colide com a barra de ação no mobile.
-P2: alvos de toque em 39-40 px passam no WCAG 2.2 AA (mínimo de 24 px) mas ficam abaixo da diretriz de plataforma de 44 px. Subir os oito links de card e os três links de contato custa pouco.
+### adapt — P2
+Medi os dois itens que pareciam P1 e nenhum é. O botão "ao topo" termina em 738 px e a barra de ação começa em 739 px: encostam, não se sobrepõem. É aperto, não colisão, e 16 px de folga resolvem. Os alvos de toque de 39-40 px passam no WCAG 2.2 AA, que pede 24 px; ficam abaixo dos 44 px da diretriz de plataforma. Subir os oito links de card e os dois de contato custa pouco e vale, sem urgência.
 
 ### optimize — P2
 Medido, o desperdício de imagem é pequeno: das 17 imagens da home social, uma baixa mais que 2,2× do necessário. O `sizes="100vw"` em 34 declarações continua impreciso e vale corrigir por higiene, com ganho real só em telas intermediárias. O que pesa de verdade é fora do site: 9,9 MB de PNG legado (`solucao-completa-decoracao-casamento.png`, `corporativo-auditorio.png`, `CASAMENTO-v2.png`, `espaco-lounge.png`) que nenhum HTML referencia.
@@ -144,7 +143,7 @@ Fechar o snapshot atual e comparar contra 25/32 e 16/20.
 | 02 | polish | Fotos de ocasião sem texto queimado, quatro na mesma proporção | P | O único rótulo visível vem do HTML |
 | 03 | polish | Card do Palacete com fotografia de verdade | P | Nenhum bloco chapado no hub |
 | 04 | audit | `.evento-tag` sólido sobre scrim medido | P | Rótulo ≥ 4,5:1 na pior foto da grade |
-| 05 | adapt | Botão "ao topo" sai de cima da barra de ação | P | Sem sobreposição de 320 a 430 px |
+| 05 | adapt | Folga entre o botão "ao topo" e a barra de ação | P | 16 px de respiro de 320 a 430 px |
 | 06 | polish | Telefone placeholder sai da home social | P | Nenhum dado falso no ar |
 | 07 | typeset | Corpo a 16 px | P | Sem refluxo quebrado nas 14 rotas |
 | 08 | layout | Três intervalos de seção diferenciados | M | `.intro`, casas e contato sem vazio de quase uma tela |
@@ -153,7 +152,11 @@ Fechar o snapshot atual e comparar contra 25/32 e 16/20.
 | 11 | delight | Confirmação com data e prazo; título nos "a confirmar" | P | Formulário devolve o que a pessoa escreveu |
 | 12 | bolder | Ocasiões levantadas com um gesto do sistema | M | Depois da fotografia |
 
-PRs 01 a 06 são os P1 desta sessão. P = até meio dia, M = 1 a 2 dias.
+Executados nesta sessão: 01, 02 (que absorveu o 04) e 03, mais o 06. Os PRs 05 e 07 a 12 ficam para a próxima rodada.
+
+Dois itens que entraram como P1 e saíram depois da medição: o bloco de `prefers-reduced-motion`, que já estava certo, e o encontro entre o botão "ao topo" e a barra de ação, que é aperto e não sobreposição. Ambos estão descritos acima com o número que os derrubou.
+
+P = até meio dia, M = 1 a 2 dias.
 
 ---
 
