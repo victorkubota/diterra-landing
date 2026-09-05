@@ -346,9 +346,35 @@
   color: rgba(255,255,255,.8); margin-top: 12px; display: block;
 }
 
-/* .pilha / .fmt / .fmt__cartao (cartões que se cobrem ao rolar) moram no
-   base.css desde 05/09/2026: a home social usa a mesma pilha para as
-   ocasiões. Aqui só o que é do corporativo. */
+/* ══════════════════════════════════════════════════════════════════════
+   FORMATOS — grade bento com fotografia
+   Seis cartões de altura contida: dois largos, três médios, um cheio.
+   ══════════════════════════════════════════════════════════════════════ */
+.bento { display: grid; gap: clamp(12px, 1.4vw, 20px); }
+@media (min-width: 760px) { .bento { grid-template-columns: repeat(6, 1fr); } }
+.bento__item {
+  position: relative; border-radius: var(--radius-lg); overflow: hidden;
+  background: var(--navy-900); min-height: clamp(240px, 34vw, 320px);
+  display: flex; align-items: flex-end; isolation: isolate;
+}
+@media (min-width: 760px) {
+  .bento__item        { grid-column: span 2; }
+  .bento__item--wide  { grid-column: span 3; min-height: clamp(300px, 30vw, 400px); }
+  .bento__item--full  { grid-column: span 6; min-height: clamp(260px, 26vw, 340px); }
+}
+.bento__item img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s var(--ease); }
+.bento__item::after {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(to top, rgba(12,20,38,.9) 0%, rgba(12,20,38,.46) 46%, rgba(12,20,38,.06) 100%);
+  transition: background var(--dur) var(--ease);
+}
+@media (hover: hover) {
+  .bento__item:hover img { transform: scale(1.05); }
+  .bento__item:hover::after { background: linear-gradient(to top, rgba(12,20,38,.92) 0%, rgba(12,20,38,.56) 52%, rgba(12,20,38,.14) 100%); }
+}
+.bento__text { position: relative; padding: clamp(22px, 2.6vw, 34px); color: #fff; display: flex; flex-direction: column; gap: 10px; }
+.bento__text .h-card { color: #fff; }
+.bento__text p { font-size: var(--text-sm); color: rgba(255,255,255,.84); max-width: 44ch; }
 #formatos .fmt__n { color: var(--blue-300); }
 
 /* .switch / .vcard (lista que troca a foto) moram no base.css desde

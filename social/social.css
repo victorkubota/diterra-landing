@@ -361,14 +361,14 @@
    em serifa, metadados em caixa alta e um link. No hover a foto ganha a
    moldura em arco do símbolo. No celular: foto em cima, texto embaixo.
    ══════════════════════════════════════════════════════════════════════ */
-.indice-foto { display: grid; gap: clamp(48px, 7vw, 120px); }
+.indice-foto { display: grid; gap: clamp(36px, 5vw, 80px); }
 .indice-foto__item { display: grid; gap: clamp(18px, 3vw, 48px); align-items: end; }
 @media (min-width: 900px) {
-  .indice-foto__item { grid-template-columns: 62fr 38fr; }
+  .indice-foto__item { grid-template-columns: 1fr 1fr; }
   .indice-foto__item:nth-child(even) .indice-foto__media { order: 2; }
 }
 .indice-foto__media {
-  display: block; position: relative; aspect-ratio: 3 / 2;
+  display: block; position: relative; aspect-ratio: 4 / 3; max-height: 56svh;
   overflow: hidden; border-radius: var(--radius-lg); background: var(--royal);
 }
 .indice-foto__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }

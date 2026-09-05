@@ -325,24 +325,6 @@
     leadHub.parentNode.insertBefore(marca, leadHub);
   }
 
-  /* ── índice com foto (soluções na home) ─────────────────────────
-     Passar o mouse ou focar um item troca a foto do palco. Sem palco
-     (celular) a miniatura já está ao lado do nome. */
-  var indice = document.getElementById('indiceSolucoes');
-  if (indice) {
-    var itensIndice = indice.querySelectorAll('.indice__item');
-    var fotosIndice = indice.querySelectorAll('.indice__foto');
-    var ativarIndice = function (slug) {
-      Array.prototype.forEach.call(itensIndice, function (li) { li.classList.toggle('is-on', li.getAttribute('data-foto') === slug); });
-      Array.prototype.forEach.call(fotosIndice, function (f) { f.classList.toggle('is-on', f.getAttribute('data-foto') === slug); });
-    };
-    Array.prototype.forEach.call(itensIndice, function (li) {
-      var slug = li.getAttribute('data-foto');
-      li.addEventListener('mouseenter', function () { ativarIndice(slug); });
-      li.querySelector('a').addEventListener('focus', function () { ativarIndice(slug); });
-    });
-  }
-
   /* ── cursor "Ver" ──────────────────────────────────────────────────
      Só com ponteiro fino e sem movimento reduzido. Um círculo pequeno
      com a palavra segue o mouse sobre fotos clicáveis; diz o que o
@@ -353,7 +335,7 @@
     cursor.setAttribute('aria-hidden', 'true');
     cursor.textContent = 'Ver';
     document.body.appendChild(cursor);
-    var alvosCursor = 'a:has(img), .glightbox, .vcard__head, .switch__stage, .indice__link';
+    var alvosCursor = 'a:has(img), .glightbox, .vcard__head, .switch__stage';
     var moverCursor = function (e) {
       cursor.style.transform = 'translate3d(' + (e.clientX - 28) + 'px,' + (e.clientY - 28) + 'px,0)';
     };

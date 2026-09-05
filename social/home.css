@@ -304,13 +304,25 @@
 @media (max-width: 939px) { .switch__arco { display: none; } }
 
 /* ══════════════════════════════════════════════════════════════
-   § 4 — OCASIÕES (pilha do base.css)
+   § 4 — OCASIÕES (pilares editoriais)
+   Foto 4:5 de um lado, texto do outro, lados alternando. Altura da foto
+   limitada a 72svh para a seção ler como um todo.
    ══════════════════════════════════════════════════════════════ */
 .ocasioes { background: var(--ivory-light); }
-.ocasioes .section__head--centro { margin-inline: auto; text-align: center; }
-.ocasioes .fmt__text .h-card { text-transform: uppercase; letter-spacing: .04em; font-weight: 300; }
-.ocasiao__link { color: #fff; border-bottom-color: rgba(255,255,255,.4); margin-top: 6px; }
-.ocasiao__link:hover { border-bottom-color: #fff; }
+.ocasioes .section__head--centro { margin-inline: auto; text-align: center; margin-bottom: clamp(40px, 6vw, 96px); }
+.pilar { display: grid; gap: clamp(22px, 3vw, 56px); align-items: center; }
+.pilar + .pilar { margin-top: clamp(56px, 9vw, 140px); }
+@media (min-width: 900px) {
+  .pilar { grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 110px); }
+  .pilar:nth-of-type(even) .pilar__media { order: 2; }
+}
+.pilar__media { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4 / 5; max-height: 72svh; background: var(--royal); }
+.pilar__media picture, .pilar__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.pilar__texto { display: flex; flex-direction: column; gap: 16px; max-width: 42ch; }
+@media (min-width: 900px) { .pilar:nth-of-type(odd) .pilar__texto { padding-left: clamp(0px, 4vw, 64px); } }
+.pilar__rotulo { font-size: var(--text-xs); letter-spacing: .22em; text-transform: uppercase; color: var(--ui-text-muted); }
+.pilar__titulo { font-family: var(--font-display); font-weight: 300; font-size: var(--text-2xl); line-height: 1.05; letter-spacing: -.01em; color: var(--royal); }
+.pilar__texto > p:not(.pilar__rotulo) { color: var(--ui-text-muted); line-height: 1.75; }
 
 /* ══════════════════════════════════════════════════════════════
    § 4b — SOLUÇÕES (índice com foto)
@@ -318,44 +330,21 @@
 .solucoes-faixa { background: var(--rose); color: var(--royal); }
 .solucoes-faixa .heading-lg { color: var(--royal); }
 .solucoes-faixa .body-text { color: var(--royal); opacity: .8; }
-.indice { display: grid; gap: clamp(28px, 4vw, 64px); align-items: start; }
-@media (min-width: 940px) { .indice { grid-template-columns: 1fr minmax(0, 40vw); } }
-.indice__lista { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(17,21,66,.18); }
-.indice__item { border-bottom: 1px solid rgba(17,21,66,.18); }
-.indice__link {
-  display: flex; align-items: center; gap: clamp(14px, 2vw, 26px);
-  padding: clamp(16px, 2vw, 24px) 0; color: var(--royal);
+/* as cinco soluções visíveis ao mesmo tempo: retratos 3:4 lado a lado,
+   nome em serifa e rótulo em caixa alta; trilho no celular */
+.solucoes-grade { display: grid; gap: clamp(14px, 1.6vw, 24px); grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 1099px) { .solucoes-grade { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 699px) {
+  .solucoes-grade { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); padding-bottom: 6px; }
+  .solucoes-grade::-webkit-scrollbar { display: none; }
+  .solucao-card { flex: 0 0 68vw; scroll-snap-align: start; }
 }
-.indice__mini { flex: none; width: 72px; aspect-ratio: 3 / 4; border-radius: var(--radius); overflow: hidden; }
-.indice__mini img { width: 100%; height: 100%; object-fit: cover; }
-@media (min-width: 940px) { .indice__mini { display: none; } }
-.indice__texto { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-.indice__nome {
-  font-family: var(--font-display); font-weight: 300;
-  font-size: clamp(1.45rem, 2.6vw, 2.1rem); line-height: 1.1; letter-spacing: -.01em;
-  transition: transform var(--dur) var(--ease);
-}
-.indice__meta { font-size: var(--text-xs); letter-spacing: .18em; text-transform: uppercase; opacity: .7; }
-.indice__seta { flex: none; opacity: .5; transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease); }
-.indice__item.is-on .indice__nome { transform: translateX(6px); }
-.indice__item.is-on .indice__seta { transform: translateX(6px); opacity: 1; }
-/* o palco só existe no desktop: a foto troca ao passar o mouse ou focar */
-.indice__palco { display: none; }
-@media (min-width: 940px) {
-  .indice__palco {
-    display: block; position: sticky; top: 100px;
-    aspect-ratio: 3 / 4; max-height: min(84svh, 820px);
-    border-radius: var(--radius-lg); overflow: hidden; background: var(--royal);
-  }
-  .indice__foto {
-    position: absolute; inset: 0; margin: 0;
-    opacity: 0; transform: scale(1.04);
-    clip-path: inset(0 0 0 100%);
-    transition: opacity .8s var(--ease), transform 1.3s var(--ease), clip-path .9s var(--ease);
-  }
-  .indice__foto.is-on { opacity: 1; transform: none; clip-path: inset(0 0 0 0); }
-  .indice__foto img { width: 100%; height: 100%; object-fit: cover; }
-}
+.solucao-card { display: grid; gap: 10px; color: var(--royal); }
+.solucao-card__media { display: block; aspect-ratio: 3 / 4; border-radius: var(--radius-md); overflow: hidden; background: var(--royal); }
+.solucao-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+@media (hover: hover) { .solucao-card:hover .solucao-card__media img { transform: scale(1.05); } }
+.solucao-card__nome { font-family: var(--font-display); font-weight: 300; font-size: var(--text-xl); line-height: 1.1; margin-top: 6px; }
+.solucao-card__meta { font-size: var(--text-xs); letter-spacing: .16em; text-transform: uppercase; opacity: .7; }
 
 /* ══════════════════════════════════════════════════════════════
    § 5 — BANNER FULLWIDTH
