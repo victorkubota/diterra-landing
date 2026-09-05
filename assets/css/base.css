@@ -54,8 +54,14 @@
   --tracking-eyebrow: .25em;
   --tracking-btn:     .2em;
 
-  /* ── ESPAÇO E FORMA ─────────────────────────────────────────────── */
-  --section-y: clamp(80px, 10vw, 140px);
+  /* ── ESPAÇO E FORMA ───────────────────────────────────────────────
+     Três intervalos de seção, não um. Um valor único repetido em todo
+     bloco dá peso igual a tudo; o ritmo vem do contraste entre o
+     apertado (faixa de logos, depoimentos), o normal e o respiro
+     (fotografia em tela cheia, chamada final). */
+  --section-y-tight: clamp(48px, 6vw, 80px);
+  --section-y:       clamp(80px, 10vw, 140px);
+  --section-y-loose: clamp(120px, 14vw, 200px);
 
   /* ── LARGURA ──────────────────────────────────────────────────────
      O teto de 1200px deixava 360px de margem morta de cada lado em
@@ -171,6 +177,8 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   position: relative;
   scroll-margin-top: 76px;
 }
+.section--tight  { padding-block: var(--section-y-tight); }
+.section--loose  { padding-block: var(--section-y-loose); }
 .section--invert { background: var(--ui-bg-invert); color: var(--ui-text-invert); }
 .section--paper  { background: var(--ui-bg-alt); }
 
