@@ -527,19 +527,37 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
 .vcard.is-on .vcard__chev { transform: rotate(180deg); }
 @media (hover: hover) { .vcard__head:hover .vcard__name { color: var(--ui-accent); } }
 
-/* painel: altura animada por grid-template-rows, sem medir em JS */
+/* painel: altura animada por grid-template-rows, sem medir em JS.
+
+   O colapso vive atrás de .js de propósito. Sem JS a lista não troca de
+   painel, então fechar três dos quatro esconderia conteúdo que ninguém
+   consegue abrir. Sem JS todos ficam abertos e as quatro casas seguem
+   legíveis. Com JS, o switch.js fecha os outros três e marca cada um
+   como inert, senão os dois links de dentro continuam na ordem de
+   tabulação num painel de 0px: o foco vai parar num destino invisível. */
 .vcard__panel {
-  display: grid; grid-template-rows: 0fr;
-  transition: grid-template-rows .7s var(--ease);
+  display: grid; grid-template-rows: 1fr;
 }
-.vcard.is-on .vcard__panel { grid-template-rows: 1fr; }
 .vcard__inner {
   overflow: hidden;
   display: flex; flex-direction: column; gap: 20px;
+  padding-bottom: clamp(24px, 2.6vw, 34px);
+}
+
+.js .vcard__panel {
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .7s var(--ease);
+}
+.js .vcard__inner {
   opacity: 0;
+  padding-bottom: 0;
   transition: opacity .5s var(--ease);
 }
-.vcard.is-on .vcard__inner { opacity: 1; transition-delay: .16s; padding-bottom: clamp(24px, 2.6vw, 34px); }
+.js .vcard.is-on .vcard__panel { grid-template-rows: 1fr; }
+.js .vcard.is-on .vcard__inner {
+  opacity: 1; transition-delay: .16s;
+  padding-bottom: clamp(24px, 2.6vw, 34px);
+}
 .vcard__inner > p { font-size: var(--text-sm); color: var(--ui-text-muted); max-width: 52ch; }
 
 /* a foto dentro do card só existe abaixo de 940px */

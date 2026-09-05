@@ -18,16 +18,35 @@
     var cards = Array.prototype.slice.call(sw.querySelectorAll('.vcard'));
     var shots = Array.prototype.slice.call(sw.querySelectorAll('.switch__shot'));
 
+    /* O painel fechado tem 0px de altura mas continua no documento, e os
+       dois links de dentro continuavam recebendo Tab: o foco sumia num
+       destino invisível. inert tira o painel fechado da ordem de
+       tabulação e da árvore de acessibilidade sem tocar no layout, então
+       a transição de altura continua a mesma.
+
+       O tabindex acompanha o padrão de tablist: só a aba ativa recebe
+       Tab, e as setas circulam entre as quatro. Antes as quatro estavam
+       em 0, o que fazia o Tab parar quatro vezes numa lista que a seta
+       já percorre. */
     var ativar = function (slug) {
       cards.forEach(function (c) {
         var on = c.getAttribute('data-venue') === slug;
         c.classList.toggle('is-on', on);
-        c.querySelector('.vcard__head').setAttribute('aria-selected', String(on));
+        var head = c.querySelector('.vcard__head');
+        head.setAttribute('aria-selected', String(on));
+        head.tabIndex = on ? 0 : -1;
+        var painel = c.querySelector('.vcard__panel');
+        if (painel) painel.inert = !on;
       });
       shots.forEach(function (s) {
         s.classList.toggle('is-on', s.getAttribute('data-shot') === slug);
       });
     };
+
+    /* o HTML nasce com todos os paineis abertos, para funcionar sem JS.
+       Assim que o JS assume, o estado inicial passa a valer de verdade. */
+    var inicial = cards.find(function (c) { return c.classList.contains('is-on'); }) || cards[0];
+    if (inicial) ativar(inicial.getAttribute('data-venue'));
 
     cards.forEach(function (c, i) {
       var head = c.querySelector('.vcard__head');
@@ -36,12 +55,15 @@
         escolher();
       });
       head.addEventListener('keydown', function (e) {
-        var d = e.key === 'ArrowDown' ? 1 : e.key === 'ArrowUp' ? -1 : 0;
-        if (!d) return;
+        var alvo = null;
+        if (e.key === 'ArrowDown') alvo = cards[(i + 1) % cards.length];
+        else if (e.key === 'ArrowUp') alvo = cards[(i - 1 + cards.length) % cards.length];
+        else if (e.key === 'Home') alvo = cards[0];
+        else if (e.key === 'End') alvo = cards[cards.length - 1];
+        if (!alvo) return;
         e.preventDefault();
-        var alvo = cards[(i + d + cards.length) % cards.length];
-        alvo.querySelector('.vcard__head').focus();
         ativar(alvo.getAttribute('data-venue'));
+        alvo.querySelector('.vcard__head').focus();
         escolher();
       });
     });
