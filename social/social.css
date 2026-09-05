@@ -249,6 +249,39 @@
 .card:hover .card__more svg { transform: translateX(5px); }
 
 /* ══════════════════════════════════════════════════════════════════════
+   ÍNDICE FOTOGRÁFICO (hubs de espaços e soluções)
+   Cada item ocupa a linha inteira: foto de 62% alternando de lado, nome
+   em serifa, metadados em caixa alta e um link. No hover a foto ganha a
+   moldura em arco do símbolo. No celular: foto em cima, texto embaixo.
+   ══════════════════════════════════════════════════════════════════════ */
+.indice-foto { display: grid; gap: clamp(48px, 7vw, 120px); }
+.indice-foto__item { display: grid; gap: clamp(18px, 3vw, 48px); align-items: end; }
+@media (min-width: 900px) {
+  .indice-foto__item { grid-template-columns: 62fr 38fr; }
+  .indice-foto__item:nth-child(even) .indice-foto__media { order: 2; }
+}
+.indice-foto__media {
+  display: block; position: relative; aspect-ratio: 3 / 2;
+  overflow: hidden; border-radius: var(--radius-lg); background: var(--royal);
+}
+.indice-foto__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+@media (hover: hover) { .indice-foto__item:hover .indice-foto__media img { transform: scale(1.04); } }
+.indice-foto__arco {
+  position: absolute; inset: 24px 24px 0;
+  border: 1px solid rgba(254,250,224,.7); border-bottom: 0;
+  border-radius: 999px 999px 0 0; pointer-events: none;
+  opacity: 0; transform: scaleY(.96); transform-origin: bottom;
+  transition: opacity .9s var(--ease), transform .9s var(--ease);
+}
+.indice-foto__item:hover .indice-foto__arco,
+.indice-foto__media:focus-visible .indice-foto__arco { opacity: 1; transform: none; }
+.indice-foto__texto { display: flex; flex-direction: column; gap: 14px; max-width: 46ch; }
+.indice-foto__meta { font-size: var(--text-xs); letter-spacing: .18em; text-transform: uppercase; color: var(--ui-text-muted); }
+.indice-foto__texto h3 a { color: inherit; }
+.indice-foto__texto h3 a:hover { color: var(--brick); }
+.indice-foto__texto > p:not(.indice-foto__meta) { color: var(--ui-text-muted); }
+
+/* ══════════════════════════════════════════════════════════════════════
    GALERIA
    ══════════════════════════════════════════════════════════════════════ */
 .gallery { display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr); }
