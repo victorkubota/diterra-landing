@@ -1,0 +1,62 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "corporativo/index.html"
+        ],
+        "createdAt": "2026-09-05T06:53:19.086Z",
+        "reason": "false positive: detector reads <option> inside <select> as navy on navy; options have their own color"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "social/index.html"
+        ],
+        "createdAt": "2026-09-05T06:53:19.103Z",
+        "reason": "false positive: hero text sits on a photo with a dark gradient overlay, detector compares with body ivory"
+      },
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          "*.html"
+        ],
+        "createdAt": "2026-09-05T06:53:19.119Z",
+        "reason": "false positive: body overflow-x:hidden propagates to the viewport and does not clip fixed drawers, curtain or the to-top button"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "*.html"
+        ],
+        "createdAt": "2026-09-05T06:53:19.135Z",
+        "reason": "brand: ivory (social BRANDBOOK v2 p.6) and sand-100 (corporate Brand Guideline V0 p.10) are the official page grounds"
+      },
+      {
+        "rule": "marquee",
+        "value": "*",
+        "files": [
+          "corporativo/index.html"
+        ],
+        "createdAt": "2026-09-05T06:53:19.151Z",
+        "reason": "sanctioned: client logo strip pauses on hover/focus and stops under prefers-reduced-motion; visible pause control lands in PR-07"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "*.html"
+        ],
+        "createdAt": "2026-09-05T06:53:19.168Z",
+        "reason": "false positive: full-bleed sections pad vertically and delegate the gutter to .wrap; fmt__cartao and switch__list children carry their own padding"
+      }
+    ]
+  }
+}

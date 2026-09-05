@@ -41,8 +41,8 @@
   gap: 24px;
   padding: 16px var(--gutter);
   background: rgba(30,50,92,0);
-  transition: background var(--dur) var(--ease), padding var(--dur) var(--ease),
-              box-shadow var(--dur) var(--ease);
+  /* sem padding na transição: animar padding relayouta a nav a cada quadro */
+  transition: background var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 .nav.is-stuck {
   background: rgba(30,50,92,.97);
@@ -205,7 +205,7 @@
   opacity: calc(1 - var(--hp, 0) * 3);
 }
 .hero__scroll span {
-  font-family: var(--font-sans); font-size: 9px;
+  font-family: var(--font-sans); font-size: 11px;
   letter-spacing: .25em; text-transform: uppercase;
   color: rgba(255,255,255,.5);
 }
@@ -596,11 +596,14 @@
   height: 2px; background: rgba(255,255,255,.16); border-radius: 999px;
   overflow: hidden;
 }
+/* largura e posição vêm as duas do transform (scaleX + translateX), escritas
+   pelo JS: animar width relayoutava a barra a cada passo do carrossel */
 .reel__barra span {
-  display: block; height: 100%; width: 20%;
+  display: block; height: 100%; width: 100%;
   background: var(--blue-300); border-radius: inherit;
   transform-origin: left;
-  transition: width var(--dur) var(--ease), transform var(--dur) var(--ease);
+  transform: scaleX(.2);
+  transition: transform var(--dur) var(--ease);
 }
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -699,7 +702,7 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
 .contact__ico { flex: none; color: var(--blue-300); margin-top: 3px; }
 .contact__body { display: flex; flex-direction: column; gap: 4px; }
 .contact__k {
-  font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
+  font-size: var(--text-xs); letter-spacing: .16em; text-transform: uppercase;
   color: rgba(255,255,255,.66);
 }
 .contact__v { font-size: var(--text-base); font-weight: 400; line-height: 1.45; }
@@ -816,12 +819,8 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
 
 /* .nav__progresso mora no base.css: toda página longa merece a régua. */
 
+/* o corte de movimento mora no base.css: aqui só o que é desta folha */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-  }
-  .rise { opacity: 1; transform: none; }
   .hero__media img, .hero__media video { transform: none; }
   .switch__shot { transition: none; }
   .vcard__panel { transition: none; }
@@ -906,7 +905,7 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
 .depo__nome { font-size: var(--text-base); font-weight: 500; }
 .depo__cargo {
   font-size: var(--text-xs); color: var(--ui-text-muted);
-  letter-spacing: .08em; line-height: 1.4;
+  letter-spacing: .04em; line-height: 1.4;
 }
 
 /* ── CABEÇALHO DE FORMATOS ────────────────────────────────────────────

@@ -23,6 +23,9 @@
   line-height: 1.2; color: var(--brick); font-weight: 400;
 }
 .on-dark .script { color: var(--rose); }
+/* tijolo sobre rosa dá 2,2:1 e reprova até para título; royal sobre
+   rosa dá 10,9:1. A assinatura manuscrita da chamada final vai de royal. */
+.section--rose .script { color: var(--royal); }
 
 /* Sem o teto de 1200px no container, este bloco ia a 93ch em 1920.
    A grade acompanha a tela; a linha de leitura, não. */
@@ -41,8 +44,9 @@
   position: fixed; inset: 0 0 auto 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
   padding: 14px var(--gutter);
-  transition: background var(--dur) var(--ease), padding var(--dur) var(--ease);
+  transition: background var(--dur) var(--ease);
 }
+/* o padding muda sem transição: animar padding relayouta a nav a cada quadro */
 .nav.is-stuck { background: rgba(17,21,66,.96); padding-block: 10px; }
 @supports (backdrop-filter: blur(8px)) {
   .nav.is-stuck { background: rgba(17,21,66,.86); backdrop-filter: blur(14px); }
@@ -262,9 +266,10 @@
    MOTION
    ══════════════════════════════════════════════════════════════════════ */
 
+/* o corte de movimento mora no base.css: aqui só o que é desta folha */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-  .rise { opacity: 1; transform: none; }
+  .card:hover { transform: none; }
+  .card:hover .card__media img, .gallery figure:hover img, .split__media img { transform: none; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════

@@ -26,8 +26,11 @@
   --font-script:  'Oooh Baby', 'Cormorant Garamond', cursive;
   --font-sans:    'Albert Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
 
-  --text-xs:   .6875rem;                                  /* 11px — eyebrow  */
-  --text-sm:   .75rem;                                    /* 12px — botão    */
+  /* 12px é o piso de texto funcional (rótulo, link, botão): abaixo disso
+     falha em tela pequena e de alta densidade. Os dois degraus subiram
+     1px em 05/09/2026 por esse motivo. */
+  --text-xs:   .75rem;                                    /* 12px — eyebrow  */
+  --text-sm:   .8125rem;                                  /* 13px — botão    */
   --text-base: .9375rem;                                  /* 15px — corpo    */
   --text-lg:   clamp(1.0625rem, 1rem + .3vw, 1.25rem);
   --text-xl:   clamp(1.4rem, 1.2rem + .85vw, 2rem);
@@ -393,7 +396,11 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
    Revelação em cascata: --i escalona os irmãos, de modo que o bloco se
    monta em sequência em vez de aparecer inteiro.
    ══════════════════════════════════════════════════════════════════════ */
-.rise { opacity: 0; transform: translateY(26px); }
+/* Todo estado inicial escondido fica atrás de html.js, que o <head> de
+   cada rota escreve antes do CSS. Sem script, sem observer ou com o rAF
+   parado numa aba em segundo plano, o conteúdo já nasce visível: a
+   revelação é um bônus, nunca a condição para ler a página. */
+.js .rise { opacity: 0; transform: translateY(26px); }
 .rise.is-in {
   opacity: 1; transform: none;
   transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
@@ -415,9 +422,9 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
    Nunca no mesmo bloco que [data-parallax]: disputariam o transform da
    imagem. E nunca dentro de .hero-palco, que já anima o próprio clip.
    ─────────────────────────────────────────────────────────────────── */
-.reveal-shot { clip-path: inset(0 0 100% 0); }
-.reveal-shot img,
-.reveal-shot video { transform: scale(1.07); }
+.js .reveal-shot { clip-path: inset(0 0 100% 0); }
+.js .reveal-shot img,
+.js .reveal-shot video { transform: scale(1.07); }
 .reveal-shot.is-in {
   clip-path: inset(0 0 0 0);
   transition: clip-path 1.15s var(--ease);
@@ -438,7 +445,7 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
    O escalonamento vem do nth-child e não de um --i no HTML: são listas
    de seis a oito itens, e assim nenhuma marcação carrega índice.
    ─────────────────────────────────────────────────────────────────── */
-.cascata > li { opacity: 0; transform: translateY(14px); }
+.js .cascata > li { opacity: 0; transform: translateY(14px); }
 .cascata.is-in > li {
   opacity: 1; transform: none;
   transition: opacity .5s var(--ease), transform .5s var(--ease);
@@ -469,10 +476,8 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   display: block; overflow: hidden;
   padding-bottom: .14em; margin-bottom: -.14em;
 }
-.linhas__l > span {
-  display: block;
-  transform: translateY(105%);
-}
+.linhas__l > span { display: block; }
+.js .linhas__l > span { transform: translateY(105%); }
 .linhas.is-in .linhas__l > span {
   transform: translateY(0);
   transition: transform 1s var(--ease-out);
@@ -593,23 +598,29 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   }
 }
 
+/* Movimento reduzido não é movimento zero. O que sai é o deslocamento:
+   transform, clip-path, parallax e laços. O que fica é a mudança de
+   opacidade, cor e borda em 150ms, porque é ela que confirma um hover,
+   um foco ou um envio. Um corte global para 0,01ms apagava esse retorno
+   junto com o resto. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
+    transition-duration: .15s !important;
+    transition-property: opacity, color, background-color, border-color, box-shadow, outline-color !important;
   }
-  .rise { opacity: 1; transform: none; }
+  .js .rise { opacity: 1; transform: none; }
   /* sem recolhimento: o hero volta a ser um bloco comum */
   .hero-palco > .hero,
   .hero-palco > .page-hero { clip-path: none; }
   /* a foto aparece inteira, sem ser descoberta nem escalar */
-  .reveal-shot { clip-path: none; }
-  .reveal-shot img, .reveal-shot video { transform: none; }
+  .js .reveal-shot { clip-path: none; }
+  .js .reveal-shot img, .js .reveal-shot video { transform: none; }
   /* a lista aparece inteira, sem escalonar */
-  .cascata > li { opacity: 1; transform: none; }
+  .js .cascata > li { opacity: 1; transform: none; }
   /* o título já está no lugar, sem subir por trás da máscara */
-  .linhas__l > span { transform: none; }
+  .js .linhas__l > span { transform: none; }
   /* a régua de leitura sai de cena: é movimento contínuo na borda do
      campo de visão, exatamente o que incomoda quem pediu menos */
   .nav__progresso { display: none; }

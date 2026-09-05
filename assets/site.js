@@ -180,6 +180,14 @@
       });
     }, { rootMargin: '0px 0px -10% 0px' });
     Array.prototype.forEach.call(blocos, function (el) { io.observe(el); });
+    /* o observer dorme em aba de fundo e em painel oculto; passado um
+       segundo, o que está dentro da tela aparece de qualquer jeito */
+    window.setTimeout(function () {
+      var linha = window.innerHeight * 0.9;
+      Array.prototype.forEach.call(blocos, function (el) {
+        if (!el.classList.contains('is-in') && el.getBoundingClientRect().top < linha) revelar(el);
+      });
+    }, 1000);
   } else {
     Array.prototype.forEach.call(blocos, function (el) { revelar(el); });
   }
