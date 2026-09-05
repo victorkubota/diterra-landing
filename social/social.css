@@ -249,6 +249,96 @@
 .card:hover .card__more svg { transform: translateX(5px); }
 
 /* ══════════════════════════════════════════════════════════════════════
+   PÁGINA DE CASA — hero cheio, abertura, percurso, ficha em número,
+   página dupla, citação, trilho
+   ══════════════════════════════════════════════════════════════════════ */
+.page-hero--cheio { min-height: 100svh; }
+.prose--abertura { max-width: 34ch; font-family: var(--font-display); font-weight: 300; font-size: var(--text-xl); line-height: 1.3; }
+.prose--abertura p + p { margin-top: .8em; }
+
+/* ── percurso: foto presa à direita, passos à esquerda ── */
+.percurso__grade { display: grid; gap: clamp(28px, 4vw, 64px); align-items: start; }
+@media (min-width: 940px) { .percurso__grade { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.percurso__passos { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(40px, 8vh, 96px); }
+@media (min-width: 940px) { .percurso__passos { padding-block: 10vh 30vh; } }
+.percurso__passo { display: grid; gap: 10px; max-width: 40ch; transition: opacity var(--dur) var(--ease); }
+@media (min-width: 940px) { .percurso__passo { opacity: .35; } .percurso__passo.is-on { opacity: 1; } }
+.percurso__n { font-family: var(--font-display); font-weight: 300; font-size: var(--text-2xl); line-height: 1; color: var(--brick); }
+.percurso__titulo { font-family: var(--font-display); font-weight: 400; font-size: var(--text-xl); line-height: 1.1; }
+.percurso__passo p { color: var(--ui-text-muted); }
+.percurso__foto-m { margin: 0 0 10px; aspect-ratio: 3 / 4; overflow: hidden; border-radius: var(--radius-lg); background: var(--royal); }
+.percurso__foto-m img { width: 100%; height: 100%; object-fit: cover; }
+@media (min-width: 940px) { .percurso__foto-m { display: none; } }
+.percurso__palco { display: none; }
+@media (min-width: 940px) {
+  .percurso__palco {
+    display: block; position: sticky; top: 100px;
+    height: min(90svh, 900px); border-radius: var(--radius-lg); overflow: hidden; background: var(--royal);
+  }
+  .percurso__foto {
+    position: absolute; inset: 0; margin: 0;
+    opacity: 0; transform: scale(1.05); clip-path: inset(0 0 100% 0);
+    transition: opacity .8s var(--ease), transform 1.4s var(--ease), clip-path 1s var(--ease);
+  }
+  .percurso__foto.is-on { opacity: 1; transform: none; clip-path: inset(0); }
+  .percurso__foto img { width: 100%; height: 100%; object-fit: cover; }
+}
+
+/* ── ficha como número: valor em display, rótulo em caixa alta ── */
+.ficha-num { display: grid; gap: clamp(20px, 3vw, 40px) clamp(24px, 4vw, 64px); grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 760px) { .ficha-num { grid-template-columns: repeat(3, 1fr); } }
+.ficha-num__item { display: grid; gap: 8px; padding-top: 16px; border-top: 1px solid var(--ui-border); }
+.ficha-num__v {
+  font-family: var(--font-display); font-weight: 300; font-size: var(--text-3xl);
+  line-height: 1; font-variant-numeric: tabular-nums; color: var(--royal);
+}
+/* enquanto o dado não chega, o valor é o aviso, menor e em serifa itálica */
+.ficha-num__v.tbd { font-size: var(--text-xl); font-style: italic; border-bottom: 0; color: var(--ui-accent); }
+.ficha-num__k { font-size: var(--text-xs); letter-spacing: .18em; text-transform: uppercase; color: var(--ui-text-muted); }
+
+/* ── galeria em página dupla: cheia, dois retratos, cheia ── */
+.dupla { display: grid; gap: clamp(14px, 2vw, 28px); grid-template-columns: repeat(2, 1fr); }
+.dupla__item { margin: 0; display: grid; gap: 10px; }
+.dupla__cheia { grid-column: 1 / -1; }
+.dupla__item picture, .dupla__item img { display: block; width: 100%; }
+.dupla__cheia img { aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius-lg); }
+.dupla__retrato img { aspect-ratio: 3 / 4; object-fit: cover; border-radius: var(--radius-lg); }
+.dupla__legenda { font-size: var(--text-xs); letter-spacing: .14em; text-transform: uppercase; color: var(--ui-text-muted); }
+@media (max-width: 480px) { .dupla { grid-template-columns: 1fr; } .dupla__retrato img { aspect-ratio: 4 / 5; } }
+
+/* ── citação em tela cheia ── */
+.citacao { position: relative; isolation: isolate; min-height: 80svh; display: grid; align-items: center; overflow: hidden; }
+.citacao__fundo { position: absolute; inset: 0; z-index: -2; }
+.citacao__fundo img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+.citacao::before { content: ''; position: absolute; inset: 0; z-index: -1; background: rgba(17,21,66,.78); }
+.citacao__corpo { text-align: center; max-width: 24ch; margin-inline: auto; }
+.citacao__texto { font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: var(--text-manchete); line-height: 1.05; letter-spacing: -.01em; text-wrap: balance; }
+.citacao__texto::before { content: '\201C'; }
+.citacao__texto::after { content: '\201D'; }
+.citacao__quem { margin-top: 28px; font-size: var(--text-xs); letter-spacing: .2em; text-transform: uppercase; color: var(--ui-text-invert-muted); }
+.citacao__aviso { text-transform: none; letter-spacing: 0; color: var(--rose); }
+
+/* ── trilho de retratos (outras casas) ── */
+.trilho {
+  display: flex; gap: clamp(14px, 1.6vw, 24px); overflow-x: auto;
+  scroll-snap-type: x mandatory; scrollbar-width: none;
+  padding-inline: var(--gutter); padding-bottom: 8px;
+}
+.trilho::-webkit-scrollbar { display: none; }
+.trilho__item {
+  position: relative; flex: 0 0 min(78vw, 360px); aspect-ratio: 3 / 4;
+  border-radius: var(--radius-lg); overflow: hidden; scroll-snap-align: start;
+  background: var(--royal); color: var(--ivory); isolation: isolate;
+}
+@media (min-width: 900px) { .trilho__item { flex-basis: 30vw; } }
+.trilho__item img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+@media (hover: hover) { .trilho__item:hover img { transform: scale(1.05); } }
+.trilho__item::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(17,21,66,.85) 0%, rgba(17,21,66,.2) 50%, transparent 100%); }
+.trilho__texto { position: absolute; inset: auto 0 0 0; z-index: 1; padding: clamp(18px, 2.4vw, 28px); display: grid; gap: 6px; }
+.trilho__nome { font-family: var(--font-display); font-weight: 300; font-size: var(--text-xl); line-height: 1.1; }
+.trilho__meta { font-size: var(--text-sm); color: var(--ui-text-invert-muted); }
+
+/* ══════════════════════════════════════════════════════════════════════
    ÍNDICE FOTOGRÁFICO (hubs de espaços e soluções)
    Cada item ocupa a linha inteira: foto de 62% alternando de lado, nome
    em serifa, metadados em caixa alta e um link. No hover a foto ganha a
