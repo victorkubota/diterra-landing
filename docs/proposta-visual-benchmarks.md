@@ -129,3 +129,18 @@ Mesmo esqueleto, com dois blocos próprios:
 | 9 | Ficha como número, citação em tela cheia, vídeo em cartão | P cada | Sim (dados, depoimento, vídeo) |
 
 Os itens 2, 3, 5, 6, 7 e 8 podem entrar já, com o material atual. Os itens 1, 4 e 9 valem a espera pela fotografia, porque são justamente os que vendem o lugar.
+
+---
+
+## 10. Histórico de execução e rollback (2026-09-05)
+
+Os nove itens foram implementados nas PRs #37 a #41, com 39 fotos e um vídeo de placeholder gerados no Higgsfield; a PR #42 aplicou o primeiro feedback (fotos menores, ocasiões como pilares editoriais, bento restaurado no corporativo). Em seguida, a pedido do Victor, a PR #43 reverteu o site inteiro ao estado anterior à implementação (commit `00ae421`).
+
+Tudo continua no histórico. Para trazer a implementação de volta, inteira ou por partes:
+
+```bash
+git revert --no-edit 3b6bdbf          # desfaz o rollback por inteiro
+git checkout e996a2c -- social/index.html   # ou recupera um arquivo específico do estado pós-feedback
+```
+
+Os assets gerados (`assets/demo/ocasioes`, `percurso`, `passos`, `assets/opt/video/coquetelaria-1280.mp4`) também voltam com o revert.
