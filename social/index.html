@@ -20,6 +20,7 @@
      clique da galeria (ver carregarLightbox) -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+<script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="/assets/css/tema-social.css">
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/social/home.css">
@@ -90,7 +91,7 @@
       <span class="word-wrap"><span class="word-inner">Excepcionais</span></span>
     </h1>
     <p class="hero-sub hero-fade">Onde cada detalhe compõe uma experiência inesquecível</p>
-    <a href="#intro" class="btn btn--ghost on-dark hero-fade" style="opacity:0">
+    <a href="#intro" class="btn btn--ghost on-dark hero-fade">
       <span>Conheça o Espaço</span>
       <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M9 1l4 4-4 4" stroke="currentColor" stroke-width="1"/></svg>
     </a>
@@ -341,11 +342,11 @@
           <div class="form-row">
             <div class="form-field">
               <label class="form-label" for="nome3">Nome *</label>
-              <input class="form-input" type="text" id="nome3" placeholder="Seu nome completo" required>
+              <input class="form-input" type="text" id="nome3" name="nome" autocomplete="name" placeholder="Seu nome completo" required>
             </div>
             <div class="form-field">
               <label class="form-label" for="email3">E-mail *</label>
-              <input class="form-input" type="email" id="email3" placeholder="email@exemplo.com" required>
+              <input class="form-input" type="email" id="email3" name="email" autocomplete="email" placeholder="email@exemplo.com" required>
             </div>
           </div>
           <div class="form-row">

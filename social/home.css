@@ -24,7 +24,9 @@
    ══════════════════════════════════════════════════════════════ */
 /* ── voltar ao topo ── */
 
-.loader {
+.loader { display: none; }
+.js .loader {
+  display: flex;
   position: fixed;
   inset: 0;
   background: var(--royal);
@@ -111,9 +113,9 @@
   background: var(--royal);
   display: block;
   opacity: .2;
-  transform: scaleX(0);
   transform-origin: left;
 }
+.js .deco-line { transform: scaleX(0); }
 .deco-line.revealed { transform: scaleX(1); transition: transform .8s var(--ease); }
 
 /* Split text containers */
@@ -123,10 +125,8 @@
   vertical-align: top;
   padding-bottom: 0.1em;
 }
-.word-inner {
-  display: inline-block;
-  transform: translateY(110%);
-}
+.word-inner { display: inline-block; }
+.js .word-inner { transform: translateY(110%); }
 
 /* ══════════════════════════════════════════════════════════════
    BUTTONS
@@ -291,8 +291,9 @@
   margin-bottom: 44px;
   letter-spacing: .04em;
   text-shadow: 0 1px 12px rgba(0,0,0,.4);
-  opacity: 0;
 }
+/* o que o GSAP revela na entrada começa invisível só quando há script */
+.js .hero-fade { opacity: 0; }
 .hero-scroll {
   position: absolute;
   bottom: 40px;
@@ -308,7 +309,7 @@
 }
 .hero-scroll span {
   font-family: var(--font-sans);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: .25em;
   text-transform: uppercase;
   color: rgba(255,255,255,.35);
@@ -564,7 +565,7 @@
 }
 .evento-card:hover .evento-card-overlay h3 { transform: translateY(0); }
 .evento-card-overlay .evento-tag {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 300;
   letter-spacing: .2em;
   text-transform: uppercase;
@@ -733,7 +734,7 @@
   gap: 6px;
 }
 .form-label {
-  font-size: 10px;
+  font-size: var(--text-xs);
   font-weight: 400;
   letter-spacing: .15em;
   text-transform: uppercase;
@@ -894,9 +895,9 @@
 }
 .footer-bottom {
   margin-top: 48px;
-  font-size: 10px;
-  font-weight: 200;
-  letter-spacing: .06em;
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: .04em;
   color: rgba(255,255,255,.2);
 }
 .footer-bg-img {

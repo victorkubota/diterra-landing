@@ -317,6 +317,7 @@ def cabeca(titulo, descricao, canonical, css, favicon):
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Oooh+Baby&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/tema-social.css">
 <link rel="stylesheet" href="/assets/css/base.css">
+<script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="{css}">
 </head>
 <body>
