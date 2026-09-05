@@ -92,15 +92,15 @@
 .hero-bg {
   position: absolute;
   inset: -80px;
-  /* A peça tem 1220 px de largura: não há pixel para ampliar, então a
-     variante nativa é a única. AVIF pesa 1/20 do PNG de 3,7 MB. */
-  background-image: url('/assets/opt/solucao-completa-decoracao-casamento-1220.webp');
-  background-image: image-set(
-    url('/assets/opt/solucao-completa-decoracao-casamento-1220.avif') type('image/avif'),
-    url('/assets/opt/solucao-completa-decoracao-casamento-1220.webp') type('image/webp'));
-  background-size: cover;
-  background-position: center;
+  background: var(--royal);
 }
+/* foto de reserva e vídeo ocupam o palco inteiro; o vídeo fica por cima
+   quando o script o liga (mesma lógica da raiz e do corporativo) */
+.hero-bg img, .hero-bg video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover; object-position: center 46%;
+}
+.hero-bg video { z-index: 1; }
 /* parallax preso à rolagem, sem JS: a foto desce 15% enquanto o hero
    sai pelo topo. Onde não há animation-timeline, fica parada. */
 @supports (animation-timeline: scroll()) {
@@ -375,6 +375,52 @@
   transition: transform .5s var(--ease) .05s;
 }
 .evento-card:hover .evento-card-overlay .evento-tag { transform: translateY(0); }
+
+/* ══════════════════════════════════════════════════════════════
+   § 4b — SOLUÇÕES (índice com foto)
+   ══════════════════════════════════════════════════════════════ */
+.solucoes-faixa { background: var(--rose); color: var(--royal); }
+.solucoes-faixa .heading-lg { color: var(--royal); }
+.solucoes-faixa .body-text { color: var(--royal); opacity: .8; }
+.indice { display: grid; gap: clamp(28px, 4vw, 64px); align-items: start; }
+@media (min-width: 940px) { .indice { grid-template-columns: 1fr minmax(0, 40vw); } }
+.indice__lista { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(17,21,66,.18); }
+.indice__item { border-bottom: 1px solid rgba(17,21,66,.18); }
+.indice__link {
+  display: flex; align-items: center; gap: clamp(14px, 2vw, 26px);
+  padding: clamp(16px, 2vw, 24px) 0; color: var(--royal);
+  transition: padding-left var(--dur) var(--ease);
+}
+.indice__mini { flex: none; width: 72px; aspect-ratio: 3 / 4; border-radius: var(--radius); overflow: hidden; }
+.indice__mini img { width: 100%; height: 100%; object-fit: cover; }
+@media (min-width: 940px) { .indice__mini { display: none; } }
+.indice__texto { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.indice__nome {
+  font-family: var(--font-display); font-weight: 300;
+  font-size: clamp(1.45rem, 2.6vw, 2.1rem); line-height: 1.1; letter-spacing: -.01em;
+  transition: transform var(--dur) var(--ease);
+}
+.indice__meta { font-size: var(--text-xs); letter-spacing: .18em; text-transform: uppercase; opacity: .7; }
+.indice__seta { flex: none; opacity: .5; transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease); }
+.indice__item.is-on .indice__nome { transform: translateX(6px); }
+.indice__item.is-on .indice__seta { transform: translateX(6px); opacity: 1; }
+/* o palco só existe no desktop: a foto troca ao passar o mouse ou focar */
+.indice__palco { display: none; }
+@media (min-width: 940px) {
+  .indice__palco {
+    display: block; position: sticky; top: 100px;
+    aspect-ratio: 3 / 4; max-height: min(84svh, 820px);
+    border-radius: var(--radius-lg); overflow: hidden; background: var(--royal);
+  }
+  .indice__foto {
+    position: absolute; inset: 0; margin: 0;
+    opacity: 0; transform: scale(1.04);
+    clip-path: inset(0 0 0 100%);
+    transition: opacity .8s var(--ease), transform 1.3s var(--ease), clip-path .9s var(--ease);
+  }
+  .indice__foto.is-on { opacity: 1; transform: none; clip-path: inset(0 0 0 0); }
+  .indice__foto img { width: 100%; height: 100%; object-fit: cover; }
+}
 
 /* ══════════════════════════════════════════════════════════════
    § 5 — BANNER FULLWIDTH

@@ -258,6 +258,53 @@
     atualizar();
   }
 
+  /* ── índice com foto (soluções na home) ─────────────────────────
+     Passar o mouse ou focar um item troca a foto do palco. Sem palco
+     (celular) a miniatura já está ao lado do nome. */
+  var indice = document.getElementById('indiceSolucoes');
+  if (indice) {
+    var itensIndice = indice.querySelectorAll('.indice__item');
+    var fotosIndice = indice.querySelectorAll('.indice__foto');
+    var ativarIndice = function (slug) {
+      Array.prototype.forEach.call(itensIndice, function (li) { li.classList.toggle('is-on', li.getAttribute('data-foto') === slug); });
+      Array.prototype.forEach.call(fotosIndice, function (f) { f.classList.toggle('is-on', f.getAttribute('data-foto') === slug); });
+    };
+    Array.prototype.forEach.call(itensIndice, function (li) {
+      var slug = li.getAttribute('data-foto');
+      li.addEventListener('mouseenter', function () { ativarIndice(slug); });
+      li.querySelector('a').addEventListener('focus', function () { ativarIndice(slug); });
+    });
+  }
+
+  /* ── cursor "Ver" ──────────────────────────────────────────────────
+     Só com ponteiro fino e sem movimento reduzido. Um círculo pequeno
+     com a palavra segue o mouse sobre fotos clicáveis; diz o que o
+     clique faz antes do clique. */
+  if (window.matchMedia('(pointer: fine)').matches && !semMovimento) {
+    var cursor = document.createElement('div');
+    cursor.className = 'cursor-ver';
+    cursor.setAttribute('aria-hidden', 'true');
+    cursor.textContent = 'Ver';
+    document.body.appendChild(cursor);
+    var alvosCursor = 'a:has(img), .glightbox, .vcard__head, .switch__stage, .indice__link';
+    var moverCursor = function (e) {
+      cursor.style.transform = 'translate3d(' + (e.clientX - 28) + 'px,' + (e.clientY - 28) + 'px,0)';
+    };
+    document.addEventListener('pointerover', function (e) {
+      var alvo = e.target.closest && e.target.closest(alvosCursor);
+      if (!alvo) return;
+      cursor.classList.add('is-on');
+      moverCursor(e);
+    });
+    document.addEventListener('pointerout', function (e) {
+      var alvo = e.target.closest && e.target.closest(alvosCursor);
+      if (alvo && !(e.relatedTarget && alvo.contains(e.relatedTarget))) cursor.classList.remove('is-on');
+    });
+    document.addEventListener('pointermove', function (e) {
+      if (cursor.classList.contains('is-on')) moverCursor(e);
+    }, { passive: true });
+  }
+
   /* ── voltar ao topo ──────────────────────────────────────────────── */
   if (toTop) {
 
