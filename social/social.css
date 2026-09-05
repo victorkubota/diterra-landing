@@ -158,6 +158,17 @@
 
 .ornament { position: absolute; pointer-events: none; user-select: none; opacity: .45; z-index: 0; }
 .ornament img { width: 100%; height: auto; }
+/* o ramo respira 4px contra a rolagem: pouco, para o ornamento ficar
+   vivo sem virar efeito. Só onde há animation-timeline. */
+@supports (animation-timeline: view()) {
+  .js .ornament img {
+    animation: ramoRespira linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+}
+@keyframes ramoRespira { from { transform: translateY(4px); } to { transform: translateY(-4px); } }
+@media (prefers-reduced-motion: reduce) { .ornament img { animation: none; } }
 .ornament--tr { top: -26px; right: -18px; width: clamp(90px, 12vw, 180px); }
 .ornament--bl { bottom: -26px; left: -22px; width: clamp(90px, 12vw, 180px); transform: rotate(180deg); }
 

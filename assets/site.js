@@ -11,6 +11,13 @@
   window.requestAnimationFrame(pronto);
   window.setTimeout(pronto, 400);
 
+  /* "a confirmar" não é um vazio: é um dado que a Di Terrá ainda vai
+     dar. O hover e o leitor de tela recebem a explicação. */
+  Array.prototype.forEach.call(document.querySelectorAll('.tbd'), function (el) {
+    el.setAttribute('title', 'Estamos confirmando este dado com a casa. Pergunte na proposta e a equipe responde com o número certo.');
+    el.setAttribute('aria-description', 'Estamos confirmando este dado com a casa. Pergunte na proposta e a equipe responde com o número certo.');
+  });
+
   var nav    = document.getElementById('nav');
   var toggle = document.getElementById('navToggle');
   var drawer = document.getElementById('navDrawer');

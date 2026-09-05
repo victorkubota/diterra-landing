@@ -8,6 +8,7 @@
 <link rel="canonical" href="https://www.diterra.com.br/">
 <meta name="robots" content="index,follow">
 <link rel="icon" type="image/png" href="/assets/brand/favicon-social.png">
+<meta name="theme-color" content="#0c0e10">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Di Terrá Eventos">
@@ -303,6 +304,17 @@ img, video { display: block; max-width: 100%; }
   transition: color .3s var(--ease-out);
 }
 .drawer__col a:hover { color: var(--paper); }
+/* as quatro casas com miniatura: quem abre o menu procura um lugar, e o
+   nome sozinho não mostra nada. A imagem só é pedida quando a gaveta
+   abre (data-src), para não custar 4 fotos a quem nunca abre. */
+.drawer__casa { display: flex; align-items: center; gap: 14px; }
+.drawer__mini {
+  width: 64px; height: 43px; object-fit: cover; flex: none;
+  border-radius: 3px; background: rgba(245,243,239,.08);
+  opacity: 0; transition: opacity .6s var(--ease-out);
+}
+.drawer__mini[src] { opacity: 1; }
+@media (max-width: 759px) { .drawer__mini { width: 72px; height: 48px; } }
 
 /* ══════════════════════════════════════════════════════════════
    CONTEÚDO INDEXÁVEL — a raiz precisa continuar rankeando
@@ -514,10 +526,10 @@ img, video { display: block; max-width: 100%; }
     <div class="drawer__col">
       <h2>As quatro casas</h2>
       <ul>
-        <li><a href="/social/espacos/a-querencia">A Querência</a></li>
-        <li><a href="/social/espacos/palacete-monte-alegre">Palacete Monte Alegre</a></li>
-        <li><a href="/social/espacos/casa-lucca">Casa Lucca</a></li>
-        <li><a href="/social/espacos/espaco-terra">Espaço Terrá</a></li>
+        <li><a class="drawer__casa" href="/social/espacos/a-querencia"><img class="drawer__mini" data-src="/assets/opt/a-querencia-amplitude-800.webp" alt="" width="800" height="537">A Querência</a></li>
+        <li><a class="drawer__casa" href="/social/espacos/palacete-monte-alegre"><img class="drawer__mini" data-src="/assets/opt/palacete-monte-alegre-amplitude-800.webp" alt="" width="800" height="537">Palacete Monte Alegre</a></li>
+        <li><a class="drawer__casa" href="/social/espacos/casa-lucca"><img class="drawer__mini" data-src="/assets/opt/casa-lucca-amplitude-800.webp" alt="" width="800" height="537">Casa Lucca</a></li>
+        <li><a class="drawer__casa" href="/social/espacos/espaco-terra"><img class="drawer__mini" data-src="/assets/opt/espaco-terra-amplitude-800.webp" alt="" width="800" height="537">Espaço Terrá</a></li>
       </ul>
     </div>
   </div>
@@ -615,6 +627,12 @@ img, video { display: block; max-width: 100%; }
 
   var alternar = function (estado) {
     drawer.classList.toggle('is-open', estado);
+    if (estado) {
+      drawer.querySelectorAll('.drawer__mini[data-src]').forEach(function (img) {
+        img.src = img.getAttribute('data-src');
+        img.removeAttribute('data-src');
+      });
+    }
     abrir.setAttribute('aria-expanded', String(estado));
     abrir.setAttribute('aria-label', estado ? 'Fechar menu' : 'Abrir menu');
     document.body.style.overflow = estado ? 'hidden' : '';

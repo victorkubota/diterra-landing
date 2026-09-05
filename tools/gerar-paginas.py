@@ -309,6 +309,7 @@ def cabeca(titulo, descricao, canonical, css, favicon):
 <meta name="description" content="{descricao}">
 <link rel="canonical" href="{canonical}">
 <link rel="icon" type="image/png" href="{favicon}">
+<meta name="theme-color" content="#111542">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{titulo}">
 <meta property="og:description" content="{descricao}">
