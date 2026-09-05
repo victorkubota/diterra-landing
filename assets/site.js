@@ -277,6 +277,22 @@
     atualizar();
   }
 
+  /* ── percurso do evento: o passo no meio da tela acende a própria foto ──
+     Observer com a faixa central (40% de cima e de baixo excluídos). */
+  var percurso = document.querySelector('.percurso');
+  if (percurso && 'IntersectionObserver' in window) {
+    var passosP = percurso.querySelectorAll('.percurso__passo');
+    var fotosP = percurso.querySelectorAll('.percurso__foto');
+    var ativarPasso = function (n) {
+      Array.prototype.forEach.call(passosP, function (el) { el.classList.toggle('is-on', el.getAttribute('data-passo') === n); });
+      Array.prototype.forEach.call(fotosP, function (el) { el.classList.toggle('is-on', el.getAttribute('data-passo') === n); });
+    };
+    var ioPasso = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) { if (e.isIntersecting) ativarPasso(e.target.getAttribute('data-passo')); });
+    }, { rootMargin: '-40% 0px -40% 0px' });
+    Array.prototype.forEach.call(passosP, function (el) { ioPasso.observe(el); });
+  }
+
   /* ── hub de soluções chegando de uma ocasião ─────────────────────
      /social/solucoes?ocasiao=casamento: o hero diz para que ocasião a
      pessoa está olhando. Só texto; a lista continua a mesma. */
