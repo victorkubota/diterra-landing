@@ -18,6 +18,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 
 <script>document.documentElement.classList.add('js')</script>
+<link rel="preload" as="image" type="image/avif" imagesizes="100vw"
+      imagesrcset="/assets/opt/hero-social-800.avif 800w, /assets/opt/hero-social-1400.avif 1400w, /assets/opt/hero-social-2400.avif 2400w">
 <link rel="stylesheet" href="/assets/css/tema-social.css">
 <link rel="stylesheet" href="/assets/css/base.css">
 <!-- social.css: nav, botão, gaveta e rodapé são os mesmos das outras
@@ -67,7 +69,12 @@
      ═══════════════════════════════════════════════════ -->
 <div class="hero-palco" id="heroPalco">
 <section class="hero" id="topo">
-  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-bg" id="heroBg">
+    <!-- mesma mídia da raiz: foto de reserva em <picture> e vídeo H.264 que o
+         script liga só em tela larga e com movimento permitido -->
+    <picture><source type="image/avif" srcset="/assets/opt/hero-social-800.avif 800w, /assets/opt/hero-social-1400.avif 1400w, /assets/opt/hero-social-2400.avif 2400w" sizes="100vw"><img id="heroPoster" src="/assets/opt/hero-social-1400.webp" srcset="/assets/opt/hero-social-800.webp 800w, /assets/opt/hero-social-1400.webp 1400w, /assets/opt/hero-social-2400.webp 2400w" sizes="100vw" width="2400" height="1340" alt="Cerimônia ao entardecer no jardim de um dos espaços da Di Terrá" fetchpriority="high" decoding="async"></picture>
+    <video id="heroVideo" muted loop playsinline preload="none" aria-hidden="true" hidden></video>
+  </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <p class="hero-eyebrow hero-fade">Piracicaba · Interior de São Paulo</p>
@@ -274,6 +281,84 @@
         <div class="evento-tag">Festas & Debutantes</div>
       </div>
     </article>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     § 4b — SOLUÇÕES
+     A home não tinha nenhuma presença das cinco soluções, só o link da
+     nav. Índice de uma linha por solução (nome em serifa, dado em caixa
+     alta), com a foto que troca ao passar o mouse no desktop e uma
+     miniatura fixa ao lado do nome no celular. Bloco rosa: a cor do
+     brandbook que ainda não aparecia na home.
+     ═══════════════════════════════════════════════════ -->
+<section class="section solucoes-faixa" id="solucoes">
+  <div class="wrap">
+    <div class="section__head">
+      <h2 class="heading-lg linhas">Tudo em um só lugar</h2>
+      <p class="body-text rise" style="--i:1">Cinco soluções próprias, da cozinha ao som, num único contrato. Cada uma tem página própria.</p>
+    </div>
+    <div class="indice" id="indiceSolucoes">
+      <ul class="indice__lista" role="list">
+      <li class="indice__item is-on" data-foto="gastronomia">
+        <a class="indice__link" href="/social/solucoes/gastronomia">
+          <span class="indice__mini"><picture><source type="image/avif" srcset="/assets/opt/gastronomia-800.avif 800w, /assets/opt/gastronomia-1400.avif 1400w" sizes="72px"><img src="/assets/opt/gastronomia-1400.webp" srcset="/assets/opt/gastronomia-800.webp 800w, /assets/opt/gastronomia-1400.webp 1400w" sizes="72px" width="2400" height="1792" alt="Prato autoral servido em jantar da Di Terrá" loading="lazy" decoding="async"></picture></span>
+          <span class="indice__texto">
+            <span class="indice__nome">Gastronomia</span>
+            <span class="indice__meta">Cozinha própria · Menu autoral</span>
+          </span>
+          <svg class="indice__seta" width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+        </a>
+      </li>
+      <li class="indice__item" data-foto="decoracao">
+        <a class="indice__link" href="/social/solucoes/decoracao">
+          <span class="indice__mini"><picture><source type="image/avif" srcset="/assets/opt/decoracao-800.avif 800w, /assets/opt/decoracao-1400.avif 1400w" sizes="72px"><img src="/assets/opt/decoracao-1400.webp" srcset="/assets/opt/decoracao-800.webp 800w, /assets/opt/decoracao-1400.webp 1400w" sizes="72px" width="2400" height="1792" alt="Arranjo floral e ambientação de mesa" loading="lazy" decoding="async"></picture></span>
+          <span class="indice__texto">
+            <span class="indice__nome">Decoração</span>
+            <span class="indice__meta">Cenografia · Ambientação</span>
+          </span>
+          <svg class="indice__seta" width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+        </a>
+      </li>
+      <li class="indice__item" data-foto="coquetelaria">
+        <a class="indice__link" href="/social/solucoes/coquetelaria">
+          <span class="indice__mini"><picture><source type="image/avif" srcset="/assets/opt/coquetelaria-800.avif 800w, /assets/opt/coquetelaria-1400.avif 1400w" sizes="72px"><img src="/assets/opt/coquetelaria-1400.webp" srcset="/assets/opt/coquetelaria-800.webp 800w, /assets/opt/coquetelaria-1400.webp 1400w" sizes="72px" width="2400" height="1792" alt="Drinks autorais no bar da casa" loading="lazy" decoding="async"></picture></span>
+          <span class="indice__texto">
+            <span class="indice__nome">Coquetelaria</span>
+            <span class="indice__meta">Bar assinado · Drinks autorais</span>
+          </span>
+          <svg class="indice__seta" width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+        </a>
+      </li>
+      <li class="indice__item" data-foto="producao">
+        <a class="indice__link" href="/social/solucoes/producao">
+          <span class="indice__mini"><picture><source type="image/avif" srcset="/assets/opt/producao-800.avif 800w, /assets/opt/producao-1400.avif 1400w" sizes="72px"><img src="/assets/opt/producao-1400.webp" srcset="/assets/opt/producao-800.webp 800w, /assets/opt/producao-1400.webp 1400w" sizes="72px" width="2400" height="1792" alt="Equipe de produção montando a estrutura do evento" loading="lazy" decoding="async"></picture></span>
+          <span class="indice__texto">
+            <span class="indice__nome">Produção</span>
+            <span class="indice__meta">Planejamento · Operação no dia</span>
+          </span>
+          <svg class="indice__seta" width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+        </a>
+      </li>
+      <li class="indice__item" data-foto="tecnologia-audiovisual">
+        <a class="indice__link" href="/social/solucoes/tecnologia-audiovisual">
+          <span class="indice__mini"><picture><source type="image/avif" srcset="/assets/opt/tecnologia-audiovisual-800.avif 800w, /assets/opt/tecnologia-audiovisual-1400.avif 1400w" sizes="72px"><img src="/assets/opt/tecnologia-audiovisual-1400.webp" srcset="/assets/opt/tecnologia-audiovisual-800.webp 800w, /assets/opt/tecnologia-audiovisual-1400.webp 1400w" sizes="72px" width="2400" height="1792" alt="Mesa de luz e vídeo em operação durante o evento" loading="lazy" decoding="async"></picture></span>
+          <span class="indice__texto">
+            <span class="indice__nome">Tecnologia audiovisual</span>
+            <span class="indice__meta">Som · Luz · Projeção</span>
+          </span>
+          <svg class="indice__seta" width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+        </a>
+      </li>
+      </ul>
+      <div class="indice__palco" aria-hidden="true">
+      <figure class="indice__foto is-on" data-foto="gastronomia"><picture><source type="image/avif" srcset="/assets/opt/gastronomia-800.avif 800w, /assets/opt/gastronomia-1400.avif 1400w" sizes="(min-width: 940px) 40vw, 100vw"><img src="/assets/opt/gastronomia-1400.webp" srcset="/assets/opt/gastronomia-800.webp 800w, /assets/opt/gastronomia-1400.webp 1400w" sizes="(min-width: 940px) 40vw, 100vw" width="2400" height="1792" alt="Prato autoral servido em jantar da Di Terrá" loading="lazy" decoding="async"></picture></figure>
+      <figure class="indice__foto" data-foto="decoracao"><picture><source type="image/avif" srcset="/assets/opt/decoracao-800.avif 800w, /assets/opt/decoracao-1400.avif 1400w" sizes="(min-width: 940px) 40vw, 100vw"><img src="/assets/opt/decoracao-1400.webp" srcset="/assets/opt/decoracao-800.webp 800w, /assets/opt/decoracao-1400.webp 1400w" sizes="(min-width: 940px) 40vw, 100vw" width="2400" height="1792" alt="Arranjo floral e ambientação de mesa" loading="lazy" decoding="async"></picture></figure>
+      <figure class="indice__foto" data-foto="coquetelaria"><picture><source type="image/avif" srcset="/assets/opt/coquetelaria-800.avif 800w, /assets/opt/coquetelaria-1400.avif 1400w" sizes="(min-width: 940px) 40vw, 100vw"><img src="/assets/opt/coquetelaria-1400.webp" srcset="/assets/opt/coquetelaria-800.webp 800w, /assets/opt/coquetelaria-1400.webp 1400w" sizes="(min-width: 940px) 40vw, 100vw" width="2400" height="1792" alt="Drinks autorais no bar da casa" loading="lazy" decoding="async"></picture></figure>
+      <figure class="indice__foto" data-foto="producao"><picture><source type="image/avif" srcset="/assets/opt/producao-800.avif 800w, /assets/opt/producao-1400.avif 1400w" sizes="(min-width: 940px) 40vw, 100vw"><img src="/assets/opt/producao-1400.webp" srcset="/assets/opt/producao-800.webp 800w, /assets/opt/producao-1400.webp 1400w" sizes="(min-width: 940px) 40vw, 100vw" width="2400" height="1792" alt="Equipe de produção montando a estrutura do evento" loading="lazy" decoding="async"></picture></figure>
+      <figure class="indice__foto" data-foto="tecnologia-audiovisual"><picture><source type="image/avif" srcset="/assets/opt/tecnologia-audiovisual-800.avif 800w, /assets/opt/tecnologia-audiovisual-1400.avif 1400w" sizes="(min-width: 940px) 40vw, 100vw"><img src="/assets/opt/tecnologia-audiovisual-1400.webp" srcset="/assets/opt/tecnologia-audiovisual-800.webp 800w, /assets/opt/tecnologia-audiovisual-1400.webp 1400w" sizes="(min-width: 940px) 40vw, 100vw" width="2400" height="1792" alt="Mesa de luz e vídeo em operação durante o evento" loading="lazy" decoding="async"></picture></figure>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -498,6 +583,24 @@
    voltar-ao-topo são do site.js, iguais às outras treze rotas.
    ══════════════════════════════════════════════════════════════ */
 (function () {
+  /* ── vídeo do hero: tela larga e movimento permitido; no celular a foto
+     fica. 1280 px até o tablet, 1920 px daí para cima. ── */
+  var video = document.getElementById('heroVideo');
+  var poster = document.getElementById('heroPoster');
+  var reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (video && !reduz && window.matchMedia('(min-width: 768px)').matches) {
+    video.src = window.matchMedia('(min-width: 1440px)').matches
+      ? '/assets/opt/video/hero-social-1920.mp4'
+      : '/assets/opt/video/hero-social-1280.mp4';
+    video.hidden = false;
+    video.addEventListener('playing', function () {
+      poster.style.transition = 'opacity .8s cubic-bezier(.16,1,.3,1)';
+      poster.style.opacity = '0';
+    }, { once: true });
+    var tocar = video.play();
+    if (tocar && tocar.catch) { tocar.catch(function () { video.hidden = true; }); }
+  }
+
   /* ── GLightbox sob demanda: baixa no primeiro clique da galeria ── */
   var lightbox = null;
   var carregando = null;
