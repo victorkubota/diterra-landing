@@ -71,6 +71,10 @@
   --ui-luz-fio:                rgba(245,243,239,.16);
   --ui-superficie-invert:      rgba(245,243,239,.10);
 
+  /* na entrada a primária é o dourado, e sobre quase-preto o brilho é a
+     única coisa que a fotografia teria para descolar do fundo */
+  --ui-brilho:                 rgba(184,160,112,.18);
+
   /* erro: sobre quase-preto o vermelho tem de clarear, não escurecer */
   --ui-erro:                   #e9a893;
   --ui-erro-on-dark:           #e9a893;

@@ -148,6 +148,16 @@
      1px na aresta de baixo do vidro fixo. */
   --elev-luz: 0 1px 0 var(--ui-luz-fio);
 
+  /* A fotografia tinha só o fio. Agora ela também descola do papel: o
+     mesmo anel, uma camada de contato curta, e uma terceira camada larga
+     na cor primária clareada, que é o brilho. Não é halo de software: é a
+     sombra que uma superfície colorida devolve ao papel em volta, e por
+     isso a cor sai do tema, como todo o resto da escada. */
+  --elev-foto:
+    0 0 0 1px var(--ui-sombra-fio),
+    0 2px 6px var(--ui-sombra-contato),
+    0 20px 44px -14px var(--ui-brilho);
+
   /* Dois gestos de pressão, não um: onde há borda de 1px, escalar
      serrilha a linha, então o elemento afunda; onde não há, ele encolhe.
      Ficam em token para o bloco de movimento reduzido desligar os dois
