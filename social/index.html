@@ -362,43 +362,78 @@
 <!-- ═══════════════════════════════════════════════════
      § 6 — GALERIA
      ═══════════════════════════════════════════════════ -->
-<section class="galeria" id="galeria">
+<section class="galeria" id="galeria" aria-label="Registros de momentos reais">
   <div class="container">
     <div class="galeria-header">
       <h2 class="heading-lg linhas">Registros de<br>Momentos Reais</h2>
     </div>
   </div>
-  <div class="galeria-grid rise" style="--i:2">
-    <div class="galeria-item">
-      <a href="/assets/demo/galeria/cerimonia-vertical.webp" class="glightbox" data-gallery="gallery1">
-        <picture><source type="image/avif" srcset="/assets/opt/cerimonia-vertical-800.avif 800w, /assets/opt/cerimonia-vertical-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/cerimonia-vertical-1400.webp" alt="Cadeiras e arco de flores montados para a cerimônia, no fim da tarde" width="1792" height="2400" loading="lazy" decoding="async" srcset="/assets/opt/cerimonia-vertical-800.webp 800w, /assets/opt/cerimonia-vertical-1400.webp 1400w" sizes="100vw"></picture>
-      </a>
-    </div>
-    <div class="galeria-item">
-      <a href="/assets/demo/galeria/mesa-posta.webp" class="glightbox" data-gallery="gallery1">
-        <picture><source type="image/avif" srcset="/assets/opt/mesa-posta-800.avif 800w, /assets/opt/mesa-posta-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/mesa-posta-1400.webp" alt="Detalhe de mesa posta: louça, cristal e arranjo baixo de rosas brancas" width="2048" height="2048" loading="lazy" decoding="async" srcset="/assets/opt/mesa-posta-800.webp 800w, /assets/opt/mesa-posta-1400.webp 1400w" sizes="100vw"></picture>
-      </a>
-    </div>
-    <div class="galeria-item">
-      <a href="/assets/demo/galeria/brinde-por-do-sol.webp" class="glightbox" data-gallery="gallery1">
-        <picture><source type="image/avif" srcset="/assets/opt/brinde-por-do-sol-800.avif 800w, /assets/opt/brinde-por-do-sol-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/brinde-por-do-sol-1400.webp" alt="Taças erguidas em brinde contra o céu do fim de tarde" width="2048" height="2048" loading="lazy" decoding="async" srcset="/assets/opt/brinde-por-do-sol-800.webp 800w, /assets/opt/brinde-por-do-sol-1400.webp 1400w" sizes="100vw"></picture>
-      </a>
-    </div>
-    <div class="galeria-item">
-      <a href="/assets/demo/galeria/propriedade-anoitecer.webp" class="glightbox" data-gallery="gallery1">
-        <picture><source type="image/avif" srcset="/assets/opt/propriedade-anoitecer-800.avif 800w, /assets/opt/propriedade-anoitecer-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/propriedade-anoitecer-1400.webp" alt="O galpão iluminado ao anoitecer, visto de fora, com as colinas ao fundo" width="2400" height="1340" loading="lazy" decoding="async" srcset="/assets/opt/propriedade-anoitecer-800.webp 800w, /assets/opt/propriedade-anoitecer-1400.webp 1400w" sizes="100vw"></picture>
-      </a>
-    </div>
-    <div class="galeria-item">
-      <a href="/assets/demo/galeria/pista-noite.webp" class="glightbox" data-gallery="gallery1">
-        <picture><source type="image/avif" srcset="/assets/opt/pista-noite-800.avif 800w, /assets/opt/pista-noite-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/pista-noite-1400.webp" alt="Pista de dança cheia sob o telhado de madeira, à noite" width="2048" height="2048" loading="lazy" decoding="async" srcset="/assets/opt/pista-noite-800.webp 800w, /assets/opt/pista-noite-1400.webp 1400w" sizes="100vw"></picture>
-      </a>
-    </div>
-    <div class="galeria-item">
-      <a href="/assets/demo/galeria/cozinha-servico.webp" class="glightbox" data-gallery="gallery1">
-        <picture><source type="image/avif" srcset="/assets/opt/cozinha-servico-800.avif 800w, /assets/opt/cozinha-servico-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/cozinha-servico-1400.webp" alt="Cozinha em serviço: finalização dos pratos na passagem" width="2048" height="2048" loading="lazy" decoding="async" srcset="/assets/opt/cozinha-servico-800.webp 800w, /assets/opt/cozinha-servico-1400.webp 1400w" sizes="100vw"></picture>
-      </a>
-    </div>
+
+  <!-- Casais, datas e locais são MOCK, como combinado. As casas são as
+       quatro reais; as fotos saem de /assets/opt, que já existem. -->
+  <div class="tiras rise" id="tiras" style="--i:2" data-parado="0" data-oculto="0">
+
+      <div class="tira" style="--vel:58s">
+        <ul class="tira__trilho" role="list">
+          <li class="tira__item"><figure class="polaroid" style="--tilt:-1.8deg">
+            <div class="polaroid__janela"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-04-festa-800.avif"><img src="/assets/opt/casa-lucca-04-festa-800.webp" alt="Convidados na pista sob os varais de luz, já de noite" width="800" height="1071" loading="lazy" decoding="async"></picture></div>
+            <figcaption class="polaroid__legenda"><span class="polaroid__casal">Ana e Gabriel</span><span class="polaroid__dado">fev/25<span class="polaroid__local">Casa Lucca</span></span></figcaption>
+          </figure></li>
+          <li class="tira__item"><figure class="polaroid" style="--tilt:1.4deg">
+            <div class="polaroid__janela"><picture><source type="image/avif" srcset="/assets/opt/foto-casal-noite-800.avif"><img src="/assets/opt/foto-casal-noite-800.webp" alt="Os noivos abraçados no jardim, à noite" width="800" height="450" loading="lazy" decoding="async"></picture></div>
+            <figcaption class="polaroid__legenda"><span class="polaroid__casal">Marina e Téo</span><span class="polaroid__dado">abr/25<span class="polaroid__local">Palacete Monte Alegre</span></span></figcaption>
+          </figure></li>
+          <li class="tira__item"><figure class="polaroid" style="--tilt:-0.9deg">
+            <div class="polaroid__janela"><picture><source type="image/avif" srcset="/assets/opt/mesa-posta-800.avif"><img src="/assets/opt/mesa-posta-800.webp" alt="Detalhe de mesa posta: louça, cristal e arranjo baixo de rosas brancas" width="800" height="800" loading="lazy" decoding="async"></picture></div>
+            <figcaption class="polaroid__legenda"><span class="polaroid__casal">Clara e Vitor</span><span class="polaroid__dado">jun/24<span class="polaroid__local">A Querência</span></span></figcaption>
+          </figure></li>
+          <li class="tira__item"><figure class="polaroid" style="--tilt:2.1deg">
+            <div class="polaroid__janela"><picture><source type="image/avif" srcset="/assets/opt/a-querencia-03-coquetel-800.avif"><img src="/assets/opt/a-querencia-03-coquetel-800.webp" alt="Coquetel servido no gramado, no fim da tarde" width="800" height="1071" loading="lazy" decoding="async"></picture></div>
+            <figcaption class="polaroid__legenda"><span class="polaroid__casal">Helena e Rui</span><span class="polaroid__dado">set/24<span class="polaroid__local">A Querência</span></span></figcaption>
+          </figure></li>
+          <li class="tira__item"><figure class="polaroid" style="--tilt:-1.3deg">
+            <div class="polaroid__janela"><picture><source type="image/avif" srcset="/assets/opt/brinde-por-do-sol-800.avif"><img src="/assets/opt/brinde-por-do-sol-800.webp" alt="Taças erguidas em brinde contra o céu do fim de tarde" width="800" height="800" loading="lazy" decoding="async"></picture></div>
+            <figcaption class="polaroid__legenda"><span class="polaroid__casal">Bruna e Caio</span><span class="polaroid__dado">nov/24<span class="polaroid__local">Espaço Terrá</span></span></figcaption>
+          </figure></li>
+          <li class="tira__item"><figure class="polaroid" style="--tilt:1.1deg">
+            <div class="polaroid__janela"><picture><source type="image/avif" srcset="/assets/opt/foto-noiva-janela-800.avif"><img src="/assets/opt/foto-noiva-janela-800.webp" alt="A noiva junto à janela, na luz da manhã" width="800" height="450" loading="lazy" decoding="async"></picture></div>
+            <figcaption class="polaroid__legenda"><span class="polaroid__casal">Laura e Ivo</span><span class="polaroid__dado">mar/25<span class="polaroid__local">Casa Lucca</span></span></figcaption>
+          </figure></li>
+        </ul>
+      </div>
+
+      <div class="tira  tira--volta" style="--vel:72s">
+        <ul class="tira__trilho" role="list">
+          <li class="tira__item"><figure class="polaroid" style="--tilt:1.6deg">
+            <div class="polaroid__janela"><picture><source type="image/avif" srcset="/assets/opt/palacete-monte-alegre-02-cerimonia-800.avif"><img src="/assets/opt/palacete-monte-alegre-02-cerimonia-800.webp" alt="Cerimônia montada no salão do palacete" width="800" height="1071" loading="lazy" decoding="async"></picture></div>
+            <figcaption class="polaroid__legenda"><span class="polaroid__casal">Sofia e Léo</span><span class="polaroid__dado">jan/25<span class="polaroid__local">Palacete Monte Alegre</span></span></figcaption>
+          </figure></li>
+          <li class="tira__item"><figure class="polaroid" style="--tilt:-1.5deg">
+            <div class="polaroid__janela"><picture><source type="image/avif" srcset="/assets/opt/pista-noite-800.avif"><img src="/assets/opt/pista-noite-800.webp" alt="Pista de dança cheia sob o telhado de madeira, à noite" width="800" height="800" loading="lazy" decoding="async"></picture></div>
+            <figcaption class="polaroid__legenda"><span class="polaroid__casal">Júlia e Enzo</span><span class="polaroid__dado">out/24<span class="polaroid__local">Casa Lucca</span></span></figcaption>
+          </figure></li>
+          <li class="tira__item"><figure class="polaroid" style="--tilt:0.8deg">
+            <div class="polaroid__janela"><picture><source type="image/avif" srcset="/assets/opt/espaco-terra-05-saida-800.avif"><img src="/assets/opt/espaco-terra-05-saida-800.webp" alt="Saída dos noivos sob chuva de pétalas" width="800" height="1071" loading="lazy" decoding="async"></picture></div>
+            <figcaption class="polaroid__legenda"><span class="polaroid__casal">Alice e Davi</span><span class="polaroid__dado">dez/24<span class="polaroid__local">Espaço Terrá</span></span></figcaption>
+          </figure></li>
+          <li class="tira__item"><figure class="polaroid" style="--tilt:-2.0deg">
+            <div class="polaroid__janela"><picture><source type="image/avif" srcset="/assets/opt/foto-mesa-posta-800.avif"><img src="/assets/opt/foto-mesa-posta-800.webp" alt="Mesa longa posta para o jantar, com velas acesas" width="800" height="450" loading="lazy" decoding="async"></picture></div>
+            <figcaption class="polaroid__legenda"><span class="polaroid__casal">Nina e Otto</span><span class="polaroid__dado">mai/25<span class="polaroid__local">A Querência</span></span></figcaption>
+          </figure></li>
+          <li class="tira__item"><figure class="polaroid" style="--tilt:1.2deg">
+            <div class="polaroid__janela"><picture><source type="image/avif" srcset="/assets/opt/cerimonia-vertical-800.avif"><img src="/assets/opt/cerimonia-vertical-800.webp" alt="Cadeiras e arco de flores montados para a cerimônia, no fim da tarde" width="800" height="1071" loading="lazy" decoding="async"></picture></div>
+            <figcaption class="polaroid__legenda"><span class="polaroid__casal">Rita e Bento</span><span class="polaroid__dado">ago/24<span class="polaroid__local">Espaço Terrá</span></span></figcaption>
+          </figure></li>
+          <li class="tira__item"><figure class="polaroid" style="--tilt:-1.0deg">
+            <div class="polaroid__janela"><picture><source type="image/avif" srcset="/assets/opt/foto-saida-noivos-800.avif"><img src="/assets/opt/foto-saida-noivos-800.webp" alt="Os noivos deixando a festa entre os convidados" width="800" height="450" loading="lazy" decoding="async"></picture></div>
+            <figcaption class="polaroid__legenda"><span class="polaroid__casal">Cecília e Noah</span><span class="polaroid__dado">jul/24<span class="polaroid__local">Palacete Monte Alegre</span></span></figcaption>
+          </figure></li>
+        </ul>
+      </div>
+
+    <button type="button" class="galeria-parar" id="galeriaParar" hidden>
+      <span class="galeria-parar__rotulo">Pausar o carrossel</span>
+    </button>
   </div>
 </section>
 
@@ -562,35 +597,98 @@
    voltar-ao-topo são do site.js, iguais às outras treze rotas.
    ══════════════════════════════════════════════════════════════ */
 (function () {
-  /* ── GLightbox sob demanda: baixa no primeiro clique da galeria ── */
-  var lightbox = null;
-  var carregando = null;
-  var carregar = function () {
-    if (carregando) return carregando;
-    carregando = new Promise(function (ok, falha) {
-      var css = document.createElement('link');
-      css.rel = 'stylesheet';
-      css.href = 'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css';
-      document.head.appendChild(css);
-      var js = document.createElement('script');
-      js.src = 'https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js';
-      js.onload = function () {
-        lightbox = GLightbox({ touchNavigation: true, loop: true, skin: 'clean' });
-        ok(lightbox);
-      };
-      js.onerror = falha;
-      document.head.appendChild(js);
+  /* ── AS DUAS TIRAS DE POLAROIDS ────────────────────────────────
+     O movimento é CSS; este script só decide se ele existe e cria os
+     clones que fecham o laço. Nada de rAF: ver o comentário no home.css. */
+  var tirasCaixa = document.getElementById('tiras');
+  var botao = document.getElementById('galeriaParar');
+  if (tirasCaixa && botao) (function () {
+    var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var tiras = Array.prototype.slice.call(tirasCaixa.querySelectorAll('.tira'));
+    var ligado = false;
+
+    /* loading="lazy" numa imagem fora do corte horizontal de um
+       overflow:hidden nunca intersecta, e transform não faz o navegador
+       reavaliar isso: metade dos polaroids ficaria branca para sempre.
+       Mas acordar as doze no parse seriam doze requisições abaixo da
+       dobra por uma seção que talvez ninguém alcance. Então acorda na
+       primeira vez que a seção chega perto do quadro, e só então. */
+    var acordarFotos = function () {
+      Array.prototype.forEach.call(
+        tirasCaixa.querySelectorAll('img[loading="lazy"]'),
+        function (img) { img.loading = 'eager'; });
+    };
+
+    var ligar = function () {
+      if (ligado) return;
+      ligado = true;
+      tiras.forEach(function (tira) {
+        var trilho = tira.querySelector('.tira__trilho');
+        /* HTMLCollection é VIVA: iterar sobre ela enquanto se anexa clone
+           é laço infinito e trava a aba. O slice é a correção, não estilo. */
+        Array.prototype.slice.call(trilho.children).forEach(function (li) {
+          var c = li.cloneNode(true);
+          c.setAttribute('data-clone', '');
+          c.setAttribute('aria-hidden', 'true');
+          c.inert = true;
+          trilho.appendChild(c);
+        });
+        tira.classList.add('tira--roda');
+      });
+      botao.hidden = false;
+    };
+
+    var desligar = function () {
+      if (!ligado) return;
+      ligado = false;
+      tiras.forEach(function (tira) {
+        tira.classList.remove('tira--roda', 'esta-visivel');
+        Array.prototype.forEach.call(
+          tira.querySelectorAll('[data-clone]'),
+          function (c) { c.parentNode.removeChild(c); });
+      });
+      botao.hidden = true;
+      tirasCaixa.setAttribute('data-parado', '0');
+    };
+
+    /* a camada de compositor só vive enquanto a seção está em quadro */
+    if ('IntersectionObserver' in window) {
+      var olho = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          e.target.classList.toggle('esta-visivel', e.isIntersecting);
+        });
+      }, { rootMargin: '200px' });
+      tiras.forEach(function (t) { olho.observe(t); });
+
+      var olhoFotos = new IntersectionObserver(function (es) {
+        if (es.some(function (e) { return e.isIntersecting; })) {
+          acordarFotos();
+          olhoFotos.disconnect();
+        }
+      }, { rootMargin: '400px' });
+      olhoFotos.observe(tirasCaixa);
+    } else {
+      tiras.forEach(function (t) { t.classList.add('esta-visivel'); });
+      acordarFotos();
+    }
+
+    botao.addEventListener('click', function () {
+      var parado = tirasCaixa.getAttribute('data-parado') === '1';
+      tirasCaixa.setAttribute('data-parado', parado ? '0' : '1');
+      botao.querySelector('.galeria-parar__rotulo').textContent =
+        parado ? 'Pausar o carrossel' : 'Retomar o carrossel';
     });
-    return carregando;
-  };
-  document.querySelectorAll('.glightbox').forEach(function (link, i) {
-    link.addEventListener('click', function (e) {
-      if (lightbox) return;
-      e.preventDefault();
-      carregar().then(function (lb) { lb.openAt(i); })
-        .catch(function () { window.location.href = link.href; });
+
+    /* aba em segundo plano não anima */
+    document.addEventListener('visibilitychange', function () {
+      tirasCaixa.setAttribute('data-oculto', document.hidden ? '1' : '0');
     });
-  });
+
+    var aplicar = function () { if (mq.matches) desligar(); else ligar(); };
+    if (mq.addEventListener) mq.addEventListener('change', aplicar);
+    else if (mq.addListener) mq.addListener(aplicar);
+    aplicar();
+  })();
 })();
 </script>
 </body>
