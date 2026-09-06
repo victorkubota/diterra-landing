@@ -570,6 +570,95 @@
 }
 
 /* ══════════════════════════════════════════════════════════════
+   SOLUÇÃO COMPLETA — os cinco serviços em pilha
+
+   Mesmo gesto dos formatos do corporativo: cada cartão prende no topo
+   e o seguinte sobe por cima; o coberto desfoca, encolhe e perde luz.
+   A forma do recuo mora no base.css (.pilha__item / .recua) e o --cp
+   vem do assets/site.js. Aqui fica só a pele social.
+
+   O cartão é um <a>: a solução tem página própria, e um cartão que
+   ocupa a tela inteira sem levar a lugar nenhum é um beco.
+   ══════════════════════════════════════════════════════════════ */
+.solucoes { padding: var(--section-y) 0; background: var(--ivory); }
+.solucoes .lead { margin: 18px auto 0; text-align: center; }
+.solucoes .h-section { text-align: center; }
+
+.pilha { margin-top: clamp(38px, 5vw, 72px); }
+
+.sol { padding-inline: var(--gutter); }
+.sol__cartao {
+  position: relative;
+  display: block;
+  margin-inline: auto;
+  max-width: 1180px;
+  aspect-ratio: 16 / 9;
+  min-height: clamp(300px, 42vw, 520px);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: var(--elev-foto);
+}
+.sol__cartao img {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 1.4s var(--ease);
+}
+/* o véu pesa embaixo, que é onde o texto se lê */
+.sol__cartao::after {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(to top,
+    rgba(13,16,50,.86) 0%, rgba(13,16,50,.46) 40%, rgba(13,16,50,.04) 100%);
+  transition: background var(--dur) var(--ease);
+}
+@media (hover: hover) {
+  .sol__cartao:hover img { transform: scale(1.04); }
+  .sol__cartao:hover::after {
+    background: linear-gradient(to top,
+      rgba(13,16,50,.9) 0%, rgba(13,16,50,.54) 44%, rgba(13,16,50,.1) 100%);
+  }
+}
+.sol__cartao:focus-visible img { transform: scale(1.04); }
+.sol__cartao:active { transform: var(--press-caixa); transition: transform var(--dur-press) var(--ease); }
+
+.sol__text {
+  position: absolute; inset: auto 0 0 0;
+  padding: clamp(26px, 3.4vw, 54px) clamp(22px, 3vw, 44px);
+  display: flex; flex-direction: column; gap: 10px;
+  color: var(--white);
+  text-align: left;
+}
+.sol__n {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-eyebrow);
+  font-variant-numeric: tabular-nums;
+  color: var(--ui-accent-on-dark);
+}
+.sol__text .h-card {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 1rem + 2.2vw, 3rem);
+  font-weight: 400; line-height: 1.08; letter-spacing: -.01em;
+}
+.sol__text p {
+  font-size: var(--text-base);
+  color: rgba(255,255,255,.88);
+  max-width: 44ch;
+}
+
+/* abaixo de 860px não há pilha: os cinco viram uma lista comum, que é o
+   que o driver do --cp também assume */
+@media (max-width: 859px) {
+  .sol { margin-bottom: clamp(18px, 3vw, 28px); }
+  .sol__cartao { aspect-ratio: 4 / 5; }
+}
+@media (min-width: 860px) {
+  .pilha { padding-bottom: 12vh; }
+  .sol { top: 12vh; margin-bottom: 7vh; height: 76vh; }
+  .sol__cartao { height: 100%; aspect-ratio: auto; }
+}
+
+/* ══════════════════════════════════════════════════════════════
    § 5 — BANNER FULLWIDTH
    ══════════════════════════════════════════════════════════════ */
 .banner {
