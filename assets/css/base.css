@@ -953,9 +953,19 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
    ══════════════════════════════════════════════════════════════════════ */
 .pilha__item { position: sticky; }
 .recua {
+  /* O quanto o cartão coberto recua. Medido na referência: o de trás lê
+     em torno de 83% da largura do da frente e bem mais apagado, contra
+     93% e pouco desbotado que estes valores davam antes. Com 7% de
+     escala a diferença some assim que a foto do da frente é clara, e a
+     pilha lê como duas fotos do mesmo tamanho em vez de uma atrás da
+     outra.
+
+     A escala e a opacidade são as duas que carregam a profundidade; o
+     desfoque é o coadjuvante. Escala e opacidade são de compositor, e o
+     desfoque fica preso ao filho, nunca ao elemento sticky. */
   filter: blur(calc(var(--cp, 0) * 6px));
-  transform: scale(calc(1 - var(--cp, 0) * .07));
-  opacity: calc(1 - var(--cp, 0) * .4);
+  transform: scale(calc(1 - var(--cp, 0) * var(--recuo, .14)));
+  opacity: calc(1 - var(--cp, 0) * .55);
   will-change: transform, filter;
 }
 

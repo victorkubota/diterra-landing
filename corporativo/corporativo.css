@@ -378,7 +378,11 @@
 }
 @media (min-width: 860px) {
   .pilha { display: block; padding-bottom: 12vh; }
-  .fmt { top: 12vh; margin-bottom: 7vh; height: 76vh; }
+  /* mesma altura da pilha social, para as duas lerem como o mesmo gesto */
+  .fmt { top: 9vh; margin-bottom: 6vh; height: 82vh; }
+  /* e um degrau a mais de recuo: aqui o cartão da frente é navy e a foto
+     coberta some menos por conta própria, então precisa de mais escala */
+  .fmt .recua { --recuo: .17; }
 }
 
 .fmt__cartao {
