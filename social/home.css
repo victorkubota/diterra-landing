@@ -316,7 +316,7 @@
    ══════════════════════════════════════════════════════════════ */
 .intro {
   padding: var(--section-y) 0;
-  background: var(--ivory);
+  background: var(--sand-100);
 }
 .intro-grid {
   display: grid;
@@ -416,7 +416,7 @@
    ══════════════════════════════════════════════════════════════ */
 .eventos {
   padding: var(--section-y) 0;
-  background: var(--ivory-light);
+  background: var(--sand-50);
 }
 .eventos-header {
   text-align: center;
@@ -580,7 +580,7 @@
    O cartão é um <a>: a solução tem página própria, e um cartão que
    ocupa a tela inteira sem levar a lugar nenhum é um beco.
    ══════════════════════════════════════════════════════════════ */
-.solucoes { padding: var(--section-y) 0; background: var(--ivory); }
+.solucoes { padding: var(--section-y) 0; background: var(--sand-100); }
 .solucoes .lead { margin: 18px auto 0; text-align: center; }
 .solucoes .h-section { text-align: center; }
 
@@ -730,7 +730,7 @@
    ══════════════════════════════════════════════════════════════ */
 .galeria {
   padding: var(--section-y) 0;
-  background: var(--ivory);
+  background: var(--sand-100);
 }
 .galeria-header {
   text-align: center;
@@ -782,7 +782,7 @@
    ══════════════════════════════════════════════════════════════ */
 .contato {
   padding: var(--section-y) 0;
-  background: var(--ivory-light);
+  background: var(--sand-50);
 }
 .contato-grid {
   display: grid;
@@ -853,7 +853,7 @@
   width: 100%;
   padding: 14px 16px;
   border: 1px solid rgba(0,0,0,.08);
-  background: var(--ivory-light);
+  background: var(--sand-50);
   font-family: var(--font-sans);
   /* 16px é o piso: abaixo disso o Safari do iPhone dá zoom ao focar o
      campo e o visitante precisa pinçar de volta para continuar. */
