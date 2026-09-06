@@ -390,7 +390,7 @@ def rodape():
         </ul>
       </div>
       <div>
-        <h2>Di Terrá</h2>
+        <h2>Di Terrá</h2>
         <ul>
           <li><a href="/social">Home social</a></li>
           <li><a href="/corporativo">Corporativo</a></li>
@@ -576,7 +576,7 @@ def pagina_interna(item, tipo):
   <div class="wrap">
     <div class="section__head">
       <p class="eyebrow rise">Registros</p>
-      <h2 class="h-section linhas">Momentos na Di Terrá</h2>
+      <h2 class="h-section linhas">Momentos na Di Terrá</h2>
     </div>
     <div class="gallery">
 {galeria_html()}

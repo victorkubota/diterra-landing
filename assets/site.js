@@ -73,7 +73,12 @@
   var montarLinhas = function (el) {
     var bruto = el.getAttribute('data-linhas');
     if (bruto === null) {
-      bruto = el.children.length ? '' : el.textContent.replace(/\s+/g, ' ').trim();
+      /* [^\S\u00a0] é "espaço em branco que NÃO é espaço rígido". Com
+         /\s+/ o \u00a0 virava espaço comum aqui, e o split logo abaixo
+         separava "Di Terrá" em duas palavras: o título ganhava o direito
+         de quebrar no meio do nome da marca, que é justamente o que o
+         &nbsp; no HTML existia para impedir. */
+      bruto = el.children.length ? '' : el.textContent.replace(/[^\S\u00a0]+/g, ' ').trim();
       el.setAttribute('data-linhas', bruto);
     }
 

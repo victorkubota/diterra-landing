@@ -101,6 +101,15 @@
         ],
         "createdAt": "2026-09-05T10:12:31.735Z",
         "reason": "sanctioned: hero composition (location eyebrow above the display title) comes from the client feedback documented in the page and CSS comments (referência Sarah Haywood / Cipriani); not user-confirmed in this session"
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "corporativo/index.html"
+        ],
+        "createdAt": "2026-09-06T00:00:00.000Z",
+        "reason": "sancionado: o gradiente e o veiculo da varredura de scroll do .acende, nao a aparencia. No fim do animation-range --acende vale 106%, as duas primeiras paradas cobrem a caixa inteira e o texto assenta em tinta chapada; o banimento mira gradiente como look de repouso"
       }
     ]
   }
