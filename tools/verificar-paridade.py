@@ -29,7 +29,7 @@ BASE = os.path.join(RAIZ, 'assets/css/base.css')
 TEMAS = sorted(glob.glob(os.path.join(RAIZ, 'assets/css/tema-*.css')))
 
 # nomes de paleta que um tema pode definir, além dos --ui-*
-PALETA = r'--(?:ui-|royal|rose|ivory|brick|navy|blue|petrol|taupe|sand|white|black)'
+PALETA = r'--(?:ui-|royal|rose|ivory|brick|navy|blue|petrol|taupe|sand|white|black|ink|paper|accent)'
 
 PROPRIEDADE_NAO_COR = re.compile(
     r'^\s*(padding|margin|font-size|font-family|font-weight|border-radius|border-width'

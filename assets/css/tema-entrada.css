@@ -38,4 +38,42 @@
   --ui-action-hover:       var(--accent);
   --ui-notice-bg:          #1a1d20;
   --ui-notice-text:        rgba(245,243,239,.78);
+
+  /* ── PARIDADE COM OS OUTROS DOIS TEMAS ───────────────────────────────
+     A entrada não instancia nenhuma das superfícies compartilhadas: o
+     vocabulário dela é próprio (stage, doors, core, curtain, pill,
+     entry-foot). Nenhum destes tokens pinta um pixel hoje.
+
+     Eles existem porque a entrada passou a carregar o base.css, e o
+     base.css declara --elev-* em cima deles: sem os nomes, qualquer
+     superfície compartilhada que um dia atravesse para cá receberia um
+     box-shadow inválido e simplesmente não teria sombra. E porque o
+     verificar-paridade.py cobra os três temas com o mesmo vocabulário.
+
+     A calibragem é a de chão quase-preto, que é o oposto da dos outros
+     dois: aqui não existe nada mais escuro que #0c0e10 para a sombra
+     morder, então quem separa é luz. Por isso o fio e o filete são
+     claros, e não escuros como no marfim e na areia.                   */
+
+  /* sombra: preto puro, o único tom abaixo do fundo da entrada */
+  --ui-sombra-contato:         rgba(0,0,0,.55);
+  --ui-sombra-ambiente:        rgba(0,0,0,.40);
+  --ui-sombra-funda:           rgba(0,0,0,.62);
+  --ui-sombra-barra:           rgba(0,0,0,.50);
+  /* o anel de 1px inverte: sobre quase-preto, fio escuro não existe */
+  --ui-sombra-fio:             rgba(245,243,239,.16);
+
+  /* a entrada já é chão escuro, então a variante invertida é a mesma
+     família, um degrau mais funda */
+  --ui-sombra-contato-invert:  rgba(0,0,0,.62);
+  --ui-sombra-ambiente-invert: rgba(0,0,0,.46);
+
+  --ui-luz-fio:                rgba(245,243,239,.16);
+  --ui-superficie-invert:      rgba(245,243,239,.10);
+
+  /* erro: sobre quase-preto o vermelho tem de clarear, não escurecer */
+  --ui-erro:                   #e9a893;
+  --ui-erro-on-dark:           #e9a893;
+  /* "link pequeno dentro de cartão": aqui é o dourado da entrada */
+  --ui-link-brick:             var(--accent);
 }
