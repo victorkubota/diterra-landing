@@ -109,7 +109,7 @@
           "corporativo/index.html"
         ],
         "createdAt": "2026-09-06T00:00:00.000Z",
-        "reason": "sancionado: o gradiente e o veiculo da varredura de scroll do .acende, nao a aparencia. No fim do animation-range --acende vale 106%, as duas primeiras paradas cobrem a caixa inteira e o texto assenta em tinta chapada; o banimento mira gradiente como look de repouso"
+        "reason": "sancionado: o gradiente e o veiculo da varredura de scroll do .acende, nao a aparencia. No fim do animation-range --acende vale 106%, as duas primeiras paradas cobrem a caixa inteira e o texto assenta em tinta chapada; o banimento mira gradiente como look de repouso. A regra mora em corporativo/corporativo.css, o unico arquivo que a instancia"
       }
     ]
   }
