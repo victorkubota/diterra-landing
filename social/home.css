@@ -297,7 +297,7 @@
   object-fit: cover;
   transition: transform .8s var(--ease);
 }
-.intro-image:hover img { transform: scale(1.04); }
+@media (hover: hover) { .intro-image:hover img { transform: scale(1.04); } }
 
 /* ══════════════════════════════════════════════════════════════
    § 3 — AS QUATRO CASAS
@@ -370,7 +370,7 @@
   transition: transform .8s var(--ease);
   border-radius: var(--radius-lg);
 }
-.evento-card:hover img { transform: scale(1.06); }
+@media (hover: hover) { .evento-card:hover img { transform: scale(1.06); } }
 /* O rótulo é permanente. Antes ele só aparecia no hover, e duas das
    quatro fotos traziam o nome da ocasião impresso dentro do arquivo,
    o que fazia a grade parecer rotulada. Com as fotos limpas, esconder
@@ -534,7 +534,11 @@
 }
 .galeria-item:nth-child(1) img { aspect-ratio: auto; height: 100%; }
 .galeria-item:nth-child(4) img { aspect-ratio: 16/9; }
-.galeria-item:hover img { transform: scale(1.05); }
+/* este tem <a class="glightbox"> dentro, então ganha paridade de teclado
+   e estado pressionado; .intro-image e .evento-card não são clicáveis */
+@media (hover: hover) { .galeria-item:hover img { transform: scale(1.05); } }
+.galeria-item:focus-within img { transform: scale(1.05); }
+.galeria-item:active { transform: var(--press-caixa); transition: transform var(--dur-press) var(--ease); }
 
 /* ══════════════════════════════════════════════════════════════
    § 7 — CONTATO
