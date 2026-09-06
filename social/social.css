@@ -228,6 +228,21 @@
 @media (min-width: 680px)  { .grid--3 { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1040px) { .grid--3 { grid-template-columns: repeat(3, 1fr); } }
 
+/* Exatamente quatro cards não são três e um órfão: são dois e dois.
+   A consulta de quantidade casa quando o quarto filho também é o
+   último, então só as grades de quatro mudam — as de três (as internas
+   de casa) e a de cinco (o índice de soluções) não são tocadas.
+
+   Vale para seis rotas geradas de uma vez: o índice de espaços, com as
+   quatro casas, e as cinco internas de solução, que listam quatro
+   irmãs. Nenhuma linha de HTML muda, então o gerador travado não tem o
+   que desfazer.
+
+   Sem :has() a grade continua em três, que é o que o site já fazia. */
+@media (min-width: 1040px) {
+  .grid--3:has(> :nth-child(4):last-child) { grid-template-columns: repeat(2, 1fr); }
+}
+
 .card {
   display: flex; flex-direction: column; text-decoration: none;
   /* era color: inherit, e dentro de .section--invert o cartão pintava
