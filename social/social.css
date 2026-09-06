@@ -23,6 +23,9 @@
   line-height: 1.2; color: var(--brick); font-weight: 400;
 }
 .on-dark .script { color: var(--rose); }
+/* tijolo sobre rosa dá 2,2:1 e reprova até para título; royal sobre
+   rosa dá 10,9:1. A assinatura manuscrita da chamada final vai de royal. */
+.section--rose .script { color: var(--royal); }
 
 /* Sem o teto de 1200px no container, este bloco ia a 93ch em 1920.
    A grade acompanha a tela; a linha de leitura, não. */
@@ -41,14 +44,28 @@
   position: fixed; inset: 0 0 auto 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
   padding: 14px var(--gutter);
-  transition: background var(--dur) var(--ease), padding var(--dur) var(--ease);
+  transition: background var(--dur) var(--ease);
 }
-.nav.is-stuck { background: rgba(17,21,66,.96); padding-block: 10px; }
-@supports (backdrop-filter: blur(8px)) {
-  .nav.is-stuck { background: rgba(17,21,66,.86); backdrop-filter: blur(14px); }
+/* o padding muda sem transição: animar padding relayouta a nav a cada quadro */
+.nav.is-stuck { background: rgba(17,21,66,.96); padding-block: 10px; box-shadow: var(--elev-luz); }
+/* o Safari só aceitou backdrop-filter sem prefixo no 18: sem testar as
+   duas grafias, todo iPhone com iOS 17 ou anterior reprova o @supports,
+   a regra nunca entra e a nav cai no fundo opaco, em silêncio, no
+   aparelho onde ela mais aparece.
+   saturate(125%) porque blur faz média dos vizinhos e média dessatura:
+   a foto por baixo do vidro chega acinzentada sem isso. */
+@supports ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
+  .nav.is-stuck {
+    background: rgba(17,21,66,.86);
+    -webkit-backdrop-filter: blur(14px) saturate(125%);
+            backdrop-filter: blur(14px) saturate(125%);
+  }
 }
 .nav__logo { display: block; flex: none; }
-.nav__logo img { height: clamp(34px, 4vw, 46px); width: auto; }
+.nav__logo img { height: clamp(34px, 4vw, 46px); width: auto; view-transition-name: marca; }
+/* o hero de uma casa recebe a foto que estava na lista da home ou do
+   corporativo (casa-foto, ver base.css) */
+.page-hero__media img { view-transition-name: casa-foto; }
 
 .nav__links { display: flex; align-items: center; gap: clamp(16px, 2vw, 30px); list-style: none; }
 .nav__links a {
@@ -76,23 +93,17 @@
 
 .nav__toggle {
   display: none; background: none; border: 0; cursor: pointer;
-  width: 40px; height: 40px; padding: 10px; color: var(--ivory);
+  width: 44px; height: 44px; padding: 12px;   /* 44px: mínimo de alvo de toque */ color: var(--ivory);
 }
 .nav__toggle span { display: block; height: 1px; background: currentColor; margin: 5px 0; }
-@media (max-width: 1000px) { .nav__links, .nav__side .nav__switch { display: none; } .nav__toggle { display: block; } }
+/* 1024: o mesmo ponto de colapso do corporativo */
+@media (max-width: 1024px) { .nav__links, .nav__side .nav__switch { display: none; } .nav__toggle { display: block; } }
+/* Abaixo de 480px a logo (171px) e o botão (120px) não cabem juntos e o
+   hambúrguer era espremido a 38px. A ação já está dentro da gaveta.
+   O corporativo faz o mesmo desde sempre, a ≤1080px. */
+@media (max-width: 480px) { .nav__side .btn { display: none; } }
 
-.nav__drawer {
-  position: fixed; inset: 0; z-index: 99; background: var(--royal);
-  display: flex; flex-direction: column; justify-content: center; gap: 4px;
-  padding: var(--gutter); opacity: 0; visibility: hidden;
-  transition: opacity var(--dur) var(--ease), visibility var(--dur);
-}
-.nav__drawer.is-open { opacity: 1; visibility: visible; }
-.nav__drawer a {
-  font-family: var(--font-display); font-size: clamp(1.6rem, 5.6vw, 2.4rem);
-  color: var(--ivory); text-decoration: none; padding: 8px 0; font-weight: 300;
-}
-.nav__drawer .nav__switch { margin-top: 24px; font-size: var(--text-sm); }
+/* .nav__drawer mora no base.css: mesmo componente em treze rotas. */
 
 /* ══════════════════════════════════════════════════════════════════════
    HERO DE PÁGINA INTERNA
@@ -161,6 +172,17 @@
 
 .ornament { position: absolute; pointer-events: none; user-select: none; opacity: .45; z-index: 0; }
 .ornament img { width: 100%; height: auto; }
+/* o ramo respira 4px contra a rolagem: pouco, para o ornamento ficar
+   vivo sem virar efeito. Só onde há animation-timeline. */
+@supports (animation-timeline: view()) {
+  .js .ornament img {
+    animation: ramoRespira linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+}
+@keyframes ramoRespira { from { transform: translateY(4px); } to { transform: translateY(-4px); } }
+@media (prefers-reduced-motion: reduce) { .ornament img { animation: none; } }
 .ornament--tr { top: -26px; right: -18px; width: clamp(90px, 12vw, 180px); }
 .ornament--bl { bottom: -26px; left: -22px; width: clamp(90px, 12vw, 180px); transform: rotate(180deg); }
 
@@ -210,12 +232,26 @@
   color: var(--ui-text);
   background: var(--ui-bg-alt); border: 1px solid var(--ui-border);
   border-radius: var(--radius); overflow: hidden;
+  /* estática no repouso e no hover: o levante já é lido pelo translateY
+     e pela borda que escurece. Uma camada em ::after seria aparada pelo
+     overflow: hidden e a elevação simplesmente não aconteceria. Nas nove
+     rotas em que o cartão vive dentro de .section--invert, a troca de
+     chão do base.css entrega a versão funda sem override aqui. */
+  box-shadow: var(--elev-1);
   transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
-.card:hover { transform: translateY(-4px); border-color: rgba(17,21,66,.3); }
+/* O cartão inteiro é o <a>, então o teclado recebe o mesmo levante que
+   o mouse. E o levante fica atrás de hover: hover: sem isso, no celular
+   ele dispara no toque e continua levantado depois que o dedo sai. */
+@media (hover: hover) {
+  .card:hover { transform: translateY(-4px); border-color: rgba(17,21,66,.3); }
+}
+.card:focus-visible { transform: translateY(-4px); border-color: rgba(17,21,66,.3); }
+.card:active { transform: var(--press-caixa); transition-duration: var(--dur-press); }
 .card__media { position: relative; aspect-ratio: 4/3; overflow: hidden; background: var(--royal); }
 .card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.1s var(--ease); }
-.card:hover .card__media img { transform: scale(1.05); }
+@media (hover: hover) { .card:hover .card__media img { transform: scale(1.05); } }
+.card:focus-visible .card__media img { transform: scale(1.05); }
 .card__arch {
   position: absolute; left: clamp(16px, 2.4vw, 26px); bottom: 0;
   width: clamp(42px, 5.4vw, 62px); height: clamp(56px, 7vw, 82px);
@@ -243,7 +279,9 @@
 @media (min-width: 860px) { .gallery { grid-template-columns: repeat(4, 1fr); } }
 .gallery figure { margin: 0; overflow: hidden; aspect-ratio: 1; background: var(--royal); }
 .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.1s var(--ease); }
-.gallery figure:hover img { transform: scale(1.06); }
+/* o <a> vive dentro do <figure>, então a paridade de teclado é focus-within */
+@media (hover: hover) { .gallery figure:hover img { transform: scale(1.06); } }
+.gallery figure:focus-within img { transform: scale(1.06); }
 @media (min-width: 860px) { .gallery figure:first-child { grid-column: span 2; grid-row: span 2; } }
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -269,9 +307,10 @@
    MOTION
    ══════════════════════════════════════════════════════════════════════ */
 
+/* o corte de movimento mora no base.css: aqui só o que é desta folha */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-  .rise { opacity: 1; transform: none; }
+  .card:hover { transform: none; }
+  .card:hover .card__media img, .gallery figure:hover img, .split__media img { transform: none; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════

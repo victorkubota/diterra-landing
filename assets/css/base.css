@@ -22,12 +22,15 @@
      contraste do logotipo. Trocar por Channe em woff2 quando a licença
      for adquirida. Oooh Baby é acento manuscrito do universo social e
      não tem equivalente no corporativo.                             */
-  --font-display: 'Channe', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-display: 'Channe', 'Cormorant Garamond', 'Cormorant Fallback', Georgia, 'Times New Roman', serif;
   --font-script:  'Oooh Baby', 'Cormorant Garamond', cursive;
-  --font-sans:    'Albert Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-sans:    'Albert Sans', 'Albert Fallback', -apple-system, 'Helvetica Neue', Arial, sans-serif;
 
-  --text-xs:   .6875rem;                                  /* 11px — eyebrow  */
-  --text-sm:   .75rem;                                    /* 12px — botão    */
+  /* 12px é o piso de texto funcional (rótulo, link, botão): abaixo disso
+     falha em tela pequena e de alta densidade. Os dois degraus subiram
+     1px em 05/09/2026 por esse motivo. */
+  --text-xs:   .75rem;                                    /* 12px — eyebrow  */
+  --text-sm:   .8125rem;                                  /* 13px — botão    */
   --text-base: .9375rem;                                  /* 15px — corpo    */
   --text-lg:   clamp(1.0625rem, 1rem + .3vw, 1.25rem);
   --text-xl:   clamp(1.4rem, 1.2rem + .85vw, 2rem);
@@ -38,14 +41,27 @@
      nosso maior título de seção parava em 56px, e é essa diferença que
      faz a frase valer por um parágrafo inteiro. */
   --text-manchete: clamp(2.75rem, 1.4rem + 5.6vw, 6.5rem);
+  /* papéis do hero, iguais na home social e no corporativo: título em
+     caixa alta e subtítulo em itálico. Viviam como px soltos nas duas
+     folhas; agora são um degrau só. */
+  --text-hero:     clamp(2.75rem, 1.5rem + 5.5vw, 6rem);
+  --text-hero-sub: clamp(1.125rem, 1rem + .7vw, 1.625rem);
+  /* título de cartão em display (overlay de evento, card de casa) */
+  --text-lg-display: clamp(1.25rem, 1rem + 1vw, 1.75rem);
 
   --leading-body:    1.7;
   --leading-display: 1.02;
   --tracking-eyebrow: .25em;
   --tracking-btn:     .2em;
 
-  /* ── ESPAÇO E FORMA ─────────────────────────────────────────────── */
-  --section-y: clamp(80px, 10vw, 140px);
+  /* ── ESPAÇO E FORMA ───────────────────────────────────────────────
+     Três intervalos de seção, não um. Um valor único repetido em todo
+     bloco dá peso igual a tudo; o ritmo vem do contraste entre o
+     apertado (faixa de logos, depoimentos), o normal e o respiro
+     (fotografia em tela cheia, chamada final). */
+  --section-y-tight: clamp(48px, 6vw, 80px);
+  --section-y:       clamp(80px, 10vw, 140px);
+  --section-y-loose: clamp(120px, 14vw, 200px);
 
   /* ── LARGURA ──────────────────────────────────────────────────────
      O teto de 1200px deixava 360px de margem morta de cada lado em
@@ -72,6 +88,138 @@
   --dur-fast:  .25s;
   --dur:       .5s;
   --dur-slow:  .8s;
+  /* o toque precisa responder antes de a pessoa perceber que esperou;
+     .25s já é lento demais para o instante entre apertar e soltar */
+  --dur-press: .1s;
+
+  /* ── ELEVAÇÃO ────────────────────────────────────────────────────────
+     Aqui mora a FORMA da sombra: deslocamento, desfoque, spread e quantas
+     camadas. A COR de cada camada vem de um token --ui-* que os dois temas
+     declaram, que é a mesma divisão do resto do arquivo.
+
+     Uma direção de luz só na página inteira: alta e de frente, sombra para
+     baixo, deslocamento lateral zero. A única exceção é --elev-barra, que
+     sobe porque a barra fixa mora na borda de baixo da tela e é ela que
+     separa a barra do conteúdo que passa por baixo. Oclusão, não projeção.
+
+     Duas camadas por degrau. CONTATO encosta a peça no papel: 1 a 2px de
+     deslocamento, desfoque curto, a mais opaca. AMBIENTE é a poça embaixo:
+     deslocamento médio, desfoque largo, spread negativo pequeno, que segura
+     a sombra debaixo do objeto em vez de deixá-la vazar pelas laterais.
+     Pequeno de propósito: spread muito negativo encolhe tanto a fonte da
+     sombra que a camada some nas caixas pequenas, que são as que mais
+     precisam dela.
+
+     Nada aqui anima. Nenhuma sombra é transicionada em lugar nenhum do
+     site, porque sombra não é propriedade de compositor. A única que muda
+     em cena é a da pilha de formatos, por opacidade de um pseudo preso ao
+     --cp que a rolagem já escreve.                                       */
+
+  /* papel apoiado na mesa: formulário, cartão, depoimento */
+  --elev-1:
+    0 1px 2px var(--ui-sombra-contato),
+    0 10px 24px -8px var(--ui-sombra-ambiente);
+
+  /* a placa grande da pilha de formatos, e só ela. Nasce com o peso que já
+     tinha no ar (0 30px 60px -30px), mais a camada de contato que faltava */
+  --elev-2:
+    0 2px 6px var(--ui-sombra-contato),
+    0 30px 60px -30px var(--ui-sombra-funda);
+
+  /* cromo fixo sobre conteúdo arbitrário: voltar-ao-topo e balão do
+     WhatsApp. Spread quase nulo de propósito: numa pílula de 46px um
+     spread de -20px encolheria a fonte da sombra para 6x6px e a camada
+     de ambiente deixaria de existir. */
+  --elev-flutuante:
+    0 2px 6px var(--ui-sombra-contato),
+    0 10px 30px -2px var(--ui-sombra-funda);
+
+  /* a exceção declarada: a barra do polegar projeta para CIMA. Uma camada
+     e não duas, porque a aresta já é um border-top de 1px de verdade. */
+  --elev-barra: 0 -10px 30px -6px var(--ui-sombra-barra);
+
+  /* Degrau que não é sombra, é corte. Fotografia sem borda dissolve no
+     marfim e na areia quando o recorte cai num céu claro. Anel de 1px por
+     spread: fica FORA da border box, então o overflow hidden do próprio
+     elemento não o apara, e ele acompanha o border-radius. */
+  --elev-fio: 0 0 0 1px var(--ui-sombra-fio);
+
+  /* Sobre fundo escuro sombra é invisível: o que separa é luz. Filete de
+     1px na aresta de baixo do vidro fixo. */
+  --elev-luz: 0 1px 0 var(--ui-luz-fio);
+
+  /* Dois gestos de pressão, não um: onde há borda de 1px, escalar
+     serrilha a linha, então o elemento afunda; onde não há, ele encolhe.
+     Ficam em token para o bloco de movimento reduzido desligar os dois
+     num lugar só. */
+  --press-borda: translateY(1px);
+  --press-caixa: scale(.99);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   FALLBACKS MÉTRICOS
+
+   Enquanto a webfont não chega, o texto usa Georgia e Arial ajustadas
+   para ocupar a mesma largura e altura de linha da Cormorant e da Albert.
+   Duas consequências: o título não pula quando a fonte real entra, e o
+   montarLinhas() do site.js, que mede onde cada linha quebra, mede
+   certo desde a primeira passada.
+
+   Valores aproximados da relação de largura média entre as famílias
+   (Cormorant é estreita; Georgia, larga). Afinar contra o rendering real
+   se algum título mudar de quebra na troca.
+   ══════════════════════════════════════════════════════════════════════ */
+@font-face {
+  font-family: 'Cormorant Fallback';
+  src: local('Georgia'), local('Times New Roman');
+  size-adjust: 88%;
+  ascent-override: 92%;
+  descent-override: 26%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Albert Fallback';
+  src: local('Arial'), local('Helvetica Neue');
+  size-adjust: 101%;
+  ascent-override: 95%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   TRANSIÇÃO ENTRE PÁGINAS (View Transitions entre documentos)
+
+   Raiz, home social, corporativo e as casas são um site só, e a troca
+   de página deveria parecer isso, não um recarregamento. Com a regra
+   abaixo o navegador tira um retrato da página que sai e anima para a
+   que entra. Três elementos têm nome e viajam de uma página à outra:
+
+     hero-foto   a foto do hero de cada rota (raiz, social, corporativo)
+     casa-foto   a foto da casa escolhida na lista, que vira o hero da
+                 página daquela casa
+     marca       o logo na nav, que troca de universo sem sumir
+
+   Chrome, Edge e Safari 18.2+ animam; Firefox navega como sempre. Nada
+   de JS, nada a carregar. Com movimento reduzido, não há transição.
+   ══════════════════════════════════════════════════════════════════════ */
+@view-transition { navigation: auto; }
+
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: .45s; animation-timing-function: var(--ease); }
+::view-transition-group(hero-foto),
+::view-transition-group(casa-foto) { animation-duration: .7s; animation-timing-function: var(--ease-out); }
+::view-transition-group(marca) { animation-duration: .5s; animation-timing-function: var(--ease-out); }
+/* a foto antiga não esmaece por baixo da nova: a nova cobre, a antiga some no fim */
+::view-transition-old(hero-foto),
+::view-transition-old(casa-foto) { animation: none; mix-blend-mode: normal; }
+::view-transition-new(hero-foto),
+::view-transition-new(casa-foto) { animation: none; mix-blend-mode: normal; }
+
+/* a foto da casa ativa na lista é a que vira hero da página da casa */
+.switch__shot.is-on img { view-transition-name: casa-foto; }
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -117,6 +265,31 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
 :focus-visible { outline: 2px solid var(--ui-accent); outline-offset: 3px; }
 
 /* ══════════════════════════════════════════════════════════════════════
+   TROCA DE CHÃO
+   Quem decide a cor da sombra é a superfície onde ela CAI, não a peça que
+   a projeta. O mesmo .card branco vive sobre marfim no hub e dentro de
+   .section--invert royal em nove rotas, e sombra royal sobre royal não
+   existe.
+
+   Atenção ao mecanismo: não adianta redeclarar só --ui-sombra-contato
+   aqui. O valor computado de uma custom property já vem com os var()
+   substituídos, então o que desce herdado é a string pronta com a cor de
+   marfim dentro. O que funciona é redeclarar o PRÓPRIO --elev-1 neste
+   escopo.
+
+   Só --elev-1 troca. A .barra-acao carrega .on-dark no HTML das treze
+   rotas e herdaria a sombra errada; o .to-top e o .wa são fixos no body e
+   atravessam todos os chãos da página.
+   ══════════════════════════════════════════════════════════════════════ */
+.section--invert,
+.foot,
+.on-dark {
+  --elev-1:
+    0 2px 4px var(--ui-sombra-contato-invert),
+    0 16px 36px -12px var(--ui-sombra-ambiente-invert);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
    GRADE
    ══════════════════════════════════════════════════════════════════════ */
 .wrap,
@@ -131,6 +304,8 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   position: relative;
   scroll-margin-top: 76px;
 }
+.section--tight  { padding-block: var(--section-y-tight); }
+.section--loose  { padding-block: var(--section-y-loose); }
 .section--invert { background: var(--ui-bg-invert); color: var(--ui-text-invert); }
 .section--paper  { background: var(--ui-bg-alt); }
 
@@ -188,6 +363,12 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
 .body-muted { color: var(--ui-text-muted); }
 .on-dark { color: var(--ui-text-invert); }
 .on-dark .body-muted { color: var(--ui-text-invert-muted); }
+/* Texto claro sobre navy ou royal perde massa: a Albert 300 fica fina e
+   as letras se colam. Sobre fundo escuro o corpo sobe um peso, ganha um
+   fio de tracking e um pouco mais de entrelinha. */
+.on-dark p, .on-dark li, .section--invert p, .section--invert li {
+  font-weight: 400; letter-spacing: .012em; line-height: 1.75;
+}
 
 /* ══════════════════════════════════════════════════════════════════════
    BOTÃO
@@ -213,8 +394,10 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   letter-spacing: var(--tracking-btn);
   text-transform: uppercase;
   cursor: pointer;
-  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease),
+              transform var(--dur-press) var(--ease);
 }
+.btn:active { transform: var(--press-borda); }
 .btn::before {
   content: ''; position: absolute; inset: 0; z-index: -1;
   border-radius: inherit;
@@ -283,6 +466,29 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
 .link-arrow--alt:hover { color: var(--ui-text); }
 
 /* ══════════════════════════════════════════════════════════════════════
+   MENU MOBILE
+   Estava duplicado, literal por literal, em social.css e corporativo.css,
+   e por isso faltava na home social: o botão existia, a gaveta não.
+   Aqui em cima os dois temas o pintam sozinhos.
+   ══════════════════════════════════════════════════════════════════════ */
+.nav__drawer {
+  position: fixed; inset: 0; z-index: 99;
+  background: var(--ui-bg-invert);
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 5px; padding: var(--gutter);
+  opacity: 0; visibility: hidden;
+  transition: opacity var(--dur) var(--ease), visibility var(--dur);
+}
+.nav__drawer.is-open { opacity: 1; visibility: visible; }
+.nav__drawer a {
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 5.8vw, 2.5rem);
+  color: var(--ui-text-invert);
+  text-decoration: none; padding: 9px 0; font-weight: 300;
+}
+.nav__drawer .nav__switch { display: inline-block; margin-top: 25px; font-size: var(--text-sm); }
+
+/* ══════════════════════════════════════════════════════════════════════
    FICHA TÉCNICA E AVISOS
    ══════════════════════════════════════════════════════════════════════ */
 .spec { list-style: none; display: grid; }
@@ -311,6 +517,176 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   max-width: var(--max-text);
 }
 .notice strong { font-weight: 600; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   ESTADOS DO FORMULÁRIO
+   Erro junto do campo, enviando no botão, resultado num bloco que o
+   leitor de tela anuncia (aria-live no HTML). A cor de erro é um papel
+   do tema, não um vermelho genérico.
+   ══════════════════════════════════════════════════════════════════════ */
+.campo-erro {
+  font-size: var(--text-sm); font-weight: 400;
+  color: var(--ui-erro); margin-top: 6px;
+}
+[aria-invalid="true"] { border-color: var(--ui-erro) !important; }
+.form-status {
+  margin-top: 18px; padding: 16px 20px;
+  font-size: var(--text-base); line-height: 1.55;
+  border: 1px solid var(--ui-border); border-radius: var(--radius-sm);
+  max-width: var(--max-text);
+}
+.form-status:focus { outline: 2px solid var(--ui-accent); outline-offset: 3px; }
+.form-status--ok { background: var(--ui-notice-bg); color: var(--ui-notice-text); border-color: transparent; }
+.form-status--erro { color: var(--ui-erro); border-color: var(--ui-erro); }
+.on-dark .form-status--ok { background: var(--ui-superficie-invert); color: var(--ui-text-invert); }
+.on-dark .form-status--erro { color: var(--ui-erro-on-dark); border-color: var(--ui-erro-on-dark); }
+.on-dark .campo-erro { color: var(--ui-erro-on-dark); }
+.on-dark [aria-invalid="true"] { border-color: var(--ui-erro-on-dark) !important; }
+button[aria-busy="true"] { cursor: progress; opacity: .7; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   LISTA QUE TROCA A FOTO — .switch / .vcard
+
+   Nasceu no corporativo (referência Sarah Haywood) e desde 05/09/2026
+   também mostra as quatro casas na home social. A foto ocupa metade da
+   tela e é sticky enquanto a lista rola; no celular vira acordeão, com
+   a foto dentro de cada card. O comportamento está em assets/switch.js.
+   ══════════════════════════════════════════════════════════════════════ */
+.switch { display: grid; gap: clamp(26px, 3vw, 52px); }
+@media (min-width: 940px) {
+  /* metade e metade, como a referência. Era 1.25/.75: mais largo, porém
+     mais baixo, e no fim com MENOS área que este retrato de 90svh. */
+  .switch { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+
+.switch__stage { display: none;
+  border-radius: var(--radius-lg);
+}
+@media (min-width: 940px) {
+  .switch__stage {
+    display: block;
+    position: sticky; top: 100px;
+    /* altura de verdade, não proporção: é o que responde ao pedido de
+       "um espaço que mostre mais amplitude". Agora nos 90svh medidos na
+       referência, que é o que vira o corte em retrato. */
+    height: min(90svh, 900px);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--ui-bg-invert);
+  }
+}
+.switch__shot {
+  position: absolute; inset: 0;
+  opacity: 0; transform: scale(1.04);
+  /* o wipe entra pela direita junto do cross-fade: a troca passa a ter
+     direção, em vez de só surgir */
+  clip-path: inset(0 0 0 100%);
+  transition: opacity .9s var(--ease), transform 1.4s var(--ease),
+              clip-path 1s var(--ease);
+}
+.switch__shot.is-on { opacity: 1; transform: none; clip-path: inset(0 0 0 0); }
+.switch__shot img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg); }
+
+.switch__list { display: grid; gap: 0; border-top: 1px solid var(--ui-border); }
+
+.vcard { border-bottom: 1px solid var(--ui-border); }
+
+.vcard__head {
+  width: 100%;
+  display: flex; align-items: center; gap: clamp(14px, 2vw, 24px);
+  background: none; border: 0; cursor: pointer;
+  font-family: inherit; text-align: left;
+  padding: clamp(20px, 2.4vw, 30px) 0;
+  color: var(--ui-text);
+  transition: color var(--dur-fast) var(--ease);
+}
+.vcard__n {
+  font-size: var(--text-xs); font-variant-numeric: tabular-nums;
+  letter-spacing: .2em; color: var(--ui-text-muted); flex: none;
+  transition: color var(--dur-fast) var(--ease);
+}
+.vcard__name {
+  flex: 1;
+  font-family: var(--font-display); font-weight: 300;
+  font-size: clamp(1.45rem, 2.6vw, 2.1rem);
+  line-height: 1.1; letter-spacing: -.01em;
+}
+.vcard__chev {
+  flex: none; color: var(--ui-text-muted);
+  transition: transform var(--dur) var(--ease), color var(--dur-fast) var(--ease);
+}
+.vcard.is-on .vcard__n,
+.vcard.is-on .vcard__chev { color: var(--ui-accent); }
+.vcard.is-on .vcard__chev { transform: rotate(180deg); }
+@media (hover: hover) { .vcard__head:hover .vcard__name { color: var(--ui-accent); } }
+
+/* painel: altura animada por grid-template-rows, sem medir em JS.
+
+   O colapso vive atrás de .js de propósito. Sem JS a lista não troca de
+   painel, então fechar três dos quatro esconderia conteúdo que ninguém
+   consegue abrir. Sem JS todos ficam abertos e as quatro casas seguem
+   legíveis. Com JS, o switch.js fecha os outros três e marca cada um
+   como inert, senão os dois links de dentro continuam na ordem de
+   tabulação num painel de 0px: o foco vai parar num destino invisível. */
+.vcard__panel {
+  display: grid; grid-template-rows: 1fr;
+}
+.vcard__inner {
+  overflow: hidden;
+  display: flex; flex-direction: column; gap: 20px;
+  padding-bottom: clamp(24px, 2.6vw, 34px);
+}
+
+.js .vcard__panel {
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .7s var(--ease);
+}
+.js .vcard__inner {
+  opacity: 0;
+  padding-bottom: 0;
+  transition: opacity .5s var(--ease);
+}
+.js .vcard.is-on .vcard__panel { grid-template-rows: 1fr; }
+.js .vcard.is-on .vcard__inner {
+  opacity: 1; transition-delay: .16s;
+  padding-bottom: clamp(24px, 2.6vw, 34px);
+}
+.vcard__inner > p { font-size: var(--text-sm); color: var(--ui-text-muted); max-width: 52ch; }
+
+/* a foto dentro do card só existe abaixo de 940px */
+.vcard__shot-m { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 3/2; background: var(--ui-bg-invert); }
+.vcard__shot-m img { width: 100%; height: 100%; object-fit: cover; }
+@media (min-width: 940px) { .vcard__shot-m { display: none; } }
+
+.vcard__acts { display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: center; }
+
+/* campo a preencher pela Di Terrá — nunca inventar capacidade */
+
+/* ── RÉGUA DO RODÍZIO DE CASAS ────────────────────────────────────────
+   A largura vem de --rp, o progresso que o próprio timer escreve, e não
+   de uma animação presa à classe .is-on.
+
+   A versão anterior dependia de o navegador reiniciar a animação toda
+   vez que .is-on mudava de cartão, e era isso que dava a impressão de
+   que a régua só rodava na primeira volta. Agora ela é um número: anda
+   com o relógio, para junto com ele, e a pausa fica visível em vez de
+   parecer que a contagem sumiu. */
+.vcard.is-on { position: relative; }
+.vcard.is-on::after {
+  content: '';
+  position: absolute; left: 0; bottom: -1px; height: 2px;
+  background: var(--ui-accent);
+  width: calc(var(--rp, 0) * 100%);
+  /* só aparece enquanto o rodízio anda: parado, some e o que resta é o
+     comportamento de clique de sempre */
+  opacity: var(--ro, 0);
+  transition: opacity var(--dur-fast) var(--ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vcard.is-on::after { display: none; }
+}
+
 
 /* ══════════════════════════════════════════════════════════════════════
    RODAPÉ
@@ -346,6 +722,49 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════
+   BARRA DE AÇÃO NO CELULAR
+
+   No celular a ação principal fica no polegar, não no topo: uma barra
+   fixa no rodapé com a conversão da rota (falar com a equipe, pedir
+   proposta) e, onde há número real, o WhatsApp. Aparece depois que a
+   pessoa rolou meia tela, some no desktop. Respeita a área segura do
+   iPhone (env) e empurra o voltar-ao-topo para cima dela.
+   ══════════════════════════════════════════════════════════════════════ */
+.barra-acao {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 95;
+  display: none; gap: 10px;
+  padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom, 0px));
+  background: var(--ui-bg-invert); color: var(--ui-text-invert);
+  border-top: 1px solid var(--ui-border-invert);
+  box-shadow: var(--elev-barra);
+  transform: translateY(110%);
+  transition: transform var(--dur) var(--ease-out);
+}
+.barra-acao.is-visible { transform: none; }
+.barra-acao .btn { flex: 1; justify-content: center; padding: 14px 16px; }
+.barra-acao .btn--primary.on-dark { background: var(--ui-text-invert); color: var(--ui-bg-invert); }
+.barra-acao .btn--primary.on-dark:hover { color: var(--ui-bg-invert); }
+.barra-acao__wa {
+  flex: none; display: grid; place-items: center;
+  width: 50px; border: 1px solid var(--ui-border-invert); border-radius: var(--radius-sm);
+  color: var(--ui-text-invert);
+}
+@media (max-width: 768px) {
+  .barra-acao { display: flex; }
+  /* o conteúdo não termina escondido atrás da barra */
+  body { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* ── TOQUE ──────────────────────────────────────────────────────────────
+   Tamanho de tela não diz o que aponta na tela. Com dedo, os alvos
+   crescem e o que dependia de hover fica sempre visível. */
+@media (pointer: coarse) {
+  .btn { padding: 16px 30px; }
+  .nav__links a { padding: 10px 0; }
+  .link-arrow { padding-block: 6px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
    VOLTAR AO TOPO
    ══════════════════════════════════════════════════════════════════════ */
 .to-top {
@@ -358,9 +777,13 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   opacity: 0; visibility: hidden; transform: translateY(10px);
   transition: opacity var(--dur) var(--ease-out), transform var(--dur) var(--ease-out),
               visibility var(--dur), background var(--dur-fast) var(--ease-out);
+  box-shadow: var(--elev-flutuante);
 }
 .to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
 .to-top:hover { background: var(--ui-accent); }
+/* no celular sobe para cima da barra de ação (vem depois do bloco .to-top
+   de propósito: o bottom de cima venceria) */
+@media (max-width: 768px) { .to-top { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); } }
 .to-top svg { transition: transform var(--dur-fast) var(--ease-out); }
 .to-top:hover svg { transform: translateY(-2px); }
 
@@ -370,12 +793,111 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
    Revelação em cascata: --i escalona os irmãos, de modo que o bloco se
    monta em sequência em vez de aparecer inteiro.
    ══════════════════════════════════════════════════════════════════════ */
-.rise { opacity: 0; transform: translateY(26px); }
+/* Todo estado inicial escondido fica atrás de html.js, que o <head> de
+   cada rota escreve antes do CSS. Sem script, sem observer ou com o rAF
+   parado numa aba em segundo plano, o conteúdo já nasce visível: a
+   revelação é um bônus, nunca a condição para ler a página. */
+.js .rise { opacity: 0; transform: translateY(26px); }
 .rise.is-in {
   opacity: 1; transform: none;
   transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
   transition-delay: calc(var(--i, 0) * .11s);
 }
+
+/* ── REVELAÇÃO DE FOTO POR CLIP-PATH ──────────────────────────────────
+   Escrito para o corporativo e preso lá até 05/09/2026, enquanto as onze
+   internas — que são onze das catorze rotas e concentram a fotografia do
+   site — ainda revelavam foto com o .rise.
+
+   O .rise resolve texto, mas em fotografia um fade puro não se lê como
+   revelação: a imagem só clareia. Aqui a foto é descoberta de baixo para
+   cima enquanto assenta a escala.
+
+   O clip fica na figura e a escala na imagem: sobrepor os dois no mesmo
+   elemento faz a borda arredondada tremer durante a transição.
+
+   Nunca no mesmo bloco que [data-parallax]: disputariam o transform da
+   imagem. E nunca dentro de .hero-palco, que já anima o próprio clip.
+   ─────────────────────────────────────────────────────────────────── */
+.js .reveal-shot { clip-path: inset(0 0 100% 0); }
+.js .reveal-shot img,
+.js .reveal-shot video { transform: scale(1.07); }
+.reveal-shot.is-in {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 1.15s var(--ease);
+  transition-delay: calc(var(--i, 0) * .11s);
+}
+.reveal-shot.is-in img,
+.reveal-shot.is-in video {
+  transform: scale(1);
+  transition: transform 1.6s var(--ease);
+  transition-delay: calc(var(--i, 0) * .11s);
+}
+
+/* ── LISTA QUE SE MONTA LINHA A LINHA ─────────────────────────────────
+   Ficha técnica e lista de entregas apareciam inteiras de uma vez. Item
+   a item, o visitante tem tempo de ler e a lista deixa de ser um bloco
+   de texto para virar uma enumeração.
+
+   O escalonamento vem do nth-child e não de um --i no HTML: são listas
+   de seis a oito itens, e assim nenhuma marcação carrega índice.
+   ─────────────────────────────────────────────────────────────────── */
+.js .cascata > li { opacity: 0; transform: translateY(14px); }
+.cascata.is-in > li {
+  opacity: 1; transform: none;
+  transition: opacity .5s var(--ease), transform .5s var(--ease);
+}
+.cascata.is-in > li:nth-child(1) { transition-delay: .02s; }
+.cascata.is-in > li:nth-child(2) { transition-delay: .09s; }
+.cascata.is-in > li:nth-child(3) { transition-delay: .16s; }
+.cascata.is-in > li:nth-child(4) { transition-delay: .23s; }
+.cascata.is-in > li:nth-child(5) { transition-delay: .30s; }
+.cascata.is-in > li:nth-child(6) { transition-delay: .37s; }
+.cascata.is-in > li:nth-child(7) { transition-delay: .44s; }
+.cascata.is-in > li:nth-child(8) { transition-delay: .51s; }
+.cascata.is-in > li:nth-child(n+9) { transition-delay: .58s; }
+
+/* ── TÍTULO QUE SOBE POR TRÁS DE UMA MÁSCARA ──────────────────────────
+   O bloco inteiro subindo lê como "a página carregou". As linhas subindo
+   em cascata leem como alguém escrevendo — e numa página de casamento a
+   segunda leitura vale mais.
+
+   O JS quebra o título em linhas e embrulha cada uma; quando não
+   consegue, porque o título tem marcação interna, o elemento vira uma
+   máscara só e o gesto continua o mesmo, em bloco.
+
+   O respiro embaixo devolve o espaço dos descendentes: sem ele a máscara
+   corta o "ç" e o "p" da Cormorant.
+   ─────────────────────────────────────────────────────────────────── */
+.linhas__l {
+  display: block; overflow: hidden;
+  padding-bottom: .14em; margin-bottom: -.14em;
+}
+.linhas__l > span { display: block; }
+.js .linhas__l > span { transform: translateY(105%); }
+.linhas.is-in .linhas__l > span {
+  transform: translateY(0);
+  transition: transform 1s var(--ease-out);
+  transition-delay: calc(var(--l, 0) * .07s + var(--i, 0) * .11s);
+}
+
+/* ── BARRA DE PROGRESSO DE LEITURA ────────────────────────────────────
+   As internas de casa têm cinco seções e ficha técnica; a barra diz
+   quanto falta. É orientação, não enfeite, e por isso só aparece depois
+   que a nav gruda — antes disso a página inteira ainda está à vista.
+
+   A nav é fixed, então ancora a barra absoluta sem precisar de relative.
+   ─────────────────────────────────────────────────────────────────── */
+.nav__progresso {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: var(--ui-accent-on-dark);
+  transform: scaleX(var(--lido, 0));
+  transform-origin: left;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+  pointer-events: none;
+}
+.nav.is-stuck .nav__progresso { opacity: .9; }
 
 /* ══════════════════════════════════════════════════════════════════════
    MANCHETE
@@ -473,14 +995,34 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   }
 }
 
+/* Movimento reduzido não é movimento zero. O que sai é o deslocamento:
+   transform, clip-path, parallax e laços. O que fica é a mudança de
+   opacidade, cor e borda em 150ms, porque é ela que confirma um hover,
+   um foco ou um envio. Um corte global para 0,01ms apagava esse retorno
+   junto com o resto. */
 @media (prefers-reduced-motion: reduce) {
+  /* a pressão continua respondendo, mas por cor e borda, que o bloco
+     abaixo preserva; o que sai é o deslocamento */
+  :root { --press-borda: none; --press-caixa: none; }
+
   *, *::before, *::after {
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
+    transition-duration: .15s !important;
+    transition-property: opacity, color, background-color, border-color, outline-color !important;
   }
-  .rise { opacity: 1; transform: none; }
+  .js .rise { opacity: 1; transform: none; }
   /* sem recolhimento: o hero volta a ser um bloco comum */
   .hero-palco > .hero,
   .hero-palco > .page-hero { clip-path: none; }
+  /* a foto aparece inteira, sem ser descoberta nem escalar */
+  .js .reveal-shot { clip-path: none; }
+  .js .reveal-shot img, .js .reveal-shot video { transform: none; }
+  /* a lista aparece inteira, sem escalonar */
+  .js .cascata > li { opacity: 1; transform: none; }
+  /* o título já está no lugar, sem subir por trás da máscara */
+  .js .linhas__l > span { transform: none; }
+  /* a régua de leitura sai de cena: é movimento contínuo na borda do
+     campo de visão, exatamente o que incomoda quem pediu menos */
+  .nav__progresso { display: none; }
 }

@@ -2,12 +2,13 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Di Terrá Corporativo | Espaços para Convenções, Off-sites e Eventos de Empresa</title>
 <meta name="description" content="Convenções, off-sites, lançamentos e integrações no interior paulista. Quatro espaços com gastronomia, cenografia, som, luz e operação em um único contrato.">
 <link rel="canonical" href="https://www.diterra.com.br/corporativo/">
 <meta name="robots" content="index,follow">
 <link rel="icon" type="image/png" href="/assets/brand/favicon-corp.png">
+<meta name="theme-color" content="#1e325c">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Di Terrá Corporativo">
@@ -16,7 +17,11 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<!-- o poster do hero é o LCP da página: pede-se antes do CSS terminar -->
+<link rel="preload" as="image" type="image/avif" imagesizes="100vw"
+      imagesrcset="/assets/opt/hero-corporativo-noite-800.avif 800w, /assets/opt/hero-corporativo-noite-1400.avif 1400w, /assets/opt/hero-corporativo-noite-2400.avif 2400w">
 <link rel="stylesheet" href="/assets/css/tema-corp.css">
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/corporativo/corporativo.css">
@@ -74,12 +79,13 @@
 <div class="hero-palco" id="heroPalco">
 <header class="hero" id="topo">
   <div class="hero__media">
-    <img id="heroPoster" src="/assets/demo/hero/hero-corporativo-noite.webp"
+    <picture><source type="image/avif" srcset="/assets/opt/hero-corporativo-noite-800.avif 800w, /assets/opt/hero-corporativo-noite-1400.avif 1400w, /assets/opt/hero-corporativo-noite-2400.avif 2400w" sizes="100vw"><img id="heroPoster" src="/assets/opt/hero-corporativo-noite-1400.webp"
          width="2400" height="1340"
          alt="Auditório montado para convenção corporativa em espaço da Di Terrá"
-         fetchpriority="high" decoding="async">
+         fetchpriority="high" decoding="async" srcset="/assets/opt/hero-corporativo-noite-800.webp 800w, /assets/opt/hero-corporativo-noite-1400.webp 1400w, /assets/opt/hero-corporativo-noite-2400.webp 2400w" sizes="100vw"></picture>
+    <!-- sem poster: o atributo baixa a imagem mesmo com o vídeo oculto, e a
+         foto acima já cumpre esse papel -->
     <video id="heroVideo" muted loop playsinline preload="none"
-           poster="/assets/demo/hero/hero-corporativo-noite.webp"
            aria-hidden="true" hidden></video>
   </div>
 
@@ -107,46 +113,47 @@
      Ordem definida pelo cliente: a prova social vem logo depois do
      hero, antes de qualquer discurso.
      ══════════════════════════════════════════════════════════════ -->
-<section class="section section--paper" id="clientes">
+<section class="section section--paper section--tight" id="clientes">
   <div class="wrap">
-    <h2 class="h-section clientes__titulo letras">Marcas que escolheram a Di Terrá</h2>
+    <h2 class="h-section clientes__titulo linhas">Marcas que escolheram a Di Terrá</h2>
   </div>
-  <div class="faixa rise" style="--i:2" aria-label="Empresas que já realizaram eventos na Di Terrá">
+  <div class="faixa rise" style="--i:2" id="faixaLogos" aria-label="Empresas que já realizaram eventos na Di Terrá">
+    <button class="faixa__pausa" type="button" aria-pressed="false" aria-controls="faixaLogos">Pausar</button>
     <div class="faixa__pista">
-      <img src="/assets/demo/logos/alice.webp" alt="alice" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/b3.webp" alt="b3" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/btg.webp" alt="btg" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/cocacola.webp" alt="cocacola" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/dasa.webp" alt="dasa" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/exame.webp" alt="exame" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/foxbit.webp" alt="foxbit" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/genera.webp" alt="genera" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/getninjas.webp" alt="getninjas" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/heineken.webp" alt="heineken" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/itau.webp" alt="itau" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/livup.webp" alt="livup" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/olist.webp" alt="olist" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/quintoandar.webp" alt="quintoandar" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/smiles.webp" alt="smiles" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/sodexo.webp" alt="sodexo" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/swift.webp" alt="swift" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/alice.webp" alt="alice" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/b3.webp" alt="b3" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/btg.webp" alt="btg" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/cocacola.webp" alt="cocacola" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/dasa.webp" alt="dasa" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/exame.webp" alt="exame" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/foxbit.webp" alt="foxbit" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/genera.webp" alt="genera" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/getninjas.webp" alt="getninjas" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/heineken.webp" alt="heineken" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/itau.webp" alt="itau" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/livup.webp" alt="livup" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/olist.webp" alt="olist" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/quintoandar.webp" alt="quintoandar" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/smiles.webp" alt="smiles" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/sodexo.webp" alt="sodexo" loading="lazy" width="300" height="120">
-      <img src="/assets/demo/logos/swift.webp" alt="swift" loading="lazy" width="300" height="120">
+      <img src="/assets/demo/logos/alice.webp" alt="Alice" loading="lazy" width="289" height="160">
+      <img src="/assets/demo/logos/b3.webp" alt="B3" loading="lazy" width="357" height="160">
+      <img src="/assets/demo/logos/btg.webp" alt="BTG Pactual" loading="lazy" width="402" height="160">
+      <img src="/assets/demo/logos/cocacola.webp" alt="Coca-Cola" loading="lazy" width="510" height="160">
+      <img src="/assets/demo/logos/dasa.webp" alt="Dasa" loading="lazy" width="463" height="160">
+      <img src="/assets/demo/logos/exame.webp" alt="Exame" loading="lazy" width="980" height="160">
+      <img src="/assets/demo/logos/foxbit.webp" alt="Foxbit" loading="lazy" width="413" height="160">
+      <img src="/assets/demo/logos/genera.webp" alt="Genera" loading="lazy" width="468" height="160">
+      <img src="/assets/demo/logos/getninjas.webp" alt="GetNinjas" loading="lazy" width="777" height="160">
+      <img src="/assets/demo/logos/heineken.webp" alt="Heineken" loading="lazy" width="302" height="160">
+      <img src="/assets/demo/logos/itau.webp" alt="Itaú" loading="lazy" width="160" height="160">
+      <img src="/assets/demo/logos/livup.webp" alt="Liv Up" loading="lazy" width="140" height="160">
+      <img src="/assets/demo/logos/olist.webp" alt="Olist" loading="lazy" width="392" height="160">
+      <img src="/assets/demo/logos/quintoandar.webp" alt="QuintoAndar" loading="lazy" width="560" height="160">
+      <img src="/assets/demo/logos/smiles.webp" alt="Smiles" loading="lazy" width="384" height="160">
+      <img src="/assets/demo/logos/sodexo.webp" alt="Sodexo" loading="lazy" width="495" height="160">
+      <img src="/assets/demo/logos/swift.webp" alt="Swift" loading="lazy" width="266" height="160">
+      <img src="/assets/demo/logos/alice.webp" alt="" aria-hidden="true" loading="lazy" width="289" height="160">
+      <img src="/assets/demo/logos/b3.webp" alt="" aria-hidden="true" loading="lazy" width="357" height="160">
+      <img src="/assets/demo/logos/btg.webp" alt="" aria-hidden="true" loading="lazy" width="402" height="160">
+      <img src="/assets/demo/logos/cocacola.webp" alt="" aria-hidden="true" loading="lazy" width="510" height="160">
+      <img src="/assets/demo/logos/dasa.webp" alt="" aria-hidden="true" loading="lazy" width="463" height="160">
+      <img src="/assets/demo/logos/exame.webp" alt="" aria-hidden="true" loading="lazy" width="980" height="160">
+      <img src="/assets/demo/logos/foxbit.webp" alt="" aria-hidden="true" loading="lazy" width="413" height="160">
+      <img src="/assets/demo/logos/genera.webp" alt="" aria-hidden="true" loading="lazy" width="468" height="160">
+      <img src="/assets/demo/logos/getninjas.webp" alt="" aria-hidden="true" loading="lazy" width="777" height="160">
+      <img src="/assets/demo/logos/heineken.webp" alt="" aria-hidden="true" loading="lazy" width="302" height="160">
+      <img src="/assets/demo/logos/itau.webp" alt="" aria-hidden="true" loading="lazy" width="160" height="160">
+      <img src="/assets/demo/logos/livup.webp" alt="" aria-hidden="true" loading="lazy" width="140" height="160">
+      <img src="/assets/demo/logos/olist.webp" alt="" aria-hidden="true" loading="lazy" width="392" height="160">
+      <img src="/assets/demo/logos/quintoandar.webp" alt="" aria-hidden="true" loading="lazy" width="560" height="160">
+      <img src="/assets/demo/logos/smiles.webp" alt="" aria-hidden="true" loading="lazy" width="384" height="160">
+      <img src="/assets/demo/logos/sodexo.webp" alt="" aria-hidden="true" loading="lazy" width="495" height="160">
+      <img src="/assets/demo/logos/swift.webp" alt="" aria-hidden="true" loading="lazy" width="266" height="160">
     </div>
   </div>
 </section>
@@ -160,8 +167,8 @@
   <div class="wrap manifesto">
     <div class="manifesto__aside">
       <figure class="manifesto__media reveal-shot" style="--i:0">
-        <img src="/assets/demo/apoio/offsite-corporativo.webp" width="2400" height="1340"
-             alt="Mesa de reunião montada sob a árvore, com a sede ao fundo" loading="lazy">
+        <picture><source type="image/avif" srcset="/assets/opt/offsite-corporativo-800.avif 800w, /assets/opt/offsite-corporativo-1400.avif 1400w, /assets/opt/offsite-corporativo-2400.avif 2400w" sizes="100vw"><img src="/assets/opt/offsite-corporativo-1400.webp" width="2400" height="1340"
+             alt="Mesa de reunião montada sob a árvore, com a sede ao fundo" loading="lazy" decoding="async" srcset="/assets/opt/offsite-corporativo-800.webp 800w, /assets/opt/offsite-corporativo-1400.webp 1400w, /assets/opt/offsite-corporativo-2400.webp 2400w" sizes="100vw"></picture>
       </figure>
     </div>
     <div class="manifesto__body">
@@ -190,8 +197,8 @@
   <div class="wrap">
     <div class="pilha">
       <article class="fmt pilha__item" style="--i:0"><div class="fmt__cartao recua">
-        <img src="/assets/demo/formatos/convencoes-congressos.webp" width="2400" height="1792"
-             alt="Plenária de convenção montada em auditório na Di Terrá" loading="lazy">
+        <picture><source type="image/avif" srcset="/assets/opt/convencoes-congressos-800.avif 800w, /assets/opt/convencoes-congressos-1400.avif 1400w, /assets/opt/convencoes-congressos-2400.avif 2400w" sizes="100vw"><img src="/assets/opt/convencoes-congressos-1400.webp" width="2400" height="1792"
+             alt="Plenária de convenção montada em auditório na Di Terrá" loading="lazy" decoding="async" srcset="/assets/opt/convencoes-congressos-800.webp 800w, /assets/opt/convencoes-congressos-1400.webp 1400w, /assets/opt/convencoes-congressos-2400.webp 2400w" sizes="100vw"></picture>
         <div class="fmt__text">
           <h3 class="h-card">Convenções e congressos</h3>
           <p>Plenária em auditório, salas de apoio, credenciamento e coffee simultâneo para grupos grandes.</p>
@@ -200,8 +207,8 @@
       </article>
 
       <article class="fmt pilha__item" style="--i:1"><div class="fmt__cartao recua">
-        <img src="/assets/demo/formatos/offsites-retreats.webp" width="2400" height="1792"
-             alt="Reunião de liderança em terraço ao ar livre" loading="lazy">
+        <picture><source type="image/avif" srcset="/assets/opt/offsites-retreats-800.avif 800w, /assets/opt/offsites-retreats-1400.avif 1400w, /assets/opt/offsites-retreats-2400.avif 2400w" sizes="100vw"><img src="/assets/opt/offsites-retreats-1400.webp" width="2400" height="1792"
+             alt="Reunião de liderança em terraço ao ar livre" loading="lazy" decoding="async" srcset="/assets/opt/offsites-retreats-800.webp 800w, /assets/opt/offsites-retreats-1400.webp 1400w, /assets/opt/offsites-retreats-2400.webp 2400w" sizes="100vw"></picture>
         <div class="fmt__text">
           <h3 class="h-card">Off-sites e retreats</h3>
           <p>Alinhamentos estratégicos de liderança longe do escritório, com ritmo, silêncio e natureza a favor.</p>
@@ -210,8 +217,8 @@
       </article>
 
       <article class="fmt pilha__item" style="--i:2"><div class="fmt__cartao recua">
-        <img src="/assets/demo/formatos/lancamentos-produto.webp" width="2400" height="1792"
-             alt="Palco de lançamento de produto com projeção de grande formato" loading="lazy">
+        <picture><source type="image/avif" srcset="/assets/opt/lancamentos-produto-800.avif 800w, /assets/opt/lancamentos-produto-1400.avif 1400w, /assets/opt/lancamentos-produto-2400.avif 2400w" sizes="100vw"><img src="/assets/opt/lancamentos-produto-1400.webp" width="2400" height="1792"
+             alt="Palco de lançamento de produto com projeção de grande formato" loading="lazy" decoding="async" srcset="/assets/opt/lancamentos-produto-800.webp 800w, /assets/opt/lancamentos-produto-1400.webp 1400w, /assets/opt/lancamentos-produto-2400.webp 2400w" sizes="100vw"></picture>
         <div class="fmt__text">
           <h3 class="h-card">Lançamentos de produto</h3>
           <p>Cenografia, projeção e som desenhados para o momento em que a marca aparece.</p>
@@ -220,8 +227,8 @@
       </article>
 
       <article class="fmt pilha__item" style="--i:3"><div class="fmt__cartao recua">
-        <img src="/assets/demo/formatos/integracoes-equipe.webp" width="2400" height="1792"
-             alt="Confraternização de equipe no gramado ao entardecer" loading="lazy">
+        <picture><source type="image/avif" srcset="/assets/opt/integracoes-equipe-800.avif 800w, /assets/opt/integracoes-equipe-1400.avif 1400w, /assets/opt/integracoes-equipe-2400.avif 2400w" sizes="100vw"><img src="/assets/opt/integracoes-equipe-1400.webp" width="2400" height="1792"
+             alt="Confraternização de equipe no gramado ao entardecer" loading="lazy" decoding="async" srcset="/assets/opt/integracoes-equipe-800.webp 800w, /assets/opt/integracoes-equipe-1400.webp 1400w, /assets/opt/integracoes-equipe-2400.webp 2400w" sizes="100vw"></picture>
         <div class="fmt__text">
           <h3 class="h-card">Integrações de equipe</h3>
           <p>Encontros que aproximam times distribuídos e transformam cultura em experiência compartilhada.</p>
@@ -230,8 +237,8 @@
       </article>
 
       <article class="fmt pilha__item" style="--i:4"><div class="fmt__cartao recua">
-        <img src="/assets/demo/formatos/celebracoes-corporativas.webp" width="2400" height="1792"
-             alt="Jantar de gala corporativo sob pavilhão iluminado" loading="lazy">
+        <picture><source type="image/avif" srcset="/assets/opt/celebracoes-corporativas-800.avif 800w, /assets/opt/celebracoes-corporativas-1400.avif 1400w, /assets/opt/celebracoes-corporativas-2400.avif 2400w" sizes="100vw"><img src="/assets/opt/celebracoes-corporativas-1400.webp" width="2400" height="1792"
+             alt="Jantar de gala corporativo sob pavilhão iluminado" loading="lazy" decoding="async" srcset="/assets/opt/celebracoes-corporativas-800.webp 800w, /assets/opt/celebracoes-corporativas-1400.webp 1400w, /assets/opt/celebracoes-corporativas-2400.webp 2400w" sizes="100vw"></picture>
         <div class="fmt__text">
           <h3 class="h-card">Celebrações corporativas</h3>
           <p>Premiações, festas de fim de ano e comemorações de conquistas do time.</p>
@@ -240,8 +247,8 @@
       </article>
 
       <article class="fmt pilha__item" style="--i:5"><div class="fmt__cartao recua">
-        <img src="/assets/demo/formatos/alinhamentos-comerciais.webp" width="2400" height="1792"
-             alt="Sala de breakout montada em U para kickoff comercial" loading="lazy">
+        <picture><source type="image/avif" srcset="/assets/opt/alinhamentos-comerciais-800.avif 800w, /assets/opt/alinhamentos-comerciais-1400.avif 1400w, /assets/opt/alinhamentos-comerciais-2400.avif 2400w" sizes="100vw"><img src="/assets/opt/alinhamentos-comerciais-1400.webp" width="2400" height="1792"
+             alt="Sala de breakout montada em U para kickoff comercial" loading="lazy" decoding="async" srcset="/assets/opt/alinhamentos-comerciais-800.webp 800w, /assets/opt/alinhamentos-comerciais-1400.webp 1400w, /assets/opt/alinhamentos-comerciais-2400.webp 2400w" sizes="100vw"></picture>
         <div class="fmt__text">
           <h3 class="h-card">Alinhamentos comerciais</h3>
           <p>Kickoffs de vendas e convenções de força comercial com estrutura de palco e breakout.</p>
@@ -269,8 +276,8 @@
      ══════════════════════════════════════════════════════════════ -->
 <section class="section section--photo section--respiro">
   <div class="photo-bg" data-parallax data-parallax-fator="0.18">
-    <img src="/assets/demo/apoio/numeros-fundo.webp" width="2400" height="1018"
-         alt="Vista aérea da sede da Di Terrá e do entorno no fim da tarde" loading="lazy">
+    <picture><source type="image/avif" srcset="/assets/opt/numeros-fundo-800.avif 800w, /assets/opt/numeros-fundo-1400.avif 1400w, /assets/opt/numeros-fundo-2400.avif 2400w" sizes="100vw"><img src="/assets/opt/numeros-fundo-1400.webp" width="2400" height="1018"
+         alt="Vista aérea da sede da Di Terrá e do entorno no fim da tarde" loading="lazy" decoding="async" srcset="/assets/opt/numeros-fundo-800.webp 800w, /assets/opt/numeros-fundo-1400.webp 1400w, /assets/opt/numeros-fundo-2400.webp 2400w" sizes="100vw"></picture>
   </div>
   <div class="wrap respiro on-dark">
     <h2 class="h-section linhas" style="--i:1">Você contrata um lugar e recebe uma operação inteira</h2>
@@ -309,7 +316,7 @@
 
       <div class="reel__track" id="reelTrack" tabindex="0" aria-label="Recursos inclusos, use as setas do teclado">
         <article class="reel__item">
-          <figure><img src="/assets/demo/solucoes/gastronomia.webp" width="2400" height="1792" alt="Prato autoral servido em jantar da Di Terrá" loading="lazy"></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/opt/gastronomia-800.avif 800w, /assets/opt/gastronomia-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/gastronomia-1400.webp" width="2400" height="1792" alt="Prato autoral servido em jantar da Di Terrá" loading="lazy" decoding="async" srcset="/assets/opt/gastronomia-800.webp 800w, /assets/opt/gastronomia-1400.webp 1400w" sizes="100vw"></picture></figure>
           <div class="reel__texto">
             <span class="reel__n">01</span>
             <h3>Gastronomia</h3>
@@ -317,7 +324,7 @@
           </div>
         </article>
         <article class="reel__item">
-          <figure><img src="/assets/demo/solucoes/decoracao.webp" width="2400" height="1792" alt="Arranjo floral e ambientação de mesa" loading="lazy"></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/opt/decoracao-800.avif 800w, /assets/opt/decoracao-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/decoracao-1400.webp" width="2400" height="1792" alt="Arranjo floral e ambientação de mesa" loading="lazy" decoding="async" srcset="/assets/opt/decoracao-800.webp 800w, /assets/opt/decoracao-1400.webp 1400w" sizes="100vw"></picture></figure>
           <div class="reel__texto">
             <span class="reel__n">02</span>
             <h3>Decoração</h3>
@@ -325,7 +332,7 @@
           </div>
         </article>
         <article class="reel__item">
-          <figure><img src="/assets/demo/solucoes/coquetelaria.webp" width="2400" height="1792" alt="Drinks autorais no bar da casa" loading="lazy"></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/opt/coquetelaria-800.avif 800w, /assets/opt/coquetelaria-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/coquetelaria-1400.webp" width="2400" height="1792" alt="Drinks autorais no bar da casa" loading="lazy" decoding="async" srcset="/assets/opt/coquetelaria-800.webp 800w, /assets/opt/coquetelaria-1400.webp 1400w" sizes="100vw"></picture></figure>
           <div class="reel__texto">
             <span class="reel__n">03</span>
             <h3>Coquetelaria</h3>
@@ -333,7 +340,7 @@
           </div>
         </article>
         <article class="reel__item">
-          <figure><img src="/assets/demo/solucoes/producao.webp" width="2400" height="1792" alt="Equipe de produção montando a estrutura do evento" loading="lazy"></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/opt/producao-800.avif 800w, /assets/opt/producao-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/producao-1400.webp" width="2400" height="1792" alt="Equipe de produção montando a estrutura do evento" loading="lazy" decoding="async" srcset="/assets/opt/producao-800.webp 800w, /assets/opt/producao-1400.webp 1400w" sizes="100vw"></picture></figure>
           <div class="reel__texto">
             <span class="reel__n">04</span>
             <h3>Produção</h3>
@@ -341,7 +348,7 @@
           </div>
         </article>
         <article class="reel__item">
-          <figure><img src="/assets/demo/solucoes/tecnologia-audiovisual.webp" width="2400" height="1792" alt="Mesa de luz e vídeo em operação durante o evento" loading="lazy"></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/opt/tecnologia-audiovisual-800.avif 800w, /assets/opt/tecnologia-audiovisual-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/tecnologia-audiovisual-1400.webp" width="2400" height="1792" alt="Mesa de luz e vídeo em operação durante o evento" loading="lazy" decoding="async" srcset="/assets/opt/tecnologia-audiovisual-800.webp 800w, /assets/opt/tecnologia-audiovisual-1400.webp 1400w" sizes="100vw"></picture></figure>
           <div class="reel__texto">
             <span class="reel__n">05</span>
             <h3>Tecnologia audiovisual</h3>
@@ -379,25 +386,25 @@
       <!-- palco: as quatro fotos empilhadas, uma visível por vez -->
       <div class="switch__stage">
         <figure class="switch__shot is-on" data-shot="a-querencia">
-          <img src="/assets/demo/espacos/a-querencia-amplitude.webp" width="2400" height="1610"
-               alt="Vista do pavilhão coberto da Querência aberto para o jardim" loading="lazy">
+          <picture><source type="image/avif" srcset="/assets/opt/a-querencia-amplitude-800.avif 800w, /assets/opt/a-querencia-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/a-querencia-amplitude-1400.webp" width="2400" height="1610"
+               alt="Vista do pavilhão coberto da Querência aberto para o jardim" loading="lazy" decoding="async" srcset="/assets/opt/a-querencia-amplitude-800.webp 800w, /assets/opt/a-querencia-amplitude-1400.webp 1400w" sizes="100vw"></picture>
         </figure>
         <figure class="switch__shot" data-shot="palacete-monte-alegre">
-          <img src="/assets/demo/espacos/palacete-monte-alegre-amplitude.webp" width="2400" height="1610"
-               alt="Salão principal do Palacete Monte Alegre montado para jantar" loading="lazy">
+          <picture><source type="image/avif" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.avif 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/palacete-monte-alegre-amplitude-1400.webp" width="2400" height="1610"
+               alt="Salão principal do Palacete Monte Alegre montado para jantar" loading="lazy" decoding="async" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.webp 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.webp 1400w" sizes="100vw"></picture>
         </figure>
         <figure class="switch__shot" data-shot="casa-lucca">
-          <img src="/assets/demo/espacos/casa-lucca-amplitude.webp" width="2400" height="1610"
-               alt="Casa Lucca vista do jardim, com varanda ao longo da fachada" loading="lazy">
+          <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-amplitude-800.avif 800w, /assets/opt/casa-lucca-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/casa-lucca-amplitude-1400.webp" width="2400" height="1610"
+               alt="Casa Lucca vista do jardim, com varanda ao longo da fachada" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-amplitude-800.webp 800w, /assets/opt/casa-lucca-amplitude-1400.webp 1400w" sizes="100vw"></picture>
         </figure>
         <figure class="switch__shot" data-shot="espaco-terra">
-          <img src="/assets/demo/espacos/espaco-terra-amplitude.webp" width="2400" height="1610"
-               alt="Espaço Terrá montado em plenária, com palco e painel de LED" loading="lazy">
+          <picture><source type="image/avif" srcset="/assets/opt/espaco-terra-amplitude-800.avif 800w, /assets/opt/espaco-terra-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/espaco-terra-amplitude-1400.webp" width="2400" height="1610"
+               alt="Espaço Terrá montado em plenária, com palco e painel de LED" loading="lazy" decoding="async" srcset="/assets/opt/espaco-terra-amplitude-800.webp 800w, /assets/opt/espaco-terra-amplitude-1400.webp 1400w" sizes="100vw"></picture>
         </figure>
       </div>
 
       <!-- lista -->
-      <div class="switch__list" role="tablist" aria-label="Escolha um espaço">
+      <div class="switch__list" role="tablist" aria-orientation="vertical" aria-label="Escolha um espaço">
 
         <article class="vcard is-on" data-venue="a-querencia">
           <button class="vcard__head" role="tab" aria-selected="true" aria-controls="p-a-querencia" id="t-a-querencia">
@@ -408,8 +415,8 @@
           <div class="vcard__panel" id="p-a-querencia" role="tabpanel" aria-labelledby="t-a-querencia">
             <div class="vcard__inner">
               <figure class="vcard__shot-m">
-                <img src="/assets/demo/espacos/a-querencia-amplitude.webp" width="2400" height="1610"
-                     alt="Vista do pavilhão coberto da Querência aberto para o jardim" loading="lazy">
+                <picture><source type="image/avif" srcset="/assets/opt/a-querencia-amplitude-800.avif 800w, /assets/opt/a-querencia-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/a-querencia-amplitude-1400.webp" width="2400" height="1610"
+                     alt="Vista do pavilhão coberto da Querência aberto para o jardim" loading="lazy" decoding="async" srcset="/assets/opt/a-querencia-amplitude-800.webp 800w, /assets/opt/a-querencia-amplitude-1400.webp 1400w" sizes="100vw"></picture>
               </figure>
               <p>Área ampla com salão coberto e jardim, indicada para convenções com plenária e áreas de convivência ao ar livre.</p>
               <ul class="spec">
@@ -420,7 +427,7 @@
                 <li><span class="k">Estacionamento</span><span class="v tbd">a confirmar</span></li>
               </ul>
               <div class="vcard__acts">
-                <a class="link-arrow" href="/social/espacos/a-querencia.html">Ver a casa por inteiro
+                <a class="link-arrow" href="/social/espacos/a-querencia">Ver a casa por inteiro
                   <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
                 </a>
                 <a class="link-arrow link-arrow--alt" href="#proposta">Solicitar proposta para esta casa</a>
@@ -438,8 +445,8 @@
           <div class="vcard__panel" id="p-palacete" role="tabpanel" aria-labelledby="t-palacete">
             <div class="vcard__inner">
               <figure class="vcard__shot-m">
-                <img src="/assets/demo/espacos/palacete-monte-alegre-amplitude.webp" width="2400" height="1610"
-                     alt="Salão principal do Palacete Monte Alegre montado para jantar" loading="lazy">
+                <picture><source type="image/avif" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.avif 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/palacete-monte-alegre-amplitude-1400.webp" width="2400" height="1610"
+                     alt="Salão principal do Palacete Monte Alegre montado para jantar" loading="lazy" decoding="async" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.webp 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.webp 1400w" sizes="100vw"></picture>
               </figure>
               <p>Arquitetura histórica para eventos de posicionamento e recepções institucionais de alto padrão.</p>
               <ul class="spec">
@@ -450,7 +457,7 @@
                 <li><span class="k">Estacionamento</span><span class="v tbd">a confirmar</span></li>
               </ul>
               <div class="vcard__acts">
-                <a class="link-arrow" href="/social/espacos/palacete-monte-alegre.html">Ver a casa por inteiro
+                <a class="link-arrow" href="/social/espacos/palacete-monte-alegre">Ver a casa por inteiro
                   <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
                 </a>
                 <a class="link-arrow link-arrow--alt" href="#proposta">Solicitar proposta para esta casa</a>
@@ -468,8 +475,8 @@
           <div class="vcard__panel" id="p-lucca" role="tabpanel" aria-labelledby="t-lucca">
             <div class="vcard__inner">
               <figure class="vcard__shot-m">
-                <img src="/assets/demo/espacos/casa-lucca-amplitude.webp" width="2400" height="1610"
-                     alt="Casa Lucca vista do jardim, com varanda ao longo da fachada" loading="lazy">
+                <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-amplitude-800.avif 800w, /assets/opt/casa-lucca-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/casa-lucca-amplitude-1400.webp" width="2400" height="1610"
+                     alt="Casa Lucca vista do jardim, com varanda ao longo da fachada" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-amplitude-800.webp 800w, /assets/opt/casa-lucca-amplitude-1400.webp 1400w" sizes="100vw"></picture>
               </figure>
               <p>Escala menor e ambiente reservado. Formato natural para off-sites de liderança, comitês e reuniões de conselho.</p>
               <ul class="spec">
@@ -480,7 +487,7 @@
                 <li><span class="k">Estacionamento</span><span class="v tbd">a confirmar</span></li>
               </ul>
               <div class="vcard__acts">
-                <a class="link-arrow" href="/social/espacos/casa-lucca.html">Ver a casa por inteiro
+                <a class="link-arrow" href="/social/espacos/casa-lucca">Ver a casa por inteiro
                   <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
                 </a>
                 <a class="link-arrow link-arrow--alt" href="#proposta">Solicitar proposta para esta casa</a>
@@ -498,8 +505,8 @@
           <div class="vcard__panel" id="p-terra" role="tabpanel" aria-labelledby="t-terra">
             <div class="vcard__inner">
               <figure class="vcard__shot-m">
-                <img src="/assets/demo/espacos/espaco-terra-amplitude.webp" width="2400" height="1610"
-                     alt="Espaço Terrá montado em plenária, com palco e painel de LED" loading="lazy">
+                <picture><source type="image/avif" srcset="/assets/opt/espaco-terra-amplitude-800.avif 800w, /assets/opt/espaco-terra-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/espaco-terra-amplitude-1400.webp" width="2400" height="1610"
+                     alt="Espaço Terrá montado em plenária, com palco e painel de LED" loading="lazy" decoding="async" srcset="/assets/opt/espaco-terra-amplitude-800.webp 800w, /assets/opt/espaco-terra-amplitude-1400.webp 1400w" sizes="100vw"></picture>
               </figure>
               <p>Estrutura versátil para lançamentos e convenções com montagem cenográfica e projeção de grande formato.</p>
               <ul class="spec">
@@ -510,7 +517,7 @@
                 <li><span class="k">Estacionamento</span><span class="v tbd">a confirmar</span></li>
               </ul>
               <div class="vcard__acts">
-                <a class="link-arrow" href="/social/espacos/espaco-terra.html">Ver a casa por inteiro
+                <a class="link-arrow" href="/social/espacos/espaco-terra">Ver a casa por inteiro
                   <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
                 </a>
                 <a class="link-arrow link-arrow--alt" href="#proposta">Solicitar proposta para esta casa</a>
@@ -544,8 +551,8 @@
       </ul>
     </div>
     <div class="territory__media reveal-shot" style="--i:1">
-      <img src="/assets/demo/territorio/estrada-interior.webp" width="2400" height="1610"
-           alt="Estrada arborizada no interior paulista, a caminho da Di Terrá" loading="lazy">
+      <picture><source type="image/avif" srcset="/assets/opt/estrada-interior-800.avif 800w, /assets/opt/estrada-interior-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/estrada-interior-1400.webp" width="2400" height="1610"
+           alt="Estrada arborizada no interior paulista, a caminho da Di Terrá" loading="lazy" decoding="async" srcset="/assets/opt/estrada-interior-800.webp 800w, /assets/opt/estrada-interior-1400.webp 1400w" sizes="100vw"></picture>
     </div>
   </div>
 
@@ -568,22 +575,22 @@
 
   <div class="rail rise" style="--i:1" id="stayRail" tabindex="0" aria-label="Carrossel de hospedagem, use as setas do teclado">
     <article class="stay">
-      <figure><img src="/assets/demo/territorio/pousada.webp" width="2400" height="1610" alt="Pousada de fazenda restaurada na região de Piracicaba" loading="lazy"></figure>
+      <figure><picture><source type="image/avif" srcset="/assets/opt/pousada-800.avif 800w, /assets/opt/pousada-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/pousada-1400.webp" width="2400" height="1610" alt="Pousada de fazenda restaurada na região de Piracicaba" loading="lazy" decoding="async" srcset="/assets/opt/pousada-800.webp 800w, /assets/opt/pousada-1400.webp 1400w" sizes="100vw"></picture></figure>
       <h4>Pousadas de fazenda</h4>
       <p class="tbd">a confirmar &middot; parceiros e distância</p>
     </article>
     <article class="stay">
-      <figure><img src="/assets/demo/territorio/hotel-fazenda.webp" width="2400" height="1610" alt="Hotel fazenda com piscina e arcadas no interior paulista" loading="lazy"></figure>
+      <figure><picture><source type="image/avif" srcset="/assets/opt/hotel-fazenda-800.avif 800w, /assets/opt/hotel-fazenda-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/hotel-fazenda-1400.webp" width="2400" height="1610" alt="Hotel fazenda com piscina e arcadas no interior paulista" loading="lazy" decoding="async" srcset="/assets/opt/hotel-fazenda-800.webp 800w, /assets/opt/hotel-fazenda-1400.webp 1400w" sizes="100vw"></picture></figure>
       <h4>Hotéis fazenda</h4>
       <p class="tbd">a confirmar &middot; parceiros e distância</p>
     </article>
     <article class="stay">
-      <figure><img src="/assets/demo/territorio/suite.webp" width="2400" height="1610" alt="Suíte de hotel com vista para o jardim" loading="lazy"></figure>
+      <figure><picture><source type="image/avif" srcset="/assets/opt/suite-800.avif 800w, /assets/opt/suite-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/suite-1400.webp" width="2400" height="1610" alt="Suíte de hotel com vista para o jardim" loading="lazy" decoding="async" srcset="/assets/opt/suite-800.webp 800w, /assets/opt/suite-1400.webp 1400w" sizes="100vw"></picture></figure>
       <h4>Suítes e apartamentos</h4>
       <p class="tbd">a confirmar &middot; parceiros e distância</p>
     </article>
     <article class="stay">
-      <figure><img src="/assets/demo/territorio/estrada-interior.webp" width="2400" height="1610" alt="Acesso rodoviário à região" loading="lazy"></figure>
+      <figure><picture><source type="image/avif" srcset="/assets/opt/estrada-interior-800.avif 800w, /assets/opt/estrada-interior-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/estrada-interior-1400.webp" width="2400" height="1610" alt="Acesso rodoviário à região" loading="lazy" decoding="async" srcset="/assets/opt/estrada-interior-800.webp 800w, /assets/opt/estrada-interior-1400.webp 1400w" sizes="100vw"></picture></figure>
       <h4>Acesso e transfer</h4>
       <p class="tbd">a confirmar &middot; rota e tempo de viagem</p>
     </article>
@@ -600,7 +607,7 @@
      Substituir por depoimento real com autorização de uso de imagem
      antes de qualquer publicação.
      ══════════════════════════════════════════════════════════════ -->
-<section class="section" id="depoimentos">
+<section class="section section--tight" id="depoimentos">
   <div class="wrap">
     <div class="section__head section__head--centro">
       <h2 class="h-section rise" style="--i:1">O que dizem quem já realizou</h2>
@@ -662,7 +669,7 @@
     <div class="proposal">
       <!-- coluna de contato -->
       <aside class="contact on-dark rise" style="--i:0">
-        <a class="contact__card" href="tel:+551996777288">
+        <a class="contact__card" href="tel:+5519996777288">
           <span class="contact__ico" aria-hidden="true">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M6 1.5 7.6 5 6 6.6c.9 1.9 2.5 3.5 4.4 4.4L12 9.4l3.5 1.6v3.5c0 .8-.7 1.5-1.5 1.5A12.5 12.5 0 0 1 1.5 3.5C1.5 2.7 2.2 2 3 2h3Z" stroke="currentColor" stroke-width="1.2"/></svg>
           </span>
@@ -719,7 +726,7 @@
       </aside>
 
       <!-- formulário -->
-      <form class="on-dark rise" style="--i:1" action="#" method="post" novalidate>
+      <form class="on-dark rise" style="--i:1" method="post" data-destino="corporativo@diterra.com.br" data-assunto="Solicitação de proposta corporativa">
         <div class="form-grid">
           <div class="field">
             <label for="nome">Nome</label>
@@ -784,9 +791,10 @@
               Enviar solicitação
               <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
             </button>
+            <p class="form-status" aria-live="polite" tabindex="-1" hidden></p>
             <p class="form-note">
-              Formulário de demonstração: o envio ainda não está conectado a um destino.
-              O lead corporativo deve ser roteado para o comercial B2B, separado do social.
+              Enquanto o envio direto não está conectado, o botão abre o seu e-mail com a
+              solicitação pronta para o comercial.
             </p>
           </div>
         </div>
@@ -796,6 +804,9 @@
 </section>
 
 </main>
+
+<script src="/assets/switch.js" defer></script>
+<script src="/assets/formulario.js" defer></script>
 
 <!-- ══════════════════════════════════════════════════════════════
      RODAPÉ
@@ -824,10 +835,10 @@
       <div>
         <h2>As quatro casas</h2>
         <ul>
-          <li><a href="/social/espacos/a-querencia.html">A Querência</a></li>
-          <li><a href="/social/espacos/palacete-monte-alegre.html">Palacete Monte Alegre</a></li>
-          <li><a href="/social/espacos/casa-lucca.html">Casa Lucca</a></li>
-          <li><a href="/social/espacos/espaco-terra.html">Espaço Terrá</a></li>
+          <li><a href="/social/espacos/a-querencia">A Querência</a></li>
+          <li><a href="/social/espacos/palacete-monte-alegre">Palacete Monte Alegre</a></li>
+          <li><a href="/social/espacos/casa-lucca">Casa Lucca</a></li>
+          <li><a href="/social/espacos/espaco-terra">Espaço Terrá</a></li>
           <li><a href="/social">Eventos sociais</a></li>
           <li><a href="/">Página de entrada</a></li>
         </ul>
@@ -850,6 +861,13 @@
   <span>Falar com o comercial</span>
 </a>
 
+<!-- barra de ação do celular (base.css): a proposta e o WhatsApp no polegar -->
+<div class="barra-acao on-dark" id="barraAcao">
+  <a class="btn btn--primary on-dark" href="#proposta">Solicitar proposta</a>
+  <a class="barra-acao__wa" href="https://wa.me/5519996777288" target="_blank" rel="noopener" aria-label="Falar com o comercial pelo WhatsApp">
+    <svg width="22" height="22" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 1.6a7.4 7.4 0 0 0-6.3 11.3L1.6 16.4l3.6-1a7.4 7.4 0 1 0 3.8-13.8Z" stroke="currentColor" stroke-width="1.2"/><path d="M6.4 6c.3-.6.6-.6.9-.6h.5l.8 1.8-.7.8c.5 1 1.1 1.6 2.1 2.1l.8-.7 1.8.8v.5c0 .3 0 .6-.6.9-.9.4-2.3 0-3.6-1.2S6 7 6.4 6Z" fill="currentColor"/></svg>
+  </a>
+</div>
 <a class="to-top" id="toTop" href="#topo" aria-label="Voltar ao topo da página">
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
     <path d="M8 13V3M3.5 7.5L8 3l4.5 4.5" stroke="currentColor" stroke-width="1.3"/>
@@ -869,7 +887,11 @@
   var video = document.getElementById('heroVideo');
   var poster = document.getElementById('heroPoster');
   if (video && !reduz && window.matchMedia('(min-width: 768px)').matches) {
-    video.src = '/assets/demo/hero/hero-corporativo-noite.mp4';
+    /* H.264 em vez do HEVC original: o HEVC não toca no Chrome do Windows
+       e do Android nem no Firefox. 1280 px até o tablet, 1920 px acima. */
+    video.src = window.matchMedia('(min-width: 1440px)').matches
+      ? '/assets/opt/video/hero-corporativo-noite-1920.mp4'
+      : '/assets/opt/video/hero-corporativo-noite-1280.mp4';
     video.hidden = false;
     video.addEventListener('playing', function () {
       poster.style.transition = 'opacity .8s cubic-bezier(.16,1,.3,1)';
@@ -879,8 +901,12 @@
     if (tocar && tocar.catch) { tocar.catch(function () { video.hidden = true; }); }
   }
 
-  /* ── entrada do hero em cascata ────────────────────────────── */
-  requestAnimationFrame(function () { document.body.classList.add('is-ready'); });
+  /* ── entrada do hero em cascata ────────────────────────────────
+     rAF não roda em aba de fundo nem em painel oculto; o timer garante
+     que o hero aparece de qualquer jeito */
+  var pronto = function () { document.body.classList.add('is-ready'); };
+  requestAnimationFrame(pronto);
+  setTimeout(pronto, 400);
 
   /* nav sólida ao sair do hero */
   var sentinel = document.getElementById('topo');
@@ -888,6 +914,23 @@
     new IntersectionObserver(function (entries) {
       nav.classList.toggle('is-stuck', !entries[0].isIntersecting);
     }, { rootMargin: '-88% 0px 0px 0px' }).observe(sentinel);
+  }
+
+  /* "a confirmar" explicado no hover e no leitor de tela */
+  Array.prototype.forEach.call(document.querySelectorAll('.tbd'), function (el) {
+    el.setAttribute('title', 'Estamos confirmando este dado com a casa. Pergunte na proposta e a equipe responde com o número certo.');
+    el.setAttribute('aria-description', 'Estamos confirmando este dado com a casa. Pergunte na proposta e a equipe responde com o número certo.');
+  });
+
+  /* faixa de logos: quem pediu para parar, para (WCAG 2.2.2) */
+  var faixa = document.getElementById('faixaLogos');
+  var pausa = faixa && faixa.querySelector('.faixa__pausa');
+  if (pausa) {
+    pausa.addEventListener('click', function () {
+      var parada = faixa.classList.toggle('faixa--parada');
+      pausa.setAttribute('aria-pressed', String(parada));
+      pausa.textContent = parada ? 'Retomar' : 'Pausar';
+    });
   }
 
   /* menu mobile */
@@ -992,54 +1035,6 @@
     });
   };
 
-  /* ── frase revelada caractere a caractere ──────────────────────
-     Referência: a abertura da sarahhaywood aparece letra por letra
-     conforme a seção sobe, não de uma vez. Cada caractere carrega o
-     próprio índice, e a opacidade sai de --tp por calc: uma onda de
-     seis caracteres correndo pela frase, sem um timer por letra. */
-  var montarLetras = function (el) {
-    var bruto = el.getAttribute('data-letras');
-    if (bruto === null) {
-      bruto = el.textContent.replace(/\s+/g, ' ').trim();
-      el.setAttribute('data-letras', bruto);
-    }
-    el.textContent = '';
-    el.style.setProperty('--total', String(bruto.length));
-
-    var n = 0;
-    var caractere = function (ch) {
-      var c = document.createElement('span');
-      c.className = 'letras__c';
-      c.style.setProperty('--ci', String(n++));
-      if (ch === ' ') { c.innerHTML = '&nbsp;'; } else { c.textContent = ch; }
-      return c;
-    };
-
-    /* as letras entram dentro de uma palavra para a quebra de linha
-       acontecer entre palavras, não no meio de uma */
-    bruto.split(' ').forEach(function (palavra, w, todas) {
-      var p = document.createElement('span');
-      p.className = 'letras__p';
-      palavra.split('').forEach(function (ch) { p.appendChild(caractere(ch)); });
-      el.appendChild(p);
-      if (w < todas.length - 1) el.appendChild(caractere(' '));
-    });
-  };
-
-  var frases = Array.prototype.slice.call(document.querySelectorAll('.letras'));
-  frases.forEach(montarLetras);
-
-  var medirFrases = function () {
-    if (!frases.length) return;
-    var alto = window.innerHeight;
-    frases.forEach(function (el) {
-      var r = el.getBoundingClientRect();
-      /* 0 quando a frase entra por baixo, 1 quando alcança o meio da tela */
-      var p = (alto - r.top) / (alto * 0.62);
-      el.style.setProperty('--tp', Math.max(0, Math.min(1, p)).toFixed(4));
-    });
-  };
-
   var titulos = Array.prototype.slice.call(document.querySelectorAll('.linhas'));
   titulos.forEach(montarLinhas);
 
@@ -1094,6 +1089,9 @@
       });
     }, { rootMargin: '0px 0px -10% 0px' });
     rises.forEach(function (el) { io.observe(el); });
+    /* terceira rede: o observer também dorme em aba de fundo; passado
+       um segundo, o que está na tela aparece de qualquer jeito */
+    setTimeout(varrer, 1000);
   } else {
     rises.forEach(revelar);
   }
@@ -1128,8 +1126,11 @@
     });
   };
 
-  var camadas = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
-  var podeParallax = !reduz && window.matchMedia('(min-width: 768px)').matches;
+  /* onde o navegador tem animation-timeline o parallax é do CSS
+     (corporativo.css); o laço abaixo só entra como reserva */
+  var parallaxCss = window.CSS && CSS.supports && CSS.supports('animation-timeline: view()');
+  var camadas = parallaxCss ? [] : Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
+  var podeParallax = !reduz && !parallaxCss && window.matchMedia('(min-width: 768px)').matches;
 
   var moverCamadas = function () {
     if (!podeParallax) return;
@@ -1145,131 +1146,7 @@
     });
   };
 
-  /* ── espaços: lista que troca a foto ───────────────────────────
-     Referência Sarah Haywood. No desktop a foto grande troca com
-     transição; no celular cada card abre a própria foto. */
-  var sw = document.getElementById('venueSwitch');
-  if (sw) {
-    var cards = Array.prototype.slice.call(sw.querySelectorAll('.vcard'));
-    var shots = Array.prototype.slice.call(sw.querySelectorAll('.switch__shot'));
-
-    var ativar = function (slug) {
-      cards.forEach(function (c) {
-        var on = c.getAttribute('data-venue') === slug;
-        c.classList.toggle('is-on', on);
-        c.querySelector('.vcard__head').setAttribute('aria-selected', String(on));
-      });
-      shots.forEach(function (s) {
-        s.classList.toggle('is-on', s.getAttribute('data-shot') === slug);
-      });
-    };
-
-    cards.forEach(function (c, i) {
-      var head = c.querySelector('.vcard__head');
-      head.addEventListener('click', function () {
-        ativar(c.getAttribute('data-venue'));
-        escolher();
-      });
-      head.addEventListener('keydown', function (e) {
-        var d = e.key === 'ArrowDown' ? 1 : e.key === 'ArrowUp' ? -1 : 0;
-        if (!d) return;
-        e.preventDefault();
-        var alvo = cards[(i + d + cards.length) % cards.length];
-        alvo.querySelector('.vcard__head').focus();
-        ativar(alvo.getAttribute('data-venue'));
-        escolher();
-      });
-    });
-
-    /* ── passagem automática das casas ─────────────────────────────
-       Quem só rola a página via uma casa das quatro. O rodízio mostra
-       as outras três sozinho.
-
-       A régua vem do MESMO relógio que faz a troca, não de uma animação
-       CSS presa a uma classe. A versão anterior dependia de o navegador
-       reiniciar a animação a cada vez que a classe .is-on mudava de
-       cartão, e era isso que dava a impressão de que ela só rodava na
-       primeira volta. Aqui o progresso é um número que o próprio timer
-       escreve: enquanto ele anda, a régua anda; quando ele para, ela
-       para no lugar, e a pausa fica visível.
-
-       Conteúdo que se move sozinho precisa de como parar (WCAG 2.2.2):
-         · mouse ou foco na seção pausa enquanto durar
-         · escolher uma casa pausa e NÃO retoma sozinho, para o rodízio
-           não roubar de volta a casa que a pessoa quis ler
-         · quem pediu menos movimento no sistema nunca vê o rodízio
-         · fora da tela ou em aba oculta não roda para ninguém */
-    var ESPERA = 6000;
-    var PASSO = 100;
-    var relogio = null, pausado = false, escolhido = false, naTela = false;
-    var decorrido = 0;
-
-    /* largura E visibilidade saem da mesma variável. A visibilidade
-       chegou a depender de uma classe no contêiner, mas aí eram dois
-       mecanismos para um efeito só; com uma variável, o que o relógio
-       escreve é exatamente o que a régua mostra. */
-    var pintarRegua = function (visivel) {
-      sw.style.setProperty('--rp', (decorrido / ESPERA).toFixed(4));
-      sw.style.setProperty('--ro', visivel ? '1' : '0');
-    };
-
-    var proxima = function () {
-      var atual = cards.findIndex(function (c) { return c.classList.contains('is-on'); });
-      ativar(cards[(Math.max(0, atual) + 1) % cards.length].getAttribute('data-venue'));
-      decorrido = 0;
-      pintarRegua(true);
-    };
-
-    var passo = function () {
-      decorrido += PASSO;
-      if (decorrido >= ESPERA) proxima(); else pintarRegua(true);
-    };
-
-    var tocar = function () {
-      if (relogio || escolhido || pausado || !naTela || document.hidden) return;
-      relogio = setInterval(passo, PASSO);
-      pintarRegua(true);
-    };
-
-    /* pausa guarda o tempo decorrido: ao voltar, a casa atual termina o
-       que faltava em vez de recomeçar do zero */
-    var pausar = function () {
-      if (relogio) { clearInterval(relogio); relogio = null; }
-      pintarRegua(false);
-    };
-
-    /* a pessoa escolheu uma casa: para e fica parado, mas a régua zera
-       para não deixar uma barra pela metade sugerindo contagem */
-    var escolher = function () {
-      escolhido = true;
-      pausar();
-      decorrido = 0;
-      pintarRegua(false);
-    };
-
-    if (!reduz) {
-      pintarRegua(false);
-      sw.addEventListener('mouseenter', function () { pausado = true; pausar(); });
-      sw.addEventListener('mouseleave', function () { pausado = false; tocar(); });
-      /* focusin/focusout só entre pausa e retomada: quem clicou já caiu
-         em escolher(), e o foco que fica no botão não deve represar o
-         estado depois disso */
-      sw.addEventListener('focusin', function () { pausado = true; pausar(); });
-      sw.addEventListener('focusout', function () { pausado = false; tocar(); });
-      document.addEventListener('visibilitychange', function () {
-        if (document.hidden) pausar(); else tocar();
-      });
-
-      if ('IntersectionObserver' in window) {
-        new IntersectionObserver(function (entradas) {
-          naTela = entradas[0].isIntersecting;
-          if (naTela) tocar(); else pausar();
-        }, { threshold: 0.35 }).observe(sw);
-      } else {
-        naTela = true; tocar();
-      }
-    }
-  }
+  /* a lista que troca a foto (#venueSwitch) é de assets/switch.js */
 
   /* ── carrossel de recursos ─────────────────────────────────────
      Contador, barra de progresso e setas que desabilitam nas pontas.
@@ -1295,9 +1172,11 @@
       var visiveis = Math.max(1, Math.round(reel.clientWidth / passoReel()));
       var fracao = Math.min(1, visiveis / itens.length);
       if (progresso) {
-        progresso.style.width = (fracao * 100) + '%';
+        /* só transform: translateX em % da barra inteira, depois scaleX
+           encolhe para a fração visível (origem à esquerda) */
         var curso = Math.max(1, reel.scrollWidth - reel.clientWidth);
-        progresso.style.transform = 'translateX(' + (reel.scrollLeft / curso) * ((1 / fracao) - 1) * 100 + '%)';
+        var deslocamento = (reel.scrollLeft / curso) * (1 - fracao) * 100;
+        progresso.style.transform = 'translateX(' + deslocamento + '%) scaleX(' + fracao + ')';
       }
       botoes.forEach(function (b) {
         var fim = reel.scrollLeft >= reel.scrollWidth - reel.clientWidth - 2;
@@ -1333,12 +1212,14 @@
   /* ── contato flutuante e voltar ao topo ────────────────────── */
   var toTop = document.getElementById('toTop');
   var wa = document.getElementById('wa');
+  var barra = document.getElementById('barraAcao');
   var palco = reduz ? null : document.getElementById('heroPalco');
   var pendente = false;
   var atualizar = function () {
     var passou = window.scrollY > window.innerHeight * 0.8;
     if (toTop) toTop.classList.toggle('is-visible', passou);
     if (wa) wa.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.5);
+    if (barra) barra.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.5);
 
     /* quanto da página já foi lida, para a régua da nav */
     var curso = document.documentElement.scrollHeight - window.innerHeight;
@@ -1358,7 +1239,6 @@
 
     moverCamadas();
     medirPilha();
-    medirFrases();
     varrer();
     pendente = false;
   };
@@ -1368,7 +1248,7 @@
     window.requestAnimationFrame(atualizar);
   }, { passive: true });
   window.addEventListener('resize', function () {
-    podeParallax = !reduz && window.matchMedia('(min-width: 768px)').matches;
+    podeParallax = !reduz && !parallaxCss && window.matchMedia('(min-width: 768px)').matches;
     /* sem a pilha, --cp precisa voltar a zero: senão um cartão fica
        desfocado no fluxo normal depois de encolher a janela */
     if (!window.matchMedia('(min-width: 860px)').matches) {

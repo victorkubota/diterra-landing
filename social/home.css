@@ -1,14 +1,10 @@
 /* ══════════════════════════════════════════════════════════════════════
    DI TERRÁ SOCIAL — HOME
 
-   Extraído do <style> inline de social/index.html sem alteração de
-   valores (23/08/2026). Enquanto estava embutido, esta folha não podia
-   ser comparada nem compartilhada com o resto do site: a home é a única
-   rota que NÃO carrega social/social.css, e por isso divergiu das onze
-   páginas internas e do corporativo.
-
-   Próximo passo do plano: os tokens e componentes daqui migram para
-   assets/css/base.css, e o que sobrar fica sendo só o layout da home.
+   Só o layout desta página. Nav, botão, gaveta, rodapé e revelações
+   vêm de base.css + social.css, como nas outras treze rotas (05/09/2026:
+   saíram daqui o preloader, o noise, a nav com mix-blend e o rodapé
+   fixo atrás do wrapper).
    ══════════════════════════════════════════════════════════════════════ */
 
 /* ══════════════════════════════════════════════════════════════
@@ -20,66 +16,11 @@
    ══════════════════════════════════════════════════════════════ */
 
 /* ══════════════════════════════════════════════════════════════
-   PRELOADER
-   ══════════════════════════════════════════════════════════════ */
-/* ── voltar ao topo ── */
-
-.loader {
-  position: fixed;
-  inset: 0;
-  background: var(--royal);
-  z-index: 100000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 24px;
-}
-.loader-text {
-  font-family: var(--font-display);
-  font-size: clamp(24px, 4vw, 48px);
-  font-weight: 300;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--ivory);
-}
-.loader-bar {
-  position: absolute;
-  bottom: 0; left: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--brick), var(--ivory));
-  width: 0%;
-}
-
-/* ══════════════════════════════════════════════════════════════
-   NOISE OVERLAY
-   ══════════════════════════════════════════════════════════════ */
-.noise-overlay {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9000;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
-}
-
-/* ══════════════════════════════════════════════════════════════
-   LAYOUT
-   ══════════════════════════════════════════════════════════════ */
-.wrapper {
-  position: relative;
-  z-index: 10;
-  background-color: var(--ivory);
-  margin-bottom: 100vh;
-  box-shadow: 0 50px 100px rgba(0,0,0,0.3);
-}
-
-/* ══════════════════════════════════════════════════════════════
    TYPOGRAPHY UTILITY
    ══════════════════════════════════════════════════════════════ */
 .heading-lg {
   font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 56px);
+  font-size: var(--text-2xl);
   font-weight: 300;
   line-height: 1.1;
   letter-spacing: .03em;
@@ -92,7 +33,7 @@
 
 .heading-md {
   font-family: var(--font-display);
-  font-size: clamp(24px, 3vw, 40px);
+  font-size: var(--text-xl);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: .02em;
@@ -100,21 +41,21 @@
 }
 
 .body-text {
-  font-size: 15px;
+  font-size: var(--text-base);
   font-weight: 300;
   line-height: 1.85;
   color: var(--ui-text-muted);
-  max-width: 520px;
+  max-width: 62ch;
 }
 .deco-line {
   width: 48px; height: 1px;
   background: var(--royal);
   display: block;
   opacity: .2;
-  transform: scaleX(0);
   transform-origin: left;
 }
-.deco-line.revealed { transform: scaleX(1); transition: transform .8s var(--ease); }
+.js .deco-line { transform: scaleX(0); }
+.deco-line.is-in { transform: scaleX(1); transition: transform .8s var(--ease) .2s; }
 
 /* Split text containers */
 .word-wrap {
@@ -123,87 +64,16 @@
   vertical-align: top;
   padding-bottom: 0.1em;
 }
-.word-inner {
-  display: inline-block;
-  transform: translateY(110%);
+/* palavras do hero sobem de trás da máscara em cascata quando o
+   documento fica pronto (is-ready vem do site.js, com timer de reserva) */
+.word-inner { display: inline-block; }
+.js .word-inner { transform: translateY(110%); }
+.is-ready .word-inner {
+  transform: none;
+  transition: transform 1.3s var(--ease-out);
+  transition-delay: calc(.1s + var(--w, 0) * .1s);
 }
-
-/* ══════════════════════════════════════════════════════════════
-   BUTTONS
-   ══════════════════════════════════════════════════════════════ */
-
-.btn:hover { color: var(--royal); border-color: var(--white); }
-
-/* ══════════════════════════════════════════════════════════════
-   NAVIGATION — mix-blend-difference (from parallax-clean)
-   ══════════════════════════════════════════════════════════════ */
-.nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 9000;
-  padding: 0 var(--gutter);
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  mix-blend-mode: difference;
-  color: var(--white);
-}
-.nav-logo {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 400;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--white);
-}
-.nav-logo img {
-  height: 30px;
-  /* sem width:auto o browser usa o atributo width do HTML e estica o logo */
-  width: auto;
-  filter: brightness(0) invert(1);
-}
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  list-style: none;
-}
-.nav-links a {
-  font-family: var(--font-sans);
-  font-size: 11px;
-  font-weight: 300;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.7);
-  transition: color .3s var(--ease);
-  position: relative;
-}
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  left: 0; bottom: -4px;
-  width: 100%; height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform .4s var(--ease);
-}
-.nav-links a:hover { color: var(--white); }
-.nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
-
-.nav-toggle {
-  display: none;
-  width: 32px; height: 24px;
-  flex-direction: column;
-  justify-content: space-between;
-  background: none; border: none; padding: 0;
-}
-.nav-toggle span {
-  display: block; width: 100%; height: 1px;
-  background: var(--white);
-  transition: all .4s var(--ease);
-}
+.is-ready .hero-fade { opacity: 1; transition: opacity 1s var(--ease) .6s; }
 
 /* ══════════════════════════════════════════════════════════════
    § 1 — HERO
@@ -212,6 +82,7 @@
   position: relative;
   width: 100%;
   height: 100vh;
+  height: 100svh;   /* no celular o 100vh conta a barra do navegador e corta o hero */
   min-height: 600px;
   overflow: hidden;
   display: flex;
@@ -221,11 +92,27 @@
 .hero-bg {
   position: absolute;
   inset: -80px;
-  background-image: url('../assets/solucao-completa-decoracao-casamento.png');
+  /* A peça tem 1220 px de largura: não há pixel para ampliar, então a
+     variante nativa é a única. AVIF pesa 1/20 do PNG de 3,7 MB. */
+  background-image: url('/assets/opt/solucao-completa-decoracao-casamento-1220.webp');
+  background-image: image-set(
+    url('/assets/opt/solucao-completa-decoracao-casamento-1220.avif') type('image/avif'),
+    url('/assets/opt/solucao-completa-decoracao-casamento-1220.webp') type('image/webp'));
   background-size: cover;
   background-position: center;
-  will-change: transform;
 }
+/* parallax preso à rolagem, sem JS: a foto desce 15% enquanto o hero
+   sai pelo topo. Onde não há animation-timeline, fica parada. */
+@supports (animation-timeline: scroll()) {
+  .js .hero-bg {
+    animation: heroParallax linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 100vh;
+  }
+}
+@keyframes heroParallax { to { transform: translateY(15%); } }
+/* a foto do hero viaja de e para a raiz e o corporativo (base.css) */
+.hero-bg { view-transition-name: hero-foto; }
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -243,6 +130,8 @@
   text-align: center;
   padding: 0 var(--gutter);
   max-width: 1000px;
+  /* acima de 1200px a caixa abre para 1360px: é a largura que a
+     composição autoral de duas linhas do <h1> precisa (ver .hero-title) */
   color: var(--white);
   /* sai de cena antes de o hero terminar de virar cartão: no cartão a
      foto fala sozinha, como na referência */
@@ -250,9 +139,9 @@
 }
 .hero-eyebrow {
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: var(--text-xs);
   font-weight: 400;
-  letter-spacing: .3em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
   color: rgba(255,255,255,.95);
   margin-bottom: 32px;
@@ -260,7 +149,7 @@
 }
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(44px, 7.5vw, 96px);
+  font-size: var(--text-hero);
   font-weight: 600;
   line-height: 1.05;
   letter-spacing: .06em;
@@ -269,18 +158,48 @@
   margin-bottom: 24px;
   overflow: hidden;
   mix-blend-mode: difference;
+  /* a manchete foi composta em duas linhas (o <br> no HTML). Sem isto
+     ela reflui em quatro, com "PARA" sozinha na segunda. Abaixo de
+     1200px as duas linhas não cabem em nenhum tamanho legível, então
+     o <br> sai e o balanceamento distribui as linhas por igual. */
+  text-wrap: balance;
+  /* Abaixo de 1200px a composição de duas linhas não cabe em tamanho
+     nenhum. O teto aqui é a primeira linha ("Um Lugar Para", 9,85em
+     medidos): acima dele "Para" cai sozinha numa linha só dela. Em
+     375px isso dá 34px, contra os 44,6px do clamp. */
+  font-size: min(
+    var(--text-hero),
+    calc((100vw - 2 * var(--gutter)) / 9.85)
+  );
+}
+.hero-title br { display: none; }
+
+@media (min-width: 1200px) {
+  .hero-content { max-width: 1360px; }
+  .hero-title br { display: inline; }
+  /* Medido no navegador: a segunda linha ("Momentos Excepcionais",
+     duas caixas inline-block com o espaço entre elas) precisa de
+     15,56em. O divisor 15,9 guarda a folga. Sem este teto o clamp de
+     --text-hero pede 96px onde só cabem 80px, e a linha quebra em duas. */
+  .hero-title {
+    font-size: min(
+      var(--text-hero),
+      calc((min(1360px, 100vw) - 2 * var(--gutter)) / 15.9)
+    );
+  }
 }
 .hero-sub {
   font-family: var(--font-display);
-  font-size: clamp(18px, 2vw, 26px);
+  font-size: var(--text-hero-sub);
   font-weight: 400;
   font-style: italic;
   color: rgba(255,255,255,.95);
   margin-bottom: 44px;
   letter-spacing: .04em;
   text-shadow: 0 1px 12px rgba(0,0,0,.4);
-  opacity: 0;
 }
+/* o que o GSAP revela na entrada começa invisível só quando há script */
+.js .hero-fade { opacity: 0; }
 .hero-scroll {
   position: absolute;
   bottom: 40px;
@@ -296,7 +215,7 @@
 }
 .hero-scroll span {
   font-family: var(--font-sans);
-  font-size: 9px;
+  font-size: var(--text-xs);
   letter-spacing: .25em;
   text-transform: uppercase;
   color: rgba(255,255,255,.35);
@@ -338,7 +257,7 @@
 /* metade e metade a partir de 940px, como a referência: era 1fr/1.2fr
    com a foto centrada, agora as duas colunas partem do topo e a foto
    fica presa enquanto o texto passa */
-@media (min-width: 940px) {
+@media (min-width: 860px) {
   .intro-grid { grid-template-columns: 1fr 1fr; align-items: start; }
 }
 .intro-text .heading-lg { margin-bottom: 28px; }
@@ -353,7 +272,7 @@
   margin-top: 32px;
   padding-top: 24px;
   border-top: 1px solid var(--ui-border);
-  font-size: 12px;
+  font-size: var(--text-xs);
   font-weight: 300;
   letter-spacing: .15em;
   text-transform: uppercase;
@@ -364,6 +283,9 @@
   overflow: hidden;
   border-radius: var(--radius-xl);
   aspect-ratio: 3/4;
+  /* fotografia com corte a sangue sobre marfim dissolve quando o
+     recorte cai num céu claro: o que ela precisa é fio, não levante */
+  box-shadow: var(--elev-fio);
 }
 /* a proporção 3/4 já batia com a referência; o que faltava era altura
    de viewport e a fixação: 620x810 numa tela de 1440x900 são 90vh */
@@ -378,117 +300,42 @@
   object-fit: cover;
   transition: transform .8s var(--ease);
 }
-.intro-image:hover img { transform: scale(1.04); }
+@media (hover: hover) { .intro-image:hover img { transform: scale(1.04); } }
 
 /* ══════════════════════════════════════════════════════════════
-   § 3 — CARD STACK (from parallax-clean — Espaços)
+   § 3 — AS QUATRO CASAS
+   O .switch mora no base.css. Aqui: o fundo royal desta seção, a
+   lista sobre escuro e a moldura em arco sobre a foto.
    ══════════════════════════════════════════════════════════════ */
-.stack-section {
-  padding: 10vh 0;
-  background: var(--royal);
-  color: var(--ivory);
-  position: relative;
+.casas { background: var(--royal); color: var(--ivory); }
+.casas .heading-lg { color: var(--ivory); }
+.casas .section__head--centro .body-text { margin-inline: auto; text-align: center; }
+.casas__lead { color: var(--ui-text-invert-muted); max-width: 46ch; margin-top: 14px; }
+.casas .switch__list { border-top-color: var(--ui-border-invert); }
+.casas .vcard { border-bottom-color: var(--ui-border-invert); }
+.casas .vcard__head { color: var(--ivory); }
+.casas .vcard__n, .casas .vcard__chev { color: var(--ui-text-invert-muted); }
+.casas .vcard.is-on .vcard__n, .casas .vcard.is-on .vcard__chev { color: var(--rose); }
+@media (hover: hover) { .casas .vcard__head:hover .vcard__name { color: var(--rose); } }
+.casas .vcard__inner > p { color: var(--ui-text-invert-muted); }
+.casas .link-arrow { color: var(--rose); border-bottom-color: var(--ui-border-invert); }
+.casas .link-arrow--alt { color: var(--ui-text-invert-muted); }
+.casas .link-arrow--alt:hover { color: var(--ivory); }
+.casas .vcard.is-on::after { background: var(--rose); }
+
+/* a janela em arco do símbolo, em linha, sobre a foto: moldura, não
+   máscara (o cliente tirou a máscara; a moldura mantém o motivo sem
+   recortar a imagem). Só no palco grande. */
+.switch__arco {
+  position: absolute; inset: 28px 28px 0;
+  border: 1px solid rgba(254,250,224,.55); border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+  pointer-events: none;
+  opacity: 0; transform: scaleY(.96); transform-origin: bottom;
+  transition: opacity 1.2s var(--ease) .4s, transform 1.2s var(--ease) .4s;
 }
-.stack-header {
-  text-align: center;
-  margin-bottom: clamp(40px, 6vw, 80px);
-  padding: 0 var(--gutter);
-}
-.stack-header .eyebrow {
-  justify-content: center;
-  color: rgba(255,255,255,.4);
-  margin-bottom: 16px;
-}
-.stack-header .eyebrow::before { background: rgba(255,255,255,.3); }
-.stack-header .heading-lg {
-  color: var(--ivory);
-}
-.stack-container {
-  width: 100%;
-  max-width: var(--max);   /* era 1400px: o layout acompanha a tela */
-  margin: 0 auto;
-  position: relative;
-  padding-bottom: 10vh;
-}
-.card-item {
-  position: sticky;
-  top: 10vh;
-  height: 80vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 5vh;
-}
-.card-inner {
-  width: 90%;
-  height: 100%;
-  background: #1a1a1a;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius-xl);
-  position: relative;
-  overflow: hidden;
-  display: grid;
-  /* a imagem passa de 55% para 65% do cartão: item 5 do brief pede a
-     foto na proporção grande da referência */
-  grid-template-columns: 1fr 1.85fr;
-  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7);
-}
-@media (max-width: 860px) {
-  .card-inner { grid-template-columns: 1fr; }
-}
-.card-content {
-  padding: clamp(2rem, 4vw, 4rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: #1a1a1a;
-  z-index: 2;
-  border-radius: var(--radius-xl) 0 0 var(--radius-xl);
-}
-.card-number {
-  font-family: var(--font-display);
-  font-size: clamp(40px, 5vw, 64px);
-  font-weight: 300;
-  color: var(--ivory);
-  opacity: .2;
-  margin-bottom: 8px;
-}
-.card-title {
-  font-family: var(--font-display);
-  font-size: clamp(24px, 3vw, 36px);
-  font-weight: 400;
-  letter-spacing: .02em;
-  color: var(--ivory);
-  margin-bottom: 8px;
-}
-.card-location {
-  font-size: 11px;
-  font-weight: 300;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.4);
-  margin-top: 12px;
-}
-.card-desc {
-  font-size: 15px;
-  font-weight: 300;
-  line-height: 1.8;
-  color: rgba(255,255,255,.55);
-}
-.card-img-wrap {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
-}
-.card-img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform 1.5s ease;
-}
-.card-inner:hover .card-img { transform: scale(1.08); }
+.switch.is-in .switch__arco { opacity: 1; transform: none; }
+@media (max-width: 939px) { .switch__arco { display: none; } }
 
 /* ══════════════════════════════════════════════════════════════
    § 4 — EVENTOS
@@ -519,6 +366,7 @@
   aspect-ratio: 3/4;
   overflow: hidden;
   border-radius: var(--radius-lg);
+  box-shadow: var(--elev-fio);
 }
 .evento-card img {
   width: 100%; height: 100%;
@@ -526,42 +374,57 @@
   transition: transform .8s var(--ease);
   border-radius: var(--radius-lg);
 }
-.evento-card:hover img { transform: scale(1.06); }
+@media (hover: hover) { .evento-card:hover img { transform: scale(1.06); } }
+/* O rótulo é permanente. Antes ele só aparecia no hover, e duas das
+   quatro fotos traziam o nome da ocasião impresso dentro do arquivo,
+   o que fazia a grade parecer rotulada. Com as fotos limpas, esconder
+   o rótulo deixaria quatro fotografias sem legenda. */
 .evento-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,.6) 100%);
+  background: linear-gradient(
+    180deg,
+    transparent 36%,
+    rgba(0,0,0,.30) 62%,
+    rgba(0,0,0,.80) 100%
+  );
   border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 32px;
-  opacity: 0;
-  transition: opacity .5s var(--ease);
+  transition: background .5s var(--ease);
 }
-.evento-card:hover .evento-card-overlay { opacity: 1; }
+.evento-card:hover .evento-card-overlay {
+  background: linear-gradient(
+    180deg,
+    transparent 28%,
+    rgba(0,0,0,.42) 58%,
+    rgba(0,0,0,.88) 100%
+  );
+}
 .evento-card-overlay h3 {
   font-family: var(--font-display);
-  font-size: clamp(20px, 2vw, 28px);
+  font-size: var(--text-lg-display);
   font-weight: 300;
   letter-spacing: .04em;
   text-transform: uppercase;
   color: var(--white);
-  transform: translateY(12px);
   transition: transform .5s var(--ease);
 }
-.evento-card:hover .evento-card-overlay h3 { transform: translateY(0); }
+.evento-card:hover .evento-card-overlay h3 { transform: translateY(-2px); }
 .evento-card-overlay .evento-tag {
-  font-size: 10px;
+  font-size: var(--text-xs);
   font-weight: 300;
   letter-spacing: .2em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.5);
+  /* era rgba(255,255,255,.5): 3,08:1 medidos sobre o card corporativo,
+     abaixo do mínimo de 4,5:1 que o WCAG AA pede para 12px */
+  color: rgba(254,250,224,.92);
   margin-top: 8px;
-  transform: translateY(12px);
   transition: transform .5s var(--ease) .05s;
 }
-.evento-card:hover .evento-card-overlay .evento-tag { transform: translateY(0); }
+.evento-card:hover .evento-card-overlay .evento-tag { transform: translateY(-2px); }
 
 /* ══════════════════════════════════════════════════════════════
    § 5 — BANNER FULLWIDTH
@@ -577,11 +440,22 @@
 .banner-bg {
   position: absolute;
   inset: -40px;
-  background-image: url('../assets/3.png');
+  /* 500 px de origem esticados a tela cheia: fica até a foto real chegar */
+  background-image: url('/assets/opt/3-500.webp');
+  background-image: image-set(
+    url('/assets/opt/3-500.avif') type('image/avif'),
+    url('/assets/opt/3-500.webp') type('image/webp'));
   background-size: cover;
   background-position: center;
-  will-change: transform;
 }
+@supports (animation-timeline: view()) {
+  .js .banner-bg {
+    animation: bannerParallax linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+}
+@keyframes bannerParallax { from { transform: translateY(-6%); } to { transform: translateY(6%); } }
 .banner-overlay {
   position: absolute;
   inset: 0;
@@ -592,18 +466,27 @@
   position: relative;
   z-index: 2;
   text-align: center;
-  max-width: 800px;
+  /* 800px era estreito demais para a citação de três linhas, que
+     refluía em cinco e deixava "de" pendurada na primeira */
+  max-width: 1000px;
   padding: 80px var(--gutter);
 }
 .banner-content blockquote {
   font-family: var(--font-display);
-  font-size: clamp(26px, 3.5vw, 48px);
+  font-size: var(--text-2xl);
   font-weight: 300;
   line-height: 1.25;
   letter-spacing: .03em;
   text-transform: uppercase;
   color: var(--white);
   margin-bottom: 24px;
+  text-wrap: balance;
+}
+/* abaixo de 600px a linha mais longa (13,67em) não cabe: o <br> sai e o
+   balanceamento assume */
+.banner-content blockquote br { display: none; }
+@media (min-width: 600px) {
+  .banner-content blockquote br { display: inline; }
 }
 .banner-content .deco-line {
   background: rgba(255,255,255,.3);
@@ -639,6 +522,7 @@
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-lg);
+  box-shadow: var(--elev-fio);
 }
 .galeria-item:nth-child(1) { grid-row: span 2; }
 .galeria-item:nth-child(4) { grid-column: span 2; }
@@ -655,7 +539,11 @@
 }
 .galeria-item:nth-child(1) img { aspect-ratio: auto; height: 100%; }
 .galeria-item:nth-child(4) img { aspect-ratio: 16/9; }
-.galeria-item:hover img { transform: scale(1.05); }
+/* este tem <a class="glightbox"> dentro, então ganha paridade de teclado
+   e estado pressionado; .intro-image e .evento-card não são clicáveis */
+@media (hover: hover) { .galeria-item:hover img { transform: scale(1.05); } }
+.galeria-item:focus-within img { transform: scale(1.05); }
+.galeria-item:active { transform: var(--press-caixa); transition: transform var(--dur-press) var(--ease); }
 
 /* ══════════════════════════════════════════════════════════════
    § 7 — CONTATO
@@ -679,8 +567,9 @@
   gap: 16px;
   margin-top: 20px;
 }
-.contato-info a {
-  font-size: 14px;
+.contato-info a,
+.contato-info p {
+  font-size: var(--text-base);
   font-weight: 300;
   color: var(--ui-text-muted);
   display: flex;
@@ -705,6 +594,9 @@
   padding: clamp(24px, 3vw, 40px);
   border-radius: var(--radius-xl);
   border: 1px solid var(--ui-border);
+  /* branco sobre marfim-claro, hoje segurado só por uma borda de 1px:
+     é a superfície que mais mente na página */
+  box-shadow: var(--elev-1);
 }
 .form-row {
   display: grid;
@@ -717,7 +609,7 @@
   gap: 6px;
 }
 .form-label {
-  font-size: 10px;
+  font-size: var(--text-xs);
   font-weight: 400;
   letter-spacing: .15em;
   text-transform: uppercase;
@@ -731,7 +623,9 @@
   border: 1px solid rgba(0,0,0,.08);
   background: var(--ivory-light);
   font-family: var(--font-sans);
-  font-size: 14px;
+  /* 16px é o piso: abaixo disso o Safari do iPhone dá zoom ao focar o
+     campo e o visitante precisa pinçar de volta para continuar. */
+  font-size: 16px;
   font-weight: 300;
   color: var(--royal);
   outline: none;
@@ -761,167 +655,57 @@
 .form-submit { align-self: flex-start; margin-top: 8px; }
 
 /* ══════════════════════════════════════════════════════════════
-   § 8 — ETERNITY SECTION (before footer, like parallax-clean)
+   § 8 — CHAMADA FINAL
    ══════════════════════════════════════════════════════════════ */
-.eternity {
-  padding: clamp(80px, 12vw, 160px) 0;
-  background: var(--ivory);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 10;
+.chamada { text-align: center; padding-block: var(--section-y-loose); }
+.chamada .wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.chamada__rotulo {
+  font-size: var(--text-xs); letter-spacing: .25em; text-transform: uppercase;
+  color: var(--ui-text-invert-muted);
 }
-.eternity .heading-lg {
-  margin-bottom: 24px;
-}
-.eternity .body-text {
-  max-width: 560px;
-  text-align: center;
-  margin-bottom: 32px;
-}
-.eternity .vert-line {
-  width: 1px;
-  height: 64px;
-  background: rgba(0,0,0,.15);
-}
-
-/* ══════════════════════════════════════════════════════════════
-   FOOTER (FIXED BEHIND)
-   ══════════════════════════════════════════════════════════════ */
-.footer-sticky {
-  position: fixed;
-  bottom: 0; left: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: 1;
-  background: var(--royal);
-  color: rgba(255,255,255,.45);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.footer-inner {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  padding: 0 var(--gutter);
-  max-width: 800px;
-}
-.footer-logo {
-  height: 68px;
-  width: auto;
-  opacity: .7;
-  margin: 0 auto 40px;
-}
-.footer-cta-label {
-  font-size: 11px;
-  letter-spacing: .25em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.35);
-  margin-bottom: 16px;
-}
-.footer-cta {
+.chamada__cta {
   font-family: var(--font-display);
-  font-size: clamp(36px, 6vw, 72px);
-  font-weight: 300;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  color: var(--ivory);
+  font-size: clamp(2.6rem, 6vw, 4.5rem);
+  font-weight: 300; letter-spacing: .04em; text-transform: uppercase;
+  line-height: 1.05; color: var(--ivory);
   transition: color .4s var(--ease);
-  display: block;
-  line-height: 1.1;
 }
-.footer-cta:hover { color: rgba(255,255,255,.5); }
-.footer-nav {
-  display: flex;
-  justify-content: center;
-  gap: 28px;
-  margin-top: 48px;
-  flex-wrap: wrap;
-}
-.footer-nav a {
-  font-size: 11px;
-  font-weight: 300;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  transition: color .3s var(--ease);
-}
-.footer-nav a:hover { color: rgba(255,255,255,.85); }
-.footer-social {
-  display: flex;
-  gap: 16px;
-  margin-top: 24px;
-  justify-content: center;
-}
-.footer-social a {
-  width: 36px; height: 36px;
-  border: 1px solid rgba(255,255,255,.1);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all .3s var(--ease);
-}
-.footer-social a:hover {
-  border-color: rgba(255,255,255,.3);
-  background: rgba(255,255,255,.05);
-}
-.footer-social a svg {
-  width: 14px; height: 14px;
-  fill: rgba(255,255,255,.5);
-}
-.footer-bottom {
-  margin-top: 48px;
-  font-size: 10px;
-  font-weight: 200;
-  letter-spacing: .06em;
-  color: rgba(255,255,255,.2);
-}
-.footer-bg-img {
-  position: absolute;
-  inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  opacity: .06;
-  pointer-events: none;
-  z-index: 1;
-}
+.chamada__cta:hover, .chamada__cta:focus-visible { color: var(--rose); }
+.chamada__texto { color: var(--ui-text-invert-muted); max-width: 52ch; margin-top: 14px; }
 
 /* ══════════════════════════════════════════════════════════════
    RESPONSIVE
    ══════════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
   .eventos-grid { grid-template-columns: repeat(2, 1fr); }
+  /* a galeria mantém o desenho bento em duas colunas: item 1 alto à
+     esquerda, 2 e 3 à direita, 4 largo embaixo, 5 e 6 fechando */
   .galeria-grid { grid-template-columns: repeat(2, 1fr); }
-  .galeria-item:nth-child(1) { grid-row: span 1; }
-  .galeria-item:nth-child(4) { grid-column: span 1; }
 }
 @media (max-width: 768px) {
-  .nav-links { display: none; }
-  .nav-toggle { display: flex; }
-
   .intro-grid,
   .contato-grid {
     grid-template-columns: 1fr;
   }
   .intro-image { margin-right: 0; }
 
-  .card-inner { grid-template-columns: 1fr; }
-  .card-item { top: 5vh; height: 85vh; }
-  .card-img-wrap { height: 50%; order: -1; border-radius: var(--radius-xl) var(--radius-xl) 0 0; }
-  .card-content { border-radius: 0 0 var(--radius-xl) var(--radius-xl); }
 
   .eventos-grid { grid-template-columns: 1fr 1fr; }
   .galeria-grid { grid-template-columns: 1fr 1fr; }
   .form-row { grid-template-columns: 1fr; }
 
-  .evento-card-overlay { opacity: 1; }
 }
+/* sem hover (dedo, inclusive tablet) o nome do evento fica sempre visível */
 @media (max-width: 480px) {
   .eventos-grid { grid-template-columns: 1fr; }
   .galeria-grid { grid-template-columns: 1fr; }
+  .galeria-item:nth-child(1) { grid-row: span 1; }
+  .galeria-item:nth-child(4) { grid-column: span 1; }
+  .galeria-item:nth-child(1) img { aspect-ratio: 3 / 4; height: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg, .banner-bg { animation: none; }
+  .js .word-inner { transform: none; }
+  .js .hero-fade { opacity: 1; }
 }

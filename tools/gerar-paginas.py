@@ -304,19 +304,21 @@ def cabeca(titulo, descricao, canonical, css, favicon):
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>{titulo}</title>
 <meta name="description" content="{descricao}">
 <link rel="canonical" href="{canonical}">
 <link rel="icon" type="image/png" href="{favicon}">
+<meta name="theme-color" content="#111542">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{titulo}">
 <meta property="og:description" content="{descricao}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Oooh+Baby&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400&family=Oooh+Baby&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/tema-social.css">
 <link rel="stylesheet" href="/assets/css/base.css">
+<script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="{css}">
 </head>
 <body>
@@ -344,6 +346,7 @@ def nav():
       <span></span><span></span>
     </button>
   </div>
+  <span class="nav__progresso" aria-hidden="true"></span>
 </nav>
 <div class="nav__drawer" id="navDrawer">
   <a href="/social#intro">O grupo</a>
@@ -403,6 +406,10 @@ def rodape():
   </div>
 </footer>
 
+<!-- barra de ação do celular (base.css / site.js) -->
+<div class="barra-acao on-dark" id="barraAcao">
+  <a class="btn btn--primary on-dark" href="/social#contato">Fale conosco</a>
+</div>
 <a class="to-top" id="toTop" href="#topo" aria-label="Voltar ao topo da página">
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
     <path d="M8 13V3M3.5 7.5L8 3l4.5 4.5" stroke="currentColor" stroke-width="1.3"/>
@@ -450,7 +457,7 @@ def cards_html(itens, pasta, atual=None):
             continue
         img = it["imagem"]
         saida.append(f"""      <a class="card rise" href="/social/{pasta}/{it['slug']}">
-        <div class="card__media">
+        <div class="card__media reveal-shot">
           <img src="{img}" alt="{it['alt']}" loading="lazy" style="object-position:center 35%">
           <span class="card__arch" aria-hidden="true"></span>
         </div>
@@ -466,9 +473,12 @@ def cards_html(itens, pasta, atual=None):
 
 
 def galeria_html():
+    # cada figura se descobre por conta, escalonada pelo --i; o .gallery
+    # não leva mais .rise, senão o bloco piscaria inteiro por cima
     return NL.join(
-        f'      <figure><img src="/assets/{arq}" alt="{alt}" loading="lazy" style="object-position:center 35%"></figure>'
-        for arq, alt in GALERIA
+        f'      <figure class="reveal-shot" style="--i:{i}"><img src="/assets/{arq}" '
+        f'alt="{alt}" loading="lazy" style="object-position:center 35%"></figure>'
+        for i, (arq, alt) in enumerate(GALERIA)
     )
 
 
@@ -484,9 +494,9 @@ def pagina_interna(item, tipo):
         bloco_dados = f"""
 <section class="section section--paper">
   <div class="wrap">
-    <div class="section__head rise">
-      <p class="eyebrow">Ficha do espaço</p>
-      <h2 class="h-section">Números e estrutura</h2>
+    <div class="section__head">
+      <p class="eyebrow rise">Ficha do espaço</p>
+      <h2 class="h-section linhas">Números e estrutura</h2>
     </div>
     <p class="notice rise">
       <span aria-hidden="true">&#9650;</span>
@@ -494,12 +504,12 @@ def pagina_interna(item, tipo):
       confirmação da Di Terrá. Nenhum valor foi estimado.</span>
     </p>
     <div class="split">
-      <ul class="spec rise">
+      <ul class="spec cascata">
 {ficha_html(item['ficha'])}
       </ul>
       <div class="rise">
         <h3 class="h-card" style="margin-bottom:20px">O que este espaço oferece</h3>
-        <ul class="checks">
+        <ul class="checks cascata">
 {destaques}
         </ul>
       </div>
@@ -512,11 +522,11 @@ def pagina_interna(item, tipo):
         bloco_dados = f"""
 <section class="section section--paper">
   <div class="wrap">
-    <div class="section__head rise">
-      <p class="eyebrow">O que está incluído</p>
-      <h2 class="h-section">Do planejamento à desmontagem</h2>
+    <div class="section__head">
+      <p class="eyebrow rise">O que está incluído</p>
+      <h2 class="h-section linhas">Do planejamento à desmontagem</h2>
     </div>
-    <ul class="checks rise">
+    <ul class="checks cascata">
 {inclui}
     </ul>
   </div>
@@ -556,7 +566,7 @@ def pagina_interna(item, tipo):
       <p class="eyebrow">{rotulo}</p>
 {prosa}
     </div>
-    <div class="split__media rise">
+    <div class="split__media reveal-shot">
       <img src="{item['imagem']}" alt="{item['alt']}" loading="lazy" width="1800" height="1013">
     </div>
   </div>
@@ -564,11 +574,11 @@ def pagina_interna(item, tipo):
 {bloco_dados}
 <section class="section">
   <div class="wrap">
-    <div class="section__head rise">
-      <p class="eyebrow">Registros</p>
-      <h2 class="h-section">Momentos na Di Terrá</h2>
+    <div class="section__head">
+      <p class="eyebrow rise">Registros</p>
+      <h2 class="h-section linhas">Momentos na Di Terrá</h2>
     </div>
-    <div class="gallery rise">
+    <div class="gallery">
 {galeria_html()}
     </div>
   </div>
@@ -576,9 +586,9 @@ def pagina_interna(item, tipo):
 
 <section class="section section--invert">
   <div class="wrap">
-    <div class="section__head on-dark rise">
-      <p class="eyebrow">Continue explorando</p>
-      <h2 class="h-section">{titulo_irmaos}</h2>
+    <div class="section__head on-dark">
+      <p class="eyebrow rise">Continue explorando</p>
+      <h2 class="h-section linhas">{titulo_irmaos}</h2>
     </div>
     <div class="grid grid--3">
 {cards_html(irmaos, tipo, atual=item['slug'])}
@@ -643,10 +653,10 @@ def hub(tipo):
 <section class="section">
   <span class="ornament ornament--bl"><img src="/assets/brand/ornamento-ramo-rose.png" alt="" width="305" height="621"></span>
   <div class="wrap">
-    <div class="section__head rise">
-      <p class="eyebrow">{chamada}</p>
-      <h2 class="h-section">{sub}</h2>
-      <p class="body-muted">{subtexto}</p>
+    <div class="section__head">
+      <p class="eyebrow rise">{chamada}</p>
+      <h2 class="h-section linhas">{sub}</h2>
+      <p class="body-muted rise">{subtexto}</p>
     </div>
     <div class="grid grid--3">
 {cards_html(itens, tipo)}
@@ -661,6 +671,11 @@ def hub(tipo):
 
 # ══════════════════════════════════════════════════════════════════════════
 # EXECUÇÃO
+#
+# Este script SOBRESCREVE as onze internas por inteiro. Toda classe de
+# motion aplicada à mão nelas precisa existir aqui em cima também, senão
+# uma execução apaga o trabalho. Em 05/09/2026 foi o que quase aconteceu
+# com .reveal-shot e .cascata.
 # ══════════════════════════════════════════════════════════════════════════
 
 def escrever(caminho, conteudo):
@@ -683,5 +698,36 @@ def main():
     print(f"\n{2 + len(ESPACOS) + len(SOLUCOES)} páginas geradas.")
 
 
+# ══════════════════════════════════════════════════════════════════════════
+# TRAVA
+#
+# Este template ficou para trás do que as onze páginas realmente contêm.
+# Rodado em 05/09/2026, ele desfez trabalho de três PRs em uma execução:
+#
+#   · removeu o <div class="hero-palco"> das onze — o hero deixou de se
+#     recolher em cartão ao rolar (fase 4)
+#   · reinseriu 44 <p class="eyebrow">, que o cliente pediu para tirar
+#     ("Em todas as seções remova os headlines")
+#   · trouxe de volta /assets/DECORACAO.png, a peça de marketing com texto
+#     queimado no pixel, substituída no PR victorkubota/diterra-landing#21
+#
+# As classes de motion já foram todas alinhadas aqui: .reveal-shot na
+# fotografia, .cascata nas listas, --i na galeria, .linhas nos títulos de
+# seção e a barra .nav__progresso na nav. O que continua desalinhado é o
+# hero-palco, que sumiria, e os eyebrows, que voltariam. Enquanto esses
+# dois não forem resolvidos, gerar é destrutivo.
+#
+# Para rodar mesmo assim, depois de alinhar o template:
+#   python3 tools/gerar-paginas.py --eu-sei-o-que-estou-fazendo
+# ══════════════════════════════════════════════════════════════════════════
+
 if __name__ == "__main__":
+    import sys
+    if "--eu-sei-o-que-estou-fazendo" not in sys.argv:
+        print(__doc__ or "")
+        print("RECUSADO: este gerador sobrescreve as onze internas por inteiro e")
+        print("o template está desatualizado. Rodá-lo agora apaga o hero-palco,")
+        print("devolve os eyebrows removidos a pedido do cliente e restaura uma")
+        print("imagem legada. Leia o bloco TRAVA no fim deste arquivo.")
+        sys.exit(1)
     main()

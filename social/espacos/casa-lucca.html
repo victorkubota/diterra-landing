@@ -2,17 +2,19 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Casa Lucca | Di Terrá Eventos</title>
 <meta name="description" content="Escala menor e ambiente reservado para celebrações intimistas.">
 <link rel="canonical" href="https://www.diterra.com.br/social/espacos/casa-lucca">
 <link rel="icon" type="image/png" href="/assets/brand/favicon-social.png">
+<meta name="theme-color" content="#111542">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Casa Lucca | Di Terrá Eventos">
 <meta property="og:description" content="Escala menor e ambiente reservado para celebrações intimistas.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Oooh+Baby&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400&family=Oooh+Baby&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="/assets/css/tema-social.css">
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/social/social.css">
@@ -38,6 +40,7 @@
       <span></span><span></span>
     </button>
   </div>
+  <span class="nav__progresso" aria-hidden="true"></span>
 </nav>
 <div class="nav__drawer" id="navDrawer">
   <a href="/social#intro">O grupo</a>
@@ -53,7 +56,7 @@
 <div class="hero-palco" id="heroPalco">
 <header class="page-hero" id="topo">
   <div class="page-hero__media">
-    <img src="/assets/espaco-casa-lucca.png" alt="Mesa longa montada na área externa da Casa Lucca" fetchpriority="high" width="1800" height="1013">
+    <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-amplitude-800.avif 800w, /assets/opt/casa-lucca-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/casa-lucca-amplitude-1400.webp" alt="Mesa longa montada na área externa da Casa Lucca" fetchpriority="high" width="2400" height="1610" srcset="/assets/opt/casa-lucca-amplitude-800.webp 800w, /assets/opt/casa-lucca-amplitude-1400.webp 1400w" sizes="100vw"></picture>
   </div>
   <div class="wrap on-dark">
     <ol class="crumbs">
@@ -75,16 +78,16 @@
       <p>A Casa Lucca é a resposta para quem não quer uma festa grande. O formato favorece mesas longas, jantares servidos e conversas que atravessam a noite inteira sem competir com o som.</p>
       <p>A escala menor muda a operação: a equipe fica mais próxima dos convidados e o ritmo do serviço acompanha a mesa, não o cronograma.</p>
     </div>
-    <div class="split__media rise">
-      <img src="/assets/espaco-casa-lucca.png" alt="Mesa longa montada na área externa da Casa Lucca" loading="lazy" width="1800" height="1013">
+    <div class="split__media reveal-shot">
+      <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-amplitude-800.avif 800w, /assets/opt/casa-lucca-amplitude-1400.avif 1400w" sizes="(min-width: 1040px) 33vw, (min-width: 680px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-amplitude-1400.webp" alt="Mesa longa montada na área externa da Casa Lucca" loading="lazy" width="2400" height="1610" decoding="async" srcset="/assets/opt/casa-lucca-amplitude-800.webp 800w, /assets/opt/casa-lucca-amplitude-1400.webp 1400w" sizes="(min-width: 1040px) 33vw, (min-width: 680px) 50vw, 100vw"></picture>
     </div>
   </div>
 </section>
 
 <section class="section section--paper">
   <div class="wrap">
-    <div class="section__head rise">
-      <h2 class="h-section">Números e estrutura</h2>
+    <div class="section__head">
+      <h2 class="h-section linhas">Números e estrutura</h2>
     </div>
     <p class="notice rise">
       <span aria-hidden="true">&#9650;</span>
@@ -92,7 +95,7 @@
       confirmação da Di Terrá. Nenhum valor foi estimado.</span>
     </p>
     <div class="split">
-      <ul class="spec rise">
+      <ul class="spec cascata">
         <li><span class="k">Capacidade sentado</span><span class="v tbd">a confirmar</span></li>
         <li><span class="k">Capacidade em pé</span><span class="v tbd">a confirmar</span></li>
         <li><span class="k">Área coberta</span><span class="v tbd">a confirmar</span></li>
@@ -102,7 +105,7 @@
       </ul>
       <div class="rise">
         <h3 class="h-card" style="margin-bottom:20px">O que este espaço oferece</h3>
-        <ul class="checks">
+        <ul class="checks cascata">
           <li>Formato de mesa longa</li>
           <li>Ambiente reservado</li>
           <li>Jantar servido à mesa</li>
@@ -117,28 +120,28 @@
 
 <section class="section">
   <div class="wrap">
-    <div class="section__head rise">
-      <h2 class="h-section">Momentos na Di Terrá</h2>
+    <div class="section__head">
+      <h2 class="h-section linhas">Momentos na Di Terrá</h2>
     </div>
-    <div class="gallery rise">
-      <figure><img src="/assets/brand/foto-saida-noivos.jpg" alt="Saída dos noivos entre os convidados" loading="lazy" style="object-position:center 35%"></figure>
-      <figure><img src="/assets/brand/foto-mesa-posta.jpg" alt="Mesa posta com arranjo central" loading="lazy" style="object-position:center 35%"></figure>
-      <figure><img src="/assets/brand/foto-noiva-robe.jpg" alt="Noiva na preparação" loading="lazy" style="object-position:center 35%"></figure>
-      <figure><img src="/assets/DECORACAO.png" alt="Cenografia floral da cerimônia" loading="lazy" style="object-position:center 35%"></figure>
-      <figure><img src="/assets/brand/foto-casal-noite.jpg" alt="Casal sob luzes no jardim" loading="lazy" style="object-position:center 35%"></figure>
+    <div class="gallery">
+      <figure class="reveal-shot" style="--i:0"><picture><source type="image/avif" srcset="/assets/opt/foto-saida-noivos-800.avif 800w, /assets/opt/foto-saida-noivos-1400.avif 1400w" sizes="(min-width: 900px) 50vw, 100vw"><img src="/assets/opt/foto-saida-noivos-1400.webp" alt="Saída dos noivos entre os convidados" loading="lazy" style="object-position:center 35%" width="1400" height="788" decoding="async" srcset="/assets/opt/foto-saida-noivos-800.webp 800w, /assets/opt/foto-saida-noivos-1400.webp 1400w" sizes="(min-width: 900px) 50vw, 100vw"></picture></figure>
+      <figure class="reveal-shot" style="--i:1"><picture><source type="image/avif" srcset="/assets/opt/foto-mesa-posta-800.avif 800w, /assets/opt/foto-mesa-posta-1400.avif 1400w" sizes="(min-width: 900px) 50vw, 100vw"><img src="/assets/opt/foto-mesa-posta-1400.webp" alt="Mesa posta com arranjo central" loading="lazy" style="object-position:center 35%" width="1400" height="788" decoding="async" srcset="/assets/opt/foto-mesa-posta-800.webp 800w, /assets/opt/foto-mesa-posta-1400.webp 1400w" sizes="(min-width: 900px) 50vw, 100vw"></picture></figure>
+      <figure class="reveal-shot" style="--i:2"><picture><source type="image/avif" srcset="/assets/opt/foto-noiva-robe-800.avif 800w, /assets/opt/foto-noiva-robe-1400.avif 1400w" sizes="(min-width: 900px) 50vw, 100vw"><img src="/assets/opt/foto-noiva-robe-1400.webp" alt="Noiva na preparação" loading="lazy" style="object-position:center 35%" width="1400" height="788" decoding="async" srcset="/assets/opt/foto-noiva-robe-800.webp 800w, /assets/opt/foto-noiva-robe-1400.webp 1400w" sizes="(min-width: 900px) 50vw, 100vw"></picture></figure>
+      <figure class="reveal-shot" style="--i:3"><picture><source type="image/avif" srcset="/assets/opt/decoracao-800.avif 800w, /assets/opt/decoracao-1400.avif 1400w" sizes="(min-width: 860px) 25vw, 50vw"><img src="/assets/opt/decoracao-1400.webp" alt="Cenografia floral da cerimônia" loading="lazy" style="object-position:center 35%" width="1400" height="1045" decoding="async" srcset="/assets/opt/decoracao-800.webp 800w, /assets/opt/decoracao-1400.webp 1400w" sizes="(min-width: 860px) 25vw, 50vw"></picture></figure>
+      <figure class="reveal-shot" style="--i:4"><picture><source type="image/avif" srcset="/assets/opt/foto-casal-noite-800.avif 800w, /assets/opt/foto-casal-noite-1400.avif 1400w" sizes="(min-width: 900px) 50vw, 100vw"><img src="/assets/opt/foto-casal-noite-1400.webp" alt="Casal sob luzes no jardim" loading="lazy" style="object-position:center 35%" width="1400" height="788" decoding="async" srcset="/assets/opt/foto-casal-noite-800.webp 800w, /assets/opt/foto-casal-noite-1400.webp 1400w" sizes="(min-width: 900px) 50vw, 100vw"></picture></figure>
     </div>
   </div>
 </section>
 
 <section class="section section--invert">
   <div class="wrap">
-    <div class="section__head on-dark rise">
-      <h2 class="h-section">Os outros espaços</h2>
+    <div class="section__head on-dark">
+      <h2 class="h-section linhas">Os outros espaços</h2>
     </div>
     <div class="grid grid--3">
       <a class="card rise" href="/social/espacos/a-querencia">
-        <div class="card__media">
-          <img src="/assets/brand/foto-casal-noite.jpg" alt="Casal de noivos sob luzes no jardim da Querência" loading="lazy" style="object-position:center 35%">
+        <div class="card__media reveal-shot">
+          <picture><source type="image/avif" srcset="/assets/opt/foto-casal-noite-800.avif 800w, /assets/opt/foto-casal-noite-1400.avif 1400w" sizes="(min-width: 900px) 50vw, 100vw"><img src="/assets/opt/foto-casal-noite-1400.webp" alt="Casal de noivos sob luzes no jardim da Querência" loading="lazy" style="object-position:center 35%" width="1400" height="788" decoding="async" srcset="/assets/opt/foto-casal-noite-800.webp 800w, /assets/opt/foto-casal-noite-1400.webp 1400w" sizes="(min-width: 900px) 50vw, 100vw"></picture>
           <span class="card__arch" aria-hidden="true"></span>
         </div>
         <div class="card__body">
@@ -150,8 +153,8 @@
         </div>
       </a>
       <a class="card rise" href="/social/espacos/palacete-monte-alegre">
-        <div class="card__media">
-          <img src="/assets/brand/foto-noiva-janela.jpg" alt="Noiva junto à janela em arco do Palacete Monte Alegre" loading="lazy" style="object-position:center 35%">
+        <div class="card__media reveal-shot">
+          <picture><source type="image/avif" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.avif 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.avif 1400w" sizes="(min-width: 900px) 50vw, 100vw"><img src="/assets/opt/palacete-monte-alegre-amplitude-1400.webp" alt="Salão do Palacete Monte Alegre montado para jantar, com pé-direito alto e lustres" loading="lazy" width="1400" height="939" decoding="async" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.webp 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.webp 1400w" sizes="(min-width: 900px) 50vw, 100vw"></picture>
           <span class="card__arch" aria-hidden="true"></span>
         </div>
         <div class="card__body">
@@ -163,8 +166,8 @@
         </div>
       </a>
       <a class="card rise" href="/social/espacos/espaco-terra">
-        <div class="card__media">
-          <img src="/assets/capa-video.png" alt="Vista do horizonte no Espaço Terrá, interior paulista" loading="lazy" style="object-position:center 35%">
+        <div class="card__media reveal-shot">
+          <picture><source type="image/avif" srcset="/assets/opt/espaco-terra-amplitude-800.avif 800w, /assets/opt/espaco-terra-amplitude-1400.avif 1400w" sizes="(min-width: 1040px) 33vw, (min-width: 680px) 50vw, 100vw"><img src="/assets/opt/espaco-terra-amplitude-1400.webp" alt="Vista do horizonte no Espaço Terrá, interior paulista" loading="lazy" style="object-position:center 35%" width="1400" height="939" decoding="async" srcset="/assets/opt/espaco-terra-amplitude-800.webp 800w, /assets/opt/espaco-terra-amplitude-1400.webp 1400w" sizes="(min-width: 1040px) 33vw, (min-width: 680px) 50vw, 100vw"></picture>
           <span class="card__arch" aria-hidden="true"></span>
         </div>
         <div class="card__body">
@@ -241,6 +244,10 @@
   </div>
 </footer>
 
+<!-- barra de ação do celular (base.css / site.js) -->
+<div class="barra-acao on-dark" id="barraAcao">
+  <a class="btn btn--primary on-dark" href="/social#contato">Fale conosco</a>
+</div>
 <a class="to-top" id="toTop" href="#topo" aria-label="Voltar ao topo da página">
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
     <path d="M8 13V3M3.5 7.5L8 3l4.5 4.5" stroke="currentColor" stroke-width="1.3"/>
