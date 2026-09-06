@@ -558,7 +558,8 @@
   gap: 16px;
   margin-top: 20px;
 }
-.contato-info a {
+.contato-info a,
+.contato-info p {
   font-size: var(--text-base);
   font-weight: 300;
   color: var(--ui-text-muted);
