@@ -73,11 +73,21 @@
   transition: transform 1.3s var(--ease-out);
   transition-delay: calc(.1s + var(--w, 0) * .1s);
 }
+/* Esta regra e a de baixo têm a MESMA especificidade (.js no <html>,
+   .is-ready no <body>), então quem decide é a ordem. Ela estava depois,
+   150 linhas adiante, herdada de quando o GSAP fazia a entrada: o
+   resultado é que o eyebrow, o subtítulo e o botão do hero ficavam em
+   opacity 0 para sempre em toda visita com JavaScript, e só apareciam
+   com movimento reduzido. Medido na main antes do conserto: os três em 0. */
+.js .hero-fade { opacity: 0; }
 .is-ready .hero-fade { opacity: 1; transition: opacity 1s var(--ease) .6s; }
 
 /* ══════════════════════════════════════════════════════════════
    § 1 — HERO
    ══════════════════════════════════════════════════════════════ */
+/* Referência Sarah Haywood: a marca no alto, a foto entre as duas
+   pontas, e o texto no rodapé do hero. O hero deixa de centralizar um
+   bloco só e passa a distribuir dois. */
 .hero {
   position: relative;
   width: 100%;
@@ -86,8 +96,10 @@
   min-height: 600px;
   overflow: hidden;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: clamp(76px, 11vh, 112px) 0 clamp(38px, 6vh, 64px);
 }
 .hero-bg {
   position: absolute;
@@ -124,6 +136,39 @@
   );
   z-index: 1;
 }
+/* ── a marca no alto ───────────────────────────────────────────
+   O PNG é o lockup do brandbook, emblema sobre wordmark. Enquanto ele
+   está em cena a nav esconde o próprio logo, senão a marca apareceria
+   duas vezes na mesma tela; quando a nav gruda, o logo volta. */
+.hero-marca {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 var(--gutter);
+  /* acompanha o texto quando o hero vira cartão */
+  opacity: calc(1 - var(--hp, 0) * 1.9);
+}
+.hero-marca img {
+  width: clamp(132px, 15vw, 196px);
+  height: auto;
+  /* o reset do base.css declara img { display: block }, e bloco não
+     obedece text-align: sem a margem automática o lockup encosta na
+     esquerda no celular */
+  margin-inline: auto;
+  filter: drop-shadow(0 2px 18px rgba(0,0,0,.45));
+}
+.hero-marca p {
+  margin-top: 14px;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: rgba(255,255,255,.86);
+  text-shadow: 0 1px 12px rgba(0,0,0,.5);
+}
+.nav__logo { transition: opacity var(--dur) var(--ease), visibility var(--dur); }
+.nav--sobre-marca:not(.is-stuck) .nav__logo { opacity: 0; visibility: hidden; }
+
 .hero-content {
   position: relative;
   z-index: 2;
@@ -147,59 +192,70 @@
   margin-bottom: 32px;
   text-shadow: 0 1px 12px rgba(0,0,0,.5);
 }
+/* ── o rodapé do hero ─────────────────────────────────────────
+   As três lâminas dividem a MESMA célula do grid. A caixa assume a
+   altura da mais alta, então a troca de texto não muda a altura do
+   hero nem empurra nada: o que muda é opacidade e 14px de deslocamento.
+
+   O título encolheu em relação ao que era. Ele deixou de ser o centro
+   da tela e virou legenda de rodapé: quem carrega a marca agora é o
+   lockup no alto, como na referência. Por isso saiu também o
+   mix-blend-mode: difference, que existia para um título gigante sobre
+   foto e aqui só tornaria a leitura imprevisível. */
+.hero-rotativo {
+  display: grid;
+  margin-bottom: 30px;
+}
+.hero-lamina {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(14px);
+  /* a que SAI leva .4s e vai primeiro */
+  transition: opacity .35s var(--ease), transform .35s var(--ease-out);
+}
+/* a que ENTRA espera a outra terminar. Sem o atraso as duas ficam
+   legíveis ao mesmo tempo no meio da troca, e o rodapé do hero vira
+   dois textos sobrepostos. */
+.hero-lamina.is-on {
+  opacity: 1;
+  transform: none;
+  transition: opacity .5s var(--ease) .28s, transform .5s var(--ease-out) .28s;
+}
+
 .hero-title {
   font-family: var(--font-display);
-  font-size: var(--text-hero);
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: .06em;
-  text-transform: uppercase;
+  font-size: clamp(1.5rem, .95rem + 2.35vw, 3rem);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: .01em;
   color: var(--white);
-  margin-bottom: 24px;
-  overflow: hidden;
-  mix-blend-mode: difference;
-  /* a manchete foi composta em duas linhas (o <br> no HTML). Sem isto
-     ela reflui em quatro, com "PARA" sozinha na segunda. Abaixo de
-     1200px as duas linhas não cabem em nenhum tamanho legível, então
-     o <br> sai e o balanceamento distribui as linhas por igual. */
+  margin: 0 0 14px;
   text-wrap: balance;
-  /* Abaixo de 1200px a composição de duas linhas não cabe em tamanho
-     nenhum. O teto aqui é a primeira linha ("Um Lugar Para", 9,85em
-     medidos): acima dele "Para" cai sozinha numa linha só dela. Em
-     375px isso dá 34px, contra os 44,6px do clamp. */
-  font-size: min(
-    var(--text-hero),
-    calc((100vw - 2 * var(--gutter)) / 9.85)
-  );
+  max-width: 22ch;
+  margin-inline: auto;
+  text-shadow: 0 1px 18px rgba(0,0,0,.5);
 }
-.hero-title br { display: none; }
-
-@media (min-width: 1200px) {
-  .hero-content { max-width: 1360px; }
-  .hero-title br { display: inline; }
-  /* Medido no navegador: a segunda linha ("Momentos Excepcionais",
-     duas caixas inline-block com o espaço entre elas) precisa de
-     15,56em. O divisor 15,9 guarda a folga. Sem este teto o clamp de
-     --text-hero pede 96px onde só cabem 80px, e a linha quebra em duas. */
-  .hero-title {
-    font-size: min(
-      var(--text-hero),
-      calc((min(1360px, 100vw) - 2 * var(--gutter)) / 15.9)
-    );
-  }
-}
+/* Caixa alta com tracking largo serve rótulo curto, do tipo "CNN" na
+   referência. Aqui as linhas são frases inteiras, e em 390px a versão
+   em caixa alta ocupava três linhas sobre foto movimentada. Volta ao
+   tratamento que a casa já usa para frase: serifa em itálico. */
 .hero-sub {
   font-family: var(--font-display);
-  font-size: var(--text-hero-sub);
+  font-size: clamp(.95rem, .88rem + .3vw, 1.15rem);
   font-weight: 400;
   font-style: italic;
-  color: rgba(255,255,255,.95);
-  margin-bottom: 44px;
-  letter-spacing: .04em;
-  text-shadow: 0 1px 12px rgba(0,0,0,.4);
+  letter-spacing: .02em;
+  color: rgba(255,255,255,.9);
+  margin: 0 auto;
+  max-width: 40ch;
+  text-wrap: balance;
+  text-shadow: 0 1px 14px rgba(0,0,0,.5);
 }
-/* o que o GSAP revela na entrada começa invisível só quando há script */
-.js .hero-fade { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  /* sem rodízio: a primeira lâmina fica, e fica parada */
+  .hero-lamina { transition: none; }
+}
 .hero-scroll {
   position: absolute;
   bottom: 40px;
@@ -707,5 +763,4 @@
 @media (prefers-reduced-motion: reduce) {
   .hero-bg, .banner-bg { animation: none; }
   .js .word-inner { transform: none; }
-  .js .hero-fade { opacity: 1; }
 }
