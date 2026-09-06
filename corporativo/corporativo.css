@@ -42,15 +42,23 @@
   padding: 16px var(--gutter);
   background: rgba(30,50,92,0);
   /* sem padding na transição: animar padding relayouta a nav a cada quadro */
-  transition: background var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  /* sem box-shadow na transição: sombra não é propriedade de compositor */
+  transition: background var(--dur) var(--ease);
 }
 .nav.is-stuck {
   background: rgba(30,50,92,.97);
   padding-block: 11px;
-  box-shadow: 0 1px 0 rgba(255,255,255,.1);
+  box-shadow: var(--elev-luz);
 }
-@supports (backdrop-filter: blur(8px)) {
-  .nav.is-stuck { background: rgba(30,50,92,.86); backdrop-filter: blur(14px); }
+/* o @supports precisa testar as duas grafias: o Safari só aceitou
+   backdrop-filter sem prefixo no 18, e sem isso todo iPhone com iOS 17
+   ou anterior cai no fundo opaco em silêncio */
+@supports ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
+  .nav.is-stuck {
+    background: rgba(30,50,92,.86);
+    -webkit-backdrop-filter: blur(14px) saturate(125%);
+            backdrop-filter: blur(14px) saturate(125%);
+  }
 }
 
 .nav__brand { display: flex; align-items: center; gap: 11px; text-decoration: none; color: #fff; }
@@ -85,8 +93,12 @@
    translúcido. O rótulo continua claro porque o botão usa a variante
    on-dark: um fundo escuro com rótulo escuro apagava o texto. */
 .nav:not(.is-stuck) .btn--primary { background: rgba(11,19,38,.42); }
-@supports (backdrop-filter: blur(6px)) {
-  .nav:not(.is-stuck) .btn--primary { background: rgba(11,19,38,.28); backdrop-filter: blur(10px); }
+@supports ((-webkit-backdrop-filter: blur(6px)) or (backdrop-filter: blur(6px))) {
+  .nav:not(.is-stuck) .btn--primary {
+    background: rgba(11,19,38,.28);
+    -webkit-backdrop-filter: blur(10px) saturate(135%);
+            backdrop-filter: blur(10px) saturate(135%);
+  }
 }
 
 .nav__toggle {
@@ -317,37 +329,6 @@
    precisar escurecer mais a imagem. */
 .section--respiro .eyebrow { color: #fff; }
 
-.stats {
-  display: grid; gap: 1px;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  background: rgba(255,255,255,.24);
-  border: 1px solid rgba(255,255,255,.24);
-  margin-top: clamp(38px, 4.4vw, 62px);
-}
-.stat {
-  background: rgba(14,22,42,.5);
-  padding: clamp(24px, 3vw, 38px);
-}
-@supports (backdrop-filter: blur(6px)) {
-  .stat { background: rgba(14,22,42,.34); backdrop-filter: blur(12px); }
-}
-.stat__n {
-  font-family: var(--font-display); font-size: clamp(2.2rem, 4vw, 3.4rem);
-  line-height: 1; color: #fff; font-weight: 400; display: block;
-  font-variant-numeric: tabular-nums;
-}
-/* placeholder de número ainda não confirmado pela Di Terrá */
-.stat__n--tbd {
-  font-family: var(--font-sans); font-size: var(--text-lg);
-  font-weight: 300; letter-spacing: .01em;
-  color: rgba(255,255,255,.86);
-  border-bottom-color: rgba(255,255,255,.42);
-}
-.stat__l {
-  font-size: var(--text-xs); letter-spacing: .16em; text-transform: uppercase;
-  color: rgba(255,255,255,.8); margin-top: 12px; display: block;
-}
-
 /* ══════════════════════════════════════════════════════════════════════
    FORMATOS — grade bento com fotografia
 
@@ -363,7 +344,38 @@
    corporativo.css carrega depois, um "relative" nesta regra o anulava */
 /* no celular não há pilha: um sticky sem top é inerte, mas deixar
    explícito evita surpresa se alguém mexer no utilitário depois */
-@media (max-width: 859px) { .fmt { position: static; } }
+@media (max-width: 859px) {
+  /* no celular não há pilha, mas o ::before precisa de âncora e de
+     contexto de empilhamento próprio. Só aqui dentro: um .fmt
+     { position: relative } sem qualificação venceria o
+     .pilha__item { position: sticky } do base.css (mesma especificidade,
+     este arquivo carrega depois) e mataria a pilha em desktop. */
+  .fmt { position: relative; isolation: isolate; }
+}
+
+/* A sombra da placa mora no PAI, não no cartão: o .fmt__cartao tem
+   overflow: hidden (a camada seria aparada), isolation: isolate, e o
+   ::after dele já é o véu. O --cp é escrito no .fmt pelo próprio JS da
+   rolagem, então é o único lugar onde a variável alcança um pseudo.
+
+   Antes o cartão coberto ficava desfocado e elevado ao mesmo tempo, com
+   a mesma sombra chapada do cartão da frente. Agora a sombra chega ao
+   chão na mesma medida em que ele recua, e a escala espelha o
+   scale(1 - --cp * .07) do .recua para a sombra não sobrar por trás. */
+.fmt::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elev-2);
+  transform: scale(calc(1 - var(--cp, 0) * .07));
+  opacity: calc(1 - var(--cp, 0));
+  pointer-events: none;
+}
+@media (max-width: 859px) {
+  .fmt::before { transform: none; opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fmt::before { transform: none; opacity: 1; }
+}
 @media (min-width: 860px) {
   .pilha { display: block; padding-bottom: 12vh; }
   .fmt { top: 12vh; margin-bottom: 7vh; height: 76vh; }
@@ -378,7 +390,6 @@
   min-height: clamp(240px, 34vw, 320px);
   display: flex; align-items: flex-start; justify-content: center;
   isolation: isolate;
-  box-shadow: 0 30px 60px -30px rgba(14,22,42,.5);
 }
 @media (min-width: 860px) {
   .fmt__cartao { min-height: 0; }
@@ -583,6 +594,7 @@
 .stay figure {
   aspect-ratio: 3 / 2; border-radius: var(--radius-lg);
   overflow: hidden; background: var(--sand-200);
+  box-shadow: var(--elev-fio);
 }
 .stay figure img {
   width: 100%; height: 100%; object-fit: cover;
@@ -686,7 +698,7 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
   border: 1px solid rgba(255,255,255,.2); border-radius: 999px;
   text-decoration: none;
   font-size: var(--text-sm); font-weight: 500; letter-spacing: .04em;
-  box-shadow: 0 10px 34px rgba(10,18,36,.3);
+  box-shadow: var(--elev-flutuante);
   opacity: 0; visibility: hidden; transform: translateY(12px);
   transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease),
               visibility var(--dur), background var(--dur-fast) var(--ease);
@@ -822,6 +834,7 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
   background: var(--ui-bg-alt);
   border: 1px solid var(--ui-border);
   border-radius: var(--radius-lg);
+  box-shadow: var(--elev-1);
 }
 .depo__item blockquote {
   font-family: var(--font-display);

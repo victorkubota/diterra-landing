@@ -283,6 +283,9 @@
   overflow: hidden;
   border-radius: var(--radius-xl);
   aspect-ratio: 3/4;
+  /* fotografia com corte a sangue sobre marfim dissolve quando o
+     recorte cai num céu claro: o que ela precisa é fio, não levante */
+  box-shadow: var(--elev-fio);
 }
 /* a proporção 3/4 já batia com a referência; o que faltava era altura
    de viewport e a fixação: 620x810 numa tela de 1440x900 são 90vh */
@@ -363,6 +366,7 @@
   aspect-ratio: 3/4;
   overflow: hidden;
   border-radius: var(--radius-lg);
+  box-shadow: var(--elev-fio);
 }
 .evento-card img {
   width: 100%; height: 100%;
@@ -518,6 +522,7 @@
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-lg);
+  box-shadow: var(--elev-fio);
 }
 .galeria-item:nth-child(1) { grid-row: span 2; }
 .galeria-item:nth-child(4) { grid-column: span 2; }
@@ -589,6 +594,9 @@
   padding: clamp(24px, 3vw, 40px);
   border-radius: var(--radius-xl);
   border: 1px solid var(--ui-border);
+  /* branco sobre marfim-claro, hoje segurado só por uma borda de 1px:
+     é a superfície que mais mente na página */
+  box-shadow: var(--elev-1);
 }
 .form-row {
   display: grid;
