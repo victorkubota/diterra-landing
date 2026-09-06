@@ -519,14 +519,27 @@
     aspect-ratio: auto;
     transition: flex-grow .55s var(--ease-out);
   }
-  .eventos-grid:hover .evento-card       { flex-grow: .70; }
-  .eventos-grid .evento-card:hover       { flex-grow: 1.9; }
+  /* A proporção afrouxou de 1,9/.70 para 1,55/.815, e o motivo é o
+     rótulo. O nome mais largo, "Corporativos", mede 226px; com a
+     proporção anterior o cartão recuado ficava com 223px e o nome não
+     cabia de jeito nenhum. Agora o recuado tem 260px e o aberto 495px:
+     a abertura continua evidente, quase 2 para 1, e os quatro nomes
+     continuam legíveis o tempo todo. */
+  .eventos-grid:hover .evento-card       { flex-grow: .815; }
+  .eventos-grid .evento-card:hover       { flex-grow: 1.55; }
 
-  .eventos-grid:hover .evento-card-overlay > * {
+  /* o NOME fica sempre. Some só a linha de apoio, que é a única que não
+     cabe em 260px sem quebrar em duas */
+  .eventos-grid:hover .evento-card .evento-tag {
     opacity: 0;
-    transition: opacity .3s var(--ease), transform .5s var(--ease);
+    transition: opacity .3s var(--ease);
   }
-  .eventos-grid .evento-card:hover .evento-card-overlay > * { opacity: 1; }
+  .eventos-grid .evento-card:hover .evento-tag { opacity: 1; }
+
+  /* o rótulo encolhe um degrau e a moldura aperta, para o nome caber no
+     cartão recuado sem nunca quebrar linha */
+  .evento-card-overlay { padding: 24px 22px; }
+  .evento-card-overlay h3 { font-size: clamp(1.2rem, 1rem + .55vw, 1.55rem); }
 
   .evento-card:hover img { transform: none; }
 }
