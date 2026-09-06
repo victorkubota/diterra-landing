@@ -55,4 +55,43 @@
      rosa da marca sobre royal (8,7:1) quando o formulário está no escuro */
   --ui-erro:               #9a4a1f;
   --ui-erro-on-dark:       var(--rose);
+
+  /* ── SOMBRA E LUZ ────────────────────────────────────────────────────
+     Só cor: a estrutura das camadas mora em assets/css/base.css e vale
+     para os dois universos.
+
+     A sombra não é preta, é o royal com alpha. Sobre marfim quente a
+     sombra neutra puxa cinza fotográfico; a tinta da marca puxa a própria
+     página, e é a sombra fria que uma parede clara realmente faz.
+
+     Contraste de aresta medido:
+       contato .14 sobre ivory-light #fffdf2 .... 1,34:1
+       fio     .20 sobre ivory       #fefae0 .... 1,53:1
+       barra   .24 sobre ivory       #fefae0 .... 1,65:1
+     O contato lê com a mesma força do --ui-border que já está na página:
+     uma espessura de aresta só, dita duas vezes.                        */
+
+  /* chão claro */
+  --ui-sombra-contato:         rgba(17,21,66,.14);
+  --ui-sombra-ambiente:        rgba(17,21,66,.10);
+  /* queda funda: a placa da pilha e o cromo flutuante, que precisam de
+     peso sobre conteúdo arbitrário */
+  --ui-sombra-funda:           rgba(9,11,40,.42);
+  /* a barra do polegar sobe sobre qualquer coisa, foto clara incluída;
+     substitui o rgba(0,0,0,.18) literal e sai mais forte que ele
+     (1,65:1 contra 1,52:1) */
+  --ui-sombra-barra:           rgba(17,21,66,.24);
+  /* o anel de 1px que circunda fotografia sem borda */
+  --ui-sombra-fio:             rgba(17,21,66,.20);
+
+  /* chão ESCURO: o royal não escurece o royal, a sombra sobre o bloco
+     escuro tem de ser mais funda que o bloco */
+  --ui-sombra-contato-invert:  rgba(4,5,22,.50);
+  --ui-sombra-ambiente-invert: rgba(4,5,22,.36);
+
+  /* filete de luz na aresta de baixo do vidro fixo. Marfim e não branco:
+     branco puro sobre royal esfria a aresta e destoa do resto */
+  --ui-luz-fio:                rgba(254,250,224,.14);
+  /* superfície translúcida sobre fundo escuro */
+  --ui-superficie-invert:      rgba(254,250,224,.10);
 }

@@ -92,6 +92,62 @@
      .25s já é lento demais para o instante entre apertar e soltar */
   --dur-press: .1s;
 
+  /* ── ELEVAÇÃO ────────────────────────────────────────────────────────
+     Aqui mora a FORMA da sombra: deslocamento, desfoque, spread e quantas
+     camadas. A COR de cada camada vem de um token --ui-* que os dois temas
+     declaram, que é a mesma divisão do resto do arquivo.
+
+     Uma direção de luz só na página inteira: alta e de frente, sombra para
+     baixo, deslocamento lateral zero. A única exceção é --elev-barra, que
+     sobe porque a barra fixa mora na borda de baixo da tela e é ela que
+     separa a barra do conteúdo que passa por baixo. Oclusão, não projeção.
+
+     Duas camadas por degrau. CONTATO encosta a peça no papel: 1 a 2px de
+     deslocamento, desfoque curto, a mais opaca. AMBIENTE é a poça embaixo:
+     deslocamento médio, desfoque largo, spread negativo pequeno, que segura
+     a sombra debaixo do objeto em vez de deixá-la vazar pelas laterais.
+     Pequeno de propósito: spread muito negativo encolhe tanto a fonte da
+     sombra que a camada some nas caixas pequenas, que são as que mais
+     precisam dela.
+
+     Nada aqui anima. Nenhuma sombra é transicionada em lugar nenhum do
+     site, porque sombra não é propriedade de compositor. A única que muda
+     em cena é a da pilha de formatos, por opacidade de um pseudo preso ao
+     --cp que a rolagem já escreve.                                       */
+
+  /* papel apoiado na mesa: formulário, cartão, depoimento */
+  --elev-1:
+    0 1px 2px var(--ui-sombra-contato),
+    0 10px 24px -8px var(--ui-sombra-ambiente);
+
+  /* a placa grande da pilha de formatos, e só ela. Nasce com o peso que já
+     tinha no ar (0 30px 60px -30px), mais a camada de contato que faltava */
+  --elev-2:
+    0 2px 6px var(--ui-sombra-contato),
+    0 30px 60px -30px var(--ui-sombra-funda);
+
+  /* cromo fixo sobre conteúdo arbitrário: voltar-ao-topo e balão do
+     WhatsApp. Spread quase nulo de propósito: numa pílula de 46px um
+     spread de -20px encolheria a fonte da sombra para 6x6px e a camada
+     de ambiente deixaria de existir. */
+  --elev-flutuante:
+    0 2px 6px var(--ui-sombra-contato),
+    0 10px 30px -2px var(--ui-sombra-funda);
+
+  /* a exceção declarada: a barra do polegar projeta para CIMA. Uma camada
+     e não duas, porque a aresta já é um border-top de 1px de verdade. */
+  --elev-barra: 0 -10px 30px -6px var(--ui-sombra-barra);
+
+  /* Degrau que não é sombra, é corte. Fotografia sem borda dissolve no
+     marfim e na areia quando o recorte cai num céu claro. Anel de 1px por
+     spread: fica FORA da border box, então o overflow hidden do próprio
+     elemento não o apara, e ele acompanha o border-radius. */
+  --elev-fio: 0 0 0 1px var(--ui-sombra-fio);
+
+  /* Sobre fundo escuro sombra é invisível: o que separa é luz. Filete de
+     1px na aresta de baixo do vidro fixo. */
+  --elev-luz: 0 1px 0 var(--ui-luz-fio);
+
   /* Dois gestos de pressão, não um: onde há borda de 1px, escalar
      serrilha a linha, então o elemento afunda; onde não há, ele encolhe.
      Ficam em token para o bloco de movimento reduzido desligar os dois
@@ -207,6 +263,31 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
 .skip:focus { left: 12px; top: 12px; }
 
 :focus-visible { outline: 2px solid var(--ui-accent); outline-offset: 3px; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   TROCA DE CHÃO
+   Quem decide a cor da sombra é a superfície onde ela CAI, não a peça que
+   a projeta. O mesmo .card branco vive sobre marfim no hub e dentro de
+   .section--invert royal em nove rotas, e sombra royal sobre royal não
+   existe.
+
+   Atenção ao mecanismo: não adianta redeclarar só --ui-sombra-contato
+   aqui. O valor computado de uma custom property já vem com os var()
+   substituídos, então o que desce herdado é a string pronta com a cor de
+   marfim dentro. O que funciona é redeclarar o PRÓPRIO --elev-1 neste
+   escopo.
+
+   Só --elev-1 troca. A .barra-acao carrega .on-dark no HTML das treze
+   rotas e herdaria a sombra errada; o .to-top e o .wa são fixos no body e
+   atravessam todos os chãos da página.
+   ══════════════════════════════════════════════════════════════════════ */
+.section--invert,
+.foot,
+.on-dark {
+  --elev-1:
+    0 2px 4px var(--ui-sombra-contato-invert),
+    0 16px 36px -12px var(--ui-sombra-ambiente-invert);
+}
 
 /* ══════════════════════════════════════════════════════════════════════
    GRADE
@@ -457,7 +538,7 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
 .form-status:focus { outline: 2px solid var(--ui-accent); outline-offset: 3px; }
 .form-status--ok { background: var(--ui-notice-bg); color: var(--ui-notice-text); border-color: transparent; }
 .form-status--erro { color: var(--ui-erro); border-color: var(--ui-erro); }
-.on-dark .form-status--ok { background: rgba(255,255,255,.1); color: var(--ui-text-invert); }
+.on-dark .form-status--ok { background: var(--ui-superficie-invert); color: var(--ui-text-invert); }
 .on-dark .form-status--erro { color: var(--ui-erro-on-dark); border-color: var(--ui-erro-on-dark); }
 .on-dark .campo-erro { color: var(--ui-erro-on-dark); }
 .on-dark [aria-invalid="true"] { border-color: var(--ui-erro-on-dark) !important; }
@@ -655,7 +736,7 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
   padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom, 0px));
   background: var(--ui-bg-invert); color: var(--ui-text-invert);
   border-top: 1px solid var(--ui-border-invert);
-  box-shadow: 0 -8px 30px rgba(0,0,0,.18);
+  box-shadow: var(--elev-barra);
   transform: translateY(110%);
   transition: transform var(--dur) var(--ease-out);
 }
@@ -696,6 +777,7 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
   opacity: 0; visibility: hidden; transform: translateY(10px);
   transition: opacity var(--dur) var(--ease-out), transform var(--dur) var(--ease-out),
               visibility var(--dur), background var(--dur-fast) var(--ease-out);
+  box-shadow: var(--elev-flutuante);
 }
 .to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
 .to-top:hover { background: var(--ui-accent); }
@@ -927,7 +1009,7 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: .15s !important;
-    transition-property: opacity, color, background-color, border-color, box-shadow, outline-color !important;
+    transition-property: opacity, color, background-color, border-color, outline-color !important;
   }
   .js .rise { opacity: 1; transform: none; }
   /* sem recolhimento: o hero volta a ser um bloco comum */

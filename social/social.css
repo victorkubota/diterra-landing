@@ -47,9 +47,19 @@
   transition: background var(--dur) var(--ease);
 }
 /* o padding muda sem transição: animar padding relayouta a nav a cada quadro */
-.nav.is-stuck { background: rgba(17,21,66,.96); padding-block: 10px; }
-@supports (backdrop-filter: blur(8px)) {
-  .nav.is-stuck { background: rgba(17,21,66,.86); backdrop-filter: blur(14px); }
+.nav.is-stuck { background: rgba(17,21,66,.96); padding-block: 10px; box-shadow: var(--elev-luz); }
+/* o Safari só aceitou backdrop-filter sem prefixo no 18: sem testar as
+   duas grafias, todo iPhone com iOS 17 ou anterior reprova o @supports,
+   a regra nunca entra e a nav cai no fundo opaco, em silêncio, no
+   aparelho onde ela mais aparece.
+   saturate(125%) porque blur faz média dos vizinhos e média dessatura:
+   a foto por baixo do vidro chega acinzentada sem isso. */
+@supports ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
+  .nav.is-stuck {
+    background: rgba(17,21,66,.86);
+    -webkit-backdrop-filter: blur(14px) saturate(125%);
+            backdrop-filter: blur(14px) saturate(125%);
+  }
 }
 .nav__logo { display: block; flex: none; }
 .nav__logo img { height: clamp(34px, 4vw, 46px); width: auto; view-transition-name: marca; }
@@ -222,6 +232,12 @@
   color: var(--ui-text);
   background: var(--ui-bg-alt); border: 1px solid var(--ui-border);
   border-radius: var(--radius); overflow: hidden;
+  /* estática no repouso e no hover: o levante já é lido pelo translateY
+     e pela borda que escurece. Uma camada em ::after seria aparada pelo
+     overflow: hidden e a elevação simplesmente não aconteceria. Nas nove
+     rotas em que o cartão vive dentro de .section--invert, a troca de
+     chão do base.css entrega a versão funda sem override aqui. */
+  box-shadow: var(--elev-1);
   transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 /* O cartão inteiro é o <a>, então o teclado recebe o mesmo levante que
