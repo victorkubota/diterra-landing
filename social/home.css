@@ -427,6 +427,62 @@
 .evento-card:hover .evento-card-overlay .evento-tag { transform: translateY(-2px); }
 
 /* ══════════════════════════════════════════════════════════════
+   OCASIÕES — acordeão no ponteiro fino
+   Referência: Klarna. Os quatro cartões dividem a faixa por igual; o
+   que recebe o ponteiro abre e os outros três recuam.
+
+   SÓ acima de 1024px, que é onde a grade tem as quatro colunas, e só
+   com ponteiro fino: no toque não existe passar por cima, e um cartão
+   que abrisse no tap roubaria o gesto de rolar.
+
+   A ALTURA DA FAIXA É FIXA, na mesma conta que a grade produz hoje:
+   (100vw - 2 gutter - 3 gaps) / 4, vezes 4/3 do aspect-ratio, que
+   simplifica para dividir por 3. Confere com os 426px medidos em
+   1440. Sem isso o cartão que abre ficaria mais alto, a seção mudaria
+   de altura a cada hover e a página andaria embaixo do mouse.
+
+   O RÓTULO DO CARTÃO RECUADO SAI POR OPACIDADE, não por tamanho. O
+   mais largo mede 226px e o cartão recuado tem 223px: nenhum ajuste
+   de escala caberia sem quebrar a linha. Quem você aponta diz o nome;
+   os outros voltam a ser fotografia, que é o que a seção vende.
+
+   O zoom da foto sai aqui: a abertura já é o gesto, e o object-fit
+   corta a imagem enquanto o cartão estreita, o que por si só lê como
+   aproximação. Dois gestos no mesmo hover viram ruído.
+   ══════════════════════════════════════════════════════════════ */
+@media (hover: hover) and (min-width: 1025px) {
+  .eventos-grid {
+    display: flex;
+    height: calc((100vw - 2 * var(--gutter) - 48px) / 3);
+  }
+  .evento-card {
+    flex: 1 1 0;
+    min-width: 0;
+    aspect-ratio: auto;
+    transition: flex-grow .55s var(--ease-out);
+  }
+  .eventos-grid:hover .evento-card       { flex-grow: .70; }
+  .eventos-grid .evento-card:hover       { flex-grow: 1.9; }
+
+  .eventos-grid:hover .evento-card-overlay > * {
+    opacity: 0;
+    transition: opacity .3s var(--ease), transform .5s var(--ease);
+  }
+  .eventos-grid .evento-card:hover .evento-card-overlay > * { opacity: 1; }
+
+  .evento-card:hover img { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* o acordeão é deslocamento de layout: com movimento reduzido a
+     faixa fica como em repouso, os quatro do mesmo tamanho e os
+     quatro rótulos visíveis */
+  .eventos-grid:hover .evento-card,
+  .eventos-grid .evento-card:hover { flex-grow: 1; }
+  .eventos-grid:hover .evento-card-overlay > * { opacity: 1; }
+}
+
+/* ══════════════════════════════════════════════════════════════
    § 5 — BANNER FULLWIDTH
    ══════════════════════════════════════════════════════════════ */
 .banner {
