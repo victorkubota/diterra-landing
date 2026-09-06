@@ -81,6 +81,10 @@
   --ui-luz-fio:                rgba(255,255,255,.14);
   --ui-superficie-invert:      rgba(255,255,255,.10);
 
+  /* mesmo papel do social, com o azul da casa: --navy-700 em vez do
+     navy-900, pela mesma razão de croma */
+  --ui-brilho:                 rgba(28,76,126,.26);
+
   /* paridade anterior a este módulo: o token existia só no tema social e
      o linter já falhava por isso. O papel é "link pequeno dentro de
      cartão" (.card__more); no corporativo isso é o azul escuro, 7,2:1

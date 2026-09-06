@@ -94,4 +94,10 @@
   --ui-luz-fio:                rgba(254,250,224,.14);
   /* superfície translúcida sobre fundo escuro */
   --ui-superficie-invert:      rgba(254,250,224,.10);
+
+  /* o brilho da fotografia: o royal clareado (--royal-80), não o royal
+     puro. O royal puro é escuro demais para virar halo, some no marfim
+     como sombra comum; a 80% ele mantém croma e a foto passa a devolver
+     cor ao papel em vez de só cortá-lo. */
+  --ui-brilho:                 rgba(42,47,92,.30);
 }

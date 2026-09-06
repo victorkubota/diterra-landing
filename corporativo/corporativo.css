@@ -594,7 +594,7 @@
 .stay figure {
   aspect-ratio: 3 / 2; border-radius: var(--radius-lg);
   overflow: hidden; background: var(--sand-200);
-  box-shadow: var(--elev-fio);
+  box-shadow: var(--elev-foto);
 }
 .stay figure img {
   width: 100%; height: 100%; object-fit: cover;
