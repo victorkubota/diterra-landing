@@ -885,3 +885,63 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
   max-width: 83vw;
   margin-inline: auto;
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   Este bloco morava no base.css. Só o #manifesto o instancia, e o
+   detector acusava gradient-text em TODA rota que carrega o base,
+   porque a regra estava lá mesmo sem consumidor. Componente de um
+   consumidor só mora no arquivo desse consumidor; se um dia o social
+   pedir o mesmo gesto, ele sobe para o base junto com o segundo uso.
+   ══════════════════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════════════
+   TÍTULO QUE ACENDE
+   O texto entra apagado e acende da esquerda para a direita conforme a
+   seção sobe. Não é o bloco inteiro aparecendo: é uma frente de luz que
+   atravessa a linha, então a leitura acompanha o movimento em vez de
+   esperar por ele terminar.
+
+   Um elemento, uma animação, uma propriedade registrada. O gradiente é
+   pintado dentro do próprio texto por background-clip, e o que anima é a
+   posição da parada. A alternativa seria um nó por letra com uma linha
+   do tempo cada: trinta elementos onde basta um.
+
+   A tinta NÃO pode ser currentColor. Com color: transparent, currentColor
+   também é transparente, e o título some. Por isso a cor entra por
+   --acende-tinta, que o bloco escuro redefine.
+
+   Tudo atrás de @supports: color: transparent sem o gradiente é texto
+   invisível. Onde o navegador não acompanha, o título é só o título.
+   ══════════════════════════════════════════════════════════════════════ */
+.acende { --acende-tinta: var(--ui-text); }
+.on-dark .acende,
+.section--invert .acende { --acende-tinta: var(--ui-text-invert); }
+
+@supports (animation-timeline: view()) and ((-webkit-background-clip: text) or (background-clip: text)) {
+  @property --acende {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 0%;
+  }
+
+  .acende {
+    background-image: linear-gradient(
+      100deg,
+      var(--acende-tinta) 0%,
+      var(--acende-tinta) var(--acende),
+      color-mix(in oklab, var(--acende-tinta) 20%, transparent) calc(var(--acende) + 14%),
+      color-mix(in oklab, var(--acende-tinta) 20%, transparent) 100%
+    );
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+    animation: acender linear both;
+    animation-timeline: view();
+    animation-range: entry 20% cover 35%;
+  }
+  @keyframes acender { to { --acende: 106%; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    /* sem varredura: o título nasce aceso */
+    .acende { animation: none; --acende: 106%; }
+  }
+}

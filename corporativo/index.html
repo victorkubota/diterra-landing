@@ -115,7 +115,7 @@
      ══════════════════════════════════════════════════════════════ -->
 <section class="section section--paper section--tight" id="clientes">
   <div class="wrap">
-    <h2 class="h-section clientes__titulo linhas">Marcas que escolheram a Di Terrá</h2>
+    <h2 class="h-section clientes__titulo linhas">Marcas que escolheram a Di Terrá</h2>
   </div>
   <div class="faixa rise" style="--i:2" id="faixaLogos" aria-label="Empresas que já realizaram eventos na Di Terrá">
     <button class="faixa__pausa" type="button" aria-pressed="false" aria-controls="faixaLogos">Pausar</button>
@@ -172,7 +172,7 @@
       </figure>
     </div>
     <div class="manifesto__body">
-      <h2 class="h-section manchete linhas" style="--i:1">O enredo de um evento que acontece por inteiro</h2>
+      <h2 class="h-section manchete acende" style="--i:1">O enredo de um evento que acontece por inteiro</h2>
       <p class="rise" style="--i:2">Cada empresa tem uma história para contar, e nós transformamos essa história em experiência.</p>
       <p class="rise" style="--i:3">Cuidamos de tudo e de todos os detalhes para que as conexões sejam reais e para que cada encontro fortaleça a cultura da empresa.</p>
       <p class="rise" style="--i:4">
@@ -988,7 +988,13 @@
   var montarLinhas = function (el) {
     var bruto = el.getAttribute('data-linhas');
     if (bruto === null) {
-      bruto = el.children.length ? '' : el.textContent.replace(/\s+/g, ' ').trim();
+      /* mesma correção de assets/site.js: [^\S\u00a0] é "espaço em branco
+         que NÃO é espaço rígido". Com /\s+/ o \u00a0 virava espaço comum e
+         o split abaixo separava "Di Terrá" em duas palavras, dando ao
+         título o direito de quebrar no meio do nome da marca.
+         Esta página não carrega o assets/site.js: ela traz a própria cópia
+         deste runtime, então as duas precisam do mesmo conserto. */
+      bruto = el.children.length ? '' : el.textContent.replace(/[^\S\u00a0]+/g, ' ').trim();
       el.setAttribute('data-linhas', bruto);
     }
 
