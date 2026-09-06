@@ -1007,9 +1007,9 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
   .hero-palco > .page-hero {
     clip-path: inset(
       0
-      calc(var(--hp, 0) * var(--laje-recuo))
+      calc(var(--hp, 0) * var(--hero-recolhe))
       calc(var(--hp, 0) * 4svh)
-      calc(var(--hp, 0) * var(--laje-recuo))
+      calc(var(--hp, 0) * var(--hero-recolhe))
       round 0 0 calc(var(--hp, 0) * var(--laje-raio)) calc(var(--hp, 0) * var(--laje-raio))
     );
   }
@@ -1048,6 +1048,63 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════
+   TÍTULO QUE ACENDE
+   Morou no corporativo.css enquanto teve um consumidor só, com a nota
+   de que subiria para cá junto com o segundo uso. O segundo uso chegou:
+   a "Solução completa" do social pedia a mesma frente de luz no lugar
+   da subida por máscara. Duas rotas, um gesto, um bloco.
+   O texto entra apagado e acende da esquerda para a direita conforme a
+   seção sobe. Não é o bloco inteiro aparecendo: é uma frente de luz que
+   atravessa a linha, então a leitura acompanha o movimento em vez de
+   esperar por ele terminar.
+
+   Um elemento, uma animação, uma propriedade registrada. O gradiente é
+   pintado dentro do próprio texto por background-clip, e o que anima é a
+   posição da parada. A alternativa seria um nó por letra com uma linha
+   do tempo cada: trinta elementos onde basta um.
+
+   A tinta NÃO pode ser currentColor. Com color: transparent, currentColor
+   também é transparente, e o título some. Por isso a cor entra por
+   --acende-tinta, que o bloco escuro redefine.
+
+   Tudo atrás de @supports: color: transparent sem o gradiente é texto
+   invisível. Onde o navegador não acompanha, o título é só o título.
+   ══════════════════════════════════════════════════════════════════════ */
+.acende { --acende-tinta: var(--ui-text); }
+.on-dark .acende,
+.section--invert .acende { --acende-tinta: var(--ui-text-invert); }
+
+@supports (animation-timeline: view()) and ((-webkit-background-clip: text) or (background-clip: text)) {
+  @property --acende {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 0%;
+  }
+
+  .acende {
+    background-image: linear-gradient(
+      100deg,
+      var(--acende-tinta) 0%,
+      var(--acende-tinta) var(--acende),
+      color-mix(in oklab, var(--acende-tinta) 20%, transparent) calc(var(--acende) + 14%),
+      color-mix(in oklab, var(--acende-tinta) 20%, transparent) 100%
+    );
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+    animation: acender linear both;
+    animation-timeline: view();
+    animation-range: entry 20% cover 35%;
+  }
+  @keyframes acender { to { --acende: 106%; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    /* sem varredura: o título nasce aceso */
+    .acende { animation: none; --acende: 106%; }
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
    LAJE — A SEÇÃO COMO FOLHA APOIADA SOBRE A MESA
 
    O site tem 80 fronteiras entre blocos e 45 são corte reto de cor
@@ -1075,17 +1132,23 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
    ══════════════════════════════════════════════════════════════════════ */
 
 :root {
-  /* A única medida nova: quanto da mesa aparece em volta da folha.
-     Fração da goteira, e não um clamp próprio, para que as duas nunca
-     saiam de sincronia. A soma recuo + respiro interno é sempre
-     exatamente --gutter, então nenhum texto do site anda um pixel. */
-  --laje-recuo: calc(var(--gutter) * .4);
+  /* A faixa de mesa que aparece ENTRE duas folhas de tintas diferentes.
+     A folha encosta nas duas bordas laterais; o que sobrou da medida é
+     só esta fresta horizontal, e é ela que resolve royal contra marfim
+     sem tocar em nenhuma das duas cores. Fração da goteira para que as
+     duas nunca saiam de sincronia. */
+  --laje-fresta: calc(var(--gutter) * .4);
 
-  /* O raio é o mesmo em que o hero já pousa quando se recolhe: a escada
-     de raios não cresce. O min() garante que o canto nunca coma mais
-     mesa do que existe, e é o que faz o gesto atravessar o celular sem
-     breakpoint próprio. */
-  --laje-raio: min(var(--radius-xl), calc(var(--laje-recuo) * 1.6));
+  /* Sem recuo lateral o raio para de depender de quanta mesa sobra do
+     lado e passa a ser exatamente o raio de canto dos cartões. É essa
+     igualdade que o pedido nomeia: a divisão de seção curva como o
+     cartão curva. Um valor só, sem breakpoint próprio. */
+  --laje-raio: var(--radius-xl);
+
+  /* O hero se recolhe num cartão ao sair, e isso continua sendo um gesto
+     de cartão — com recuo lateral — mesmo agora que as faixas vão de
+     borda a borda. Medida própria para que uma coisa não mate a outra. */
+  --hero-recolhe: calc(var(--gutter) * .4);
 }
 
 /* O vocabulário compartilhado de faixa pintada. A tinta mora no tema; a
@@ -1096,27 +1159,20 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
 .section--invert,
 .section--rose,
 .section--petrol {
-  margin-inline: var(--laje-recuo);
   border-radius: var(--laje-raio);
 }
 
-/* O texto não anda: o que a laje toma na margem, o wrap devolve no
-   padding. .4 fora + .6 dentro = a goteira de sempre. */
-.laje > .wrap,            .laje > .container,
-.section--paper > .wrap,  .section--paper > .container,
-.section--invert > .wrap, .section--invert > .container,
-.section--rose > .wrap,   .section--rose > .container,
-.section--petrol > .wrap, .section--petrol > .container {
-  padding-inline: calc(var(--gutter) - var(--laje-recuo));
-}
+/* Nenhuma compensação de padding: a folha não toma mais nada da margem,
+   então o wrap continua com a goteira de sempre e nenhum texto do site
+   anda um pixel — nem aqui, nem nas onze rotas geradas. */
 
 /* Duas lajes seguidas de tintas diferentes: a mesa aparece entre elas
-   com a mesma medida dos outros três lados. É essa faixa de mesa que
-   resolve royal para rosa e petróleo para branco sem tocar em nenhuma
-   das duas cores. */
+   numa fresta horizontal, e os quatro cantos curvos ficam à vista de um
+   lado e do outro. É essa fresta que resolve royal para rosa e petróleo
+   para branco sem tocar em nenhuma das duas cores. */
 :is(.laje, .section--paper, .section--invert, .section--rose, .section--petrol)
 + :is(.laje, .section--paper, .section--invert, .section--rose, .section--petrol) {
-  margin-block-start: var(--laje-recuo);
+  margin-block-start: var(--laje-fresta);
 }
 
 /* Duas lajes seguidas de MESMA tinta fundem numa folha só. Esta regra
@@ -1145,15 +1201,11 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
    houve uma. */
 @supports not selector(:has(*)) {
   .laje, .section--paper, .section--invert, .section--rose, .section--petrol {
-    margin-inline: 0;
     border-radius: 0;
   }
-  .laje > .wrap,            .laje > .container,
-  .section--paper > .wrap,  .section--paper > .container,
-  .section--invert > .wrap, .section--invert > .container,
-  .section--rose > .wrap,   .section--rose > .container,
-  .section--petrol > .wrap, .section--petrol > .container {
-    padding-inline: var(--gutter);
+  :is(.laje, .section--paper, .section--invert, .section--rose, .section--petrol)
+  + :is(.laje, .section--paper, .section--invert, .section--rose, .section--petrol) {
+    margin-block-start: 0;
   }
 }
 
