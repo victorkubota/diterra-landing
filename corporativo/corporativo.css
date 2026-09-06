@@ -293,7 +293,6 @@
   overflow: hidden;
 }
 .photo-bg { position: absolute; inset: 0; z-index: -2;
-  border-radius: var(--radius-lg);
 }
 .photo-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 60%; }
 .section--photo::before {

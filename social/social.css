@@ -183,8 +183,16 @@
 }
 @keyframes ramoRespira { from { transform: translateY(4px); } to { transform: translateY(-4px); } }
 @media (prefers-reduced-motion: reduce) { .ornament img { animation: none; } }
-.ornament--tr { top: -26px; right: -18px; width: clamp(90px, 12vw, 180px); }
-.ornament--bl { bottom: -26px; left: -22px; width: clamp(90px, 12vw, 180px); transform: rotate(180deg); }
+/* Os offsets negativos sangravam para fora da caixa e a seção cortava o
+   excesso numa aresta reta. Com a laje o corte passa a seguir a CURVA do
+   canto, e o ramo aparecia mordido pelo arredondamento — conferido na
+   tela antes de mudar. Ele entra o suficiente para limpar o raio e
+   continua encostado na quina, que é o que sempre foi.
+
+   Sangrar para fora com overflow: visible não serve: em 375px o recuo da
+   laje é 8px e os 18px do ramo criariam rolagem horizontal. */
+.ornament--tr { top: 10px; right: 4px; width: clamp(90px, 12vw, 180px); }
+.ornament--bl { bottom: 10px; left: 4px; width: clamp(90px, 12vw, 180px); transform: rotate(180deg); }
 
 /* ══════════════════════════════════════════════════════════════════════
    FICHA / LISTA DE DADOS

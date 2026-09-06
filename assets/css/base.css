@@ -997,10 +997,10 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
   .hero-palco > .page-hero {
     clip-path: inset(
       0
-      calc(var(--hp, 0) * var(--gutter))
+      calc(var(--hp, 0) * var(--laje-recuo))
       calc(var(--hp, 0) * 4svh)
-      calc(var(--hp, 0) * var(--gutter))
-      round 0 0 calc(var(--hp, 0) * var(--radius-xl)) calc(var(--hp, 0) * var(--radius-xl))
+      calc(var(--hp, 0) * var(--laje-recuo))
+      round 0 0 calc(var(--hp, 0) * var(--laje-raio)) calc(var(--hp, 0) * var(--laje-raio))
     );
   }
 }
@@ -1036,3 +1036,122 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
      campo de visão, exatamente o que incomoda quem pediu menos */
   .nav__progresso { display: none; }
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   LAJE — A SEÇÃO COMO FOLHA APOIADA SOBRE A MESA
+
+   O site tem 80 fronteiras entre blocos e 45 são corte reto de cor
+   chapada contra cor chapada. A única que alguém projetou como fronteira
+   é a do rodapé, e a razão está escrita acima: a separação vem do
+   COMPONENTE, não da página. Aqui essa mesma razão sobe de escala.
+
+   A REGRA INTEIRA, numa frase: toda faixa que tem tinta PRÓPRIA deixa de
+   ser listra de borda a borda e vira folha apoiada sobre a mesa; faixa
+   sem tinta própria não vira laje porque ela É a mesa.
+
+   É por isso que duas seções de marfim seguidas continuam sem fronteira
+   nenhuma: sempre foram um bloco só e continuam sendo.
+
+   Laje não é cartão, e a distinção é categórica: cartão anda em grade,
+   vem em três por linha e tem --elev-foto; laje é uma por faixa, ocupa a
+   coluna inteira e NÃO TEM SOMBRA. Se um dia alguém der elevação a uma
+   laje, ela virou cartão gigante e o gesto morreu.
+
+   A forma nunca usa overflow nem clip-path, de propósito: as duas
+   conteriam o position: sticky de que as pilhas e o aside do corporativo
+   dependem. border-radius pinta o fundo curvo sem recortar filho.
+
+   Nada aqui anima e nenhuma propriedade de layout entra em transição.
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* A única medida nova: quanto da mesa aparece em volta da folha.
+     Fração da goteira, e não um clamp próprio, para que as duas nunca
+     saiam de sincronia. A soma recuo + respiro interno é sempre
+     exatamente --gutter, então nenhum texto do site anda um pixel. */
+  --laje-recuo: calc(var(--gutter) * .4);
+
+  /* O raio é o mesmo em que o hero já pousa quando se recolhe: a escada
+     de raios não cresce. O min() garante que o canto nunca coma mais
+     mesa do que existe, e é o que faz o gesto atravessar o celular sem
+     breakpoint próprio. */
+  --laje-raio: min(var(--radius-xl), calc(var(--laje-recuo) * 1.6));
+}
+
+/* O vocabulário compartilhado de faixa pintada. A tinta mora no tema; a
+   forma mora aqui, uma vez só. A classe .laje existe para as três rotas
+   escritas à mão inscreverem uma faixa de nome próprio sem tocar em CSS. */
+.laje,
+.section--paper,
+.section--invert,
+.section--rose,
+.section--petrol {
+  margin-inline: var(--laje-recuo);
+  border-radius: var(--laje-raio);
+}
+
+/* O texto não anda: o que a laje toma na margem, o wrap devolve no
+   padding. .4 fora + .6 dentro = a goteira de sempre. */
+.laje > .wrap,            .laje > .container,
+.section--paper > .wrap,  .section--paper > .container,
+.section--invert > .wrap, .section--invert > .container,
+.section--rose > .wrap,   .section--rose > .container,
+.section--petrol > .wrap, .section--petrol > .container {
+  padding-inline: calc(var(--gutter) - var(--laje-recuo));
+}
+
+/* Duas lajes seguidas de tintas diferentes: a mesa aparece entre elas
+   com a mesma medida dos outros três lados. É essa faixa de mesa que
+   resolve royal para rosa e petróleo para branco sem tocar em nenhuma
+   das duas cores. */
+:is(.laje, .section--paper, .section--invert, .section--rose, .section--petrol)
++ :is(.laje, .section--paper, .section--invert, .section--rose, .section--petrol) {
+  margin-block-start: var(--laje-recuo);
+}
+
+/* Duas lajes seguidas de MESMA tinta fundem numa folha só. Esta regra
+   não é acabamento: é o que preserva #clientes e #manifesto como bloco
+   contínuo no corporativo. Eles nunca tiveram fronteira, e nada aqui
+   inventa uma. É também a regra que prova que isto não é bento. */
+.section--paper  + .section--paper,
+.section--invert + .section--invert,
+.section--rose   + .section--rose,
+.section--petrol + .section--petrol {
+  margin-block-start: 0;
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+}
+.section--paper:has(+ .section--paper),
+.section--invert:has(+ .section--invert),
+.section--rose:has(+ .section--rose),
+.section--petrol:has(+ .section--petrol) {
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
+}
+
+/* Sem :has() a fusão não acontece e um par de mesma tinta ganharia uma
+   cintura no meio. Antes disso, sem laje nenhuma: o corte reto que o
+   site sempre teve é melhor que uma fronteira inventada onde nunca
+   houve uma. */
+@supports not selector(:has(*)) {
+  .laje, .section--paper, .section--invert, .section--rose, .section--petrol {
+    margin-inline: 0;
+    border-radius: 0;
+  }
+  .laje > .wrap,            .laje > .container,
+  .section--paper > .wrap,  .section--paper > .container,
+  .section--invert > .wrap, .section--invert > .container,
+  .section--rose > .wrap,   .section--rose > .container,
+  .section--petrol > .wrap, .section--petrol > .container {
+    padding-inline: var(--gutter);
+  }
+}
+
+/* O QUE FICA RETO, DE PROPÓSITO, e a omissão é a regra:
+   1. .foot — o rodapé é o bordo da mesa, não uma folha sobre ela.
+   2. .section--photo, .section--respiro, .banner — as quatro fronteiras
+      de foto sangrando. O argumento delas é a imagem sem moldura, e
+      arredondá-las é transformar as pausas do site em cartões, que foi
+      exatamente o que a proposta revertida fez.
+   3. .hero e .page-hero em repouso: quem os arredonda é o recolhimento.
+   4. Toda faixa sem tinta própria: ela é a mesa.                       */
