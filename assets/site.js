@@ -33,6 +33,49 @@
     nav.classList.add('is-stuck');
   }
 
+  /* ── pilha: cada cartão prende e o seguinte sobe por cima ────────────
+     --cp (0 a 1) é quanto o PRÓXIMO cartão já cobriu este. A forma do
+     recuo (desfoque, escala, luz) mora no base.css; aqui só o número.
+
+     O corporativo tem a própria cópia deste laço no HTML porque não
+     carrega este arquivo. Quando ele passar a carregar, esta é a versão
+     que fica: ela lê .pilha__item em vez de .fmt, então serve qualquer
+     pilha, e mede dentro de requestAnimationFrame em vez de medir a
+     cada evento de rolagem.
+
+     Abaixo de 860px e com movimento reduzido a pilha não existe: os
+     cartões são uma lista comum e o --cp fica em zero. */
+  var pilha = document.querySelector('.pilha');
+  if (pilha) {
+    var podePilha = !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
+                    window.matchMedia('(min-width: 860px)').matches;
+    var itens = podePilha ? Array.prototype.slice.call(pilha.querySelectorAll('.pilha__item')) : [];
+
+    if (itens.length > 1) {
+      var agendado = false;
+      var medir = function () {
+        agendado = false;
+        var alto = window.innerHeight;
+        itens.forEach(function (c, i) {
+          var prox = itens[i + 1];
+          if (!prox) { c.style.setProperty('--cp', '0'); return; }
+          var curso = alto - c.getBoundingClientRect().top;
+          var avanco = alto - prox.getBoundingClientRect().top;
+          var p = curso > 0 ? avanco / curso : 0;
+          c.style.setProperty('--cp', Math.max(0, Math.min(1, p)).toFixed(4));
+        });
+      };
+      var pedir = function () {
+        if (agendado) return;
+        agendado = true;
+        window.requestAnimationFrame(medir);
+      };
+      window.addEventListener('scroll', pedir, { passive: true });
+      window.addEventListener('resize', pedir, { passive: true });
+      medir();
+    }
+  }
+
   /* ── rodízio do rodapé do hero ──────────────────────────────────────
      Três lâminas na mesma célula do grid; o que troca é a classe.
 
