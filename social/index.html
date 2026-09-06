@@ -31,7 +31,7 @@
      NAV — o mesmo componente das outras treze rotas (social.css +
      site.js): fundo ao sair do hero, gaveta no celular, régua de leitura
      ═══════════════════════════════════════════════════ -->
-<nav class="nav" id="nav" aria-label="Navegação principal">
+<nav class="nav nav--sobre-marca" id="nav" aria-label="Navegação principal">
   <a class="nav__logo" href="/social" aria-label="Di Terrá Eventos, início">
     <img src="/assets/brand/social-wordmark-white.png" alt="Di Terrá Eventos" width="472" height="94">
   </a>
@@ -69,24 +69,38 @@
 <section class="hero" id="topo">
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-overlay"></div>
+  <div class="hero-marca hero-fade">
+    <img src="/assets/brand/social-lockup-white.png" alt="Di Terrá Eventos"
+         width="454" height="288" decoding="async">
+    <p>Desde 2009 · Piracicaba, interior de São Paulo</p>
+  </div>
+
   <div class="hero-content">
     <p class="hero-eyebrow hero-fade">Piracicaba · Interior de São Paulo</p>
-    <h1 class="hero-title" id="heroTitle">
-      <span class="word-wrap"><span class="word-inner" style="--w:0">Um&nbsp;</span></span>
-      <span class="word-wrap"><span class="word-inner" style="--w:1">Lugar&nbsp;</span></span>
-      <span class="word-wrap"><span class="word-inner" style="--w:2">Para</span></span><br>
-      <span class="word-wrap"><span class="word-inner" style="--w:3">Momentos&nbsp;</span></span>
-      <span class="word-wrap"><span class="word-inner" style="--w:4">Excepcionais</span></span>
-    </h1>
-    <p class="hero-sub hero-fade">Onde cada detalhe compõe uma experiência inesquecível</p>
+
+    <!-- As três lâminas ocupam a MESMA célula do grid, então a caixa
+         assume a altura da mais alta e a troca nunca move a página.
+         Todo o texto aqui já existe no site: nada foi escrito para
+         preencher o rodízio. Para trocar, edite as lâminas abaixo. -->
+    <div class="hero-rotativo" id="heroRotativo">
+      <article class="hero-lamina is-on">
+        <h1 class="hero-title">Um lugar para momentos excepcionais</h1>
+        <p class="hero-sub">Onde cada detalhe compõe uma experiência inesquecível</p>
+      </article>
+      <article class="hero-lamina">
+        <p class="hero-title">Onde a natureza encontra a arte</p>
+        <p class="hero-sub">Quatro casas no interior paulista, cada uma com um jeito de receber</p>
+      </article>
+      <article class="hero-lamina">
+        <p class="hero-title">O lugar mais desejado de Piracicaba para eventos inesquecíveis</p>
+        <p class="hero-sub">Cada evento, uma narrativa única</p>
+      </article>
+    </div>
+
     <a href="#intro" class="btn btn--ghost on-dark hero-fade">
       <span>Conheça o Espaço</span>
       <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M9 1l4 4-4 4" stroke="currentColor" stroke-width="1"/></svg>
     </a>
-  </div>
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <div class="hero-scroll-line"></div>
   </div>
 </section>
 </div>

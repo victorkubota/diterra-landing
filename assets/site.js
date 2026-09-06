@@ -33,6 +33,56 @@
     nav.classList.add('is-stuck');
   }
 
+  /* ── rodízio do rodapé do hero ──────────────────────────────────────
+     Três lâminas na mesma célula do grid; o que troca é a classe.
+
+     Conteúdo que se move sozinho precisa de como parar (WCAG 2.2.2), e
+     a disciplina aqui é a mesma do rodízio das casas em switch.js:
+       · mouse ou foco no hero pausa enquanto durar
+       · fora da tela ou em aba oculta não roda para ninguém
+       · quem pediu menos movimento no sistema nunca vê o rodízio
+     A diferença é que aqui não há escolha do visitante para respeitar:
+     ninguém "escolhe" uma lâmina, então basta pausar e retomar. */
+  var rot = document.getElementById('heroRotativo');
+  if (rot && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var laminas = Array.prototype.slice.call(rot.querySelectorAll('.hero-lamina'));
+    if (laminas.length > 1) {
+      var ESPERA_LAMINA = 6000;
+      var atual = 0, relogio = null, pausadoRot = false, naTelaRot = true;
+
+      var mostrar = function (i) {
+        laminas.forEach(function (l, n) { l.classList.toggle('is-on', n === i); });
+        atual = i;
+      };
+      var tocarRot = function () {
+        if (relogio || pausadoRot || !naTelaRot || document.hidden) return;
+        relogio = setInterval(function () {
+          mostrar((atual + 1) % laminas.length);
+        }, ESPERA_LAMINA);
+      };
+      var pausarRot = function () {
+        if (relogio) { clearInterval(relogio); relogio = null; }
+      };
+
+      var palco = rot.closest('.hero') || rot;
+      palco.addEventListener('mouseenter', function () { pausadoRot = true; pausarRot(); });
+      palco.addEventListener('mouseleave', function () { pausadoRot = false; tocarRot(); });
+      palco.addEventListener('focusin', function () { pausadoRot = true; pausarRot(); });
+      palco.addEventListener('focusout', function () { pausadoRot = false; tocarRot(); });
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) pausarRot(); else tocarRot();
+      });
+
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (e) {
+          naTelaRot = e[0].isIntersecting;
+          if (naTelaRot) tocarRot(); else pausarRot();
+        }, { threshold: 0.2 }).observe(rot);
+      }
+      tocarRot();
+    }
+  }
+
   /* ── menu mobile ─────────────────────────────────────────────────── */
   if (toggle && drawer) {
     var fechar = function () {
