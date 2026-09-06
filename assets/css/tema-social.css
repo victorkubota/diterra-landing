@@ -6,12 +6,17 @@
    duração, o lugar é assets/css/base.css — e a mudança vale para os dois
    universos, que é exatamente o ponto.
 
-   Contraste medido:
-     royal sobre ivory ....... 15,6:1   AA + AAA
-     ivory sobre royal ....... 15,6:1   AA + AAA
-     royal sobre rose ........ 10,9:1   AA + AAA
-     rose  sobre royal .......  8,7:1   AA + AAA
-     brick sobre ivory .......  3,6:1   só título ≥24px, filete e ornamento
+   Contraste medido (recalculado nesta passagem; a tabela anterior
+   tinha três números errados, entre eles royal/rose escrito como par
+   assimétrico — razão de contraste é simétrica por definição):
+     royal sobre gelo ........ 14,8:1   AA + AAA
+     ivory sobre royal ....... 16,5:1   AA + AAA
+     royal sobre rose ........ 10,7:1   AA + AAA
+     rose  sobre royal ....... 10,7:1   AA + AAA
+     text-muted sobre gelo ....  6,7:1   AA + AAA
+     ui-erro sobre gelo .......  5,3:1   AA
+     link-brick sobre gelo ....  4,7:1   AA, é o "ver" de 11px do cartão
+     brick sobre gelo .........  3,1:1   só título ≥24px, filete e ornamento
    O marrom tijolo nunca carrega texto corrido.
    ══════════════════════════════════════════════════════════════════════ */
 
@@ -22,23 +27,44 @@
   --royal-soft:  rgba(17,21,66,.06);
   --rose:        #f4bfb3;   /* rosa baby */
   --rose-soft:   #fbe4de;
-  --ivory:       #fefae0;   /* bege marfim */
-  --ivory-warm:  #f7f1d8;
-  --ivory-light: #fffdf2;
   --brick:       #c67139;   /* marrom tijolo */
   --white:       #ffffff;
 
+  /* ── A MESA ──────────────────────────────────────────────────────────
+     O marfim media L* 98,0 e b* 12,9: quase tão claro quanto o branco,
+     só que amarelo. O que se lia como creme era o b*, não o L*. O gelo
+     mede L* 93,7 e b* 3,1, contra b* 2,7 da referência.
+
+     Mesmo nome que em tema-corp.css de propósito: se um dia os dois
+     universos assentarem no mesmo chão, é uma linha. Hoje divergem —
+     corp em #f5f1e8 — e divergem por não ter sido pedido, não por
+     acaso. */
+  --sand-100:    #efede7;   /* a mesa */
+  --sand-50:     #f5f3ee;   /* o degrau claro da mesa */
+
+  /* --ivory perde o emprego de fundo e fica com um só: tinta clara
+     sobre o azul. É por isso que os 24 rgba(254,250,224,...) escritos
+     à mão — em social.css, em home.css e em doze arquivos HTML, onze
+     deles gerados — seguem corretos sem uma única edição. Todos são
+     tinta sobre royal, e a tinta não mudou. */
+  --ivory:       #fefae0;   /* bege marfim, agora só como tinta */
+
   /* papéis de interface */
-  --ui-bg:                 var(--ivory);
+  --ui-bg:                 var(--sand-100);
   --ui-bg-alt:             var(--white);
   --ui-bg-invert:          var(--royal);
   /* mesmo papel do corporativo: o rodapé sempre um degrau mais fundo
      que a seção invertida, para nunca encostar sem transição */
   --ui-bg-rodape:          #0d1038;
   /* o --brick puro dá 3,61:1 sobre branco, e o "ver" do cartão é texto
-     de 11px, que pede 4,5:1. Este é o mesmo tom a 85%: 4,79:1. O brick
-     original segue valendo para ornamento, onde contraste não se aplica. */
-  --ui-link-brick:         #a86030;
+     de 11px, que pede 4,5:1. O tom a 85% (#a86030) resolvia sobre o
+     marfim raspando o mínimo, com 4,56:1 — e sobre a mesa de gelo cai
+     para 4,09:1, que REPROVA. A mesa mais escura come a folga que não
+     existia. Este é o mesmo matiz a 78%: 4,67:1 sobre gelo e 5,46:1
+     sobre branco, agora com margem em vez de fio de navalha.
+     O --brick original segue valendo para ornamento, onde contraste
+     não se aplica. */
+  --ui-link-brick:         #9c582b;
   --ui-text:               var(--royal);
   --ui-text-muted:         #4a4f78;
   --ui-text-invert:        var(--ivory);
@@ -51,8 +77,9 @@
   --ui-action-hover:       var(--royal-80);
   --ui-notice-bg:          var(--rose-soft);
   --ui-notice-text:        #6b3f22;
-  /* erro de formulário: o tijolo escurecido a 5,3:1 sobre marfim, e o
-     rosa da marca sobre royal (8,7:1) quando o formulário está no escuro */
+  /* erro de formulário: o tijolo escurecido, 5,3:1 sobre a mesa de
+     gelo, e o rosa da marca sobre royal (10,7:1) quando o formulário
+     está no escuro */
   --ui-erro:               #9a4a1f;
   --ui-erro-on-dark:       var(--rose);
 
@@ -60,14 +87,17 @@
      Só cor: a estrutura das camadas mora em assets/css/base.css e vale
      para os dois universos.
 
-     A sombra não é preta, é o royal com alpha. Sobre marfim quente a
+     A sombra não é preta, é o royal com alpha. Sobre mesa clara a
      sombra neutra puxa cinza fotográfico; a tinta da marca puxa a própria
      página, e é a sombra fria que uma parede clara realmente faz.
 
-     Contraste de aresta medido:
-       contato .14 sobre ivory-light #fffdf2 .... 1,34:1
-       fio     .20 sobre ivory       #fefae0 .... 1,53:1
-       barra   .24 sobre ivory       #fefae0 .... 1,65:1
+     Contraste de aresta medido, recalculado sobre a mesa nova:
+       contato .14 sobre sand-50  #f5f3ee .... 1,33:1   (era 1,33)
+       fio     .20 sobre sand-100 #efede7 .... 1,51:1   (era 1,53)
+       barra   .24 sobre sand-100 #efede7 .... 1,66:1   (era 1,68)
+     A escada de alphas atravessa a troca intacta: o chão desceu 4,3
+     pontos de L* e nenhuma aresta se moveu dois centésimos. Não há o
+     que recalibrar aqui.
      O contato lê com a mesma força do --ui-border que já está na página:
      uma espessura de aresta só, dita duas vezes.                        */
 
@@ -79,7 +109,7 @@
   --ui-sombra-funda:           rgba(9,11,40,.42);
   /* a barra do polegar sobe sobre qualquer coisa, foto clara incluída;
      substitui o rgba(0,0,0,.18) literal e sai mais forte que ele
-     (1,65:1 contra 1,52:1) */
+     (1,66:1 contra 1,53:1 sobre a mesa de gelo) */
   --ui-sombra-barra:           rgba(17,21,66,.24);
   /* o anel de 1px que circunda fotografia sem borda */
   --ui-sombra-fio:             rgba(17,21,66,.20);
