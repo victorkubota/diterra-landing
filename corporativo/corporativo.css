@@ -32,6 +32,130 @@
 }
 .cta-inline > span { font-size: var(--text-lg); font-weight: 300; color: var(--ui-text-muted); }
 
+
+/* ── hero no padrão do social (rodada 4): lockup, linha e frase ─── */
+.hero-marca {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 var(--gutter);
+  /* acompanha o texto quando o hero vira cartão */
+  opacity: calc(1 - var(--hp, 0) * 1.9);
+}
+.hero-marca img {
+  width: clamp(158px, 18vw, 240px);
+  height: auto;
+  /* o reset do base.css declara img { display: block }, e bloco não
+     obedece text-align: sem a margem automática o lockup encosta na
+     esquerda no celular */
+  margin-inline: auto;
+  filter: drop-shadow(0 2px 10px rgba(0,0,0,.55)) drop-shadow(0 6px 30px rgba(0,0,0,.4));
+}
+.hero-marca p {
+  margin-top: 14px;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #fff;
+  text-shadow: 0 1px 14px rgba(0,0,0,.6);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 var(--gutter);
+  /* a caixa é a linha inteira: quem limita a medida é o próprio texto,
+     em 70% da linha, como na referência */
+  width: 100%;
+  color: var(--white);
+  /* sai de cena antes de o hero terminar de virar cartão: no cartão a
+     foto fala sozinha, como na referência */
+  opacity: calc(1 - var(--hp, 0) * 1.9);
+}
+.hero-eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: rgba(255,255,255,.95);
+  margin-bottom: 32px;
+  text-shadow: 0 1px 12px rgba(0,0,0,.5);
+}
+/* ── o rodapé do hero ─────────────────────────────────────────
+   As três lâminas dividem a MESMA célula do grid. A caixa assume a
+   altura da mais alta, então a troca de texto não muda a altura do
+   hero nem empurra nada: o que muda é opacidade e 14px de deslocamento.
+
+   O título encolheu em relação ao que era. Ele deixou de ser o centro
+   da tela e virou legenda de rodapé: quem carrega a marca agora é o
+   lockup no alto, como na referência. Por isso saiu também o
+   mix-blend-mode: difference, que existia para um título gigante sobre
+   foto e aqui só tornaria a leitura imprevisível. */
+.hero-rotativo {
+  display: grid;
+  margin-bottom: 30px;
+}
+.hero-lamina {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(14px);
+  /* a que SAI leva .4s e vai primeiro */
+  transition: opacity .35s var(--ease), transform .35s var(--ease-out);
+}
+/* a que ENTRA espera a outra terminar. Sem o atraso as duas ficam
+   legíveis ao mesmo tempo no meio da troca, e o rodapé do hero vira
+   dois textos sobrepostos. */
+.hero-lamina.is-on {
+  opacity: 1;
+  transform: none;
+  transition: opacity .5s var(--ease) .28s, transform .5s var(--ease-out) .28s;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  /* 500 e não 400: sobre fotografia clara o peso do traço é o que
+     separa a serifa do fundo, mais do que a sombra */
+  font-weight: 500;
+  line-height: 1.28;
+  letter-spacing: .01em;
+  color: var(--white);
+  margin: 0 0 16px;
+  text-wrap: balance;
+  /* 70% da LINHA, não da caixa: a caixa já perdeu os dois gutters, então
+     76% dela dá 70% da tela. Medido em 1440: 1007px de 1440. No celular
+     a conta não serve, 70% de 350px empilharia a manchete em cinco
+     linhas curtas, então lá o texto usa quase a linha inteira. */
+  max-width: 92%;
+  margin-inline: auto;
+  text-shadow: 0 2px 22px rgba(0,0,0,.6);
+}
+/* Caixa alta com tracking largo serve rótulo curto, do tipo "CNN" na
+   referência. Aqui as linhas são frases inteiras, e em 390px a versão
+   em caixa alta ocupava três linhas sobre foto movimentada. Volta ao
+   tratamento que a casa já usa para frase: serifa em itálico. */
+.hero-sub {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: .02em;
+  font-size: var(--text-lg);
+  color: #fff;
+  margin: 0 auto;
+  max-width: 92%;
+  text-wrap: balance;
+  text-shadow: 0 2px 18px rgba(0,0,0,.6);
+}
+
+@media (min-width: 900px) {
+  .hero-title { max-width: 76%; }
+  .hero-sub   { max-width: 58%; }
+}
+
 /* A barra antiga saiu na rodada 4: a navegação é a pílula (nav-pilula.css). */
 /* .nav__drawer mora no base.css: mesmo componente em treze rotas. */
 
@@ -51,7 +175,9 @@
   height: 100svh;
   min-height: 600px;
   overflow: hidden;
-  display: flex; align-items: center; justify-content: center;
+  /* mesmo padrão do hero social: lockup no alto, frase no rodapé */
+  display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+  padding: clamp(76px, 11vh, 112px) 0 clamp(38px, 6vh, 64px);
   background: var(--navy-900);
   isolation: isolate;
 }
@@ -78,81 +204,6 @@
     linear-gradient(to top,    rgba(10,18,36,.34) 0%, rgba(10,18,36,0) 24%);
 }
 
-.hero__conteudo {
-  position: relative; z-index: 1;
-  text-align: center;
-  padding-inline: var(--gutter);
-  max-width: 1000px;
-  /* sai de cena antes de o hero terminar de virar cartão: no cartão a
-     foto fala sozinha, como na referência */
-  opacity: calc(1 - var(--hp, 0) * 1.9);
-}
-
-.hero__eyebrow {
-  font-family: var(--font-sans);
-  font-size: var(--text-xs); font-weight: 400;
-  letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
-  color: rgba(255,255,255,.95);
-  margin-bottom: clamp(24px, 3vw, 32px);
-  text-shadow: 0 1px 14px rgba(8,14,30,.75);
-}
-.hero__titulo {
-  font-family: var(--font-display);
-  font-size: var(--text-hero);
-  font-weight: 300; line-height: 1.05;
-  letter-spacing: -.01em;
-  color: #fff;
-  margin-bottom: clamp(18px, 2vw, 24px);
-  text-shadow: 0 2px 40px rgba(8,14,30,.6);
-  /* sem isto a quebra automática deixa "SE" no fim da primeira linha */
-  text-wrap: balance;
-}
-.hero__sub {
-  font-family: var(--font-display);
-  font-size: var(--text-hero-sub);
-  font-weight: 400; font-style: italic;
-  letter-spacing: .04em;
-  color: #fff;
-  margin-bottom: clamp(34px, 4vw, 44px);
-  /* a projeção acesa é a área mais clara da foto e cai bem atrás desta
-     linha no celular: duas sombras seguram o branco sem véu na imagem */
-  text-shadow: 0 1px 3px rgba(8,14,30,.85), 0 2px 24px rgba(8,14,30,.75);
-}
-.hero__acao { display: flex; justify-content: center; }
-.hero .btn--ghost {
-  border-color: rgba(255,255,255,.62);
-  text-shadow: 0 1px 3px rgba(8,14,30,.7);
-}
-
-.hero__scroll {
-  position: absolute; bottom: 40px; left: 50%;
-  transform: translateX(-50%); z-index: 1;
-  display: flex; flex-direction: column; align-items: center; gap: 10px;
-  /* já cumpriu o papel assim que a pessoa rolou; some junto do título,
-     senão fica pendurado na borda do cartão */
-  opacity: calc(1 - var(--hp, 0) * 3);
-}
-.hero__scroll span {
-  font-family: var(--font-sans); font-size: var(--text-xs);
-  letter-spacing: .25em; text-transform: uppercase;
-  color: rgba(255,255,255,.5);
-}
-.hero__scroll-linha {
-  width: 1px; height: 48px;
-  background: rgba(255,255,255,.2);
-  position: relative; overflow: hidden;
-}
-.hero__scroll-linha::after {
-  content: ''; position: absolute; inset: 0;
-  background: rgba(255,255,255,.9);
-  animation: heroScroll 2.4s var(--ease) infinite;
-}
-@keyframes heroScroll {
-  0%   { transform: translateY(-100%); }
-  60%,
-  100% { transform: translateY(100%); }
-}
-@media (max-width: 640px) { .hero__scroll { display: none; } }
 
 /* ══════════════════════════════════════════════════════════════════════
    SEÇÕES

@@ -168,6 +168,7 @@
 .visita__nota { margin: 0; font-size: var(--text-xs); color: var(--ui-text-muted); line-height: 1.5; }
 .visita__ok .script { margin-bottom: 6px; }
 .visita__ok a { color: var(--ui-link-brick); }
+.visita__resumo { margin-top: 18px; color: var(--ui-text); text-decoration: none; }
 
 /* ── barra inferior do celular: três ações ───────────────────────── */
 .barra-acao--tres { display: none; padding: 6px var(--gutter) calc(6px + env(safe-area-inset-bottom, 0px)); gap: 0; }
@@ -190,20 +191,52 @@ a.evento-card { display: block; text-decoration: none; color: inherit; }
 .page-hero__media .hero-video { z-index: 0; }
 .hero-video[hidden] { display: none; }
 
-/* ── pausar vídeo de fundo ───────────────────────────────────────── */
-.video-pausa {
-  position: absolute; right: var(--gutter); bottom: 22px; z-index: 5;
-  padding: 8px 12px; border-radius: var(--radius);
-  background: color-mix(in srgb, var(--ui-bg-invert) 45%, transparent);
-  border: 1px solid color-mix(in srgb, var(--ui-text-invert) 30%, transparent);
-  color: var(--ui-text-invert); font: 500 var(--text-xs)/1 var(--font-sans);
-  letter-spacing: .12em; text-transform: uppercase; cursor: pointer;
-}
-.video-pausa:hover, .video-pausa:focus-visible { background: color-mix(in srgb, var(--ui-bg-invert) 70%, transparent); }
-.video-pausa:focus-visible { outline: 2px solid var(--ui-accent-on-dark); outline-offset: 2px; }
-.video-pausa[hidden] { display: none; }
-@media (max-width: 768px) { .video-pausa { bottom: 84px; } }
 
 /* ── transição entre rotas: a pílula e o título viajam ──────────── */
 .pil { view-transition-name: pilula; }
 .page-hero .h-display { view-transition-name: titulo; }
+
+/* ── páginas de casa: o dia hora a hora ──────────────────────────── */
+.gallery--percurso figure { position: relative; }
+.gallery--percurso figcaption {
+  position: absolute; left: 14px; bottom: 12px; display: flex; gap: 10px; align-items: baseline;
+  font-size: var(--text-xs); letter-spacing: .14em; text-transform: uppercase; color: var(--ui-text-invert);
+  text-shadow: 0 1px 12px rgba(0,0,0,.6);
+}
+.gallery--percurso figcaption b { font-weight: 500; font-variant-numeric: tabular-nums; }
+@media (max-width: 859px) {
+  /* no celular vira trilho com snap: um momento por tela */
+  .gallery--percurso { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: var(--space-3); padding-bottom: 6px; scrollbar-width: none; }
+  .gallery--percurso figure { flex: 0 0 82%; scroll-snap-align: start; aspect-ratio: 4 / 3; }
+}
+
+/* ── respiro fotográfico de tela cheia ───────────────────────────── */
+.respiro-foto { position: relative; min-height: 70svh; overflow: hidden; background: var(--ui-bg-invert); display: flex; align-items: flex-end; }
+.respiro-foto picture, .respiro-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.respiro-foto::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, color-mix(in srgb, var(--ui-bg-invert) 70%, transparent), transparent 45%); }
+.respiro-foto__frase { position: relative; z-index: 1; margin: 0; padding: var(--space-6) var(--gutter); color: var(--ui-text-invert); font-size: clamp(1.6rem, 3vw, 2.6rem); }
+
+/* ── /proposta: resumo da visita, feito para imprimir ────────────── */
+.prop { max-width: 960px; margin: 0 auto; padding: clamp(96px, 12vw, 140px) var(--gutter) var(--space-7); display: grid; gap: var(--space-6); }
+.prop__topo { display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); flex-wrap: wrap; }
+.prop__topo img { height: 56px; width: auto; }
+.prop__acoes { display: flex; gap: 10px; flex-wrap: wrap; }
+.prop__hero { display: grid; gap: var(--space-4); }
+.prop__hero img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius); display: block; }
+.prop__titulo .script { margin-bottom: 6px; }
+.prop__titulo .lead { margin-top: 10px; }
+.prop__grade { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+.prop__grade .h-section, .prop__percurso .h-section { font-size: var(--text-xl); margin-bottom: var(--space-4); }
+.prop__percurso .tempo--3 li strong { font-weight: 500; color: var(--ui-text); }
+.prop__contato a { color: var(--ui-link-brick); text-decoration: underline; text-underline-offset: 3px; }
+.prop__nota { font-size: var(--text-xs); margin-top: 10px; }
+@media (max-width: 700px) { .prop__grade { grid-template-columns: 1fr; } }
+@media print {
+  @page { size: A4; margin: 14mm; }
+  body.proposta { background: #fff; color: #000; }
+  .pil, .nav__drawer, .barra-acao, .to-top, .visita, .prop__acoes { display: none !important; }
+  .prop { padding: 0; gap: 10mm; max-width: none; }
+  .prop__hero img { aspect-ratio: 21 / 9; }
+  .prop__grade { break-inside: avoid; }
+  a { text-decoration: none; }
+}

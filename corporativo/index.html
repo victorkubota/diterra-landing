@@ -72,21 +72,19 @@
            aria-hidden="true" hidden></video>
   </div>
 
-  <div class="hero__conteudo on-dark">
-    <p class="hero__eyebrow rise" style="--i:0">Di Terrá Corporativo</p>
-    <h1 class="hero__titulo rise" style="--i:1">Onde marcas se expressam</h1>
-    <p class="hero__sub rise" style="--i:2">Onde pessoas se conectam</p>
-    <div class="hero__acao rise" style="--i:3">
-      <a class="btn btn--ghost on-dark" href="#proposta" data-visita>
-        <span>Agendar visita</span>
-        <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h11M9 1l4 4-4 4" stroke="currentColor" stroke-width="1"/></svg>
-      </a>
-    </div>
+  <div class="hero-marca hero-fade">
+    <img src="/assets/brand/corp-lockup-white.png" alt="Di Terrá Corporativo"
+         width="282" height="212" decoding="async">
+    <p>Desde 2009 · Piracicaba, interior de São Paulo</p>
   </div>
 
-  <div class="hero__scroll" aria-hidden="true">
-    <span>Scroll</span>
-    <div class="hero__scroll-linha"></div>
+  <div class="hero-content">
+    <div class="hero-rotativo" id="heroRotativo">
+      <article class="hero-lamina is-on">
+        <h1 class="hero-title">Onde marcas se expressam</h1>
+        <p class="hero-sub">Onde pessoas se conectam</p>
+      </article>
+    </div>
   </div>
 </header>
 </div>
@@ -868,7 +866,7 @@
   var nav = document.getElementById('nav');
   var toggle = document.getElementById('navToggle');
   var drawer = document.getElementById('navDrawer');
-  var links = Array.prototype.slice.call(document.querySelectorAll('.nav__links a'));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav__links a'));   /* vazio desde a rodada 4 */
 
   /* ── vídeo do hero ─────────────────────────────────────────────
      Desktop e movimento permitido. No celular o poster assume. */
@@ -1225,7 +1223,7 @@
 
     /* quanto da página já foi lida, para a régua da nav */
     var curso = document.documentElement.scrollHeight - window.innerHeight;
-    nav.style.setProperty('--lido',
+    if (nav) nav.style.setProperty('--lido',
       curso > 0 ? Math.min(1, window.scrollY / curso).toFixed(4) : '0');
 
     /* progresso do hero virando cartão: 0 na tela cheia, 1 no cartão.
