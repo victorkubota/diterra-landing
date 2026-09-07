@@ -15,15 +15,15 @@
 <meta property="og:description" content="Casamentos, debutantes e aniversários | Corporativo. Quatro espaços no interior paulista.">
 <meta property="og:url" content="https://www.diterra.com.br/">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/cormorant-garamond-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/albert-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fontes.css">
 
 <!-- o poster do hero é o LCP da página: pede-se antes do CSS terminar.
      Quem não decodifica AVIF ignora o preload e segue pelo <picture>. -->
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preload" as="image" type="image/avif" imagesizes="100vw"
-      imagesrcset="/assets/opt/hero-social-800.avif 800w, /assets/opt/hero-social-1400.avif 1400w, /assets/opt/hero-social-2400.avif 2400w">
+      imagesrcset="/assets/opt/hero-social-800.avif 800w, /assets/opt/hero-social-1400.avif 1400w, /assets/opt/hero-social-1800.avif 1800w, /assets/opt/hero-social-2400.avif 2400w">
 
 <link rel="stylesheet" href="/assets/css/tema-entrada.css">
 <link rel="stylesheet" href="/assets/css/base.css">
@@ -478,10 +478,10 @@
   <!-- MÍDIA ÚNICA — vídeo com foto de reserva.
        O vídeo é desligado no celular pelo script; o poster assume. -->
   <div class="stage__media">
-    <picture><source type="image/avif" srcset="/assets/opt/hero-social-800.avif 800w, /assets/opt/hero-social-1400.avif 1400w, /assets/opt/hero-social-2400.avif 2400w" sizes="100vw"><img id="stagePoster" src="/assets/opt/hero-social-1400.webp"
+    <picture><source type="image/avif" srcset="/assets/opt/hero-social-800.avif 800w, /assets/opt/hero-social-1400.avif 1400w, /assets/opt/hero-social-1800.avif 1800w, /assets/opt/hero-social-2400.avif 2400w" sizes="100vw"><img id="stagePoster" src="/assets/opt/hero-social-1400.webp"
          width="2400" height="1340"
          alt="Cerimônia ao entardecer no jardim de um dos espaços da Di Terrá"
-         fetchpriority="high" decoding="async" srcset="/assets/opt/hero-social-800.webp 800w, /assets/opt/hero-social-1400.webp 1400w, /assets/opt/hero-social-2400.webp 2400w" sizes="100vw"></picture>
+         fetchpriority="high" decoding="async" srcset="/assets/opt/hero-social-800.webp 800w, /assets/opt/hero-social-1400.webp 1400w, /assets/opt/hero-social-1800.webp 1800w, /assets/opt/hero-social-2400.webp 2400w" sizes="100vw"></picture>
     <!-- sem poster: o atributo baixa a imagem mesmo com o vídeo oculto, e a
          foto acima já cumpre esse papel -->
     <video id="stageVideo" muted loop playsinline preload="none"
@@ -604,10 +604,10 @@
     <div class="drawer__col">
       <h2>As quatro casas</h2>
       <ul>
-        <li><a class="drawer__casa" href="/social/espacos/a-querencia"><picture><source type="image/avif" srcset="/assets/opt/a-querencia-amplitude-800.avif 800w, /assets/opt/a-querencia-amplitude-1400.avif 1400w" sizes="100vw"><img class="drawer__mini" data-src="/assets/opt/a-querencia-amplitude-1400.webp" alt="" width="800" height="537" loading="lazy" decoding="async" srcset="/assets/opt/a-querencia-amplitude-800.webp 800w, /assets/opt/a-querencia-amplitude-1400.webp 1400w" sizes="100vw"></picture>A Querência</a></li>
-        <li><a class="drawer__casa" href="/social/espacos/palacete-monte-alegre"><picture><source type="image/avif" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.avif 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.avif 1400w" sizes="100vw"><img class="drawer__mini" data-src="/assets/opt/palacete-monte-alegre-amplitude-1400.webp" alt="" width="800" height="537" loading="lazy" decoding="async" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.webp 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.webp 1400w" sizes="100vw"></picture>Palacete Monte Alegre</a></li>
-        <li><a class="drawer__casa" href="/social/espacos/casa-lucca"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-amplitude-800.avif 800w, /assets/opt/casa-lucca-amplitude-1400.avif 1400w" sizes="100vw"><img class="drawer__mini" data-src="/assets/opt/casa-lucca-amplitude-1400.webp" alt="" width="800" height="537" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-amplitude-800.webp 800w, /assets/opt/casa-lucca-amplitude-1400.webp 1400w" sizes="100vw"></picture>Casa Lucca</a></li>
-        <li><a class="drawer__casa" href="/social/espacos/espaco-terra"><picture><source type="image/avif" srcset="/assets/opt/espaco-terra-amplitude-800.avif 800w, /assets/opt/espaco-terra-amplitude-1400.avif 1400w" sizes="100vw"><img class="drawer__mini" data-src="/assets/opt/espaco-terra-amplitude-1400.webp" alt="" width="800" height="537" loading="lazy" decoding="async" srcset="/assets/opt/espaco-terra-amplitude-800.webp 800w, /assets/opt/espaco-terra-amplitude-1400.webp 1400w" sizes="100vw"></picture>Espaço Terrá</a></li>
+        <li><a class="drawer__casa" href="/social/espacos/a-querencia"><img class="drawer__mini" data-src="/assets/opt/a-querencia-amplitude-800.webp" alt="" width="800" height="537" loading="lazy" decoding="async">A Querência</a></li>
+        <li><a class="drawer__casa" href="/social/espacos/palacete-monte-alegre"><img class="drawer__mini" data-src="/assets/opt/palacete-monte-alegre-amplitude-800.webp" alt="" width="800" height="537" loading="lazy" decoding="async">Palacete Monte Alegre</a></li>
+        <li><a class="drawer__casa" href="/social/espacos/casa-lucca"><img class="drawer__mini" data-src="/assets/opt/casa-lucca-amplitude-800.webp" alt="" width="800" height="537" loading="lazy" decoding="async">Casa Lucca</a></li>
+        <li><a class="drawer__casa" href="/social/espacos/espaco-terra"><img class="drawer__mini" data-src="/assets/opt/espaco-terra-amplitude-800.webp" alt="" width="800" height="537" loading="lazy" decoding="async">Espaço Terrá</a></li>
       </ul>
     </div>
   </div>
@@ -686,20 +686,25 @@
   var video = document.getElementById('stageVideo');
   var poster = document.getElementById('stagePoster');
 
-  if (video && !reduz && window.matchMedia('(min-width: 768px)').matches) {
+  var economia = navigator.connection && navigator.connection.saveData;
+  if (video && !reduz && !economia && window.matchMedia('(min-width: 768px)').matches) {
     /* H.264 em vez do HEVC original: o HEVC não toca no Chrome do Windows
        e do Android nem no Firefox, e nesses o poster ficava para sempre.
        1280 px até o tablet, 1920 px daí para cima. */
-    video.src = window.matchMedia('(min-width: 1440px)').matches
-      ? '/assets/opt/video/hero-social-1920.mp4'
-      : '/assets/opt/video/hero-social-1280.mp4';
-    video.hidden = false;
+    var ligarVideo = function () {
+      video.src = window.matchMedia('(min-width: 1440px)').matches
+        ? '/assets/opt/video/hero-social-1920.mp4'
+        : '/assets/opt/video/hero-social-1280.mp4';
+      video.hidden = false;
+      var tocar = video.play();
+      if (tocar && tocar.catch) { tocar.catch(function () { video.hidden = true; }); }
+    };
+    /* o vídeo espera a página carregar: não disputa banda com o LCP */
+    if (document.readyState === 'complete') ligarVideo(); else window.addEventListener('load', ligarVideo, { once: true });
     video.addEventListener('playing', function () {
       poster.style.opacity = '0';
       poster.style.transition = 'opacity .8s var(--ease-out)';
     }, { once: true });
-    var tocar = video.play();
-    if (tocar && tocar.catch) { tocar.catch(function () { video.hidden = true; }); }
   }
 
   /* ── entrada ───────────────────────────────────────────────── */
