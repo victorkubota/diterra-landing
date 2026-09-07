@@ -111,3 +111,18 @@
 .post__mais { font-size: var(--text-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--ui-link-brick); }
 .post:focus-visible { outline: 2px solid var(--ui-accent); outline-offset: 4px; }
 @media (max-width: 900px) { .posts { grid-template-columns: 1fr; } }
+
+/* ── página Fornecedores: lista editorial ────────────────────────── */
+.forn { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3vw, 48px) clamp(24px, 4vw, 64px); }
+.forn__cat .h-card { margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--ui-border); }
+.forn__lista { list-style: none; display: grid; gap: 8px; }
+.forn__lista li { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; font-size: var(--text-sm); }
+.forn__lista b { font-weight: 400; }
+.forn__lista span { font-size: var(--text-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--ui-text-muted); white-space: nowrap; }
+@media (max-width: 900px) { .forn { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .forn { grid-template-columns: 1fr; } }
+.tempo--3 { grid-template-columns: 1fr; gap: 0; }
+.tempo--3::before { top: 0; bottom: 0; left: 7px; right: auto; width: 1px; height: auto; }
+.tempo--3 li { padding: 0 0 22px 30px; }
+.tempo--3 li::before { top: 4px; }
+.tempo--3 b { font-size: 1.1rem; color: var(--ui-accent); }
