@@ -85,14 +85,13 @@
 @media (max-width: 900px) { .valores { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 520px) { .valores { grid-template-columns: 1fr; } }
 
-.equipe { list-style: none; display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-4); }
+.equipe { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); max-width: 760px; }
 .equipe__pessoa { display: flex; flex-direction: column; gap: 6px; }
 .equipe__foto { aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--radius); background: var(--ui-bg-alt); display: grid; place-items: center; }
 .equipe__foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.equipe__ini { font-family: var(--font-display); font-size: 2rem; color: var(--ui-text-muted); letter-spacing: .08em; }
 .equipe b { font-weight: 500; font-size: var(--text-base); margin-top: 6px; }
 .equipe span { font-size: var(--text-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--ui-text-muted); }
-@media (max-width: 900px) { .equipe { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px) { .equipe { grid-template-columns: 1fr 1fr; } }
 
 /* ── páginas de solução: como funciona ───────────────────────────── */
 .etapas { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); counter-reset: etapa; }
@@ -115,7 +114,6 @@
 @media (hover: hover) { .post:hover .post__capa img { transform: scale(var(--zoom-hover)); } }
 .post__data { font-size: var(--text-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--ui-text-muted); margin-top: 4px; }
 .post__titulo { margin: 0; text-wrap: balance; }
-.post__mais { font-size: var(--text-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--ui-link-brick); }
 .post:focus-visible { outline: 2px solid var(--ui-accent); outline-offset: 4px; }
 @media (max-width: 900px) { .posts { grid-template-columns: 1fr; } }
 

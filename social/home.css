@@ -961,10 +961,11 @@
 }
 .contato-info a:hover { color: var(--royal); }
 .contato-info svg {
-  width: 16px; height: 16px;
+  width: 18px; height: 18px;
   flex-shrink: 0;
-  fill: var(--royal);
-  opacity: .6;
+  fill: none;               /* ícones em traço, como o resto do site */
+  color: var(--royal);
+  opacity: .7;
 }
 
 /* Form */
