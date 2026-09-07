@@ -322,6 +322,8 @@ def cabeca(titulo, descricao, canonical, css, favicon):
 <link rel="stylesheet" href="{css}">
 <link rel="stylesheet" href="/assets/css/nav-pilula.css">
 <script src="/assets/nav-pilula.js"></script>
+<link rel="stylesheet" href="/assets/css/melhorias.css">
+<script src="/assets/melhorias.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>

@@ -1,0 +1,56 @@
+/* ══════════════════════════════════════════════════════════════════════
+   MELHORIAS DA RODADA 3 — componentes novos compartilhados pelas rotas.
+   docs/plano-melhorias-rodada-3.md descreve cada um. Toda cor sai de
+   --ui-*, então o mesmo arquivo serve Social e Corporativo.
+
+   · evento real e lightbox (páginas de casa)
+   · capacidade nos cards (índice de espaços)
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── card: linha de capacidade ───────────────────────────────────── */
+.card__cap {
+  display: inline-block; margin-top: 10px;
+  font-size: var(--text-xs); letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ui-text-muted);
+}
+
+/* ── evento real ─────────────────────────────────────────────────── */
+.evento__ficha { list-style: none; display: grid; gap: 8px; margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--ui-border); }
+.evento__ficha li { display: flex; justify-content: space-between; gap: 18px; font-size: var(--text-sm); }
+.evento__ficha .k { color: var(--ui-text-muted); }
+.evento__ficha .v { font-variant-numeric: tabular-nums; text-align: right; }
+
+.evento__galeria { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; align-content: start; }
+.evento__galeria a {
+  display: block; overflow: hidden; border-radius: var(--radius);
+  aspect-ratio: 4 / 3; background: var(--ui-border);
+}
+.evento__galeria a:nth-child(1) { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+.evento__galeria img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.1s var(--ease); }
+@media (hover: hover) { .evento__galeria a:hover img { transform: scale(1.05); } }
+.evento__galeria a:focus-visible { outline: 2px solid var(--ui-accent); outline-offset: 2px; }
+.evento__mais { margin-top: 12px; font-size: var(--text-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--ui-text-muted); }
+@media (max-width: 720px) { .evento__galeria { grid-template-columns: repeat(2, 1fr); } .evento__galeria a:nth-child(1) { grid-column: span 2; grid-row: auto; aspect-ratio: 4 / 3; } }
+
+/* ── lightbox ────────────────────────────────────────────────────── */
+.lb {
+  position: fixed; inset: 0; z-index: 400;
+  display: none; align-items: center; justify-content: center;
+  background: color-mix(in srgb, var(--ui-bg-invert) 94%, transparent);
+  padding: clamp(16px, 4vw, 48px);
+}
+.lb.is-open { display: flex; }
+.lb img { max-width: 100%; max-height: calc(100vh - 2 * clamp(16px, 4vw, 48px)); object-fit: contain; display: block; box-shadow: var(--elev-1); }
+.lb__btn {
+  position: absolute; background: none; border: 0; cursor: pointer;
+  color: var(--ui-text-invert); width: 48px; height: 48px; display: grid; place-items: center;
+  border-radius: 999px; transition: background var(--dur-fast) var(--ease);
+}
+.lb__btn:hover, .lb__btn:focus-visible { background: color-mix(in srgb, var(--ui-text-invert) 14%, transparent); outline: none; }
+.lb__fechar { top: 14px; right: 14px; }
+.lb__ant { left: 10px; top: 50%; transform: translateY(-50%); }
+.lb__prox { right: 10px; top: 50%; transform: translateY(-50%); }
+.lb__legenda {
+  position: absolute; left: 0; right: 0; bottom: 14px; text-align: center;
+  font-size: var(--text-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--ui-text-invert-muted);
+}
