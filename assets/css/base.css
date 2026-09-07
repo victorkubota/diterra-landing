@@ -752,7 +752,14 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
   border-top: 1px solid var(--ui-border-invert);
 }
 .foot__grid { display: grid; gap: clamp(28px, 4vw, 56px); }
-@media (min-width: 760px) { .foot__grid { grid-template-columns: 1.4fr 1fr 1fr; } }
+@media (min-width: 760px) { .foot__grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1100px) { .foot__grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
+.foot__lede { font-size: var(--text-sm); color: var(--ui-text-invert-muted); max-width: 32ch; margin-top: 18px; }
+.foot__logo img { height: 72px; width: auto; }
+.foot .foot__h2--seg { margin-top: var(--space-5); }
+.foot__end { font-style: normal; font-size: var(--text-sm); color: var(--ui-text-invert-muted); line-height: 1.6; margin-top: 14px; }
+/* setas dentro de link de texto: mesmo desenho e traço em todo o site */
+.nav__switch svg { vertical-align: middle; margin-left: 6px; }
 .foot h2 {
   font-size: var(--text-xs); letter-spacing: .22em; text-transform: uppercase;
   color: var(--ui-text-invert-muted); margin-bottom: 14px; font-weight: 500;

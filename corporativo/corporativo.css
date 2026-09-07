@@ -851,10 +851,6 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
   display: flex; align-items: center; gap: 14px;
   padding-top: 18px; border-top: 1px solid var(--ui-border);
 }
-.depo__foto {
-  width: 48px; height: 48px; flex: none;
-  border-radius: 999px; object-fit: cover;
-}
 .depo__quem { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .depo__nome { font-size: var(--text-base); font-weight: 500; }
 .depo__cargo {

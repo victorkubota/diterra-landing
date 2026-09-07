@@ -53,7 +53,7 @@
   </ul>
 
   <div class="nav__side">
-    <a class="nav__switch" href="/social">Eventos sociais &rarr;</a>
+    <a class="nav__switch" href="/social">Eventos sociais <svg width="14" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.25"/></svg></a>
     <a class="btn btn--primary on-dark" href="#proposta" data-visita>Agendar visita</a>
     <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Abrir menu">
       <span></span><span></span>
@@ -70,7 +70,7 @@
   <a href="#espacos">Espaços</a>
   <a href="#territorio">Território</a>
   <a href="#proposta">Solicitar proposta</a>
-  <a class="nav__switch" href="/social">Ir para eventos sociais &rarr;</a>
+  <a class="nav__switch" href="/social">Ir para eventos sociais <svg width="14" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.25"/></svg></a>
 </div>
 
 <main id="conteudo">
@@ -623,7 +623,6 @@
       <figure class="depo__item rise" style="--i:0">
         <blockquote>Levamos 180 pessoas para a convenção anual e a operação inteira ficou com uma equipe só. Não precisei coordenar fornecedor nenhum: cheguei e estava montado.</blockquote>
         <figcaption>
-          <img class="depo__foto" src="/assets/demo/depoimentos/retrato-1.webp" width="480" height="480" alt="" loading="lazy">
           <span class="depo__quem">
             <span class="depo__nome">Marina Salgado</span>
             <span class="depo__cargo">Diretora de Marketing &middot; Grupo Meridiano</span>
@@ -634,7 +633,6 @@
       <figure class="depo__item rise" style="--i:1">
         <blockquote>Escolhemos pela distância de São Paulo e ficamos pela comida. O time voltou falando do jantar de encerramento até semanas depois.</blockquote>
         <figcaption>
-          <img class="depo__foto" src="/assets/demo/depoimentos/retrato-2.webp" width="480" height="480" alt="" loading="lazy">
           <span class="depo__quem">
             <span class="depo__nome">Rafael Ostrowski</span>
             <span class="depo__cargo">Head de Vendas &middot; Vantiva Brasil</span>
@@ -645,7 +643,6 @@
       <figure class="depo__item rise" style="--i:2">
         <blockquote>Fizemos o off-site de liderança na Casa Lucca. O silêncio do lugar faz diferença real numa agenda de dois dias de decisão.</blockquote>
         <figcaption>
-          <img class="depo__foto" src="/assets/demo/depoimentos/retrato-3.webp" width="480" height="480" alt="" loading="lazy">
           <span class="depo__quem">
             <span class="depo__nome">Beatriz Furtado</span>
             <span class="depo__cargo">Diretora de Pessoas &middot; Arcadia Tecnologia</span>
@@ -820,41 +817,51 @@
 <footer class="foot">
   <div class="wrap">
     <div class="foot__grid">
-      <div>
-        <img src="/assets/brand/corp-lockup-white.png" alt="Di Terrá Corporativo"
-             width="282" height="212" style="height:88px; width:auto">
-        <p style="margin-top:20px; font-size:var(--text-sm); max-width:34ch; color:rgba(255,255,255,.72)">
-          Quatro espaços no interior paulista para convenções, off-sites, lançamentos e integrações.
-        </p>
+      <div class="foot__logo">
+        <img src="/assets/brand/corp-lockup-white.png" alt="Di Terrá Corporativo" width="454" height="288">
+        <p class="foot__lede">Quatro casas no interior paulista para celebrar e reunir. Casamentos, debutantes, aniversários e eventos de empresa, desde 2009.</p>
       </div>
       <div>
-        <h2>Navegação</h2>
-        <ul>
-          <li><a href="#manifesto">A proposta</a></li>
-          <li><a href="#formatos">Formatos</a></li>
-          <li><a href="#espacos">Espaços</a></li>
-          <li><a href="#estrutura">Estrutura</a></li>
-          <li><a href="#territorio">Território</a></li>
-          <li><a href="#proposta">Solicitar proposta</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2>As quatro casas</h2>
+        <h2>Espaços</h2>
         <ul>
           <li><a href="/social/espacos/a-querencia">A Querência</a></li>
           <li><a href="/social/espacos/palacete-monte-alegre">Palacete Monte Alegre</a></li>
           <li><a href="/social/espacos/casa-lucca">Casa Lucca</a></li>
           <li><a href="/social/espacos/espaco-terra">Espaço Terrá</a></li>
+        </ul>
+        <h2 class="foot__h2--seg">Soluções</h2>
+        <ul>
+          <li><a href="/social/solucoes/gastronomia">Gastronomia</a></li>
+          <li><a href="/social/solucoes/decoracao">Decoração</a></li>
+          <li><a href="/social/solucoes/coquetelaria">Coquetelaria</a></li>
+          <li><a href="/social/solucoes/producao">Produção</a></li>
+          <li><a href="/social/solucoes/tecnologia-audiovisual">Tecnologia audiovisual</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Di Terrá</h2>
+        <ul>
+          <li><a href="/social">Eventos sociais</a></li>
+          <li><a href="/corporativo">Corporativo</a></li>
           <li><a href="/sobre">Sobre</a></li>
           <li><a href="/social/fornecedores">Fornecedores</a></li>
-          <li><a href="/social">Eventos sociais</a></li>
-          <li><a href="/">Página de entrada</a></li>
+          <li><a href="https://diterra.com.br/blog/" target="_blank" rel="noopener">Blog</a></li>
+          <li><a href="/corporativo#proposta" data-visita>Agendar visita</a></li>
         </ul>
+      </div>
+      <div>
+        <h2>Contato</h2>
+        <ul>
+          <li><a href="https://wa.me/5519996777288" target="_blank" rel="noopener">WhatsApp (19) 99677-7288</a></li>
+          <li><a href="mailto:contato@diterra.com.br">contato@diterra.com.br</a></li>
+          <li><a href="https://www.instagram.com/diterraeventos" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+        <address class="foot__end">Estrada Municipal Piracicaba–Tupi, km 6<br>Piracicaba, SP · Interior de São Paulo</address>
       </div>
     </div>
     <div class="foot__bar">
-      <span>&copy; 2026 Di Terrá Eventos. Piracicaba e região, São Paulo.</span>
-      <span>Protótipo de avaliação. Fotografia ilustrativa e dados técnicos sujeitos a validação.</span>
+      <span>&copy; 2026 Di Terrá Eventos. Piracicaba, São Paulo.</span>
+      <span>Protótipo de avaliação. Fotografia ilustrativa e dados sujeitos a validação.</span>
     </div>
   </div>
 </footer>
@@ -862,10 +869,7 @@
 <!-- contato flutuante: hoje a página inteira tinha um único ponto de conversão -->
 <a class="wa" id="wa" href="https://wa.me/5519996777288" target="_blank" rel="noopener"
    aria-label="Falar com o comercial pelo WhatsApp">
-  <svg width="22" height="22" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-    <path d="M9 1.6a7.4 7.4 0 0 0-6.3 11.3L1.6 16.4l3.6-1a7.4 7.4 0 1 0 3.8-13.8Z" stroke="currentColor" stroke-width="1.2"/>
-    <path d="M6.4 6c.3-.6.6-.6.9-.6h.5l.8 1.8-.7.8c.5 1 1.1 1.6 2.1 2.1l.8-.7 1.8.8v.5c0 .3 0 .6-.6.9-.9.4-2.3 0-3.6-1.2S6 7 6.4 6Z" fill="currentColor"/>
-  </svg>
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20l1.3-3.8A8 8 0 1 1 8.2 19L4 20z" stroke="currentColor" stroke-width="1.25"/><path d="M9.5 9.5c.3 2.5 2.5 4.7 5 5l1.2-1.2-1.8-.9-.8.8c-.9-.4-1.8-1.3-2.2-2.2l.8-.8-.9-1.8L9.5 9.5z" fill="currentColor"/></svg>
   <span>Falar com o comercial</span>
 </a>
 
