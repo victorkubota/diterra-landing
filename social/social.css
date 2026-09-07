@@ -37,72 +37,7 @@
    BOTÕES
    ══════════════════════════════════════════════════════════════════════ */
 
-/* ══════════════════════════════════════════════════════════════════════
-   NAV
-   ══════════════════════════════════════════════════════════════════════ */
-.nav {
-  position: fixed; inset: 0 0 auto 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between; gap: 24px;
-  padding: 14px var(--gutter);
-  transition: background var(--dur) var(--ease);
-}
-/* o padding muda sem transição: animar padding relayouta a nav a cada quadro */
-.nav.is-stuck { background: rgba(17,21,66,.96); padding-block: 10px; box-shadow: var(--elev-luz); }
-/* o Safari só aceitou backdrop-filter sem prefixo no 18: sem testar as
-   duas grafias, todo iPhone com iOS 17 ou anterior reprova o @supports,
-   a regra nunca entra e a nav cai no fundo opaco, em silêncio, no
-   aparelho onde ela mais aparece.
-   saturate(125%) porque blur faz média dos vizinhos e média dessatura:
-   a foto por baixo do vidro chega acinzentada sem isso. */
-@supports ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
-  .nav.is-stuck {
-    background: rgba(17,21,66,.86);
-    -webkit-backdrop-filter: blur(14px) saturate(125%);
-            backdrop-filter: blur(14px) saturate(125%);
-  }
-}
-.nav__logo { display: block; flex: none; }
-.nav__logo img { height: clamp(34px, 4vw, 46px); width: auto; view-transition-name: marca; }
-/* o hero de uma casa recebe a foto que estava na lista da home ou do
-   corporativo (casa-foto, ver base.css) */
-.page-hero__media img { view-transition-name: casa-foto; }
-
-.nav__links { display: flex; align-items: center; gap: clamp(16px, 2vw, 30px); list-style: none; }
-.nav__links a {
-  font-size: var(--text-sm); font-weight: 400; color: rgba(254,250,224,.9);
-  text-decoration: none; padding: 6px 0; position: relative;
-  transition: color var(--dur-fast) var(--ease);
-}
-.nav__links a::after {
-  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
-  background: var(--rose); transform: scaleX(0); transform-origin: left;
-  transition: transform var(--dur) var(--ease);
-}
-.nav__links a:hover { color: var(--ivory); }
-.nav__links a:hover::after, .nav__links a[aria-current="page"]::after { transform: scaleX(1); }
-
-.nav__side { display: flex; align-items: center; gap: 14px; }
-.nav__switch {
-  font-size: var(--text-xs); letter-spacing: .12em; text-transform: uppercase;
-  color: rgba(254,250,224,.72); text-decoration: none; white-space: nowrap;
-}
-.nav__switch:hover { color: var(--ivory); }
-.nav .btn { padding: 11px 20px; font-size: var(--text-xs); }
-.nav .btn--primary { background: var(--ivory); color: var(--royal); }
-.nav .btn--primary:hover { background: var(--rose); }
-
-.nav__toggle {
-  display: none; background: none; border: 0; cursor: pointer;
-  width: 44px; height: 44px; padding: 12px;   /* 44px: mínimo de alvo de toque */ color: var(--ivory);
-}
-.nav__toggle span { display: block; height: 1px; background: currentColor; margin: 5px 0; }
-/* 1024: o mesmo ponto de colapso do corporativo */
-@media (max-width: 1024px) { .nav__links, .nav__side .nav__switch { display: none; } .nav__toggle { display: block; } }
-/* Abaixo de 480px a logo (171px) e o botão (120px) não cabem juntos e o
-   hambúrguer era espremido a 38px. A ação já está dentro da gaveta.
-   O corporativo faz o mesmo desde sempre, a ≤1080px. */
-@media (max-width: 480px) { .nav__side .btn { display: none; } }
-
+/* A barra antiga saiu na rodada 4: a navegação é a pílula (nav-pilula.css). */
 /* .nav__drawer mora no base.css: mesmo componente em treze rotas. */
 
 /* ══════════════════════════════════════════════════════════════════════

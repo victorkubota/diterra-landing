@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/corporativo/corporativo.css">
 <link rel="stylesheet" href="/assets/css/nav-pilula.css">
-<script src="/assets/nav-pilula.js"></script>
+<script src="/assets/nav-pilula.js" defer></script>
 <link rel="stylesheet" href="/assets/css/melhorias.css">
 <script src="/assets/melhorias.js" defer></script>
 </head>
@@ -38,30 +38,6 @@
 <!-- ══════════════════════════════════════════════════════════════
      NAV COM ANCORAGEM — o corporativo é uma página única
      ══════════════════════════════════════════════════════════════ -->
-<nav class="nav" id="nav" aria-label="Navegação principal">
-  <a class="nav__brand" href="#topo" aria-label="Di Terrá Corporativo, início">
-    <img class="nav__brand-img" src="/assets/brand/corp-horizontal-white.png"
-         alt="Di Terrá Corporativo" width="1164" height="365">
-  </a>
-
-  <ul class="nav__links">
-    <li><a href="#manifesto">A proposta</a></li>
-    <li><a href="#formatos">Formatos</a></li>
-    <li><a href="#estrutura">Estrutura</a></li>
-    <li><a href="#espacos">Espaços</a></li>
-    <li><a href="#territorio">Território</a></li>
-    <li><a href="/sobre">Sobre</a></li>
-  </ul>
-
-  <div class="nav__side">
-    <a class="nav__switch" href="/social">Eventos sociais <svg width="14" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.25"/></svg></a>
-    <a class="btn btn--primary on-dark" href="#proposta" data-visita>Agendar visita</a>
-    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Abrir menu">
-      <span></span><span></span>
-    </button>
-  </div>
-  <span class="nav__progresso" id="navProgresso" aria-hidden="true"></span>
-</nav>
 
 <div class="nav__drawer" id="navDrawer">
   <a class="nav__drawer-cta" href="#proposta" data-visita>Agendar visita</a>
@@ -927,7 +903,7 @@
 
   /* nav sólida ao sair do hero */
   var sentinel = document.getElementById('topo');
-  if ('IntersectionObserver' in window && sentinel) {
+  if (nav && 'IntersectionObserver' in window && sentinel) {
     new IntersectionObserver(function (entries) {
       nav.classList.toggle('is-stuck', !entries[0].isIntersecting);
     }, { rootMargin: '-88% 0px 0px 0px' }).observe(sentinel);
