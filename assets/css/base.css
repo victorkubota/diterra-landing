@@ -519,6 +519,13 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   text-decoration: none; padding: 9px 0; font-weight: 300;
 }
 .nav__drawer .nav__switch { display: inline-block; margin-top: 25px; font-size: var(--text-sm); }
+/* o CTA único também mora na gaveta: no celular ele some da barra */
+.nav__drawer .nav__drawer-cta {
+  font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 500;
+  letter-spacing: var(--tracking-btn); text-transform: uppercase;
+  padding: 14px 22px; margin-bottom: 18px; align-self: flex-start;
+  background: var(--ui-text-invert); color: var(--ui-bg-invert); border-radius: var(--radius);
+}
 
 /* ══════════════════════════════════════════════════════════════════════
    FICHA TÉCNICA E AVISOS

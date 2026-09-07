@@ -343,7 +343,7 @@
 
     var atualizar = function () {
       if (toTop) toTop.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.8);
-      if (barra) barra.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.5);
+      if (barra) barra.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.2);
       pintarHero();
       pintarRegua();
       pendente = false;
