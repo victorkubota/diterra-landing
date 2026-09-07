@@ -320,6 +320,8 @@ def cabeca(titulo, descricao, canonical, css, favicon):
 <link rel="stylesheet" href="/assets/css/base.css">
 <script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="{css}">
+<link rel="stylesheet" href="/assets/css/nav-pilula.css">
+<script src="/assets/nav-pilula.js"></script>
 </head>
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
