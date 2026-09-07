@@ -15,7 +15,7 @@
    O que a pílula sabe de cada universo (logo, itens, alternador, ação)
    mora em CONTEXTOS. Espaços e Soluções são os mesmos dicionários do
    gerador (tools/gerar-paginas.py), copiados aqui em forma resumida.
-   Quando o painel de visita (PR 8) existir, o destino da ação troca.
+   A ação "Agendar visita" abre o painel de melhorias.js (data-visita).
    ══════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
@@ -62,7 +62,7 @@
         { rotulo: 'Blog',     href: BLOG, menu: 'blog', externo: true }
       ],
       alternador: { rotulo: 'Corporativo', href: '/corporativo' },
-      acao: { rotulo: 'Agendar visita', href: '/social#contato' } /* abre o painel no PR 8 */
+      acao: { rotulo: 'Agendar visita', href: '/social#contato' }
     },
     corporativo: {
       logo: '/assets/brand/corp-horizontal-navy.png', alt: 'Di Terrá Corporativo', inicio: '/corporativo',
@@ -88,8 +88,8 @@
       '<span class="pil__card-head">' + (img ? '<img src="' + img + '" alt="" width="44" height="44">' : '') +
       '<b>' + esc(titulo) + '</b></span>' + (texto ? '<p>' + esc(texto) + '</p>' : '') + '</a>';
   };
-  var atalho = function (href, titulo) {
-    return '<a class="pil__card pil__card--curto" href="' + href + '"><span class="pil__card-head"><b>' + esc(titulo) + '</b></span></a>';
+  var atalho = function (href, titulo, visita) {
+    return '<a class="pil__card pil__card--curto" href="' + href + '"' + (visita ? ' data-visita' : '') + '><span class="pil__card-head"><b>' + esc(titulo) + '</b></span></a>';
   };
 
   var PAINEIS = {
@@ -97,13 +97,13 @@
       return '<div class="pil__grid"><div class="pil__col2">' + ESPACOS.map(function (e) {
         return card('/social/espacos/' + e.slug, e.nome, e.resumo, '/assets/opt/' + e.slug + '-amplitude-800.webp');
       }).join('') + '</div><div class="pil__aside">' +
-        atalho('/social/espacos', 'Todos os espaços') + atalho(ctx.acao.href, 'Agendar visita') + '</div></div>';
+        atalho('/social/espacos', 'Todos os espaços') + atalho(ctx.acao.href, 'Agendar visita', true) + '</div></div>';
     },
     solucoes: function () {
       return '<div class="pil__grid"><div class="pil__col2">' + SOLUCOES.map(function (s) {
         return card('/social/solucoes/' + s.slug, s.nome, s.resumo, null);
       }).join('') + '</div><div class="pil__aside">' +
-        atalho('/social/solucoes', 'Todas as soluções') + atalho(ctx.acao.href, 'Agendar visita') + '</div></div>';
+        atalho('/social/solucoes', 'Todas as soluções') + atalho(ctx.acao.href, 'Agendar visita', true) + '</div></div>';
     },
     /* nasce com o post mais recente conhecido; a API troca pelo atual */
     blog: function () {
@@ -134,7 +134,7 @@
     });
     html += '</ul><div class="pil__side">' +
       '<a class="pil__switch" href="' + ctx.alternador.href + '">' + esc(ctx.alternador.rotulo) + '</a>' +
-      '<a class="pil__cta" href="' + ctx.acao.href + '">' + esc(ctx.acao.rotulo) + '</a>' +
+      '<a class="pil__cta" href="' + ctx.acao.href + '" data-visita>' + esc(ctx.acao.rotulo) + '</a>' +
       (gaveta ? '<button class="pil__toggle" type="button" aria-expanded="false" aria-controls="navDrawer" aria-label="Abrir menu"><span></span><span></span></button>' : '') +
       '</div></div><div class="pil__mega"><div>';
     ctx.itens.forEach(function (it) {
