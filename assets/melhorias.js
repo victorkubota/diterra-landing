@@ -12,6 +12,11 @@
 (function () {
   'use strict';
 
+  /* com um diálogo aberto, o resto da página sai da ordem de Tab */
+  var prender = function (aberto) {
+    Array.prototype.forEach.call(document.querySelectorAll('main, footer.foot, .barra-acao, .pil, .nav'), function (el) { el.inert = aberto; });
+  };
+
   /* ── lightbox ──────────────────────────────────────────────────── */
   var gatilhos = Array.prototype.slice.call(document.querySelectorAll('a[data-lightbox]'));
   if (gatilhos.length) {
@@ -45,11 +50,13 @@
       mostrar(grupo.indexOf(a));
       lb.classList.add('is-open');
       document.body.style.overflow = 'hidden';
+      prender(true);
       lb.querySelector('.lb__fechar').focus();
     };
     var fechar = function () {
       lb.classList.remove('is-open');
       document.body.style.overflow = '';
+      prender(false);
       if (origem) origem.focus();
     };
 
@@ -141,6 +148,7 @@
     form.casa.value = casa || '';
     painel.hidden = false;
     document.body.style.overflow = 'hidden';
+    prender(true);
     window.requestAnimationFrame(function () {
       painel.classList.add('is-open');
       form.nome.focus();
@@ -149,6 +157,7 @@
   var fecharVisita = function () {
     painel.classList.remove('is-open');
     document.body.style.overflow = '';
+    prender(false);
     window.setTimeout(function () { painel.hidden = true; }, 350);
     if (origemVisita) origemVisita.focus();
   };

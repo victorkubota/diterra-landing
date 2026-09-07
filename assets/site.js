@@ -96,9 +96,15 @@
       var atual = 0, relogio = null, pausadoRot = false, naTelaRot = true;
 
       var mostrar = function (i) {
-        laminas.forEach(function (l, n) { l.classList.toggle('is-on', n === i); });
+        laminas.forEach(function (l, n) {
+          l.classList.toggle('is-on', n === i);
+          /* só a lâmina visível fica na árvore de acessibilidade */
+          l.setAttribute('aria-hidden', String(n !== i));
+          l.inert = n !== i;
+        });
         atual = i;
       };
+      mostrar(0);
       var tocarRot = function () {
         if (relogio || pausadoRot || !naTelaRot || document.hidden) return;
         relogio = setInterval(function () {
@@ -130,11 +136,16 @@
 
   /* ── menu mobile ─────────────────────────────────────────────────── */
   if (toggle && drawer) {
+    /* com a gaveta aberta, o resto da página sai da ordem de Tab */
+    var prender = function (aberto) {
+      Array.prototype.forEach.call(document.querySelectorAll('main, footer.foot, .barra-acao'), function (el) { el.inert = aberto; });
+    };
     var fechar = function () {
       drawer.classList.remove('is-open');
       toggle.setAttribute('aria-expanded', 'false');
       toggle.setAttribute('aria-label', 'Abrir menu');
       document.body.style.overflow = '';
+      prender(false);
     };
 
     toggle.addEventListener('click', function () {
@@ -142,6 +153,7 @@
       toggle.setAttribute('aria-expanded', String(aberto));
       toggle.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
       document.body.style.overflow = aberto ? 'hidden' : '';
+      prender(aberto);
     });
 
     drawer.addEventListener('click', function (e) {

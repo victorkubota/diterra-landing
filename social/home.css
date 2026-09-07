@@ -1003,7 +1003,7 @@
 .form-textarea {
   width: 100%;
   padding: 14px 16px;
-  border: 1px solid rgba(0,0,0,.08);
+  border: 1px solid color-mix(in srgb, var(--ui-text) 45%, transparent);   /* 3:1 sobre a mesa */
   background: var(--sand-50);
   font-family: var(--font-sans);
   /* 16px é o piso: abaixo disso o Safari do iPhone dá zoom ao focar o

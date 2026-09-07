@@ -217,6 +217,7 @@
     if (toggle && gaveta) {
       var pintar = function (aberto) {
         gaveta.classList.toggle('is-open', aberto);
+        Array.prototype.forEach.call(document.querySelectorAll('main, footer.foot, .barra-acao'), function (el) { el.inert = aberto; });
         toggle.setAttribute('aria-expanded', String(aberto));
         toggle.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
       };
