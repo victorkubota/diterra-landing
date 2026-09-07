@@ -4,9 +4,10 @@
    Liga:    qualquer rota com ?nav=pilula (fica gravado no navegador)
    Desliga: qualquer rota com ?nav=barra
 
-   Modelo: craft.do. A pílula nasce escondida e aparece depois que a
-   página rola. Ao pousar o mouse num item, a própria pílula cresce para
-   baixo e mostra cards; os outros links esmaecem.
+   Modelo: craft.do. No topo a pílula é só logo e textos sobre a foto;
+   o vidro entra quando a página rola (is-scrolled). Ao pousar o mouse
+   num item, a própria pílula cresce para baixo e mostra cards; os
+   outros links esmaecem.
 
    Carrega no <head> sem defer de propósito: a classe html.nav-pilula
    precisa existir antes da primeira pintura, senão a barra antiga pisca
@@ -35,7 +36,7 @@
 
   var BLOG = 'https://diterra.com.br/blog/';
   var API  = 'https://diterra.com.br/wp-json/wp/v2/posts?per_page=1&_embed=wp:featuredmedia';
-  var ROLAGEM_MINIMA = 24;   /* px rolados antes de a pílula aparecer */
+  var ROLAGEM_MINIMA = 24;   /* px rolados antes de o vidro entrar */
 
   var ESPACOS = [
     { slug: 'a-querencia',           nome: 'A Querência',           resumo: 'Salão coberto e jardim para celebrações de grande porte.' },
@@ -54,7 +55,7 @@
   var corporativo = window.location.pathname.indexOf('/corporativo') === 0;
   var CONTEXTOS = {
     social: {
-      logo: '/assets/brand/social-wordmark-navy.png', alt: 'Di Terrá Eventos', inicio: '/social',
+      logo: '/assets/brand/social-wordmark-navy.png', logoClaro: '/assets/brand/social-wordmark-white.png', alt: 'Di Terrá Eventos', inicio: '/social',
       itens: [
         { rotulo: 'Espaços',  href: '/social/espacos',  menu: 'espacos' },
         { rotulo: 'Soluções', href: '/social/solucoes', menu: 'solucoes' },
@@ -65,7 +66,7 @@
       acao: { rotulo: 'Agendar visita', href: '/social#contato' }
     },
     corporativo: {
-      logo: '/assets/brand/corp-horizontal-navy.png', alt: 'Di Terrá Corporativo', inicio: '/corporativo',
+      logo: '/assets/brand/corp-horizontal-navy.png', logoClaro: '/assets/brand/corp-horizontal-white.png', alt: 'Di Terrá Corporativo', inicio: '/corporativo',
       itens: [
         { rotulo: 'Formatos', href: '/corporativo#formatos' },
         { rotulo: 'Espaços',  href: '/corporativo#espacos', menu: 'espacos' },
@@ -124,7 +125,8 @@
 
     var aqui = window.location.pathname.replace(/\/$/, '');
     var html = '<div class="pil__row"><a class="pil__logo" href="' + ctx.inicio + '" aria-label="' + esc(ctx.alt) + ', início">' +
-      '<img src="' + ctx.logo + '" alt="' + esc(ctx.alt) + '"></a><ul class="pil__list">';
+      '<img class="pil__logo--claro" src="' + ctx.logoClaro + '" alt="' + esc(ctx.alt) + '">' +
+      '<img class="pil__logo--escuro" src="' + ctx.logo + '" alt=""></a><ul class="pil__list">';
     ctx.itens.forEach(function (it) {
       var atual = aqui === it.href.replace(/#.*$/, '') && it.href.indexOf('#') === -1 ? ' aria-current="page"' : '';
       var ext = it.externo ? ' target="_blank" rel="noopener"' : '';
@@ -164,11 +166,9 @@
       nav.classList.add('is-open');
     };
 
-    /* ── aparece só depois que a página rola ───────────────────────── */
+    /* ── o vidro entra só depois que a página rola ─────────────────── */
     var mostrar = function () {
-      var visivel = window.scrollY > ROLAGEM_MINIMA;
-      nav.classList.toggle('is-visible', visivel);
-      if (!visivel) fechar();
+      nav.classList.toggle('is-scrolled', window.scrollY > ROLAGEM_MINIMA);
     };
     window.addEventListener('scroll', mostrar, { passive: true });
     mostrar();

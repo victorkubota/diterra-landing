@@ -7,6 +7,13 @@
    · capacidade nos cards (índice de espaços)
    ══════════════════════════════════════════════════════════════════════ */
 
+/* ── divisão de seções sem cantos arredondados (ajuste de 07/09) ──
+   As "lajes" do base.css curvam as faixas pintadas e abrem uma fresta
+   entre elas. Aqui o raio vai a zero e a fresta também: corte reto,
+   como o site sempre teve. O hero que se recolhe ao rolar segue o
+   mesmo raio, então também fica reto. */
+:root { --laje-raio: 0px; --laje-fresta: 0px; }
+
 /* ── card: linha de capacidade ───────────────────────────────────── */
 .card__cap {
   display: inline-block; margin-top: 10px;
