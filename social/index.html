@@ -11,13 +11,15 @@
 <!-- FONTS — BRANDBOOK p.8: Channe (display), Oooh Baby (script), Albert Sans (texto).
      Channe é licenciada e não veio nos arquivos de marca; Cormorant Garamond
      entra como substituta temporária da mesma classe de serifada. -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Só os pesos que a home usa: Albert 300/400/500/600, Cormorant 300/400/600
      e itálico 400. Oooh Baby não aparece nesta rota. -->
-<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/cormorant-garamond-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/albert-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fontes.css">
 
 <script>document.documentElement.classList.add('js')</script>
+<!-- o LCP da home é o fundo do hero (home.css): pedido antes do CSS terminar -->
+<link rel="preload" as="image" type="image/avif" href="/assets/opt/solucao-completa-decoracao-casamento-1220.avif">
 <link rel="stylesheet" href="/assets/css/tema-social.css">
 <link rel="stylesheet" href="/assets/css/base.css">
 <!-- social.css: nav, botão, gaveta e rodapé são os mesmos das outras
@@ -187,7 +189,7 @@
         </div>
       </div>
       <div class="intro-image">
-        <picture><source type="image/avif" srcset="/assets/opt/decoracao-800.avif 800w, /assets/opt/decoracao-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/decoracao-1400.webp" alt="Decoração Di Terrá, ambientação premium para eventos" width="2400" height="1792" loading="lazy" decoding="async" srcset="/assets/opt/decoracao-800.webp 800w, /assets/opt/decoracao-1400.webp 1400w" sizes="100vw"></picture>
+        <picture><source type="image/avif" srcset="/assets/opt/decoracao-800.avif 800w, /assets/opt/decoracao-1400.avif 1400w" sizes="(min-width: 900px) 50vw, 100vw"><img src="/assets/opt/decoracao-1400.webp" alt="Decoração Di Terrá, ambientação premium para eventos" width="2400" height="1792" loading="lazy" decoding="async" srcset="/assets/opt/decoracao-800.webp 800w, /assets/opt/decoracao-1400.webp 1400w" sizes="100vw"></picture>
       </div>
     </div>
   </div>
@@ -211,16 +213,16 @@
     <div class="switch rise" style="--i:1" id="venueSwitch">
       <div class="switch__stage">
         <figure class="switch__shot is-on" data-shot="a-querencia">
-          <picture><source type="image/avif" srcset="/assets/opt/a-querencia-amplitude-800.avif 800w, /assets/opt/a-querencia-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/a-querencia-amplitude-1400.webp" width="2400" height="1610" alt="Vista do pavilhão coberto da Querência aberto para o jardim" loading="lazy" decoding="async" srcset="/assets/opt/a-querencia-amplitude-800.webp 800w, /assets/opt/a-querencia-amplitude-1400.webp 1400w" sizes="100vw"></picture>
+          <picture><source type="image/avif" srcset="/assets/opt/a-querencia-amplitude-800.avif 800w, /assets/opt/a-querencia-amplitude-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/a-querencia-amplitude-1400.webp" width="2400" height="1610" alt="Vista do pavilhão coberto da Querência aberto para o jardim" loading="lazy" decoding="async" srcset="/assets/opt/a-querencia-amplitude-800.webp 800w, /assets/opt/a-querencia-amplitude-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture>
         </figure>
         <figure class="switch__shot" data-shot="palacete-monte-alegre">
-          <picture><source type="image/avif" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.avif 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/palacete-monte-alegre-amplitude-1400.webp" width="2400" height="1610" alt="Salão principal do Palacete Monte Alegre montado para jantar" loading="lazy" decoding="async" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.webp 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.webp 1400w" sizes="100vw"></picture>
+          <picture><source type="image/avif" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.avif 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/palacete-monte-alegre-amplitude-1400.webp" width="2400" height="1610" alt="Salão principal do Palacete Monte Alegre montado para jantar" loading="lazy" decoding="async" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.webp 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture>
         </figure>
         <figure class="switch__shot" data-shot="casa-lucca">
-          <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-amplitude-800.avif 800w, /assets/opt/casa-lucca-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/casa-lucca-amplitude-1400.webp" width="2400" height="1610" alt="Casa Lucca vista do jardim, com varanda ao longo da fachada" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-amplitude-800.webp 800w, /assets/opt/casa-lucca-amplitude-1400.webp 1400w" sizes="100vw"></picture>
+          <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-amplitude-800.avif 800w, /assets/opt/casa-lucca-amplitude-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-amplitude-1400.webp" width="2400" height="1610" alt="Casa Lucca vista do jardim, com varanda ao longo da fachada" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-amplitude-800.webp 800w, /assets/opt/casa-lucca-amplitude-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture>
         </figure>
         <figure class="switch__shot" data-shot="espaco-terra">
-          <picture><source type="image/avif" srcset="/assets/opt/espaco-terra-amplitude-800.avif 800w, /assets/opt/espaco-terra-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/espaco-terra-amplitude-1400.webp" width="2400" height="1610" alt="Espaço Terrá montado em plenária, com palco e painel de LED" loading="lazy" decoding="async" srcset="/assets/opt/espaco-terra-amplitude-800.webp 800w, /assets/opt/espaco-terra-amplitude-1400.webp 1400w" sizes="100vw"></picture>
+          <picture><source type="image/avif" srcset="/assets/opt/espaco-terra-amplitude-800.avif 800w, /assets/opt/espaco-terra-amplitude-1400.avif 1400w" sizes="(min-width: 940px) 50vw, 100vw"><img src="/assets/opt/espaco-terra-amplitude-1400.webp" width="2400" height="1610" alt="Espaço Terrá montado em plenária, com palco e painel de LED" loading="lazy" decoding="async" srcset="/assets/opt/espaco-terra-amplitude-800.webp 800w, /assets/opt/espaco-terra-amplitude-1400.webp 1400w" sizes="(min-width: 940px) 50vw, 100vw"></picture>
         </figure>
         <span class="switch__arco" aria-hidden="true"></span>
       </div>

@@ -199,13 +199,38 @@
 
   /* ── vídeo nos heroes ──────────────────────────────────────────── */
   var semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  Array.prototype.forEach.call(document.querySelectorAll('video[data-hero-video]'), function (v) {
-    if (semMovimento || !window.matchMedia('(min-width: 768px)').matches) return;
-    var nome = v.getAttribute('data-hero-video');
-    var grande = v.hasAttribute('data-1920') && window.matchMedia('(min-width: 1440px)').matches;
-    v.src = '/assets/opt/video/' + nome + '-' + (grande ? '1920' : '1280') + '.mp4';
-    v.hidden = false;
-    var tocar = v.play();
-    if (tocar && tocar.catch) tocar.catch(function () { v.hidden = true; });
+  var economia = navigator.connection && navigator.connection.saveData;
+  var ligarVideos = function () {
+    Array.prototype.forEach.call(document.querySelectorAll('video[data-hero-video]'), function (v) {
+      if (semMovimento || economia || !window.matchMedia('(min-width: 768px)').matches) return;
+      var nome = v.getAttribute('data-hero-video');
+      var grande = v.hasAttribute('data-1920') && window.matchMedia('(min-width: 1440px)').matches;
+      v.src = '/assets/opt/video/' + nome + '-' + (grande ? '1920' : '1280') + '.mp4';
+      v.hidden = false;
+      var tocar = v.play();
+      if (tocar && tocar.catch) tocar.catch(function () { v.hidden = true; });
+    });
+  };
+  /* o vídeo espera a página carregar: não disputa banda com o LCP */
+  if (document.readyState === 'complete') ligarVideos(); else window.addEventListener('load', ligarVideos, { once: true });
+
+  /* ── pausar vídeo (WCAG 2.2.2): um botão por vídeo de fundo ──────
+     Cobre os vídeos do melhorias.js e os que o portal e o corporativo
+     ligam sozinhos (#stageVideo, #heroVideo). Aparece quando o vídeo
+     começa a tocar; some se ele nunca tocar. */
+  Array.prototype.forEach.call(document.querySelectorAll('video[data-hero-video], #stageVideo, #heroVideo'), function (v) {
+    var palco = v.closest('.hero, .page-hero, .stage, header, section') || v.parentNode;
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'video-pausa'; b.hidden = true;
+    b.setAttribute('aria-pressed', 'false');
+    b.innerHTML = '<span>Pausar vídeo</span>';
+    palco.appendChild(b);
+    v.addEventListener('playing', function () { b.hidden = false; }, { once: true });
+    b.addEventListener('click', function () {
+      var pausar = !v.paused;
+      if (pausar) v.pause(); else v.play();
+      b.setAttribute('aria-pressed', String(pausar));
+      b.querySelector('span').textContent = pausar ? 'Retomar vídeo' : 'Pausar vídeo';
+    });
   });
 })();

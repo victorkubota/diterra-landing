@@ -15,9 +15,9 @@
 <meta property="og:description" content="Onde marcas se expressam. Onde pessoas se conectam.">
 <meta property="og:url" content="https://www.diterra.com.br/corporativo/">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/cormorant-garamond-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/albert-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fontes.css">
 <script>document.documentElement.classList.add('js')</script>
 <!-- o poster do hero é o LCP da página: pede-se antes do CSS terminar -->
 <link rel="preload" as="image" type="image/avif" imagesizes="100vw"
@@ -897,19 +897,24 @@
      Desktop e movimento permitido. No celular o poster assume. */
   var video = document.getElementById('heroVideo');
   var poster = document.getElementById('heroPoster');
-  if (video && !reduz && window.matchMedia('(min-width: 768px)').matches) {
+  var economia = navigator.connection && navigator.connection.saveData;
+  if (video && !reduz && !economia && window.matchMedia('(min-width: 768px)').matches) {
     /* H.264 em vez do HEVC original: o HEVC não toca no Chrome do Windows
        e do Android nem no Firefox. 1280 px até o tablet, 1920 px acima. */
-    video.src = window.matchMedia('(min-width: 1440px)').matches
-      ? '/assets/opt/video/hero-corporativo-noite-1920.mp4'
-      : '/assets/opt/video/hero-corporativo-noite-1280.mp4';
-    video.hidden = false;
+    var ligarVideo = function () {
+      video.src = window.matchMedia('(min-width: 1440px)').matches
+        ? '/assets/opt/video/hero-corporativo-noite-1920.mp4'
+        : '/assets/opt/video/hero-corporativo-noite-1280.mp4';
+      video.hidden = false;
+      var tocar = video.play();
+      if (tocar && tocar.catch) { tocar.catch(function () { video.hidden = true; }); }
+    };
+    /* o vídeo espera a página carregar: não disputa banda com o LCP */
+    if (document.readyState === 'complete') ligarVideo(); else window.addEventListener('load', ligarVideo, { once: true });
     video.addEventListener('playing', function () {
       poster.style.transition = 'opacity .8s var(--ease-out)';
       poster.style.opacity = '0';
     }, { once: true });
-    var tocar = video.play();
-    if (tocar && tocar.catch) { tocar.catch(function () { video.hidden = true; }); }
   }
 
   /* ── entrada do hero em cascata ────────────────────────────────

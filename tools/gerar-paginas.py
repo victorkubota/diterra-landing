@@ -313,9 +313,9 @@ def cabeca(titulo, descricao, canonical, css, favicon):
 <meta property="og:type" content="website">
 <meta property="og:title" content="{titulo}">
 <meta property="og:description" content="{descricao}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400&family=Oooh+Baby&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/cormorant-garamond-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/albert-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fontes.css">
 <link rel="stylesheet" href="/assets/css/tema-social.css">
 <link rel="stylesheet" href="/assets/css/base.css">
 <script>document.documentElement.classList.add('js')</script>
