@@ -15,8 +15,7 @@
    O que a pílula sabe de cada universo (logo, itens, alternador, ação)
    mora em CONTEXTOS. Espaços e Soluções são os mesmos dicionários do
    gerador (tools/gerar-paginas.py), copiados aqui em forma resumida.
-   Quando Sobre (PR 4) e o painel de visita (PR 8) existirem, os dois
-   destinos provisórios abaixo trocam de href.
+   Quando o painel de visita (PR 8) existir, o destino da ação troca.
    ══════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
@@ -59,7 +58,7 @@
       itens: [
         { rotulo: 'Espaços',  href: '/social/espacos',  menu: 'espacos' },
         { rotulo: 'Soluções', href: '/social/solucoes', menu: 'solucoes' },
-        { rotulo: 'Sobre',    href: '/social#intro' },           /* vira /sobre no PR 4 */
+        { rotulo: 'Sobre',    href: '/sobre' },
         { rotulo: 'Blog',     href: BLOG, menu: 'blog', externo: true }
       ],
       alternador: { rotulo: 'Corporativo', href: '/corporativo' },
@@ -70,7 +69,7 @@
       itens: [
         { rotulo: 'Formatos', href: '/corporativo#formatos' },
         { rotulo: 'Espaços',  href: '/corporativo#espacos', menu: 'espacos' },
-        { rotulo: 'Sobre',    href: '/corporativo#manifesto' },  /* vira /sobre no PR 4 */
+        { rotulo: 'Sobre',    href: '/sobre' },
         { rotulo: 'Blog',     href: BLOG, menu: 'blog', externo: true }
       ],
       alternador: { rotulo: 'Eventos sociais', href: '/social' },
