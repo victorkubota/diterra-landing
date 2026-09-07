@@ -319,11 +319,16 @@
   position: relative; z-index: 4;
   background: var(--ui-bg-rodape);
   border-top: 1px solid var(--ui-border-invert);
-  padding: clamp(30px, 4vw, 46px) var(--gutter);
-  display: flex; flex-wrap: wrap;
+  padding: clamp(34px, 4vw, 56px) var(--gutter);
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
   gap: clamp(24px, 4vw, 60px);
-  justify-content: space-between; align-items: flex-start;
+  align-items: flex-start;
 }
+@media (max-width: 900px) { .entry-foot { grid-template-columns: 1fr 1fr; } }
+.foot-brand img { height: 44px; width: auto; margin-bottom: 14px; }
+.foot-col + .foot-col h2 { margin-top: 0; }
+.foot-col h2 + ul + h2 { margin-top: 22px; }
+.foot-col address { font-style: normal; color: rgba(245,243,239,.84); font-size: .84rem; font-weight: 300; line-height: 1.7; }
 .foot-col h2 {
   font-size: 11px; letter-spacing: .26em; text-transform: uppercase;
   font-weight: 500; color: rgba(245,243,239,.5); margin-bottom: 14px;
@@ -338,6 +343,56 @@
 .foot-legal {
   font-size: .74rem; color: rgba(245,243,239,.5);
   font-weight: 300; line-height: 1.7; max-width: 28ch;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FAIXA DAS QUATRO CASAS — segundo caminho de entrada, com foto.
+   Quem já sabe a casa não precisa passar pela home social.
+   ══════════════════════════════════════════════════════════════ */
+.casas {
+  position: relative; z-index: 4;
+  background: var(--ink);
+  padding: clamp(40px, 6vw, 80px) var(--gutter);
+}
+.casas__head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  max-width: 1280px; margin: 0 auto clamp(22px, 3vw, 36px);
+}
+.casas__head h2 {
+  font-family: var(--font-display); font-weight: 300;
+  font-size: clamp(1.6rem, 3vw, 2.4rem); letter-spacing: .04em; color: var(--paper);
+}
+.casas__head a {
+  font-size: 11px; letter-spacing: .24em; text-transform: uppercase;
+  color: rgba(245,243,239,.7); text-decoration: none;
+  border-bottom: 1px solid rgba(245,243,239,.3); padding-bottom: 4px;
+  transition: color .3s var(--ease-out), border-color .3s var(--ease-out);
+}
+.casas__head a:hover, .casas__head a:focus-visible { color: var(--paper); border-color: var(--paper); }
+.casas__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(10px, 1.5vw, 18px); max-width: 1280px; margin: 0 auto; }
+.casa {
+  position: relative; display: block; overflow: hidden; border-radius: 4px;
+  aspect-ratio: 3 / 4; text-decoration: none; color: var(--paper);
+  background: rgba(245,243,239,.06);
+}
+.casa img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s var(--ease-out); }
+.casa::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,12,16,.72) 0%, rgba(10,12,16,0) 55%);
+}
+.casa__nome {
+  position: absolute; left: 18px; right: 18px; bottom: 18px; z-index: 1;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.casa__nome b { font-family: var(--font-display); font-weight: 300; font-size: clamp(1.15rem, 1.8vw, 1.5rem); letter-spacing: .03em; }
+.casa__nome span { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: rgba(245,243,239,.7); }
+@media (hover: hover) { .casa:hover img { transform: scale(1.05); } }
+.casa:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; }
+@media (max-width: 720px) { .casas__grid { grid-template-columns: 1fr 1fr; } .casa { aspect-ratio: 4 / 5; } }
+
+.core__lede {
+  max-width: 34ch; font-size: clamp(.95rem, 1.1vw, 1.1rem); font-weight: 300; line-height: 1.6;
+  color: rgba(245,243,239,.86); text-shadow: 0 1px 20px rgba(8,10,14,.5);
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -460,6 +515,7 @@
     <div class="core__head">
       <h1 class="core__title rise" style="--i:3">Di Terrá Eventos</h1>
       <p class="core__sub rise" style="--i:4">Piracicaba &nbsp;·&nbsp; Interior de São Paulo</p>
+      <p class="core__lede rise" style="--i:4">Quatro casas no interior paulista para celebrar e reunir. Desde 2009.</p>
     </div>
 
     <nav class="doors" aria-label="Escolha o universo">
@@ -481,7 +537,7 @@
   <!-- RODAPÉ DO PALCO -->
   <div class="stage__foot">
     <span class="rise" style="--i:7">Quatro espaços</span>
-    <a class="chev rise" style="--i:8" href="#navegacao" aria-label="Ver a navegação do site">
+    <a class="chev rise" style="--i:8" href="#casas" aria-label="Ver as quatro casas">
       <svg width="20" height="11" viewBox="0 0 20 11" fill="none" aria-hidden="true">
         <path d="M1 1l9 9 9-9" stroke="currentColor" stroke-width="1.2"/>
       </svg>
@@ -490,6 +546,32 @@
   </div>
 
 </main>
+
+<!-- FAIXA DAS QUATRO CASAS -->
+<section class="casas" id="casas" aria-labelledby="casas-titulo">
+  <div class="casas__head">
+    <h2 id="casas-titulo">As quatro casas</h2>
+    <a href="/social/espacos">Ver todos os espaços</a>
+  </div>
+  <div class="casas__grid">
+    <a class="casa" href="/social/espacos/a-querencia">
+      <picture><source type="image/avif" srcset="/assets/opt/a-querencia-amplitude-800.avif 800w, /assets/opt/a-querencia-amplitude-1400.avif 1400w" sizes="(min-width: 720px) 25vw, 50vw"><img src="/assets/opt/a-querencia-amplitude-1400.webp" alt="Salão coberto e jardim da Querência" loading="lazy" decoding="async" width="1400" height="939" srcset="/assets/opt/a-querencia-amplitude-800.webp 800w, /assets/opt/a-querencia-amplitude-1400.webp 1400w" sizes="(min-width: 720px) 25vw, 50vw"></picture>
+      <span class="casa__nome"><b>A Querência</b><span>Grande porte</span></span>
+    </a>
+    <a class="casa" href="/social/espacos/palacete-monte-alegre">
+      <picture><source type="image/avif" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.avif 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.avif 1400w" sizes="(min-width: 720px) 25vw, 50vw"><img src="/assets/opt/palacete-monte-alegre-amplitude-1400.webp" alt="Salão do Palacete Monte Alegre" loading="lazy" decoding="async" width="1400" height="939" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.webp 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.webp 1400w" sizes="(min-width: 720px) 25vw, 50vw"></picture>
+      <span class="casa__nome"><b>Palacete Monte Alegre</b><span>Histórico</span></span>
+    </a>
+    <a class="casa" href="/social/espacos/casa-lucca">
+      <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-amplitude-800.avif 800w, /assets/opt/casa-lucca-amplitude-1400.avif 1400w" sizes="(min-width: 720px) 25vw, 50vw"><img src="/assets/opt/casa-lucca-amplitude-1400.webp" alt="Mesa longa na área externa da Casa Lucca" loading="lazy" decoding="async" width="1400" height="939" srcset="/assets/opt/casa-lucca-amplitude-800.webp 800w, /assets/opt/casa-lucca-amplitude-1400.webp 1400w" sizes="(min-width: 720px) 25vw, 50vw"></picture>
+      <span class="casa__nome"><b>Casa Lucca</b><span>Intimista</span></span>
+    </a>
+    <a class="casa" href="/social/espacos/espaco-terra">
+      <picture><source type="image/avif" srcset="/assets/opt/espaco-terra-amplitude-800.avif 800w, /assets/opt/espaco-terra-amplitude-1400.avif 1400w" sizes="(min-width: 720px) 25vw, 50vw"><img src="/assets/opt/espaco-terra-amplitude-1400.webp" alt="Horizonte aberto do Espaço Terrá" loading="lazy" decoding="async" width="1400" height="939" srcset="/assets/opt/espaco-terra-amplitude-800.webp 800w, /assets/opt/espaco-terra-amplitude-1400.webp 1400w" sizes="(min-width: 720px) 25vw, 50vw"></picture>
+      <span class="casa__nome"><b>Espaço Terrá</b><span>Versátil</span></span>
+    </a>
+  </div>
+</section>
 
 <!-- GAVETA -->
 <div class="drawer" id="drawer">
@@ -533,6 +615,12 @@
 
 <!-- Conteúdo indexável: a raiz precisa continuar rankeando para a marca -->
 <footer class="entry-foot" id="navegacao">
+  <div class="foot-col foot-brand">
+    <img src="/assets/brand/social-lockup-white.png" alt="Di Terrá Eventos" width="454" height="288">
+    <p class="foot-legal">
+      Quatro casas no interior paulista para celebrar e reunir. Casamentos, debutantes, aniversários e eventos de empresa, desde 2009.
+    </p>
+  </div>
   <div class="foot-col">
     <h2>Espaços</h2>
     <ul>
@@ -541,8 +629,6 @@
       <li><a href="/social/espacos/casa-lucca">Casa Lucca</a></li>
       <li><a href="/social/espacos/espaco-terra">Espaço Terrá</a></li>
     </ul>
-  </div>
-  <div class="foot-col">
     <h2>Soluções</h2>
     <ul>
       <li><a href="/social/solucoes/gastronomia">Gastronomia</a></li>
@@ -553,18 +639,23 @@
     </ul>
   </div>
   <div class="foot-col">
-    <h2>Corporativo</h2>
+    <h2>Di Terrá</h2>
     <ul>
-      <li><a href="/corporativo#espacos">Espaços corporativos</a></li>
-      <li><a href="/corporativo#formatos">Formatos de evento</a></li>
-      <li><a href="/corporativo#estrutura">Estrutura completa</a></li>
-      <li><a href="/corporativo#proposta">Solicitar proposta</a></li>
+      <li><a href="/social">Eventos sociais</a></li>
+      <li><a href="/corporativo">Corporativo</a></li>
+      <li><a href="https://diterra.com.br/blog/" target="_blank" rel="noopener">Blog</a></li>
+      <li><a href="/social#contato">Agendar visita</a></li>
     </ul>
   </div>
-  <p class="foot-legal">
-    Di Terrá Eventos. Quatro espaços no interior paulista para eventos sociais e corporativos.
-    Piracicaba e região, São Paulo.
-  </p>
+  <div class="foot-col">
+    <h2>Contato</h2>
+    <ul>
+      <li><a href="https://wa.me/5519996777288" target="_blank" rel="noopener">WhatsApp (19) 99677-7288</a></li>
+      <li><a href="mailto:contato@diterra.com.br">contato@diterra.com.br</a></li>
+      <li><a href="https://www.instagram.com/diterraeventos" target="_blank" rel="noopener">Instagram</a></li>
+    </ul>
+    <address>Estrada Municipal Piracicaba–Tupi, km 6<br>Piracicaba, SP · Interior de São Paulo</address>
+  </div>
 </footer>
 
 <script type="application/ld+json">
