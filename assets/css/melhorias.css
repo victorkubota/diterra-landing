@@ -86,3 +86,15 @@
 .equipe b { font-weight: 500; font-size: var(--text-base); margin-top: 6px; }
 .equipe span { font-size: var(--text-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--ui-text-muted); }
 @media (max-width: 900px) { .equipe { grid-template-columns: repeat(3, 1fr); } }
+
+/* ── páginas de solução: como funciona ───────────────────────────── */
+.etapas { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 2.5vw, 32px); counter-reset: etapa; }
+.etapas--3 { grid-template-columns: repeat(3, 1fr); }
+.etapa { display: flex; flex-direction: column; gap: 10px; }
+.etapa__foto { margin: 0 0 6px; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius); background: var(--ui-border); }
+.etapa__foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.etapa__n { font-family: var(--font-display); font-size: 1.1rem; color: var(--ui-accent); letter-spacing: .08em; }
+.etapa .h-card { margin: 0; }
+.etapa p { margin: 0; font-size: var(--text-sm); color: var(--ui-text-muted); line-height: 1.55; }
+@media (max-width: 900px) { .etapas, .etapas--3 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .etapas, .etapas--3 { grid-template-columns: 1fr; } }
