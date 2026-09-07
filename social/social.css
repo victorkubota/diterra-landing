@@ -140,7 +140,7 @@
   font-size: var(--text-xs); letter-spacing: .14em; text-transform: uppercase;
   color: rgba(254,250,224,.7); margin-bottom: 22px; list-style: none;
 }
-.crumbs a { text-decoration: none; color: inherit; }
+.crumbs a { text-decoration: none; color: inherit; display: inline-block; padding-block: 8px; }  /* alvo de toque */
 .crumbs a:hover { color: var(--ivory); }
 .crumbs li + li::before { content: '/'; margin-right: 10px; opacity: .5; }
 

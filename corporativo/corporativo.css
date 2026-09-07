@@ -888,4 +888,5 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
   max-width: 83vw;
   margin-inline: auto;
 }
-
+/* 320px: a manchete em caixa alta não cabe em 83vw; piso menor */
+@media (max-width: 360px) { .clientes__titulo { font-size: 2.25rem; } }

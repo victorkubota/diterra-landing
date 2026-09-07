@@ -101,7 +101,7 @@ html.nav-pilula .nav__progresso { display: none; }
 
 .pil__toggle {
   display: none; background: none; border: 0; cursor: pointer;
-  width: 40px; height: 40px; padding: 11px; color: inherit; border-radius: 999px;
+  width: 44px; height: 44px; padding: 13px; color: inherit; border-radius: 999px;   /* alvo de toque */
 }
 .pil__toggle span { display: block; height: 1.5px; background: currentColor; margin: 5px 0; transition: transform var(--dur-fast) var(--ease); }
 .pil__toggle[aria-expanded="true"] span:first-child { transform: translateY(3.5px) rotate(45deg); }

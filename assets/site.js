@@ -58,11 +58,13 @@
         var alto = window.innerHeight;
         itens.forEach(function (c, i) {
           var prox = itens[i + 1];
-          if (!prox) { c.style.setProperty('--cp', '0'); return; }
+          if (!prox) { c.style.setProperty('--cp', '0'); c.classList.remove('is-cobrindo'); return; }
           var curso = alto - c.getBoundingClientRect().top;
           var avanco = alto - prox.getBoundingClientRect().top;
           var p = curso > 0 ? avanco / curso : 0;
-          c.style.setProperty('--cp', Math.max(0, Math.min(1, p)).toFixed(4));
+          var cp = Math.max(0, Math.min(1, p));
+          c.style.setProperty('--cp', cp.toFixed(4));
+          c.classList.toggle('is-cobrindo', cp > 0 && cp < 1);
         });
       };
       var pedir = function () {
