@@ -1,0 +1,16 @@
+# PNGs legados do site antigo na raiz de assets: nenhum HTML/CSS os referencia (13 MB)
+assets/*.png
+# acervo demo gerado por IA: só logos/ e depoimentos/ são usados pelas páginas
+assets/demo/apoio
+assets/demo/eventos
+assets/demo/espacos
+assets/demo/formatos
+assets/demo/galeria
+assets/demo/hero
+assets/demo/ocasioes
+assets/demo/passos
+assets/demo/percurso
+assets/demo/solucoes
+assets/demo/territorio
+docs
+tools

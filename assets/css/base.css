@@ -966,8 +966,10 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
   filter: blur(calc(var(--cp, 0) * 6px));
   transform: scale(calc(1 - var(--cp, 0) * var(--recuo, .14)));
   opacity: calc(1 - var(--cp, 0) * .55);
-  will-change: transform, filter;
 }
+/* will-change só enquanto o cartão está sendo coberto (0 < --cp < 1);
+   parado, ele sai da camada própria. O site.js marca is-cobrindo. */
+.recua.is-cobrindo { will-change: transform, filter; }
 
 @media (prefers-reduced-motion: reduce) {
   .recua { filter: none; transform: none; opacity: 1; will-change: auto; }
