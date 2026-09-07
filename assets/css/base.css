@@ -87,15 +87,14 @@
   --max:       none;
   --max-text:  70ch;
 
-  /* Rodada 4: um raio só, de 2px, como a referência (sarahhaywood).
-     As variantes continuam existindo por compatibilidade, mas apontam
-     para o mesmo valor; 999px fica reservado a botão circular de ícone
-     e à pílula de navegação. */
-  --radius:    2px;
-  --radius-sm: var(--radius);
-  --radius-md: var(--radius);
-  --radius-lg: var(--radius);
-  --radius-xl: var(--radius);
+  /* Escala de canto: um padrão por papel (fio 3px, controle 12, cartão
+     16, foto 22, pílula/formulário 28). As divisões de seção são retas
+     (--laje-raio: 0 em melhorias.css); tudo o mais segue esta escala. */
+  --radius:    3px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
   --arch:      999px 999px 3px 3px;   /* arco da janela do símbolo */
 
   /* ── MOVIMENTO ──────────────────────────────────────────────────── */

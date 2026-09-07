@@ -192,8 +192,6 @@
   display: grid;
   margin-bottom: 30px;
 }
-/* o CTA único também aparece na primeira dobra do social */
-.hero-cta { margin-top: 6px; }
 .hero-lamina {
   grid-area: 1 / 1;
   opacity: 0;
