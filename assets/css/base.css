@@ -16,6 +16,7 @@
    ══════════════════════════════════════════════════════════════════════ */
 
 :root {
+  color-scheme: light;   /* controles nativos claros, como o site */
   /* ── TIPOGRAFIA ───────────────────────────────────────────────────
      Channe é licenciada e não veio nos arquivos de marca. Cormorant
      Garamond entra como substituta: mesma classe de serifada de alto

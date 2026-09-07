@@ -328,3 +328,8 @@
    ══════════════════════════════════════════════════════════════════════ */
 .section { overflow-x: clip; }
 @supports not (overflow-x: clip) { .section { overflow-x: hidden; } }
+
+/* foco legível sobre a faixa rosa (tijolo sobre rosa dá 2,2:1) */
+.section--rose :focus-visible { outline-color: var(--royal); }
+/* link dentro de prosa precisa ser visível: a { color: inherit } global o esconde */
+.prose a, .visita__texto a { color: var(--ui-link-brick); text-decoration: underline; text-underline-offset: 3px; }
