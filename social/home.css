@@ -57,22 +57,6 @@
 .js .deco-line { transform: scaleX(0); }
 .deco-line.is-in { transform: scaleX(1); transition: transform .8s var(--ease) .2s; }
 
-/* Split text containers */
-.word-wrap {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: top;
-  padding-bottom: 0.1em;
-}
-/* palavras do hero sobem de trás da máscara em cascata quando o
-   documento fica pronto (is-ready vem do site.js, com timer de reserva) */
-.word-inner { display: inline-block; }
-.js .word-inner { transform: translateY(110%); }
-.is-ready .word-inner {
-  transform: none;
-  transition: transform 1.3s var(--ease-out);
-  transition-delay: calc(.1s + var(--w, 0) * .1s);
-}
 /* Esta regra e a de baixo têm a MESMA especificidade (.js no <html>,
    .is-ready no <body>), então quem decide é a ordem. Ela estava depois,
    150 linhas adiante, herdada de quando o GSAP fazia a entrada: o
@@ -272,44 +256,6 @@
   /* sem rodízio: a primeira lâmina fica, e fica parada */
   .hero-lamina { transition: none; }
 }
-.hero-scroll {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  /* já cumpriu o papel assim que a pessoa rolou */
-  opacity: calc(1 - var(--hp, 0) * 3);
-}
-.hero-scroll span {
-  font-family: var(--font-sans);
-  font-size: var(--text-xs);
-  letter-spacing: .25em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.35);
-}
-.hero-scroll-line {
-  width: 1px; height: 48px;
-  background: rgba(255,255,255,.15);
-  position: relative;
-  overflow: hidden;
-}
-.hero-scroll-line::after {
-  content: '';
-  position: absolute;
-  top: -48px; left: 0;
-  width: 1px; height: 48px;
-  background: linear-gradient(180deg, transparent, rgba(255,255,255,.7));
-  animation: scrollPulse 2.5s var(--ease) infinite;
-}
-@keyframes scrollPulse {
-  0% { top: -48px; }
-  100% { top: 48px; }
-}
 
 /* ══════════════════════════════════════════════════════════════
    § 2 — INTRO (split text reveal, like parallax-clean)
@@ -374,7 +320,7 @@
   object-fit: cover;
   transition: transform .8s var(--ease);
 }
-@media (hover: hover) { .intro-image:hover img { transform: scale(1.04); } }
+@media (hover: hover) { .intro-image:hover img { transform: scale(var(--zoom-hover)); } }
 
 /* ══════════════════════════════════════════════════════════════
    § 3 — AS QUATRO CASAS
@@ -448,7 +394,7 @@
   transition: transform .8s var(--ease);
   border-radius: var(--radius-lg);
 }
-@media (hover: hover) { .evento-card:hover img { transform: scale(1.06); } }
+@media (hover: hover) { .evento-card:hover img { transform: scale(var(--zoom-hover)); } }
 /* O rótulo é permanente. Antes ele só aparecia no hover, e duas das
    quatro fotos traziam o nome da ocasião impresso dentro do arquivo,
    o que fazia a grade parecer rotulada. Com as fotos limpas, esconder
@@ -614,13 +560,13 @@
   transition: background var(--dur) var(--ease);
 }
 @media (hover: hover) {
-  .sol__cartao:hover img { transform: scale(1.04); }
+  .sol__cartao:hover img { transform: scale(var(--zoom-hover)); }
   .sol__cartao:hover::after {
     background: linear-gradient(to bottom,
       rgba(13,16,50,.88) 0%, rgba(13,16,50,.5) 46%, rgba(13,16,50,.1) 100%);
   }
 }
-.sol__cartao:focus-visible img { transform: scale(1.04); }
+.sol__cartao:focus-visible img { transform: scale(var(--zoom-hover)); }
 .sol__cartao:active { transform: var(--press-caixa); transition: transform var(--dur-press) var(--ease); }
 
 /* texto no topo e centrado, como na referência. O número saiu: numerar
@@ -845,7 +791,7 @@
 /* pausa por mouse só onde há mouse, senão o toque deixa hover grudado */
 @media (hover: hover) {
   .tira--roda:hover .tira__trilho { animation-play-state: paused; }
-  .polaroid:hover { rotate: 0deg; transform: scale(1.04); }
+  .polaroid:hover { rotate: 0deg; transform: scale(var(--zoom-hover)); }
 }
 
 /* ── o polaroid ───────────────────────────────────────────────────────
@@ -1138,5 +1084,4 @@
 
 @media (prefers-reduced-motion: reduce) {
   .hero-bg, .banner-bg { animation: none; }
-  .js .word-inner { transform: none; }
 }

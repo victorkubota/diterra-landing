@@ -34,7 +34,7 @@
 }
 .evento__galeria a:nth-child(1) { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
 .evento__galeria img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.1s var(--ease); }
-@media (hover: hover) { .evento__galeria a:hover img { transform: scale(1.05); } }
+@media (hover: hover) { .evento__galeria a:hover img { transform: scale(var(--zoom-hover)); } }
 .evento__galeria a:focus-visible { outline: 2px solid var(--ui-accent); outline-offset: 2px; }
 .evento__mais { margin-top: 12px; font-size: var(--text-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--ui-text-muted); }
 @media (max-width: 720px) { .evento__galeria { grid-template-columns: repeat(2, 1fr); } .evento__galeria a:nth-child(1) { grid-column: span 2; grid-row: auto; aspect-ratio: 4 / 3; } }
@@ -112,7 +112,7 @@
 .post { display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: inherit; }
 .post__capa { display: block; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius); background: var(--ui-border); }
 .post__capa img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.1s var(--ease); }
-@media (hover: hover) { .post:hover .post__capa img { transform: scale(1.05); } }
+@media (hover: hover) { .post:hover .post__capa img { transform: scale(var(--zoom-hover)); } }
 .post__data { font-size: var(--text-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--ui-text-muted); margin-top: 4px; }
 .post__titulo { margin: 0; text-wrap: balance; }
 .post__mais { font-size: var(--text-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--ui-link-brick); }

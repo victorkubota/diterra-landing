@@ -75,19 +75,27 @@
   --max:       none;
   --max-text:  70ch;
 
-  --radius:    3px;
-  --radius-sm: 12px;
-  --radius-md: 16px;
-  --radius-lg: 22px;
-  --radius-xl: 28px;
+  /* Rodada 4: um raio só, de 2px, como a referência (sarahhaywood).
+     As variantes continuam existindo por compatibilidade, mas apontam
+     para o mesmo valor; 999px fica reservado a botão circular de ícone
+     e à pílula de navegação. */
+  --radius:    2px;
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+  --radius-xl: var(--radius);
   --arch:      999px 999px 3px 3px;   /* arco da janela do símbolo */
 
   /* ── MOVIMENTO ──────────────────────────────────────────────────── */
-  --ease:      cubic-bezier(.15,.75,.5,1);
-  --ease-out:  cubic-bezier(.25,1,.33,1);
+  --ease:      cubic-bezier(.15,.75,.5,1);       /* estados: hover, foco, cor */
+  --ease-out:  cubic-bezier(.16,1,.3,1);         /* chegadas: entrada, reveal, painel */
   --dur-fast:  .25s;
   --dur:       .5s;
   --dur-slow:  .8s;
+  --dur-focal: .9s;    /* entrada do título e do hero */
+  --dur-foto:  1.4s;   /* foto que assenta ao entrar em quadro */
+  --dur-view:  .45s;   /* transição entre rotas */
+  --zoom-hover: 1.04;  /* um zoom só para toda foto em hover */
   /* o toque precisa responder antes de a pessoa perceber que esperou;
      .25s já é lento demais para o instante entre apertar e soltar */
   --dur-press: .1s;
@@ -425,13 +433,16 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
    Nota para revisão: um CTA sólido converte melhor que um contornado.
    Se a conversão pesar mais que a paridade, é aqui que se muda — e a
    mudança vale para os dois universos de uma vez. */
+/* Rodada 4: o primário chega sólido e é reservado a "Agendar visita".
+   Uma ação sólida por tela; tudo o mais é ghost. */
 .btn--primary {
-  background: transparent;
-  color: var(--ui-action);
+  background: var(--ui-action);
+  color: var(--ui-text-invert);
   border-color: var(--ui-action);
+  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), transform var(--dur-press) var(--ease);
 }
-.btn--primary::before { background: var(--ui-action); }
-.btn--primary:hover { color: var(--ui-text-invert); }
+.btn--primary::before { display: none; }
+.btn--primary:hover { background: var(--ui-action-hover); border-color: var(--ui-action-hover); color: var(--ui-text-invert); }
 
 .btn--ghost {
   background: transparent;
@@ -443,14 +454,12 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
 
 .on-dark .btn--primary,
 .btn--primary.on-dark {
-  background: transparent;
-  color: var(--ui-text-invert);
+  background: var(--ui-text-invert);
+  color: var(--ui-bg-invert);
   border-color: var(--ui-text-invert);
 }
-.on-dark .btn--primary::before,
-.btn--primary.on-dark::before { background: var(--ui-text-invert); }
 .on-dark .btn--primary:hover,
-.btn--primary.on-dark:hover { color: var(--ui-bg-invert); }
+.btn--primary.on-dark:hover { background: var(--ui-accent-on-dark); border-color: var(--ui-accent-on-dark); color: var(--ui-bg-invert); }
 
 .on-dark .btn--ghost,
 .btn--ghost.on-dark { color: var(--ui-text-invert); border-color: var(--ui-border-invert); }
