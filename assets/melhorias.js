@@ -125,7 +125,7 @@
         '<button class="btn btn--primary visita__enviar" type="submit">Enviar</button>' +
         '<p class="visita__nota">Sem compromisso. A visita é com a equipe que vai cuidar do seu evento.</p>' +
       '</form>' +
-      '<div class="visita__ok" hidden><p class="script">Recebemos</p><h3 class="h-card">A equipe confirma a visita pelo WhatsApp.</h3><p class="visita__texto">Se preferir, chame agora: <a href="https://wa.me/5519996777288" target="_blank" rel="noopener">(19) 99677-7288</a>.</p></div>' +
+      '<div class="visita__ok" hidden><p class="script">Recebemos</p><h3 class="h-card" id="visitaResumo"></h3><p class="visita__texto">Abrimos o seu e-mail com o pedido pronto para a equipe. A confirmação de dia e horário vem pelo WhatsApp em até um dia útil.</p><p class="visita__texto">Se preferir, chame agora: <a href="https://wa.me/5519996777288" target="_blank" rel="noopener">(19) 99677-7288</a>.</p></div>' +
     '</div>';
   document.body.appendChild(painel);
 
@@ -176,10 +176,23 @@
       (faltam[0] === 'nome' ? form.nome : form.whatsapp).focus();
       return;
     }
-    /* sem destino nesta fase: o pedido fica no console do navegador */
+    /* Sem endpoint conectado, o pedido segue pelo mesmo caminho do
+       formulário longo (formulario.js): abre o e-mail do visitante com a
+       mensagem pronta para o comercial. A confirmação repete o que a
+       pessoa pediu, para ela conferir antes de fechar. */
     var dados = {};
     Array.prototype.forEach.call(form.elements, function (el) { if (el.name) dados[el.name] = el.value; });
-    if (window.console) window.console.info('[visita] pedido registrado (sem destino conectado)', dados);
+    var nomeCasa = (CASAS.filter(function (c) { return c[0] === dados.casa; })[0] || [null, 'casa a definir'])[1];
+    var partes = [nomeCasa];
+    if (dados.data) partes.push(dados.data);
+    if (dados.convidados) partes.push(dados.convidados + ' convidados');
+    document.getElementById('visitaResumo').textContent = partes.join(', ') + '.';
+    var corpo = 'Pedido de visita pelo site\n\n' +
+      'Nome: ' + dados.nome + '\nWhatsApp: ' + dados.whatsapp + '\nCasa: ' + nomeCasa +
+      '\nData pretendida: ' + (dados.data || 'a definir') + '\nConvidados: ' + (dados.convidados || 'a definir') + '\n';
+    window.location.href = 'mailto:contato@diterra.com.br?subject=' +
+      encodeURIComponent('Visita: ' + nomeCasa + (dados.data ? ', ' + dados.data : '')) +
+      '&body=' + encodeURIComponent(corpo);
     form.hidden = true; ok.hidden = false;
     painel.querySelector('.visita__fechar').focus();
   });

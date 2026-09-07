@@ -63,6 +63,7 @@
 </nav>
 
 <div class="nav__drawer" id="navDrawer">
+  <a class="nav__drawer-cta" href="#proposta" data-visita>Agendar visita</a>
   <a href="#manifesto">A proposta</a>
   <a href="#formatos">Formatos</a>
   <a href="#estrutura">Estrutura</a>
@@ -1234,7 +1235,7 @@
     var passou = window.scrollY > window.innerHeight * 0.8;
     if (toTop) toTop.classList.toggle('is-visible', passou);
     if (wa) wa.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.5);
-    if (barra) barra.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.5);
+    if (barra) barra.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.2);
 
     /* quanto da página já foi lida, para a régua da nav */
     var curso = document.documentElement.scrollHeight - window.innerHeight;
