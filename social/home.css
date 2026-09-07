@@ -618,10 +618,10 @@
   position: absolute;
   inset: -40px;
   /* 500 px de origem esticados a tela cheia: fica até a foto real chegar */
-  background-image: url('/assets/opt/3-500.webp');
+  background-image: url('/assets/opt/brinde-por-do-sol-1400.webp');
   background-image: image-set(
-    url('/assets/opt/3-500.avif') type('image/avif'),
-    url('/assets/opt/3-500.webp') type('image/webp'));
+    url('/assets/opt/brinde-por-do-sol-1400.avif') type('image/avif'),
+    url('/assets/opt/brinde-por-do-sol-1400.webp') type('image/webp'));
   background-size: cover;
   background-position: center;
 }

@@ -868,7 +868,7 @@
   var nav = document.getElementById('nav');
   var toggle = document.getElementById('navToggle');
   var drawer = document.getElementById('navDrawer');
-  var links = Array.prototype.slice.call(document.querySelectorAll('.nav__links a'));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav__links a'));   /* vazio desde a rodada 4 */
 
   /* ── vídeo do hero ─────────────────────────────────────────────
      Desktop e movimento permitido. No celular o poster assume. */
@@ -1225,7 +1225,7 @@
 
     /* quanto da página já foi lida, para a régua da nav */
     var curso = document.documentElement.scrollHeight - window.innerHeight;
-    nav.style.setProperty('--lido',
+    if (nav) nav.style.setProperty('--lido',
       curso > 0 ? Math.min(1, window.scrollY / curso).toFixed(4) : '0');
 
     /* progresso do hero virando cartão: 0 na tela cheia, 1 no cartão.

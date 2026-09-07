@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Resumo da visita | Di Terrá Eventos</title>
+<meta name="description" content="Resumo da visita à Di Terrá: casa, data, convidados, ficha e percurso do dia, pronto para imprimir.">
+<link rel="canonical" href="https://www.diterra.com.br/proposta/">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="/assets/brand/favicon-social.png">
+<meta name="theme-color" content="#111542">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Resumo da visita | Di Terrá Eventos">
+<meta property="og:description" content="Casa, data, convidados e o dia hora a hora.">
+<meta property="og:image" content="https://www.diterra.com.br/assets/opt/propriedade-anoitecer-1400.webp">
+<link rel="preload" href="/assets/fonts/cormorant-garamond-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/albert-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fontes.css">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="/assets/css/tema-social.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/social/social.css">
+<link rel="stylesheet" href="/assets/css/nav-pilula.css">
+<script src="/assets/nav-pilula.js" defer></script>
+<link rel="stylesheet" href="/assets/css/melhorias.css">
+<script src="/assets/melhorias.js" defer></script>
+</head>
+<body class="proposta">
+
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<main id="conteudo" class="prop">
+  <header class="prop__topo">
+    <img src="/assets/brand/social-lockup-navy.png" alt="Di Terrá Eventos" width="454" height="288">
+    <div class="prop__acoes">
+      <button class="btn btn--ghost" type="button" id="propImprimir">Imprimir ou salvar em PDF</button>
+      <a class="btn btn--primary" href="/social#contato" data-visita>Agendar visita</a>
+    </div>
+  </header>
+
+  <section class="prop__hero">
+    <picture id="propFoto"></picture>
+    <div class="prop__titulo">
+      <p class="script">Resumo da visita</p>
+      <h1 class="h-display" id="propCasa">Di Terrá</h1>
+      <p class="lead" id="propLinha"></p>
+    </div>
+  </section>
+
+  <section class="prop__grade">
+    <div>
+      <h2 class="h-section">O que você pediu</h2>
+      <ul class="spec" id="propPedido"></ul>
+    </div>
+    <div>
+      <h2 class="h-section">Números da casa</h2>
+      <ul class="spec" id="propFicha"></ul>
+    </div>
+  </section>
+
+  <section class="prop__percurso">
+    <h2 class="h-section">O dia, hora a hora</h2>
+    <ol class="tempo tempo--3" id="propPercurso"></ol>
+  </section>
+
+  <section class="prop__contato">
+    <p class="body-muted">Confirmação de dia e horário pelo WhatsApp <a href="https://wa.me/5519996777288">(19) 99677-7288</a> ou por <a href="mailto:contato@diterra.com.br">contato@diterra.com.br</a>. Estrada Municipal Piracicaba–Tupi, km 6 · Piracicaba, SP · 165 km de São Paulo pela Rod. dos Bandeirantes.</p>
+    <p class="body-muted prop__nota">Resumo gerado pelo site em <span id="propData"></span>. Capacidades e valores sujeitos a confirmação pela equipe.</p>
+  </section>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var CASAS = {
+    'a-querencia': { nome: 'A Querência', linha: 'Área ampla, salão coberto e jardim aberto para as celebrações de maior porte.', ficha: [['Capacidade sentado','450 convidados'],['Capacidade em pé','700 convidados'],['Área coberta','1.100 m²'],['Área de jardim','3.200 m²'],['Estacionamento','180 vagas'],['Suíte dos noivos','Sim']] },
+    'palacete-monte-alegre': { nome: 'Palacete Monte Alegre', linha: 'Casarão histórico, pé-direito alto e janelas em arco.', ficha: [['Capacidade sentado','220 convidados'],['Capacidade em pé','350 convidados'],['Área coberta','640 m²'],['Área de jardim','900 m²'],['Estacionamento','90 vagas'],['Suíte dos noivos','Sim']] },
+    'casa-lucca': { nome: 'Casa Lucca', linha: 'Mesa longa na área externa, ambiente reservado e serviço próximo.', ficha: [['Capacidade sentado','120 convidados'],['Capacidade em pé','180 convidados'],['Área coberta','380 m²'],['Área externa','600 m²'],['Estacionamento','60 vagas'],['Suíte dos noivos','Sim']] },
+    'espaco-terra': { nome: 'Espaço Terrá', linha: 'Terreno aberto e vista limpa para montagens de grande formato.', ficha: [['Capacidade sentado','600 convidados'],['Capacidade em pé','1.000 convidados'],['Área de montagem','1.800 m²'],['Terreno','8.000 m²'],['Estacionamento','250 vagas'],['Suíte dos noivos','Montada sob demanda']] }
+  };
+  var PERCURSO = [['16h','Chegada','Recepção dos convidados com welcome drink no jardim.'],['17h30','Cerimônia','Ao ar livre, com a luz baixa do fim de tarde.'],['18h30','Coquetel','Ilhas gastronômicas e bar assinado.'],['21h','Festa','Jantar servido e pista aberta.'],['02h','Saída','Ceia da madrugada e saída dos noivos.']];
+  var q = new URLSearchParams(window.location.search);
+  var esc = function (t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; };
+  var slug = q.get('casa'), casa = CASAS[slug];
+  var nome = q.get('nome') || '', data = q.get('data') || '', conv = q.get('convidados') || '';
+  document.getElementById('propCasa').textContent = casa ? casa.nome : 'Quatro casas, uma operação';
+  document.getElementById('propLinha').textContent = casa ? casa.linha : 'A casa fica para a visita: a equipe mostra as quatro no mesmo dia.';
+  var foto = document.getElementById('propFoto');
+  var base = casa ? '/assets/opt/' + slug + '-amplitude' : '/assets/opt/propriedade-anoitecer';
+  foto.innerHTML = '<source type="image/avif" srcset="' + base + '-1400.avif"><img src="' + base + '-1400.webp" alt="" width="1400" height="939">';
+  var pedido = [];
+  if (nome) pedido.push(['Para', nome]);
+  pedido.push(['Casa', casa ? casa.nome : 'a definir na visita']);
+  pedido.push(['Data pretendida', data || 'a definir']);
+  pedido.push(['Convidados', conv ? conv + ' pessoas' : 'a definir']);
+  document.getElementById('propPedido').innerHTML = pedido.map(function (p) { return '<li><span class="k">' + esc(p[0]) + '</span><span class="v">' + esc(p[1]) + '</span></li>'; }).join('');
+  var ficha = casa ? casa.ficha : [['Casas','A Querência, Palacete Monte Alegre, Casa Lucca, Espaço Terrá'],['De 96 a 600','convidados sentados'],['Cozinha, bar, decoração e produção','próprios']];
+  document.getElementById('propFicha').innerHTML = ficha.map(function (p) { return '<li><span class="k">' + esc(p[0]) + '</span><span class="v">' + esc(p[1]) + '</span></li>'; }).join('');
+  document.getElementById('propPercurso').innerHTML = PERCURSO.map(function (p) { return '<li><b>' + p[0] + '</b><span><strong>' + p[1] + '.</strong> ' + p[2] + '</span></li>'; }).join('');
+  document.getElementById('propData').textContent = new Date().toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+  document.getElementById('propImprimir').addEventListener('click', function () { window.print(); });
+})();
+</script>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

@@ -149,7 +149,7 @@
         '<button class="btn btn--primary visita__enviar" type="submit">Enviar</button>' +
         '<p class="visita__nota">Sem compromisso. A visita é com a equipe que vai cuidar do seu evento.</p>' +
       '</form>' +
-      '<div class="visita__ok" hidden><p class="script">Recebemos</p><h3 class="h-card" id="visitaResumo"></h3><p class="visita__texto">Abrimos o seu e-mail com o pedido pronto para a equipe. A confirmação de dia e horário vem pelo WhatsApp em até um dia útil.</p><p class="visita__texto">Se preferir, chame agora: <a href="https://wa.me/5519996777288" target="_blank" rel="noopener">(19) 99677-7288</a>.</p></div>' +
+      '<div class="visita__ok" hidden><p class="script">Recebemos</p><h3 class="h-card" id="visitaResumo"></h3><p class="visita__texto">Abrimos o seu e-mail com o pedido pronto para a equipe. A confirmação de dia e horário vem pelo WhatsApp em até um dia útil.</p><p class="visita__texto">Se preferir, chame agora: <a href="https://wa.me/5519996777288" target="_blank" rel="noopener">(19) 99677-7288</a>.</p><a class="btn btn--ghost visita__resumo" id="visitaBaixar" href="/proposta">Baixar o resumo da visita</a></div>' +
     '</div>';
   document.body.appendChild(painel);
 
@@ -245,6 +245,12 @@
     if (dados.data) partes.push(dados.data);
     if (dados.convidados) partes.push(dados.convidados + ' convidados');
     document.getElementById('visitaResumo').textContent = partes.join(', ') + '.';
+    var query = new URLSearchParams();
+    if (dados.casa) query.set('casa', dados.casa);
+    if (dados.data) query.set('data', dados.data);
+    if (dados.convidados) query.set('convidados', dados.convidados);
+    if (dados.nome) query.set('nome', dados.nome);
+    document.getElementById('visitaBaixar').href = '/proposta?' + query.toString();
     var corpo = 'Pedido de visita pelo site\n\n' +
       'Nome: ' + dados.nome + '\nWhatsApp: ' + dados.whatsapp + '\nCasa: ' + nomeCasa +
       '\nData pretendida: ' + (dados.data || 'a definir') + '\nConvidados: ' + (dados.convidados || 'a definir') + '\n';
