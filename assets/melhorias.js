@@ -104,7 +104,21 @@
   }
 
   /* ── painel "Agendar visita" ───────────────────────────────────── */
-  var CASAS = [['a-querencia','A Querência'],['palacete-monte-alegre','Palacete Monte Alegre'],['casa-lucca','Casa Lucca'],['espaco-terra','Espaço Terrá']];
+  /* slug, nome, capacidade sentada (mock, ver docs/plano-melhorias-rodada-3.md) */
+  var CASAS = [['a-querencia','A Querência',450],['palacete-monte-alegre','Palacete Monte Alegre',220],['casa-lucca','Casa Lucca',120],['espaco-terra','Espaço Terrá',600]];
+  /* pôr do sol médio em Piracicaba por mês (hora local, sem horário de
+     verão). Tabela estática: zero backend. */
+  var POR_DO_SOL = ['19h05','18h55','18h30','18h00','17h40','17h35','17h45','17h55','18h05','18h20','18h40','19h00'];
+  var MESES = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  var opcoesMes = function () {
+    var hoje = new Date(), out = '<option value="">Ainda não sei</option>';
+    for (var i = 2; i < 26; i++) {
+      var d = new Date(hoje.getFullYear(), hoje.getMonth() + i, 1);
+      var v = MESES[d.getMonth()] + ' de ' + d.getFullYear();
+      out += '<option value="' + v + '" data-mes="' + d.getMonth() + '">' + v + '</option>';
+    }
+    return out;
+  };
   var painel = document.createElement('aside');
   painel.className = 'visita';
   painel.id = 'visita';
@@ -115,6 +129,7 @@
   painel.innerHTML =
     '<div class="visita__veu" data-fechar></div>' +
     '<div class="visita__caixa">' +
+      '<div class="visita__capa" aria-hidden="true"><img id="visitaCapa" alt="" width="800" height="537" hidden></div>' +
       '<button class="visita__fechar" type="button" aria-label="Fechar" data-fechar><svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M2 2l18 18M20 2L2 20" stroke="currentColor" stroke-width="1.2"/></svg></button>' +
       '<p class="eyebrow">Agendar visita</p>' +
       '<h2 class="h-section" id="visitaTitulo">Venha conhecer a casa</h2>' +
@@ -123,11 +138,13 @@
         '<label class="visita__campo"><span>Nome</span><input type="text" name="nome" autocomplete="name" required></label>' +
         '<label class="visita__campo"><span>WhatsApp</span><input type="tel" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(19) 9 0000-0000" required></label>' +
         '<div class="visita__linha">' +
-          '<label class="visita__campo"><span>Data pretendida</span><input type="text" name="data" placeholder="Ex.: março de 2027"></label>' +
+          '<label class="visita__campo"><span>Data pretendida</span><select name="data">' + opcoesMes() + '</select></label>' +
           '<label class="visita__campo"><span>Convidados</span><input type="number" name="convidados" min="10" max="1500" inputmode="numeric" placeholder="120"></label>' +
         '</div>' +
+        '<p class="visita__dica" id="visitaSol" aria-live="polite" hidden></p>' +
         '<label class="visita__campo"><span>Casa</span><select name="casa"><option value="">Ainda não sei</option>' +
           CASAS.map(function (c) { return '<option value="' + c[0] + '">' + c[1] + '</option>'; }).join('') + '</select></label>' +
+        '<p class="visita__dica" id="visitaCap" aria-live="polite" hidden></p>' +
         '<p class="visita__erro" aria-live="polite" hidden></p>' +
         '<button class="btn btn--primary visita__enviar" type="submit">Enviar</button>' +
         '<p class="visita__nota">Sem compromisso. A visita é com a equipe que vai cuidar do seu evento.</p>' +
@@ -142,10 +159,42 @@
   var origemVisita = null;
   var casaDaPagina = (window.location.pathname.match(/\/social\/espacos\/([a-z-]+)/) || [])[1] || '';
 
+  var capa = painel.querySelector('#visitaCapa');
+  var dicaSol = painel.querySelector('#visitaSol');
+  var dicaCap = painel.querySelector('#visitaCap');
+  var pintarCapa = function () {
+    var slug = form.casa.value;
+    capa.hidden = !slug;
+    if (slug) capa.src = '/assets/opt/' + slug + '-amplitude-800.webp';
+  };
+  var pintarSol = function () {
+    var op = form.data.options[form.data.selectedIndex];
+    var mes = op && op.getAttribute('data-mes');
+    if (mes === null || mes === undefined || mes === '') { dicaSol.hidden = true; return; }
+    var hora = POR_DO_SOL[Number(mes)];
+    var cerimonia = hora.replace(/h\d+$/, 'h');
+    dicaSol.textContent = 'Em ' + MESES[Number(mes)] + ' o sol se põe por volta das ' + hora + ' em Piracicaba: a cerimônia uma hora e meia antes costuma pegar a luz dourada.';
+    dicaSol.hidden = false;
+  };
+  var pintarCap = function () {
+    var slug = form.casa.value, n = Number(form.convidados.value);
+    var casa = CASAS.filter(function (c) { return c[0] === slug; })[0];
+    if (!casa || !n || n <= casa[2]) { dicaCap.hidden = true; return; }
+    var maiores = CASAS.filter(function (c) { return c[2] >= n; }).map(function (c) { return c[1]; });
+    dicaCap.textContent = maiores.length
+      ? 'Para ' + n + ' pessoas sentadas, ' + maiores.join(' e ') + ' recebem melhor. A visita pode cobrir mais de uma casa.'
+      : 'Para ' + n + ' pessoas a equipe monta estrutura sob medida no Espaço Terrá. Vale conversar na visita.';
+    dicaCap.hidden = false;
+  };
+  form.casa.addEventListener('change', function () { pintarCapa(); pintarCap(); });
+  form.data.addEventListener('change', pintarSol);
+  form.convidados.addEventListener('input', pintarCap);
+
   var abrirVisita = function (casa, origem) {
     origemVisita = origem || null;
     form.hidden = false; ok.hidden = true; erro.hidden = true;
     form.casa.value = casa || '';
+    pintarCapa(); pintarSol(); pintarCap();
     painel.hidden = false;
     document.body.style.overflow = 'hidden';
     prender(true);

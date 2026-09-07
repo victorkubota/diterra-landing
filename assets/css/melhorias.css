@@ -145,6 +145,11 @@
 .visita.is-open .visita__veu { opacity: 1; }
 .visita.is-open .visita__caixa { transform: none; }
 @media (prefers-reduced-motion: reduce) { .visita__caixa, .visita__veu { transition: none; } }
+.visita__capa { margin: calc(-1 * clamp(28px, 4vw, 48px)) calc(-1 * clamp(22px, 3vw, 40px)) 22px; }
+.visita__capa img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
+.visita__capa img[hidden] { display: none; }
+.visita__dica { margin: -4px 0 0; font-size: var(--text-sm); color: var(--ui-text-muted); line-height: 1.5; padding-left: 12px; border-left: 1px solid var(--ui-border); }
+.visita__dica[hidden] { display: none; }
 .visita__fechar { position: absolute; top: 14px; right: 14px; background: none; border: 0; cursor: pointer; color: var(--ui-text); width: 44px; height: 44px; display: grid; place-items: center; border-radius: 999px; }
 .visita__fechar:hover, .visita__fechar:focus-visible { background: var(--ui-border); }
 .visita .h-section { margin: 8px 0 10px; }
@@ -198,3 +203,7 @@ a.evento-card { display: block; text-decoration: none; color: inherit; }
 .video-pausa:focus-visible { outline: 2px solid var(--ui-accent-on-dark); outline-offset: 2px; }
 .video-pausa[hidden] { display: none; }
 @media (max-width: 768px) { .video-pausa { bottom: 84px; } }
+
+/* ── transição entre rotas: a pílula e o título viajam ──────────── */
+.pil { view-transition-name: pilula; }
+.page-hero .h-display { view-transition-name: titulo; }
