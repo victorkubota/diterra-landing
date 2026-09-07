@@ -332,7 +332,7 @@
    ══════════════════════════════════════════════════════════════ */
 .casas { background: var(--royal); color: var(--ivory); }
 .casas .heading-lg { color: var(--ivory); }
-.casas .section__head--centro .body-text { margin-inline: auto; text-align: center; }
+.casas .section__head--centro .body-text { margin-inline: 0; text-align: left; }
 .casas__lead { color: var(--ui-text-invert-muted); max-width: 46ch; margin-top: 14px; }
 .casas .switch__list { border-top-color: var(--ui-border-invert); }
 .casas .vcard { border-bottom-color: var(--ui-border-invert); }
@@ -368,8 +368,7 @@
   background: var(--sand-50);
 }
 .eventos-header {
-  text-align: center;
-  margin-bottom: clamp(40px, 6vw, 72px);
+  margin-bottom: var(--space-6);
 }
 .eventos-header .eyebrow {
   justify-content: center;
@@ -379,7 +378,7 @@
 .eventos-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: var(--space-4);
   max-width: var(--max);   /* era 1400px: o layout acompanha a tela */
   margin: 0 auto;
   padding: 0 var(--gutter);
@@ -447,7 +446,6 @@
   margin-top: 8px;
   transition: transform .5s var(--ease) .05s;
 }
-.evento-card:hover .evento-card-overlay .evento-tag { transform: translateY(-2px); }
 
 /* ══════════════════════════════════════════════════════════════
    OCASIÕES — acordeão no ponteiro fino
@@ -530,8 +528,7 @@
    ocupa a tela inteira sem levar a lugar nenhum é um beco.
    ══════════════════════════════════════════════════════════════ */
 .solucoes { padding: var(--section-y) 0; background: var(--sand-100); }
-.solucoes .lead { margin: 18px auto 0; text-align: center; }
-.solucoes .h-section { text-align: center; }
+.solucoes .lead { margin: var(--space-4) 0 0; }
 
 .pilha { margin-top: clamp(38px, 5vw, 72px); }
 
@@ -681,8 +678,7 @@
   background: var(--sand-100);
 }
 .galeria-header {
-  text-align: center;
-  margin-bottom: clamp(40px, 6vw, 72px);
+  margin-bottom: var(--space-6);
 }
 .galeria-header .eyebrow {
   justify-content: center;
