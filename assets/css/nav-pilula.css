@@ -3,166 +3,136 @@
 
    Liga com ?nav=pilula (fica gravado no navegador) e desliga com
    ?nav=barra. Enquanto ligada, a .nav das treze rotas fica escondida e
-   esta pílula assume: vidro sobre a foto, dropdown ao pousar o mouse,
-   alternador Social ⇄ Corporativo na ponta. No celular vira logo +
-   hambúrguer e reaproveita a gaveta (.nav__drawer) que já existe.
+   esta pílula assume.
 
-   Referências: DS Navigation 02 (pílula de vidro, amigo/oura/cosmos)
-   e 04 (alternador entre as duas marcas). Toda cor sai de --ui-*, então
-   o mesmo arquivo serve os dois temas.
+   Modelo: craft.do. Uma pílula larga de vidro claro, logo à esquerda,
+   links no centro, alternador e ação à direita. Ao pousar o mouse num
+   item, a própria pílula cresce para baixo e mostra cards; os outros
+   links esmaecem. Ela nasce escondida e só aparece depois que a pessoa
+   rola a página. No celular vira logo + hambúrguer e reaproveita a
+   gaveta (.nav__drawer) que já existe.
+
+   Toda cor sai de --ui-*, então o mesmo arquivo serve os dois temas.
    ══════════════════════════════════════════════════════════════════════ */
 
 html.nav-pilula .nav,
 html.nav-pilula .nav__progresso { display: none; }
 
 .pil {
-  --pil-vidro: color-mix(in srgb, var(--ui-bg-invert) 58%, transparent);
-  --pil-vidro-forte: color-mix(in srgb, var(--ui-bg-invert) 86%, transparent);
-  --pil-fio: color-mix(in srgb, var(--ui-text-invert) 18%, transparent);
-  --pil-brilho: color-mix(in srgb, var(--ui-text-invert) 26%, transparent);
-  --pil-hover: color-mix(in srgb, var(--ui-text-invert) 9%, transparent);
+  --pil-vidro: color-mix(in srgb, var(--ui-bg-alt) 64%, transparent);
+  --pil-vidro-forte: color-mix(in srgb, var(--ui-bg-alt) 82%, transparent);
+  --pil-card: color-mix(in srgb, var(--ui-bg-alt) 55%, transparent);
+  --pil-card-hover: color-mix(in srgb, var(--ui-bg-alt) 90%, transparent);
+  --pil-fio: color-mix(in srgb, var(--ui-text) 10%, transparent);
+  --pil-brilho: color-mix(in srgb, var(--ui-bg-alt) 80%, transparent);
+  --pil-hover: color-mix(in srgb, var(--ui-text) 6%, transparent);
   position: fixed; top: 14px; left: 50%; z-index: 100;
-  transform: translateX(-50%);
-  display: flex; align-items: center; gap: 2px;
-  padding: 6px 6px 6px 16px;
-  max-width: calc(100vw - 2 * var(--gutter));
-  border-radius: 999px;
-  color: var(--ui-text-invert);
+  width: min(1280px, calc(100% - 2 * var(--gutter)));
+  display: flex; flex-direction: column;
+  border-radius: var(--radius-xl);
+  color: var(--ui-text);
   background: var(--pil-vidro);
   border: 1px solid var(--pil-fio);
   box-shadow:
     inset 0 1px 0 var(--pil-brilho),
-    inset 0 -1px 0 color-mix(in srgb, var(--ui-bg-invert) 40%, transparent),
-    0 14px 34px -14px color-mix(in srgb, var(--ui-bg-invert) 80%, transparent);
-  transition: background var(--dur) var(--ease), top var(--dur) var(--ease);
+    0 18px 40px -18px color-mix(in srgb, var(--ui-text) 40%, transparent);
+  /* nasce escondida: só entra depois que a página rola (is-visible) */
+  opacity: 0; transform: translate(-50%, -18px); pointer-events: none;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), background var(--dur) var(--ease);
 }
+.pil.is-visible { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.pil.is-open { background: var(--pil-vidro-forte); }
 @supports ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
   .pil {
-    -webkit-backdrop-filter: blur(22px) saturate(150%);
-            backdrop-filter: blur(22px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+            backdrop-filter: blur(24px) saturate(160%);
   }
 }
-/* o reflexo: uma luz que atravessa o vidro da esquerda para a direita */
-.pil::before {
-  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
-  background: linear-gradient(105deg,
-    color-mix(in srgb, var(--ui-text-invert) 14%, transparent) 0%,
-    transparent 38%, transparent 62%,
-    color-mix(in srgb, var(--ui-text-invert) 7%, transparent) 100%);
-}
-.pil.is-stuck { background: var(--pil-vidro-forte); }
+@media (prefers-reduced-motion: reduce) { .pil { transition: opacity var(--dur-fast); transform: translate(-50%, 0); } }
 
-.pil__logo { display: flex; align-items: center; flex: none; margin-right: 10px; }
-.pil__logo img { height: 26px; width: auto; display: block; }
+/* ── linha principal ──────────────────────────────────────────────── */
+.pil__row { display: flex; align-items: center; gap: 18px; padding: 10px 12px 10px 24px; min-height: 64px; }
+.pil__logo { display: flex; align-items: center; flex: none; margin-right: 18px; }
+.pil__logo img { height: 24px; width: auto; display: block; }
 
-.pil__list { display: flex; align-items: center; gap: 2px; list-style: none; margin: 0; padding: 0; }
-.pil__item { position: relative; }
+.pil__list { display: flex; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 0; flex: 1; }
 .pil__link {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 9px 13px; border-radius: 999px;
-  font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 400;
-  color: var(--ui-text-invert); text-decoration: none; white-space: nowrap;
-  transition: background var(--dur-fast) var(--ease);
+  display: inline-flex; align-items: center;
+  padding: 8px 10px; border-radius: 999px;
+  font-family: var(--font-sans); font-size: 1rem; font-weight: 400;
+  color: var(--ui-text); text-decoration: none; white-space: nowrap;
+  transition: opacity var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
 }
-.pil__link:hover, .pil__link:focus-visible,
-.pil__item.is-open > .pil__link { background: var(--pil-hover); outline: none; }
-.pil__link[aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; text-decoration-color: var(--ui-accent-on-dark); }
-.pil__link svg { width: 10px; height: 10px; opacity: .7; transition: transform var(--dur-fast) var(--ease); }
-.pil__item.is-open > .pil__link svg,
-.pil__item:hover > .pil__link svg { transform: rotate(180deg); }
+.pil__link:focus-visible { outline: 2px solid var(--ui-accent); outline-offset: 2px; }
+.pil__link[aria-current="page"] { font-weight: 500; }
+/* com um painel aberto, só o item ativo fica inteiro; os demais esmaecem */
+.pil.is-open .pil__link:not(.is-active) { opacity: .42; }
+.pil.is-open .pil__link.is-active { opacity: 1; }
 
-/* ── dropdown ──────────────────────────────────────────────────────── */
-.pil__drop {
-  position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-  padding-top: 12px;   /* ponte: o mouse cruza o vão sem fechar o menu */
-  opacity: 0; visibility: hidden; translate: 0 -6px;
-  transition: opacity var(--dur-fast) var(--ease), translate var(--dur-fast) var(--ease), visibility var(--dur-fast);
-}
-.pil__item.is-open > .pil__drop,
-.pil__item:hover > .pil__drop,
-.pil__item:focus-within > .pil__drop { opacity: 1; visibility: visible; translate: 0 0; }
-@media (prefers-reduced-motion: reduce) { .pil__drop { transition: none; translate: 0 0; } }
-
-.pil__panel {
-  background: var(--pil-vidro-forte);
-  border: 1px solid var(--pil-fio); border-radius: 22px;
-  box-shadow: inset 0 1px 0 var(--pil-brilho), 0 24px 50px -20px color-mix(in srgb, var(--ui-bg-invert) 90%, transparent);
-  padding: 10px;
-}
-@supports ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
-  .pil__panel { -webkit-backdrop-filter: blur(26px) saturate(150%); backdrop-filter: blur(26px) saturate(150%); }
-}
-
-/* espaços: quatro miniaturas */
-.pil__casas { display: grid; grid-template-columns: repeat(4, 168px); gap: 6px; }
-.pil__casa {
-  display: flex; flex-direction: column; gap: 8px;
-  padding: 6px; border-radius: 16px; text-decoration: none; color: inherit;
-  transition: background var(--dur-fast) var(--ease);
-}
-.pil__casa:hover, .pil__casa:focus-visible { background: var(--pil-hover); outline: none; }
-.pil__casa img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 11px; display: block; }
-.pil__casa b { font-family: var(--font-display); font-weight: 400; font-size: 1.05rem; line-height: 1.15; }
-.pil__casa small { font-size: var(--text-xs); color: var(--ui-text-invert-muted); line-height: 1.4; }
-
-/* soluções: lista */
-.pil__lista { display: flex; flex-direction: column; min-width: 230px; }
-.pil__lista a {
-  display: flex; justify-content: space-between; gap: 18px; align-items: baseline;
-  padding: 9px 12px; border-radius: 12px; text-decoration: none; color: inherit;
-  font-size: var(--text-sm);
-  transition: background var(--dur-fast) var(--ease);
-}
-.pil__lista a:hover, .pil__lista a:focus-visible { background: var(--pil-hover); outline: none; }
-.pil__lista small { font-size: var(--text-xs); color: var(--ui-text-invert-muted); white-space: nowrap; }
-
-/* blog: o último post */
-.pil__post {
-  display: grid; grid-template-columns: 104px 1fr; gap: 12px; align-items: center;
-  width: 340px; padding: 6px; border-radius: 16px; text-decoration: none; color: inherit;
-  transition: background var(--dur-fast) var(--ease);
-}
-.pil__post:hover, .pil__post:focus-visible { background: var(--pil-hover); outline: none; }
-.pil__post img { width: 104px; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 11px; display: block; background: var(--pil-hover); }
-.pil__post span { display: flex; flex-direction: column; gap: 4px; }
-.pil__post small { font-size: var(--text-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--ui-text-invert-muted); }
-.pil__post b { font-family: var(--font-display); font-weight: 400; font-size: 1rem; line-height: 1.25; }
-.pil__post em { font-style: normal; font-size: var(--text-xs); color: var(--ui-accent-on-dark); }
-
-/* ── ponta: alternador e ação ──────────────────────────────────────── */
-.pil__side { display: flex; align-items: center; gap: 6px; margin-left: 8px; }
+.pil__side { display: flex; align-items: center; gap: 6px; margin-left: auto; }
 .pil__switch {
-  display: inline-flex; align-items: center; gap: 6px;
   padding: 8px 12px; border-radius: 999px;
-  border: 1px solid var(--pil-fio);
-  font-size: var(--text-xs); letter-spacing: .1em; text-transform: uppercase;
-  color: var(--ui-text-invert-muted); text-decoration: none; white-space: nowrap;
-  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  font-size: 1rem; color: var(--ui-text); text-decoration: none; white-space: nowrap;
+  transition: opacity var(--dur-fast) var(--ease);
 }
-.pil__switch:hover, .pil__switch:focus-visible { color: var(--ui-text-invert); border-color: var(--pil-brilho); outline: none; }
+.pil__switch:hover { opacity: .65; }
+.pil__switch:focus-visible { outline: 2px solid var(--ui-accent); outline-offset: 2px; }
+.pil.is-open .pil__switch { opacity: .42; }
 .pil__cta {
   display: inline-flex; align-items: center;
-  padding: 9px 16px; border-radius: 999px;
-  background: var(--ui-text-invert); color: var(--ui-bg-invert);
-  font-size: var(--text-xs); letter-spacing: .1em; text-transform: uppercase; font-weight: 500;
-  text-decoration: none; white-space: nowrap;
+  padding: 12px 22px; border-radius: 999px;
+  background: var(--ui-action); color: var(--ui-text-invert);
+  font-size: 1rem; font-weight: 500; text-decoration: none; white-space: nowrap;
   transition: background var(--dur-fast) var(--ease);
 }
-.pil__cta:hover, .pil__cta:focus-visible { background: var(--ui-accent-on-dark); outline: none; }
+.pil__cta:hover { background: var(--ui-action-hover); }
+.pil__cta:focus-visible { outline: 2px solid var(--ui-accent); outline-offset: 2px; }
 
 .pil__toggle {
   display: none; background: none; border: 0; cursor: pointer;
-  width: 40px; height: 40px; padding: 11px; color: var(--ui-text-invert); border-radius: 999px;
+  width: 44px; height: 44px; padding: 13px; color: var(--ui-text); border-radius: 999px;
 }
-.pil__toggle span { display: block; height: 1px; background: currentColor; margin: 5px 0; transition: transform var(--dur-fast) var(--ease); }
-.pil__toggle[aria-expanded="true"] span:first-child { transform: translateY(3px) rotate(45deg); }
+.pil__toggle span { display: block; height: 1.5px; background: currentColor; margin: 5px 0; transition: transform var(--dur-fast) var(--ease); }
+.pil__toggle[aria-expanded="true"] span:first-child { transform: translateY(3.5px) rotate(45deg); }
 .pil__toggle[aria-expanded="true"] span:last-child { transform: translateY(-3px) rotate(-45deg); }
+
+/* ── painel: a pílula cresce para baixo ──────────────────────────── */
+.pil__mega {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur) var(--ease);
+}
+.pil.is-open .pil__mega { grid-template-rows: 1fr; }
+.pil__mega > div { overflow: hidden; }
+.pil__panel { display: none; padding: 4px 12px 14px; }
+.pil__panel.is-on { display: block; }
+
+.pil__grid { display: grid; grid-template-columns: 1fr 1fr .85fr; gap: 10px; align-items: start; }
+.pil__col2 { grid-column: 1 / 3; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pil__aside { display: grid; gap: 10px; }
+
+.pil__card {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 16px 18px; border-radius: var(--radius-lg);
+  background: var(--pil-card); color: inherit; text-decoration: none;
+  transition: background var(--dur-fast) var(--ease);
+}
+.pil__card:hover, .pil__card:focus-visible { background: var(--pil-card-hover); outline: none; }
+.pil__card-head { display: flex; align-items: center; gap: 12px; }
+.pil__card-head img { width: 44px; height: 44px; object-fit: cover; border-radius: 10px; display: block; flex: none; }
+.pil__card-head b { font-family: var(--font-sans); font-weight: 500; font-size: 1.1rem; line-height: 1.2; }
+.pil__card p { margin: 0; font-size: .95rem; line-height: 1.45; color: var(--ui-text-muted); }
+.pil__card--curto { padding: 16px 18px; }
+
+/* blog: capa maior */
+.pil__post { grid-column: 1 / 3; }
+.pil__post .pil__card-head img { width: 96px; height: 72px; border-radius: 12px; }
+.pil__post small { display: block; font-size: var(--text-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--ui-text-muted); margin-bottom: 4px; }
 
 /* ── celular: logo + hambúrguer, gaveta existente ─────────────────── */
 @media (max-width: 1024px) {
-  .pil { padding: 6px 6px 6px 14px; gap: 6px; }
-  .pil__list, .pil__switch, .pil__cta { display: none; }
-  .pil__side { margin-left: 0; }
+  .pil { width: calc(100% - 2 * var(--gutter)); }
+  .pil__row { padding: 6px 8px 6px 18px; min-height: 56px; }
+  .pil__list, .pil__switch, .pil__cta, .pil__mega { display: none; }
   .pil__toggle { display: block; }
-  .pil__logo { margin-right: 4px; }
+  .pil__logo { margin-right: 0; }
 }

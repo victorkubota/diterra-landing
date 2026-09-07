@@ -4,6 +4,10 @@
    Liga:    qualquer rota com ?nav=pilula (fica gravado no navegador)
    Desliga: qualquer rota com ?nav=barra
 
+   Modelo: craft.do. A pílula nasce escondida e aparece depois que a
+   página rola. Ao pousar o mouse num item, a própria pílula cresce para
+   baixo e mostra cards; os outros links esmaecem.
+
    Carrega no <head> sem defer de propósito: a classe html.nav-pilula
    precisa existir antes da primeira pintura, senão a barra antiga pisca
    e some. A montagem do DOM espera o documento.
@@ -32,6 +36,7 @@
 
   var BLOG = 'https://diterra.com.br/blog/';
   var API  = 'https://diterra.com.br/wp-json/wp/v2/posts?per_page=1&_embed=wp:featuredmedia';
+  var ROLAGEM_MINIMA = 24;   /* px rolados antes de a pílula aparecer */
 
   var ESPACOS = [
     { slug: 'a-querencia',           nome: 'A Querência',           resumo: 'Salão coberto e jardim para celebrações de grande porte.' },
@@ -40,17 +45,17 @@
     { slug: 'espaco-terra',          nome: 'Espaço Terrá',          resumo: 'Estrutura versátil com horizonte aberto do interior paulista.' }
   ];
   var SOLUCOES = [
-    { slug: 'gastronomia',            nome: 'Gastronomia',            resumo: 'menu autoral' },
-    { slug: 'decoracao',              nome: 'Decoração',              resumo: 'cenografia e flores' },
-    { slug: 'coquetelaria',           nome: 'Coquetelaria',           resumo: 'bar assinado' },
-    { slug: 'producao',               nome: 'Produção',               resumo: 'cronograma e operação' },
-    { slug: 'tecnologia-audiovisual', nome: 'Tecnologia audiovisual', resumo: 'som, luz e projeção' }
+    { slug: 'gastronomia',            nome: 'Gastronomia',            resumo: 'Menu autoral, do welcome ao doce da madrugada.' },
+    { slug: 'decoracao',              nome: 'Decoração',              resumo: 'Cenografia, flores e ambientação sob medida.' },
+    { slug: 'coquetelaria',           nome: 'Coquetelaria',           resumo: 'Bar assinado, drinks autorais e serviço dedicado.' },
+    { slug: 'producao',               nome: 'Produção',               resumo: 'Planejamento, cronograma e operação no dia.' },
+    { slug: 'tecnologia-audiovisual', nome: 'Tecnologia audiovisual', resumo: 'Som, luz, projeção e transmissão.' }
   ];
 
   var corporativo = window.location.pathname.indexOf('/corporativo') === 0;
   var CONTEXTOS = {
     social: {
-      logo: '/assets/brand/social-wordmark-white.png', alt: 'Di Terrá Eventos', inicio: '/social',
+      logo: '/assets/brand/social-wordmark-navy.png', alt: 'Di Terrá Eventos', inicio: '/social',
       itens: [
         { rotulo: 'Espaços',  href: '/social/espacos',  menu: 'espacos' },
         { rotulo: 'Soluções', href: '/social/solucoes', menu: 'solucoes' },
@@ -61,7 +66,7 @@
       acao: { rotulo: 'Agendar visita', href: '/social#contato' } /* abre o painel no PR 8 */
     },
     corporativo: {
-      logo: '/assets/brand/corp-horizontal-white.png', alt: 'Di Terrá Corporativo', inicio: '/corporativo',
+      logo: '/assets/brand/corp-horizontal-navy.png', alt: 'Di Terrá Corporativo', inicio: '/corporativo',
       itens: [
         { rotulo: 'Formatos', href: '/corporativo#formatos' },
         { rotulo: 'Espaços',  href: '/corporativo#espacos', menu: 'espacos' },
@@ -79,27 +84,37 @@
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   };
-  var seta = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3.5 5 7.5 9 3.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>';
+  var card = function (href, titulo, texto, img) {
+    return '<a class="pil__card" href="' + href + '">' +
+      '<span class="pil__card-head">' + (img ? '<img src="' + img + '" alt="" width="44" height="44">' : '') +
+      '<b>' + esc(titulo) + '</b></span>' + (texto ? '<p>' + esc(texto) + '</p>' : '') + '</a>';
+  };
+  var atalho = function (href, titulo) {
+    return '<a class="pil__card pil__card--curto" href="' + href + '"><span class="pil__card-head"><b>' + esc(titulo) + '</b></span></a>';
+  };
 
-  var painelEspacos = function () {
-    return '<div class="pil__panel"><div class="pil__casas">' + ESPACOS.map(function (e) {
-      return '<a class="pil__casa" href="/social/espacos/' + e.slug + '">' +
-        '<img src="/assets/opt/' + e.slug + '-amplitude-800.webp" alt="" width="800" height="600">' +
-        '<b>' + esc(e.nome) + '</b><small>' + esc(e.resumo) + '</small></a>';
-    }).join('') + '</div></div>';
+  var PAINEIS = {
+    espacos: function () {
+      return '<div class="pil__grid"><div class="pil__col2">' + ESPACOS.map(function (e) {
+        return card('/social/espacos/' + e.slug, e.nome, e.resumo, '/assets/opt/' + e.slug + '-amplitude-800.webp');
+      }).join('') + '</div><div class="pil__aside">' +
+        atalho('/social/espacos', 'Todos os espaços') + atalho(ctx.acao.href, 'Agendar visita') + '</div></div>';
+    },
+    solucoes: function () {
+      return '<div class="pil__grid"><div class="pil__col2">' + SOLUCOES.map(function (s) {
+        return card('/social/solucoes/' + s.slug, s.nome, s.resumo, null);
+      }).join('') + '</div><div class="pil__aside">' +
+        atalho('/social/solucoes', 'Todas as soluções') + atalho(ctx.acao.href, 'Agendar visita') + '</div></div>';
+    },
+    /* nasce com o post mais recente conhecido; a API troca pelo atual */
+    blog: function () {
+      return '<div class="pil__grid"><div class="pil__col2">' +
+        '<a class="pil__card pil__post" id="pilPost" href="https://diterra.com.br/destination-wedding-no-interior-de-sp-como-funciona-e-porque-escolher/" target="_blank" rel="noopener">' +
+        '<span class="pil__card-head"><img id="pilPostImg" src="/assets/opt/cerimonia-vertical-800.webp" alt="" width="96" height="72">' +
+        '<span><small>Último post</small><b id="pilPostTitulo">Destination Wedding no Interior de SP: como funciona e por que escolher</b></span></span></a>' +
+        '</div><div class="pil__aside">' + atalho(BLOG, 'Ver todos os posts') + '</div></div>';
+    }
   };
-  var painelSolucoes = function () {
-    return '<div class="pil__panel"><div class="pil__lista">' + SOLUCOES.map(function (s) {
-      return '<a href="/social/solucoes/' + s.slug + '">' + esc(s.nome) + '<small>' + esc(s.resumo) + '</small></a>';
-    }).join('') + '</div></div>';
-  };
-  /* nasce com o post mais recente conhecido; a API troca pelo atual */
-  var painelBlog = function () {
-    return '<div class="pil__panel"><a class="pil__post" id="pilPost" href="https://diterra.com.br/destination-wedding-no-interior-de-sp-como-funciona-e-porque-escolher/" target="_blank" rel="noopener">' +
-      '<img id="pilPostImg" alt="" width="104" height="78" src="/assets/opt/cerimonia-vertical-800.webp">' +
-      '<span><small>Último post</small><b id="pilPostTitulo">Destination Wedding no Interior de SP: como funciona e por que escolher</b><em>Ler no blog &rarr;</em></span></a></div>';
-  };
-  var PAINEIS = { espacos: painelEspacos, solucoes: painelSolucoes, blog: painelBlog };
 
   var montar = function () {
     var gaveta = document.getElementById('navDrawer');
@@ -109,72 +124,90 @@
     nav.setAttribute('aria-label', 'Navegação principal');
 
     var aqui = window.location.pathname.replace(/\/$/, '');
-    var html = '<a class="pil__logo" href="' + ctx.inicio + '" aria-label="' + esc(ctx.alt) + ', início">' +
+    var html = '<div class="pil__row"><a class="pil__logo" href="' + ctx.inicio + '" aria-label="' + esc(ctx.alt) + ', início">' +
       '<img src="' + ctx.logo + '" alt="' + esc(ctx.alt) + '"></a><ul class="pil__list">';
-    ctx.itens.forEach(function (it, i) {
+    ctx.itens.forEach(function (it) {
       var atual = aqui === it.href.replace(/#.*$/, '') && it.href.indexOf('#') === -1 ? ' aria-current="page"' : '';
       var ext = it.externo ? ' target="_blank" rel="noopener"' : '';
-      html += '<li class="pil__item"' + (it.menu ? ' data-menu="' + it.menu + '"' : '') + '>' +
-        '<a class="pil__link" href="' + it.href + '"' + atual + ext +
-        (it.menu ? ' aria-haspopup="true" aria-expanded="false" aria-controls="pilMenu' + i + '"' : '') + '>' +
-        esc(it.rotulo) + (it.menu ? seta : '') + '</a>' +
-        (it.menu ? '<div class="pil__drop" id="pilMenu' + i + '">' + PAINEIS[it.menu]() + '</div>' : '') +
-        '</li>';
+      html += '<li class="pil__item"><a class="pil__link" href="' + it.href + '"' + atual + ext +
+        (it.menu ? ' data-menu="' + it.menu + '" aria-haspopup="true" aria-expanded="false" aria-controls="pilPainel-' + it.menu + '"' : '') +
+        '>' + esc(it.rotulo) + '</a></li>';
     });
     html += '</ul><div class="pil__side">' +
-      '<a class="pil__switch" href="' + ctx.alternador.href + '">' + esc(ctx.alternador.rotulo) + ' &rarr;</a>' +
+      '<a class="pil__switch" href="' + ctx.alternador.href + '">' + esc(ctx.alternador.rotulo) + '</a>' +
       '<a class="pil__cta" href="' + ctx.acao.href + '">' + esc(ctx.acao.rotulo) + '</a>' +
       (gaveta ? '<button class="pil__toggle" type="button" aria-expanded="false" aria-controls="navDrawer" aria-label="Abrir menu"><span></span><span></span></button>' : '') +
-      '</div>';
+      '</div></div><div class="pil__mega"><div>';
+    ctx.itens.forEach(function (it) {
+      if (it.menu) html += '<div class="pil__panel" id="pilPainel-' + it.menu + '" data-panel="' + it.menu + '">' + PAINEIS[it.menu]() + '</div>';
+    });
+    html += '</div></div>';
     nav.innerHTML = html;
     document.body.insertBefore(nav, document.body.firstChild);
 
-    /* ── vidro mais fechado depois do hero, como a barra faz ──────── */
-    var hero = document.getElementById('topo');
-    if (hero && 'IntersectionObserver' in window) {
-      new IntersectionObserver(function (entradas) {
-        nav.classList.toggle('is-stuck', !entradas[0].isIntersecting);
-      }, { rootMargin: '-85% 0px 0px 0px' }).observe(hero);
-    } else {
-      nav.classList.add('is-stuck');
-    }
+    var links = Array.prototype.slice.call(nav.querySelectorAll('.pil__link[data-menu]'));
+    var paineis = Array.prototype.slice.call(nav.querySelectorAll('.pil__panel'));
+    var atraso = null;
 
-    /* ── dropdown: mouse abre por CSS; teclado e toque abrem aqui ───
-       Enter/Espaço no item com menu abre em vez de navegar na primeira
-       vez; segundo Enter segue o link. Escape fecha e devolve o foco. */
-    var itens = Array.prototype.slice.call(nav.querySelectorAll('.pil__item[data-menu]'));
     var fechar = function () {
-      itens.forEach(function (li) {
-        li.classList.remove('is-open');
-        li.querySelector('.pil__link').setAttribute('aria-expanded', 'false');
-      });
+      nav.classList.remove('is-open');
+      links.forEach(function (a) { a.classList.remove('is-active'); a.setAttribute('aria-expanded', 'false'); });
+      paineis.forEach(function (p) { p.classList.remove('is-on'); });
     };
-    itens.forEach(function (li) {
-      var link = li.querySelector('.pil__link');
-      var toque = window.matchMedia('(hover: none)').matches;
-      link.addEventListener('click', function (e) {
-        if (!toque || li.classList.contains('is-open')) return;
-        e.preventDefault();
-        fechar();
-        li.classList.add('is-open');
-        link.setAttribute('aria-expanded', 'true');
+    var abrir = function (menu) {
+      window.clearTimeout(atraso);
+      links.forEach(function (a) {
+        var on = a.getAttribute('data-menu') === menu;
+        a.classList.toggle('is-active', on);
+        a.setAttribute('aria-expanded', String(on));
       });
-      link.addEventListener('keydown', function (e) {
-        if (e.key === 'ArrowDown' || ((e.key === 'Enter' || e.key === ' ') && !li.classList.contains('is-open'))) {
+      paineis.forEach(function (p) { p.classList.toggle('is-on', p.getAttribute('data-panel') === menu); });
+      nav.classList.add('is-open');
+    };
+
+    /* ── aparece só depois que a página rola ───────────────────────── */
+    var mostrar = function () {
+      var visivel = window.scrollY > ROLAGEM_MINIMA;
+      nav.classList.toggle('is-visible', visivel);
+      if (!visivel) fechar();
+    };
+    window.addEventListener('scroll', mostrar, { passive: true });
+    mostrar();
+
+    /* ── painéis: mouse abre ao pousar; teclado e toque abrem aqui ── */
+    var podeHover = window.matchMedia('(hover: hover)').matches;
+    Array.prototype.forEach.call(nav.querySelectorAll('.pil__link'), function (a) {
+      var menu = a.getAttribute('data-menu');
+      if (podeHover) {
+        a.addEventListener('mouseenter', function () { if (menu) abrir(menu); else fechar(); });
+      }
+      if (!menu) return;
+      a.addEventListener('click', function (e) {
+        /* no toque, o primeiro toque abre; o segundo segue o link */
+        if (podeHover || a.classList.contains('is-active')) return;
+        e.preventDefault();
+        abrir(menu);
+      });
+      a.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowDown' || ((e.key === 'Enter' || e.key === ' ') && !a.classList.contains('is-active'))) {
           e.preventDefault();
-          fechar();
-          li.classList.add('is-open');
-          link.setAttribute('aria-expanded', 'true');
-          var primeiro = li.querySelector('.pil__drop a');
+          abrir(menu);
+          var primeiro = nav.querySelector('.pil__panel.is-on a');
           if (primeiro) primeiro.focus();
         }
       });
-      li.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') { fechar(); link.focus(); }
-      });
-      li.addEventListener('focusout', function (e) {
-        if (!li.contains(e.relatedTarget)) fechar();
-      });
+    });
+    nav.addEventListener('mouseleave', function () { atraso = window.setTimeout(fechar, 160); });
+    nav.addEventListener('mouseenter', function () { window.clearTimeout(atraso); });
+    nav.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+        var ativo = nav.querySelector('.pil__link.is-active');
+        fechar();
+        if (ativo) ativo.focus();
+      }
+    });
+    nav.addEventListener('focusout', function (e) {
+      if (!nav.contains(e.relatedTarget)) fechar();
     });
     document.addEventListener('click', function (e) {
       if (!nav.contains(e.target)) fechar();
@@ -206,8 +239,7 @@
       window.fetch(API).then(function (r) { return r.ok ? r.json() : null; }).then(function (lista) {
         var p = lista && lista[0];
         if (!p || !p.link || !p.title) return;
-        var a = document.getElementById('pilPost');
-        a.href = p.link;
+        document.getElementById('pilPost').href = p.link;
         /* o título vem com entidades (&#8217;): decodifica sem injetar HTML */
         var caixa = document.createElement('textarea');
         caixa.innerHTML = p.title.rendered;
