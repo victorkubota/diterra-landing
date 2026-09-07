@@ -4,6 +4,10 @@
 
    · lightbox para qualquer <a data-lightbox="grupo"> com <img> dentro
    · #blogPosts: troca os três posts fixos pelos mais recentes da API
+   · <video data-hero-video="nome">: toca o mp4 do acervo em tela larga e com
+     movimento permitido; no celular a foto por trás assume
+   · painel "Agendar visita": abre em qualquer <a data-visita>; o valor do
+     atributo (slug da casa) pré-seleciona o espaço. Sem destino ainda.
    ══════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
@@ -91,4 +95,104 @@
       });
     }).catch(function () { /* ficam os três posts fixos */ });
   }
+
+  /* ── painel "Agendar visita" ───────────────────────────────────── */
+  var CASAS = [['a-querencia','A Querência'],['palacete-monte-alegre','Palacete Monte Alegre'],['casa-lucca','Casa Lucca'],['espaco-terra','Espaço Terrá']];
+  var painel = document.createElement('aside');
+  painel.className = 'visita';
+  painel.id = 'visita';
+  painel.setAttribute('role', 'dialog');
+  painel.setAttribute('aria-modal', 'true');
+  painel.setAttribute('aria-labelledby', 'visitaTitulo');
+  painel.hidden = true;
+  painel.innerHTML =
+    '<div class="visita__veu" data-fechar></div>' +
+    '<div class="visita__caixa">' +
+      '<button class="visita__fechar" type="button" aria-label="Fechar" data-fechar><svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M2 2l18 18M20 2L2 20" stroke="currentColor" stroke-width="1.2"/></svg></button>' +
+      '<p class="eyebrow">Agendar visita</p>' +
+      '<h2 class="h-section" id="visitaTitulo">Venha conhecer a casa</h2>' +
+      '<p class="visita__texto">Conte o básico e a equipe confirma dia e horário pelo WhatsApp.</p>' +
+      '<form class="visita__form" novalidate>' +
+        '<label class="visita__campo"><span>Nome</span><input type="text" name="nome" autocomplete="name" required></label>' +
+        '<label class="visita__campo"><span>WhatsApp</span><input type="tel" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(19) 9 0000-0000" required></label>' +
+        '<div class="visita__linha">' +
+          '<label class="visita__campo"><span>Data pretendida</span><input type="text" name="data" placeholder="Ex.: março de 2027"></label>' +
+          '<label class="visita__campo"><span>Convidados</span><input type="number" name="convidados" min="10" max="1500" inputmode="numeric" placeholder="120"></label>' +
+        '</div>' +
+        '<label class="visita__campo"><span>Casa</span><select name="casa"><option value="">Ainda não sei</option>' +
+          CASAS.map(function (c) { return '<option value="' + c[0] + '">' + c[1] + '</option>'; }).join('') + '</select></label>' +
+        '<p class="visita__erro" aria-live="polite" hidden></p>' +
+        '<button class="btn btn--primary visita__enviar" type="submit">Enviar</button>' +
+        '<p class="visita__nota">Sem compromisso. A visita é com a equipe que vai cuidar do seu evento.</p>' +
+      '</form>' +
+      '<div class="visita__ok" hidden><p class="script">Recebemos</p><h3 class="h-card">A equipe confirma a visita pelo WhatsApp.</h3><p class="visita__texto">Se preferir, chame agora: <a href="https://wa.me/5519996777288" target="_blank" rel="noopener">(19) 99677-7288</a>.</p></div>' +
+    '</div>';
+  document.body.appendChild(painel);
+
+  var form = painel.querySelector('form');
+  var erro = painel.querySelector('.visita__erro');
+  var ok = painel.querySelector('.visita__ok');
+  var origemVisita = null;
+  var casaDaPagina = (window.location.pathname.match(/\/social\/espacos\/([a-z-]+)/) || [])[1] || '';
+
+  var abrirVisita = function (casa, origem) {
+    origemVisita = origem || null;
+    form.hidden = false; ok.hidden = true; erro.hidden = true;
+    form.casa.value = casa || '';
+    painel.hidden = false;
+    document.body.style.overflow = 'hidden';
+    window.requestAnimationFrame(function () {
+      painel.classList.add('is-open');
+      form.nome.focus();
+    });
+  };
+  var fecharVisita = function () {
+    painel.classList.remove('is-open');
+    document.body.style.overflow = '';
+    window.setTimeout(function () { painel.hidden = true; }, 350);
+    if (origemVisita) origemVisita.focus();
+  };
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[data-visita]');
+    if (!a) return;
+    e.preventDefault();
+    var casa = a.getAttribute('data-visita') || casaDaPagina;
+    if (CASAS.map(function (c) { return c[0]; }).indexOf(casa) === -1) casa = '';
+    abrirVisita(casa, a);
+  });
+  Array.prototype.forEach.call(painel.querySelectorAll('[data-fechar]'), function (b) { b.addEventListener('click', fecharVisita); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !painel.hidden) fecharVisita();
+  });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var faltam = [];
+    if (!form.nome.value.trim()) faltam.push('nome');
+    if (!/^[\d\s()+-]{8,}$/.test(form.whatsapp.value.trim())) faltam.push('WhatsApp');
+    if (faltam.length) {
+      erro.textContent = 'Confira: ' + faltam.join(' e ') + '.';
+      erro.hidden = false;
+      (faltam[0] === 'nome' ? form.nome : form.whatsapp).focus();
+      return;
+    }
+    /* sem destino nesta fase: o pedido fica no console do navegador */
+    var dados = {};
+    Array.prototype.forEach.call(form.elements, function (el) { if (el.name) dados[el.name] = el.value; });
+    if (window.console) window.console.info('[visita] pedido registrado (sem destino conectado)', dados);
+    form.hidden = true; ok.hidden = false;
+    painel.querySelector('.visita__fechar').focus();
+  });
+
+  /* ── vídeo nos heroes ──────────────────────────────────────────── */
+  var semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  Array.prototype.forEach.call(document.querySelectorAll('video[data-hero-video]'), function (v) {
+    if (semMovimento || !window.matchMedia('(min-width: 768px)').matches) return;
+    var nome = v.getAttribute('data-hero-video');
+    var grande = v.hasAttribute('data-1920') && window.matchMedia('(min-width: 1440px)').matches;
+    v.src = '/assets/opt/video/' + nome + '-' + (grande ? '1920' : '1280') + '.mp4';
+    v.hidden = false;
+    var tocar = v.play();
+    if (tocar && tocar.catch) tocar.catch(function () { v.hidden = true; });
+  });
 })();
