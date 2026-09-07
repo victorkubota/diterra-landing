@@ -278,11 +278,12 @@
 .manifesto__body .btn { margin-top: 10px; }
 
 /* cabeçalho centrado, para seções que não têm coluna de apoio */
+/* Rodada 4: cabeçalho à esquerda por padrão; só banner, respiro e
+   chamada final centram */
 .section__head--centro {
-  margin-inline: auto;
-  text-align: center;
+  margin-inline: 0;
+  text-align: left;
 }
-.section__head--centro .body-muted { margin-inline: auto; }
 
 /* ── NÚMEROS SOBRE FOTOGRAFIA ──────────────────────────────────────── */
 .section--photo {
@@ -836,8 +837,7 @@ a.contact__card:hover { background: rgba(255,255,255,.11); border-color: rgba(25
   padding: clamp(26px, 3vw, 38px);
   background: var(--ui-bg-alt);
   border: 1px solid var(--ui-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--elev-1);
+  border-radius: var(--radius);
 }
 .depo__item blockquote {
   font-family: var(--font-display);
