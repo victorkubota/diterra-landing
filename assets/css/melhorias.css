@@ -173,3 +173,9 @@
 
 /* ── tipos de evento viram links ─────────────────────────────────── */
 a.evento-card { display: block; text-decoration: none; color: inherit; }
+
+/* ── vídeo nos heroes (Social e Coquetelaria) ────────────────────── */
+.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; }
+.hero .hero-video { inset: -80px; width: auto; height: auto; min-width: calc(100% + 160px); min-height: calc(100% + 160px); }
+.page-hero__media .hero-video { z-index: 0; }
+.hero-video[hidden] { display: none; }

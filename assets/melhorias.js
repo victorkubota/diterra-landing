@@ -4,6 +4,8 @@
 
    · lightbox para qualquer <a data-lightbox="grupo"> com <img> dentro
    · #blogPosts: troca os três posts fixos pelos mais recentes da API
+   · <video data-hero-video="nome">: toca o mp4 do acervo em tela larga e com
+     movimento permitido; no celular a foto por trás assume
    · painel "Agendar visita": abre em qualquer <a data-visita>; o valor do
      atributo (slug da casa) pré-seleciona o espaço. Sem destino ainda.
    ══════════════════════════════════════════════════════════════════════ */
@@ -180,5 +182,17 @@
     if (window.console) window.console.info('[visita] pedido registrado (sem destino conectado)', dados);
     form.hidden = true; ok.hidden = false;
     painel.querySelector('.visita__fechar').focus();
+  });
+
+  /* ── vídeo nos heroes ──────────────────────────────────────────── */
+  var semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  Array.prototype.forEach.call(document.querySelectorAll('video[data-hero-video]'), function (v) {
+    if (semMovimento || !window.matchMedia('(min-width: 768px)').matches) return;
+    var nome = v.getAttribute('data-hero-video');
+    var grande = v.hasAttribute('data-1920') && window.matchMedia('(min-width: 1440px)').matches;
+    v.src = '/assets/opt/video/' + nome + '-' + (grande ? '1920' : '1280') + '.mp4';
+    v.hidden = false;
+    var tocar = v.play();
+    if (tocar && tocar.catch) tocar.catch(function () { v.hidden = true; });
   });
 })();
