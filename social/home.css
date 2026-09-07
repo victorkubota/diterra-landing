@@ -18,14 +18,16 @@
 /* ══════════════════════════════════════════════════════════════
    TYPOGRAPHY UTILITY
    ══════════════════════════════════════════════════════════════ */
+/* Rodada 4: sentence case, sem caixa alta em display; mesmo tracking do
+   .h-section para não haver dois sistemas de título na mesma casa */
 .heading-lg {
   font-family: var(--font-display);
   font-size: var(--text-2xl);
   font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: .03em;
-  text-transform: uppercase;
-  color: var(--royal);
+  line-height: 1.08;
+  letter-spacing: -.008em;
+  text-wrap: balance;
+  color: var(--ui-text);
 }
 /* home.css carrega depois do base.css, então .heading-lg vencia o
    empate de especificidade com .manchete e a frase ficava em 56px */
@@ -209,7 +211,7 @@
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, .95rem + 2.35vw, 3rem);
+  font-size: var(--text-2xl);
   /* 500 e não 400: sobre fotografia clara o peso do traço é o que
      separa a serifa do fundo, mais do que a sombra */
   font-weight: 500;
@@ -232,11 +234,10 @@
    tratamento que a casa já usa para frase: serifa em itálico. */
 .hero-sub {
   font-family: var(--font-display);
-  font-size: clamp(.95rem, .88rem + .3vw, 1.15rem);
   font-weight: 400;
   font-style: italic;
   letter-spacing: .02em;
-  font-size: clamp(1rem, .9rem + .42vw, 1.28rem);
+  font-size: var(--text-lg);
   color: #fff;
   margin: 0 auto;
   max-width: 92%;
@@ -581,8 +582,8 @@
 }
 .sol__text .h-card {
   font-family: var(--font-display);
-  font-size: clamp(1.7rem, 1rem + 2.2vw, 3rem);
-  font-weight: 400; line-height: 1.08; letter-spacing: -.01em;
+  font-size: var(--text-xl);
+  font-weight: 400; line-height: 1.1; letter-spacing: -.01em;
 }
 .sol__text p {
   font-size: var(--text-base);
@@ -653,9 +654,8 @@
   font-family: var(--font-display);
   font-size: var(--text-2xl);
   font-weight: 300;
-  line-height: 1.25;
-  letter-spacing: .03em;
-  text-transform: uppercase;
+  line-height: 1.2;
+  letter-spacing: -.008em;
   color: var(--white);
   margin-bottom: 24px;
   text-wrap: balance;
@@ -1043,14 +1043,10 @@
    ══════════════════════════════════════════════════════════════ */
 .chamada { text-align: center; padding-block: var(--section-y-loose); }
 .chamada .wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-.chamada__rotulo {
-  font-size: var(--text-xs); letter-spacing: .25em; text-transform: uppercase;
-  color: var(--ui-text-invert-muted);
-}
 .chamada__cta {
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 6vw, 4.5rem);
-  font-weight: 300; letter-spacing: .04em; text-transform: uppercase;
+  font-size: var(--text-3xl);
+  font-weight: 300; letter-spacing: -.01em;
   line-height: 1.05; color: var(--ivory);
   transition: color .4s var(--ease);
 }

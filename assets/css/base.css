@@ -30,17 +30,17 @@
      falha em tela pequena e de alta densidade. Os dois degraus subiram
      1px em 05/09/2026 por esse motivo. */
   --text-xs:   .75rem;                                    /* 12px — eyebrow  */
-  --text-sm:   .8125rem;                                  /* 13px — botão    */
-  --text-base: .9375rem;                                  /* 15px — corpo    */
-  --text-lg:   clamp(1.0625rem, 1rem + .3vw, 1.25rem);
-  --text-xl:   clamp(1.4rem, 1.2rem + .85vw, 2rem);
+  --text-sm:   .875rem;                                   /* 14px — botão, nav, meta */
+  --text-base: 1rem;                                      /* 16px — corpo, peso 400 */
+  --text-lg:   clamp(1.125rem, 1rem + .4vw, 1.25rem);    /* lead, 300 */
+  --text-xl:   clamp(1.5rem, 1.2rem + 1.2vw, 2rem);      /* nome, título de cartão em display, 400 */
   --text-2xl:  clamp(2rem, 1.5rem + 2.1vw, 3.5rem);
-  --text-3xl:  clamp(2.6rem, 1.6rem + 4.2vw, 5.25rem);
+  --text-3xl:  clamp(2.6rem, 1.6rem + 4.2vw, 5rem);
   /* manchete: o degrau que faltava entre o título de seção e o display
      do hero. A referência declara a frase de abertura em 94px enquanto
      nosso maior título de seção parava em 56px, e é essa diferença que
      faz a frase valer por um parágrafo inteiro. */
-  --text-manchete: clamp(2.75rem, 1.4rem + 5.6vw, 6.5rem);
+  --text-manchete: clamp(2.75rem, 1.4rem + 5vw, 6rem);   /* teto de 6rem */
   /* papéis do hero, iguais na home social e no corporativo: título em
      caixa alta e subtítulo em itálico. Viviam como px soltos nas duas
      folhas; agora são um degrau só. */
@@ -49,7 +49,8 @@
   /* título de cartão em display (overlay de evento, card de casa) */
   --text-lg-display: clamp(1.25rem, 1rem + 1vw, 1.75rem);
 
-  --leading-body:    1.7;
+  --leading-body:    1.65;
+  --leading-lead:    1.5;
   --leading-display: 1.02;
   --tracking-eyebrow: .25em;
   --tracking-btn:     .2em;
@@ -253,7 +254,7 @@ html { -webkit-text-size-adjust: 100%; }
 body {
   font-family: var(--font-sans);
   font-size: var(--text-base);
-  font-weight: 300;
+  font-weight: 400;
   line-height: var(--leading-body);
   color: var(--ui-text);
   background: var(--ui-bg);
@@ -363,6 +364,7 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   font-size: var(--text-3xl);
   line-height: var(--leading-display);
   letter-spacing: -.01em;
+  text-wrap: balance;
 }
 .h-section {
   font-family: var(--font-display);
@@ -370,14 +372,25 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   font-size: var(--text-2xl);
   line-height: 1.08;
   letter-spacing: -.008em;
+  text-wrap: balance;
 }
 .h-card {
   font-size: var(--text-lg);
   font-weight: 500;
   line-height: 1.25;
+  text-wrap: balance;
+}
+/* título de cartão em display: a Cormorant só entra a partir de 24px
+   (--text-xl); abaixo disso a serifa de alto contraste fica esquelética */
+.h-card--display {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -.01em;
 }
 
-.lead { font-size: var(--text-lg); font-weight: 300; line-height: 1.6; max-width: 46ch; }
+.lead { font-size: var(--text-lg); font-weight: 300; line-height: var(--leading-lead); max-width: 46ch; }
 .body-muted { color: var(--ui-text-muted); }
 .on-dark { color: var(--ui-text-invert); }
 .on-dark .body-muted { color: var(--ui-text-invert-muted); }
