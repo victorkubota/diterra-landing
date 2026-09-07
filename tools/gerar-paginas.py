@@ -337,7 +337,7 @@ def nav():
     <img src="/assets/brand/social-wordmark-white.png" alt="Di Terrá Eventos" width="472" height="94">
   </a>
   <ul class="nav__links">
-    <li><a href="/social#intro">O grupo</a></li>
+    <li><a href="/sobre">Sobre</a></li>
     <li><a href="/social/espacos">Espaços</a></li>
     <li><a href="/social/solucoes">Soluções</a></li>
     <li><a href="/social#galeria">Galeria</a></li>
@@ -353,7 +353,7 @@ def nav():
   <span class="nav__progresso" aria-hidden="true"></span>
 </nav>
 <div class="nav__drawer" id="navDrawer">
-  <a href="/social#intro">O grupo</a>
+  <a href="/sobre">Sobre</a>
   <a href="/social/espacos">Espaços</a>
   <a href="/social/solucoes">Soluções</a>
   <a href="/social#galeria">Galeria</a>
@@ -397,6 +397,7 @@ def rodape():
         <h2>Di Terrá</h2>
         <ul>
           <li><a href="/social">Home social</a></li>
+          <li><a href="/sobre">Sobre</a></li>
           <li><a href="/corporativo">Corporativo</a></li>
           <li><a href="/social#contato">Contato</a></li>
           <li><a href="/">Página de entrada</a></li>
