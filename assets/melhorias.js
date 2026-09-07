@@ -3,6 +3,7 @@
    docs/plano-melhorias-rodada-3.md descreve cada peça.
 
    · lightbox para qualquer <a data-lightbox="grupo"> com <img> dentro
+   · #blogPosts: troca os três posts fixos pelos mais recentes da API
    ══════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
@@ -61,5 +62,33 @@
       else if (e.key === 'ArrowLeft') mostrar(atual - 1);
       else if (e.key === 'ArrowRight') mostrar(atual + 1);
     });
+  }
+
+  /* ── do blog: três posts mais recentes da API do WordPress ─────── */
+  var lista = document.getElementById('blogPosts');
+  if (lista && window.fetch) {
+    var API = 'https://diterra.com.br/wp-json/wp/v2/posts?per_page=3&_embed=wp:featuredmedia';
+    var decodificar = function (html) { var t = document.createElement('textarea'); t.innerHTML = html; return t.value; };
+    var dataLonga = function (iso) {
+      var d = new Date(iso);
+      if (isNaN(d)) return '';
+      return d.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+    };
+    window.fetch(API).then(function (r) { return r.ok ? r.json() : null; }).then(function (posts) {
+      if (!posts || posts.length < 3) return;
+      var cards = lista.querySelectorAll('.post');
+      posts.slice(0, 3).forEach(function (p, i) {
+        var a = cards[i];
+        if (!a || !p.link || !p.title) return;
+        a.href = p.link;
+        a.querySelector('.post__titulo').textContent = decodificar(p.title.rendered);
+        var t = a.querySelector('.post__data');
+        if (t) { t.textContent = dataLonga(p.date); t.setAttribute('datetime', p.date); }
+        var midia = p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'][0];
+        var tam = midia && midia.media_details && midia.media_details.sizes;
+        var src = (tam && tam.large && tam.large.source_url) || (tam && tam.medium_large && tam.medium_large.source_url) || (midia && midia.source_url);
+        if (src) a.querySelector('.post__capa img').src = src;
+      });
+    }).catch(function () { /* ficam os três posts fixos */ });
   }
 })();
