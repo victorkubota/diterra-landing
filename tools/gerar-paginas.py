@@ -321,7 +321,7 @@ def cabeca(titulo, descricao, canonical, css, favicon):
 <script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="{css}">
 <link rel="stylesheet" href="/assets/css/nav-pilula.css">
-<script src="/assets/nav-pilula.js"></script>
+<script src="/assets/nav-pilula.js" defer></script>
 <link rel="stylesheet" href="/assets/css/melhorias.css">
 <script src="/assets/melhorias.js" defer></script>
 </head>
@@ -332,26 +332,6 @@ def cabeca(titulo, descricao, canonical, css, favicon):
 
 def nav():
     return """
-<nav class="nav" id="nav" aria-label="Navegação principal">
-  <a class="nav__logo" href="/social" aria-label="Di Terrá Eventos, início">
-    <img src="/assets/brand/social-wordmark-white.png" alt="Di Terrá Eventos" width="472" height="94">
-  </a>
-  <ul class="nav__links">
-    <li><a href="/sobre">Sobre</a></li>
-    <li><a href="/social/espacos">Espaços</a></li>
-    <li><a href="/social/solucoes">Soluções</a></li>
-    <li><a href="/social#galeria">Galeria</a></li>
-    <li><a href="/social#contato">Contato</a></li>
-  </ul>
-  <div class="nav__side">
-    <a class="nav__switch" href="/corporativo">Corporativo <svg width="14" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.25"/></svg></a>
-    <a class="btn btn--primary" href="/social#contato" data-visita>Agendar visita</a>
-    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Abrir menu">
-      <span></span><span></span>
-    </button>
-  </div>
-  <span class="nav__progresso" aria-hidden="true"></span>
-</nav>
 <div class="nav__drawer" id="navDrawer">
   <a class="nav__drawer-cta" href="/social#contato" data-visita>Agendar visita</a>
   <a href="/sobre">Sobre</a>

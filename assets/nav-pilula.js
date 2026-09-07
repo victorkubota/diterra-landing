@@ -1,17 +1,12 @@
 /* ══════════════════════════════════════════════════════════════════════
-   NAV PÍLULA — alternativa à barra atual, para comparação lado a lado.
-
-   Liga:    qualquer rota com ?nav=pilula (fica gravado no navegador)
-   Desliga: qualquer rota com ?nav=barra
+   NAV PÍLULA — a navegação do site (rodada 4: única, sem a barra antiga).
 
    Modelo: craft.do. No topo a pílula é só logo e textos sobre a foto;
    o vidro entra quando a página rola (is-scrolled). Ao pousar o mouse
    num item, a própria pílula cresce para baixo e mostra cards; os
    outros links esmaecem.
 
-   Carrega no <head> sem defer de propósito: a classe html.nav-pilula
-   precisa existir antes da primeira pintura, senão a barra antiga pisca
-   e some. A montagem do DOM espera o documento.
+   Carrega com defer e monta o DOM quando o documento estiver pronto.
 
    O que a pílula sabe de cada universo (logo, itens, alternador, ação)
    mora em CONTEXTOS. Espaços e Soluções são os mesmos dicionários do
@@ -21,17 +16,7 @@
 (function () {
   'use strict';
 
-  var CHAVE = 'diterra-nav';
-  var modo = new URLSearchParams(window.location.search).get('nav');
-  var salvo = null;
-  try {
-    if (modo === 'pilula') window.localStorage.setItem(CHAVE, 'pilula');
-    else if (modo === 'barra') window.localStorage.removeItem(CHAVE);
-    salvo = window.localStorage.getItem(CHAVE);
-  } catch (e) { /* armazenamento bloqueado: só a URL decide */ }
-
-  var ativa = modo === 'pilula' || (modo !== 'barra' && salvo === 'pilula');
-  if (!ativa) return;
+  /* Rodada 4: a pílula é a única navegação; a barra antiga saiu do HTML. */
   document.documentElement.classList.add('nav-pilula');
 
   var BLOG = 'https://diterra.com.br/blog/';

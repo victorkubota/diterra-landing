@@ -1,9 +1,5 @@
 /* ══════════════════════════════════════════════════════════════════════
-   NAV PÍLULA — alternativa à barra atual, para comparação.
-
-   Liga com ?nav=pilula (fica gravado no navegador) e desliga com
-   ?nav=barra. Enquanto ligada, a .nav das treze rotas fica escondida e
-   esta pílula assume.
+   NAV PÍLULA — a navegação do site (rodada 4: única, sem a barra antiga).
 
    Modelo: craft.do. Uma pílula larga de vidro claro, logo à esquerda,
    links no centro, alternador e ação à direita. Ao pousar o mouse num
@@ -15,9 +11,6 @@
 
    Toda cor sai de --ui-*, então o mesmo arquivo serve os dois temas.
    ══════════════════════════════════════════════════════════════════════ */
-
-html.nav-pilula .nav,
-html.nav-pilula .nav__progresso { display: none; }
 
 .pil {
   --pil-vidro: color-mix(in srgb, var(--ui-bg-alt) 64%, transparent);
