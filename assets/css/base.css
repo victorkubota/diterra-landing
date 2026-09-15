@@ -1019,6 +1019,59 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
   .recua { filter: none; transform: none; opacity: 1; will-change: auto; }
 }
 
+/* ── a pilha no celular ────────────────────────────────────────────────
+   O gesto é o mesmo do desktop; o que muda é de onde vem a medida. No
+   telefone a tela é disputada por dois móveis fixos (a pílula da
+   navegação no topo e a barra de ação no rodapé) e o cartão não pode
+   passar por baixo de nenhum dos dois.
+
+   --pilha-alt é a altura do cartão: o que sobra da tela depois do cromo,
+   com teto de uma vez e meia a largura útil. Sem esse teto, num telefone
+   estreito o cartão viraria uma tira de 1:2 e a foto, que é paisagem,
+   perderia quase toda a largura no recorte do object-fit.
+
+   --pilha-fresta é a sobra dividida em dois, e serve de topo da fixação
+   E de margem entre um cartão e o seguinte. A igualdade não é economia
+   de variável: é ela que faz o próximo cartão entrar pela borda de baixo
+   da tela no quadro exato em que o anterior prende. Com qualquer outra
+   margem o --cp já nasce a meio caminho e o cartão aparece desfocado
+   antes de alguém ter rolado por ele.
+
+   svh e não vh: na barra de endereço recolhida o vh é maior que a tela
+   real, e o cartão terminaria cortado pela barra de ação.
+
+   Quem pediu menos movimento não entra aqui: sem top, o sticky do
+   .pilha__item é inerte e os cartões continuam sendo a lista comum que
+   sempre foram no celular. */
+@media (max-width: 859px) and (prefers-reduced-motion: no-preference) {
+  :root {
+    /* --pilha-rodape nunca menor que --pilha-topo: a fresta é metade da
+       soma dos dois, e é ela que vira o topo da fixação. Com um rodapé
+       menor que o topo, numa tela curta a fresta ficaria abaixo da
+       pílula e o cartão passaria por baixo dela. */
+    --pilha-topo:   88px;   /* pílula: 12 de folga + 56 de altura + ar */
+    --pilha-rodape: 88px;
+    --pilha-alt: min(
+      calc(100svh - var(--pilha-topo) - var(--pilha-rodape)),
+      calc((100vw - var(--gutter) * 2) * 1.5)
+    );
+    --pilha-fresta: calc((100svh - var(--pilha-alt)) / 2);
+  }
+  .pilha { padding-bottom: var(--pilha-fresta); }
+  .pilha__item {
+    top: var(--pilha-fresta);
+    height: var(--pilha-alt);
+    margin-bottom: var(--pilha-fresta);
+  }
+  /* o desfoque é o mais caro dos três e o menos necessário: no telefone
+     a escala e a luz já contam a profundidade sozinhas */
+  .recua { filter: blur(calc(var(--cp, 0) * 3px)); }
+}
+/* abaixo de 768px a barra de ação aparece e come o rodapé */
+@media (max-width: 768px) and (prefers-reduced-motion: no-preference) {
+  :root { --pilha-rodape: calc(92px + env(safe-area-inset-bottom, 0px)); }
+}
+
 /* ══════════════════════════════════════════════════════════════════════
    HERO QUE VIRA CARTÃO
 
