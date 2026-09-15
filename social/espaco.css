@@ -52,6 +52,21 @@
 }
 
 /* ══════════════════════════════════════════════════════════════════════
+   OCASIÕES — o ajuste que o conteúdo desta rota pede
+
+   Na home, as quatro fotos de ocasião foram escolhidas juntas e todas
+   escurecem embaixo. Aqui as fotos são da casa, e algumas terminam em
+   céu claro ou gramado ao sol: o rótulo branco encostava em 2:1 sobre
+   a palmeira da Querência. O gradiente sobe um degrau só nesta rota.
+   ══════════════════════════════════════════════════════════════════════ */
+#ocasioes .evento-card-overlay {
+  background: linear-gradient(180deg, transparent 20%, rgba(0,0,0,.30) 46%, rgba(0,0,0,.62) 70%, rgba(0,0,0,.92) 100%);
+}
+#ocasioes .evento-card:hover .evento-card-overlay {
+  background: linear-gradient(180deg, transparent 16%, rgba(0,0,0,.38) 44%, rgba(0,0,0,.70) 68%, rgba(0,0,0,.95) 100%);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
    2 — SOLUÇÃO COMPLETA, VISTA DESTA CASA
 
    A home empilha os cinco serviços em tela cheia, um por vez: lá eles
@@ -102,8 +117,11 @@
     gap: var(--space-3); padding-bottom: 6px;
     scrollbar-width: none;
     /* o trilho sangra até as bordas da tela e devolve o respiro por
-       dentro, para o último cartão não colar no canto */
+       dentro, para o último cartão não colar no canto. O scroll-padding
+       é o que faz o encaixe respeitar essa margem: sem ele o primeiro
+       cartão prende no content box e o trilho nasce 20px rolado. */
     margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter);
+    scroll-padding-inline: var(--gutter);
   }
   .servicos::-webkit-scrollbar { display: none; }
   .servico { flex: 0 0 68%; scroll-snap-align: start; }
@@ -155,7 +173,14 @@
   .editorial__cap { grid-template-columns: 1fr 1fr; }
   .editorial__cap--espelho .editorial__foto { order: -1; }
 }
-.editorial__cap h3 { margin-bottom: var(--space-3); }
+/* o título do capítulo em serifada, e não no sans do .h-card: é um
+   intertítulo de matéria, não o rótulo de um cartão */
+.editorial__cap h3 {
+  margin-bottom: var(--space-4);
+  font-family: var(--font-display); font-weight: 300;
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2.1rem); line-height: 1.15;
+  letter-spacing: 0; text-transform: none;
+}
 .editorial__foto {
   border-radius: var(--radius-lg); overflow: hidden;
   background: var(--ui-bg-invert); box-shadow: var(--elev-foto);
@@ -166,6 +191,37 @@
   font-size: var(--text-xs); color: var(--ui-text-muted);
   background: var(--ui-bg-alt);
 }
+
+/* O DIA, HORA A HORA — antes era uma faixa com as mesmas cinco fotos
+   que os capítulos acima já usam, uma a uma. A informação que ela
+   carregava de verdade é a hora, e hora se lê melhor em texto. */
+.cronograma {
+  margin-top: var(--space-7); padding-top: var(--space-5);
+  border-top: 1px solid var(--ui-border);
+}
+.cronograma h3 {
+  font-family: var(--font-display); font-weight: 300;
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2.1rem); line-height: 1.15;
+  margin-bottom: var(--space-4);
+}
+.cronograma__lista { list-style: none; display: grid; gap: 0; }
+@media (min-width: 720px) { .cronograma__lista { grid-template-columns: repeat(5, 1fr); gap: var(--space-4); } }
+.cronograma__lista li {
+  display: flex; flex-direction: column; gap: 4px;
+  padding-block: var(--space-3);
+  border-top: 1px solid var(--ui-border);
+}
+@media (min-width: 720px) { .cronograma__lista li { border-top: 2px solid var(--ui-accent); } }
+.cronograma__lista .k {
+  font-family: var(--font-display); font-size: var(--text-lg-display);
+  font-weight: 300; font-variant-numeric: tabular-nums;
+}
+.cronograma__lista .v { font-size: var(--text-sm); color: var(--ui-text-muted); }
+
+/* o álbum ocupa a largura inteira da matéria, então cabe uma coluna a
+   mais do que quando vivia espremido na metade de um .split */
+.editorial .evento__galeria { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1000px) { .editorial .evento__galeria { grid-template-columns: repeat(3, 1fr); } }
 
 /* a ficha técnica — o crédito de cada fornecedor, linha a linha.
    Quem é da casa leva a marca; quem é de fora leva o nome próprio. É
