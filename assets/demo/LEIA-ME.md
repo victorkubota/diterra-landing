@@ -1,5 +1,34 @@
 # Assets de demonstração
 
+## 15/09/2026 — dezesseis arquivos já são fotografia oficial da cliente
+
+Vieram da pasta "home" compartilhada pela Di Terrá em 14/09/2026 e substituem
+a imagem gerada por IA que ocupava o lugar. O aviso abaixo continua valendo
+para todo o resto da pasta.
+
+| Arquivo | Origem no Drive | Crédito |
+| --- | --- | --- |
+| `espacos/a-querencia-amplitude.webp` · `-vertical.webp` | nossos espaços | @dayaneankosqui_photo |
+| `espacos/palacete-monte-alegre-amplitude.webp` · `-vertical.webp` | nossos espaços | @jaisonsampaio |
+| `espacos/casa-lucca-amplitude.webp` · `-vertical.webp` | nossos espaços | @cadubritofotografia |
+| `espacos/espaco-terra-amplitude.webp` · `-vertical.webp` | nossos espaços | @fernandoremediofotografia |
+| `solucoes/gastronomia.webp` | bloco serviços / gastronomia | sem crédito informado |
+| `solucoes/decoracao.webp` | bloco serviços / decoração | sem crédito informado |
+| `solucoes/coquetelaria.webp` | bloco serviços / coquetelaria | sem crédito informado |
+| `ocasioes/ocasiao-casamento.webp` | tipos de evento | sem crédito informado |
+| `ocasioes/ocasiao-corporativo.webp` | tipos de evento | sem crédito informado |
+| `ocasioes/ocasiao-debutante.webp` | tipos de evento | sem crédito informado |
+| `ocasioes/ocasiao-aniversario.webp` | tipos de evento (bodas & aniversários) | sem crédito informado |
+| `apoio/natureza-cta.webp` | cta pós-serviço (natureza) | sem crédito informado |
+
+Pendências que ficaram desta rodada: a cliente não mandou foto de produção,
+tecnologia audiovisual, hero, galeria, percurso, território e depoimentos, e
+`espaco-terra` veio em 2048 px (as outras três casas vieram acima de 2900 px).
+A página corporativa passa a exibir as mesmas fotos das casas em contexto
+social — precisa de uma seleção própria.
+
+## O resto da pasta segue sendo IA
+
 **Estas imagens NÃO são as casas da Di Terrá.** São cenários gerados por IA
 (Higgsfield · Nano Banana Pro 2K e Seedance 2.5) a partir da descrição textual
 de cada espaço, para a discussão de layout sair do abstrato na apresentação.
