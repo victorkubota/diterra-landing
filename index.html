@@ -325,8 +325,14 @@
 }
 @media (max-width: 900px) { .entry-foot { grid-template-columns: 1fr 1fr; } }
 .foot-brand img { height: 44px; width: auto; margin-bottom: 14px; }
-.foot-col + .foot-col h2 { margin-top: 0; }
-.foot-col h2 + ul + h2 { margin-top: 22px; }
+/* o reset da margem do navegador vale para o primeiro título da coluna;
+   o segundo precisa do degrau, senão "Soluções" encosta no último item
+   de "Espaços" e os dois leem como uma lista só. O seletor antigo era
+   .foot-col + .foot-col h2, que por ter duas classes vencia a regra do
+   degrau abaixo e zerava justamente o título que precisava dele. */
+.foot-col h2 { margin-top: 0; }
+.foot-col h2 + ul + h2 { margin-top: 26px; }
+.foot-col ul + address { margin-top: 18px; }
 .foot-col address { font-style: normal; color: rgba(245,243,239,.84); font-size: .84rem; font-weight: 300; line-height: 1.7; }
 .foot-col h2 {
   font-size: 11px; letter-spacing: .26em; text-transform: uppercase;
