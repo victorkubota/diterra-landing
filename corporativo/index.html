@@ -1108,7 +1108,7 @@
 
      A home social faz o mesmo, mas lá o recuo já existia num tween do
      GSAP, então bastou somar o desfoque a ele. Aqui não há GSAP. */
-  var podePilha = !reduz && window.matchMedia('(min-width: 860px)').matches;
+  var podePilha = !reduz;
   var cartoes = podePilha ? Array.prototype.slice.call(document.querySelectorAll('.fmt')) : [];
 
   var medirPilha = function () {
@@ -1249,11 +1249,6 @@
   }, { passive: true });
   window.addEventListener('resize', function () {
     podeParallax = !reduz && !parallaxCss && window.matchMedia('(min-width: 768px)').matches;
-    /* sem a pilha, --cp precisa voltar a zero: senão um cartão fica
-       desfocado no fluxo normal depois de encolher a janela */
-    if (!window.matchMedia('(min-width: 860px)').matches) {
-      cartoes.forEach(function (c) { c.style.setProperty('--cp', '0'); });
-    }
     if (!podeParallax) camadas.forEach(function (c) { c.style.removeProperty('--py'); });
     varrer();
     moverCamadas();

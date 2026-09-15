@@ -587,11 +587,17 @@
   max-width: 48ch;
 }
 
-/* abaixo de 860px não há pilha: os cinco viram uma lista comum, que é o
-   que o driver do --cp também assume */
+/* No celular a pilha é a mesma, com a medida do telefone: o cartão
+   preenche a altura que o .pilha__item recebeu do base.css, e a
+   proporção fixa sai do caminho para não brigar com ela. */
 @media (max-width: 859px) {
+  .sol__cartao { height: 100%; aspect-ratio: auto; min-height: 0; }
+}
+/* sem pilha, com movimento reduzido, os cinco voltam a ser lista comum,
+   que é o que o driver do --cp também assume */
+@media (max-width: 859px) and (prefers-reduced-motion: reduce) {
   .sol { margin-bottom: clamp(18px, 3vw, 28px); }
-  .sol__cartao { aspect-ratio: 4 / 5; }
+  .sol__cartao { height: auto; aspect-ratio: 4 / 5; min-height: clamp(300px, 42vw, 520px); }
 }
 @media (min-width: 860px) {
   .pilha { padding-bottom: 12vh; }

@@ -43,12 +43,12 @@
      pilha, e mede dentro de requestAnimationFrame em vez de medir a
      cada evento de rolagem.
 
-     Abaixo de 860px e com movimento reduzido a pilha não existe: os
-     cartões são uma lista comum e o --cp fica em zero. */
+     A pilha vale em qualquer largura: no celular ela usa a medida do
+     telefone, escrita em --pilha-alt no base.css. Só movimento reduzido
+     desliga: lá os cartões são uma lista comum e o --cp fica em zero. */
   var pilha = document.querySelector('.pilha');
   if (pilha) {
-    var podePilha = !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
-                    window.matchMedia('(min-width: 860px)').matches;
+    var podePilha = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var itens = podePilha ? Array.prototype.slice.call(pilha.querySelectorAll('.pilha__item')) : [];
 
     if (itens.length > 1) {

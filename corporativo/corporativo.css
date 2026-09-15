@@ -299,20 +299,17 @@
    a tela por vez e o anterior recua desfocado, o mesmo mecanismo que a
    referência usa nas citações de imprensa. Um formato de cada vez lê
    melhor que seis miniaturas competindo. */
-.pilha { display: grid; gap: clamp(12px, 1.4vw, 20px); }
+/* Bloco em qualquer medida, nunca grade: em grid cada item ganha área
+   própria do tamanho dele, e um sticky dentro dessa área não prende em
+   nada. O respiro entre um cartão e o outro vem da margem do
+   .pilha__item, que é a mesma medida que o topo da fixação. */
+.pilha { display: block; }
 
 /* sem position aqui: .pilha__item já dá o sticky no base.css, e como
-   corporativo.css carrega depois, um "relative" nesta regra o anulava */
-/* no celular não há pilha: um sticky sem top é inerte, mas deixar
-   explícito evita surpresa se alguém mexer no utilitário depois */
-@media (max-width: 859px) {
-  /* no celular não há pilha, mas o ::before precisa de âncora e de
-     contexto de empilhamento próprio. Só aqui dentro: um .fmt
-     { position: relative } sem qualificação venceria o
-     .pilha__item { position: sticky } do base.css (mesma especificidade,
-     este arquivo carrega depois) e mataria a pilha em desktop. */
-  .fmt { position: relative; isolation: isolate; }
-}
+   corporativo.css carrega depois, um "relative" nesta regra o anulava.
+   O ::before precisa de âncora e de contexto de empilhamento próprio, e
+   o sticky entrega os dois: posicionado é posicionado, e todo elemento
+   sticky abre contexto de empilhamento. */
 
 /* A sombra da placa mora no PAI, não no cartão: o .fmt__cartao tem
    overflow: hidden (a camada seria aparada), isolation: isolate, e o
@@ -331,14 +328,14 @@
   opacity: calc(1 - var(--cp, 0));
   pointer-events: none;
 }
-@media (max-width: 859px) {
-  .fmt::before { transform: none; opacity: 1; }
-}
+/* sem pilha, com movimento reduzido, os seis voltam a ser lista comum:
+   sombra chapada, altura de miniatura e respiro de grade */
 @media (prefers-reduced-motion: reduce) {
   .fmt::before { transform: none; opacity: 1; }
+  .fmt { margin-bottom: clamp(12px, 1.4vw, 20px); }
 }
 @media (min-width: 860px) {
-  .pilha { display: block; padding-bottom: 12vh; }
+  .pilha { padding-bottom: 12vh; }
   /* mesma altura da pilha social, para as duas lerem como o mesmo gesto */
   .fmt { top: 9vh; margin-bottom: 6vh; height: 82vh; }
   /* e um degrau a mais de recuo: aqui o cartão da frente é navy e a foto
@@ -352,12 +349,14 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--navy-900);
-  min-height: clamp(240px, 34vw, 320px);
+  min-height: 0;
   display: flex; align-items: flex-start; justify-content: center;
   isolation: isolate;
 }
-@media (min-width: 860px) {
-  .fmt__cartao { min-height: 0; }
+/* sem pilha o .fmt não tem altura, e height: 100% de auto é auto: só
+   aqui o cartão precisa de um piso próprio para não colar no texto */
+@media (prefers-reduced-motion: reduce) {
+  .fmt__cartao { min-height: clamp(240px, 34vw, 320px); }
 }
 .fmt__cartao img {
   position: absolute; inset: 0; z-index: -2;
