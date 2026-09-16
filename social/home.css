@@ -348,7 +348,7 @@
    recortar a imagem). Só no palco grande. */
 .switch__arco {
   position: absolute; inset: 28px 28px 0;
-  border: 1px solid rgba(254,250,224,.55); border-bottom: 0;
+  border: 1px solid color-mix(in srgb, var(--ui-arco) 55%, transparent); border-bottom: 0;
   border-radius: 999px 999px 0 0;
   pointer-events: none;
   opacity: 0; transform: scaleY(.96); transform-origin: bottom;

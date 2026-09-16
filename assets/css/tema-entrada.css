@@ -34,6 +34,9 @@
   --ui-accent-on-dark:     var(--accent);
   --ui-border:             rgba(245,243,239,.14);
   --ui-border-invert:      rgba(245,243,239,.14);
+  /* Cor sólida: a transparência é decisão do componente, não do tema. */
+  --ui-veu-hero:           var(--ink);
+  --ui-arco:               var(--paper);
   --ui-action:             var(--paper);
   --ui-action-hover:       var(--accent);
   --ui-notice-bg:          #1a1d20;
