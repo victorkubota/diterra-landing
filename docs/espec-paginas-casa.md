@@ -3,12 +3,9 @@
 Você apontou certo na reunião. As páginas da Querência, do Palacete, da Casa Lucca e do Espaço Terrá foram escritas para vender um tipo de festa, quando elas existem para a pessoa conhecer a casa: quantos cabem, como é o lugar, de onde ele veio, e fotos suficientes para ela imaginar a festa dela ali.
 A gente colocou nelas uma matéria de casamento com um casal que não existe, um cronograma hora a hora (que você mesma descartou) e uma lista de fornecedores inventados. E ficou de fora justamente o que você pediu: a história da casa, uma galeria de verdade e hospedagem.
 Este documento é a lista do que sai, do que fica, do que muda de lugar, do que depende de decisão sua e do que depende de conteúdo que só você tem como levantar.
-Leia com o site aberto numa outra aba. A Casa Lucca serve de exemplo, e há dois endereços para comparar:
+**O corte já está aplicado no site de teste.** Tudo que este documento descreve nas partes 1 a 4 saiu, então você lê e confere na mesma hora: [abrir a Casa Lucca](https://diterra-deploy.vercel.app/social/espacos/casa-lucca). Troque `casa-lucca` por `a-querencia`, `palacete-monte-alegre` ou `espaco-terra` para ver as outras três.
 
-- **[como está](https://diterra-deploy.vercel.app/social/espacos/casa-lucca)**, com tudo que este documento descreve como "sai"
-- **[como fica](https://diterra-deploy-git-fix-casas-sem-landing-victorkubotas-projects.vercel.app/social/espacos/casa-lucca)**, com o corte já aplicado
-
-O segundo é um endereço de teste, separado do site: nada do que você vir nele está no ar para o público. Troque `casa-lucca` por `a-querencia`, `palacete-monte-alegre` ou `espaco-terra` para ver as outras três. Dá para ler em cinco minutos.
+O que ainda não aconteceu, e é onde preciso de você, está nas partes 5 a 7: as três decisões e os oito pedidos de conteúdo. Dá para ler em cinco minutos.
 
 ---
 
