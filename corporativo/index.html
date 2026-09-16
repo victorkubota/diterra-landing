@@ -93,12 +93,27 @@
      CLIENTES — faixa de logos
      Ordem definida pelo cliente: a prova social vem logo depois do
      hero, antes de qualquer discurso.
+
+     CONTEÚDO DE DEMONSTRAÇÃO. Os 17 logos são de marcas REAIS e vieram
+     dos assets de cliente de outro projeto (commit 13a885a). Sob o
+     título "Marcas que escolheram a Di Terrá" eles afirmam um fato
+     sobre empresas que não autorizaram nada, o que é mais grave do que
+     os depoimentos inventados duas seções abaixo. Por isso a faixa
+     ganhou tarja VISÍVEL na tela, no mesmo padrão das quatro páginas de
+     casa (PR #88), e não só um comentário no código. Só entram no ar os
+     logos que a Di Terrá confirmar e tiver autorização de uso.
      ══════════════════════════════════════════════════════════════ -->
 <section class="section section--paper section--tight" id="clientes">
   <div class="wrap">
     <h2 class="h-section clientes__titulo linhas">Marcas que escolheram a Di Terrá</h2>
   </div>
-  <div class="faixa rise" style="--i:2" id="faixaLogos" aria-label="Empresas que já realizaram eventos na Di Terrá">
+  <!-- role="group" porque o aria-label precisa de um papel que aceite
+       nome (num div o papel implícito é generic, que proíbe nomeação, e
+       o rótulo era descartado pelo leitor de tela) e porque o botão
+       Pausar aponta para cá com aria-controls. O rótulo descreve a
+       faixa em vez de afirmar que essas empresas foram clientes, que é
+       justamente o que a tarja abaixo existe para negar. -->
+  <div class="faixa rise" style="--i:2" id="faixaLogos" role="group" aria-label="Faixa de logos de demonstração">
     <button class="faixa__pausa" type="button" aria-pressed="false" aria-controls="faixaLogos">Pausar</button>
     <div class="faixa__pista">
       <img src="/assets/demo/logos/alice.webp" alt="Alice" loading="lazy" width="289" height="160">
@@ -137,12 +152,55 @@
       <img src="/assets/demo/logos/swift.webp" alt="" aria-hidden="true" loading="lazy" width="266" height="160">
     </div>
   </div>
+  <div class="wrap">
+    <p class="evento__mais">Faixa de demonstração. Os logos não são clientes confirmados da Di Terrá e saem antes da publicação.</p>
+  </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════
      MANIFESTO
      Feedback: "sinto falta de animação ao scrollar e abrir esse
      bloco — também acho que podemos explorar uma foto".
+
+     Reunião de 15/09: "Corporativo precisa de aprofundamento:
+     justificativas para evento corporativo". O bloco era discurso
+     ("transformamos essa história em experiência") e virou a lista do
+     que a empresa ganha, com cada argumento amarrado a uma capacidade
+     que a própria página já prova mais abaixo: a enumeração do contrato
+     único vem do #estrutura, a cozinha e o operador vêm das rotas de
+     solução, a ficha de distância e leitos vem do #territorio, e o piso
+     e o teto de auditório (80 e 600) vêm do #espacos. Nenhum número
+     novo entrou, e nenhum nome de pousada, hotel ou parceiro é citado.
+
+     LIMITES DA AFIRMAÇÃO (revisão de fatos, 16/09). Três coisas que a
+     primeira versão afirmava e o site não prova, e que por isso saíram:
+
+     1. "Cada uma dessas frentes tem equipe própria da casa", estendido
+        às nove frentes da enumeração. Só cinco têm rota provando
+        (gastronomia, decoração, coquetelaria, produção e tecnologia
+        audiovisual, em /social/solucoes). Segurança não aparece em
+        nenhuma outra rota do site, e "vídeo" no sentido de filmagem
+        está publicado nas páginas de casa como frente que a Di Terrá
+        NÃO cobre. A enumeração de nove continua, porque é a redação
+        literal do #estrutura, mas agora só descreve o que entra no
+        contrato; a equipe própria é afirmada só das cinco.
+     2. Ausência de terceiros ("sem renegociação com terceiros"). A
+        rota /social/solucoes/producao diz o contrário: fornecedor
+        externo entra no mesmo roteiro e no mesmo grupo de contato. A
+        promessa virou a que a página prova e vale mais para compras:
+        quem coordena o terceiro é a casa, não o time do cliente.
+     3. Contrato de calendário anual e conta recorrente. O #proposta
+        pede um evento só e não há nada publicado sobre acordo
+        plurianual. A única "convenção anual" do arquivo está nos
+        depoimentos fictícios, que saem antes de publicar.
+
+     O argumento do segundo dia também deixou de ser ficha de mapa
+     (qualquer casa de Itu ou Atibaia troca os números pelos seus) e
+     passou a apoiar-se na cozinha e no cronograma da casa, com os
+     leitos como suporte. Viracopos saiu: o #territorio publica 55 min
+     pelo aeroporto e 1h10 de van a partir de Campinas para o mesmo
+     trecho, e construir promessa de horário em cima dessa diferença
+     era encostar um número no outro na mesma tela.
      ══════════════════════════════════════════════════════════════ -->
 <section class="section section--paper" id="manifesto">
   <div class="wrap manifesto">
@@ -153,10 +211,71 @@
       </figure>
     </div>
     <div class="manifesto__body">
-      <h2 class="h-section manchete acende" style="--i:1">O enredo de um evento que acontece por inteiro</h2>
-      <p class="rise" style="--i:2">Cada empresa tem uma história para contar, e nós transformamos essa história em experiência.</p>
-      <p class="rise" style="--i:3">Cuidamos de tudo e de todos os detalhes para que as conexões sejam reais e para que cada encontro fortaleça a cultura da empresa.</p>
+      <h2 class="h-section manchete acende" style="--i:1">O que a empresa deixa de contratar por fora</h2>
+      <p class="rise" style="--i:2">
+        Um evento de empresa costuma chegar em pedaços: buffet de um lado, audiovisual de outro,
+        cenografia de um terceiro, e alguém do seu time coordenando tudo isso sem nunca ter sido
+        produtor de evento. Essa parte não aparece em proposta nenhuma e é paga do mesmo jeito,
+        em horas de gente que tem outro trabalho para fazer.
+      </p>
+
+      <ul class="argumentos rise" style="--i:3" role="list">
+        <li role="listitem">
+          <h3 class="h-card">Um contrato no lugar de uma lista de fornecedores</h3>
+          <p>
+            Gastronomia, ambientação, bar, produção e estrutura técnica são operadas pela equipe da
+            casa, e cada uma tem uma página que mostra o que faz e como faz. É o que permite que
+            gastronomia, ambientação, som, luz, vídeo, mobiliário, operação, segurança e serviço
+            entrem em um único contrato. Sai da sua lista a cotação item a item, a comparação de
+            propostas que não se comparam e o telefone que toca para cada fornecedor separado toda
+            vez que a data muda.
+          </p>
+          <p>
+            Quando a empresa já tem fornecedor próprio para fotografia, música ou cerimonial, ele
+            continua no evento. O que muda é quem cuida dele: o cronograma, a carga, a descarga e o
+            horário de montagem são alinhados pela produção da casa, não por alguém do seu time.
+          </p>
+          <a class="link-arrow" href="/social/solucoes">Ver as cinco frentes da casa
+            <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
+          </a>
+        </li>
+        <li role="listitem">
+          <h3 class="h-card">Quando o cronograma muda, quem resolve já está na casa</h3>
+          <p>
+            A plenária avança sobre o horário do almoço e é o cronograma da cozinha que se ajusta na
+            hora, porque a cozinha é da casa. O microfone falha no meio de uma fala da diretoria e o
+            operador de som está na sala, não a uma ligação de distância. Num evento de empresa isso
+            pesa mais do que em qualquer outro: o que dá errado acontece na frente do próprio time.
+          </p>
+        </li>
+        <li role="listitem">
+          <h3 class="h-card">O segundo dia é pauta, não festa esticada</h3>
+          <p>
+            Quando o encontro atravessa a noite, o jantar da véspera e o coffee da manhã seguinte
+            saem da mesma cozinha e do mesmo cronograma que conduzem a plenária, e a região tem
+            1.200 leitos num raio de 15 km para o time dormir por perto. O que a empresa ganha com
+            isso não é uma noite a mais de confraternização: é um bloco de trabalho a mais com todo
+            mundo ainda reunido, porque ninguém precisou se dispersar no fim da tarde. São 165 km ·
+            1h40 pela Bandeirantes, longe o bastante para não haver escritório para voltar no
+            intervalo.
+          </p>
+        </li>
+        <li role="listitem">
+          <h3 class="h-card">A escala muda e a operação continua a mesma</h3>
+          <p>
+            O comitê que cabe em 80 lugares de auditório e a convenção que precisa de 600 passam
+            pelo mesmo contrato e pela mesma equipe. São quatro casas de portes diferentes com uma
+            operação só por trás: quando o número de participantes muda de um evento para o outro,
+            o que muda é a casa, não o fornecedor.
+          </p>
+        </li>
+      </ul>
+
       <p class="rise" style="--i:4">
+        O que muda de um evento para o outro é o formato. Uma convenção, um off-site de liderança e
+        um lançamento pedem desenhos de operação diferentes, e é esse desenho que a casa monta.
+      </p>
+      <p class="rise" style="--i:5">
         <a class="btn btn--ghost" href="#proposta">Falar com o comercial</a>
       </p>
     </div>
@@ -261,7 +380,12 @@
          alt="Vista aérea da sede da Di Terrá e do entorno no fim da tarde" loading="lazy" decoding="async" srcset="/assets/opt/numeros-fundo-800.webp 800w, /assets/opt/numeros-fundo-1400.webp 1400w, /assets/opt/numeros-fundo-2400.webp 2400w" sizes="100vw"></picture>
   </div>
   <div class="wrap respiro on-dark">
-    <h2 class="h-section linhas" style="--i:1">Você contrata um lugar e recebe uma operação inteira</h2>
+    <!-- Era "Você contrata um lugar e recebe uma operação inteira", que
+         virou a mesma tese do H2 do #manifesto ("O que a empresa deixa
+         de contratar por fora") duas seções acima, e sem nenhuma das
+         evidências que o manifesto constrói. O respiro passou a carregar
+         a escala: a faixa de portes que o #espacos prova logo abaixo. -->
+    <h2 class="h-section linhas" style="--i:1">Do comitê à convenção, no mesmo endereço</h2>
   </div>
 </section>
 
@@ -576,13 +700,24 @@
       <p>Van executiva a partir de Campinas · 1h10</p>
     </article>
   </div>
+  <!-- Mesma tarja que as rotas sociais já carregam sobre este bloco. Aqui ela
+       cobre duas coisas: as quatro fotografias, que são de IA (assets/demo/
+       territorio, declarada em assets/demo/LEIA-ME.md), e os nomes e distâncias
+       dos parceiros, que a cliente ainda não confirmou. O mesmo nome aparece
+       no FAQ de A Querência, então quando a resposta chegar os dois mudam
+       juntos. -->
+  <div class="wrap">
+    <p class="evento__mais">Hospedagem de demonstração. Nomes, distâncias e fotografias ainda não confirmados pela Di Terrá.</p>
+  </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════
      DEPOIMENTOS
 
-     CONTEÚDO DE DEMONSTRAÇÃO. Nomes, cargos, empresas, citações e
-     retratos são fictícios; os retratos foram gerados por IA. As
+     CONTEÚDO DE DEMONSTRAÇÃO. Nomes, cargos, empresas e citações são
+     fictícios. (Os retratos saíram no commit edf1a46: eram os mesmos
+     três rostos usados como equipe no /sobre.) A tarja abaixo do bloco
+     diz isso na tela, no padrão das quatro páginas de casa. As
      empresas são inventadas de propósito: assinar um depoimento com o
      nome de uma marca real seria pôr palavras na boca dela.
      Substituir por depoimento real com autorização de uso de imagem
@@ -626,6 +761,7 @@
       </figure>
 
     </div>
+    <p class="evento__mais">Depoimentos de demonstração, nomes e empresas fictícios, a serem substituídos por depoimentos reais com autorização.</p>
   </div>
 </section>
 
@@ -907,11 +1043,12 @@
     }, { rootMargin: '-88% 0px 0px 0px' }).observe(sentinel);
   }
 
-  /* "a confirmar" explicado no hover e no leitor de tela */
-  Array.prototype.forEach.call(document.querySelectorAll('.tbd'), function (el) {
-    el.setAttribute('title', 'Estamos confirmando este dado com a casa. Pergunte na proposta e a equipe responde com o número certo.');
-    el.setAttribute('aria-description', 'Estamos confirmando este dado com a casa. Pergunte na proposta e a equipe responde com o número certo.');
-  });
+  /* O bloco que explicava .tbd ("a confirmar") no hover e no leitor de
+     tela saiu daqui: não existe um único elemento .tbd nesta página, e
+     nenhum dos números que o #manifesto reaproveita está marcado como
+     pendente. O mecanismo continua vivo em /assets/site.js e o estilo em
+     base.css; se a cliente devolver um dado pendente para esta rota,
+     copiar de lá em vez de reescrever. */
 
   /* faixa de logos: quem pediu para parar, para (WCAG 2.2.2) */
   var faixa = document.getElementById('faixaLogos');

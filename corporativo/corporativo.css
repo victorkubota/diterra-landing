@@ -238,6 +238,36 @@
 .manifesto__body strong { font-weight: 500; }
 .manifesto__body .btn { margin-top: 10px; }
 
+/* ── ARGUMENTOS DO MANIFESTO ──────────────────────────────────────────
+   Classe nova, nascida em 16/09/2026. O manifesto deixou de ser dois
+   parágrafos de discurso e passou a ser a lista dos quatro motivos para
+   trazer o time até aqui, cada um com título e explicação.
+
+   Não havia componente pronto para isso no corporativo: .spec é ficha
+   de duas colunas (rótulo e valor), .fmt e .reel exigem fotografia por
+   item e .vcard é o acordeão das casas. O filete de topo é o mesmo
+   1px var(--ui-border) do .spec, de propósito: a lista lê como ficha
+   da casa, não como bullet de apresentação.
+   ─────────────────────────────────────────────────────────────────── */
+.argumentos {
+  list-style: none;
+  display: grid;
+  margin-top: clamp(24px, 3vw, 36px);
+}
+.argumentos > li {
+  padding-block: clamp(18px, 2vw, 24px);
+  border-top: 1px solid var(--ui-border);
+}
+.argumentos > li:last-child { border-bottom: 1px solid var(--ui-border); }
+.argumentos h3 { margin-bottom: 10px; }
+/* caminho de verificação: o argumento do contrato único aponta para as
+   rotas que o provam, para quem quer conferir antes de falar com o
+   comercial. O link é o mesmo .link-arrow das casas, só com respiro. */
+.argumentos .link-arrow { margin-top: clamp(14px, 1.4vw, 18px); }
+/* p + p do .manifesto__body não alcança o parágrafo que vem depois da
+   lista: o fecho precisa do próprio respiro */
+.manifesto__body .argumentos + p { margin-top: clamp(24px, 3vw, 36px); }
+
 /* cabeçalho centrado, para seções que não têm coluna de apoio */
 /* Rodada 4: cabeçalho à esquerda por padrão; só banner, respiro e
    chamada final centram */
