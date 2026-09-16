@@ -1,21 +1,27 @@
 <!DOCTYPE html>
-<!-- LP de casamento: o <html> NÃO leva data-evento nesta fase. Casamento
-     só muda o chão de cor da coleção, e esse atributo entra quando a
-     decisão de cor por tipo de evento estiver fechada. Até lá a página
-     roda no tema social padrão. -->
+<!-- LP de bodas e aniversários: o <html> NÃO leva data-evento.
+     A cliente nomeou três cores para quatro páginas (rosa na debutante,
+     branco no casamento, azul no corporativo) e não nomeou a quarta.
+     Inventar seria decisão de marca que ninguém pediu, então esta rota
+     herda o tema social padrão. Quando alguém escolher, o bloco entra em
+     social/evento.css e esta linha ganha o atributo.
+
+     O herói é FOTO por falta de acervo, não por desenho: não existe vídeo
+     deste tipo de evento no Drive. O <video hidden> nasce igual ao do
+     molde, só esperando o arquivo. -->
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Casamento em Piracicaba | Di Terrá Eventos</title>
-<meta name="description" content="Quatro casas no interior paulista para casar, com cozinha, bar, decoração, produção e técnica no mesmo contrato. A 1h40 de São Paulo.">
-<link rel="canonical" href="https://www.diterra.com.br/social/eventos/casamento">
+<title>Bodas e aniversários em Piracicaba | Di Terrá Eventos</title>
+<meta name="description" content="Quatro casas no interior paulista para bodas, aniversários e festas de família, com cozinha, bar, decoração, produção e técnica no mesmo contrato. A 1h40 de São Paulo.">
+<link rel="canonical" href="https://www.diterra.com.br/social/eventos/bodas-aniversarios">
 <link rel="icon" type="image/png" href="/assets/brand/favicon-social.png">
 <meta name="theme-color" content="#111542">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Casamento em Piracicaba | Di Terrá Eventos">
-<meta property="og:description" content="Quatro casas no interior paulista para casar, com cozinha, bar, decoração, produção e técnica no mesmo contrato. A 1h40 de São Paulo.">
-<meta property="og:image" content="https://www.diterra.com.br/assets/opt/ocasiao-casamento-1400.webp">
+<meta property="og:title" content="Bodas e aniversários em Piracicaba | Di Terrá Eventos">
+<meta property="og:description" content="Quatro casas no interior paulista para bodas, aniversários e festas de família, com cozinha, bar, decoração, produção e técnica no mesmo contrato. A 1h40 de São Paulo.">
+<meta property="og:image" content="https://www.diterra.com.br/assets/opt/ocasiao-aniversario-1400.webp">
 <link rel="preload" href="/assets/fonts/cormorant-garamond-300.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/albert-sans-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/fontes.css">
@@ -47,26 +53,27 @@
 <!-- ═══════════════════════════════════════════════════
      HERÓI — nasce no formato final do vídeo.
      O <picture> é o pôster e o LCP. O <video hidden> já está no lugar,
-     sem src: o melhorias.js monta /assets/opt/video/casamento-1280.mp4 a
-     partir do data-hero-video. Enquanto o mp4 não chega, o play() falha,
-     o vídeo volta a hidden e a foto fica (o request de 404 acontece no
-     desktop, é o preço combinado da fase de foto).
+     sem src: o melhorias.js monta
+     /assets/opt/video/bodas-aniversarios-1280.mp4 a partir do
+     data-hero-video. Enquanto o mp4 não chega, o play() falha, o vídeo
+     volta a hidden e a foto fica (o request de 404 acontece no desktop,
+     é o preço combinado da fase de foto).
      ═══════════════════════════════════════════════════ -->
 <div class="hero-palco" id="heroPalco">
 <header class="page-hero" id="topo">
   <div class="page-hero__media">
-    <picture><source type="image/avif" srcset="/assets/opt/ocasiao-casamento-800.avif 800w, /assets/opt/ocasiao-casamento-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/ocasiao-casamento-1400.webp" alt="Cerimônia montada no gramado, com arco de flores diante do lago" fetchpriority="high" width="1800" height="2400" srcset="/assets/opt/ocasiao-casamento-800.webp 800w, /assets/opt/ocasiao-casamento-1400.webp 1400w" sizes="100vw"></picture>
-    <video class="hero-video" data-hero-video="casamento" muted loop playsinline preload="none" aria-hidden="true" hidden></video>
+    <picture><source type="image/avif" srcset="/assets/opt/ocasiao-aniversario-800.avif 800w, /assets/opt/ocasiao-aniversario-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/ocasiao-aniversario-1400.webp" alt="Casal e filha diante da capela, em celebração de bodas" fetchpriority="high" width="1400" height="1867" srcset="/assets/opt/ocasiao-aniversario-800.webp 800w, /assets/opt/ocasiao-aniversario-1400.webp 1400w" sizes="100vw"></picture>
+    <video class="hero-video" data-hero-video="bodas-aniversarios" muted loop playsinline preload="none" aria-hidden="true" hidden></video>
   </div>
   <div class="wrap on-dark">
     <ol class="crumbs">
       <li><a href="/">Di Terrá</a></li>
       <li><a href="/social">Social</a></li>
       <li><a href="/social/eventos">Ocasiões</a></li>
-      <li aria-current="page">Casamento</li>
+      <li aria-current="page">Bodas e aniversários</li>
     </ol>
-    <h1 class="h-display">Casamento no interior paulista</h1>
-    <p class="lead page-hero__lead">Quatro casas em Piracicaba, cada uma com um jeito de receber, e uma equipe que cuida da festa inteira. A 1h40 de São Paulo.</p>
+    <h1 class="h-display">Bodas e aniversários com a família inteira reunida</h1>
+    <p class="lead page-hero__lead">Quatro casas em Piracicaba para a festa de quem já viveu bastante, com uma equipe que cuida do jantar, do acesso e do horário. A 1h40 de São Paulo.</p>
   </div>
 </header>
 </div>
@@ -78,12 +85,12 @@
      ═══════════════════════════════════════════════════ -->
 <section class="section section--paper">
   <div class="wrap cta rise">
-    <p class="script">Sua data</p>
-    <h2 class="h-section">Comece pela data</h2>
-    <p class="lead">Cada casa tem uma agenda própria, e sábado é o que fecha primeiro. A equipe responde se a data pretendida ainda está livre nas quatro.</p>
+    <p class="script">A data deles</p>
+    <h2 class="h-section">Comece pela data, mesmo que a festa seja surpresa</h2>
+    <p class="lead">Quem pergunta pela agenda quase nunca é o homenageado, e a equipe trata com quem está organizando, não com ele. Nas quatro casas o sábado é o primeiro a fechar, então a data pretendida se consulta antes de convidar qualquer pessoa.</p>
     <div class="cta__actions">
       <a class="btn btn--primary" href="#contato">
-        Consultar a data
+        Ver as datas livres
         <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
       </a>
     </div>
@@ -95,13 +102,17 @@
      (social/index.html:190-288, driver em assets/switch.js).
      Foto grande que troca no desktop, sanfona no celular, rodízio de 6s
      que para quando a pessoa escolhe. O que muda aqui são as frases:
-     elas falam do formato do CASAMENTO, não da capacidade da casa.
+     elas falam do formato das BODAS, não da capacidade da casa.
+     Os textos alternativos descrevem a fotografia e por isso são os
+     mesmos de todas as rotas, e não nomeiam o papel dos retratados, para
+     servirem às três ocasiões. A pendência de foto por ocasião está
+     registrada em assets/demo/LEIA-ME.md.
      ═══════════════════════════════════════════════════ -->
 <section class="section casas on-dark laje" id="espacos">
   <div class="wrap">
     <div class="section__head">
-      <h2 class="h-section linhas">Quatro casas para celebrar</h2>
-      <p class="lead casas__lead rise">A escolha muda o formato do casamento inteiro: onde acontece a cerimônia, como se serve o jantar e quanta gente cabe na pista.</p>
+      <h2 class="h-section linhas">Quatro casas para reunir a família</h2>
+      <p class="lead casas__lead rise">A escolha muda o que a festa consegue ser: onde se serve o jantar, quanto se caminha do carro até a mesa e se dá para conversar sem levantar a voz.</p>
     </div>
     <div class="switch rise" style="--i:1" id="venueSwitch">
       <div class="switch__stage">
@@ -130,7 +141,7 @@
               <figure class="vcard__shot-m">
                 <picture><source type="image/avif" srcset="/assets/opt/a-querencia-amplitude-800.avif 800w, /assets/opt/a-querencia-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/a-querencia-amplitude-1400.webp" width="2400" height="1610" alt="Casal em frente à capela da Querência, cercada de folhagem" loading="lazy" decoding="async" srcset="/assets/opt/a-querencia-amplitude-800.webp 800w, /assets/opt/a-querencia-amplitude-1400.webp 1400w" sizes="100vw"></picture>
               </figure>
-              <p>Cerimônia no jardim aberto e festa no salão coberto, sem sair do mesmo endereço. Jardim e cobertura montados ao mesmo tempo, para a festa não parar na virada.</p>
+              <p>A casa que aguenta a família inteira, com os primos que ninguém vê há dez anos. Foto das gerações no jardim e jantar no salão coberto e climatizado, sem atravessar o terreno no meio do caminho.</p>
               <div class="vcard__acts">
                 <a class="link-arrow" href="/social/espacos/a-querencia">Ver a casa por inteiro
                   <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
@@ -150,7 +161,7 @@
               <figure class="vcard__shot-m">
                 <picture><source type="image/avif" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.avif 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/palacete-monte-alegre-amplitude-1400.webp" width="2400" height="1610" alt="Fachada rosa do Palacete Monte Alegre, com escadaria e fonte" loading="lazy" decoding="async" srcset="/assets/opt/palacete-monte-alegre-amplitude-800.webp 800w, /assets/opt/palacete-monte-alegre-amplitude-1400.webp 1400w" sizes="100vw"></picture>
               </figure>
-              <p>Casarão histórico, escadaria e janelas em arco. Para quem imagina a entrada da noiva e o jantar com a formalidade de outro tempo.</p>
+              <p>Salões internos, escadaria e pé-direito alto. A festa não depende do clima, e os homenageados descem a escada para a entrada em vez de cruzar um gramado.</p>
               <div class="vcard__acts">
                 <a class="link-arrow" href="/social/espacos/palacete-monte-alegre">Ver a casa por inteiro
                   <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
@@ -170,7 +181,7 @@
               <figure class="vcard__shot-m">
                 <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-amplitude-800.avif 800w, /assets/opt/casa-lucca-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/casa-lucca-amplitude-1400.webp" width="2400" height="1610" alt="Mesa longa posta sob o pergolado da Casa Lucca, entre oliveiras" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-amplitude-800.webp 800w, /assets/opt/casa-lucca-amplitude-1400.webp 1400w" sizes="100vw"></picture>
               </figure>
-              <p>Mesa longa única sob o pergolado. O formato de casamento em que os noivos conseguem falar com cada convidado antes da ceia.</p>
+              <p>Mesa longa única, serviço prato a prato e som de ambiente. O formato em que o discurso do filho é feito sentado e todo mundo escuta sem microfone.</p>
               <div class="vcard__acts">
                 <a class="link-arrow" href="/social/espacos/casa-lucca">Ver a casa por inteiro
                   <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
@@ -190,7 +201,7 @@
               <figure class="vcard__shot-m">
                 <picture><source type="image/avif" srcset="/assets/opt/espaco-terra-amplitude-800.avif 800w, /assets/opt/espaco-terra-amplitude-1400.avif 1400w" sizes="100vw"><img src="/assets/opt/espaco-terra-amplitude-1400.webp" width="2038" height="1367" alt="Mesa do bolo do Espaço Terrá sob os arranjos suspensos de flores brancas" loading="lazy" decoding="async" srcset="/assets/opt/espaco-terra-amplitude-800.webp 800w, /assets/opt/espaco-terra-amplitude-1400.webp 1400w" sizes="100vw"></picture>
               </figure>
-              <p>Terreno aberto e horizonte limpo. A casa que aceita altar, tenda e pista desenhados do zero, em montagem cenográfica de grande formato.</p>
+              <p>Terreno plano e aberto, tudo no mesmo nível. A casa para as listas maiores, quando a família grande não cabe num salão e a montagem é desenhada do zero.</p>
               <div class="vcard__acts">
                 <a class="link-arrow" href="/social/espacos/espaco-terra">Ver a casa por inteiro
                   <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
@@ -210,11 +221,11 @@
      ═══════════════════════════════════════════════════ -->
 <section class="section section--invert">
   <div class="wrap cta rise on-dark">
-    <h2 class="h-section">A casa se escolhe com o número na mão</h2>
-    <p class="lead">Com a data e o número aproximado de convidados, a equipe diz quais das quatro comportam a festa e o que muda de uma para outra.</p>
+    <h2 class="h-section">A lista de bodas não se conta como a de casamento</h2>
+    <p class="lead">Os contemporâneos do casal, os filhos, os netos e quem vem de outra cidade. Com o número aproximado e a ideia de formato, a equipe diz quais das quatro casas recebem sem apertar a circulação entre as mesas.</p>
     <div class="cta__actions">
       <a class="btn btn--primary on-dark" href="#contato">
-        Enviar data e convidados
+        Enviar o tamanho da lista
         <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg>
       </a>
     </div>
@@ -222,49 +233,49 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════
-     SOLUÇÃO COMPLETA — os cinco serviços, ditos do casamento.
+     SOLUÇÃO COMPLETA — os cinco serviços, ditos das bodas.
      Mesma marcação de social/espacos/a-querencia.html:250-296, com
      cinco textos novos: lá a frase é da capacidade da casa, aqui é do
-     que acontece num casamento.
+     que acontece numa festa de família.
      ═══════════════════════════════════════════════════ -->
 <section class="section" id="solucao">
   <span class="ornament ornament--bl"><img src="/assets/brand/ornamento-ramo-rose-alt.png" alt="" width="287" height="513"></span>
   <div class="wrap">
     <div class="section__head">
       <p class="script">Tudo em um só lugar</p>
-      <h2 class="h-section linhas">Um casamento, um contrato</h2>
-      <p class="lead rise">Cozinha, bar, decoração, produção e técnica são da casa. O casal fala com uma pessoa, e essa pessoa responde pelo dia inteiro.</p>
+      <h2 class="h-section linhas">Uma festa, um contrato</h2>
+      <p class="lead rise">Cozinha, bar, decoração, produção e técnica são da casa. Quem está organizando fala com uma pessoa, e essa pessoa responde pelo dia inteiro.</p>
     </div>
     <div class="servicos">
       <a class="servico rise" style="--i:1" href="/social/solucoes/gastronomia">
         <span class="servico__media reveal-shot"><picture><source type="image/avif" srcset="/assets/opt/gastronomia-800.avif 800w, /assets/opt/gastronomia-1400.avif 1400w" sizes="(min-width: 1101px) 19vw, (min-width: 721px) 31vw, 68vw"><img src="/assets/opt/gastronomia-1400.webp" alt="Buffet montado com entradas, saladas e ambientação de folhagens" width="1400" height="1045" loading="lazy" decoding="async" srcset="/assets/opt/gastronomia-800.webp 800w, /assets/opt/gastronomia-1400.webp 1400w" sizes="(min-width: 1101px) 19vw, (min-width: 721px) 31vw, 68vw"></picture></span>
         <span class="servico__n">01</span>
         <h3 class="h-card">Gastronomia</h3>
-        <p>A cozinha é própria: o menu do casamento é fechado em degustação com o casal, do welcome drink à ceia da madrugada.</p>
+        <p>A cozinha é própria e o jantar é o centro da noite, não o intervalo antes da pista. O menu é fechado em degustação, com prato mais leve, restrição de sal e de açúcar anotados por nome na lista.</p>
       </a>
       <a class="servico rise" style="--i:2" href="/social/solucoes/coquetelaria">
         <span class="servico__media reveal-shot"><picture><source type="image/avif" srcset="/assets/opt/coquetelaria-800.avif 800w, /assets/opt/coquetelaria-1400.avif 1400w" sizes="(min-width: 1101px) 19vw, (min-width: 721px) 31vw, 68vw"><img src="/assets/opt/coquetelaria-1400.webp" alt="Bartender entregando um drink autoral no bar do evento" width="1400" height="1045" loading="lazy" decoding="async" srcset="/assets/opt/coquetelaria-800.webp 800w, /assets/opt/coquetelaria-1400.webp 1400w" sizes="(min-width: 1101px) 19vw, (min-width: 721px) 31vw, 68vw"></picture></span>
         <span class="servico__n">02</span>
         <h3 class="h-card">Coquetelaria</h3>
-        <p>Entre a cerimônia e a entrada no salão existe uma espera. É ela que o bar resolve, com drinks autorais servidos em pé.</p>
+        <p>Numa mesa de três gerações tem quem beba, quem não beba e quem não possa. O bar serve drinks autorais e a versão sem álcool do mesmo copo, para ninguém precisar explicar a escolha no balcão.</p>
       </a>
       <a class="servico rise" style="--i:3" href="/social/solucoes/decoracao">
         <span class="servico__media reveal-shot"><picture><source type="image/avif" srcset="/assets/opt/decoracao-800.avif 800w, /assets/opt/decoracao-1400.avif 1400w" sizes="(min-width: 1101px) 19vw, (min-width: 721px) 31vw, 68vw"><img src="/assets/opt/decoracao-1400.webp" alt="Salão com lustres de cristal e cenografia floral branca na mesa do bolo" width="1400" height="1045" loading="lazy" decoding="async" srcset="/assets/opt/decoracao-800.webp 800w, /assets/opt/decoracao-1400.webp 1400w" sizes="(min-width: 1101px) 19vw, (min-width: 721px) 31vw, 68vw"></picture></span>
         <span class="servico__n">03</span>
         <h3 class="h-card">Decoração</h3>
-        <p>O projeto de ambientação parte da casa escolhida e cobre o altar, as mesas do jantar e o caminho entre os dois. Nada é comprado sem aprovação do casal.</p>
+        <p>A ambientação parte da casa escolhida e costuma trazer o que a família já tem: os retratos antigos, o álbum, a foto do dia do casamento. Nada é comprado sem aprovação de quem está organizando.</p>
       </a>
       <a class="servico rise" style="--i:4" href="/social/solucoes/producao">
         <span class="servico__media reveal-shot"><picture><source type="image/avif" srcset="/assets/opt/producao-800.avif 800w, /assets/opt/producao-1400.avif 1400w" sizes="(min-width: 1101px) 19vw, (min-width: 721px) 31vw, 68vw"><img src="/assets/opt/producao-1400.webp" alt="Equipe de produção da Di Terrá montando a estrutura no gramado" width="1400" height="1045" loading="lazy" decoding="async" srcset="/assets/opt/producao-800.webp 800w, /assets/opt/producao-1400.webp 1400w" sizes="(min-width: 1101px) 19vw, (min-width: 721px) 31vw, 68vw"></picture></span>
         <span class="servico__n">04</span>
         <h3 class="h-card">Produção</h3>
-        <p>Um cronograma escrito com o casal e cumprido pela equipe da casa: montagem, cerimônia, jantar e desmontagem sem ninguém da família coordenando.</p>
+        <p>Quando a festa é surpresa existe uma hora que ninguém pode furar. A equipe da casa segura a chegada do homenageado e conduz o cronograma, e os filhos ficam livres para receber os convidados na porta.</p>
       </a>
       <a class="servico rise" style="--i:5" href="/social/solucoes/tecnologia-audiovisual">
         <span class="servico__media reveal-shot"><picture><source type="image/avif" srcset="/assets/opt/tecnologia-audiovisual-800.avif 800w, /assets/opt/tecnologia-audiovisual-1400.avif 1400w" sizes="(min-width: 1101px) 19vw, (min-width: 721px) 31vw, 68vw"><img src="/assets/opt/tecnologia-audiovisual-1400.webp" alt="Mesa de corte e monitores operados durante o evento" width="1400" height="1045" loading="lazy" decoding="async" srcset="/assets/opt/tecnologia-audiovisual-800.webp 800w, /assets/opt/tecnologia-audiovisual-1400.webp 1400w" sizes="(min-width: 1101px) 19vw, (min-width: 721px) 31vw, 68vw"></picture></span>
         <span class="servico__n">05</span>
         <h3 class="h-card">Tecnologia audiovisual</h3>
-        <p>Som, luz e projeção operados por quem já conhece a casa: os votos são ouvidos no fundo do jardim e a pista aguenta até a ceia.</p>
+        <p>Som calibrado para conversa de mesa e não para pista: o discurso é ouvido no fundo do salão e o vídeo da família roda sem ninguém pedir silêncio duas vezes.</p>
       </a>
     </div>
   </div>
@@ -278,8 +289,8 @@
 <section class="section section--rose">
   <span class="ornament ornament--tr"><img src="/assets/brand/ornamento-ramo-navy.png" alt="" width="287" height="513"></span>
   <div class="wrap cta rise">
-    <h2 class="h-section">Um contrato, uma equipe</h2>
-    <p class="lead">A proposta chega com cozinha, bar, decoração, produção e técnica dentro, e com um responsável pelo dia inteiro. A data é bloqueada com contrato assinado e sinal.</p>
+    <h2 class="h-section">Quem organiza também senta à mesa</h2>
+    <p class="lead">Quase sempre quem planeja são os filhos, e eles estão na lista de convidados. A proposta chega com cozinha, bar, decoração, produção e técnica dentro, e com um responsável pelo dia inteiro, para que quem organiza possa sentar à mesa. Quem assina o contrato e paga o sinal é a família, não o homenageado, e é essa assinatura que bloqueia a data.</p>
     <div class="cta__actions">
       <a class="btn btn--primary" href="#contato">
         Pedir a proposta
@@ -290,22 +301,23 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════
-     O CASAMENTO COMO DESTINO — prosa + ficha + galeria.
+     AS BODAS COMO DESTINO — prosa + ficha + galeria.
      As quatro fotos de hospedagem são geradas por IA e levam tarja
      visível. NOMES e DISTÂNCIAS de pousadas e hotéis não entram: os
      parceiros publicados no corporativo ainda não foram confirmados
-     pela cliente.
+     pela cliente. O data-lightbox é próprio desta rota, para o grupo
+     não colidir com o da LP de casamento.
      ═══════════════════════════════════════════════════ -->
 <section class="section section--paper" id="destino">
   <div class="wrap">
     <div class="section__head">
-      <h2 class="h-section linhas">Um fim de semana de celebração</h2>
+      <h2 class="h-section linhas">Um fim de semana com a família toda na cidade</h2>
     </div>
     <div class="split">
       <div class="prose rise">
-        <p>Boa parte dos convidados vem de fora, e quem dirige 165 km raramente volta na mesma noite. Quando isso entra no planejamento desde o começo, a celebração ganha um fim de semana, não uma noite.</p>
-        <p>O roteiro que mais se repete começa na véspera, com um jantar para quem já chegou, e termina no almoço do dia seguinte, com os noivos ainda à mesa. O bloqueio de quartos, o horário de cada refeição e o transfer entram no mesmo cronograma da festa.</p>
-        <p>Quem vem de fora encontra pousadas e hotéis fazenda a poucos minutos da casa, e o transfer sai em turnos nas festas de madrugada. A indicação de onde hospedar é feita pela equipe depois que a data está fechada.</p>
+        <p>Em bodas e aniversários grandes, boa parte da lista não mora aqui. São irmãos, primos e netos que vêm de outros estados, e quem dirige 165 km com os pais no carro raramente volta na mesma noite. Quando isso entra no planejamento desde o começo, o encontro ganha um fim de semana em vez de uma noite.</p>
+        <p>O roteiro que mais se repete começa na véspera, com um jantar para quem já chegou, e termina no almoço do dia seguinte, com os homenageados ainda à mesa. É nesse almoço, sem cronograma nenhum, que a família costuma conversar mais do que na própria festa. O bloqueio de quartos, o horário de cada refeição e o transfer entram no mesmo cronograma do evento.</p>
+        <p>Quem vem de fora encontra pousadas e hotéis fazenda na região, e o transfer sai em turnos: um horário mais cedo para quem não vai virar a noite e outro no fim da festa. A indicação de onde hospedar é feita pela equipe depois que a data está fechada.</p>
       </div>
       <ul class="spec cascata">
         <li><span class="k">Distância de São Paulo</span><span class="v">165 km &middot; 1h40</span></li>
@@ -316,10 +328,10 @@
       </ul>
     </div>
     <div class="evento__galeria">
-      <a href="/assets/opt/pousada-1400.webp" data-lightbox="hospedagem-casamento"><picture><source type="image/avif" srcset="/assets/opt/pousada-800.avif 800w, /assets/opt/pousada-1400.avif 1400w" sizes="(min-width: 721px) 23vw, 50vw"><img src="/assets/opt/pousada-1400.webp" alt="Varanda de casa de campo com cadeiras de balanço e buganvília florida" width="2400" height="1610" loading="lazy" decoding="async" srcset="/assets/opt/pousada-800.webp 800w, /assets/opt/pousada-1400.webp 1400w" sizes="(min-width: 721px) 23vw, 50vw"></picture></a>
-      <a href="/assets/opt/hotel-fazenda-1400.webp" data-lightbox="hospedagem-casamento"><picture><source type="image/avif" srcset="/assets/opt/hotel-fazenda-800.avif 800w, /assets/opt/hotel-fazenda-1400.avif 1400w" sizes="(min-width: 721px) 23vw, 50vw"><img src="/assets/opt/hotel-fazenda-1400.webp" alt="Piscina comprida com espreguiçadeiras e guarda-sóis, diante de sede de hotel fazenda" width="2400" height="1610" loading="lazy" decoding="async" srcset="/assets/opt/hotel-fazenda-800.webp 800w, /assets/opt/hotel-fazenda-1400.webp 1400w" sizes="(min-width: 721px) 23vw, 50vw"></picture></a>
-      <a href="/assets/opt/suite-1400.webp" data-lightbox="hospedagem-casamento"><picture><source type="image/avif" srcset="/assets/opt/suite-800.avif 800w, /assets/opt/suite-1400.avif 1400w" sizes="(min-width: 721px) 23vw, 50vw"><img src="/assets/opt/suite-1400.webp" alt="Suíte com cama ampla, poltrona junto à janela e luz de fim de tarde" width="2400" height="1610" loading="lazy" decoding="async" srcset="/assets/opt/suite-800.webp 800w, /assets/opt/suite-1400.webp 1400w" sizes="(min-width: 721px) 23vw, 50vw"></picture></a>
-      <a href="/assets/opt/estrada-interior-1400.webp" data-lightbox="hospedagem-casamento"><picture><source type="image/avif" srcset="/assets/opt/estrada-interior-800.avif 800w, /assets/opt/estrada-interior-1400.avif 1400w" sizes="(min-width: 721px) 23vw, 50vw"><img src="/assets/opt/estrada-interior-1400.webp" alt="Estrada asfaltada ladeada por palmeiras imperiais, entre colinas" width="2400" height="1610" loading="lazy" decoding="async" srcset="/assets/opt/estrada-interior-800.webp 800w, /assets/opt/estrada-interior-1400.webp 1400w" sizes="(min-width: 721px) 23vw, 50vw"></picture></a>
+      <a href="/assets/opt/pousada-1400.webp" data-lightbox="hospedagem-bodas"><picture><source type="image/avif" srcset="/assets/opt/pousada-800.avif 800w, /assets/opt/pousada-1400.avif 1400w" sizes="(min-width: 721px) 23vw, 50vw"><img src="/assets/opt/pousada-1400.webp" alt="Varanda de casa de campo com cadeiras de balanço e buganvília florida" width="2400" height="1610" loading="lazy" decoding="async" srcset="/assets/opt/pousada-800.webp 800w, /assets/opt/pousada-1400.webp 1400w" sizes="(min-width: 721px) 23vw, 50vw"></picture></a>
+      <a href="/assets/opt/hotel-fazenda-1400.webp" data-lightbox="hospedagem-bodas"><picture><source type="image/avif" srcset="/assets/opt/hotel-fazenda-800.avif 800w, /assets/opt/hotel-fazenda-1400.avif 1400w" sizes="(min-width: 721px) 23vw, 50vw"><img src="/assets/opt/hotel-fazenda-1400.webp" alt="Piscina comprida com espreguiçadeiras e guarda-sóis, diante de sede de hotel fazenda" width="2400" height="1610" loading="lazy" decoding="async" srcset="/assets/opt/hotel-fazenda-800.webp 800w, /assets/opt/hotel-fazenda-1400.webp 1400w" sizes="(min-width: 721px) 23vw, 50vw"></picture></a>
+      <a href="/assets/opt/suite-1400.webp" data-lightbox="hospedagem-bodas"><picture><source type="image/avif" srcset="/assets/opt/suite-800.avif 800w, /assets/opt/suite-1400.avif 1400w" sizes="(min-width: 721px) 23vw, 50vw"><img src="/assets/opt/suite-1400.webp" alt="Suíte com cama ampla, poltrona junto à janela e luz de fim de tarde" width="2400" height="1610" loading="lazy" decoding="async" srcset="/assets/opt/suite-800.webp 800w, /assets/opt/suite-1400.webp 1400w" sizes="(min-width: 721px) 23vw, 50vw"></picture></a>
+      <a href="/assets/opt/estrada-interior-1400.webp" data-lightbox="hospedagem-bodas"><picture><source type="image/avif" srcset="/assets/opt/estrada-interior-800.avif 800w, /assets/opt/estrada-interior-1400.avif 1400w" sizes="(min-width: 721px) 23vw, 50vw"><img src="/assets/opt/estrada-interior-1400.webp" alt="Estrada asfaltada ladeada por palmeiras imperiais, entre colinas" width="2400" height="1610" loading="lazy" decoding="async" srcset="/assets/opt/estrada-interior-800.webp 800w, /assets/opt/estrada-interior-1400.webp 1400w" sizes="(min-width: 721px) 23vw, 50vw"></picture></a>
     </div>
     <p class="evento__mais">Fotografias de demonstração geradas por inteligência artificial, a serem substituídas por imagens reais da hospedagem na região.</p>
   </div>
@@ -337,11 +349,11 @@
     </div>
     <div class="editorial__abre">
     <div class="editorial__retrato reveal-shot">
-      <picture><source type="image/avif" srcset="/assets/opt/cerimonia-vertical-800.avif 800w, /assets/opt/cerimonia-vertical-1400.avif 1400w" sizes="(min-width: 900px) 40vw, 100vw"><img src="/assets/opt/cerimonia-vertical-1400.webp" alt="Cadeiras e arco de flores brancas montados no gramado para a cerimônia, ao fim da tarde" width="1400" height="1875" loading="lazy" decoding="async" srcset="/assets/opt/cerimonia-vertical-800.webp 800w, /assets/opt/cerimonia-vertical-1400.webp 1400w" sizes="(min-width: 900px) 40vw, 100vw"></picture>
+      <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-04-festa-800.avif 800w, /assets/opt/casa-lucca-04-festa-1400.avif 1400w" sizes="(min-width: 900px) 40vw, 100vw"><img src="/assets/opt/casa-lucca-04-festa-1400.webp" alt="Mesa longa iluminada por velas, com convidados dos dois lados" width="1400" height="1875" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-04-festa-800.webp 800w, /assets/opt/casa-lucca-04-festa-1400.webp 1400w" sizes="(min-width: 900px) 40vw, 100vw"></picture>
     </div>
     <figure class="editorial__depo rise">
-      <blockquote>&ldquo;Metade da lista vinha de fora e eu tinha medo de virar um casamento de gente cansada de estrada. Acabou que começou na sexta, com um jantar para quem já tinha chegado, e terminou no almoço de domingo. No sábado eu não pensei em horário nenhum.&rdquo;</blockquote>
-      <figcaption>Laura, a noiva</figcaption>
+      <blockquote>&ldquo;Eram cinquenta anos de casamento e três gerações na mesma sala. Meu medo era o som alto e a minha mãe pedindo para ir embora às nove. A equipe deixou o jantar como centro da noite e a música baixa até a hora do bolo. Ela ficou até o fim, contando história para os bisnetos.&rdquo;</blockquote>
+      <figcaption>Regina, filha dos homenageados</figcaption>
     </figure>
     </div>
     <p class="evento__mais">Depoimento de demonstração, nomes fictícios, a ser substituído por depoimento real com autorização.</p>
@@ -351,15 +363,15 @@
 <!-- ═══════════════════════════════════════════════════
      CONTATO — o formulário fica NESTA página. É o destino dos três
      CTAs, então mandar o visitante para outra rota perderia o caminho.
-     Convenção de id por rota (nome-casamento, email-casamento…), que é
-     a que escala para debutante e bodas.
+     Convenção de id por rota (nome-bodas, email-bodas…), a mesma da LP
+     de casamento.
      ═══════════════════════════════════════════════════ -->
 <section class="contato laje" id="contato">
   <div class="container">
     <div class="contato-grid">
       <div class="contato-text">
-        <h2 class="h-section linhas">Vamos falar da sua data</h2>
-        <p class="lead rise" style="--i:2">Conte a data pretendida e o número aproximado de convidados. A equipe responde com as casas disponíveis e uma proposta com tudo incluído.</p>
+        <h2 class="h-section linhas">Vamos falar da festa deles</h2>
+        <p class="lead rise" style="--i:2">Conte a data pretendida, o número aproximado de convidados e se a festa é surpresa. A equipe responde com as casas disponíveis e uma proposta com tudo incluído.</p>
         <div class="contato-info rise" style="--i:3">
           <a href="https://wa.me/5519996777288" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20l1.3-3.8A8 8 0 1 1 8.2 19L4 20z" stroke="currentColor" stroke-width="1.25"/></svg>
@@ -376,33 +388,39 @@
         </div>
       </div>
       <div class="rise" style="--i:2">
-        <form class="form" data-destino="contato@diterra.com.br" data-assunto="Contato pelo site Di Terr&aacute; &middot; Casamento">
+        <form class="form" data-destino="contato@diterra.com.br" data-assunto="Contato pelo site Di Terr&aacute; &middot; Bodas e anivers&aacute;rios">
           <div class="form-row">
             <div class="form-field">
-              <label class="form-label" for="nome-casamento">Nome *</label>
-              <input class="form-input" type="text" id="nome-casamento" name="nome" autocomplete="name" placeholder="Seu nome completo" required>
+              <label class="form-label" for="nome-bodas">Nome *</label>
+              <input class="form-input" type="text" id="nome-bodas" name="nome" autocomplete="name" placeholder="Seu nome completo" required>
             </div>
             <div class="form-field">
-              <label class="form-label" for="email-casamento">E-mail *</label>
-              <input class="form-input" type="email" id="email-casamento" name="email" autocomplete="email" placeholder="email@exemplo.com" required>
+              <label class="form-label" for="email-bodas">E-mail *</label>
+              <input class="form-input" type="email" id="email-bodas" name="email" autocomplete="email" placeholder="email@exemplo.com" required>
             </div>
           </div>
           <div class="form-row">
             <div class="form-field">
-              <label class="form-label" for="evento-casamento">Tipo de evento</label>
-              <select class="form-select" id="evento-casamento" name="evento">
-                <option selected>Casamento</option>
-                <option>Debutante</option>
+              <label class="form-label" for="evento-bodas">Tipo de evento</label>
+              <!-- esta rota cobre DUAS ocasiões, então o pré-selecionado precisa
+                   descrever a página inteira. Com "Bodas" selecionado, quem chegou
+                   pela palavra aniversário e não mexeu no campo enviava a metade
+                   errada. Os dois rótulos exatos seguem logo abaixo, para quem
+                   quiser ser preciso. -->
+              <select class="form-select" id="evento-bodas" name="evento">
+                <option selected>Bodas ou anivers&aacute;rio</option>
                 <option>Bodas</option>
                 <option>Anivers&aacute;rio</option>
+                <option>Casamento</option>
+                <option>Debutante</option>
                 <option>Formatura</option>
                 <option>Corporativo</option>
                 <option>Outro</option>
               </select>
             </div>
             <div class="form-field">
-              <label class="form-label" for="casa-casamento">Casa</label>
-              <select class="form-select" id="casa-casamento" name="casa">
+              <label class="form-label" for="casa-bodas">Casa</label>
+              <select class="form-select" id="casa-bodas" name="casa">
                 <option selected value="Ainda não escolhi">Ainda não escolhi</option>
                 <option value="A Querência">A Querência</option>
                 <option value="Palacete Monte Alegre">Palacete Monte Alegre</option>
@@ -413,17 +431,17 @@
           </div>
           <div class="form-row">
             <div class="form-field">
-              <label class="form-label" for="data-casamento">Data prevista</label>
-              <input class="form-input" type="text" id="data-casamento" name="data" placeholder="Ex.: mar&ccedil;o de 2027">
+              <label class="form-label" for="data-bodas">Data prevista</label>
+              <input class="form-input" type="text" id="data-bodas" name="data" placeholder="Ex.: mar&ccedil;o de 2027">
             </div>
             <div class="form-field">
-              <label class="form-label" for="convidados-casamento">Convidados</label>
-              <input class="form-input" type="number" id="convidados-casamento" name="convidados" min="10" max="1500" inputmode="numeric" placeholder="120">
+              <label class="form-label" for="convidados-bodas">Convidados</label>
+              <input class="form-input" type="number" id="convidados-bodas" name="convidados" min="10" max="1500" inputmode="numeric" placeholder="120">
             </div>
           </div>
           <div class="form-field">
-            <label class="form-label" for="mensagem-casamento">Mensagem</label>
-            <textarea class="form-textarea" id="mensagem-casamento" name="mensagem" placeholder="Conte-nos sobre o evento que imagina..."></textarea>
+            <label class="form-label" for="mensagem-bodas">Mensagem</label>
+            <textarea class="form-textarea" id="mensagem-bodas" name="mensagem" placeholder="Conte-nos sobre o evento que imagina..."></textarea>
           </div>
           <div class="form-submit">
             <button type="submit" class="btn btn--primary">

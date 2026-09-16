@@ -29,11 +29,13 @@
     { slug: 'casa-lucca',            nome: 'Casa Lucca',            resumo: 'Escala menor e ambiente reservado para celebrações intimistas.' },
     { slug: 'espaco-terra',          nome: 'Espaço Terrá',          resumo: 'Estrutura versátil com horizonte aberto do interior paulista.' }
   ];
-  /* A coleção nasce com uma página só. Debutante e bodas entram aqui
-     quando as páginas existirem: listar antes deixa link caindo no 404
+  /* As três rotas sociais da coleção. Formatura e corporativo não entram
+     aqui: não têm página própria, e listar antes deixa link caindo no 404
      padrão da Vercel, que este site não personaliza. */
   var EVENTOS = [
-    { slug: 'casamento', nome: 'Casamento', resumo: 'Quatro casas, uma equipe e a festa inteira no mesmo contrato.', foto: 'ocasiao-casamento' }
+    { slug: 'casamento',           nome: 'Casamento',            resumo: 'Quatro casas, uma equipe e a festa inteira no mesmo contrato.', foto: 'ocasiao-casamento' },
+    { slug: 'debutante',           nome: 'Debutante',            resumo: 'A festa de quinze com a pista no centro da noite.',            foto: 'ocasiao-debutante' },
+    { slug: 'bodas-aniversarios',  nome: 'Bodas e aniversários', resumo: 'A família inteira reunida, com o jantar como centro.',         foto: 'ocasiao-aniversario' }
   ];
   var SOLUCOES = [
     { slug: 'gastronomia',            nome: 'Gastronomia',            resumo: 'Menu autoral, do welcome ao doce da madrugada.' },
