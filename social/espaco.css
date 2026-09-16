@@ -220,8 +220,22 @@
 
 /* o álbum ocupa a largura inteira da matéria, então cabe uma coluna a
    mais do que quando vivia espremido na metade de um .split */
-.editorial .evento__galeria { grid-template-columns: repeat(4, 1fr); }
-@media (max-width: 1000px) { .editorial .evento__galeria { grid-template-columns: repeat(3, 1fr); } }
+#galeria .evento__galeria { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1000px) { #galeria .evento__galeria { grid-template-columns: repeat(3, 1fr); } }
+/* O acervo das casas é vertical: seis das sete fotos são 3:4. Na moldura 4:3
+   herdada elas perdiam 44% da altura, cortadas em cima e embaixo. Aqui a célula
+   acompanha a foto. A primeira, a única horizontal (a -amplitude, que é
+   fotografia real da cliente), ocupa duas colunas em 3:2 e fica com a mesma
+   altura das vizinhas, então as sete fotos fecham oito células sem sobra. */
+#galeria .evento__galeria a { aspect-ratio: 3 / 4; }
+#galeria .evento__galeria a:nth-child(1) { grid-column: span 2; grid-row: auto; aspect-ratio: 3 / 2; }
+@media (max-width: 720px) {
+  /* Duas colunas no celular: com três, cada foto fica com cerca de 105 px de
+     largura e não dá para ver nada. A horizontal ocupa a linha inteira e as
+     seis verticais fecham três linhas de duas. */
+  #galeria .evento__galeria { grid-template-columns: repeat(2, 1fr); }
+  #galeria .evento__galeria a:nth-child(1) { grid-column: span 2; aspect-ratio: 3 / 2; }
+}
 
 /* a ficha técnica — o crédito de cada fornecedor, linha a linha.
    Quem é da casa leva a marca; quem é de fora leva o nome próprio. É

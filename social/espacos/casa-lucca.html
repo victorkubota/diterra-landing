@@ -140,7 +140,7 @@
     </ul>
     <div class="casa-hero__acoes">
       <a class="btn btn--primary on-dark" href="#contato" data-visita="casa-lucca">Agendar visita <svg width="18" height="8" viewBox="0 0 18 8" fill="none" aria-hidden="true"><path d="M0 4h16M13 1l3.4 3L13 7" stroke="currentColor" stroke-width="1.1"/></svg></a>
-      <a class="btn btn--ghost on-dark" href="#evento-real">Ver um casamento aqui</a>
+      <a class="btn btn--ghost on-dark" href="#galeria">Ver a galeria</a>
     </div>
   </div>
 </header>
@@ -290,131 +290,55 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════
-     O CASAMENTO REAL — em formato de matéria
-     Referência declarada pelo cliente: o casamento real do Constance
-     Zahn. O que sustenta aquele formato é quem conta (o casal, em
-     primeira pessoa), como anda (por capítulos nomeados) e como
-     fecha (ficha técnica com o nome de cada fornecedor). Dados e
-     nomes seguem de demonstração, como o resto do protótipo.
+     GALERIA — as fotos desta casa, não as de um casamento.
+     Substitui a matéria "evento real" do PR #87, que trazia casal
+     fictício, cronograma hora a hora (descartado pela cliente) e
+     ficha de fornecedores inventados.
+     ATENÇÃO: cinco destas sete ainda são geradas por IA
+     (assets/demo/LEIA-ME.md). Só -amplitude e -vertical são
+     fotografia da cliente. Trocar quando o acervo chegar.
      ═══════════════════════════════════════════════════ -->
-<section class="section section--paper editorial" id="evento-real">
+<section class="section section--paper" id="galeria">
   <div class="wrap">
     <div class="section__head">
-      <p class="script">Um casamento aqui</p>
-      <h2 class="h-section linhas">Ana e Gabriel, fevereiro de 2025</h2>
-      <p class="lead rise">Noventa e seis convidados numa mesa só, cerimônia no gramado e jantar servido até tarde sob o pergolado.</p>
+      <h2 class="h-section linhas">A casa por dentro</h2>
     </div>
+    <div class="evento__galeria">
+        <a href="/assets/opt/casa-lucca-amplitude-1400.webp" data-lightbox="galeria-casa-lucca"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-amplitude-800.avif 800w, /assets/opt/casa-lucca-amplitude-1400.avif 1400w" sizes="(min-width: 900px) 17vw, 50vw"><img src="/assets/opt/casa-lucca-amplitude-1400.webp" alt="Mesa longa posta sob o pergolado da Casa Lucca, entre oliveiras" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-amplitude-800.webp 800w, /assets/opt/casa-lucca-amplitude-1400.webp 1400w" sizes="(min-width: 900px) 17vw, 50vw"></picture></a>
+        <a href="/assets/opt/casa-lucca-01-chegada-1400.webp" data-lightbox="galeria-casa-lucca"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-01-chegada-800.avif 800w, /assets/opt/casa-lucca-01-chegada-1400.avif 1400w" sizes="(min-width: 900px) 17vw, 50vw"><img src="/assets/opt/casa-lucca-01-chegada-1400.webp" alt="Convidados no caminho coberto de entrada da Casa Lucca, entre as flores" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-01-chegada-800.webp 800w, /assets/opt/casa-lucca-01-chegada-1400.webp 1400w" sizes="(min-width: 900px) 17vw, 50vw"></picture></a>
+        <a href="/assets/opt/casa-lucca-02-cerimonia-1400.webp" data-lightbox="galeria-casa-lucca"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-02-cerimonia-800.avif 800w, /assets/opt/casa-lucca-02-cerimonia-1400.avif 1400w" sizes="(min-width: 900px) 17vw, 50vw"><img src="/assets/opt/casa-lucca-02-cerimonia-1400.webp" alt="Cerimônia no gramado da Casa Lucca, sob uma árvore antiga" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-02-cerimonia-800.webp 800w, /assets/opt/casa-lucca-02-cerimonia-1400.webp 1400w" sizes="(min-width: 900px) 17vw, 50vw"></picture></a>
+        <a href="/assets/opt/casa-lucca-03-coquetel-1400.webp" data-lightbox="galeria-casa-lucca"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-03-coquetel-800.avif 800w, /assets/opt/casa-lucca-03-coquetel-1400.avif 1400w" sizes="(min-width: 900px) 17vw, 50vw"><img src="/assets/opt/casa-lucca-03-coquetel-1400.webp" alt="Bar montado na varanda coberta, com convidados em volta" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-03-coquetel-800.webp 800w, /assets/opt/casa-lucca-03-coquetel-1400.webp 1400w" sizes="(min-width: 900px) 17vw, 50vw"></picture></a>
+        <a href="/assets/opt/casa-lucca-04-festa-1400.webp" data-lightbox="galeria-casa-lucca"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-04-festa-800.avif 800w, /assets/opt/casa-lucca-04-festa-1400.avif 1400w" sizes="(min-width: 900px) 17vw, 50vw"><img src="/assets/opt/casa-lucca-04-festa-1400.webp" alt="Mesa longa iluminada por velas, com convidados dos dois lados" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-04-festa-800.webp 800w, /assets/opt/casa-lucca-04-festa-1400.webp 1400w" sizes="(min-width: 900px) 17vw, 50vw"></picture></a>
+        <a href="/assets/opt/casa-lucca-05-saida-1400.webp" data-lightbox="galeria-casa-lucca"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-05-saida-800.avif 800w, /assets/opt/casa-lucca-05-saida-1400.avif 1400w" sizes="(min-width: 900px) 17vw, 50vw"><img src="/assets/opt/casa-lucca-05-saida-1400.webp" alt="Os noivos saindo pelo caminho coberto, iluminado por lanternas" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-05-saida-800.webp 800w, /assets/opt/casa-lucca-05-saida-1400.webp 1400w" sizes="(min-width: 900px) 17vw, 50vw"></picture></a>
+        <a href="/assets/opt/casa-lucca-vertical-1400.webp" data-lightbox="galeria-casa-lucca"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-vertical-800.avif 800w, /assets/opt/casa-lucca-vertical-1400.avif 1400w" sizes="(min-width: 900px) 17vw, 50vw"><img src="/assets/opt/casa-lucca-vertical-1400.webp" alt="Mesa longa posta sob o pergolado da Casa Lucca, entre oliveiras" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-vertical-800.webp 800w, /assets/opt/casa-lucca-vertical-1400.webp 1400w" sizes="(min-width: 900px) 17vw, 50vw"></picture></a>
+    </div>
+    <p class="evento__mais">Fotografia @cadubritofotografia</p>
+  </div>
+</section>
 
+
+<!-- ═══════════════════════════════════════════════════
+     DEPOIMENTO — preservado de dentro da matéria removida.
+     É a única prova social da página, então fica, mas com tarja
+     VISÍVEL na tela: os nomes são de demonstração. O retrato é
+     fotografia real da casa. Sai quando chegar depoimento real
+     com autorização de imagem.
+     ═══════════════════════════════════════════════════ -->
+<section class="section" id="depoimento">
+  <div class="wrap">
+    <div class="section__head">
+      <h2 class="h-section linhas">Quem já celebrou aqui</h2>
+    </div>
     <div class="editorial__abre">
-      <div class="editorial__retrato reveal-shot">
-        <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-vertical-800.avif 800w, /assets/opt/casa-lucca-vertical-1400.avif 1400w" sizes="(min-width: 900px) 40vw, 100vw"><img src="/assets/opt/casa-lucca-vertical-1400.webp" alt="Mesa longa posta sob o pergolado da Casa Lucca, entre oliveiras" width="1400" height="1875" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-vertical-800.webp 800w, /assets/opt/casa-lucca-vertical-1400.webp 1400w" sizes="(min-width: 900px) 40vw, 100vw"></picture>
-      </div>
-      <figure class="editorial__depo rise">
-        <blockquote>&ldquo;A gente já tinha ido a casamento de quatrocentas pessoas e voltado sem ter falado com metade. Aqui era o contrário: uma mesa, noventa e seis lugares, e no fim da noite eu tinha abraçado todo mundo.&rdquo;</blockquote>
-        <figcaption>Ana, a noiva</figcaption>
-      </figure>
+    <div class="editorial__retrato reveal-shot">
+      <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-vertical-800.avif 800w, /assets/opt/casa-lucca-vertical-1400.avif 1400w" sizes="(min-width: 900px) 40vw, 100vw"><img src="/assets/opt/casa-lucca-vertical-1400.webp" alt="Mesa longa posta sob o pergolado da Casa Lucca, entre oliveiras" width="1400" height="1875" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-vertical-800.webp 800w, /assets/opt/casa-lucca-vertical-1400.webp 1400w" sizes="(min-width: 900px) 40vw, 100vw"></picture>
     </div>
-
-      <div class="editorial__cap">
-        <div class="prose rise">
-          <h3 class="h-card">A chegada pelo caminho florido</h3>
-        <p>Os convidados entraram pelo caminho coberto que leva ao jardim, com as flores abertas de fevereiro dos dois lados. O receptivo serviu limonada e espumante na sombra, e ninguém precisou ser encaminhado: noventa e seis pessoas se organizam sozinhas.</p>
-        <p>A casa recebe um evento por fim de semana, então a família chegou desde a manhã, usou a suíte e almoçou ali mesmo.</p>
-        </div>
-        <figure class="editorial__foto reveal-shot">
-          <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-01-chegada-800.avif 800w, /assets/opt/casa-lucca-01-chegada-1400.avif 1400w" sizes="(min-width: 900px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-01-chegada-1400.webp" alt="Convidados no caminho coberto de entrada da Casa Lucca, entre as flores" width="1400" height="1875" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-01-chegada-800.webp 800w, /assets/opt/casa-lucca-01-chegada-1400.webp 1400w" sizes="(min-width: 900px) 50vw, 100vw"></picture>
-          <figcaption>17h · o caminho de entrada, em fevereiro</figcaption>
-        </figure>
-      </div>
-      <div class="editorial__cap editorial__cap--espelho">
-        <div class="prose rise">
-          <h3 class="h-card">A cerimônia sob a árvore</h3>
-        <p>O altar foi montado no gramado, sob a árvore antiga que fica no fundo do terreno. Sem palco, sem tablado e sem som: a distância entre a primeira e a última cadeira era de sete metros.</p>
-        <p>Foi a cerimônia mais curta das quatro casas neste ano, vinte e dois minutos, e a única em que o celebrante não usou microfone.</p>
-        </div>
-        <figure class="editorial__foto reveal-shot">
-          <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-02-cerimonia-800.avif 800w, /assets/opt/casa-lucca-02-cerimonia-1400.avif 1400w" sizes="(min-width: 900px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-02-cerimonia-1400.webp" alt="Cerimônia no gramado, sob uma árvore antiga, com poucos convidados sentados" width="1400" height="1875" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-02-cerimonia-800.webp 800w, /assets/opt/casa-lucca-02-cerimonia-1400.webp 1400w" sizes="(min-width: 900px) 50vw, 100vw"></picture>
-          <figcaption>17h40 · o altar sob a árvore, no fundo do jardim</figcaption>
-        </figure>
-      </div>
-      <div class="editorial__cap">
-        <div class="prose rise">
-          <h3 class="h-card">O coquetel na varanda</h3>
-        <p>O bar abriu na varanda coberta, com os drinques que o casal provou dois meses antes. Enquanto isso, a mesa longa recebeu as últimas velas.</p>
-        <p>Meia hora de intervalo bastou: a mesa fica a vinte metros do altar e já estava posta desde as três da tarde.</p>
-        </div>
-        <figure class="editorial__foto reveal-shot">
-          <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-03-coquetel-800.avif 800w, /assets/opt/casa-lucca-03-coquetel-1400.avif 1400w" sizes="(min-width: 900px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-03-coquetel-1400.webp" alt="Bar montado na varanda coberta, com convidados em volta" width="1400" height="1875" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-03-coquetel-800.webp 800w, /assets/opt/casa-lucca-03-coquetel-1400.webp 1400w" sizes="(min-width: 900px) 50vw, 100vw"></picture>
-          <figcaption>18h30 · o bar na varanda, a vinte metros do altar</figcaption>
-        </figure>
-      </div>
-      <div class="editorial__cap editorial__cap--espelho">
-        <div class="prose rise">
-          <h3 class="h-card">O jantar na mesa longa</h3>
-        <p>Noventa e seis lugares numa única mesa de vinte e oito metros, sob o pergolado, com velas de ponta a ponta. O serviço foi à mesa, em três tempos, com dez pessoas de salão.</p>
-        <p>Não houve pista formal: a música tocou nas duas pontas da mesa e a dança começou no gramado ao lado, depois da sobremesa. O último convidado saiu às três.</p>
-        </div>
-        <figure class="editorial__foto reveal-shot">
-          <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-04-festa-800.avif 800w, /assets/opt/casa-lucca-04-festa-1400.avif 1400w" sizes="(min-width: 900px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-04-festa-1400.webp" alt="Mesa longa iluminada por velas, com convidados dos dois lados" width="1400" height="1875" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-04-festa-800.webp 800w, /assets/opt/casa-lucca-04-festa-1400.webp 1400w" sizes="(min-width: 900px) 50vw, 100vw"></picture>
-          <figcaption>20h · a mesa de vinte e oito metros, sob o pergolado</figcaption>
-        </figure>
-      </div>
-
-    <div class="editorial__cap">
-      <div class="prose rise">
-        <h3 class="h-card">A saída</h3>
-        <p>Ana e Gabriel saíram entre os convidados, com a festa ainda cheia. A equipe da casa fez a última coisa que faz em toda celebração: abriu caminho, acendeu a saída e recolheu o que sobrou depois que o último carro deixou o estacionamento.</p>
-        <ul class="evento__ficha">
-          <li><span class="k">Convidados</span><span class="v">96</span></li>
-          <li><span class="k">Fotografia</span><span class="v">Ateliê Ramos</span></li>
-        </ul>
-      </div>
-      <figure class="editorial__foto reveal-shot">
-        <picture><source type="image/avif" srcset="/assets/opt/casa-lucca-05-saida-800.avif 800w, /assets/opt/casa-lucca-05-saida-1400.avif 1400w" sizes="(min-width: 900px) 50vw, 100vw"><img src="/assets/opt/casa-lucca-05-saida-1400.webp" alt="Os noivos saindo pelo caminho coberto, iluminado por lanternas" width="1400" height="1875" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-05-saida-800.webp 800w, /assets/opt/casa-lucca-05-saida-1400.webp 1400w" sizes="(min-width: 900px) 50vw, 100vw"></picture>
-        <figcaption>02h · a saída pelo caminho iluminado</figcaption>
-      </figure>
+    <figure class="editorial__depo rise">
+      <blockquote>&ldquo;A gente já tinha ido a casamento de quatrocentas pessoas e voltado sem ter falado com metade. Aqui era o contrário: uma mesa, noventa e seis lugares, e no fim da noite eu tinha abraçado todo mundo.&rdquo;</blockquote>
+      <figcaption>Ana, a noiva</figcaption>
+    </figure>
     </div>
-
-    <div class="cronograma rise">
-      <h3>O dia, hora a hora</h3>
-      <ol class="cronograma__lista">
-        <li><span class="k">17h</span><span class="v">Chegada</span></li>
-        <li><span class="k">17h40</span><span class="v">Cerimônia</span></li>
-        <li><span class="k">18h30</span><span class="v">Coquetel</span></li>
-        <li><span class="k">20h</span><span class="v">Jantar</span></li>
-        <li><span class="k">02h</span><span class="v">Saída</span></li>
-      </ol>
-    </div>
-
-    <div class="editorial__creditos rise">
-      <h3>Ficha técnica</h3>
-      <ul class="creditos">
-        <li><span class="k">Espaço, buffet, bar, mobiliário e iluminação</span><span class="v"><em>Di Terrá · Casa Lucca</em></span></li>
-        <li><span class="k">Cerimonial e produção</span><span class="v"><em>Di Terrá</em></span></li>
-        <li><span class="k">Decoração e flores</span><span class="v"><em>Di Terrá</em></span></li>
-        <li><span class="k">Som e luz cênica</span><span class="v"><em>Di Terrá</em></span></li>
-        <li><span class="k">Fotografia</span><span class="v">Ateliê Ramos</span></li>
-        <li><span class="k">Vestido da noiva</span><span class="v">Lia Bertoni Sob Medida</span></li>
-        <li><span class="k">Beleza</span><span class="v">Camila Ferrari Studio</span></li>
-        <li><span class="k">Música</span><span class="v">Trio Serra Acima · DJ Léo Prado</span></li>
-        <li><span class="k">Doces e bem-casados</span><span class="v">Casa de Doces Lucca</span></li>
-        <li><span class="k">Convites e papelaria</span><span class="v">Estúdio Grafite</span></li>
-      </ul>
-    </div>
-
-    <div class="section__head" style="margin-top:var(--space-7)">
-      <h3 class="h-card">O álbum do dia</h3>
-    </div>
-          <div class="evento__galeria">
-        <a href="/assets/opt/brinde-por-do-sol-1400.webp" data-lightbox="evento-casa-lucca"><picture><source type="image/avif" srcset="/assets/opt/brinde-por-do-sol-800.avif 800w, /assets/opt/brinde-por-do-sol-1400.avif 1400w" sizes="(min-width: 900px) 17vw, 50vw"><img src="/assets/opt/brinde-por-do-sol-1400.webp" alt="Brinde ao pôr do sol" loading="lazy" decoding="async" srcset="/assets/opt/brinde-por-do-sol-800.webp 800w, /assets/opt/brinde-por-do-sol-1400.webp 1400w" sizes="(min-width: 900px) 17vw, 50vw"></picture></a>
-        <a href="/assets/opt/cerimonia-vertical-1400.webp" data-lightbox="evento-casa-lucca"><picture><source type="image/avif" srcset="/assets/opt/cerimonia-vertical-800.avif 800w, /assets/opt/cerimonia-vertical-1400.avif 1400w" sizes="(min-width: 900px) 17vw, 50vw"><img src="/assets/opt/cerimonia-vertical-1400.webp" alt="Cerimônia" loading="lazy" decoding="async" srcset="/assets/opt/cerimonia-vertical-800.webp 800w, /assets/opt/cerimonia-vertical-1400.webp 1400w" sizes="(min-width: 900px) 17vw, 50vw"></picture></a>
-        <a href="/assets/opt/mesa-posta-1400.webp" data-lightbox="evento-casa-lucca"><picture><source type="image/avif" srcset="/assets/opt/mesa-posta-800.avif 800w, /assets/opt/mesa-posta-1400.avif 1400w" sizes="(min-width: 900px) 17vw, 50vw"><img src="/assets/opt/mesa-posta-1400.webp" alt="Mesa posta" loading="lazy" decoding="async" srcset="/assets/opt/mesa-posta-800.webp 800w, /assets/opt/mesa-posta-1400.webp 1400w" sizes="(min-width: 900px) 17vw, 50vw"></picture></a>
-        <a href="/assets/opt/pista-noite-1400.webp" data-lightbox="evento-casa-lucca"><picture><source type="image/avif" srcset="/assets/opt/pista-noite-800.avif 800w, /assets/opt/pista-noite-1400.avif 1400w" sizes="(min-width: 900px) 17vw, 50vw"><img src="/assets/opt/pista-noite-1400.webp" alt="Pista de dança à noite" loading="lazy" decoding="async" srcset="/assets/opt/pista-noite-800.webp 800w, /assets/opt/pista-noite-1400.webp 1400w" sizes="(min-width: 900px) 17vw, 50vw"></picture></a>
-        <a href="/assets/opt/cozinha-servico-1400.webp" data-lightbox="evento-casa-lucca"><picture><source type="image/avif" srcset="/assets/opt/cozinha-servico-800.avif 800w, /assets/opt/cozinha-servico-1400.avif 1400w" sizes="(min-width: 900px) 17vw, 50vw"><img src="/assets/opt/cozinha-servico-1400.webp" alt="Serviço da cozinha" loading="lazy" decoding="async" srcset="/assets/opt/cozinha-servico-800.webp 800w, /assets/opt/cozinha-servico-1400.webp 1400w" sizes="(min-width: 900px) 17vw, 50vw"></picture></a>
-        <a href="/assets/opt/propriedade-anoitecer-1400.webp" data-lightbox="evento-casa-lucca"><picture><source type="image/avif" srcset="/assets/opt/propriedade-anoitecer-800.avif 800w, /assets/opt/propriedade-anoitecer-1400.avif 1400w" sizes="(min-width: 900px) 17vw, 50vw"><img src="/assets/opt/propriedade-anoitecer-1400.webp" alt="A propriedade ao anoitecer" loading="lazy" decoding="async" srcset="/assets/opt/propriedade-anoitecer-800.webp 800w, /assets/opt/propriedade-anoitecer-1400.webp 1400w" sizes="(min-width: 900px) 17vw, 50vw"></picture></a>
-        <a href="/assets/opt/foto-casal-noite-1400.webp" data-lightbox="evento-casa-lucca"><picture><source type="image/avif" srcset="/assets/opt/foto-casal-noite-800.avif 800w, /assets/opt/foto-casal-noite-1400.avif 1400w" sizes="(min-width: 900px) 17vw, 50vw"><img src="/assets/opt/foto-casal-noite-1400.webp" alt="O casal sob as luzes" loading="lazy" decoding="async" srcset="/assets/opt/foto-casal-noite-800.webp 800w, /assets/opt/foto-casal-noite-1400.webp 1400w" sizes="(min-width: 900px) 17vw, 50vw"></picture></a>
-        </div>
-          <p class="evento__mais">7 fotos</p>
+    <p class="evento__mais">Depoimento de demonstração, nomes fictícios, a ser substituído por depoimento real com autorização.</p>
   </div>
 </section>
 

@@ -196,14 +196,10 @@ a.evento-card { display: block; text-decoration: none; color: inherit; }
 .pil { view-transition-name: pilula; }
 .page-hero .h-display { view-transition-name: titulo; }
 
-/* ── páginas de casa: o dia hora a hora ──────────────────────────── */
-.gallery--percurso figure { position: relative; }
-.gallery--percurso figcaption {
-  position: absolute; left: 14px; bottom: 12px; display: flex; gap: 10px; align-items: baseline;
-  font-size: var(--text-xs); letter-spacing: .14em; text-transform: uppercase; color: var(--ui-text-invert);
-  text-shadow: 0 1px 12px rgba(0,0,0,.6);
-}
-.gallery--percurso figcaption b { font-weight: 500; font-variant-numeric: tabular-nums; }
+/* ── trilho de fotos no celular ───────────────────────────────────
+   O figcaption sobre a foto que existia aqui saiu: a cliente pediu crédito
+   e legenda na descrição, nunca por cima da imagem. A mecânica de trilho
+   abaixo fica guardada para a galeria robusta das páginas de casa. */
 @media (max-width: 859px) {
   /* no celular vira trilho com snap: um momento por tela */
   .gallery--percurso { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: var(--space-3); padding-bottom: 6px; scrollbar-width: none; }
