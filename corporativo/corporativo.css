@@ -216,68 +216,100 @@
    em docs/proposta-visual-benchmarks.md: "foto presa à esquerda e texto
    rolando à direita").
 
-   O que fica preso é o CONJUNTO título mais foto, e não só a foto: o
-   título é a pergunta que os três textos respondem, então ele precisa
-   estar na tela enquanto as respostas passam. Some junto com a imagem
-   quando a seção acaba.
+   TRÊS CAMADAS PRESAS, cada uma com um trabalho:
 
-   PROPORÇÃO DO CONJUNTO LATERAL, tirada da referência: o título é
-   display grande e o texto é pequeno, com a diferença de escala fazendo
-   o trabalho de hierarquia. Dois parágrafos curtos por pilar, não um
-   bloco único.
+   1. O título ocupa a linha inteira e prende no topo, com chão opaco e
+      z-index acima do texto. É ele que faz o texto lateral SUMIR: o
+      parágrafo sobe, encosta na base do título e passa por trás dele.
+      Sem o chão opaco o texto atravessaria por cima e as duas coisas se
+      sobreporiam.
+   2. A foto prende logo abaixo do título, deslocada pela altura dele.
+   3. Os textos rolam livres entre as duas.
 
-   PROPORÇÃO CONTRA A FOTO, que é o contrato desta seção: cada pilar
-   ocupa uma altura de foto, com o título em até 20% dela e o texto em
-   até 30%. O resto é respiro, e é ele que centra um pilar por vez na
-   frente da imagem.
+   --titulo-h existe para a foto saber onde parar, e mora no #manifesto
+   porque o título é irmão do .pilares, não filho: declarada no .pilares
+   ela não chegava ao título e o min-height caía para zero. O valor segue
+   a reta da tipografia do título (32px + 8,4vw, medida de 900 a 1920) com
+   alguns pixels de folga, então o min-height manda na caixa e a base da
+   tarja cai exatamente onde a foto prende.
 
-   A conta que faz o gesto existir: três pilares dão 300% da altura do
-   bloco preso, e o bloco ocupa 100%, então sobram 200% de curso. Com
-   meia altura por pilar, que foi a primeira tentativa, o curso caía
-   pela metade e a imagem soltava antes do segundo texto.
+   PROPORÇÃO DO CONJUNTO LATERAL, tirada da referência: a escala é a
+   hierarquia, com título em display grande sobre texto pequeno, e dois
+   parágrafos curtos por pilar em vez de um bloco único.
+
+   RITMO: cada pilar mede uma vez e meia a altura da foto. Foi 0,5 na
+   primeira tentativa (a imagem soltava antes do segundo texto) e 1 na
+   segunda (o texto passava rápido demais). A 1,5 o curso preso vai a
+   três vezes e meia a foto, e cada argumento tem tempo de ser lido
+   antes de o próximo chegar.
    ─────────────────────────────────────────────────────────────────── */
+#manifesto {
+  --titulo-h: clamp(108px, calc(32px + 8.4vw), 156px);
+  /* a foto ocupa tudo o que sobra entre a base da tarja e a dobra, com
+     piso de 460px: é o que o cliente chamou de grande, sem deixar a
+     imagem ser cortada pelo fim da tela */
+  --foto-h: clamp(460px, calc(100vh - 100px - var(--titulo-h) - 16px), 780px);
+}
 .pilares {
-  --foto-h: clamp(420px, 62vh, 660px);
   display: grid; grid-template-columns: 1fr;
   gap: clamp(30px, 4vw, 64px);
 }
 @media (min-width: 900px) {
   .pilares { grid-template-columns: 1.15fr .85fr; align-items: start; }
-  /* o mesmo top: 100px que a home e as páginas de casa já usam, para o
-     bloco preso parar abaixo da pílula de navegação e não atrás dela */
-  .pilares__fixo { position: sticky; top: 100px; }
+  /* a foto para logo abaixo do título preso */
+  .pilares__fixo { position: sticky; top: calc(100px + var(--titulo-h)); }
 }
 
-/* o título acompanha a foto: centrado sobre ela e presos juntos */
+/* o título é a pergunta que os três textos respondem, então fica na tela
+   o tempo todo e é atrás dele que o texto lateral desaparece */
 .pilares__titulo {
   text-align: center;
-  margin: 0 0 clamp(18px, 2vw, 28px);
-  max-width: 18ch; margin-inline: auto;
+  margin: 0 0 clamp(20px, 2.4vw, 32px);
+}
+/* o chão opaco fica na .pilares__tarja, e nunca no h2: o .acende pinta o
+   texto com background-image + background-clip: text, e background no
+   próprio elemento sai recortado dentro das letras em vez de cobrir a
+   faixa (com o atalho `background` ele ainda apagava o gradiente e o
+   título sumia por inteiro no desktop). A tinta é a da seção, não a do
+   body, senão a tarja atravessa o branco como uma faixa bege. */
+@media (min-width: 900px) {
+  .pilares__tarja {
+    position: sticky; top: 100px; z-index: 2;
+    background-color: var(--ui-bg-alt);
+    margin-inline: calc(var(--gutter) * -1);
+    padding: clamp(14px, 1.6vw, 22px) var(--gutter) clamp(18px, 2vw, 28px);
+    min-height: var(--titulo-h);
+    display: flex; align-items: center; justify-content: center;
+  }
+  /* a tarja sangra até o topo da janela: os 100px que ela deixava livres
+     para a pílula de navegação eram a fresta por onde o texto lateral
+     reaparecia depois de ter sumido */
+  .pilares__tarja::before {
+    content: '';
+    position: absolute;
+    inset: -100px 0 auto 0;
+    height: 100px;
+    background-color: var(--ui-bg-alt);
+  }
+  .pilares__titulo { margin: 0; }
 }
 
 .pilares__foto {
   margin: 0;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  aspect-ratio: 3 / 2;
+  /* altura em vh no empilhamento, e não proporção fixa: em 3/2 a foto
+     ficava com 223px de altura em 375 de largura, a menor imagem da
+     página justo no aparelho onde a maior parte vai ler */
+  height: clamp(320px, 56vh, 520px);
   background: var(--sand-200);
 }
 @media (min-width: 900px) {
-  .pilares__foto { aspect-ratio: auto; height: var(--foto-h); }
+  .pilares__foto { height: var(--foto-h); }
 }
 .pilares__foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* O bloco preso é título mais foto, e portanto mais alto que um pilar,
-   que mede uma foto. Sem compensar, o primeiro texto passa pela tela
-   ANTES de a imagem prender, e o leitor nunca vê o par título e primeiro
-   argumento juntos. O recuo aqui empurra a coluna de texto para baixo
-   exatamente a altura do título, e daí em diante cada pilar encontra a
-   foto no mesmo ponto. Medido: o título ocupa cerca de 38% da altura da
-   foto, e a fração amarra na mesma --foto-h para escalar junto. */
 .pilares__textos { display: grid; gap: 0; }
-@media (min-width: 900px) {
-  .pilares__textos { padding-top: calc(var(--foto-h) * .38); }
-}
 
 .pilar {
   padding-block: clamp(24px, 3vw, 38px);
@@ -286,14 +318,34 @@
 .pilar:first-child { border-top: 0; padding-top: 0; }
 .pilar:last-child { border-bottom: 1px solid var(--ui-border); }
 @media (min-width: 900px) {
-  /* uma altura de foto por pilar: é o que dá curso de rolagem suficiente
-     para o bloco preso ficar parado enquanto os três textos passam */
+  /* uma vez e meia a foto por pilar: é o que dá o ritmo de leitura.
+     O padding-top é a moldura presa (tarja + os 100px acima dela): sem
+     ele o texto se centra na caixa inteira e passa a maior parte do
+     curso escondido atrás da tarja, em vez de no meio da área legível. */
   .pilar {
-    min-height: var(--foto-h);
+    min-height: calc(var(--foto-h) * 1.5);
     display: flex; flex-direction: column; justify-content: center;
     border-top: 0;
+    padding-top: calc(100px + var(--titulo-h));
   }
-  .pilar:last-child { border-bottom: 0; }
+  .pilar:first-child { padding-top: calc(100px + var(--titulo-h)); }
+  /* o último é mais curto: com 1,5 a foto sobrevivia meia tela ao último
+     argumento e a coluna de texto fechava a seção vazia. O ritmo entre os
+     três não muda, só o rabo depois que o terceiro sai da área legível. */
+  .pilar:last-child { border-bottom: 0; min-height: calc(var(--foto-h) * 1.1); }
+}
+
+/* sem os dois presos com movimento reduzido: o título volta a ser título,
+   a foto volta a ser foto e os três textos viram lista, como o .pilha
+   logo abaixo já faz */
+@media (min-width: 900px) and (prefers-reduced-motion: reduce) {
+  .pilares__tarja { position: static; min-height: 0; }
+  .pilares__tarja::before { content: none; }
+  .pilares__fixo { position: static; }
+  .pilar,
+  .pilar:first-child,
+  .pilar:last-child { min-height: 0; padding-top: clamp(24px, 3vw, 38px); }
+  .pilar:first-child { padding-top: 0; }
 }
 
 /* a escala é a hierarquia, como na referência: display grande no título,
