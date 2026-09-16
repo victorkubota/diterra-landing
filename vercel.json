@@ -3,6 +3,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
+    { "source": "/social/eventos", "destination": "/social#eventos", "permanent": false },
     { "source": "/fazendaquerencia", "destination": "/social#espacos", "permanent": true },
     { "source": "/palacetemontealegre", "destination": "/social#espacos", "permanent": true },
     { "source": "/casa-lucca", "destination": "/social#espacos", "permanent": true },
