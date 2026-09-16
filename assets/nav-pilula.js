@@ -29,6 +29,12 @@
     { slug: 'casa-lucca',            nome: 'Casa Lucca',            resumo: 'Escala menor e ambiente reservado para celebrações intimistas.' },
     { slug: 'espaco-terra',          nome: 'Espaço Terrá',          resumo: 'Estrutura versátil com horizonte aberto do interior paulista.' }
   ];
+  /* A coleção nasce com uma página só. Debutante e bodas entram aqui
+     quando as páginas existirem: listar antes deixa link caindo no 404
+     padrão da Vercel, que este site não personaliza. */
+  var EVENTOS = [
+    { slug: 'casamento', nome: 'Casamento', resumo: 'Quatro casas, uma equipe e a festa inteira no mesmo contrato.', foto: 'ocasiao-casamento' }
+  ];
   var SOLUCOES = [
     { slug: 'gastronomia',            nome: 'Gastronomia',            resumo: 'Menu autoral, do welcome ao doce da madrugada.' },
     { slug: 'decoracao',              nome: 'Decoração',              resumo: 'Cenografia, flores e ambientação sob medida.' },
@@ -43,6 +49,7 @@
       logo: '/assets/brand/social-wordmark-navy.png', logoClaro: '/assets/brand/social-wordmark-white.png', alt: 'Di Terrá Eventos', inicio: '/social',
       itens: [
         { rotulo: 'Espaços',  href: '/social/espacos',  menu: 'espacos' },
+        { rotulo: 'Ocasiões', href: '/social#eventos',  menu: 'eventos' },
         { rotulo: 'Soluções', href: '/social/solucoes', menu: 'solucoes' },
         { rotulo: 'Sobre',    href: '/sobre' },
         { rotulo: 'Blog',     href: BLOG, menu: 'blog', externo: true }
@@ -84,6 +91,12 @@
         return card('/social/espacos/' + e.slug, e.nome, e.resumo, '/assets/opt/' + e.slug + '-amplitude-800.webp');
       }).join('') + '</div><div class="pil__aside">' +
         atalho('/social/espacos', 'Todos os espaços') + atalho(ctx.acao.href, 'Agendar visita', true) + '</div></div>';
+    },
+    eventos: function () {
+      return '<div class="pil__grid"><div class="pil__col2">' + EVENTOS.map(function (e) {
+        return card('/social/eventos/' + e.slug, e.nome, e.resumo, '/assets/opt/' + e.foto + '-800.webp');
+      }).join('') + '</div><div class="pil__aside">' +
+        atalho('/social#eventos', 'Todas as ocasiões') + atalho(ctx.acao.href, 'Agendar visita', true) + '</div></div>';
     },
     solucoes: function () {
       return '<div class="pil__grid"><div class="pil__col2">' + SOLUCOES.map(function (s) {
