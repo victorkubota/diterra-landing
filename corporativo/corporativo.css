@@ -211,70 +211,87 @@
 
 .section--petrol { background: var(--petrol-900); color: #fff; }
 
-/* ── MANIFESTO ────────────────────────────────────────────────────────
-   O título foi para a coluna de texto, junto do resto. A foto ocupa a
-   coluna da esquerda sozinha e sobe até o topo do bloco.
+/* ── MANIFESTO: PILARES COM FOTO PRESA ────────────────────────────────
+   Refeito em 16/09/2026 a pedido do cliente, na forma do benchmark
+   declarado (sarahhaywood.com, registrado em docs/proposta-visual-
+   benchmarks.md: "foto presa à esquerda e texto rolando à direita").
+
+   O que mudou em relação à versão anterior: o título saiu da coluna de
+   texto e foi para cima, na largura inteira, porque ele fala da seção
+   toda e não da primeira coluna. Abaixo dele, a foto fica presa e os
+   três pilares passam por ela, um de cada vez.
+
+   PROPORÇÃO, que é o contrato desta seção: cada pilar ocupa UMA altura
+   de foto, com o título em até 20% dela e o texto em até 30%. O resto é
+   respiro, e é ele que centra um pilar por vez na frente da imagem.
+
+   A conta que faz o gesto existir: três pilares dão 300% da altura da
+   foto, e a foto ocupa 100%, então sobram 200% de curso preso. Medido:
+   com a foto em 522 px, a imagem fica parada por mais de mil pixels de
+   rolagem, tempo suficiente para os três textos passarem um a um.
+
+   Com meia altura por pilar, que foi a primeira tentativa, o curso caía
+   para meia foto e a imagem soltava antes do segundo texto. Por isso a
+   medida é 1 e não .5: é o que separa o gesto de um bloco comum.
+   Mexer na altura da foto reequilibra tudo sozinho.
+
+   A copy nasce dentro desse limite: título de uma linha, texto de até
+   cerca de 45 palavras. Texto maior que isso estoura a proporção e a
+   foto começa a rolar junto, que é justamente o efeito que se quer
+   evitar.
    ─────────────────────────────────────────────────────────────────── */
-.manifesto { display: grid; grid-template-columns: 1fr; gap: clamp(30px, 4vw, 64px); }
-@media (min-width: 900px) {
-  /* palco fixo: a foto domina a linha e fica presa enquanto o texto rola */
-  .manifesto { grid-template-columns: 1.25fr .75fr; align-items: start; }
-  .manifesto__aside { position: sticky; top: 100px; }
+.pilares {
+  --foto-h: clamp(420px, 68vh, 720px);
+  display: grid; grid-template-columns: 1fr;
+  gap: clamp(30px, 4vw, 64px);
+  margin-top: clamp(32px, 4vw, 56px);
 }
-.manifesto__media {
-  /* era var(--arch): o arco da janela do símbolo saiu do tratamento de
-     foto a pedido do cliente. A janela segue sendo o logotipo. */
+@media (min-width: 900px) {
+  .pilares { grid-template-columns: 1.25fr .75fr; align-items: start; }
+  /* o mesmo top: 100px que a home e as páginas de casa já usam, para o
+     bloco preso parar abaixo da pílula de navegação e não atrás dela */
+  .pilares__foto { position: sticky; top: 100px; }
+}
+
+.pilares__foto {
+  margin: 0;
   border-radius: var(--radius-lg);
   overflow: hidden;
   aspect-ratio: 3 / 2;
   background: var(--sand-200);
 }
 @media (min-width: 900px) {
-  .manifesto__media { aspect-ratio: auto; height: clamp(420px, 68vh, 720px); }
+  .pilares__foto { aspect-ratio: auto; height: var(--foto-h); }
 }
-.manifesto__media img { width: 100%; height: 100%; object-fit: cover; }
-.manifesto__body .h-section { margin-bottom: clamp(20px, 2.4vw, 32px); }
-.manifesto__body p + p { margin-top: 1.15em; }
-.manifesto__body strong { font-weight: 500; }
-.manifesto__body .btn { margin-top: 10px; }
+.pilares__foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* ── ARGUMENTOS DO MANIFESTO ──────────────────────────────────────────
-   Classe nova, nascida em 16/09/2026. O manifesto deixou de ser dois
-   parágrafos de discurso e passou a ser a lista dos quatro motivos para
-   trazer o time até aqui, cada um com título e explicação.
+.pilares__textos { display: grid; gap: 0; }
 
-   Não havia componente pronto para isso no corporativo: .spec é ficha
-   de duas colunas (rótulo e valor), .fmt e .reel exigem fotografia por
-   item e .vcard é o acordeão das casas. O filete de topo é o mesmo
-   1px var(--ui-border) do .spec, de propósito: a lista lê como ficha
-   da casa, não como bullet de apresentação.
-   ─────────────────────────────────────────────────────────────────── */
-.argumentos {
-  list-style: none;
-  display: grid;
-  margin-top: clamp(24px, 3vw, 36px);
-}
-.argumentos > li {
-  padding-block: clamp(18px, 2vw, 24px);
+.pilar {
+  padding-block: clamp(22px, 2.6vw, 34px);
   border-top: 1px solid var(--ui-border);
 }
-.argumentos > li:last-child { border-bottom: 1px solid var(--ui-border); }
-.argumentos h3 { margin-bottom: 10px; }
-/* caminho de verificação: o argumento do contrato único aponta para as
-   rotas que o provam, para quem quer conferir antes de falar com o
-   comercial. O link é o mesmo .link-arrow das casas, só com respiro. */
-.argumentos .link-arrow { margin-top: clamp(14px, 1.4vw, 18px); }
-/* p + p do .manifesto__body não alcança o parágrafo que vem depois da
-   lista: o fecho precisa do próprio respiro */
-.manifesto__body .argumentos + p { margin-top: clamp(24px, 3vw, 36px); }
-
-/* cabeçalho centrado, para seções que não têm coluna de apoio */
-/* Rodada 4: cabeçalho à esquerda por padrão; só banner, respiro e
-   chamada final centram */
-.section__head--centro {
-  margin-inline: 0;
-  text-align: left;
+.pilar:first-child { border-top: 0; padding-top: 0; }
+.pilar:last-child { border-bottom: 1px solid var(--ui-border); }
+@media (min-width: 900px) {
+  /* uma altura de foto por pilar: é o que dá curso de rolagem suficiente
+     para a imagem ficar presa enquanto os três textos passam, e o que
+     mantém título e texto dentro dos 20% e 30% combinados */
+  .pilar {
+    min-height: var(--foto-h);
+    display: flex; flex-direction: column; justify-content: center;
+  }
 }
+.pilar h3 { margin: 0 0 12px; }
+.pilar p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--ui-text-muted);
+  line-height: var(--leading-body);
+  max-width: 46ch;
+}
+
+.pilares__acao { margin-top: clamp(28px, 3.4vw, 44px); }
 
 /* ── NÚMEROS SOBRE FOTOGRAFIA ──────────────────────────────────────── */
 .section--photo {
