@@ -100,10 +100,18 @@
 .servico:active { transform: var(--press-caixa); transition-duration: var(--dur-press); }
 
 /* o número é o que amarra os cinco: sem ele são cinco fotos soltas,
-   com ele são as cinco partes de uma coisa só */
+   com ele são as cinco partes de uma coisa só.
+
+   Cor: --ui-link-brick, não --ui-accent. São 12px sobre o gelo, o mesmo
+   par do "Ver" dos cartões, e foi para ele que o tema escureceu o tijolo
+   (tema-social.css:59-67). Medido sobre #efede7: o acento dá 3,08:1 e
+   reprova o mínimo AA de 4,5 para texto pequeno; o --ui-link-brick dá
+   4,67:1. A cópia desta regra em social/evento.css:169 leva a mesma
+   linha, de propósito: as duas precisam continuar idênticas até o dia em
+   que os três blocos forem promovidos para social/social.css. */
 .servico__n {
   font-size: var(--text-xs); letter-spacing: var(--tracking-eyebrow);
-  color: var(--ui-accent); font-variant-numeric: tabular-nums;
+  color: var(--ui-link-brick); font-variant-numeric: tabular-nums;
 }
 .servico .h-card { font-size: var(--text-lg-display); }
 .servico p { font-size: var(--text-sm); color: var(--ui-text-muted); line-height: var(--leading-body); }

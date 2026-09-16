@@ -68,6 +68,24 @@
 }
 .pil__link:focus-visible { outline: 2px solid var(--ui-accent); outline-offset: 2px; }
 .pil__link[aria-current="page"] { font-weight: 500; }
+
+/* Foco na pílula ANTES da rolagem. Sem .is-scrolled nem .is-open o fundo
+   é transparente, e a pílula está por cima de um herói escuro.
+
+   Isso não é suposição sobre a rota, é invariante do componente: é o
+   MESMO estado que troca o logo para a versão clara (linhas 57-59).
+   Onde o logo claro aparece, o chão é escuro; onde o vidro entra, a
+   pílula vira superfície clara e o acento volta a valer. Por isso a
+   regra é presa ao estado, e não à página.
+
+   O anel das três regras acima sai em --ui-accent, que é cor de chão
+   claro. Medido sobre o herói de cada universo, contra o mínimo de 3:1
+   da WCAG 2.2 SC 1.4.11 para indicador de foco:
+     social, royal #111542 .... tijolo 4,81 · rose-700 (debutante) 1,92
+     corporativo, navy #1e325c .. accent 1,76
+   Com --ui-accent-on-dark: 10,70:1 no social e 6,61:1 no corporativo. */
+.pil:not(.is-scrolled):not(.is-open) :focus-visible { outline-color: var(--ui-accent-on-dark); }
+
 /* com um painel aberto, só o item ativo fica inteiro; os demais esmaecem */
 .pil.is-open .pil__link:not(.is-active) { opacity: .42; }
 .pil.is-open .pil__link.is-active { opacity: 1; }

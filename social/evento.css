@@ -45,7 +45,15 @@
    assets/css/tema-social.css:33-50 registra que ele foi rebaixado a
    tinta de propósito, por medir L* 98,0 com b* 12,9: claro e amarelo
    demais para servir de papel. Quem olhar só a lista de quatro cores do
-   brandbook vai propor o marfim e reabrir um problema já resolvido. */
+   brandbook vai propor o marfim e reabrir um problema já resolvido.
+
+   ATENÇÃO, este bloco está INATIVO hoje: a social/eventos/casamento.html
+   não declara data-evento (o comentário no topo daquele arquivo, linhas
+   2-5, registra a escolha de fase). Na prática casamento e bodas rodam
+   o tema social idêntico, e das quatro cores prometidas à cliente só a
+   rosa está no ar nesta coleção. Quando a decisão de cor por tipo de
+   evento fechar, é uma palavra no <html> e mais nada. Está escrito aqui
+   para quem abrir esta folha não presumir que as três cores já valem. */
 html[data-evento="casamento"] {
   --ui-bg: var(--sand-50);
 }
@@ -61,7 +69,17 @@ html[data-evento="casamento"] {
    claro, 7,72 sobre o gelo e 9,04 sobre o branco. E o --ui-text segue
    em royal, que dá 10,70 sobre o rosa forte.
 
-   O nome precisa começar com "rose": o vocabulário de paleta do
+   Onde cada override é exercido, para ninguém ler o número errado:
+     --ui-accent      pinta o .script das duas assinaturas manuscritas e
+                      o anel de foco sobre chão claro.
+     --ui-link-brick  pinta o .servico__n dos cinco cartões desta rota
+                      (evento.css, mais abaixo) e, fora das LPs, o
+                      "Ver" de 11px dos cartões de espaço, o .link-arrow
+                      em chão claro e o link dentro de .prose.
+   O "Ver" de 11px que justifica o número acima é elemento das rotas de
+   espaço, não desta coleção: a medida é a prova, não a ocorrência. */
+
+/* O nome precisa começar com "rose": o vocabulário de paleta do
    tools/verificar-paridade.py:32 não aceita --pink-*. */
 html[data-evento="debutante"] {
   --rose-700: #7a2f46;
@@ -165,10 +183,23 @@ html[data-evento="debutante"] {
 .servico:active { transform: var(--press-caixa); transition-duration: var(--dur-press); }
 
 /* o número é o que amarra os cinco: sem ele são cinco fotos soltas,
-   com ele são as cinco partes de uma coisa só */
+   com ele são as cinco partes de uma coisa só.
+
+   Cor: --ui-link-brick, e não --ui-accent. São 12px sobre o gelo, o
+   mesmo tamanho e o mesmo chão do "Ver" dos cartões de espaço, e foi
+   exatamente para esse par que o tema escureceu o tijolo
+   (tema-social.css:59-67). Medido sobre o gelo #efede7: o --ui-accent
+   dá 3,08:1 e REPROVA o mínimo AA de 4,5 para texto pequeno; o
+   --ui-link-brick dá 4,67:1. Na debutante os dois tokens já resolvem
+   para o mesmo --rose-700, então lá nada muda de pixel: 7,72:1 antes e
+   depois.
+
+   O que este ajuste NÃO faz é rebaixar o --ui-accent do tema-social.
+   Isso consertaria o mesmo par em outras rotas, mas é decisão de marca
+   e mexe em dezoito páginas: vai em branch própria. */
 .servico__n {
   font-size: var(--text-xs); letter-spacing: var(--tracking-eyebrow);
-  color: var(--ui-accent); font-variant-numeric: tabular-nums;
+  color: var(--ui-link-brick); font-variant-numeric: tabular-nums;
 }
 .servico .h-card { font-size: var(--text-lg-display); }
 .servico p { font-size: var(--text-sm); color: var(--ui-text-muted); line-height: var(--leading-body); }

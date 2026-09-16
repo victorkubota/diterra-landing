@@ -16,11 +16,24 @@
 
 .on-dark .eyebrow::before { background: var(--rose); }
 
-/* assinatura manuscrita — Oooh Baby, uso pontual */
+/* assinatura manuscrita — Oooh Baby, uso pontual.
+
+   A cor LÊ O ACENTO DO TEMA e não o --brick literal. Nas dezoito rotas de
+   tema social o valor computado continua #c67139, porque o
+   tema-social.css:72 define --ui-accent: var(--brick). O que muda é a
+   debutante: lá o acento é o --rose-700 (#7a2f46) e o chão da
+   .section--paper vira o rosa claro, e o tijolo sobre esse rosa mede
+   2,96:1 — texto grande de 31px, que pede 3:1. Reprovava por pouco, mas
+   reprovava. Com o acento do tema a mesma linha dá 7,43:1.
+
+   A trava de .section--rose abaixo não alcançava esse caso: ela depende
+   de uma CLASSE, e na debutante o rosa chega por TOKEN. Ler o acento
+   alinha o elemento ao mecanismo em vez de abrir uma exceção por tipo
+   de evento. */
 .script {
   font-family: var(--font-script);
   font-size: clamp(1.5rem, 3vw, 2.4rem);
-  line-height: 1.2; color: var(--brick); font-weight: 400;
+  line-height: 1.2; color: var(--ui-accent); font-weight: 400;
 }
 .on-dark .script { color: var(--rose); }
 /* tijolo sobre rosa dá 2,2:1 e reprova até para título; royal sobre
@@ -267,7 +280,47 @@
 .section { overflow-x: clip; }
 @supports not (overflow-x: clip) { .section { overflow-x: hidden; } }
 
-/* foco legível sobre a faixa rosa (tijolo sobre rosa dá 2,2:1) */
+/* ── foco legível sobre superfície escura ──────────────────────────────
+   O anel global é `outline: 2px solid var(--ui-accent)` (base.css:293), e
+   o acento é cor pensada para chão claro. Sobre escuro ele encolhe:
+   tijolo sobre o royal dá 4,81:1 e sobre o rodapé 5,07:1, e na debutante
+   o acento vira o --rose-700, que cai para 1,92:1 e 2,02:1 — contra o
+   mínimo de 3:1 da WCAG 2.2 SC 1.4.11 para indicador de foco. São dois
+   terços das paradas de teclado da página: a laje das quatro casas, a
+   .section--invert, a trilha do herói e o rodapé.
+
+   Quem manda na cor do anel é a SUPERFÍCIE, na mesma forma da linha de
+   .section--rose logo abaixo. O trio .on-dark / .section--invert / .foot
+   é o mesmo vocabulário de superfície escura que o base.css:312-314 já
+   usa para trocar a sombra. O .nav__drawer entra à mão: ele é royal
+   (base.css) e leva seis paradas de teclado, mas não carrega .on-dark.
+
+   NÃO entra .laje nessa lista, por mais que o nome sugira escuro: a
+   .contato carrega .laje sobre o gelo claro (social.css:443), e o rosa
+   sobre o sand-50 daria 1,46:1 — o formulário perderia o foco em vez de
+   ganhar. .laje é forma (raio de canto), não tinta.
+
+   Medido, --ui-accent-on-dark (#f4bfb3) sobre royal: 10,70:1; sobre o
+   rodapé #0d1038: 11,28:1. */
+.on-dark :focus-visible,
+.section--invert :focus-visible,
+.foot :focus-visible,
+.nav__drawer :focus-visible { outline-color: var(--ui-accent-on-dark); }
+
+/* O .skip é o caso que não se resolve pela cor do anel: ele é um chip
+   royal que aparece POR CIMA do que estiver no topo da página, então o
+   anel de fora cai ora no herói escuro, ora no chão claro, dependendo da
+   rota. O que é estável é o chão do próprio chip. Anel por dentro, como
+   a .barra-acao__item já faz em melhorias.css:183: rosa sobre o royal do
+   chip, 10,70:1, sem depender do que está atrás. */
+.skip:focus-visible {
+  outline-color: var(--ui-accent-on-dark);
+  outline-offset: -3px;
+}
+
+/* foco legível sobre a faixa rosa (tijolo sobre rosa dá 2,2:1).
+   Fica DEPOIS do bloco escuro de propósito: se um dia um .on-dark for
+   aninhado dentro da faixa rosa, quem ganha é o chão rosa, que é claro. */
 .section--rose :focus-visible { outline-color: var(--royal); }
 /* link dentro de prosa precisa ser visível: a { color: inherit } global o esconde */
 .prose a, .visita__texto a { color: var(--ui-link-brick); text-decoration: underline; text-underline-offset: 3px; }

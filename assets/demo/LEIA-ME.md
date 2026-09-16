@@ -27,6 +27,36 @@ tecnologia audiovisual, hero, galeria, percurso, território e depoimentos, e
 A página corporativa passa a exibir as mesmas fotos das casas em contexto
 social — precisa de uma seleção própria.
 
+## 16/09/2026 — o que as LPs por ocasião deixaram pendente
+
+Entraram `/social/eventos/debutante` e `/social/eventos/bodas-aniversarios`,
+que completam a coleção aberta pela LP de casamento. Duas pendências de
+acervo ficaram registradas aqui para não se perderem.
+
+**Foto de ocasião por casa.** As quatro casas aparecem nas três LPs com a
+mesma fotografia, que é a fotografia oficial de cada casa. Ela descreve a
+casa, e não a ocasião: a da Querência mostra um casal diante da capela e a
+da Casa Lucca mostra uma mesa longa posta. Numa página de festa de quinze
+isso não mente sobre a imagem, mas também não mostra nada de festa de
+quinze. Em 16/09 o texto alternativo da Querência deixou de dizer "os
+noivos" e passou a dizer "casal" nas oito rotas que usam essa foto, porque
+a mesma imagem serve casamento, debutante e bodas. É o que dá para fazer
+sem acervo. O conserto de verdade é uma foto de debutante e uma de festa de
+família por casa, na próxima sessão fotográfica. Quando elas chegarem, o
+alt volta a ser específico por rota.
+
+**Tarja de IA: qual é o alcance.** Hoje a tarja visível
+(`<p class="evento__mais">`) cobre a galeria de hospedagem da LP de bodas, e
+só ela. Os cartões 04 Produção e 05 Tecnologia audiovisual e o retrato do
+depoimento continuam sendo imagem gerada por IA nas três LPs, sem tarja
+própria. Isso é decisão, não esquecimento, e vale para as três de uma vez:
+a hospedagem leva tarja porque a imagem poderia ser lida como um parceiro
+real da região, enquanto o resto está coberto pela linha do rodapé de todas
+as catorze rotas ("Protótipo de avaliação. Fotografia ilustrativa e dados
+sujeitos a validação."). Se a decisão mudar, ela muda nas TRÊS LPs no mesmo
+commit, incluindo a de casamento que já está no ar: tarjar só as páginas
+novas criaria incoerência entre rotas irmãs.
+
 ## O resto da pasta segue sendo IA
 
 **Estas imagens NÃO são as casas da Di Terrá.** São cenários gerados por IA
