@@ -211,46 +211,48 @@
 
 .section--petrol { background: var(--petrol-900); color: #fff; }
 
-/* ── MANIFESTO: PILARES COM FOTO PRESA ────────────────────────────────
-   Refeito em 16/09/2026 a pedido do cliente, na forma do benchmark
-   declarado (sarahhaywood.com, registrado em docs/proposta-visual-
-   benchmarks.md: "foto presa à esquerda e texto rolando à direita").
+/* ── MANIFESTO: PILARES COM TÍTULO E FOTO PRESOS ──────────────────────
+   Forma do benchmark declarado do projeto (sarahhaywood.com, registrado
+   em docs/proposta-visual-benchmarks.md: "foto presa à esquerda e texto
+   rolando à direita").
 
-   O que mudou em relação à versão anterior: o título saiu da coluna de
-   texto e foi para cima, na largura inteira, porque ele fala da seção
-   toda e não da primeira coluna. Abaixo dele, a foto fica presa e os
-   três pilares passam por ela, um de cada vez.
+   O que fica preso é o CONJUNTO título mais foto, e não só a foto: o
+   título é a pergunta que os três textos respondem, então ele precisa
+   estar na tela enquanto as respostas passam. Some junto com a imagem
+   quando a seção acaba.
 
-   PROPORÇÃO, que é o contrato desta seção: cada pilar ocupa UMA altura
-   de foto, com o título em até 20% dela e o texto em até 30%. O resto é
-   respiro, e é ele que centra um pilar por vez na frente da imagem.
+   PROPORÇÃO DO CONJUNTO LATERAL, tirada da referência: o título é
+   display grande e o texto é pequeno, com a diferença de escala fazendo
+   o trabalho de hierarquia. Dois parágrafos curtos por pilar, não um
+   bloco único.
 
-   A conta que faz o gesto existir: três pilares dão 300% da altura da
-   foto, e a foto ocupa 100%, então sobram 200% de curso preso. Medido:
-   com a foto em 522 px, a imagem fica parada por mais de mil pixels de
-   rolagem, tempo suficiente para os três textos passarem um a um.
+   PROPORÇÃO CONTRA A FOTO, que é o contrato desta seção: cada pilar
+   ocupa uma altura de foto, com o título em até 20% dela e o texto em
+   até 30%. O resto é respiro, e é ele que centra um pilar por vez na
+   frente da imagem.
 
-   Com meia altura por pilar, que foi a primeira tentativa, o curso caía
-   para meia foto e a imagem soltava antes do segundo texto. Por isso a
-   medida é 1 e não .5: é o que separa o gesto de um bloco comum.
-   Mexer na altura da foto reequilibra tudo sozinho.
-
-   A copy nasce dentro desse limite: título de uma linha, texto de até
-   cerca de 45 palavras. Texto maior que isso estoura a proporção e a
-   foto começa a rolar junto, que é justamente o efeito que se quer
-   evitar.
+   A conta que faz o gesto existir: três pilares dão 300% da altura do
+   bloco preso, e o bloco ocupa 100%, então sobram 200% de curso. Com
+   meia altura por pilar, que foi a primeira tentativa, o curso caía
+   pela metade e a imagem soltava antes do segundo texto.
    ─────────────────────────────────────────────────────────────────── */
 .pilares {
-  --foto-h: clamp(420px, 68vh, 720px);
+  --foto-h: clamp(420px, 62vh, 660px);
   display: grid; grid-template-columns: 1fr;
   gap: clamp(30px, 4vw, 64px);
-  margin-top: clamp(32px, 4vw, 56px);
 }
 @media (min-width: 900px) {
-  .pilares { grid-template-columns: 1.25fr .75fr; align-items: start; }
+  .pilares { grid-template-columns: 1.15fr .85fr; align-items: start; }
   /* o mesmo top: 100px que a home e as páginas de casa já usam, para o
      bloco preso parar abaixo da pílula de navegação e não atrás dela */
-  .pilares__foto { position: sticky; top: 100px; }
+  .pilares__fixo { position: sticky; top: 100px; }
+}
+
+/* o título acompanha a foto: centrado sobre ela e presos juntos */
+.pilares__titulo {
+  text-align: center;
+  margin: 0 0 clamp(18px, 2vw, 28px);
+  max-width: 18ch; margin-inline: auto;
 }
 
 .pilares__foto {
@@ -265,31 +267,55 @@
 }
 .pilares__foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
+/* O bloco preso é título mais foto, e portanto mais alto que um pilar,
+   que mede uma foto. Sem compensar, o primeiro texto passa pela tela
+   ANTES de a imagem prender, e o leitor nunca vê o par título e primeiro
+   argumento juntos. O recuo aqui empurra a coluna de texto para baixo
+   exatamente a altura do título, e daí em diante cada pilar encontra a
+   foto no mesmo ponto. Medido: o título ocupa cerca de 38% da altura da
+   foto, e a fração amarra na mesma --foto-h para escalar junto. */
 .pilares__textos { display: grid; gap: 0; }
+@media (min-width: 900px) {
+  .pilares__textos { padding-top: calc(var(--foto-h) * .38); }
+}
 
 .pilar {
-  padding-block: clamp(22px, 2.6vw, 34px);
+  padding-block: clamp(24px, 3vw, 38px);
   border-top: 1px solid var(--ui-border);
 }
 .pilar:first-child { border-top: 0; padding-top: 0; }
 .pilar:last-child { border-bottom: 1px solid var(--ui-border); }
 @media (min-width: 900px) {
   /* uma altura de foto por pilar: é o que dá curso de rolagem suficiente
-     para a imagem ficar presa enquanto os três textos passam, e o que
-     mantém título e texto dentro dos 20% e 30% combinados */
+     para o bloco preso ficar parado enquanto os três textos passam */
   .pilar {
     min-height: var(--foto-h);
     display: flex; flex-direction: column; justify-content: center;
+    border-top: 0;
   }
+  .pilar:last-child { border-bottom: 0; }
 }
-.pilar h3 { margin: 0 0 12px; }
+
+/* a escala é a hierarquia, como na referência: display grande no título,
+   texto pequeno embaixo. Sem eyebrow: o cliente pediu a remoção deles em
+   todas as seções (registrado em tools/gerar-paginas.py:703). */
+.pilar__t {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.6rem);
+  line-height: 1.12;
+  letter-spacing: -.01em;
+  margin: 0 0 clamp(14px, 1.6vw, 20px);
+  color: var(--ui-text);
+}
 .pilar p {
   margin: 0;
   font-size: var(--text-sm);
   color: var(--ui-text-muted);
   line-height: var(--leading-body);
-  max-width: 46ch;
+  max-width: 44ch;
 }
+.pilar p + p { margin-top: .9em; }
 
 .pilares__acao { margin-top: clamp(28px, 3.4vw, 44px); }
 
