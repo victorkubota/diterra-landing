@@ -73,6 +73,11 @@
   --ui-accent-on-dark:     var(--rose);
   --ui-border:             rgba(17,21,66,.14);
   --ui-border-invert:      rgba(254,250,224,.22);
+  /* Cor sólida: a transparência é decisão do componente, não do tema.
+     O véu escurece a foto do topo em três paradas (94, 62 e 42 por cento)
+     e o arco desenha o ornamento sobre foto escura, a 55. */
+  --ui-veu-hero:           var(--royal);
+  --ui-arco:               var(--ivory);
   --ui-action:             var(--royal);
   --ui-action-hover:       var(--royal-80);
   --ui-notice-bg:          var(--rose-soft);

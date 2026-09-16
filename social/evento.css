@@ -1,0 +1,81 @@
+/* ══════════════════════════════════════════════════════════════════════
+   IDENTIDADE POR TIPO DE EVENTO
+
+   A cliente pediu uma cor por tipo de evento: rosa na debutante, branco
+   no casamento, azul no corporativo. Este arquivo é o mecanismo inteiro.
+
+   Como funciona: a landing page declara o tipo no <html>, e não no
+   <body>.
+
+       <html lang="pt-BR" data-evento="debutante">
+
+   O lugar não é preferência. O assets/css/base.css monta --elev-1,
+   --elev-2, --elev-flutuante e --elev-barra dentro do :root a partir dos
+   --ui-sombra-*, e o valor computado de uma custom property já vem com
+   os var() substituídos (o comentário de base.css:302-306 documenta o
+   mecanismo). Um override feito em body.lp-debutante não volta atrás nas
+   sombras, e a página rosa ficaria com sombra azul. Já
+   html[data-evento="x"] tem especificidade 0,1,1 contra 0,1,0 do :root,
+   no mesmo elemento, então ganha e recalcula as sombras junto.
+
+   Por que não um assets/css/tema-<tipo>.css por tipo: o
+   tools/verificar-paridade.py exige que todo arquivo do glob
+   assets/css/tema-*.css declare exatamente o mesmo conjunto de tokens
+   --ui-*. Dois arquivos novos custariam 62 declarações mantidas à mão
+   para mudar meia dúzia de valores, e mais dois arquivos para
+   sincronizar em cada ajuste futuro de cor.
+
+   Regra que este arquivo segue: todo valor sai de var() da paleta já
+   declarada em tema-social.css. O único hex novo é o --rose-700, e ele
+   vem com o contraste medido no comentário. Isso importa porque o glob
+   do verificador não alcança este arquivo: a disciplina aqui é manual.
+
+   O que NUNCA varia é o --ui-text. O royal sobre chão claro dá 17,36:1
+   e é o contrato de leitura da marca. Muda o chão e o acento, nunca a
+   tinta: assim as landing pages leem como salas da mesma casa, e não
+   como sites diferentes.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── casamento · branco ───────────────────────────────────────────────
+   Sobe o chão do gelo --sand-100 (#efede7) para o --sand-50 (#f5f3ee).
+   É o único override com efeito: o --ui-bg-alt já é var(--white) em
+   tema-social.css:54.
+
+   NÃO usar o marfim #fefae0 como chão. O comentário de
+   assets/css/tema-social.css:33-50 registra que ele foi rebaixado a
+   tinta de propósito, por medir L* 98,0 com b* 12,9: claro e amarelo
+   demais para servir de papel. Quem olhar só a lista de quatro cores do
+   brandbook vai propor o marfim e reabrir um problema já resolvido. */
+html[data-evento="casamento"] {
+  --ui-bg: var(--sand-50);
+}
+
+/* ── debutante · rosa ─────────────────────────────────────────────────
+   O rosa entra como acento e como degrau de seção, nunca como chão de
+   página inteira.
+
+   O --ui-link-brick padrão (#9c582b) passa sobre o gelo, mas cai para
+   3,37:1 sobre o rosa #f4bfb3 e reprova o mínimo AA de 4,5 no "Ver" de
+   11px dos cartões. O --rose-700 abaixo passa sobre os quatro chãos que
+   a página usa, medido: 5,58 sobre o rosa forte, 7,43 sobre o rosa
+   claro, 7,72 sobre o gelo e 9,04 sobre o branco. E o --ui-text segue
+   em royal, que dá 10,70 sobre o rosa forte.
+
+   O nome precisa começar com "rose": o vocabulário de paleta do
+   tools/verificar-paridade.py:32 não aceita --pink-*. */
+html[data-evento="debutante"] {
+  --rose-700: #7a2f46;
+  --ui-bg-alt: var(--rose-soft);
+  --ui-accent: var(--rose-700);
+  --ui-link-brick: var(--rose-700);
+}
+
+/* ── bodas e aniversários · sem cor própria ───────────────────────────
+   Sem data-evento, herda o tema social. A cliente nomeou três cores
+   para quatro páginas, e inventar a quarta seria decisão de marca que
+   ninguém pediu. Quando alguém escolher, entra aqui.
+
+   ── corporativo · azul ───────────────────────────────────────────────
+   Zero trabalho aqui: a rota /corporativo já carrega o
+   assets/css/tema-corp.css, com o navy-900 #1e325c (12,61:1 sobre
+   branco), e já está no ar. */

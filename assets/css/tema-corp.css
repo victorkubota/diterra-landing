@@ -45,6 +45,9 @@
   --ui-accent-on-dark:     var(--blue-300);
   --ui-border:             rgba(30,50,92,.14);
   --ui-border-invert:      rgba(255,255,255,.18);
+  /* Cor sólida: a transparência é decisão do componente, não do tema. */
+  --ui-veu-hero:           var(--navy-900);
+  --ui-arco:               var(--white);
   --ui-action:             var(--navy-900);
   --ui-action-hover:       var(--navy-700);
   --ui-notice-bg:          var(--sand-200);

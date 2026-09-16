@@ -64,7 +64,10 @@
 }
 .page-hero::before {
   content: ''; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(to top, rgba(17,21,66,.94) 6%, rgba(17,21,66,.62) 52%, rgba(17,21,66,.42) 100%);
+  background: linear-gradient(to top,
+    color-mix(in srgb, var(--ui-veu-hero) 94%, transparent) 6%,
+    color-mix(in srgb, var(--ui-veu-hero) 62%, transparent) 52%,
+    color-mix(in srgb, var(--ui-veu-hero) 42%, transparent) 100%);
 }
 .page-hero .h-display { color: var(--ivory); }
 .page-hero__lead { color: var(--ui-text-invert-muted); max-width: 46ch; margin-top: 18px; }
@@ -194,12 +197,12 @@
 .card__arch {
   position: absolute; left: clamp(16px, 2.4vw, 26px); bottom: 0;
   width: clamp(42px, 5.4vw, 62px); height: clamp(56px, 7vw, 82px);
-  border: 1px solid rgba(254,250,224,.55); border-bottom: 0; border-radius: var(--arch);
+  border: 1px solid color-mix(in srgb, var(--ui-arco) 55%, transparent); border-bottom: 0; border-radius: var(--arch);
   pointer-events: none;
 }
 .card__arch::before {
   content: ''; position: absolute; left: 50%; top: 32%; bottom: 0; width: 1px;
-  background: rgba(254,250,224,.55);
+  background: color-mix(in srgb, var(--ui-arco) 55%, transparent);
 }
 .card__body { padding: var(--space-4) 0 0; margin-top: var(--space-3); border-top: 1px solid var(--ui-border); display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .card__body p { font-size: var(--text-sm); color: var(--ui-text-muted); }
