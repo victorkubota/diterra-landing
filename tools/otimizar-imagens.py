@@ -35,7 +35,13 @@ QUALIDADE_WEBP = 80
 # Pastas de demonstração que recebem srcset. Logos e retratos ficam de fora:
 # já são pequenos e servidos no tamanho em que aparecem.
 PASTAS_DEMO = ("hero", "espacos", "solucoes", "eventos", "formatos", "galeria",
-               "apoio", "territorio")
+               "apoio", "territorio", "ocasioes", "percurso", "passos")
+# ocasioes, percurso e passos voltaram: o commit a1bf6bc (05/09) tirou as três
+# daqui sem apagar os arquivos, e depois os PRs #85 e #87 trouxeram o uso de
+# volta no HTML. Enquanto estavam fora, `--limpar` apagava 190 das 392
+# variantes, 33 MB, incluindo as quatro fotos oficiais de tipo de evento, os
+# vinte capítulos das casas que a galeria usa e os dezesseis passos dos
+# serviços. Medido antes de consertar, não estimado.
 
 # Peças legadas ainda em uso na home social. Ficam no tamanho nativo porque
 # não há pixel para ampliar (o hero tem 1220 px, o banner 500 px).
@@ -108,7 +114,10 @@ def limpar(fontes: list[Path]) -> int:
 # Só fotos que ocupam a tela inteira (hero, pilha de formatos, respiro
 # fotográfico) precisam da variante de 2400 px. As demais aparecem em
 # metade ou um quarto da largura e param em 1400.
-PASTAS_CHEIAS = ("hero", "formatos", "apoio")
+PASTAS_CHEIAS = ("hero", "formatos", "apoio", "ocasioes", "passos")
+# percurso NÃO entra aqui, e isso é deliberado: ela nunca esteve nesta tupla,
+# e incluí-la passaria a gerar variantes de 2400 px que nenhum HTML pede. As
+# fotos de percurso aparecem dentro da grade da galeria, nunca em tela cheia.
 
 
 def larguras_para(largura_origem: int, origem: Path) -> list[int]:
