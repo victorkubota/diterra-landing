@@ -207,34 +207,36 @@
   pointer-events: none; z-index: 3;
 }
 
-/* AS FOTOS ENCOSTAM NA DOBRA e o texto corre para a borda externa.
-   As quatro fotos formam uma coluna dupla no miolo, e o olho lê o
-   álbum de dentro para fora em vez de pingar de canto em canto.
+/* AS DUAS PEÇAS DA FOLHA SE ALTERNAM: a primeira com a foto na borda
+   esquerda, a segunda com a foto na direita. O texto de cada uma
+   encosta na sua foto, então a folha desenha um zigue-zague em vez de
+   duas linhas iguais empilhadas.
 
-   O padrão abaixo é a página da ESQUERDA (e o verso da folha móvel,
-   que é lado esquerdo): foto à direita, texto alinhado à esquerda, que
-   é a borda externa dela. */
+   O alternado é POR POSIÇÃO NA FOLHA (:nth-child), não por lado do
+   álbum: as quatro superfícies — as duas páginas fixas e as duas faces
+   da folha móvel — seguem o mesmo par. É o que faz a peça que está
+   girando chegar já no lugar certo, sem reconfigurar no meio do gesto.
+
+   A primeira peça, e o padrão de quem não tem par: foto à esquerda. */
 .album__pagina .caso,
 .folha__face .caso {
   display: grid;
-  grid-template-columns: 1fr clamp(118px, 13.5vw, 178px);
+  grid-template-columns: clamp(118px, 13.5vw, 178px) 1fr;
   gap: clamp(14px, 1.8vw, 28px);
   align-items: center;
 }
 .album__pagina .caso__foto,
-.folha__face .caso__foto { order: 2; }
+.folha__face .caso__foto { order: 0; }
 .album__pagina .caso__fala,
 .folha__face .caso__fala { text-align: left; }
 
-/* A página da DIREITA e a FRENTE da folha móvel são o mesmo lado do
-   álbum, e nele tudo espelha: foto à esquerda, encostada na dobra, e
-   texto alinhado à direita, que é a borda externa deste lado. */
-.album__pagina--dir .caso,
-.folha__face--frente .caso { grid-template-columns: clamp(118px, 13.5vw, 178px) 1fr; }
-.album__pagina--dir .caso__foto,
-.folha__face--frente .caso__foto { order: 0; }
-.album__pagina--dir .caso__fala,
-.folha__face--frente .caso__fala { text-align: right; }
+/* a segunda peça espelha */
+.album__pagina .caso:nth-child(2),
+.folha__face .caso:nth-child(2) { grid-template-columns: 1fr clamp(118px, 13.5vw, 178px); }
+.album__pagina .caso:nth-child(2) .caso__foto,
+.folha__face .caso:nth-child(2) .caso__foto { order: 2; }
+.album__pagina .caso:nth-child(2) .caso__fala,
+.folha__face .caso:nth-child(2) .caso__fala { text-align: right; }
 
 /* ── a folha que vira ─────────────────────────────────────────────
    Cobre exatamente a metade direita, gira na dobra (transform-origin
@@ -381,16 +383,18 @@
     gap: 20px;
     text-align: center;
   }
+  /* os seletores repetem o :nth-child do bloco de cima porque precisam
+     empatar em especificidade para vencê-lo */
   .album__pagina .caso__fala,
-  .album__pagina--dir .caso__fala,
   .folha__face .caso__fala,
-  .folha__face--frente .caso__fala { text-align: center; }
+  .album__pagina .caso:nth-child(2) .caso__fala,
+  .folha__face .caso:nth-child(2) .caso__fala { text-align: center; }
   .album__pagina .caso__foto,
-  .album__pagina--dir .caso__foto,
   .folha__face .caso__foto,
-  .folha__face--frente .caso__foto { order: 0; }
-  .album__pagina--dir .caso,
-  .folha__face--frente .caso { grid-template-columns: 1fr; }
+  .album__pagina .caso:nth-child(2) .caso__foto,
+  .folha__face .caso:nth-child(2) .caso__foto { order: 0; }
+  .album__pagina .caso:nth-child(2),
+  .folha__face .caso:nth-child(2) { grid-template-columns: 1fr; }
   .album__pagina .caso__foto,
   .folha__face .caso__foto { inline-size: min(62%, 220px); }
   .caso__fala p { font-size: clamp(1.25rem, 1rem + 2vw, 1.7rem); }
