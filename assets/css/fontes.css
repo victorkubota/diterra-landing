@@ -1,5 +1,28 @@
 /* Fontes self-host (rodada 4): subset latin baixado do Google Fonts.
    Uma origem a menos, sem CSS render-blocking de terceiro. */
+/* Display: Instrument Serif assumiu o papel da Channe em 17/09/2026. Serifada
+   de display alta e estreita, de contraste alto e eixo vertical, que é a classe
+   do logotipo; a Cormorant Garamond era old-style de eixo inclinado e não era.
+   Peso único, como a própria Channe: os títulos declarados em 300 renderizam
+   em 400, porque navegador não sintetiza peso leve. A Channe segue em primeiro
+   na pilha de --font-display e assume sozinha no dia em que a licença de
+   webfont for comprada. */
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/instrument-serif-400.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/instrument-serif-400-italic.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 @font-face {
   font-family: 'Albert Sans';
   font-style: normal;

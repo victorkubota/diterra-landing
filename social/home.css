@@ -211,9 +211,15 @@
 .hero-title {
   font-family: var(--font-display);
   font-size: var(--text-2xl);
-  /* 500 e não 400: sobre fotografia clara o peso do traço é o que
-     separa a serifa do fundo, mais do que a sombra */
-  font-weight: 500;
+  /* Era 500, e voltou a 400 em 17/09/2026 com a troca para Instrument
+     Serif: a família tem um estilo só, então 500 virava NEGRITO FALSO,
+     que numa serifa de contraste alto engrossa a haste fina e borra o
+     desenho. O que se perdia de massa sobre a foto volta por dois
+     caminhos: a Instrument tem caixa alta 15% mais alta e altura de x
+     32% maior que a Cormorant no mesmo corpo, e a sombra ganhou uma
+     segunda camada curta, colada na letra. */
+  font-weight: 400;
+  font-synthesis-weight: none;
   line-height: 1.28;
   letter-spacing: .01em;
   color: var(--white);
@@ -225,7 +231,7 @@
      linhas curtas, então lá o texto usa quase a linha inteira. */
   max-width: 92%;
   margin-inline: auto;
-  text-shadow: 0 2px 22px rgba(0,0,0,.6);
+  text-shadow: 0 1px 3px rgba(0,0,0,.5), 0 2px 22px rgba(0,0,0,.6);
 }
 /* Caixa alta com tracking largo serve rótulo curto, do tipo "CNN" na
    referência. Aqui as linhas são frases inteiras, e em 390px a versão
