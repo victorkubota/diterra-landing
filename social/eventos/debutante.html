@@ -33,7 +33,7 @@
 <link rel="stylesheet" href="/assets/css/melhorias.css">
 <script src="/assets/melhorias.js" defer></script>
 </head>
-<body>
+<body class="lp-ocasiao lp-debutante">
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
 <div class="nav__drawer" id="navDrawer">
@@ -66,15 +66,16 @@
     <video class="hero-video" data-hero-video="debutante" muted loop playsinline preload="none" aria-hidden="true" hidden></video>
   </div>
   <div class="wrap on-dark">
-    <ol class="crumbs">
+    <ol class="crumbs page-hero__entra" style="--i:0">
       <li><a href="/">Di Terrá</a></li>
       <li><a href="/social">Social</a></li>
       <li><a href="/social/eventos">Ocasiões</a></li>
       <li aria-current="page">Debutante</li>
     </ol>
-    <h1 class="h-display">Quinze anos no interior paulista</h1>
-    <p class="lead page-hero__lead">Quatro casas em Piracicaba, cada uma com um tamanho de pista e um jeito de fazer a entrada. A 1h40 de São Paulo.</p>
+    <h1 class="h-display page-hero__entra" style="--i:1">Quinze anos no interior paulista</h1>
+    <p class="lead page-hero__lead page-hero__entra" style="--i:2">Quatro casas em Piracicaba, cada uma com um tamanho de pista e um jeito de fazer a entrada. A 1h40 de São Paulo.</p>
   </div>
+  <span class="hero-desce" aria-hidden="true"></span>
 </header>
 </div>
 
@@ -306,6 +307,45 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════
+     GALERIA DA OCASIÃO — pedida pela cliente em 17/09: "a página de
+     ocasião precisa de um espaço com mais mídias, como se fosse uma
+     galeria". Antes disto a rota mostrava fotografia sempre a serviço
+     de outra coisa (a casa, o serviço, o depoimento) e não tinha um
+     lugar para simplesmente ver a festa.
+
+     Oito fotos em mosaico (social/evento.css, bloco 7). O clique amplia
+     no lightbox que o assets/melhorias.js monta sozinho para qualquer
+     <a data-lightbox="grupo">: o nome do grupo é o que separa esta
+     galeria de qualquer outra da mesma página.
+
+     Sobre escuro de propósito: é a única faixa da página que existe só
+     pela fotografia, e o royal tira o chão de baixo das imagens. A
+     ordem de cores da rota continua sem duas iguais encostadas.
+
+     ACERVO: as fotos de percurso das casas (01-chegada … 05-saida) e as
+     de apoio ainda são geradas por IA (assets/demo/LEIA-ME.md). Trocar
+     quando a sessão fotográfica por ocasião acontecer.
+     ═══════════════════════════════════════════════════ -->
+<section class="section section--invert" id="galeria">
+  <div class="wrap">
+    <div class="section__head">
+      <h2 class="h-section acende">A festa de quinze, da entrada à última música</h2>
+      <p class="lead rise">A entrada, o jantar, o bolo e a pista. São as quatro casas, e não uma noite só: o que muda de uma para a outra é o tamanho do gesto. Clique em qualquer foto para ver de perto.</p>
+    </div>
+    <div class="galeria-oc">
+      <a class="reveal-shot" style="--i:1" href="/assets/opt/espaco-terra-04-festa-1400.webp" data-lightbox="galeria-debutante"><picture><source type="image/avif" srcset="/assets/opt/espaco-terra-04-festa-800.avif 800w, /assets/opt/espaco-terra-04-festa-1400.avif 1400w" sizes="(min-width: 901px) 23vw, 48vw"><img src="/assets/opt/espaco-terra-04-festa-1400.webp" alt="Festa com palco, projeção e pista cheia sob a estrutura de madeira" width="1400" height="1875" loading="lazy" decoding="async" srcset="/assets/opt/espaco-terra-04-festa-800.webp 800w, /assets/opt/espaco-terra-04-festa-1400.webp 1400w" sizes="(min-width: 901px) 23vw, 48vw"></picture></a>
+      <a class="reveal-shot" style="--i:2" href="/assets/opt/palacete-monte-alegre-01-chegada-1400.webp" data-lightbox="galeria-debutante"><picture><source type="image/avif" srcset="/assets/opt/palacete-monte-alegre-01-chegada-800.avif 800w, /assets/opt/palacete-monte-alegre-01-chegada-1400.avif 1400w" sizes="(min-width: 901px) 23vw, 48vw"><img src="/assets/opt/palacete-monte-alegre-01-chegada-1400.webp" alt="Convidados subindo a escadaria de pedra do casarão" width="1400" height="1875" loading="lazy" decoding="async" srcset="/assets/opt/palacete-monte-alegre-01-chegada-800.webp 800w, /assets/opt/palacete-monte-alegre-01-chegada-1400.webp 1400w" sizes="(min-width: 901px) 23vw, 48vw"></picture></a>
+      <a class="reveal-shot" style="--i:3" href="/assets/opt/casa-lucca-01-chegada-1400.webp" data-lightbox="galeria-debutante"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-01-chegada-800.avif 800w, /assets/opt/casa-lucca-01-chegada-1400.avif 1400w" sizes="(min-width: 901px) 23vw, 48vw"><img src="/assets/opt/casa-lucca-01-chegada-1400.webp" alt="Convidados no caminho coberto de entrada da Casa Lucca, entre as flores" width="1400" height="1875" loading="lazy" decoding="async" srcset="/assets/opt/casa-lucca-01-chegada-800.webp 800w, /assets/opt/casa-lucca-01-chegada-1400.webp 1400w" sizes="(min-width: 901px) 23vw, 48vw"></picture></a>
+      <a class="reveal-shot" style="--i:4" href="/assets/opt/mesa-posta-1400.webp" data-lightbox="galeria-debutante"><picture><source type="image/avif" srcset="/assets/opt/mesa-posta-800.avif 800w, /assets/opt/mesa-posta-1400.avif 1400w" sizes="(min-width: 901px) 23vw, 48vw"><img src="/assets/opt/mesa-posta-1400.webp" alt="Mesa posta com arranjo de rosas brancas, taças de cristal e marcador de lugar" width="1400" height="1400" loading="lazy" decoding="async" srcset="/assets/opt/mesa-posta-800.webp 800w, /assets/opt/mesa-posta-1400.webp 1400w" sizes="(min-width: 901px) 23vw, 48vw"></picture></a>
+      <a class="reveal-shot" style="--i:5" href="/assets/opt/palacete-monte-alegre-04-festa-1400.webp" data-lightbox="galeria-debutante"><picture><source type="image/avif" srcset="/assets/opt/palacete-monte-alegre-04-festa-800.avif 800w, /assets/opt/palacete-monte-alegre-04-festa-1400.avif 1400w" sizes="(min-width: 901px) 23vw, 48vw"><img src="/assets/opt/palacete-monte-alegre-04-festa-1400.webp" alt="Jantar servido no salão principal, sob lustres de cristal" width="1400" height="1875" loading="lazy" decoding="async" srcset="/assets/opt/palacete-monte-alegre-04-festa-800.webp 800w, /assets/opt/palacete-monte-alegre-04-festa-1400.webp 1400w" sizes="(min-width: 901px) 23vw, 48vw"></picture></a>
+      <a class="reveal-shot" style="--i:6" href="/assets/opt/pista-noite-1400.webp" data-lightbox="galeria-debutante"><picture><source type="image/avif" srcset="/assets/opt/pista-noite-800.avif 800w, /assets/opt/pista-noite-1400.avif 1400w" sizes="(min-width: 901px) 46vw, 96vw"><img src="/assets/opt/pista-noite-1400.webp" alt="Pista lotada sob o globo espelhado, no galpão de madeira" width="1400" height="1400" loading="lazy" decoding="async" srcset="/assets/opt/pista-noite-800.webp 800w, /assets/opt/pista-noite-1400.webp 1400w" sizes="(min-width: 901px) 46vw, 96vw"></picture></a>
+      <a class="reveal-shot" style="--i:6" href="/assets/opt/a-querencia-04-festa-1400.webp" data-lightbox="galeria-debutante"><picture><source type="image/avif" srcset="/assets/opt/a-querencia-04-festa-800.avif 800w, /assets/opt/a-querencia-04-festa-1400.avif 1400w" sizes="(min-width: 901px) 23vw, 48vw"><img src="/assets/opt/a-querencia-04-festa-1400.webp" alt="Pista cheia sob o telhado de madeira, com varais de luz acesos" width="1400" height="1875" loading="lazy" decoding="async" srcset="/assets/opt/a-querencia-04-festa-800.webp 800w, /assets/opt/a-querencia-04-festa-1400.webp 1400w" sizes="(min-width: 901px) 23vw, 48vw"></picture></a>
+      <a class="reveal-shot" style="--i:6" href="/assets/opt/palacete-monte-alegre-03-coquetel-1400.webp" data-lightbox="galeria-debutante"><picture><source type="image/avif" srcset="/assets/opt/palacete-monte-alegre-03-coquetel-800.avif 800w, /assets/opt/palacete-monte-alegre-03-coquetel-1400.avif 1400w" sizes="(min-width: 901px) 23vw, 48vw"><img src="/assets/opt/palacete-monte-alegre-03-coquetel-1400.webp" alt="Coquetel na varanda de arcos, iluminada por velas" width="1400" height="1875" loading="lazy" decoding="async" srcset="/assets/opt/palacete-monte-alegre-03-coquetel-800.webp 800w, /assets/opt/palacete-monte-alegre-03-coquetel-1400.webp 1400w" sizes="(min-width: 901px) 23vw, 48vw"></picture></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
      DEPOIMENTO — mesma composição das páginas de casa, com a mesma
      tarja VISÍVEL de demonstração. Sai quando chegar depoimento real
      com autorização de imagem.
@@ -316,7 +356,7 @@
       <h2 class="h-section linhas">Quem já celebrou aqui</h2>
     </div>
     <div class="editorial__abre">
-    <div class="editorial__retrato reveal-shot">
+    <div class="editorial__retrato foto-desliza">
       <picture><source type="image/avif" srcset="/assets/opt/a-querencia-04-festa-800.avif 800w, /assets/opt/a-querencia-04-festa-1400.avif 1400w" sizes="(min-width: 900px) 40vw, 100vw"><img src="/assets/opt/a-querencia-04-festa-1400.webp" alt="Pista cheia sob o telhado de madeira, com varais de luz acesos" width="1400" height="1875" loading="lazy" decoding="async" srcset="/assets/opt/a-querencia-04-festa-800.webp 800w, /assets/opt/a-querencia-04-festa-1400.webp 1400w" sizes="(min-width: 900px) 40vw, 100vw"></picture>
     </div>
     <figure class="editorial__depo rise">

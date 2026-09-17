@@ -57,6 +57,34 @@ sujeitos a validação."). Se a decisão mudar, ela muda nas TRÊS LPs no mesmo
 commit, incluindo a de casamento que já está no ar: tarjar só as páginas
 novas criaria incoerência entre rotas irmãs.
 
+## 17/09/2026 — a galeria das LPs de ocasião
+
+As três rotas de `/social/eventos/` ganharam uma galeria de oito fotos, pedida
+pela cliente no retorno do dia 17 ("a página de ocasião precisa de um espaço
+com mais mídias, como se fosse uma galeria"). O acervo dela sai desta pasta e
+por isso entra aqui.
+
+Cada galeria mistura o percurso das quatro casas (`01-chegada` … `05-saida`,
+tudo IA) com fotos de apoio (`mesa-posta`, `pista-noite`, `brinde-por-do-sol`,
+`propriedade-anoitecer`, também IA). Só as `-amplitude` e `-vertical` das casas
+são fotografia da cliente, e elas não entram nesta seleção porque já aparecem
+no bloco das quatro casas, mais acima na mesma página.
+
+Duas regras que a seleção seguiu, e que quem trocar as fotos precisa manter:
+
+1. **Nada de "os noivos" fora do casamento.** Os textos alternativos de
+   `05-saida` nomeiam os noivos, então essas fotos só entram na LP de
+   casamento. Debutante e bodas usam chegada, coquetel, jantar e pista, que
+   servem a qualquer ocasião.
+2. **Sem repetir a foto de serviço da mesma página.** `gastronomia`,
+   `coquetelaria`, `decoracao`, `producao` e `tecnologia-audiovisual` já são os
+   cinco cartões da seção "um contrato": repeti-las na galeria logo abaixo
+   entrega o tamanho do acervo.
+
+A galeria NÃO leva tarja de IA, pela mesma decisão registrada acima: a tarja
+visível cobre a hospedagem, e o resto está coberto pela linha do rodapé. Se a
+decisão mudar, muda nas três LPs e nas quatro páginas de casa no mesmo commit.
+
 ## O resto da pasta segue sendo IA
 
 **Estas imagens NÃO são as casas da Di Terrá.** São cenários gerados por IA

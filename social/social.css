@@ -71,8 +71,13 @@
    anterior ao layout fluido: com ele mudaram 4px de gutter, nada mais. */
 .page-hero > .wrap { width: 100%; margin-inline: 0; }
 .page-hero__media { position: absolute; inset: 0; z-index: -2; }
+/* O enquadramento é da FOTO, não do molde: onze rotas seguem no
+   "center 40%" de sempre, e a página que tem uma foto com o assunto
+   fora do meio escreve o próprio --hero-foco (as LPs de ocasião fazem
+   isso em social/evento.css). Sem a variável, nada muda de pixel. */
 .page-hero__media img {
-  width: 100%; height: 112%; object-fit: cover; object-position: center 40%;
+  width: 100%; height: 112%; object-fit: cover;
+  object-position: var(--hero-foco, center 40%);
   transform: translateY(-6%);
 }
 .page-hero::before {
