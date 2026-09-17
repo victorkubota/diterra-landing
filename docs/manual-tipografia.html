@@ -1,0 +1,1310 @@
+<title>Tipografia Di Terrá</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Figtree:wght@300..700&family=Gilda+Display&family=Hanken+Grotesk:wght@300..700&family=Imperial+Script&family=Instrument+Serif:ital@0;1&family=Italiana&family=Jost:wght@300..600&family=Mrs+Saint+Delafield&family=Oooh+Baby&family=Parisienne&family=Petit+Formal+Script&family=Playfair+Display:wght@400..700&family=Plus+Jakarta+Sans:wght@300..700&family=Prata&display=swap">
+
+<style>
+/* ─────────────────────────────────────────────────────────────────────
+   Tokens. Os valores vêm do site: tema-social.css (cor) e base.css
+   (escala, tracking). Nada aqui é inventado para o documento.
+   ───────────────────────────────────────────────────────────────────── */
+:root {
+  color-scheme: light;
+
+  --chao:        #efede7;   /* sand-100, "a mesa" */
+  --papel:       #faf9f6;
+  --papel-alt:   #f3f1ea;
+  --tinta:       #111542;   /* azul royal */
+  --tinta-fraca: #4a4f78;   /* ui-text-muted */
+  --acento:      #9c582b;   /* ui-link-brick: o tijolo que passa em contraste sobre claro */
+  --acento-vivo: #c67139;   /* marrom tijolo puro, só em filete e superfície */
+  --rosa:        #f4bfb3;
+  --rosa-claro:  #fbe4de;
+  --fio:         rgba(17,21,66,.14);
+  --fio-forte:   rgba(17,21,66,.28);
+  --alerta-bg:   #fbe4de;
+  --alerta-tx:   #6b3f22;
+
+  --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --sans:  'Albert Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+
+  --medida: 66ch;
+  --larg:   1080px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --chao:        #0d1038;   /* ui-bg-rodape */
+    --papel:       #151949;
+    --papel-alt:   #1b1f55;
+    --tinta:       #fefae0;   /* bege marfim */
+    --tinta-fraca: rgba(254,250,224,.74);
+    --acento:      #f4bfb3;   /* ui-accent-on-dark */
+    --acento-vivo: #f4bfb3;
+    --fio:         rgba(254,250,224,.20);
+    --fio-forte:   rgba(254,250,224,.40);
+    --alerta-bg:   rgba(244,191,179,.13);
+    --alerta-tx:   #f4bfb3;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --chao:        #0d1038;
+  --papel:       #151949;
+  --papel-alt:   #1b1f55;
+  --tinta:       #fefae0;
+  --tinta-fraca: rgba(254,250,224,.74);
+  --acento:      #f4bfb3;
+  --acento-vivo: #f4bfb3;
+  --fio:         rgba(254,250,224,.20);
+  --fio-forte:   rgba(254,250,224,.40);
+  --alerta-bg:   rgba(244,191,179,.13);
+  --alerta-tx:   #f4bfb3;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--chao);
+  color: var(--tinta);
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.folha {
+  max-width: var(--larg);
+  margin: 0 auto;
+  padding-inline: 20px;
+  padding-block: 0;
+}
+
+/* ── Tipografia do documento ───────────────────────────────────────── */
+.olho {
+  display: block;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--tinta-fraca);
+  margin: 0 0 14px;
+}
+h1, h2, h3 { font-family: var(--serif); font-weight: 300; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.6rem, 1.6rem + 4.2vw, 4.4rem); line-height: 1.02; letter-spacing: -.01em; }
+h2 { font-size: clamp(1.9rem, 1.4rem + 1.8vw, 2.9rem); line-height: 1.08; letter-spacing: -.008em; }
+h3 { font-size: clamp(1.3rem, 1.1rem + .8vw, 1.6rem); line-height: 1.15; }
+h4 {
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase; margin: 0;
+  color: var(--tinta-fraca);
+}
+p { margin: 0; max-width: var(--medida); }
+a { color: var(--acento); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+strong { font-weight: 500; }
+code {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: .86em;
+  background: var(--papel-alt);
+  border: 1px solid var(--fio);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+/* ── Capa ──────────────────────────────────────────────────────────── */
+.capa {
+  padding-block: clamp(56px, 9vw, 104px) clamp(40px, 6vw, 72px);
+  border-bottom: 1px solid var(--fio);
+}
+.capa__lead {
+  font-size: clamp(1.125rem, 1rem + .4vw, 1.3rem);
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--tinta-fraca);
+  margin-top: 26px;
+  max-width: 54ch;
+}
+.capa__meta {
+  display: flex; flex-wrap: wrap; gap: 10px 28px;
+  margin-top: 34px; padding-top: 22px;
+  border-top: 1px solid var(--fio);
+  font-size: 13px; color: var(--tinta-fraca);
+}
+.capa__meta b { font-weight: 500; color: var(--tinta); }
+
+/* ── Sumário ───────────────────────────────────────────────────────── */
+.sumario { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; }
+.sumario a {
+  font-size: 13px; letter-spacing: .04em;
+  padding: 7px 14px;
+  border: 1px solid var(--fio);
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--tinta);
+  background: var(--papel);
+  transition: border-color .2s, background .2s;
+}
+.sumario a:hover { border-color: var(--acento); background: var(--papel-alt); }
+
+/* ── Seções ────────────────────────────────────────────────────────── */
+section { padding-block: clamp(48px, 7vw, 84px); border-bottom: 1px solid var(--fio); }
+section:last-of-type { border-bottom: 0; }
+.secao__cabeca { margin-bottom: clamp(28px, 4vw, 44px); }
+.secao__cabeca p { margin-top: 18px; color: var(--tinta-fraca); font-weight: 300; font-size: 1.05rem; }
+.pilha { display: flex; flex-direction: column; gap: 22px; }
+.pilha p { font-weight: 300; }
+
+/* ── Aviso / nota ──────────────────────────────────────────────────── */
+.nota {
+  background: var(--alerta-bg);
+  color: var(--alerta-tx);
+  border-left: 2px solid var(--acento-vivo);
+  padding: 18px 22px;
+  font-size: .95rem;
+  line-height: 1.6;
+  max-width: var(--medida);
+}
+.nota b { font-weight: 600; }
+
+/* ── A referência: o logotipo ──────────────────────────────────────── */
+.referencia {
+  background: var(--papel);
+  border: 1px solid var(--fio);
+  padding: clamp(24px, 4vw, 40px);
+  display: grid;
+  gap: 24px;
+  align-items: center;
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 760px) { .referencia { grid-template-columns: 1.15fr 1fr; gap: 40px; } }
+.referencia img { display: block; width: 100%; max-width: 420px; height: auto; }
+.referencia__navy { display: block; }
+.referencia__branca { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .referencia__navy { display: none; }
+  :root:not([data-theme="light"]) .referencia__branca { display: block; }
+}
+:root[data-theme="dark"] .referencia__navy { display: none; }
+:root[data-theme="dark"] .referencia__branca { display: block; }
+.referencia p { font-size: .95rem; font-weight: 300; color: var(--tinta-fraca); }
+.referencia p + p { margin-top: 12px; }
+
+/* ── Espécime ──────────────────────────────────────────────────────── */
+.especimes { display: flex; flex-direction: column; gap: 18px; }
+.especime {
+  background: var(--papel);
+  border: 1px solid var(--fio);
+  padding: clamp(22px, 3.4vw, 34px);
+}
+.especime--recomendada { border-color: var(--acento-vivo); border-width: 1px; box-shadow: inset 3px 0 0 var(--acento-vivo); }
+.especime__topo {
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: 10px 16px; margin-bottom: 22px;
+}
+.especime__nome { font-family: var(--serif); font-size: 1.55rem; font-weight: 400; letter-spacing: -.005em; }
+.especime__selo {
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase; font-weight: 500;
+  padding: 4px 9px; border-radius: 3px;
+  background: var(--acento-vivo); color: #fff;
+}
+:root[data-theme="dark"] .especime__selo { color: #111542; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .especime__selo { color: #111542; }
+}
+.especime__selo--neutro { background: transparent; color: var(--tinta-fraca); border: 1px solid var(--fio-forte); }
+:root[data-theme="dark"] .especime__selo--neutro { color: var(--tinta-fraca); }
+.especime__tag { font-size: 12px; color: var(--tinta-fraca); letter-spacing: .02em; }
+.especime__tag::before { content: "·"; margin-right: 10px; opacity: .5; }
+
+.amostra { display: block; line-height: 1; margin: 0 0 6px; overflow-x: auto; }
+.amostra--nome {
+  font-size: clamp(2.6rem, 1.4rem + 5vw, 4.6rem);
+  letter-spacing: .01em;
+  padding-bottom: 6px;
+}
+.amostra--frase {
+  font-size: clamp(1.4rem, 1rem + 1.6vw, 2.1rem);
+  line-height: 1.16;
+  margin-top: 14px;
+  color: var(--tinta-fraca);
+}
+.amostra--miuda {
+  font-size: 1.25rem; line-height: 1.35; margin-top: 14px; color: var(--tinta-fraca);
+}
+.amostra--acentos {
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.1rem);
+  margin-top: 16px; letter-spacing: .02em; color: var(--tinta);
+}
+
+.veredito { display: grid; gap: 16px; margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--fio); }
+@media (min-width: 720px) { .veredito { grid-template-columns: 1fr 1fr; gap: 28px; } }
+.veredito h4 { margin-bottom: 8px; }
+.veredito p { font-size: .94rem; font-weight: 300; line-height: 1.62; max-width: none; }
+.veredito__ganha h4 { color: var(--acento); }
+
+.especime__pe {
+  display: flex; flex-wrap: wrap; gap: 8px 22px;
+  margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--fio);
+  font-size: 12.5px; color: var(--tinta-fraca);
+}
+.especime__pe b { font-weight: 500; color: var(--tinta); }
+.aplicar {
+  margin-left: auto; font-family: var(--sans); font-size: 11px; font-weight: 500;
+  letter-spacing: .16em; text-transform: uppercase;
+  background: none; border: 0; border-bottom: 1px solid var(--fio-forte);
+  color: var(--tinta); padding: 2px 0; cursor: pointer;
+  transition: color .2s, border-color .2s;
+}
+.aplicar:hover { color: var(--acento); border-color: var(--acento); }
+
+/* ── Provador ──────────────────────────────────────────────────────── */
+.provador {
+  --pv-display: 'Cormorant Garamond', Georgia, serif;
+  --pv-script:  'Oooh Baby', cursive;
+  --pv-sans:    'Albert Sans', Arial, sans-serif;
+  --pv-chao:    #efede7;
+  --pv-tinta:   #111542;
+  --pv-fraca:   #4a4f78;
+  --pv-acento:  #9c582b;
+  --pv-fio:     rgba(17,21,66,.14);
+  border: 1px solid var(--fio);
+  background: var(--papel);
+}
+.provador--escuro {
+  --pv-chao:   #111542;
+  --pv-tinta:  #fefae0;
+  --pv-fraca:  rgba(254,250,224,.78);
+  --pv-acento: #f4bfb3;
+  --pv-fio:    rgba(254,250,224,.22);
+}
+.controles { padding: 20px clamp(18px, 3vw, 28px); display: flex; flex-direction: column; gap: 16px; }
+.controle { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.controle__rotulo {
+  font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--tinta-fraca); width: 84px; flex-shrink: 0;
+}
+.chip {
+  font-family: var(--sans); font-size: 12.5px; font-weight: 400;
+  padding: 6px 13px; border-radius: 999px;
+  border: 1px solid var(--fio); background: transparent; color: var(--tinta);
+  cursor: pointer; transition: border-color .2s, background .2s, color .2s;
+}
+.chip:hover { border-color: var(--fio-forte); }
+.chip[aria-pressed="true"] { background: var(--tinta); color: var(--chao); border-color: var(--tinta); }
+.chip:focus-visible, .aplicar:focus-visible, .sumario a:focus-visible {
+  outline: 2px solid var(--acento-vivo); outline-offset: 3px;
+}
+
+.palco {
+  background: var(--pv-chao);
+  color: var(--pv-tinta);
+  border-top: 1px solid var(--fio);
+  padding: clamp(34px, 6vw, 68px) clamp(20px, 4vw, 56px);
+  transition: background .3s ease, color .3s ease;
+}
+@media (prefers-reduced-motion: reduce) { .palco { transition: none; } .chip { transition: none; } }
+.palco__olho {
+  font-family: var(--pv-sans); font-size: 12px; font-weight: 300;
+  letter-spacing: .25em; text-transform: uppercase; color: var(--pv-fraca);
+  display: block; margin-bottom: 20px;
+}
+.palco__h1 {
+  font-family: var(--pv-display); font-weight: 300;
+  font-size: clamp(2.6rem, 1.6rem + 4.2vw, 5rem);
+  line-height: 1.02; letter-spacing: -.01em;
+  margin: 0; text-wrap: balance; max-width: 16ch;
+}
+.palco__sub {
+  font-family: var(--pv-display); font-style: italic; font-weight: 400;
+  font-size: clamp(1.125rem, 1rem + .7vw, 1.625rem);
+  color: var(--pv-fraca); margin: 18px 0 0; max-width: 40ch;
+}
+.palco__script {
+  font-family: var(--pv-script); font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 2.4rem); line-height: 1.2;
+  color: var(--pv-acento); margin: 30px 0 0;
+}
+.palco__regua { border: 0; border-top: 1px solid var(--pv-fio); margin: 38px 0; }
+.palco__h2 {
+  font-family: var(--pv-display); font-weight: 300;
+  font-size: clamp(2rem, 1.5rem + 2.1vw, 3.5rem);
+  line-height: 1.08; letter-spacing: -.008em; margin: 0;
+}
+.palco__corpo {
+  font-family: var(--pv-sans); font-weight: 300; font-size: 1.125rem;
+  line-height: 1.5; color: var(--pv-fraca); margin: 18px 0 0; max-width: 46ch;
+}
+.palco__cartoes { display: grid; gap: 16px; margin-top: 34px; grid-template-columns: minmax(0,1fr); }
+@media (min-width: 620px) { .palco__cartoes { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+.cartao { border: 1px solid var(--pv-fio); padding: 20px; }
+.cartao__titulo {
+  font-family: var(--pv-display); font-weight: 400;
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  line-height: 1.1; letter-spacing: -.01em; margin: 0;
+}
+.cartao__texto {
+  font-family: var(--pv-sans); font-size: .9rem; font-weight: 400;
+  line-height: 1.6; color: var(--pv-fraca); margin: 8px 0 0;
+}
+.palco__botao {
+  font-family: var(--pv-sans); font-size: 14px; font-weight: 400;
+  letter-spacing: .2em; text-transform: uppercase;
+  border: 1px solid var(--pv-tinta); color: var(--pv-tinta);
+  background: transparent; border-radius: 12px;
+  padding: 16px 36px; margin-top: 34px; cursor: default;
+}
+
+/* ── Tabela ────────────────────────────────────────────────────────── */
+.rolagem { overflow-x: auto; border: 1px solid var(--fio); background: var(--papel); }
+table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 13.5px; }
+caption {
+  text-align: left; padding: 16px clamp(16px, 2.5vw, 22px);
+  font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--tinta-fraca); border-bottom: 1px solid var(--fio);
+}
+th, td { text-align: left; padding: 12px clamp(12px, 2vw, 18px); border-bottom: 1px solid var(--fio); vertical-align: top; }
+th { font-weight: 500; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--tinta-fraca); }
+tbody tr:last-child td { border-bottom: 0; }
+td b { font-weight: 500; }
+.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* ── Passos numerados (é uma sequência de verdade) ─────────────────── */
+.passos { list-style: none; margin: 0; padding: 0; counter-reset: passo; display: flex; flex-direction: column; gap: 4px; }
+.passos li {
+  counter-increment: passo;
+  display: grid; grid-template-columns: 38px minmax(0,1fr); gap: 14px;
+  padding: 18px 0; border-bottom: 1px solid var(--fio);
+}
+.passos li:last-child { border-bottom: 0; }
+.passos li::before {
+  content: counter(passo, decimal-leading-zero);
+  font-family: var(--serif); font-size: 1.35rem; line-height: 1.2;
+  color: var(--acento); font-variant-numeric: tabular-nums;
+}
+.passos h3 { font-family: var(--sans); font-size: 1rem; font-weight: 500; line-height: 1.4; }
+.passos p { font-size: .93rem; font-weight: 300; margin-top: 7px; color: var(--tinta-fraca); }
+
+/* ── Regras de ouro ────────────────────────────────────────────────── */
+.regras { display: grid; gap: 1px; background: var(--fio); border: 1px solid var(--fio); }
+@media (min-width: 720px) { .regras { grid-template-columns: 1fr 1fr; } }
+.regra { background: var(--papel); padding: 24px clamp(18px, 2.6vw, 26px); }
+.regra h3 { font-family: var(--sans); font-size: .98rem; font-weight: 500; line-height: 1.4; margin-bottom: 9px; }
+.regra p { font-size: .91rem; font-weight: 300; line-height: 1.6; color: var(--tinta-fraca); max-width: none; }
+
+/* ── Rodapé ────────────────────────────────────────────────────────── */
+footer {
+  padding-block: 44px 64px;
+  font-size: 12.5px; color: var(--tinta-fraca); font-weight: 300;
+  border-top: 1px solid var(--fio);
+}
+footer p { max-width: 62ch; }
+footer p + p { margin-top: 10px; }
+</style>
+
+<div class="folha">
+
+  <header class="capa">
+    <span class="olho">Di Terrá Eventos · Brandbook v2, p.8</span>
+    <h1>As três fontes da marca, e o que fazer com a que falta</h1>
+    <p class="capa__lead">
+      A Channe não veio nos arquivos de marca e é paga. Este documento mostra o que ela é,
+      quanto custa, cinco substitutas que dá para testar agora, alternativas para as outras
+      duas fontes, e as regras de aplicação de cada uma nas treze rotas do site.
+    </p>
+    <div class="capa__meta">
+      <span><b>Preparado para</b> Victoria · Di Terrá</span>
+      <span><b>Site</b> diterra-deploy.vercel.app</span>
+      <span><b>Data</b> 17 de setembro de 2026</span>
+    </div>
+    <nav class="sumario" aria-label="Seções do documento">
+      <a href="#situacao">Onde estamos</a>
+      <a href="#channe">A Channe</a>
+      <a href="#provador">Provador</a>
+      <a href="#display">Substitutas do display</a>
+      <a href="#script">A manuscrita</a>
+      <a href="#sans">A fonte de texto</a>
+      <a href="#aplicacao">Manual de aplicação</a>
+      <a href="#troca">Como trocar</a>
+    </nav>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <section id="situacao">
+    <div class="secao__cabeca">
+      <span class="olho">Situação</span>
+      <h2>Três fontes no manual, duas na mão</h2>
+      <p>
+        O brandbook v2 fecha a tipografia da marca em três papéis. Dois chegaram
+        como arquivo e estão no ar. O terceiro nunca chegou.
+      </p>
+    </div>
+
+    <div class="rolagem">
+      <table>
+        <caption>Tipografia do brandbook, e o que está publicado hoje</caption>
+        <thead>
+          <tr>
+            <th>Papel</th><th>Fonte do manual</th><th>Situação do arquivo</th><th>O que está no ar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Display</b><br>títulos e manchetes</td>
+            <td>Channe Regular</td>
+            <td>Não veio. É licenciada.</td>
+            <td>Cormorant Garamond, como substituta provisória</td>
+          </tr>
+          <tr>
+            <td><b>Manuscrita</b><br>assinatura de fecho</td>
+            <td>Oooh Baby Regular</td>
+            <td>Veio em <code>TIPOGRAFIA/OoohBaby-Regular.ttf</code></td>
+            <td>Oooh Baby, hospedada no próprio site</td>
+          </tr>
+          <tr>
+            <td><b>Texto</b><br>corpo, botão, rótulo</td>
+            <td>Albert Sans</td>
+            <td>Veio em <code>TIPOGRAFIA/AlbertSans-Black.ttf</code></td>
+            <td>Albert Sans, hospedada no próprio site</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pilha" style="margin-top: 26px;">
+      <p>
+        O <code>Fonte.zip</code> de 23,9 MB que está na pasta do brandbook engana: dentro dele há
+        uma pasta <code>Fotos</code> com seis imagens, e nenhuma fonte. A pasta TIPOGRAFIA tem só
+        os dois arquivos acima. A Channe não está em lugar nenhum do Drive.
+      </p>
+      <p>
+        O site já está preparado para recebê-la. A pilha de fontes em <code>base.css</code> declara
+        <code>--font-display: 'Channe', 'Cormorant Garamond', …</code>, com a Channe em primeiro lugar.
+        No dia em que o arquivo <code>.woff2</code> entrar na pasta e ganhar um <code>@font-face</code>,
+        ela assume os títulos sozinha.
+      </p>
+      <div class="nota">
+        <b>A Cormorant não é uma substituta da Channe.</b> São classes diferentes de serifada.
+        A Channe, como o logotipo, é de eixo vertical e contraste alto, com serifas finas e
+        cortadas. A Cormorant é old-style, de eixo inclinado e serifas macias. Ela é bonita e
+        sustenta o site, mas não ecoa a letra da marca. É por isso que esta conversa existe.
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <section id="channe">
+    <div class="secao__cabeca">
+      <span class="olho">A fonte que falta</span>
+      <h2>Channe: o que custa e o que ela não resolve</h2>
+      <p>
+        Antes de escolher uma substituta, vale saber que comprar a original é barato, e que
+        comprar não encerra o assunto.
+      </p>
+    </div>
+
+    <div class="rolagem">
+      <table>
+        <caption>Ficha da Channe</caption>
+        <tbody>
+          <tr><th>Autoria</th><td>Rahmad Mulyadi, foundry BaronWNM. Na MyFonts desde março de 2021.</td></tr>
+          <tr><th>Classe</th><td>Serifada de display, alta, estreita e de contraste alto. Capitulares desenhadas fora do padrão em A, B, F, H, P e Q, mais ligaturas próprias.</td></tr>
+          <tr><th>Estilos</th><td class="num"><b>1 só.</b> Regular. Sem itálico, sem outros pesos.</td></tr>
+          <tr><th>Idiomas</th><td>281 idiomas. Português inteiro: <b>ã õ ç á ê à</b> estão cobertos. Não há risco de acento faltando.</td></tr>
+          <tr><th>OpenType</th><td>Ligaturas padrão e discricionárias, alternativas estilísticas, versalete de caixa, frações, ordinais, kerning.</td></tr>
+          <tr><th>Preço</th><td class="num">Desktop US$ 21 · <b>Webfont US$ 21, ou US$ 17,85 com o desconto de 15% da Creative Market</b> · App US$ 168</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pilha" style="margin-top: 26px;">
+      <h3 style="font-family: var(--sans); font-size: 1.05rem; font-weight: 500;">O ponto cego: ela tem um peso só</h3>
+      <p>
+        O site pede peso 300 nos títulos. <code>.h-display</code> e <code>.h-section</code>, que são
+        a manchete e o título de seção das treze rotas, estão declarados em
+        <code>font-weight: 300</code>. A Channe não tem 300, e navegador nenhum inventa peso leve:
+        ele só sabe engrossar, nunca afinar. Na prática, todo título que hoje pede 300 vai
+        renderizar em 400 e sair <b>mais pesado do que está hoje</b>.
+      </p>
+      <p>
+        Isso não impede a compra. Impede tratar a troca como substituição de arquivo. Depois de
+        instalar, os tamanhos e o espacejamento dos títulos precisam ser recalibrados a olho,
+        porque a página muda de peso visual.
+      </p>
+      <div class="nota">
+        <b>Antes de pagar, confira uma coisa no carrinho:</b> licença de webfont costuma vir com
+        teto de visualizações mensais. Se houver teto, ele precisa caber no tráfego do site.
+        É a única letra miúda que vale ler nessa compra.
+      </div>
+      <p>
+        <b>Recomendação.</b> US$ 17,85 é barato demais para virar impedimento. Se a Channe é a
+        letra do manual, compre a licença de webfont e resolva o assunto na origem. As
+        substitutas abaixo existem para dois casos: decidir não comprar, e ter um plano de
+        comparação honesto na mão antes de gastar.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <section id="provador">
+    <div class="secao__cabeca">
+      <span class="olho">Teste ao vivo</span>
+      <h2>Provador</h2>
+      <p>
+        O bloco abaixo reproduz a hierarquia real do site: manchete, subtítulo em itálico,
+        assinatura manuscrita, título de seção, cartão e botão. Troque as fontes e veja
+        o efeito no conjunto, não na palavra solta. O botão do chão escuro importa: é onde
+        as letras finas somem.
+      </p>
+    </div>
+
+    <div class="provador" id="provador">
+      <div class="controles">
+        <div class="controle">
+          <span class="controle__rotulo" id="rot-display">Display</span>
+          <button class="chip" type="button" data-papel="display" data-fonte="'Cormorant Garamond', Georgia, serif" aria-pressed="true">Cormorant Garamond (atual)</button>
+          <button class="chip" type="button" data-papel="display" data-fonte="'Instrument Serif', Georgia, serif" aria-pressed="false">Instrument Serif</button>
+          <button class="chip" type="button" data-papel="display" data-fonte="'Prata', Georgia, serif" aria-pressed="false">Prata</button>
+          <button class="chip" type="button" data-papel="display" data-fonte="'Bodoni Moda', Georgia, serif" aria-pressed="false">Bodoni Moda</button>
+          <button class="chip" type="button" data-papel="display" data-fonte="'Italiana', Georgia, serif" aria-pressed="false">Italiana</button>
+          <button class="chip" type="button" data-papel="display" data-fonte="'Gilda Display', Georgia, serif" aria-pressed="false">Gilda Display</button>
+        </div>
+        <div class="controle">
+          <span class="controle__rotulo" id="rot-script">Manuscrita</span>
+          <button class="chip" type="button" data-papel="script" data-fonte="'Oooh Baby', cursive" aria-pressed="true">Oooh Baby (manual)</button>
+          <button class="chip" type="button" data-papel="script" data-fonte="'Parisienne', cursive" aria-pressed="false">Parisienne</button>
+          <button class="chip" type="button" data-papel="script" data-fonte="'Mrs Saint Delafield', cursive" aria-pressed="false">Mrs Saint Delafield</button>
+          <button class="chip" type="button" data-papel="script" data-fonte="'Imperial Script', cursive" aria-pressed="false">Imperial Script</button>
+          <button class="chip" type="button" data-papel="script" data-fonte="'Petit Formal Script', cursive" aria-pressed="false">Petit Formal Script</button>
+        </div>
+        <div class="controle">
+          <span class="controle__rotulo" id="rot-sans">Texto</span>
+          <button class="chip" type="button" data-papel="sans" data-fonte="'Albert Sans', Arial, sans-serif" aria-pressed="true">Albert Sans (manual)</button>
+          <button class="chip" type="button" data-papel="sans" data-fonte="'Figtree', Arial, sans-serif" aria-pressed="false">Figtree</button>
+          <button class="chip" type="button" data-papel="sans" data-fonte="'Hanken Grotesk', Arial, sans-serif" aria-pressed="false">Hanken Grotesk</button>
+          <button class="chip" type="button" data-papel="sans" data-fonte="'Plus Jakarta Sans', Arial, sans-serif" aria-pressed="false">Plus Jakarta Sans</button>
+        </div>
+        <div class="controle">
+          <span class="controle__rotulo">Chão</span>
+          <button class="chip" type="button" id="chao-claro" aria-pressed="true">Mesa clara</button>
+          <button class="chip" type="button" id="chao-escuro" aria-pressed="false">Royal escuro</button>
+        </div>
+      </div>
+
+      <div class="palco" id="palco">
+        <span class="palco__olho">Casamento</span>
+        <h3 class="palco__h1">Casamento no interior paulista</h3>
+        <p class="palco__sub">Quatro casas em Piracicaba, uma equipe só, do primeiro café ao último convidado.</p>
+        <p class="palco__script">Sua história começa aqui</p>
+
+        <hr class="palco__regua">
+
+        <h3 class="palco__h2">Solução completa</h3>
+        <p class="palco__corpo">
+          Decoração, gastronomia, coquetelaria, produção e audiovisual saem da mesma casa.
+          Um contrato, um interlocutor, uma data.
+        </p>
+
+        <div class="palco__cartoes">
+          <article class="cartao">
+            <h4 class="cartao__titulo">Casa Lucca</h4>
+            <p class="cartao__texto">Salão principal, jardim de cerimônia e hospedagem no terreno.</p>
+          </article>
+          <article class="cartao">
+            <h4 class="cartao__titulo">Espaço Rosé</h4>
+            <p class="cartao__texto">Formato intimista, com vista aberta para o pomar.</p>
+          </article>
+          <article class="cartao">
+            <h4 class="cartao__titulo">Villa Terrá</h4>
+            <p class="cartao__texto">Recepção coberta e área de lounge para até 400 convidados.</p>
+          </article>
+        </div>
+
+        <button class="palco__botao" type="button" tabindex="-1" aria-hidden="true">Falar com a Di Terrá</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <section id="display">
+    <div class="secao__cabeca">
+      <span class="olho">Papel 1 · Display</span>
+      <h2>Cinco substitutas para a Channe</h2>
+      <p>
+        O critério não é "qual é bonita". É qual se parece com a letra do logotipo, que é a
+        única peça de tipografia da marca que já está desenhada e aprovada. Compare cada
+        amostra com a referência abaixo.
+      </p>
+    </div>
+
+    <div class="referencia">
+      <div>
+        <img class="referencia__navy" src="marca-navy.png" alt="Logotipo Di Terrá em azul royal">
+        <img class="referencia__branca" src="marca-branca.png" alt="Logotipo Di Terrá em bege marfim">
+      </div>
+      <div>
+        <span class="olho">A referência</span>
+        <p>
+          Olhe três coisas: o <b>contraste</b> entre a haste grossa e a fina de cabelo; a
+          <b>serifa</b>, que é reta, afilada e cortada em ângulo, não arredondada; e o
+          <b>eixo vertical</b>, que é o que dá o ar de alta-costura.
+        </p>
+        <p>
+          E dois detalhes que só esse logotipo tem: o braço do meio do <b>E</b> desce em
+          diagonal, e a perna do <b>R</b> sai aberta, quase caligráfica. Nenhuma fonte de
+          catálogo vai reproduzir os dois. A boa candidata é a que erra menos.
+        </p>
+      </div>
+    </div>
+
+    <div class="especimes" style="margin-top: 22px;">
+
+      <article class="especime especime--recomendada">
+        <div class="especime__topo">
+          <span class="especime__nome">Instrument Serif</span>
+          <span class="especime__selo">Recomendada</span>
+          <span class="especime__tag">Serifada de display · eixo vertical · Regular e itálico</span>
+        </div>
+        <span class="amostra amostra--nome" style="font-family:'Instrument Serif',Georgia,serif;">DI TERRÁ</span>
+        <span class="amostra amostra--frase" style="font-family:'Instrument Serif',Georgia,serif;">Casamento no interior paulista</span>
+        <span class="amostra amostra--acentos" style="font-family:'Instrument Serif',Georgia,serif;">espaço · produção · coquetelaria · Terrá</span>
+        <div class="veredito">
+          <div class="veredito__ganha">
+            <h4>Onde ganha</h4>
+            <p>
+              É a que mais chega perto do "alta e fina" da Channe. Estreita, de contraste alto e
+              serifa cortada reta, do mesmo jeito do logotipo. E é a única da lista com
+              <b>itálico</b>, que é exatamente o que o subtítulo do hero pede hoje — o site tem
+              esse papel e o resolve com a Cormorant itálica.
+            </p>
+          </div>
+          <div>
+            <h4>Onde perde</h4>
+            <p>
+              Peso único, como a Channe: o <code>font-weight: 300</code> dos títulos vai cair para
+              400 do mesmo jeito. Abaixo de 24px ela fica esquelética e não serve para título
+              de cartão pequeno.
+            </p>
+          </div>
+        </div>
+        <div class="especime__pe">
+          <span><b>Pesos</b> 400 + itálico</span>
+          <span><b>Licença</b> SIL Open Font License</span>
+          <span class="num"><b>Custo</b> R$ 0</span>
+          <button class="aplicar" type="button" data-papel="display" data-fonte="'Instrument Serif', Georgia, serif">Ver no provador</button>
+        </div>
+      </article>
+
+      <article class="especime">
+        <div class="especime__topo">
+          <span class="especime__nome">Bodoni Moda</span>
+          <span class="especime__selo especime__selo--neutro">A mais flexível</span>
+          <span class="especime__tag">Didone · eixo vertical · variável com eixo óptico</span>
+        </div>
+        <span class="amostra amostra--nome" style="font-family:'Bodoni Moda',Georgia,serif;">DI TERRÁ</span>
+        <span class="amostra amostra--frase" style="font-family:'Bodoni Moda',Georgia,serif;">Casamento no interior paulista</span>
+        <span class="amostra amostra--acentos" style="font-family:'Bodoni Moda',Georgia,serif;">espaço · produção · coquetelaria · Terrá</span>
+        <div class="veredito">
+          <div class="veredito__ganha">
+            <h4>Onde ganha</h4>
+            <p>
+              É a única com <b>eixo óptico</b> de 6 a 96 e pesos de 400 a 900 no mesmo arquivo.
+              Isso resolve um problema que está anotado no CSS do site em letras miúdas: a
+              serifada de contraste alto "só entra a partir de 24px". Com eixo óptico ela se
+              engrossa sozinha nos tamanhos pequenos e afina no título grande. Um arquivo
+              serve a manchete de 96px e o título de cartão de 24px.
+            </p>
+          </div>
+          <div>
+            <h4>Onde perde</h4>
+            <p>
+              Terminais em gota e serifa reta de didone clássica. Lê mais "capa de revista de
+              moda" e menos caligráfico que o logotipo. O E e o R não têm nada do gesto do
+              desenho da marca.
+            </p>
+          </div>
+        </div>
+        <div class="especime__pe">
+          <span><b>Pesos</b> 400–900, itálico, eixo óptico 6–96</span>
+          <span><b>Licença</b> SIL Open Font License</span>
+          <span class="num"><b>Custo</b> R$ 0</span>
+          <button class="aplicar" type="button" data-papel="display" data-fonte="'Bodoni Moda', Georgia, serif">Ver no provador</button>
+        </div>
+      </article>
+
+      <article class="especime">
+        <div class="especime__topo">
+          <span class="especime__nome">Prata</span>
+          <span class="especime__tag">Didone de texto · eixo vertical · peso único</span>
+        </div>
+        <span class="amostra amostra--nome" style="font-family:'Prata',Georgia,serif;">DI TERRÁ</span>
+        <span class="amostra amostra--frase" style="font-family:'Prata',Georgia,serif;">Casamento no interior paulista</span>
+        <span class="amostra amostra--acentos" style="font-family:'Prata',Georgia,serif;">espaço · produção · coquetelaria · Terrá</span>
+        <div class="veredito">
+          <div class="veredito__ganha">
+            <h4>Onde ganha</h4>
+            <p>
+              Contraste alto e eixo vertical como o logotipo, mas com haste um pouco mais
+              robusta que a Instrument. É a candidata mais <b>segura</b>: aguenta fundo com foto,
+              aguenta o royal escuro e não quebra em tela pequena. Se a preocupação for
+              legibilidade antes de personalidade, é esta.
+            </p>
+          </div>
+          <div>
+            <h4>Onde perde</h4>
+            <p>
+              É mais larga e mais baixa que a Channe. O ar de "alta e fina" do logotipo se perde.
+              Peso único, e a versão itálica não existe.
+            </p>
+          </div>
+        </div>
+        <div class="especime__pe">
+          <span><b>Pesos</b> 400</span>
+          <span><b>Licença</b> SIL Open Font License</span>
+          <span class="num"><b>Custo</b> R$ 0</span>
+          <button class="aplicar" type="button" data-papel="display" data-fonte="'Prata', Georgia, serif">Ver no provador</button>
+        </div>
+      </article>
+
+      <article class="especime">
+        <div class="especime__topo">
+          <span class="especime__nome">Italiana</span>
+          <span class="especime__tag">Display de capitulares · contraste muito alto · peso único</span>
+        </div>
+        <span class="amostra amostra--nome" style="font-family:'Italiana',Georgia,serif;">DI TERRÁ</span>
+        <span class="amostra amostra--frase" style="font-family:'Italiana',Georgia,serif;">Casamento no interior paulista</span>
+        <span class="amostra amostra--acentos" style="font-family:'Italiana',Georgia,serif;">espaço · produção · coquetelaria · Terrá</span>
+        <div class="veredito">
+          <div class="veredito__ganha">
+            <h4>Onde ganha</h4>
+            <p>
+              Nas <b>capitulares</b> é a mais parecida com a Channe de toda a lista: altíssima,
+              estreitíssima, com hastes finas e serifas quase invisíveis. Em "DI TERRÁ" o
+              parentesco com o logotipo salta.
+            </p>
+          </div>
+          <div>
+            <h4>Onde perde</h4>
+            <p>
+              A caixa baixa é fraca e some. O site tem manchetes de frase inteira, não só de
+              palavra em caixa alta, e é aí que ela desanda. Abaixo de 32px desaparece. Serviria
+              como letra de vitrine, não como display do site inteiro.
+            </p>
+          </div>
+        </div>
+        <div class="especime__pe">
+          <span><b>Pesos</b> 400</span>
+          <span><b>Licença</b> SIL Open Font License</span>
+          <span class="num"><b>Custo</b> R$ 0</span>
+          <button class="aplicar" type="button" data-papel="display" data-fonte="'Italiana', Georgia, serif">Ver no provador</button>
+        </div>
+      </article>
+
+      <article class="especime">
+        <div class="especime__topo">
+          <span class="especime__nome">Gilda Display</span>
+          <span class="especime__tag">Serifada de display com serifa afilada · peso único</span>
+        </div>
+        <span class="amostra amostra--nome" style="font-family:'Gilda Display',Georgia,serif;">DI TERRÁ</span>
+        <span class="amostra amostra--frase" style="font-family:'Gilda Display',Georgia,serif;">Casamento no interior paulista</span>
+        <span class="amostra amostra--acentos" style="font-family:'Gilda Display',Georgia,serif;">espaço · produção · coquetelaria · Terrá</span>
+        <div class="veredito">
+          <div class="veredito__ganha">
+            <h4>Onde ganha</h4>
+            <p>
+              A serifa dela é <b>afilada e cortada</b>, e é o detalhe que mais lembra o gesto
+              caligráfico do logotipo. Tem mais corpo que a Italiana e mais personalidade que a
+              Prata. Lê bem em frase inteira.
+            </p>
+          </div>
+          <div>
+            <h4>Onde perde</h4>
+            <p>
+              Contraste mais baixo que a Channe: o efeito de alta-costura fica mais discreto.
+              Peso único e sem itálico, então o subtítulo do hero fica sem par.
+            </p>
+          </div>
+        </div>
+        <div class="especime__pe">
+          <span><b>Pesos</b> 400</span>
+          <span><b>Licença</b> SIL Open Font License</span>
+          <span class="num"><b>Custo</b> R$ 0</span>
+          <button class="aplicar" type="button" data-papel="display" data-fonte="'Gilda Display', Georgia, serif">Ver no provador</button>
+        </div>
+      </article>
+
+      <article class="especime">
+        <div class="especime__topo">
+          <span class="especime__nome">Cormorant Garamond</span>
+          <span class="especime__selo especime__selo--neutro">No ar hoje</span>
+          <span class="especime__tag">Old-style · eixo inclinado · 300 a 700 com itálico</span>
+        </div>
+        <span class="amostra amostra--nome" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400;">DI TERRÁ</span>
+        <span class="amostra amostra--frase" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:300;">Casamento no interior paulista</span>
+        <span class="amostra amostra--acentos" style="font-family:'Cormorant Garamond',Georgia,serif; font-weight:400;">espaço · produção · coquetelaria · Terrá</span>
+        <div class="veredito">
+          <div class="veredito__ganha">
+            <h4>Onde ganha</h4>
+            <p>
+              Tem <b>peso 300 de verdade</b>, e é a única aqui que atende o CSS do site como ele
+              está escrito hoje, sem recalibrar nada. Tem itálico. Tem família inteira. É
+              bonita e está funcionando.
+            </p>
+          </div>
+          <div>
+            <h4>Onde perde</h4>
+            <p>
+              Classe errada. Eixo inclinado e serifa macia de garalda: ela conversa com livro
+              antigo, não com o logotipo da marca. Um convidado atento não liga o título à
+              letra da placa na entrada.
+            </p>
+          </div>
+        </div>
+        <div class="especime__pe">
+          <span><b>Pesos</b> 300–700 + itálico</span>
+          <span><b>Licença</b> SIL Open Font License</span>
+          <span class="num"><b>Custo</b> R$ 0</span>
+          <button class="aplicar" type="button" data-papel="display" data-fonte="'Cormorant Garamond', Georgia, serif">Ver no provador</button>
+        </div>
+      </article>
+    </div>
+
+    <div class="nota" style="margin-top: 26px;">
+      <b>Uma descartada, e o motivo.</b> A Playfair Display é a serifada de contraste alto mais
+      usada da web. Ela funcionaria, mas tem altura de x grande e está em tanta landing page
+      que passou a soar a template. Para uma marca que vende exclusividade, é um custo de
+      imagem sem contrapartida.
+    </div>
+
+    <div class="rolagem" style="margin-top: 22px;">
+      <table>
+        <caption>Resumo do display</caption>
+        <thead>
+          <tr><th>Fonte</th><th>Pesos</th><th>Itálico</th><th>Custo</th><th>Veredito</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Channe</b></td><td class="num">1</td><td>Não</td><td class="num">US$ 17,85</td><td>A letra do manual. Compre se a fidelidade ao brandbook for inegociável.</td></tr>
+          <tr><td><b>Instrument Serif</b></td><td class="num">1</td><td>Sim</td><td class="num">R$ 0</td><td>A substituta mais próxima, e a única de graça com itálico.</td></tr>
+          <tr><td><b>Bodoni Moda</b></td><td class="num">400–900</td><td>Sim</td><td class="num">R$ 0</td><td>A escolha técnica: resolve o título pequeno com eixo óptico.</td></tr>
+          <tr><td><b>Prata</b></td><td class="num">1</td><td>Não</td><td class="num">R$ 0</td><td>A segura. Menos caráter, nenhum risco.</td></tr>
+          <tr><td><b>Italiana</b></td><td class="num">1</td><td>Não</td><td class="num">R$ 0</td><td>Só para caixa alta. Não sustenta o site inteiro.</td></tr>
+          <tr><td><b>Gilda Display</b></td><td class="num">1</td><td>Não</td><td class="num">R$ 0</td><td>Bom meio-termo de caráter e leitura.</td></tr>
+          <tr><td><b>Cormorant Garamond</b></td><td class="num">300–700</td><td>Sim</td><td class="num">R$ 0</td><td>Está no ar e funciona, mas é de outra família de desenho.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <section id="script">
+    <div class="secao__cabeca">
+      <span class="olho">Papel 2 · Manuscrita</span>
+      <h2>A assinatura de fecho</h2>
+      <p>
+        A Oooh Baby aparece uma vez por página, sempre na mesma função: a frase manuscrita
+        que fecha a seção de contato. "Sua história começa aqui" em dez rotas, "A data deles"
+        na página de bodas. Ela está no manual, veio no arquivo e é gratuita. Trocar é
+        opcional, e há um motivo real para considerar.
+      </p>
+    </div>
+
+    <div class="nota">
+      <b>O sintoma.</b> A Oooh Baby é monolinear e muito fina. A regra de cor dessa assinatura
+      já precisou de dois remendos no CSS por causa disso: tijolo sobre rosa mede 2,96:1 e
+      reprova, tijolo sobre o rosa da debutante idem. Uma letra de traço mais encorpado não
+      teria criado esses casos.
+    </div>
+
+    <div class="especimes" style="margin-top: 22px;">
+
+      <article class="especime">
+        <div class="especime__topo">
+          <span class="especime__nome">Oooh Baby</span>
+          <span class="especime__selo especime__selo--neutro">No manual e no ar</span>
+          <span class="especime__tag">Manuscrita casual · monolinear · muito fina</span>
+        </div>
+        <span class="amostra amostra--frase" style="font-family:'Oooh Baby',cursive; color: var(--tinta); font-size: clamp(2rem,1.4rem+2.4vw,3rem);">Sua história começa aqui</span>
+        <div class="veredito">
+          <div class="veredito__ganha"><h4>Onde ganha</h4><p>É a do brandbook. Informal e leve, combina com o tom de conversa da marca. Já está hospedada no site, sem trabalho nenhum a fazer.</p></div>
+          <div><h4>Onde perde</h4><p>Traço fino demais. Sobre foto, sobre o rosa e em tela pequena ela some ou reprova em contraste.</p></div>
+        </div>
+      </article>
+
+      <article class="especime especime--recomendada">
+        <div class="especime__topo">
+          <span class="especime__nome">Parisienne</span>
+          <span class="especime__selo">Se for trocar</span>
+          <span class="especime__tag">Manuscrita de contraste médio · traço encorpado</span>
+        </div>
+        <span class="amostra amostra--frase" style="font-family:'Parisienne',cursive; color: var(--tinta); font-size: clamp(2rem,1.4rem+2.4vw,3rem);">Sua história começa aqui</span>
+        <div class="veredito">
+          <div class="veredito__ganha"><h4>Onde ganha</h4><p>Mantém o ar manuscrito e ganha massa. Lê sobre foto, lê sobre o rosa, lê no royal escuro. É a troca que resolve o problema de contraste sem mudar o tom da marca.</p></div>
+          <div><h4>Onde perde</h4><p>Um pouco menos espontânea que a Oooh Baby. E sai do brandbook, o que exige registrar a decisão no manual da marca.</p></div>
+        </div>
+      </article>
+
+      <article class="especime">
+        <div class="especime__topo">
+          <span class="especime__nome">Mrs Saint Delafield</span>
+          <span class="especime__tag">Copperplate formal · alta inclinação</span>
+        </div>
+        <span class="amostra amostra--frase" style="font-family:'Mrs Saint Delafield',cursive; color: var(--tinta); font-size: clamp(2.2rem,1.4rem+2.8vw,3.4rem);">Sua história começa aqui</span>
+        <div class="veredito">
+          <div class="veredito__ganha"><h4>Onde ganha</h4><p>É a letra de convite de casamento por excelência. Se a marca quiser subir de registro e falar mais formal, é ela.</p></div>
+          <div><h4>Onde perde</h4><p>Tão fina quanto a Oooh Baby: não resolve o contraste. E o formalismo dela briga com o tom direto do resto do site.</p></div>
+        </div>
+      </article>
+
+      <article class="especime">
+        <div class="especime__topo">
+          <span class="especime__nome">Petit Formal Script</span>
+          <span class="especime__tag">Manuscrita formal · traço firme</span>
+        </div>
+        <span class="amostra amostra--frase" style="font-family:'Petit Formal Script',cursive; color: var(--tinta); font-size: clamp(2rem,1.4rem+2.4vw,3rem);">Sua história começa aqui</span>
+        <div class="veredito">
+          <div class="veredito__ganha"><h4>Onde ganha</h4><p>A mais legível das quatro. Formal sem ser rebuscada, e a única que aguenta cair para 20px se a assinatura precisar aparecer pequena em algum lugar.</p></div>
+          <div><h4>Onde perde</h4><p>Menos elegante. Lembra papelaria de escritório mais do que convite.</p></div>
+        </div>
+      </article>
+
+      <article class="especime">
+        <div class="especime__topo">
+          <span class="especime__nome">Imperial Script</span>
+          <span class="especime__tag">Caligráfica de contraste altíssimo</span>
+        </div>
+        <span class="amostra amostra--frase" style="font-family:'Imperial Script',cursive; color: var(--tinta); font-size: clamp(2.4rem,1.6rem+3vw,3.8rem);">Sua história começa aqui</span>
+        <div class="veredito">
+          <div class="veredito__ganha"><h4>Onde ganha</h4><p>Contraste grosso-fino altíssimo, que é exatamente o que o logotipo tem. É a única manuscrita que <b>rima com o display</b> em vez de só conviver com ele.</p></div>
+          <div><h4>Onde perde</h4><p>Os traços finos são de cabelo: em tela comum eles quebram. Só funciona acima de 40px e sobre fundo chapado.</p></div>
+        </div>
+      </article>
+    </div>
+
+    <p style="margin-top: 24px; font-weight: 300;">
+      <b>Recomendação.</b> Manter a Oooh Baby, porque é a do manual e o problema dela já está
+      contornado no CSS. Se em algum momento a assinatura precisar aparecer sobre foto ou em
+      tamanho menor, a troca certa é a Parisienne.
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <section id="sans">
+    <div class="secao__cabeca">
+      <span class="olho">Papel 3 · Texto</span>
+      <h2>A fonte de texto</h2>
+      <p>
+        A Albert Sans é a única fonte que aparece nos <b>dois</b> manuais: no brandbook social,
+        página 8, e no guia corporativo, página 11. Ela carrega corpo, rótulo, botão,
+        formulário e navegação em todas as rotas. É a que menos motivo tem para mudar.
+      </p>
+    </div>
+
+    <div class="nota">
+      <b>Antes de considerar alternativa, o histórico.</b> A home social já usou a <b>Jost</b>,
+      que não está em manual nenhum, e ela foi removida justamente por isso. Voltar a uma
+      geométrica de fora do brandbook seria refazer um erro já corrigido.
+    </div>
+
+    <div class="especimes" style="margin-top: 22px;">
+
+      <article class="especime especime--recomendada">
+        <div class="especime__topo">
+          <span class="especime__nome">Albert Sans</span>
+          <span class="especime__selo">Manter</span>
+          <span class="especime__tag">Geométrica · variável 100–900 · nos dois manuais</span>
+        </div>
+        <span class="amostra amostra--miuda" style="font-family:'Albert Sans',Arial,sans-serif; color: var(--tinta); font-size: 1.5rem; font-weight: 300;">Quatro casas em Piracicaba, uma equipe só.</span>
+        <span class="amostra amostra--miuda" style="font-family:'Albert Sans',Arial,sans-serif; font-size: 1rem; font-weight: 400;">Decoração, gastronomia, coquetelaria, produção e audiovisual saem da mesma casa. Um contrato, um interlocutor, uma data — 400 convidados no máximo.</span>
+        <span class="amostra amostra--miuda" style="font-family:'Albert Sans',Arial,sans-serif; font-size: 12px; font-weight: 300; letter-spacing: .25em; text-transform: uppercase;">Espaços · Soluções · Fornecedores</span>
+        <div class="veredito">
+          <div class="veredito__ganha"><h4>Onde ganha</h4><p>É do manual, é gratuita, é variável e já está hospedada no site. A caixa alta com espacejamento largo, que é a assinatura dos rótulos e botões da marca, fica excelente nela.</p></div>
+          <div><h4>Onde perde</h4><p>Geométrica com altura de x baixa: parágrafo longo em 16px cansa mais que numa grotesca. E o peso 300 sobre o royal escuro perde massa — o site já compensa isso subindo para 400 com um fio de espacejamento.</p></div>
+        </div>
+      </article>
+
+      <article class="especime">
+        <div class="especime__topo">
+          <span class="especime__nome">Hanken Grotesk</span>
+          <span class="especime__tag">Neogrotesca · variável 100–900</span>
+        </div>
+        <span class="amostra amostra--miuda" style="font-family:'Hanken Grotesk',Arial,sans-serif; color: var(--tinta); font-size: 1.5rem; font-weight: 300;">Quatro casas em Piracicaba, uma equipe só.</span>
+        <span class="amostra amostra--miuda" style="font-family:'Hanken Grotesk',Arial,sans-serif; font-size: 1rem; font-weight: 400;">Decoração, gastronomia, coquetelaria, produção e audiovisual saem da mesma casa. Um contrato, um interlocutor, uma data — 400 convidados no máximo.</span>
+        <div class="veredito">
+          <div class="veredito__ganha"><h4>Onde ganha</h4><p>Altura de x maior e formas mais abertas. É a melhor das quatro para texto corrido longo e para campo de formulário em celular.</p></div>
+          <div><h4>Onde perde</h4><p>Neutra. Não acrescenta personalidade nenhuma, e sai do brandbook para ganhar só conforto de leitura.</p></div>
+        </div>
+      </article>
+
+      <article class="especime">
+        <div class="especime__topo">
+          <span class="especime__nome">Figtree</span>
+          <span class="especime__tag">Geométrica humanista · variável 300–900</span>
+        </div>
+        <span class="amostra amostra--miuda" style="font-family:'Figtree',Arial,sans-serif; color: var(--tinta); font-size: 1.5rem; font-weight: 300;">Quatro casas em Piracicaba, uma equipe só.</span>
+        <span class="amostra amostra--miuda" style="font-family:'Figtree',Arial,sans-serif; font-size: 1rem; font-weight: 400;">Decoração, gastronomia, coquetelaria, produção e audiovisual saem da mesma casa. Um contrato, um interlocutor, uma data — 400 convidados no máximo.</span>
+        <div class="veredito">
+          <div class="veredito__ganha"><h4>Onde ganha</h4><p>A troca de menor impacto visual: mesma família geométrica da Albert, com mais altura de x e mais calor. Trocar uma pela outra quase não muda o desenho das páginas.</p></div>
+          <div><h4>Onde perde</h4><p>Se muda tão pouco, o ganho também é pouco. Não justifica sair do manual.</p></div>
+        </div>
+      </article>
+
+      <article class="especime">
+        <div class="especime__topo">
+          <span class="especime__nome">Plus Jakarta Sans</span>
+          <span class="especime__tag">Humanista de interface · variável 200–800</span>
+        </div>
+        <span class="amostra amostra--miuda" style="font-family:'Plus Jakarta Sans',Arial,sans-serif; color: var(--tinta); font-size: 1.5rem; font-weight: 300;">Quatro casas em Piracicaba, uma equipe só.</span>
+        <span class="amostra amostra--miuda" style="font-family:'Plus Jakarta Sans',Arial,sans-serif; font-size: 1rem; font-weight: 400;">Decoração, gastronomia, coquetelaria, produção e audiovisual saem da mesma casa. Um contrato, um interlocutor, uma data — 400 convidados no máximo.</span>
+        <div class="veredito">
+          <div class="veredito__ganha"><h4>Onde ganha</h4><p>Desenhada para interface: números e rótulos ficam muito claros. Boa se o site ganhar painel, tabela de capacidade ou orçamento na tela.</p></div>
+          <div><h4>Onde perde</h4><p>Tem cara de produto de software. Não é o registro de uma casa de eventos.</p></div>
+        </div>
+      </article>
+    </div>
+
+    <p style="margin-top: 24px; font-weight: 300;">
+      <b>Recomendação.</b> Manter a Albert Sans, sem ressalvas. É a única das três que está
+      certa, completa e nos dois manuais ao mesmo tempo.
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <section id="aplicacao">
+    <div class="secao__cabeca">
+      <span class="olho">Manual</span>
+      <h2>Onde cada fonte entra no site</h2>
+      <p>
+        Esta é a tabela que vale como regra. Os tamanhos são faixas porque escalam com a
+        largura da tela: o primeiro número é no celular, o segundo no desktop.
+      </p>
+    </div>
+
+    <div class="rolagem">
+      <table>
+        <caption>Papéis tipográficos das treze rotas</caption>
+        <thead>
+          <tr><th>Papel</th><th>Classe no código</th><th>Onde aparece</th><th>Fonte</th><th>Tamanho</th><th>Peso</th><th>Espacejamento</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Manchete</b></td><td><code>.h-display</code></td><td>O h1 de cada rota</td><td>Display</td><td class="num">42 → 80px</td><td class="num">300</td><td class="num">-0,01em</td></tr>
+          <tr><td><b>Manchete de seção</b></td><td><code>.manchete</code></td><td>Abertura da home e do corporativo</td><td>Display</td><td class="num">44 → 96px</td><td class="num">300</td><td class="num">-0,01em</td></tr>
+          <tr><td><b>Título de seção</b></td><td><code>.h-section</code></td><td>Todo h2</td><td>Display</td><td class="num">32 → 56px</td><td class="num">300</td><td class="num">-0,008em</td></tr>
+          <tr><td><b>Título de cartão em display</b></td><td><code>.h-card--display</code></td><td>Overlay de evento, cartão de casa</td><td>Display</td><td class="num">24 → 32px</td><td class="num">400</td><td class="num">-0,01em</td></tr>
+          <tr><td><b>Título de espaço</b></td><td><code>--text-lg-display</code></td><td>Nome de casa e de serviço</td><td>Display</td><td class="num">20 → 28px</td><td class="num">400</td><td class="num">-0,01em</td></tr>
+          <tr><td><b>Título de cartão</b></td><td><code>.h-card</code></td><td>Cartões em geral</td><td>Texto</td><td class="num">18 → 20px</td><td class="num">500</td><td class="num">0</td></tr>
+          <tr><td><b>Linha de abertura</b></td><td><code>.lead</code></td><td>Parágrafo que abre a seção</td><td>Texto</td><td class="num">18 → 20px</td><td class="num">300</td><td class="num">0</td></tr>
+          <tr><td><b>Corpo</b></td><td><code>.prose p</code></td><td>Texto corrido</td><td>Texto</td><td class="num">16px</td><td class="num">400</td><td class="num">0</td></tr>
+          <tr><td><b>Rótulo de seção</b></td><td><code>.eyebrow</code></td><td>A palavra em caixa alta acima do título</td><td>Texto</td><td class="num">12px</td><td class="num">300</td><td class="num">0,25em</td></tr>
+          <tr><td><b>Botão</b></td><td><code>.btn</code></td><td>Todo CTA</td><td>Texto</td><td class="num">14px</td><td class="num">400</td><td class="num">0,2em</td></tr>
+          <tr><td><b>Assinatura</b></td><td><code>.script</code></td><td>Fecho de contato, uma vez por página</td><td>Manuscrita</td><td class="num">24 → 38px</td><td class="num">400</td><td class="num">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin-top: 44px; margin-bottom: 20px;">As regras que não se quebram</h3>
+
+    <div class="regras">
+      <div class="regra">
+        <h3>Display nunca abaixo de 24px</h3>
+        <p>
+          Serifada de contraste alto perde as hastes finas em corpo pequeno e fica esquelética.
+          Abaixo de 24px o título passa para a fonte de texto em peso 500. Essa fronteira já está
+          escrita no CSS e vale para qualquer display que entre no lugar da Cormorant — exceto a
+          Bodoni Moda, que tem eixo óptico e se defende sozinha.
+        </p>
+      </div>
+      <div class="regra">
+        <h3>A manuscrita aparece uma vez por página</h3>
+        <p>
+          Nunca em parágrafo, nunca em botão, nunca em caixa alta, nunca em lista. Ela é
+          assinatura: se repetir, deixa de ser. E nunca vai num lugar onde o texto precise ser
+          lido rápido, como preço, data ou endereço.
+        </p>
+      </div>
+      <div class="regra">
+        <h3>Caixa alta só em rótulo e botão</h3>
+        <p>
+          São os dois únicos papéis em versal, e os dois pedem espacejamento largo: 0,25em no
+          rótulo e 0,2em no botão. Display em caixa alta com espacejamento não existe no site —
+          o único versal grande da marca é o logotipo, que é imagem, não fonte.
+        </p>
+      </div>
+      <div class="regra">
+        <h3>Sobre o royal escuro, o corpo sobe um peso</h3>
+        <p>
+          Texto claro sobre fundo escuro perde massa óptica. Em qualquer seção invertida o corpo
+          vai de 300 para 400, ganha 0,012em de espacejamento e 1,75 de entrelinha. Já está no
+          CSS e continua valendo com qualquer fonte nova.
+        </p>
+      </div>
+      <div class="regra">
+        <h3>A assinatura lê o acento do tema, não o tijolo</h3>
+        <p>
+          O marrom tijolo sobre o rosa da debutante mede 2,96:1 e reprova para texto grande, que
+          pede 3:1. A cor da assinatura vem do token de acento de cada tema, e na debutante isso
+          vira o rosa escuro, que dá 7,43:1. Não escreva a cor à mão nessa linha.
+        </p>
+      </div>
+      <div class="regra">
+        <h3>Título com gradiente não aceita <code>background</code> atalho</h3>
+        <p>
+          Os títulos com a classe que acende em gradiente pintam o texto por recorte de fundo.
+          Escrever <code>background:</code> nesse elemento zera o gradiente e o recorte, e o texto
+          some sem erro nenhum. Faixa ou tarja atrás de um título desses vai num elemento irmão.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <section id="troca">
+    <div class="secao__cabeca">
+      <span class="olho">Execução</span>
+      <h2>Como trocar a fonte de display</h2>
+      <p>
+        Vale igual para a Channe comprada e para qualquer substituta desta lista. Sete passos,
+        na ordem. Os três primeiros fazem a fonte aparecer; os quatro últimos são o que separa
+        uma troca feita de uma troca bem feita.
+      </p>
+    </div>
+
+    <ol class="passos">
+      <li>
+        <div>
+          <h3>Gerar o <code>.woff2</code> com o subconjunto latino estendido</h3>
+          <p>
+            Latim básico não basta: <b>ã õ ç á ê</b> vivem no latino estendido. A ferramenta
+            <code>pyftsubset</code> ainda não está instalada nesta máquina, e precisa de
+            <code>fonttools</code> e <code>brotli</code>. Se a fonte vier da Creative Market já
+            em webfont, esse passo pula.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Colocar o arquivo em <code>assets/fonts/</code></h3>
+          <p>Onde já moram as sete webfonts do site. Nome em minúsculas, no padrão dos vizinhos.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Escrever o <code>@font-face</code> em <code>assets/css/fontes.css</code></h3>
+          <p>
+            Copiar o bloco de qualquer fonte já declarada ali e trocar a família, o peso e o
+            caminho. Manter o <code>font-display: swap</code> e a faixa de unicode.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Ajustar a pilha em <code>assets/css/base.css</code></h3>
+          <p>
+            Se for a Channe, nada a fazer: ela já está declarada em primeiro lugar e assume
+            sozinha. Se for uma substituta, ela entra no lugar da Cormorant Garamond na linha
+            de <code>--font-display</code>.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Recalibrar os fallbacks métricos</h3>
+          <p>
+            O mesmo arquivo tem duas famílias falsas, feitas de Georgia e Arial esticadas por
+            <code>size-adjust</code> para ocupar exatamente a largura da Cormorant e da Albert.
+            Elas seguram o texto enquanto a webfont carrega. Com outra display, esses números
+            ficam errados e o título <b>pula</b> quando a fonte real entra. Pior: o script que
+            mede onde cada linha do título quebra mede a linha errada na primeira passada.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Conferir o peso 300 dos títulos</h3>
+          <p>
+            Manchete e título de seção pedem 300. Channe, Instrument Serif, Prata, Italiana e
+            Gilda Display <b>não têm</b> 300 e vão renderizar em 400, mais pesado que hoje.
+            Nesse caso, ou se aceita o peso novo e se reduz um degrau do tamanho, ou se escolhe
+            uma fonte com família inteira.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Olhar as páginas, porque não há verificação automática</h3>
+          <p>
+            O verificador do projeto confere paridade de cor entre os temas e nunca abre o
+            arquivo de fontes nem um HTML. Tipografia não tem rede. Abrir a home social, uma
+            casa, uma landing de evento e o corporativo, e olhar quatro coisas: a manchete, o
+            título de seção, o título de cartão e a assinatura manuscrita.
+          </p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="nota" style="margin-top: 30px;">
+      <b>Palavras de teste.</b> Sempre as mesmas, porque é nelas que uma display quebra:
+      <b>Terrá · espaço · produção · coquetelaria · São Paulo · Piracicaba</b>. Acento agudo
+      sobre maiúscula, cedilha, til e a sequência "çã" são os quatro lugares onde uma fonte de
+      catálogo costuma ter desenho ruim ou espacejamento torto.
+    </div>
+
+    <div class="nota" style="margin-top: 14px;">
+      <b>Uma sobra encontrada na conferência.</b> O CSS declara dois tokens de tamanho de hero,
+      <code>--text-hero</code> e <code>--text-hero-sub</code>, que não são usados por nenhum
+      arquivo do site. Ou a manchete da home passa a usá-los, ou eles saem. Enquanto ficarem
+      ali, quem for mexer na tipografia vai achar que são o tamanho oficial do hero e não são.
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      <b>Fontes das informações.</b> Brandbook Di Terrá v2 de 23.11.2023, página 8; guia
+      corporativo V0, página 11; o código publicado do site; e as fichas públicas da Channe na
+      MyFonts, na Creative Market e na Font Bundles, consultadas em 17 de setembro de 2026.
+      Preços em dólar e sujeitos ao câmbio e à promoção vigente na loja.
+    </p>
+    <p>
+      As amostras desta página são renderizadas ao vivo pelo Google Fonts, com exceção da
+      Channe, que não é distribuída gratuitamente e por isso não aparece aqui em amostra.
+    </p>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var provador = document.getElementById('provador');
+  var propriedade = { display: '--pv-display', script: '--pv-script', sans: '--pv-sans' };
+
+  function aplicar(papel, fonte) {
+    provador.style.setProperty(propriedade[papel], fonte);
+    document.querySelectorAll('.chip[data-papel="' + papel + '"]').forEach(function (c) {
+      c.setAttribute('aria-pressed', String(c.dataset.fonte === fonte));
+    });
+  }
+
+  document.querySelectorAll('.chip[data-papel], .aplicar[data-papel]').forEach(function (botao) {
+    botao.addEventListener('click', function () {
+      aplicar(botao.dataset.papel, botao.dataset.fonte);
+      if (botao.classList.contains('aplicar')) {
+        var suave = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+        provador.scrollIntoView({ behavior: suave, block: 'center' });
+      }
+    });
+  });
+
+  var palco = document.getElementById('palco');
+  var claro = document.getElementById('chao-claro');
+  var escuro = document.getElementById('chao-escuro');
+
+  function chao(ehEscuro) {
+    provador.classList.toggle('provador--escuro', ehEscuro);
+    claro.setAttribute('aria-pressed', String(!ehEscuro));
+    escuro.setAttribute('aria-pressed', String(ehEscuro));
+  }
+  claro.addEventListener('click', function () { chao(false); });
+  escuro.addEventListener('click', function () { chao(true); });
+})();
+</script>
