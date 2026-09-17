@@ -333,28 +333,14 @@ html[data-evento="debutante"] {
    Toda a seção morre em prefers-reduced-motion, no fim do arquivo.
    ══════════════════════════════════════════════════════════════════════ */
 
-/* ── a foto do herói assenta ─────────────────────────────────────────
-   O translateY(-6%) vem do social.css e precisa ser repetido: é a mesma
-   propriedade, então escrever só a escala apagaria o deslocamento. */
-.lp-ocasiao .page-hero__media img { transform: translateY(-6%) scale(1.06); }
-.lp-ocasiao.is-ready .page-hero__media img {
-  transform: translateY(-6%) scale(1);
-  transition: transform 3.6s var(--ease);
-}
-
-/* ── o texto do herói entra em cascata ───────────────────────────────
-   O .rise do base.css depende do observer, que aqui chegaria tarde: o
-   herói já está em tela quando a página abre. O gatilho é o mesmo
-   .is-ready do body que a foto usa, e o --i escalona os três blocos. */
-.js .lp-ocasiao .page-hero__entra { opacity: 0; transform: translateY(18px); }
-.lp-ocasiao.is-ready .page-hero__entra {
-  opacity: 1; transform: none;
-  transition: opacity var(--dur-focal) var(--ease-out), transform var(--dur-focal) var(--ease-out);
-  /* atraso curto de propósito: o título do herói é o maior candidato a
-     LCP da rota, e um bloco que começa invisível só é medido quando
-     acende. Um passo de .1s dá a cascata sem empurrar a medida. */
-  transition-delay: calc(var(--i, 0) * .1s + .05s);
-}
+/* ── a abertura do herói subiu para social/social.css ────────────────
+   A foto que assenta e o texto em cascata valiam só aqui, por
+   body.lp-ocasiao, e agora valem nas dezesseis rotas que têm .page-hero.
+   Duas coisas mudaram na promoção, e as duas estão documentadas lá: o
+   índice sai do nth-child em vez de um --i escrito no HTML, e o h1 fica
+   FORA do gesto porque carrega view-transition-name e viaja entre rotas.
+   Manter as duas versões punha dois estados iniciais escondidos sobre os
+   mesmos elementos, e o sintoma é texto de herói piscando. */
 
 /* ── marca de rolagem ────────────────────────────────────────────────
    Um fio que desce e recomeça, encostado na margem do herói. Diz "tem
@@ -521,9 +507,6 @@ html[data-evento="debutante"] {
    ══════════════════════════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
   .servico:hover .servico__media img { transform: none; }
-  .lp-ocasiao .page-hero__media img,
-  .lp-ocasiao.is-ready .page-hero__media img { transform: translateY(-6%); transition: none; }
-  .js .lp-ocasiao .page-hero__entra { opacity: 1; transform: none; }
   .hero-desce { display: none; }
   .js .foto-desliza img { height: 100%; top: 0; transform: none; animation: none; }
   .lp-ocasiao .servico:hover { transform: none; }
