@@ -90,6 +90,89 @@
 .page-hero .h-display { color: var(--ivory); }
 .page-hero__lead { color: var(--ui-text-invert-muted); max-width: 46ch; margin-top: 18px; }
 
+
+/* ══════════════════════════════════════════════════════════════════════
+   ABERTURA DO HERÓI DE PÁGINA INTERNA
+
+   Escrito para as três rotas de ocasião em social/evento.css e preso lá
+   pelo seletor body.lp-ocasiao. As outras treze internas abriam com tudo
+   parado no lugar, e o único gesto do herói era o recolhimento em
+   cartão, que só começa depois de a pessoa rolar. A marcação do herói é
+   a mesma nas dezesseis (.page-hero > .page-hero__media + .wrap com
+   trilha, título e linha de apoio), então o que prendia o gesto era o
+   seletor, não a estrutura.
+
+   O gatilho é o .is-ready que o assets/site.js grava no body (rAF com
+   rede de 400ms para aba em segundo plano) e NÃO o IntersectionObserver:
+   o herói já está em tela quando a rota abre, e esperar interseção
+   revelaria o texto depois de a pessoa já ter olhado para ele.
+
+   O h1 NÃO entra na cascata, e isso é decisão, não omissão. Ele carrega
+   view-transition-name: titulo (assets/css/melhorias.css) e viaja de uma
+   rota para a outra numa navegação interna: pôr opacity: 0 nele entrega
+   à view transition um retrato invisível, e o título apagaria durante
+   toda a troca de página para depois pipocar. De quebra sai o risco de
+   LCP (o título é o segundo candidato, depois da foto) e o gesto fica
+   mais editorial: o que se move é o miolo, e a manchete está firme desde
+   o primeiro quadro, como numa abertura de revista.
+
+   Por que aqui e não no base.css: .page-hero mora nesta folha, e o
+   /corporativo não tem .page-hero nenhum (usa .hero__media). No base ele
+   seria uma regra com zero consumidores num dos dois universos.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* o índice sai do nth-child: o herói tem três a cinco filhos, e marcar
+   --i à mão em treze arquivos seria pagar caro por uma tabela de cinco
+   linhas. O h1 ocupa a posição 2 na contagem mesmo ficando fora do
+   gesto, então a linha de apoio continua sendo o terceiro tempo. */
+.page-hero .wrap > :nth-child(1)   { --h: 0; }
+.page-hero .wrap > :nth-child(2)   { --h: 1; }
+.page-hero .wrap > :nth-child(3)   { --h: 2; }
+.page-hero .wrap > :nth-child(4)   { --h: 3; }
+.page-hero .wrap > :nth-child(n+5) { --h: 4; }
+
+.js .page-hero .wrap > *:not(.h-display) {
+  opacity: 0; transform: translateY(16px);
+}
+/* A ORDEM IMPORTA: as duas regras empatam em especificidade, então esta
+   precisa vir DEPOIS no arquivo. Já houve regressão exatamente assim no
+   .hero-fade da home, e o comentário de lá registra a pegadinha. */
+.is-ready .page-hero .wrap > *:not(.h-display) {
+  opacity: 1; transform: none;
+  /* passo de .1s e partida curta: é a primeira tela, e cada centésimo
+     entra na conta do carregamento. */
+  transition:
+    opacity   var(--dur-focal) var(--ease-out) calc(var(--h, 0) * .1s + .05s),
+    transform var(--rev-desl)  var(--ease-out) calc(var(--h, 0) * .1s + .05s);
+}
+
+/* A FOTO ASSENTA de um enquadramento levemente maior.
+
+   O translateY(-6%) vem da regra de .page-hero__media img, acima nesta
+   folha, e PRECISA ser repetido: é a mesma propriedade, e escrever só a
+   escala apagaria o deslocamento de dezesseis heróis de uma vez. O
+   enquadramento continua vindo de --hero-foco: recorte não é movimento,
+   e por isso fica fora do corte de movimento reduzido. */
+.js .page-hero__media img,
+.js .page-hero__media video { transform: translateY(-6%) scale(1.06); }
+
+.is-ready .page-hero__media img,
+.is-ready .page-hero__media video {
+  transform: translateY(-6%) scale(1);
+  transition: transform 3.6s var(--ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* o texto nasce no lugar e a foto não escala, mas MANTÉM o
+     deslocamento de enquadramento: zerá-lo não é menos movimento, é
+     outra foto */
+  .js .page-hero .wrap > *:not(.h-display) { opacity: 1; transform: none; }
+  .js .page-hero__media img,
+  .js .page-hero__media video,
+  .is-ready .page-hero__media img,
+  .is-ready .page-hero__media video { transform: translateY(-6%); }
+}
+
 /* trilha de navegação */
 .crumbs {
   display: flex; flex-wrap: wrap; align-items: center; gap: 10px;

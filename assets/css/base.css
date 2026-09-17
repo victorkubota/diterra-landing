@@ -124,6 +124,39 @@
      .25s já é lento demais para o instante entre apertar e soltar */
   --dur-press: .1s;
 
+  /* ── PASSO, CURSO E TETO DA REVELAÇÃO ─────────────────────────────
+     O escalonamento era número literal e cada folha escolheu o seu:
+     .11s aqui no .rise, .07s por linha no .linhas, .1s na abertura do
+     herói das ocasiões, mais a tabela de nth-child do .cascata. Quatro
+     passos para um gesto só. Agora o passo tem nome e quem precisa de
+     outro ritmo o redeclara no contêiner, em uma linha.
+
+     --rev-sobe desce de 26px para 20px. A display é Instrument Serif,
+     estilo único 400 (o bloco de fontes registra a troca): alta,
+     estreita e de contraste alto. 26px sobre o gelo lê como pulo,
+     porque o olho vê a CAIXA se mexendo em vez de ver o texto
+     assentando. 20px é a vizinhança dos 16px da abertura do herói.
+
+     --rev-teto limita o ÍNDICE, não o tempo. O atraso acumula, então
+     sem teto o sexto irmão espera 0,66s antes de começar, e 0,66s de
+     espera não lê como ritmo: lê como travamento. Quem passa do teto
+     entra junto com quem está nele.
+
+     --rev-desl é a SEGUNDA DURAÇÃO DA CHEGADA, e é o ponto de tudo
+     isto. Até aqui opacidade e deslocamento terminavam juntos, nos
+     mesmos --dur-slow, e o bloco pousava de uma vez. Com o deslocamento
+     mais curto que a opacidade o elemento chega ao lugar e só depois
+     firma: o movimento termina, a presença continua chegando. O site já
+     fazia isso no .switch__shot (opacity .9s contra transform 1.4s no
+     mesmo gesto); faltava justamente na entrada, que é a que aparece
+     centenas de vezes. A referência é o StaggeredFadeIn da Apple, que
+     separa 0,9s de opacidade de 0,7s de deslocamento
+     (docs/referencias-motion-apple-nubank.md). */
+  --rev-passo: .11s;
+  --rev-sobe:  20px;
+  --rev-teto:  5;
+  --rev-desl:  .6s;
+
   /* ── ELEVAÇÃO ────────────────────────────────────────────────────────
      Aqui mora a FORMA da sombra: deslocamento, desfoque, spread e quantas
      camadas. A COR de cada camada vem de um token --ui-* que os dois temas
@@ -873,11 +906,26 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
    cada rota escreve antes do CSS. Sem script, sem observer ou com o rAF
    parado numa aba em segundo plano, o conteúdo já nasce visível: a
    revelação é um bônus, nunca a condição para ler a página. */
-.js .rise { opacity: 0; transform: translateY(26px); }
+.js .rise { opacity: 0; transform: translateY(var(--rev-sobe)); }
+
+/* O atraso sai do índice com teto. min() com número sem unidade dentro
+   de calc é válido; o modo de falha a vigiar numa revisão é alguém
+   escrever style="--i:2px", que invalida a conta inteira e derruba o
+   atraso para zero, sem erro no console. */
+.rise { --rev-atraso: calc(min(var(--i, 0), var(--rev-teto)) * var(--rev-passo)); }
+
 .rise.is-in {
   opacity: 1; transform: none;
-  transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
-  transition-delay: calc(var(--i, 0) * .11s);
+  /* --ease-out e NÃO --ease. A escala deste arquivo divide as curvas por
+     papel, trinta linhas acima: --ease para estado, --ease-out para
+     chegada. O .rise era a maior chegada do site e a única usando a
+     curva de estado, que sai mais rápido e desacelera menos no fim. O
+     .linhas sempre usou --ease-out, e é por isso que o título já lia
+     mais macio que o bloco em volta dele: não era impressão, era a
+     curva. */
+  transition:
+    opacity   var(--dur-slow) var(--ease-out) var(--rev-atraso, 0s),
+    transform var(--rev-desl) var(--ease-out) var(--rev-atraso, 0s);
 }
 
 /* ── REVELAÇÃO DE FOTO POR CLIP-PATH ──────────────────────────────────
@@ -898,40 +946,87 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
 .js .reveal-shot { clip-path: inset(0 0 100% 0); }
 .js .reveal-shot img,
 .js .reveal-shot video { transform: scale(1.07); }
+/* Teto maior que o do texto, de propósito: as galerias têm sete e oito
+   fotos, e ali o atraso É o gesto (descobrir uma foto depois da outra),
+   ao contrário de um bloco de texto, onde o atraso é só espera. Os 1,15s
+   e 1,6s seguem literais: mexer na velocidade da fotografia é decisão
+   separada, não efeito colateral de uma desduplicação. */
+.reveal-shot {
+  --rev-teto: 7;
+  --rev-atraso: calc(min(var(--i, 0), var(--rev-teto)) * var(--rev-passo));
+}
 .reveal-shot.is-in {
   clip-path: inset(0 0 0 0);
-  transition: clip-path 1.15s var(--ease);
-  transition-delay: calc(var(--i, 0) * .11s);
+  transition: clip-path 1.15s var(--ease) var(--rev-atraso, 0s);
 }
 .reveal-shot.is-in img,
 .reveal-shot.is-in video {
   transform: scale(1);
-  transition: transform 1.6s var(--ease);
-  transition-delay: calc(var(--i, 0) * .11s);
+  transition: transform 1.6s var(--ease) var(--rev-atraso, 0s);
 }
 
-/* ── LISTA QUE SE MONTA LINHA A LINHA ─────────────────────────────────
+/* ── NUMERAÇÃO DOS IRMÃOS ─────────────────────────────────────────────
+   O --i vinha escrito à mão no HTML, irmão por irmão, e por isso as
+   grades de cartão das internas nunca receberam nenhum: os quatro
+   cartões de casa do hub, os cinco de soluções e os três de cada rota
+   de casa chegavam todos no mesmo quadro. Mesmo caso nas seis
+   categorias de /social/fornecedores.
+
+   Aqui a POSIÇÃO vira índice, sem JS e sem atributo por filho: quem
+   acrescentar um cartão amanhã não renumera nada. O teto vem de graça,
+   porque quem passa do quinto herda a primeira regra.
+
+   NÃO escalonar por coluna com media queries espelhando o grid. Foi
+   considerado e a conta de celular erra em toda grade que tenha um item
+   atravessando duas colunas, e descola em silêncio no dia em que alguém
+   mexer no grid-template-columns. O observer já revela cada elemento
+   quando ELE entra em quadro, então a segunda fileira chega depois por
+   conta própria.
+
+   Propriedade personalizada HERDA, e aqui isso é o desejado: um .card
+   com --i:2 passa o índice para o .card__media.reveal-shot dentro dele,
+   então a foto revela em sincronia com o cartão em vez de no quadro
+   zero, que acenderia a foto dentro de um cartão ainda invisível.
+   ─────────────────────────────────────────────────────────────────── */
+/* A tabela vai até oito porque as galerias têm sete e oito fotos, e o
+   teto de cada componente é que decide onde a fila para: --rev-teto é 5
+   no texto e 7 na fotografia. Medido numa galeria de oito com a tabela
+   parando no quinto: as três últimas fotos caíam todas em 0,77s, juntas.
+   Com a tabela inteira a fila fica 0 · 0,11 · 0,22 … 0,77. */
+:is(.cascata, [data-ritmo]) > *             { --i: var(--rev-teto); }
+:is(.cascata, [data-ritmo]) > :nth-child(1) { --i: 0; }
+:is(.cascata, [data-ritmo]) > :nth-child(2) { --i: 1; }
+:is(.cascata, [data-ritmo]) > :nth-child(3) { --i: 2; }
+:is(.cascata, [data-ritmo]) > :nth-child(4) { --i: 3; }
+:is(.cascata, [data-ritmo]) > :nth-child(5) { --i: 4; }
+:is(.cascata, [data-ritmo]) > :nth-child(6) { --i: 5; }
+:is(.cascata, [data-ritmo]) > :nth-child(7) { --i: 6; }
+:is(.cascata, [data-ritmo]) > :nth-child(8) { --i: 7; }
+
+/* ── LISTA (E QUALQUER BLOCO) QUE SE MONTA ITEM A ITEM ────────────────
    Ficha técnica e lista de entregas apareciam inteiras de uma vez. Item
    a item, o visitante tem tempo de ler e a lista deixa de ser um bloco
    de texto para virar uma enumeração.
 
-   O escalonamento vem do nth-child e não de um --i no HTML: são listas
-   de seis a oito itens, e assim nenhuma marcação carrega índice.
+   Deixa de ser só de lista: `> li` vira `> *`, e o mesmo gesto passa a
+   servir qualquer contêiner cujos FILHOS devam chegar um a um. A tabela
+   de nth-child sai (travava no nono item e repetia um passo de .07s que
+   não estava em token nenhum), mas o passo e o teto dela ficam: item de
+   lista é leitura, não chegada de superfície, e uma ficha técnica de
+   oito linhas com o passo de bloco terminaria 0,88s depois de começar.
    ─────────────────────────────────────────────────────────────────── */
-.js .cascata > li { opacity: 0; transform: translateY(14px); }
-.cascata.is-in > li {
-  opacity: 1; transform: none;
-  transition: opacity .5s var(--ease), transform .5s var(--ease);
+.cascata {
+  --rev-passo: .07s;
+  --rev-teto:  7;
 }
-.cascata.is-in > li:nth-child(1) { transition-delay: .02s; }
-.cascata.is-in > li:nth-child(2) { transition-delay: .09s; }
-.cascata.is-in > li:nth-child(3) { transition-delay: .16s; }
-.cascata.is-in > li:nth-child(4) { transition-delay: .23s; }
-.cascata.is-in > li:nth-child(5) { transition-delay: .30s; }
-.cascata.is-in > li:nth-child(6) { transition-delay: .37s; }
-.cascata.is-in > li:nth-child(7) { transition-delay: .44s; }
-.cascata.is-in > li:nth-child(8) { transition-delay: .51s; }
-.cascata.is-in > li:nth-child(n+9) { transition-delay: .58s; }
+.js .cascata > * { opacity: 0; transform: translateY(14px); }
+.cascata > * { --rev-atraso: calc(min(var(--i, 0), var(--rev-teto)) * var(--rev-passo)); }
+.cascata.is-in > * {
+  opacity: 1; transform: none;
+  transition:
+    opacity   var(--dur)      var(--ease-out) var(--rev-atraso, 0s),
+    transform var(--rev-desl) var(--ease-out) var(--rev-atraso, 0s);
+}
 
 /* ── TÍTULO QUE SOBE POR TRÁS DE UMA MÁSCARA ──────────────────────────
    O bloco inteiro subindo lê como "a página carregou". As linhas subindo
@@ -1161,7 +1256,7 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
   .js .reveal-shot { clip-path: none; }
   .js .reveal-shot img, .js .reveal-shot video { transform: none; }
   /* a lista aparece inteira, sem escalonar */
-  .js .cascata > li { opacity: 1; transform: none; }
+  .js .cascata > * { opacity: 1; transform: none; }
   /* o título já está no lugar, sem subir por trás da máscara */
   .js .linhas__l > span { transform: none; }
   /* a régua de leitura sai de cena: é movimento contínuo na borda do
