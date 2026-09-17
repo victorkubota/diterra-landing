@@ -18,12 +18,25 @@
 :root {
   color-scheme: light;   /* controles nativos claros, como o site */
   /* ── TIPOGRAFIA ───────────────────────────────────────────────────
-     Channe é licenciada e não veio nos arquivos de marca. Cormorant
-     Garamond entra como substituta: mesma classe de serifada de alto
-     contraste do logotipo. Trocar por Channe em woff2 quando a licença
-     for adquirida. Oooh Baby é acento manuscrito do universo social e
-     não tem equivalente no corporativo.                             */
-  --font-display: 'Channe', 'Cormorant Garamond', 'Cormorant Fallback', Georgia, 'Times New Roman', serif;
+     Channe é licenciada e não veio nos arquivos de marca. Segue em
+     primeiro na pilha: no dia em que a licença de WEBFONT for comprada
+     (US$ 17,85 na Creative Market, SKU separada da desktop), basta o
+     woff2 e um @font-face para ela assumir sozinha.
+
+     Instrument Serif é a substituta desde 17/09/2026. Serifada de
+     display alta e estreita, contraste alto e eixo vertical: a classe
+     do logotipo. A Cormorant Garamond, que ocupava o lugar antes, é
+     old-style de eixo inclinado e não ecoava a letra da marca.
+
+     ATENÇÃO AO PESO: Instrument Serif e Channe têm um estilo só, 400.
+     Os títulos declarados em font-weight 300 renderizam em 400, porque
+     navegador sintetiza negrito e nunca peso leve. O 300 fica escrito
+     como intenção, não como resultado.
+
+     Oooh Baby é acento manuscrito do universo social e não tem
+     equivalente no corporativo. A Cormorant continua servindo de
+     fallback da manuscrita.                                        */
+  --font-display: 'Channe', 'Instrument Serif', 'Display Fallback', Georgia, 'Times New Roman', serif;
   --font-script:  'Oooh Baby', 'Cormorant Garamond', cursive;
   --font-sans:    'Albert Sans', 'Albert Fallback', -apple-system, 'Helvetica Neue', Arial, sans-serif;
 
@@ -188,21 +201,28 @@
    FALLBACKS MÉTRICOS
 
    Enquanto a webfont não chega, o texto usa Georgia e Arial ajustadas
-   para ocupar a mesma largura e altura de linha da Cormorant e da Albert.
+   para ocupar a mesma largura e altura de linha da display e da Albert.
    Duas consequências: o título não pula quando a fonte real entra, e o
    montarLinhas() do site.js, que mede onde cada linha quebra, mede
    certo desde a primeira passada.
 
-   Valores aproximados da relação de largura média entre as famílias
-   (Cormorant é estreita; Georgia, larga). Afinar contra o rendering real
-   se algum título mudar de quebra na troca.
+   Os números do 'Display Fallback' saíram de medição, não de estimativa:
+   largura média de a-z A-Z, em em, lida das próprias webfonts.
+
+     Instrument Serif  0,4316    Georgia  0,5836   →  size-adjust 74%
+     ascent/descent da Instrument: 0,990 / -0,310, divididos pelo
+     size-adjust porque a caixa do em foi reescalada.
+
+   A Instrument é 19% mais estreita que a Cormorant que estava aqui, e
+   por isso o fallback mudou de 88% para 74%. Se a display trocar de
+   novo, remeça: um size-adjust herdado é pior que nenhum.
    ══════════════════════════════════════════════════════════════════════ */
 @font-face {
-  font-family: 'Cormorant Fallback';
+  font-family: 'Display Fallback';
   src: local('Georgia'), local('Times New Roman');
-  size-adjust: 88%;
-  ascent-override: 92%;
-  descent-override: 26%;
+  size-adjust: 74%;
+  ascent-override: 134%;
+  descent-override: 42%;
   line-gap-override: 0%;
 }
 @font-face {
@@ -389,8 +409,10 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   line-height: 1.25;
   text-wrap: balance;
 }
-/* título de cartão em display: a Cormorant só entra a partir de 24px
-   (--text-xl); abaixo disso a serifa de alto contraste fica esquelética */
+/* título de cartão em display: a display só entra a partir de 24px
+   (--text-xl); abaixo disso a serifa de alto contraste fica esquelética.
+   A Instrument Serif tem altura de x 32% maior que a Cormorant e segura
+   melhor esse piso, mas o piso continua valendo: a haste fina é a mesma. */
 .h-card--display {
   font-family: var(--font-display);
   font-size: var(--text-xl);
@@ -921,11 +943,12 @@ button[aria-busy="true"] { cursor: progress; opacity: .7; }
    máscara só e o gesto continua o mesmo, em bloco.
 
    O respiro embaixo devolve o espaço dos descendentes: sem ele a máscara
-   corta o "ç" e o "p" da Cormorant.
+   corta o "ç" e o "p". Subiu de .14em para .16em em 17/09/2026: a
+   Instrument Serif desce a -0,310 do em contra -0,287 da Cormorant.
    ─────────────────────────────────────────────────────────────────── */
 .linhas__l {
   display: block; overflow: hidden;
-  padding-bottom: .14em; margin-bottom: -.14em;
+  padding-bottom: .16em; margin-bottom: -.16em;
 }
 .linhas__l > span { display: block; }
 .js .linhas__l > span { transform: translateY(105%); }
