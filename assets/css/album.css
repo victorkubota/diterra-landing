@@ -207,23 +207,32 @@
   pointer-events: none; z-index: 3;
 }
 
-/* a foto sai na borda EXTERNA e o texto corre para o miolo: é a
-   simetria que faz as duas páginas lerem como uma peça só, e não como
-   dois cards iguais lado a lado. */
+/* AS FOTOS ENCOSTAM NA DOBRA e o texto corre para a borda externa.
+   As quatro fotos formam uma coluna dupla no miolo, e o olho lê o
+   álbum de dentro para fora em vez de pingar de canto em canto.
+
+   O padrão abaixo é a página da ESQUERDA (e o verso da folha móvel,
+   que é lado esquerdo): foto à direita, texto alinhado à esquerda, que
+   é a borda externa dela. */
 .album__pagina .caso,
 .folha__face .caso {
   display: grid;
-  grid-template-columns: clamp(118px, 13.5vw, 178px) 1fr;
+  grid-template-columns: 1fr clamp(118px, 13.5vw, 178px);
   gap: clamp(14px, 1.8vw, 28px);
   align-items: center;
 }
-/* A folha da direita e a FRENTE da folha móvel são o mesmo lado do
-   álbum: nos dois a foto vai para a borda externa e o texto corre para
-   o miolo. O verso é lado esquerdo e usa o padrão acima. */
+.album__pagina .caso__foto,
+.folha__face .caso__foto { order: 2; }
+.album__pagina .caso__fala,
+.folha__face .caso__fala { text-align: left; }
+
+/* A página da DIREITA e a FRENTE da folha móvel são o mesmo lado do
+   álbum, e nele tudo espelha: foto à esquerda, encostada na dobra, e
+   texto alinhado à direita, que é a borda externa deste lado. */
 .album__pagina--dir .caso,
-.folha__face--frente .caso { grid-template-columns: 1fr clamp(118px, 13.5vw, 178px); }
+.folha__face--frente .caso { grid-template-columns: clamp(118px, 13.5vw, 178px) 1fr; }
 .album__pagina--dir .caso__foto,
-.folha__face--frente .caso__foto { order: 2; }
+.folha__face--frente .caso__foto { order: 0; }
 .album__pagina--dir .caso__fala,
 .folha__face--frente .caso__fala { text-align: right; }
 
@@ -372,9 +381,13 @@
     gap: 20px;
     text-align: center;
   }
+  .album__pagina .caso__fala,
   .album__pagina--dir .caso__fala,
+  .folha__face .caso__fala,
   .folha__face--frente .caso__fala { text-align: center; }
+  .album__pagina .caso__foto,
   .album__pagina--dir .caso__foto,
+  .folha__face .caso__foto,
   .folha__face--frente .caso__foto { order: 0; }
   .album__pagina--dir .caso,
   .folha__face--frente .caso { grid-template-columns: 1fr; }
