@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Di Terrá | Prova de conceito: álbum de depoimentos</title>
+<meta name="description" content="Prova de conceito da seção de depoimentos em formato de álbum de casamento aberto.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="/assets/brand/favicon-social.png">
+<meta name="theme-color" content="#111542">
+
+<!-- Oooh Baby carrega aqui como fonte de CONTEÚDO, não como assinatura
+     pontual: é ela que escreve os doze depoimentos. Por isso entra no
+     preload, junto da Albert que assina os créditos. -->
+<link rel="preload" href="/assets/fonts/oooh-baby-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/albert-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fontes.css">
+
+<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="/assets/css/tema-social.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/social/social.css">
+<link rel="stylesheet" href="/assets/css/album.css">
+<script src="/assets/album.js" defer></script>
+
+<style>
+  /* só desta página de prova: a tarja que avisa o que isto é */
+  .prova-tarja {
+    background: #0d1038; color: var(--ui-text-invert-muted);
+    padding: 14px 0; border-bottom: 1px solid var(--ui-border-invert);
+    font-size: var(--text-xs); letter-spacing: .12em; text-transform: uppercase;
+  }
+  .prova-tarja .wrap { display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center; justify-content: space-between; }
+  .prova-tarja a { color: var(--rose); }
+  .prova-notas { padding-block: var(--section-y-tight); }
+  .prova-notas .wrap { max-width: 780px; }
+  .prova-notas h2 { font-family: var(--font-display); font-weight: 300; font-size: var(--text-xl); margin-bottom: 18px; }
+  .prova-notas li { margin-bottom: 12px; color: var(--ui-text-muted); }
+  .prova-notas ul { padding-left: 1.1em; }
+</style>
+</head>
+<body>
+
+<div class="prova-tarja">
+  <div class="wrap">
+    <span>Prova de conceito · 17/09/2026 · não está no site</span>
+    <a href="/social#galeria">ver a galeria que está no ar</a>
+  </div>
+</div>
+
+<main id="conteudo">
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     ÁLBUM DE DEPOIMENTOS
+
+     Os doze casais, as datas e os depoimentos são MOCK, como o resto da
+     galeria: servem para provar o formato. As quatro casas são reais e
+     as fotos saem de /assets/opt, que já existem no projeto.
+
+     A lista abaixo é o conteúdo de verdade da seção. O script a lê,
+     monta o álbum com os mesmos nós e remove a lista. Sem script, é
+     isto que a pessoa vê: doze depoimentos legíveis.
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="album-secao section--invert on-dark" data-album aria-labelledby="albumTitulo">
+  <div class="wrap">
+    <div class="album-secao__head">
+      <span class="eyebrow">Quem já casou aqui</span>
+      <h2 class="h-section" id="albumTitulo">O álbum de quem passou por aqui</h2>
+      <p>Doze casamentos, nas quatro casas. As fotos e o que os noivos escreveram depois.</p>
+    </div>
+  </div>
+
+  <div class="wrap" data-album-palco></div>
+
+  <div class="wrap">
+    <ul class="album-fonte" data-album-fonte>
+
+      <li><article class="caso">
+        <figure class="caso__foto" style="--tilt:-1.8deg">
+          <div class="caso__janela"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-04-festa-800.avif"><img src="/assets/opt/casa-lucca-04-festa-800.webp" alt="Convidados na pista sob os varais de luz, já de noite" width="800" height="1071" decoding="async"></picture></div>
+          <figcaption>fev/25 · Casa Lucca</figcaption>
+        </figure>
+        <blockquote class="caso__fala">
+          <p>A gente chorou junto na hora do brinde. Até hoje meus tios falam daquela noite.</p>
+          <div class="caso__assina"><b>Ana e Gabriel</b></div>
+        </blockquote>
+      </article></li>
+
+      <li><article class="caso">
+        <figure class="caso__foto" style="--tilt:1.4deg">
+          <div class="caso__janela"><picture><source type="image/avif" srcset="/assets/opt/foto-casal-noite-800.avif"><img src="/assets/opt/foto-casal-noite-800.webp" alt="Os noivos abraçados no jardim, à noite" width="800" height="450" decoding="async"></picture></div>
+          <figcaption>abr/25 · Palacete Monte Alegre</figcaption>
+        </figure>
+        <blockquote class="caso__fala">
+          <p>Era só para conhecer o espaço. Saímos de lá com a data marcada.</p>
+          <div class="caso__assina"><b>Marina e Téo</b></div>
+        </blockquote>
+      </article></li>
+
+      <li><article class="caso">
+        <figure class="caso__foto" style="--tilt:-0.9deg">
+          <div class="caso__janela"><picture><source type="image/avif" srcset="/assets/opt/mesa-posta-800.avif"><img src="/assets/opt/mesa-posta-800.webp" alt="Detalhe de mesa posta: louça, cristal e arranjo baixo de rosas brancas" width="800" height="800" loading="lazy" decoding="async"></picture></div>
+          <figcaption>jun/24 · A Querência</figcaption>
+        </figure>
+        <blockquote class="caso__fala">
+          <p>Minha mãe passou a festa inteira sem olhar o celular. Isso nunca tinha acontecido.</p>
+          <div class="caso__assina"><b>Clara e Vitor</b></div>
+        </blockquote>
+      </article></li>
+
+      <li><article class="caso">
+        <figure class="caso__foto" style="--tilt:2.1deg">
+          <div class="caso__janela"><picture><source type="image/avif" srcset="/assets/opt/a-querencia-03-coquetel-800.avif"><img src="/assets/opt/a-querencia-03-coquetel-800.webp" alt="Coquetel servido no gramado, no fim da tarde" width="800" height="1071" loading="lazy" decoding="async"></picture></div>
+          <figcaption>set/24 · A Querência</figcaption>
+        </figure>
+        <blockquote class="caso__fala">
+          <p>No dia eu não precisei resolver nada. Só casar.</p>
+          <div class="caso__assina"><b>Helena e Rui</b></div>
+        </blockquote>
+      </article></li>
+
+      <li><article class="caso">
+        <figure class="caso__foto" style="--tilt:-1.3deg">
+          <div class="caso__janela"><picture><source type="image/avif" srcset="/assets/opt/brinde-por-do-sol-800.avif"><img src="/assets/opt/brinde-por-do-sol-800.webp" alt="Taças erguidas em brinde contra o céu do fim de tarde" width="800" height="800" loading="lazy" decoding="async"></picture></div>
+          <figcaption>nov/24 · Espaço Terrá</figcaption>
+        </figure>
+        <blockquote class="caso__fala">
+          <p>Choveu de manhã e eu surtei. Às seis da tarde o sol abriu e ninguém percebeu o plano B.</p>
+          <div class="caso__assina"><b>Bruna e Caio</b></div>
+        </blockquote>
+      </article></li>
+
+      <li><article class="caso">
+        <figure class="caso__foto" style="--tilt:1.1deg">
+          <div class="caso__janela"><picture><source type="image/avif" srcset="/assets/opt/casa-lucca-02-cerimonia-800.avif"><img src="/assets/opt/casa-lucca-02-cerimonia-800.webp" alt="Cerimônia montada no jardim da Casa Lucca" width="800" height="1071" loading="lazy" decoding="async"></picture></div>
+          <figcaption>mar/25 · Casa Lucca</figcaption>
+        </figure>
+        <blockquote class="caso__fala">
+          <p>Meu pai dançou. Quem conhece meu pai sabe o tamanho disso.</p>
+          <div class="caso__assina"><b>Laura e Ivo</b></div>
+        </blockquote>
+      </article></li>
+
+      <li><article class="caso">
+        <figure class="caso__foto" style="--tilt:1.6deg">
+          <div class="caso__janela"><picture><source type="image/avif" srcset="/assets/opt/palacete-monte-alegre-02-cerimonia-800.avif"><img src="/assets/opt/palacete-monte-alegre-02-cerimonia-800.webp" alt="Cerimônia montada no salão do palacete" width="800" height="1071" loading="lazy" decoding="async"></picture></div>
+          <figcaption>jan/25 · Palacete Monte Alegre</figcaption>
+        </figure>
+        <blockquote class="caso__fala">
+          <p>Casamos num sábado e passamos o domingo inteiro recebendo áudio de convidado.</p>
+          <div class="caso__assina"><b>Sofia e Léo</b></div>
+        </blockquote>
+      </article></li>
+
+      <li><article class="caso">
+        <figure class="caso__foto" style="--tilt:-1.5deg">
+          <div class="caso__janela"><picture><source type="image/avif" srcset="/assets/opt/pista-noite-800.avif"><img src="/assets/opt/pista-noite-800.webp" alt="Pista de dança cheia sob o telhado de madeira, à noite" width="800" height="800" loading="lazy" decoding="async"></picture></div>
+          <figcaption>out/24 · Casa Lucca</figcaption>
+        </figure>
+        <blockquote class="caso__fala">
+          <p>A pista não esvaziou uma vez. Teve tia de setenta e oito anos até o último som.</p>
+          <div class="caso__assina"><b>Júlia e Enzo</b></div>
+        </blockquote>
+      </article></li>
+
+      <li><article class="caso">
+        <figure class="caso__foto" style="--tilt:0.8deg">
+          <div class="caso__janela"><picture><source type="image/avif" srcset="/assets/opt/espaco-terra-05-saida-800.avif"><img src="/assets/opt/espaco-terra-05-saida-800.webp" alt="Saída dos noivos sob chuva de pétalas" width="800" height="1071" loading="lazy" decoding="async"></picture></div>
+          <figcaption>dez/24 · Espaço Terrá</figcaption>
+        </figure>
+        <blockquote class="caso__fala">
+          <p>Eu lembro do cheiro do mato depois da chuva e da minha avó rindo.</p>
+          <div class="caso__assina"><b>Alice e Davi</b></div>
+        </blockquote>
+      </article></li>
+
+      <li><article class="caso">
+        <figure class="caso__foto" style="--tilt:-2.0deg">
+          <div class="caso__janela"><picture><source type="image/avif" srcset="/assets/opt/a-querencia-04-festa-800.avif"><img src="/assets/opt/a-querencia-04-festa-800.webp" alt="Festa em A Querência, com a pista cheia sob as luzes" width="800" height="1071" loading="lazy" decoding="async"></picture></div>
+          <figcaption>mai/25 · A Querência</figcaption>
+        </figure>
+        <blockquote class="caso__fala">
+          <p>Sou noiva ansiosa, das piores. Encontrei gente mais organizada do que eu.</p>
+          <div class="caso__assina"><b>Nina e Otto</b></div>
+        </blockquote>
+      </article></li>
+
+      <li><article class="caso">
+        <figure class="caso__foto" style="--tilt:1.2deg">
+          <div class="caso__janela"><picture><source type="image/avif" srcset="/assets/opt/cerimonia-vertical-800.avif"><img src="/assets/opt/cerimonia-vertical-800.webp" alt="Cadeiras e arco de flores montados para a cerimônia, no fim da tarde" width="800" height="1071" loading="lazy" decoding="async"></picture></div>
+          <figcaption>ago/24 · Espaço Terrá</figcaption>
+        </figure>
+        <blockquote class="caso__fala">
+          <p>A gente queria uma festa pequena. Virou a melhor festa que a minha família já foi.</p>
+          <div class="caso__assina"><b>Rita e Bento</b></div>
+        </blockquote>
+      </article></li>
+
+      <li><article class="caso">
+        <figure class="caso__foto" style="--tilt:-1.0deg">
+          <div class="caso__janela"><picture><source type="image/avif" srcset="/assets/opt/foto-saida-noivos-800.avif"><img src="/assets/opt/foto-saida-noivos-800.webp" alt="Os noivos deixando a festa entre os convidados" width="800" height="450" loading="lazy" decoding="async"></picture></div>
+          <figcaption>jul/24 · Palacete Monte Alegre</figcaption>
+        </figure>
+        <blockquote class="caso__fala">
+          <p>No fim da noite meu marido falou: eu casaria de novo, mas só aqui.</p>
+          <div class="caso__assina"><b>Cecília e Noah</b></div>
+        </blockquote>
+      </article></li>
+
+    </ul>
+  </div>
+</section>
+
+<!-- notas de leitura da prova, fora da seção: não fazem parte do
+     componente e saem no dia em que ele entrar na home -->
+<section class="prova-notas">
+  <div class="wrap">
+    <h2>O que esta prova resolve e o que ainda é pergunta</h2>
+    <ul>
+      <li><b>Ritmo.</b> Cinco segundos parada, 1,15s de virada. O álbum para sozinho quando sai de quadro, quando a aba perde o foco, com o mouse em cima e com o teclado dentro. O botão de pausa existe porque mouse e foco não são mecanismo de parada para quem está no celular.</li>
+      <li><b>Celular.</b> Duas folhas abertas em 360px de tela dão 170px por folha, e o polaroid sozinho já não cabe. Abaixo de 860px o álbum vira folha única com um depoimento por página: doze viradas em vez de três.</li>
+      <li><b>A letra.</b> Oooh Baby é fonte de assinatura. Ela sustenta uma ou duas frases no tamanho grande; um parágrafo de quatro linhas nela cansa e reprova em legibilidade. Se algum depoimento da cliente for longo, ou ele encurta, ou aquele caso ganha um formato diferente.</li>
+      <li><b>Falta decidir.</b> Se o álbum substitui a tira de polaroids da home ou se os dois convivem (a tira mostra volume, o álbum mostra profundidade), e quantos casais a cliente consegue entregar com depoimento escrito e foto liberada.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+</body>
+</html>

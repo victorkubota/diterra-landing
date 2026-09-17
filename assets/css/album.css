@@ -1,0 +1,396 @@
+/* ══════════════════════════════════════════════════════════════════════
+   ÁLBUM DE DEPOIMENTOS — prova de conceito (17/09/2026)
+
+   O pedido da cliente: no lugar da tira de polaroids, um álbum de
+   casamento ABERTO. Cada folha leva dois polaroids, cada polaroid leva
+   ao lado o depoimento do casal escrito à mão (Oooh Baby), e a cada
+   cinco segundos a folha vira e mostra outros quatro casos.
+
+   Três decisões que valem registro antes do código:
+
+   1. O ESTADO BASE É UMA LISTA, não o álbum. Sem script, com movimento
+      reduzido ou com o JS quebrado, a seção é uma lista de doze
+      depoimentos que a pessoa lê rolando. O álbum é enxerto por cima
+      disso, igual ao que a tira de polaroids já faz em /social.
+
+   2. A FOLHA QUE VIRA É UMA SÓ. Um livro de verdade empilha seis folhas
+      e controla z-index de cada uma; aqui só existe UMA folha móvel, que
+      carrega na frente a página que sai e no verso a página que entra.
+      Terminada a virada, as páginas fixas assumem o novo par e a folha
+      volta ao zero, invisível. É o que permite girar em laço infinito
+      sem rebobinar o álbum na frente do visitante.
+
+   3. A ESCRITA À MÃO É CURTA POR REGRA. Oooh Baby é assinatura, não
+      fonte de texto corrido: acima de duas linhas ela cansa e abaixo de
+      20px ela some. Por isso o depoimento é de uma a duas frases, no
+      tamanho grande, e o crédito do casal vem em Albert Sans.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── a seção ──────────────────────────────────────────────────────────
+   Fundo royal de propósito: álbum é OBJETO, e objeto claro precisa de
+   mesa escura para ler como objeto. Sobre o gelo da home ele viraria
+   mais uma área branca dentro de outra área branca. */
+.album-secao {
+  padding-block: var(--section-y);
+  overflow: hidden;   /* a folha gira para fora do livro em perspectiva */
+}
+.album-secao__head { text-align: center; margin-bottom: clamp(36px, 5vw, 64px); }
+.album-secao__head .eyebrow { margin-inline: auto; }
+.album-secao__head p {
+  max-width: 48ch; margin: 16px auto 0;
+  color: var(--ui-text-invert-muted);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   ESTADO BASE — a lista de depoimentos
+   É o que existe antes do script e o que sobra se ele falhar.
+   ══════════════════════════════════════════════════════════════════ */
+.album-fonte {
+  display: grid;
+  gap: clamp(28px, 4vw, 48px);
+  /* duas colunas no máximo: com três, a caixa de texto ao lado do
+     polaroid cai para 140px e a letra manuscrita quebra a cada duas
+     palavras */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  max-width: 1000px; margin-inline: auto;
+  list-style: none;
+}
+.album-fonte .caso {
+  display: grid;
+  grid-template-columns: minmax(120px, 170px) 1fr;
+  gap: clamp(16px, 2vw, 26px);
+  align-items: start;
+}
+
+/* Quando o script monta o álbum, os doze casos MUDAM DE LUGAR: saem
+   da lista e entram nas folhas, e a lista vazia se remove. O conteúdo
+   existe uma vez só no documento, é o mesmo nó, e quem usa leitor de
+   tela alcança as outras folhas pelos botões, que são botões de
+   verdade. Sem cópia escondida, sem leitura em dobro. */
+
+/* ══════════════════════════════════════════════════════════════════
+   O CASO — polaroid + depoimento à mão
+   Mesma peça na lista e dentro do álbum; muda só a moldura em volta.
+   ══════════════════════════════════════════════════════════════════ */
+.caso__foto {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 24px -12px rgba(9,11,34,.55), 0 2px 5px -2px rgba(9,11,34,.4);
+  padding: 10px 10px 0;
+  rotate: var(--tilt, 0deg);
+  position: relative;
+}
+/* a fita: dois triângulos de papel vegetal prendendo a foto na folha.
+   Detalhe pequeno, mas é o que tira a peça do "card com foto". */
+.caso__foto::before {
+  content: '';
+  position: absolute; inset-block-start: -9px; inset-inline-start: 50%;
+  translate: -50% 0;
+  inline-size: 58px; block-size: 18px;
+  background: color-mix(in srgb, var(--rose) 62%, transparent);
+  box-shadow: 0 1px 2px rgba(9,11,34,.18);
+  clip-path: polygon(6px 0, calc(100% - 6px) 0, 100% 100%, 0 100%);
+}
+.caso__janela {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--royal-soft);
+}
+.caso__janela img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+.caso__foto figcaption {
+  padding: 9px 2px 12px;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ui-text-muted);
+}
+
+.caso__fala { align-self: center; }
+/* O depoimento. clamp com teto baixo porque a caixa útil ao lado do
+   polaroid tem 250px no desktop: passar de 26px joga o texto para seis
+   linhas e a folha estoura. */
+.caso__fala p {
+  font-family: var(--font-script);
+  font-size: clamp(1.15rem, .9rem + .7vw, 1.6rem);
+  line-height: 1.32;
+  color: var(--royal);
+  text-wrap: pretty;
+}
+.caso__assina {
+  margin-top: 14px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ui-text-muted);
+}
+.caso__assina b { display: block; font-weight: 500; color: var(--royal-80); letter-spacing: .08em; }
+
+/* na lista (fundo escuro) a tinta inverte */
+.album-fonte .caso__fala p { color: var(--ivory); }
+.album-fonte .caso__assina { color: var(--ui-text-invert-muted); }
+.album-fonte .caso__assina b { color: var(--rose); }
+
+/* ══════════════════════════════════════════════════════════════════
+   O ÁLBUM
+   ══════════════════════════════════════════════════════════════════ */
+.album { max-width: 1180px; margin-inline: auto; }
+
+/* a capa: a borda de couro que sobra em volta das folhas. São 3% de
+   pixel e 100% do que faz a peça ler como álbum e não como duas
+   colunas de texto. */
+.album__capa {
+  position: relative;
+  padding: clamp(12px, 1.3vw, 22px);
+  border-radius: 5px;
+  background:
+    linear-gradient(145deg, #23284f 0%, #171b40 38%, #0e1133 100%);
+  box-shadow:
+    0 40px 80px -30px rgba(0,0,0,.75),
+    0 8px 20px -8px rgba(0,0,0,.5),
+    inset 0 0 0 1px rgba(254,250,224,.10);
+}
+
+/* perspectiva no PAI da folha, nunca na folha: aplicada nela mesma, o
+   ponto de fuga viaja junto com o giro e a página entorta. */
+.album__livro {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* A ALTURA DO LIVRO É FIXA POR PROPORÇÃO, e não pelo conteúdo, senão
+     o álbum encolhe e cresce a cada virada, conforme o depoimento da
+     folha seguinte for mais curto ou mais longo. A proporção aperta
+     quando a tela estreita porque o texto quebra em mais linhas sem o
+     polaroid encolher junto: medido folha a folha, 1,86 sobra 20px em
+     1440 e falta 1px em 900. */
+  aspect-ratio: 1.86 / 1;
+  perspective: 2600px;
+  perspective-origin: 50% 42%;
+  background: var(--sand-50);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+@media (max-width: 1180px) { .album__livro { aspect-ratio: 1.62 / 1; } }
+
+/* ── a página ──────────────────────────────────────────────────────
+   O papel (fundo, sombra da dobra, respiro) é do SLOT; a diagramação
+   dos dois casos é do CONTEÚDO, que é o nó que o script move de um
+   slot para outro. Separar os dois é o que permite mover a folha
+   inteira sem recriar nada. */
+.album__pagina,
+.folha__face {
+  display: grid;
+  align-content: center;
+  padding: clamp(22px, 3vw, 44px);
+  background:
+    radial-gradient(120% 80% at 50% 0%, #fdfbf5 0%, var(--sand-50) 70%);
+  overflow: hidden;
+}
+.album__conteudo {
+  display: grid;
+  gap: clamp(20px, 3vh, 40px);
+}
+/* a dobra central. Cada página escurece do lado da lombada, e as duas
+   sombras juntas formam o vale do miolo. */
+.album__pagina--esq { box-shadow: inset -26px 0 32px -26px rgba(17,21,66,.5); }
+.album__pagina--dir { box-shadow: inset  26px 0 32px -26px rgba(17,21,66,.5); }
+
+/* o fio da lombada por cima das duas, para a emenda não aparecer */
+.album__lombada {
+  position: absolute; inset-block: 0; inset-inline-start: 50%;
+  inline-size: 2px; translate: -1px 0;
+  background: linear-gradient(to bottom,
+    rgba(17,21,66,.05), rgba(17,21,66,.28) 18%, rgba(17,21,66,.28) 82%, rgba(17,21,66,.05));
+  pointer-events: none; z-index: 3;
+}
+
+/* a foto sai na borda EXTERNA e o texto corre para o miolo: é a
+   simetria que faz as duas páginas lerem como uma peça só, e não como
+   dois cards iguais lado a lado. */
+.album__pagina .caso,
+.folha__face .caso {
+  display: grid;
+  grid-template-columns: clamp(118px, 13.5vw, 178px) 1fr;
+  gap: clamp(14px, 1.8vw, 28px);
+  align-items: center;
+}
+/* A folha da direita e a FRENTE da folha móvel são o mesmo lado do
+   álbum: nos dois a foto vai para a borda externa e o texto corre para
+   o miolo. O verso é lado esquerdo e usa o padrão acima. */
+.album__pagina--dir .caso,
+.folha__face--frente .caso { grid-template-columns: 1fr clamp(118px, 13.5vw, 178px); }
+.album__pagina--dir .caso__foto,
+.folha__face--frente .caso__foto { order: 2; }
+.album__pagina--dir .caso__fala,
+.folha__face--frente .caso__fala { text-align: right; }
+
+/* ── a folha que vira ─────────────────────────────────────────────
+   Cobre exatamente a metade direita, gira na dobra (transform-origin
+   à esquerda) e aterrissa sobre a metade esquerda. */
+.album__folha {
+  position: absolute;
+  inset-block: 0; inset-inline: 50% 0;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  z-index: 2;
+  /* em repouso ela existe, ocupa o mesmo lugar e não se vê: é
+     visibility, não display. O porquê está no album.js, na virada. */
+  visibility: hidden;
+}
+.album__folha.esta-no-ar { visibility: visible; }
+/* Quem escreve o ângulo é o script, com Web Animations, porque a virada
+   tem DOIS sentidos: adiante sai de 0° e pousa em -180°, atrás nasce em
+   -180° e volta. O CSS aqui cuida só do papel e da sombra. */
+.folha__face {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.folha__face--frente { box-shadow: inset 26px 0 32px -26px rgba(17,21,66,.5); }
+.folha__face--verso  { transform: rotateY(180deg); box-shadow: inset -26px 0 32px -26px rgba(17,21,66,.5); }
+
+/* o verso da frente e a frente do verso são o MESMO papel: a face que
+   vira mostra o dorso da folha quando passa dos 90°, e papel tem dois
+   lados iguais. Quando o álbum roda em página única (celular) o verso
+   não carrega conteúdo nenhum, só o papel. */
+.folha__face--verso.esta-vazia { background: linear-gradient(120deg, #faf7f0, #efece4); }
+
+/* a sombra que a folha levantada projeta. Nasce forte junto da dobra e
+   dissolve na borda: é o que dá espessura ao gesto. Só existe durante o
+   giro, senão escurece a página parada. */
+.folha__sombra {
+  position: absolute; inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(to right, rgba(17,21,66,.34), rgba(17,21,66,0) 55%);
+}
+.album__livro[data-virando="1"] .folha__sombra {
+  animation: folha-sombra var(--dur-virada, 1.15s) ease-in-out;
+}
+@keyframes folha-sombra {
+  0%   { opacity: 0; }
+  45%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* o vinco do papel enquanto a folha está no ar */
+.album__livro[data-virando="1"] .folha__face--frente,
+.album__livro[data-virando="1"] .folha__face--verso {
+  animation: folha-vinco var(--dur-virada, 1.15s) ease-in-out;
+}
+@keyframes folha-vinco {
+  0%, 100% { filter: brightness(1); }
+  50%      { filter: brightness(.94); }
+}
+
+/* ── os controles ─────────────────────────────────────────────────
+   WCAG 2.2.2: o que se move sozinho por mais de cinco segundos precisa
+   de mecanismo de parada, e mouse e foco não são mecanismo para quem
+   está no dedo. O botão é o mesmo componente da galeria de /social. */
+.album__controles {
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(10px, 2vw, 22px);
+  margin-top: clamp(20px, 3vw, 32px);
+}
+.album__seta,
+.album__parar {
+  display: inline-flex; align-items: center; gap: 10px;
+  min-height: 44px; padding: 12px 14px;
+  background: none; border: 0; cursor: pointer;
+  font-family: var(--font-sans); font-size: var(--text-xs); font-weight: 500;
+  letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
+  color: var(--ui-text-invert-muted);
+  transition: color var(--dur-fast) var(--ease);
+}
+.album__seta:hover, .album__parar:hover { color: var(--ivory); }
+.album__parar::before {
+  content: '';
+  inline-size: 9px; block-size: 9px;
+  background: var(--rose);
+  transition: clip-path var(--dur-fast) var(--ease);
+}
+.album[data-parado="1"] .album__parar::before { clip-path: polygon(0 0, 100% 50%, 0 100%); }
+.album__parar[hidden], .album__seta[hidden] { display: none; }
+
+/* As marcas são atalho, não estrutura: aria-hidden porque a mesma
+   informação já sai no status ("folha 2 de 3") e porque doze bolinhas
+   sem rótulo no leitor de tela são doze ruídos. */
+.album__marcas { display: flex; gap: 9px; }
+/* o contador só aparece onde as marcas não cabem (ver o bloco do
+   celular): doze bolinhas medem 200px e a linha de controles tem 343 */
+.album__conta {
+  display: none;
+  font-family: var(--font-sans); font-size: var(--text-xs);
+  letter-spacing: .14em; color: var(--ui-text-invert-muted);
+  font-variant-numeric: tabular-nums;
+}
+.album__marca {
+  inline-size: 8px; block-size: 8px; padding: 0;
+  border: 0; border-radius: 50%; cursor: pointer;
+  background: rgba(254,250,224,.28);
+  transition: background var(--dur-fast) var(--ease), scale var(--dur-fast) var(--ease);
+}
+.album__marca[aria-current="true"] { background: var(--rose); scale: 1.25; }
+
+/* ══════════════════════════════════════════════════════════════════
+   CELULAR — o álbum vira página única
+   ══════════════════════════════════════════════════════════════════
+   Spread de duas folhas em 360px de tela dá 170px por página: o
+   polaroid sozinho já não cabe. Abaixo de 860px o álbum passa a mostrar
+   UMA folha com UM caso, a foto sobe para cima do texto, e a folha que
+   vira sai pela esquerda revelando a próxima. Doze folhas em vez de
+   três aberturas: o mesmo acervo, outro ritmo. */
+@media (max-width: 859px) {
+  .album__controles { flex-wrap: wrap; gap: 6px 14px; }
+  .album__marcas { display: none; }
+  .album__conta { display: inline-block; }
+  .album__seta, .album__parar { padding: 12px 8px; }
+
+  .album__livro {
+    grid-template-columns: 1fr;
+    aspect-ratio: .74 / 1;
+  }
+  .album__pagina--esq { display: none; }
+  .album__pagina--dir { box-shadow: none; }
+  .album__lombada { display: none; }
+  .album__folha { inset-inline: 0; }
+  .folha__face--frente { box-shadow: none; }
+
+  .album__pagina .caso,
+  .album__pagina--dir .caso,
+  .folha__face .caso {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 20px;
+    text-align: center;
+  }
+  .album__pagina--dir .caso__fala,
+  .folha__face--frente .caso__fala { text-align: center; }
+  .album__pagina--dir .caso__foto,
+  .folha__face--frente .caso__foto { order: 0; }
+  .album__pagina--dir .caso,
+  .folha__face--frente .caso { grid-template-columns: 1fr; }
+  .album__pagina .caso__foto,
+  .folha__face .caso__foto { inline-size: min(62%, 220px); }
+  .caso__fala p { font-size: clamp(1.25rem, 1rem + 2vw, 1.7rem); }
+
+  .album-fonte .caso { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .album-fonte .caso__foto { inline-size: min(60%, 200px); }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   MOVIMENTO REDUZIDO
+   O álbum continua montado, porque ele é LAYOUT antes de ser animação.
+   O que sai é a virada automática e o giro: o script troca as páginas
+   direto e as setas seguem funcionando. A armadilha do base.css (o
+   bloco global que força animation-duration a .01ms em *) não alcança
+   nada aqui porque não sobra animação nenhuma para alcançar.
+   ══════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .album__livro[data-virando="1"] .folha__sombra,
+  .album__livro[data-virando="1"] .folha__face { animation: none !important; }
+}
