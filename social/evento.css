@@ -299,8 +299,11 @@ html[data-evento="debutante"] {
 .lp-debutante { --hero-foco: 62% 13%; }
 
 /* cerimônia montada no gramado: o arco floral e as primeiras fileiras
-   vivem na metade de baixo, e o padrão mostrava só copa de árvore */
-.lp-casamento { --hero-foco: 58% 55%; }
+   vivem na metade de baixo, e o padrão mostrava só copa de árvore. O
+   primeiro número é alto porque o arco encosta na borda direita da
+   foto: em tela larga ele não faz diferença (a largura preenche), e no
+   celular é o que mantém o arco dentro do quadro. */
+.lp-casamento { --hero-foco: 78% 55%; }
 
 /* família de costas diante da porta azul: o grupo começa a 23% e o
    padrão cortava as cabeças rente ao topo */
