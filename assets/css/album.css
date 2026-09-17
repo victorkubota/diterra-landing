@@ -345,6 +345,10 @@
    vira sai pela esquerda revelando a próxima. Doze folhas em vez de
    três aberturas: o mesmo acervo, outro ritmo. */
 @media (max-width: 859px) {
+  /* Em folha única o álbum não pode crescer com a tela: num tablet de
+     820px a página viraria um retângulo de 820 por 1100 com um único
+     polaroid no meio. O teto mantém a folha em formato de folha. */
+  .album { max-width: 470px; }
   .album__controles { flex-wrap: wrap; gap: 6px 14px; }
   .album__marcas { display: none; }
   .album__conta { display: inline-block; }
