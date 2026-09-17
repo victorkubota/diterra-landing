@@ -480,6 +480,29 @@
   background-position: center;
 }
 @supports (animation-timeline: view()) {
+  /* clip e não hidden, e é isto que faz o parallax existir.
+
+     Escrito com overflow: hidden no .banner, este gesto nunca deslizou
+     um pixel: hidden torna a caixa um scroll container, e o view() sem
+     argumento se prende ao scroll container ANCESTRAL MAIS PRÓXIMO.
+     Medido em produção: source apontando para SECTION.banner (em vez do
+     documento), currentTime cravado em 50% e transform em translateY(0)
+     nas quatro posições de rolagem testadas. clip recorta igual e NÃO
+     cria scroll container, então o timeline volta para o documento:
+     medido currentTime de 39,7% a 89,4% e transform de -8,7px a +33,6px
+     no mesmo percurso.
+
+     A dupla declaração é a convenção da casa para este recurso
+     (social/social.css faz o mesmo em .section): hidden fica para quem
+     não tem clip, e quem tem sobrescreve. Nos dois casos o recorte é o
+     mesmo; o que muda é o parallax existir.
+
+     O caso irmão é o .foto-desliza de social/evento.css, que tem o
+     mesmo defeito e é consertado por nome de timeline em vez de clip,
+     porque lá a imagem é filha em fluxo normal. Aqui a .banner-bg é
+     absoluta, e nomear o timeline no .banner não basta: medido, com
+     nome e hidden o currentTime continua nulo. */
+  .js .banner { overflow: clip; }
   .js .banner-bg {
     animation: bannerParallax linear both;
     animation-timeline: view();

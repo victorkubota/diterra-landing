@@ -389,11 +389,42 @@ html[data-evento="debutante"] {
    Nunca no mesmo elemento que .reveal-shot: as duas animam o transform
    da imagem e a última a ganhar apaga a outra. */
 @supports (animation-timeline: view()) {
-  .js .foto-desliza { overflow: hidden; }
+  /* O view-timeline é NOMEADO, e essa é a diferença entre o gesto
+     existir e não existir.
+
+     Escrito em 17/09 com animation-timeline: view() na imagem, este
+     parallax nunca deslizou um pixel em produção. O view() sem
+     argumento se prende ao scroll container ANCESTRAL MAIS PRÓXIMO, e o
+     overflow: hidden da linha abaixo transforma esta caixa num scroll
+     container. O timeline resolvia para a própria .foto-desliza, que
+     nunca rola, e o progresso ficava cravado em 50%: medido em produção
+     com getAnimations()[0].timeline.source apontando para o próprio
+     DIV.foto-desliza e o transform parado em translateY(-0,002px) ao
+     longo de 1400px de rolagem.
+
+     Nomeando o timeline na caixa e referenciando-o pelo nome na imagem,
+     o source volta a ser o documento: medido 37,6% e 87,7% de
+     currentTime em dois pontos da rolagem, com o transform indo de
+     -77,7px a +58,6px. A outra saída seria trocar hidden por clip, que
+     recorta igual e não cria scroll container (é por isso que o .acende
+     e o ornamento sempre funcionaram: as seções usam overflow-x: clip,
+     social/social.css). Fica o nome, que é explícito e sobrevive a
+     alguém mexer no recorte depois.
+
+     Onde mais isso vale: qualquer animation-timeline: view() dentro de
+     um bloco com overflow hidden/auto/scroll. No repositório era este
+     caso e o .banner-bg da home (consertado no mesmo commit). Para
+     conferir: getAnimations()[0].timeline.source tem que ser o <html>;
+     currentTime cravado em 50% é a assinatura do defeito. */
+  .js .foto-desliza {
+    overflow: hidden;
+    view-timeline-name: --desliza;
+    view-timeline-axis: block;
+  }
   .js .foto-desliza img {
     height: 124%; position: relative; top: -12%;
     animation: fotoDesliza linear both;
-    animation-timeline: view();
+    animation-timeline: --desliza;
     animation-range: entry 0% exit 100%;
   }
   @keyframes fotoDesliza {
